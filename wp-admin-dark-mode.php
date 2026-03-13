@@ -23,7 +23,7 @@ define( 'ADM_VERSION', '0.0.2' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Default color palette (matches WP sidebar #1d2327 dark scheme).
+ * Default color palette
  */
 function adm_default_colors(): array {
 	return [
@@ -40,7 +40,7 @@ function adm_default_colors(): array {
 }
 
 /**
- * Load translations.
+ * Load translations
  */
 add_action( 'plugins_loaded', function () {
 	load_plugin_textdomain(
@@ -51,7 +51,7 @@ add_action( 'plugins_loaded', function () {
 } );
 
 /**
- * Enqueue admin CSS + inline custom CSS when dark mode is enabled.
+ * Enqueue admin CSS + inline custom CSS when dark mode is enabled
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! get_option( 'adm_dark_mode_enabled', false ) ) {
@@ -91,12 +91,12 @@ add_action( 'admin_enqueue_scripts', function () {
 } );
 
 /**
- * Settings page (Settings -> WP Admin Dark Mode).
+ * Settings page
  */
 add_action( 'admin_menu', function () {
 	add_options_page(
-		__( 'WP Admin Dark Mode', 'wp-admin-dark-mode' ),  // Browser-Tab-Titel
-		__( 'WP Admin Dark Mode', 'wp-admin-dark-mode' ),  // Sidebar-Label
+		__( 'WP Admin Dark Mode', 'wp-admin-dark-mode' ),
+		__( 'WP Admin Dark Mode', 'wp-admin-dark-mode' ),
 		'manage_options',
 		'wp-admin-dark-mode',
 		'adm_settings_page'
@@ -104,7 +104,7 @@ add_action( 'admin_menu', function () {
 } );
 
 /**
- * Enqueue settings page assets.
+ * Enqueue settings page assets
  */
 add_action( 'admin_enqueue_scripts', function ( $hook ) {
 	if ( $hook !== 'settings_page_wp-admin-dark-mode' ) {
@@ -122,7 +122,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 } );
 
 /**
- * Register settings.
+ * Register settings
  */
 add_action( 'admin_init', function () {
 	register_setting( 'adm_settings', 'adm_dark_mode_enabled', [
@@ -155,7 +155,7 @@ function adm_sanitize_colors( $input ): array {
 }
 
 /**
- * Settings page HTML.
+ * Settings page HTML
  */
 function adm_settings_page() {
 	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
@@ -163,7 +163,6 @@ function adm_settings_page() {
 	$custom  = get_option( 'adm_custom_css', '' );
 	$version = ADM_VERSION;
 
-	// Keys = English msgid, translated via .po
 	$color_labels = [
 		'bg'         => __( 'Background Color (Base)', 'wp-admin-dark-mode' ),
 		'card'       => __( 'Card / Content Area', 'wp-admin-dark-mode' ),
@@ -422,7 +421,7 @@ function adm_settings_page() {
 }
 
 /**
- * Settings Link in Plugins list.
+ * Settings Link in Plugins list
  */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $actions ) {
 	$url = admin_url( 'options-general.php?page=wp-admin-dark-mode' );
@@ -431,7 +430,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $ac
 } );
 
 /**
- * Admin notice after saving.
+ * Admin notice after saving
  */
 add_action( 'admin_notices', function () {
 	if ( ! current_user_can( 'manage_options' ) ) return;
