@@ -21,7 +21,11 @@ jobs:
       - name: Create plugin ZIP
         run: |
           ZIP_NAME="wp-admin-dark-mode.zip"
+          ZIP_PATH="/tmp/${ZIP_NAME}"
 
+          # Build ZIP into /tmp so the file is outside the workspace.
+          # upload-artifact re-zips everything it finds under 'path';
+          # pointing it at a single file outside the repo prevents double-zipping.
           find . \
             -not -path './.git/*' \
             -not -path './.git' \
@@ -30,22 +34,23 @@ jobs:
             -not -name '*.zip' \
             -type f \
           | sed 's|^\./||' \
-          | zip "$ZIP_NAME" -@
+          | zip "$ZIP_PATH" -@
 
+          echo "ZIP_PATH=${ZIP_PATH}" >> $GITHUB_ENV
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
 
           echo "--- ZIP contents ---"
-          unzip -l "$ZIP_NAME"
+          unzip -l "$ZIP_PATH"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
           name: wp-admin-dark-mode
-          path: ${{ env.ZIP_NAME }}
+          path: ${{ env.ZIP_PATH }}
           retention-days: 90
 
       - name: Upload ZIP to GitHub Release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.ZIP_NAME }}
+          files: ${{ env.ZIP_PATH }}
