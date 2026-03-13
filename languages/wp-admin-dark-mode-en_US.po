@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Admin Dark Mode 0.0.2\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-13 18:50+0100\n"
-"PO-Revision-Date: 2026-03-13 18:50+0100\n"
+"POT-Creation-Date: 2026-03-13 19:20+0100\n"
+"PO-Revision-Date: 2026-03-13 19:20+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: en_US\n"
@@ -21,11 +21,7 @@ msgid "WP Admin Dark Mode"
 msgstr "WP Admin Dark Mode"
 
 #: wp-admin-dark-mode.php
-msgid "Dark Mode"
-msgstr "Dark Mode"
-
-#: wp-admin-dark-mode.php
-msgid "Dunkles Theme für das WordPress-Backend"
+msgid "Dark theme for the WordPress backend"
 msgstr "Dark theme for the WordPress backend"
 
 #: wp-admin-dark-mode.php
@@ -33,89 +29,89 @@ msgid "Settings"
 msgstr "Settings"
 
 #: wp-admin-dark-mode.php
-msgid "Allgemein"
+msgid "General"
 msgstr "General"
 
 #: wp-admin-dark-mode.php
-msgid "Dark Mode aktivieren"
+msgid "Enable Dark Mode"
 msgstr "Enable Dark Mode"
 
 #: wp-admin-dark-mode.php
-msgid "Aktiviert das dunkle Design für alle Admin-Seiten."
+msgid "Enables the dark theme for all admin pages."
 msgstr "Enables the dark theme for all admin pages."
 
 #: wp-admin-dark-mode.php
-msgid "Aktiv"
+msgid "Active"
 msgstr "Active"
 
 #: wp-admin-dark-mode.php
-msgid "Inaktiv"
+msgid "Inactive"
 msgstr "Inactive"
 
 #: wp-admin-dark-mode.php
-msgid "Farbanpassung"
+msgid "Color Customization"
 msgstr "Color Customization"
 
 #: wp-admin-dark-mode.php
-msgid "Passe die Dark-Mode-Farben individuell an. Die Standardwerte orientieren sich an der WordPress-Sidebar-Palette."
+msgid "Customize the dark mode colors individually. The defaults are based on the WordPress sidebar palette."
 msgstr "Customize the dark mode colors individually. The defaults are based on the WordPress sidebar palette."
 
 #: wp-admin-dark-mode.php
-msgid "Hintergrundfarbe (Basis)"
+msgid "Background Color (Base)"
 msgstr "Background Color (Base)"
 
 #: wp-admin-dark-mode.php
-msgid "Karten- / Contentbereich"
+msgid "Card / Content Area"
 msgstr "Card / Content Area"
 
 #: wp-admin-dark-mode.php
-msgid "Rahmenfarbe"
+msgid "Border Color"
 msgstr "Border Color"
 
 #: wp-admin-dark-mode.php
-msgid "Textfarbe"
+msgid "Text Color"
 msgstr "Text Color"
 
 #: wp-admin-dark-mode.php
-msgid "Gedämpfte Textfarbe"
+msgid "Muted Text Color"
 msgstr "Muted Text Color"
 
 #: wp-admin-dark-mode.php
-msgid "Linkfarbe"
+msgid "Link Color"
 msgstr "Link Color"
 
 #: wp-admin-dark-mode.php
-msgid "Primärfarbe (Buttons)"
+msgid "Primary Color (Buttons)"
 msgstr "Primary Color (Buttons)"
 
 #: wp-admin-dark-mode.php
-msgid "Erfolgsfarbe"
+msgid "Success Color"
 msgstr "Success Color"
 
 #: wp-admin-dark-mode.php
-msgid "Warnfarbe"
+msgid "Warning Color"
 msgstr "Warning Color"
 
 #: wp-admin-dark-mode.php
-msgid "Standardfarben wiederherstellen"
+msgid "Restore Default Colors"
 msgstr "Restore Default Colors"
 
 #: wp-admin-dark-mode.php
-msgid "Eigenes CSS"
+msgid "Custom CSS"
 msgstr "Custom CSS"
 
 #: wp-admin-dark-mode.php
-msgid "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Du kannst die CSS-Variablen (--adm-bg, --adm-card, etc.) direkt verwenden."
+msgid "Add your own CSS here, loaded after the dark mode stylesheet. You can use the CSS variables (--adm-bg, --adm-card, etc.) directly."
 msgstr "Add your own CSS here, loaded after the dark mode stylesheet. You can use the CSS variables (--adm-bg, --adm-card, etc.) directly."
 
 #: wp-admin-dark-mode.php
-msgid "Einstellungen speichern"
+msgid "Save Settings"
 msgstr "Save Settings"
 
 #: wp-admin-dark-mode.php
-msgid "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
-msgstr "✓ Dark Mode is active. Settings have been saved."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgstr "\u2713 Dark Mode is active. Settings have been saved."
 
 #: wp-admin-dark-mode.php
-msgid "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
-msgstr "✓ Settings saved. Dark Mode is disabled."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr "\u2713 Settings saved. Dark Mode is disabled."
