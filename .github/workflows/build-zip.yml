@@ -33,6 +33,8 @@ jobs:
           | sed 's|^\./||' \
           | zip "$ZIP_PATH" -@
 
+          echo "ZIP_PATH=${ZIP_PATH}" >> $GITHUB_ENV
+
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
