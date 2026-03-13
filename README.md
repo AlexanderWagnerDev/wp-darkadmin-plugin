@@ -108,11 +108,12 @@ Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
 - Individuelle Farbanpassung über den WordPress Color Picker
 - Unterstützung für eigenes Custom CSS mit eingebauten CSS-Variablen
 - Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
+- Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 
 ## Installation
 
-1. Lade den Plugin-Ordner nach `/wp-content/plugins/wp-admin-dark-mode/` hoch (oder installiere über „Plugins“).
-2. Aktiviere das Plugin in WordPress unter „Plugins“.
+1. Lade den Plugin-Ordner nach `/wp-content/plugins/wp-admin-dark-mode/` hoch (oder installiere über „Plugins").
+2. Aktiviere das Plugin in WordPress unter „Plugins".
 3. Gehe zu **Einstellungen → WP Admin Dark Mode** und aktiviere es.
 
 ## FAQ
@@ -129,14 +130,27 @@ Nein. Es lädt nur CSS im `wp-admin`.
 
 Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und unterstützt zusätzlich eigenes Custom CSS.
 
+### Was ist der Auto Dark Mode?
+
+Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
+
 ## Changelog
+
+### 0.0.4
+
+- Auto Dark Mode hinzugefügt: optionaler JS-Pass, der helle Hintergründe und dunklen Text unbekannter Plugins dynamisch anpasst (WCAG-Luminanzberechnung)
+- Auto Dark Mode verwendet einen MutationObserver, um auch AJAX-geladene Inhalte zu verarbeiten
+- Farbfeld-Anzeige des Color Pickers korrigiert: `background-color` von `.wp-color-result` im CSS entfernt, damit WPs Inline-Style das Farbfeld korrekt anzeigt
+- Alle Übersetzungsdateien (`de_AT`, `de_DE`, `en_US`, `.pot`) mit neuen Auto Dark Mode Strings aktualisiert
+- Alle Kommentare bereinigt und verbleibende deutsche Inline-Kommentare ins Englische übersetzt
+- Version auf 0.0.4 angehoben
 
 ### 0.0.3
 
 - Komplettes CSS-Refactoring mit token-basiertem Design-System für Hintergründe, Flächen, Rahmen, Texte, Links, Buttons und Statusfarben
 - Neue anpassbare Farbvariablen hinzugefügt: `surface1`, `surface2`, `surface3`, `text_soft` und `danger`
 - Anzahl der anpassbaren Farb-Tokens von 9 auf 13 erhöht
-- Styling des **„Plugin hinzufügen“**-Buttons bzw. der Seitentitel-Actions korrigiert, damit der Text im Dark Mode lesbar bleibt
+- Styling des **„Plugin hinzufügen"**-Buttons bzw. der Seitentitel-Actions korrigiert, damit der Text im Dark Mode lesbar bleibt
 - WordPress Color Picker korrekt gefixt, indem die Inline-Hintergrundfarbe des Farbfelds erhalten bleibt und nur der Textbereich separat gestylt wird
 - Abstände, Größen und Proportionen verbessert, damit das Verhältnis näher an der nativen WordPress-Admin-Oberfläche liegt
 - Styles der Einstellungsseite in eine eigene Datei `assets/css/settings.css` ausgelagert
@@ -148,7 +162,7 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 
 - Einstellungsseite komplett neu gestaltet: Card-Layout, Page-Header mit Status-Badge und Versionsanzeige
 - Individuelle Farbanpassung für 9 Dark-Mode-Farben über den WordPress Color Picker
-- Schaltfläche „Standardfarben wiederherstellen“ zum Zurücksetzen auf die WordPress-Sidebar-Palette
+- Schaltfläche „Standardfarben wiederherstellen" zum Zurücksetzen auf die WordPress-Sidebar-Palette
 - Custom-CSS-Editor zum Einfügen eigener Styles nach dem Dark-Mode-Stylesheet
 - Alle Dark-Mode-Farben basieren nun auf CSS-Custom-Properties (`--adm-bg`, `--adm-card`, etc.)
 - Hintergrundfarbe auf `#1d2327` geändert (native WordPress-Sidebar-Farbe)
