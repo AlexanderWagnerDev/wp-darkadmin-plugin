@@ -8,10 +8,10 @@ Stable tag: 0.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
+A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with full color customization and Auto Dark Mode support.
 
 == Description ==
-Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
+WP Admin Dark Mode transforms the WordPress admin dashboard into a clean, eye-friendly dark interface. The plugin is purely CSS-based, keeping it fast and non-intrusive. All colors are driven by CSS custom properties, making the theme fully customizable through a dedicated settings page — no code editing required. An optional Auto Dark Mode feature uses JavaScript to dynamically handle third-party plugin areas not covered by the built-in stylesheet.
 
 Features:
 * One-click enable/disable
@@ -46,8 +46,6 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Auto Dark Mode uses a MutationObserver to also handle AJAX-loaded content
 * Fixed color picker swatch visibility: removed background-color from .wp-color-result in CSS so WP's inline style shows the swatch correctly
 * Updated all translation files (de_AT, de_DE, en_US, .pot) with new Auto Dark Mode strings
-* Cleaned up all comments and translated remaining German inline comments to English
-* Bumped version to 0.0.4
 
 = 0.0.3 =
 * Full CSS overhaul with a token-based design system for backgrounds, surfaces, borders, text, links, buttons and semantic states
@@ -75,10 +73,10 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Initial development release.
 
 == Deutsch ==
-Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
+Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit vollständiger Farbanpassung und Auto-Dark-Mode-Unterstützung.
 
 === Beschreibung ===
-Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
+WP Admin Dark Mode verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreundliche dunkle Oberfläche. Das Plugin basiert vollständig auf CSS und ist dadurch schnell und nicht intrusiv. Alle Farben werden über CSS-Custom-Properties gesteuert und sind über eine dedizierte Einstellungsseite vollständig anpassbar — ohne Code-Änderungen. Eine optionale Auto-Dark-Mode-Funktion nutzt JavaScript, um Drittanbieter-Plugin-Bereiche dynamisch abzudecken, die vom eingebauten Stylesheet nicht erfasst werden.
 
 Funktionen:
 * Ein-Klick aktivieren/deaktivieren
@@ -113,8 +111,6 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Auto Dark Mode verwendet einen MutationObserver, um auch AJAX-geladene Inhalte zu verarbeiten
 * Farbfeld-Anzeige des Color Pickers korrigiert: background-color von .wp-color-result im CSS entfernt, damit WPs Inline-Style das Farbfeld korrekt anzeigt
 * Alle Übersetzungsdateien (de_AT, de_DE, en_US, .pot) mit neuen Auto Dark Mode Strings aktualisiert
-* Alle Kommentare bereinigt und verbleibende deutsche Inline-Kommentare ins Englische übersetzt
-* Version auf 0.0.4 angehoben
 
 = 0.0.3 =
 * Komplettes CSS-Refactoring mit token-basiertem Design-System für Hintergründe, Flächen, Rahmen, Texte, Links, Buttons und Statusfarben
