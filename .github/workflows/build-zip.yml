@@ -41,7 +41,7 @@ jobs:
           archive: false
           name: wp-admin-dark-mode
           path: ${{ env.ZIP_PATH }}
-          retention-days: 90
+          retention-days: 1
 
       - name: Upload ZIP to GitHub Release
         if: github.event_name == 'release'
