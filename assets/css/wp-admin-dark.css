@@ -4,7 +4,7 @@
  * Author: AlexanderWagnerDev
  */
 
-/* ── CSS Custom Properties (overrideable via settings) ───────────────────── */
+/* ── CSS Custom Properties ────────────────────────────────────────────────────────── */
 :root {
   --adm-bg:         #1d2327;
   --adm-card:       #2c3338;
@@ -18,6 +18,7 @@
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
+html,
 body,
 body.wp-admin {
   background-color: var(--adm-bg) !important;
@@ -98,24 +99,29 @@ body.wp-admin {
 /* ── Main Content Area ───────────────────────────────────────────────────── */
 #wpcontent,
 #wpbody,
-#wpbody-content {
+#wpbody-content,
+#wpfooter,
+.wrap,
+#dashboard-widgets-wrap {
   background-color: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+#wpcontent *:not(a):not(button):not(input):not(select):not(textarea):not(code):not(pre):not([style*="background"]) {
+  border-color: var(--adm-border);
 }
 
 /* ── General Typography ──────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   color: var(--adm-text) !important;
 }
-
+p, li, td, th, label, span, div {
+  color: inherit;
+}
 a {
   color: var(--adm-link) !important;
 }
 a:hover {
   color: #90c8ff !important;
-}
-
-p, li, td, th, label, span, div {
-  color: inherit;
 }
 
 /* ── Wrap / Cards / Postboxes ────────────────────────────────────────────── */
@@ -224,41 +230,75 @@ table.widefat thead th {
 .column-primary strong a { color: var(--adm-link) !important; }
 
 /* ── Plugin List ─────────────────────────────────────────────────────────── */
-.plugins .plugin-title strong,
-.plugins .plugin-title span {
+.plugins .plugin-title strong {
   color: var(--adm-text) !important;
 }
-.plugins .plugin-description,
 .plugins .plugin-description p,
 .plugins td.desc p,
-.plugins td.desc,
-.plugins .second,
 .plugins .second p,
-.plugins .second .row-actions,
-.plugins .row-actions,
-.plugins .row-actions span,
-.plugins .row-actions a,
 .plugins td p {
+  color: var(--adm-text-muted) !important;
+}
+.plugins .row-actions {
+  color: var(--adm-text-muted) !important;
+}
+.plugins .row-actions a {
   color: var(--adm-text-muted) !important;
 }
 .plugins .row-actions a:hover {
   color: var(--adm-text) !important;
 }
+/* active/inactive rows - kein blauer Balken, nur Hintergrund */
 .plugins tr.active td,
 .plugins tr.inactive td {
   background: var(--adm-card) !important;
   border-color: var(--adm-border) !important;
+  box-shadow: none !important;
 }
 .plugins tr.inactive td {
   background: #222829 !important;
 }
-.plugins tr.active td {
-  border-left: 4px solid var(--adm-primary) !important;
-}
 .plugins .update-message,
 .plugins .update-message p {
-  color: var(--adm-text) !important;
+  color: var(--adm-warning) !important;
   background: transparent !important;
+}
+/* Links in plugin list */
+.plugins a {
+  color: var(--adm-link) !important;
+}
+
+/* ── WP Color Picker ──────────────────────────────────────────────────────── */
+.wp-picker-container .wp-color-result {
+  border-color: var(--adm-border) !important;
+}
+/* Swatch: background ist inline style vom JS — nicht überschreiben */
+.wp-picker-container .wp-color-result .wp-color-result-text {
+  background: var(--adm-card) !important;
+  color: var(--adm-text) !important;
+  border-left-color: var(--adm-border) !important;
+}
+.wp-picker-container input[type="text"].wp-color-picker {
+  background: var(--adm-card) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.wp-picker-container .wp-picker-open ~ .iris-picker,
+.iris-picker {
+  background: var(--adm-card) !important;
+  border-color: var(--adm-border) !important;
+}
+.iris-picker .iris-picker-inner input[type="text"] {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.iris-picker .iris-square-value {
+  color: var(--adm-text) !important;
+}
+.wp-picker-holder {
+  background: var(--adm-card) !important;
+  border-color: var(--adm-border) !important;
 }
 
 /* ── Notices ─────────────────────────────────────────────────────────────── */
@@ -270,10 +310,17 @@ div.notice {
   border-left-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
+.notice p,
+.notice li {
+  color: var(--adm-text) !important;
+}
 .notice-success  { border-left-color: var(--adm-success) !important; }
 .notice-error    { border-left-color: var(--adm-warning) !important; }
 .notice-warning  { border-left-color: #dba617 !important; }
 .notice-info     { border-left-color: var(--adm-primary) !important; }
+.notice .notice-dismiss::before {
+  color: var(--adm-text-muted) !important;
+}
 
 /* ── Dashboard Widgets ───────────────────────────────────────────────────── */
 #dashboard-widgets .postbox-container .postbox {
@@ -296,9 +343,15 @@ div.notice {
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
+#wp-dashboard-right .meta-box-sortables .postbox,
+#wp-dashboard-left .meta-box-sortables .postbox {
+  background: var(--adm-card) !important;
+  border-color: var(--adm-border) !important;
+}
 
 /* ── Screen Options / Help ───────────────────────────────────────────────── */
-#screen-meta {
+#screen-meta,
+#screen-meta-links {
   background: var(--adm-card) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
@@ -309,7 +362,7 @@ div.notice {
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
-#screen-meta-links a {
+#screen-meta-links .show-settings {
   color: var(--adm-text-muted) !important;
   border-color: var(--adm-border) !important;
 }
@@ -317,7 +370,7 @@ div.notice {
   background: var(--adm-bg) !important;
 }
 
-/* ── Tabs (e.g. Screen Options) ──────────────────────────────────────────── */
+/* ── Tabs ──────────────────────────────────────────────────────────────────── */
 .nav-tab {
   background: var(--adm-bg) !important;
   border-color: var(--adm-border) !important;
@@ -333,8 +386,11 @@ div.notice {
   border-bottom-color: var(--adm-card) !important;
   color: var(--adm-text) !important;
 }
+.nav-tab-wrapper {
+  border-bottom-color: var(--adm-border) !important;
+}
 
-/* ── Metaboxes / Settings Sections ──────────────────────────────────────── */
+/* ── Metaboxes / Settings Sections ─────────────────────────────────────── */
 #poststuff h1,
 #poststuff h2 {
   color: var(--adm-text) !important;
@@ -344,6 +400,9 @@ th.check-column {
 }
 
 /* ── WordPress Settings Pages ────────────────────────────────────────────── */
+.form-table {
+  background: transparent !important;
+}
 .form-table td,
 .form-table th {
   background: transparent !important;
@@ -352,6 +411,17 @@ th.check-column {
 }
 .form-table td .description {
   color: var(--adm-text-muted) !important;
+}
+
+/* ── SubSubSub / Filter Links ───────────────────────────────────────────── */
+.subsubsub {
+  color: var(--adm-text-muted) !important;
+}
+.subsubsub a {
+  color: var(--adm-link) !important;
+}
+.subsubsub a.current {
+  color: var(--adm-text) !important;
 }
 
 /* ── Media / Attachments ─────────────────────────────────────────────────── */
@@ -390,10 +460,19 @@ ul.wp-submenu {
   border-color: var(--adm-border) !important;
 }
 
-/* ── Pagination ──────────────────────────────────────────────────────────── */
+/* ── Pagination & Table Nav ─────────────────────────────────────────────── */
 .tablenav .tablenav-pages a,
 .tablenav .tablenav-pages .paging-input {
   color: var(--adm-link) !important;
+  border-color: var(--adm-border) !important;
+}
+.tablenav .tablenav-pages .displaying-num,
+.tablenav .tablenav-pages .current-page {
+  color: var(--adm-text-muted) !important;
+}
+.tablenav-pages input[type="number"] {
+  background: var(--adm-card) !important;
+  color: var(--adm-text) !important;
   border-color: var(--adm-border) !important;
 }
 
@@ -406,54 +485,30 @@ ul.wp-submenu {
 
 /* ── Misc / Utilities ────────────────────────────────────────────────────── */
 .wp-menu-badge::before,
-.wp-menu-badge { color: var(--adm-text-muted) !important; }
-
-.tablenav .tablenav-pages .displaying-num {
+.wp-menu-badge {
   color: var(--adm-text-muted) !important;
 }
-
-.update-nag, .updated, .notice, div.error {
+.update-nag {
   background: var(--adm-card) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
-
-/* community events */
 .community-events,
 .community-events li {
   background: var(--adm-card) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
-
-/* ── Plugin Page (Settings -> Dark Mode) ─────────────────────────────────── */
-body.settings_page_wp-admin-dark-mode .adm-card {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
+/* WP footer */
+#wpfooter {
+  border-top-color: var(--adm-border) !important;
 }
-body.settings_page_wp-admin-dark-mode .adm-card-header {
-  background: var(--adm-bg) !important;
-  border-color: var(--adm-border) !important;
-}
-body.settings_page_wp-admin-dark-mode .adm-page-header {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
-}
-body.settings_page_wp-admin-dark-mode .adm-card-header h2,
-body.settings_page_wp-admin-dark-mode .adm-page-title,
-body.settings_page_wp-admin-dark-mode .adm-field-title,
-body.settings_page_wp-admin-dark-mode .adm-color-label {
-  color: var(--adm-text) !important;
-}
-body.settings_page_wp-admin-dark-mode .adm-page-subtitle,
-body.settings_page_wp-admin-dark-mode .adm-field-desc,
-body.settings_page_wp-admin-dark-mode .adm-card-description,
-body.settings_page_wp-admin-dark-mode .adm-footer {
+#wpfooter p,
+#wpfooter a {
   color: var(--adm-text-muted) !important;
 }
-body.settings_page_wp-admin-dark-mode .adm-color-reset-row {
-  border-color: var(--adm-border) !important;
-}
-body.settings_page_wp-admin-dark-mode .adm-footer a {
-  color: var(--adm-link) !important;
+/* Checkbox */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--adm-primary);
 }
