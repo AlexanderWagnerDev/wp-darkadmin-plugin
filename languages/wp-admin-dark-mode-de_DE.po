@@ -125,9 +125,9 @@ msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
 #: wp-admin-dark-mode.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
-msgstr "\u2713 Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: wp-admin-dark-mode.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
-msgstr "\u2713 Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
