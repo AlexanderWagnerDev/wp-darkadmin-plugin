@@ -1,57 +1,119 @@
 /*
- * WP Admin Dark Mode – Native Style
- * Version: 0.0.2
+ * WP Admin Dark Mode – Core Stylesheet
+ * Version: 0.0.3
  * Author: AlexanderWagnerDev
+ *
+ * All colors are driven by CSS custom properties.
+ * Override them via Settings > WP Admin Dark Mode.
  */
 
-/* ── CSS Custom Properties ────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS  (all user-customisable via the settings page)
+   ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --adm-bg:         #1d2327;
-  --adm-card:       #2c3338;
-  --adm-border:     #3c434a;
-  --adm-text:       #dcdcde;
-  --adm-text-muted: #a7aaad;
-  --adm-link:       #72aee6;
-  --adm-primary:    #2271b1;
-  --adm-success:    #00a32a;
-  --adm-warning:    #d63638;
+  /* Backgrounds */
+  --adm-bg:          #1d2327;   /* page background               */
+  --adm-surface-1:   #2c3338;   /* cards, tables                 */
+  --adm-surface-2:   #32393f;   /* inputs, dropdowns             */
+  --adm-surface-3:   #3c434a;   /* hover states                  */
+
+  /* Borders */
+  --adm-border:      #3c434a;
+  --adm-border-focus:#2271b1;
+
+  /* Typography */
+  --adm-text:        #dcdcde;   /* primary text                  */
+  --adm-text-muted:  #a7aaad;   /* secondary / description text  */
+  --adm-text-soft:   #787c82;   /* tertiary / row-actions        */
+
+  /* Interactive */
+  --adm-link:        #72aee6;
+  --adm-link-hover:  #93c5fd;
+  --adm-primary:     #2271b1;
+  --adm-primary-hover:#135e96;
+
+  /* Semantic */
+  --adm-success:     #00a32a;
+  --adm-warning:     #dba617;
+  --adm-danger:      #d63638;
+
+  /* Spacing scale */
+  --adm-space-1: 4px;
+  --adm-space-2: 8px;
+  --adm-space-3: 12px;
+  --adm-space-4: 16px;
+  --adm-space-5: 20px;
+  --adm-space-6: 24px;
+
+  /* Shape */
+  --adm-radius-sm: 3px;
+  --adm-radius-md: 6px;
+  --adm-radius-lg: 10px;
+
+  /* Elevation */
+  --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.25);
+  --adm-shadow-md: 0 3px 10px rgba(0,0,0,.30);
+
+  /* Component sizes */
+  --adm-input-h: 32px;
+  --adm-btn-h:   30px;
 }
 
-/* ── Base ────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
 html,
 body,
-body.wp-admin {
+body.wp-admin,
+#wpwrap {
   background-color: var(--adm-bg) !important;
   color: var(--adm-text) !important;
 }
 
-/* ── Admin Bar ───────────────────────────────────────────────────────────── */
+#wpcontent,
+#wpbody,
+#wpbody-content,
+#wpfooter,
+#dashboard-widgets-wrap {
+  background-color: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+
+.wrap {
+  color: var(--adm-text);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ADMIN BAR
+   ═══════════════════════════════════════════════════════════════════════════ */
 #wpadminbar {
-  background: #1d2327 !important;
+  background: #1a1f24 !important;
 }
 #wpadminbar .ab-top-menu > li > .ab-item,
-#wpadminbar .ab-top-menu > li.hover > .ab-item,
 #wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-item {
   color: var(--adm-text-muted) !important;
 }
 #wpadminbar .ab-top-menu > li:hover > .ab-item,
 #wpadminbar .ab-top-menu > li.hover > .ab-item {
-  background: #2c3338 !important;
+  background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
 }
 #wpadminbar .menupop .ab-sub-wrapper {
-  background: #2c3338 !important;
+  background: var(--adm-surface-1) !important;
   border: 1px solid var(--adm-border) !important;
+  box-shadow: var(--adm-shadow-md) !important;
 }
 #wpadminbar .menupop .ab-sub-wrapper a {
   color: var(--adm-text) !important;
 }
 #wpadminbar .menupop .ab-sub-wrapper a:hover {
-  background: var(--adm-bg) !important;
+  background: var(--adm-surface-3) !important;
   color: #fff !important;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SIDEBAR
+   ═══════════════════════════════════════════════════════════════════════════ */
 #adminmenu,
 #adminmenuback,
 #adminmenuwrap {
@@ -78,39 +140,29 @@ body.wp-admin {
 }
 #adminmenu li.menu-top:hover,
 #adminmenu li.opensub > a.menu-top {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   color: #fff !important;
 }
 #adminmenu .wp-menu-arrow,
 #adminmenu .wp-menu-arrow div {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
 }
 #adminmenu li.menu-top.current,
 #adminmenu li.wp-has-current-submenu {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
 }
-#collapse-menu {
+#collapse-menu,
+#collapse-menu:hover {
   color: var(--adm-text-muted) !important;
 }
-#collapse-menu:hover {
-  color: var(--adm-text) !important;
+.wp-menu-badge::before,
+.wp-menu-badge {
+  color: var(--adm-text-muted) !important;
 }
 
-/* ── Main Content Area ───────────────────────────────────────────────────── */
-#wpcontent,
-#wpbody,
-#wpbody-content,
-#wpfooter,
-.wrap,
-#dashboard-widgets-wrap {
-  background-color: var(--adm-bg) !important;
-  color: var(--adm-text) !important;
-}
-#wpcontent *:not(a):not(button):not(input):not(select):not(textarea):not(code):not(pre):not([style*="background"]) {
-  border-color: var(--adm-border);
-}
-
-/* ── General Typography ──────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════════════════ */
 h1, h2, h3, h4, h5, h6 {
   color: var(--adm-text) !important;
 }
@@ -121,42 +173,40 @@ a {
   color: var(--adm-link) !important;
 }
 a:hover {
-  color: #90c8ff !important;
+  color: var(--adm-link-hover) !important;
 }
 
-/* ── Wrap / Cards / Postboxes ────────────────────────────────────────────── */
-.wrap {
-  color: var(--adm-text);
-}
-.postbox,
-.postbox .inside,
-.stuffbox {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
+/* Page title + inline button */
+.wp-heading-inline {
   color: var(--adm-text) !important;
-}
-.postbox .hndle,
-.postbox .handlediv {
-  background: var(--adm-bg) !important;
-  border-color: var(--adm-border) !important;
-  color: var(--adm-text) !important;
-}
-.postbox-header {
-  background: var(--adm-bg) !important;
-  border-color: var(--adm-border) !important;
 }
 
-/* ── Buttons ─────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   BUTTONS
+   (covers all WP admin button variants incl. "Plugin hinzufügen")
+   ═══════════════════════════════════════════════════════════════════════════ */
 .wp-core-ui .button,
-.wp-core-ui .button-secondary {
-  background: var(--adm-card) !important;
+.wp-core-ui .button-secondary,
+a.page-title-action,
+.page-title-action {
+  height: var(--adm-btn-h) !important;
+  line-height: var(--adm-btn-h) !important;
+  padding: 0 var(--adm-space-3) !important;
+  border-radius: var(--adm-radius-sm) !important;
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
   color: var(--adm-text) !important;
-  border-color: var(--adm-border) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-size: 13px !important;
+  cursor: pointer;
 }
 .wp-core-ui .button:hover,
-.wp-core-ui .button-secondary:hover {
-  background: #3c434a !important;
-  border-color: #6b7277 !important;
+.wp-core-ui .button-secondary:hover,
+a.page-title-action:hover,
+.page-title-action:hover {
+  background: var(--adm-surface-3) !important;
+  border-color: #5a6470 !important;
   color: #fff !important;
 }
 .wp-core-ui .button-primary {
@@ -165,16 +215,26 @@ a:hover {
   color: #fff !important;
 }
 .wp-core-ui .button-primary:hover {
-  background: #135e96 !important;
-  border-color: #135e96 !important;
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+  color: #fff !important;
 }
-.wp-core-ui .button[disabled],
-.wp-core-ui .button:disabled {
-  opacity: .6 !important;
+.wp-core-ui .button:disabled,
+.wp-core-ui .button[disabled] {
+  opacity: .55 !important;
   cursor: not-allowed !important;
 }
+/* "Plugin hinzufügen" title-action button */
+a.page-title-action {
+  margin-left: var(--adm-space-2) !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  text-decoration: none !important;
+}
 
-/* ── Forms & Inputs ──────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   FORMS & INPUTS
+   ═══════════════════════════════════════════════════════════════════════════ */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -183,151 +243,261 @@ input[type="search"],
 input[type="url"],
 textarea,
 select {
-  background: var(--adm-card) !important;
+  min-height: var(--adm-input-h) !important;
+  padding: 0 var(--adm-space-2) !important;
+  border-radius: var(--adm-radius-sm) !important;
+  background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
-  border-color: var(--adm-border) !important;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+textarea {
+  min-height: unset !important;
+  padding: var(--adm-space-2) !important;
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="url"]:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--adm-primary) !important;
-  box-shadow: 0 0 0 1px var(--adm-primary) !important;
+  border-color: var(--adm-border-focus) !important;
+  box-shadow: 0 0 0 1px var(--adm-border-focus) !important;
   outline: none !important;
 }
 select option {
-  background: var(--adm-card);
+  background: var(--adm-surface-2);
   color: var(--adm-text);
 }
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--adm-primary);
+}
 
-/* ── Tables ──────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════════════════════════════════════════ */
 .wp-list-table,
 table.widefat {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
 }
 .wp-list-table th,
 .wp-list-table td,
 table.widefat th,
 table.widefat td {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
+  background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
 }
-.wp-list-table .alternate,
-table.widefat .alternate {
+.wp-list-table .alternate td,
+table.widefat .alternate td {
   background: #272e35 !important;
 }
 .wp-list-table thead th,
 table.widefat thead th {
-  background: #1d2327 !important;
+  background: var(--adm-bg) !important;
   color: var(--adm-text-muted) !important;
   border-bottom: 1px solid var(--adm-border) !important;
 }
-.column-primary strong a { color: var(--adm-link) !important; }
+.column-primary strong a {
+  color: var(--adm-link) !important;
+}
+th.check-column {
+  background: var(--adm-bg) !important;
+}
 
-/* ── Plugin List ─────────────────────────────────────────────────────────── */
-.plugins .plugin-title strong {
+/* SubSubSub filter links */
+.subsubsub {
+  margin: 8px 0 12px !important;
+  color: var(--adm-text-soft) !important;
+}
+.subsubsub a {
+  color: var(--adm-link) !important;
+}
+.subsubsub .current {
+  color: var(--adm-text) !important;
+  font-weight: 600;
+}
+
+/* Tablenav */
+.tablenav {
+  margin: 8px 0 !important;
+}
+.tablenav .displaying-num,
+.tablenav .tablenav-pages .current-page {
+  color: var(--adm-text-muted) !important;
+}
+.tablenav .tablenav-pages a {
+  color: var(--adm-link) !important;
+  border-color: var(--adm-border) !important;
+}
+.tablenav-pages input[type="number"] {
+  padding: 0 4px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PLUGIN LIST (plugins.php)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.plugins tr td {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  box-shadow: none !important;    /* removes ALL coloured borders/shadows */
+}
+.plugins tr.inactive td {
+  background: #252c32 !important;
+}
+.plugins .plugin-title strong,
+.plugins .plugin-title strong a {
   color: var(--adm-text) !important;
 }
 .plugins .plugin-description p,
 .plugins td.desc p,
-.plugins .second p,
-.plugins td p {
+.plugins .second p {
   color: var(--adm-text-muted) !important;
+  margin: 2px 0 !important;
 }
-.plugins .row-actions {
-  color: var(--adm-text-muted) !important;
+.plugins .row-actions,
+.plugins .row-actions span a {
+  color: var(--adm-text-soft) !important;
 }
-.plugins .row-actions a {
-  color: var(--adm-text-muted) !important;
-}
-.plugins .row-actions a:hover {
+.plugins .row-actions span a:hover {
   color: var(--adm-text) !important;
 }
-.plugins tr.active td,
-.plugins tr.inactive td {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
-  box-shadow: none !important;
-}
-.plugins tr.inactive td {
-  background: #222829 !important;
-}
-.plugins .update-message,
 .plugins .update-message p {
   color: var(--adm-warning) !important;
   background: transparent !important;
 }
-.plugins a {
-  color: var(--adm-link) !important;
-}
 
-/* ── WP Color Picker ──────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   WP COLOR PICKER (Iris)
+   Key insight: .wp-color-result gets its background as inline style from JS.
+   Never override background on that element — only style the text part.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.wp-picker-container {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--adm-space-2);
+  flex-wrap: wrap;
+}
+/* The colour result button: border + shape only, NO background override */
 .wp-picker-container .wp-color-result {
-  border-color: var(--adm-border) !important;
+  height: var(--adm-btn-h) !important;
+  padding: 0 0 0 30px !important;   /* 30px = space for the swatch */
+  border-radius: var(--adm-radius-sm) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+  overflow: hidden;
 }
+/* The text label inside the button */
 .wp-picker-container .wp-color-result .wp-color-result-text {
-  background: var(--adm-card) !important;
+  height: 100%;
+  line-height: var(--adm-btn-h) !important;
+  padding: 0 var(--adm-space-2) !important;
+  background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
-  border-left-color: var(--adm-border) !important;
+  border-left: 1px solid var(--adm-border) !important;
 }
+/* Hex input */
 .wp-picker-container input[type="text"].wp-color-picker {
-  background: var(--adm-card) !important;
+  height: var(--adm-input-h) !important;
+  width: 90px !important;
+  padding: 0 var(--adm-space-2) !important;
+  background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
-  border-color: var(--adm-border) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-sm) !important;
 }
-.wp-picker-container .wp-picker-open ~ .iris-picker,
+/* Popup holder */
+.wp-picker-holder {
+  margin-top: 4px;
+}
 .iris-picker {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: var(--adm-shadow-md) !important;
+  border-radius: var(--adm-radius-md) !important;
 }
 .iris-picker .iris-picker-inner input[type="text"] {
-  background: var(--adm-bg) !important;
+  background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
-  border-color: var(--adm-border) !important;
+  border: 1px solid var(--adm-border) !important;
 }
-.iris-picker .iris-square-value {
+.iris-picker .iris-palette-container .iris-palette {
+  border: 1px solid var(--adm-border) !important;
+}
+/* "Clear" / "Close" button inside picker */
+.wp-picker-input-wrap .button,
+.wp-picker-clear {
+  height: var(--adm-btn-h) !important;
+  line-height: var(--adm-btn-h) !important;
+  background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
-}
-.wp-picker-holder {
-  background: var(--adm-card) !important;
   border-color: var(--adm-border) !important;
 }
 
-/* ── Notices ─────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   NOTICES
+   ═══════════════════════════════════════════════════════════════════════════ */
 .notice,
+div.notice,
 div.updated,
 div.error,
-div.notice {
-  background: var(--adm-card) !important;
+.update-nag {
+  background: var(--adm-surface-1) !important;
   border-left-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
+  box-shadow: none !important;
 }
 .notice p,
-.notice li {
+.notice li,
+.update-nag p {
   color: var(--adm-text) !important;
 }
-.notice-success  { border-left-color: var(--adm-success) !important; }
-.notice-error    { border-left-color: var(--adm-warning) !important; }
-.notice-warning  { border-left-color: #dba617 !important; }
-.notice-info     { border-left-color: var(--adm-primary) !important; }
 .notice .notice-dismiss::before {
   color: var(--adm-text-muted) !important;
 }
+.notice-success  { border-left-color: var(--adm-success)  !important; }
+.notice-error    { border-left-color: var(--adm-danger)   !important; }
+.notice-warning  { border-left-color: var(--adm-warning)  !important; }
+.notice-info     { border-left-color: var(--adm-primary)  !important; }
 
-/* ── Dashboard Widgets ───────────────────────────────────────────────────── */
-#dashboard-widgets .postbox-container .postbox {
-  background: var(--adm-card) !important;
+/* ═══════════════════════════════════════════════════════════════════════════
+   POSTBOXES / CARDS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.postbox,
+.postbox .inside,
+.stuffbox {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.postbox .hndle,
+.postbox .handlediv,
+.postbox-header {
+  background: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+#poststuff h1,
+#poststuff h2 {
+  color: var(--adm-text) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DASHBOARD WIDGETS
+   ═══════════════════════════════════════════════════════════════════════════ */
+#dashboard-widgets .postbox-container .postbox,
+#wp-dashboard-right .meta-box-sortables .postbox,
+#wp-dashboard-left .meta-box-sortables .postbox {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
 }
 .activity-block {
   border-top-color: var(--adm-border) !important;
-}
-.activity-block .dashboard-comment-wrap {
-  background: var(--adm-bg) !important;
 }
 #dashboard_activity .no-activity p {
   color: var(--adm-text-muted) !important;
@@ -336,26 +506,25 @@ div.notice {
 .feature-filter,
 .popular-tags,
 .widgets-holder-wrap {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
-#wp-dashboard-right .meta-box-sortables .postbox,
-#wp-dashboard-left .meta-box-sortables .postbox {
-  background: var(--adm-card) !important;
+.community-events,
+.community-events li {
+  background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
 }
 
-/* ── Screen Options / Help ───────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCREEN OPTIONS / HELP
+   ═══════════════════════════════════════════════════════════════════════════ */
 #screen-meta,
-#screen-meta-links {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
-  color: var(--adm-text) !important;
-}
+#screen-meta-links,
 #screen-options-wrap,
 #contextual-help-wrap {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
@@ -363,43 +532,33 @@ div.notice {
   color: var(--adm-text-muted) !important;
   border-color: var(--adm-border) !important;
 }
-#contextual-help-back {
-  background: var(--adm-bg) !important;
-}
 
-/* ── Tabs ──────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.nav-tab-wrapper {
+  border-bottom-color: var(--adm-border) !important;
+}
 .nav-tab {
   background: var(--adm-bg) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text-muted) !important;
 }
 .nav-tab:hover {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
 }
 .nav-tab-active,
 .nav-tab-active:hover {
-  background: var(--adm-card) !important;
-  border-bottom-color: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
 }
-.nav-tab-wrapper {
-  border-bottom-color: var(--adm-border) !important;
-}
 
-/* ── Metaboxes / Settings Sections ─────────────────────────────────────── */
-#poststuff h1,
-#poststuff h2 {
-  color: var(--adm-text) !important;
-}
-th.check-column {
-  background: var(--adm-card) !important;
-}
-
-/* ── WordPress Settings Pages ────────────────────────────────────────────── */
-.form-table {
-  background: transparent !important;
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   SETTINGS PAGES (form-table)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.form-table,
 .form-table td,
 .form-table th {
   background: transparent !important;
@@ -410,102 +569,64 @@ th.check-column {
   color: var(--adm-text-muted) !important;
 }
 
-/* ── SubSubSub / Filter Links ───────────────────────────────────────────── */
-.subsubsub {
-  color: var(--adm-text-muted) !important;
-}
-.subsubsub a {
-  color: var(--adm-link) !important;
-}
-.subsubsub a.current {
+/* ═══════════════════════════════════════════════════════════════════════════
+   SEARCH & PAGINATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+.search-box input[type="search"] {
+  background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
 }
 
-/* ── Media / Attachments ─────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   MEDIA
+   ═══════════════════════════════════════════════════════════════════════════ */
 .media-frame,
 .media-sidebar,
 .media-toolbar,
 .uploader-inline,
 .upload-ui {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
 
-/* ── Gutenberg Editor ────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   GUTENBERG
+   ═══════════════════════════════════════════════════════════════════════════ */
 .editor-styles-wrapper {
   background: var(--adm-bg) !important;
   color: var(--adm-text) !important;
 }
 .edit-post-sidebar,
 .interface-interface-skeleton__sidebar {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   border-left-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
 .edit-post-header,
 .interface-interface-skeleton__header {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   border-bottom-color: var(--adm-border) !important;
-  color: var(--adm-text) !important;
 }
 
-/* ── Dropdown Menus ──────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   DROPDOWN MENUS
+   ═══════════════════════════════════════════════════════════════════════════ */
 .dropdown-content,
 ul.wp-submenu {
-  background: var(--adm-card) !important;
+  background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
+  box-shadow: var(--adm-shadow-md) !important;
 }
 
-/* ── Pagination & Table Nav ─────────────────────────────────────────────── */
-.tablenav .tablenav-pages a,
-.tablenav .tablenav-pages .paging-input {
-  color: var(--adm-link) !important;
-  border-color: var(--adm-border) !important;
-}
-.tablenav .tablenav-pages .displaying-num,
-.tablenav .tablenav-pages .current-page {
-  color: var(--adm-text-muted) !important;
-}
-.tablenav-pages input[type="number"] {
-  background: var(--adm-card) !important;
-  color: var(--adm-text) !important;
-  border-color: var(--adm-border) !important;
-}
-
-/* ── Search Box ──────────────────────────────────────────────────────────── */
-.search-box input[type="search"] {
-  background: var(--adm-card) !important;
-  color: var(--adm-text) !important;
-  border-color: var(--adm-border) !important;
-}
-
-/* ── Misc / Utilities ────────────────────────────────────────────────────── */
-.wp-menu-badge::before,
-.wp-menu-badge {
-  color: var(--adm-text-muted) !important;
-}
-.update-nag {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
-  color: var(--adm-text) !important;
-}
-.community-events,
-.community-events li {
-  background: var(--adm-card) !important;
-  border-color: var(--adm-border) !important;
-  color: var(--adm-text) !important;
-}
-/* WP footer */
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════════════ */
 #wpfooter {
   border-top-color: var(--adm-border) !important;
 }
 #wpfooter p,
 #wpfooter a {
   color: var(--adm-text-muted) !important;
-}
-/* Checkbox */
-input[type="checkbox"],
-input[type="radio"] {
-  accent-color: var(--adm-primary);
 }
