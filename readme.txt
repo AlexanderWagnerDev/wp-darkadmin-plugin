@@ -41,14 +41,13 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 * Full CSS overhaul with a token-based design system for backgrounds, surfaces, borders, text, links, buttons and semantic states
 * Added new customizable color variables: `surface1`, `surface2`, `surface3`, `text_soft` and `danger`
 * Increased the number of adjustable color tokens from 9 to 13
-* Fixed the Plugin hinzufügen / page title action button styling so text stays readable in dark mode
+* Fixed the Add Plugin / page title action button styling so text stays readable in dark mode
 * Fixed the WordPress Color Picker button styling by preserving the inline swatch background and styling only the text section
 * Improved spacing, sizing and proportions to better match native WordPress admin UI defaults
 * Extracted the settings page styles into a dedicated assets/css/settings.css file
 * Reworked the settings page layout for cleaner spacing and more consistent component styling
 * Improved plugin list styling, row actions, tables, notices, form controls, dashboard elements and navigation tabs
 * Removed unwanted colored shadows / blue row highlight artifacts in plugin tables
-* Updated plugin core file to version 0.0.3
 
 = 0.0.2 =
 * Redesigned settings page with card-based layout, page header with status badge and version display
@@ -104,7 +103,6 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 * Layout der Einstellungsseite für konsistentere Komponenten und sauberere Abstände überarbeitet
 * Plugin-Liste, Row-Actions, Tabellen, Notices, Formularelemente, Dashboard-Bereiche und Tabs weiter optimiert
 * Unerwünschte farbige Schatten bzw. blaue Hervorhebungs-Artefakte in Plugin-Tabellen entfernt
-* Plugin-Kerndatei auf Version 0.0.3 aktualisiert
 
 = 0.0.2 =
 * Einstellungsseite komplett neu gestaltet: Card-Layout, Page-Header mit Status-Badge und Versionsanzeige
