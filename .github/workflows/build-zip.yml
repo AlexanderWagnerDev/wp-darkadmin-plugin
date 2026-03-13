@@ -16,37 +16,42 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+
+      - name: Read plugin version
+        id: version
+        run: |
+          VERSION=$(grep -m1 'Version:' wp-admin-dark-mode.php | awk '{print $NF}')
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected plugin version: $VERSION"
 
       - name: Create plugin ZIP
         run: |
-          PLUGIN_SLUG="wp-admin-dark-mode"
-          ZIP_NAME="${PLUGIN_SLUG}.zip"
+          ZIP_NAME="wp-admin-dark-mode-${{ steps.version.outputs.VERSION }}.zip"
 
-          STAGING="/tmp/staging"
-          mkdir -p "$STAGING"
-
-          rsync -av \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='.gitignore' \
-            --exclude='.editorconfig' \
-            --exclude='*.zip' \
-            --exclude='node_modules' \
-            --exclude='tests' \
-            ./ "$STAGING/"
-
-          cd "$STAGING"
-          zip -r "$GITHUB_WORKSPACE/${ZIP_NAME}" .
+          # Use find to collect everything except .github/ and .git/
+          # -not -path excludes the directory and all its contents
+          # zip reads file list from stdin via -@
+          find . \
+            -not -path './.git/*' \
+            -not -path './.git' \
+            -not -path './.github/*' \
+            -not -path './.github' \
+            -not -name '*.zip' \
+            -type f \
+          | sed 's|^\./||' \
+          | zip "$ZIP_NAME" -@
 
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
-          echo "Built: ${ZIP_NAME}"
 
+          # Show ZIP contents for verification
+          echo "--- ZIP contents ---"
+          unzip -l "$ZIP_NAME"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
-          name: wp-admin-dark-mode
+          name: wp-admin-dark-mode-${{ steps.version.outputs.VERSION }}
           path: ${{ env.ZIP_NAME }}
           retention-days: 90
 
