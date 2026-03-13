@@ -108,6 +108,7 @@ body.wp-admin {
 }
 #wpcontent *:not(a):not(button):not(input):not(select):not(textarea):not(code):not(pre):not([style*="background"]) {
   border-color: var(--adm-border);
+  background: var(--adm-card) !important;
 }
 
 /* ── General Typography ──────────────────────────────────────────────────── */
@@ -130,6 +131,7 @@ a:hover {
 }
 .postbox,
 .postbox .inside,
+.postbox div,
 .stuffbox {
   background: var(--adm-card) !important;
   border-color: var(--adm-border) !important;
