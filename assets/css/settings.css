@@ -7,13 +7,13 @@
  * Light-mode fallbacks are defined inline (body.adm-dark-active overrides them).
  */
 
-/* ─── Layout ──────────────────────────────────────────────────────────────── */
+/* ─── Layout ────────────────────────────────────────────────────────────────────────────── */
 .adm-settings-wrap {
   max-width: 900px;
   margin-top: 16px;
 }
 
-/* ─── Page Header ─────────────────────────────────────────────────────────── */
+/* ─── Page Header ───────────────────────────────────────────────────────────────────── */
 .adm-page-header {
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
   background: currentColor;
 }
 
-/* ─── Cards ───────────────────────────────────────────────────────────────── */
+/* ─── Cards ──────────────────────────────────────────────────────────────────────────────── */
 .adm-card {
   background: #fff;
   border: 1px solid #dcdcde;
@@ -116,7 +116,7 @@
   line-height: 1.5;
 }
 
-/* ─── General field row ───────────────────────────────────────────────────── */
+/* ─── General field row ───────────────────────────────────────────────────────────── */
 .adm-field-row {
   display: flex;
   align-items: center;
@@ -141,7 +141,7 @@
   line-height: 1.4;
 }
 
-/* ─── Toggle switch ───────────────────────────────────────────────────────── */
+/* ─── Toggle switch ────────────────────────────────────────────────────────────────── */
 .adm-toggle {
   position: relative;
   width: 52px;
@@ -178,7 +178,7 @@
 .adm-toggle input:checked + .adm-slider::before { transform: translateX(24px); }
 .adm-toggle input:focus-visible + .adm-slider { outline: 2px solid #2271b1; outline-offset: 2px; }
 
-/* ─── Color Grid ──────────────────────────────────────────────────────────── */
+/* ─── Color Grid ────────────────────────────────────────────────────────────────────── */
 .adm-color-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -196,19 +196,27 @@
   color: #1d2327;
   display: block;
 }
-/* Make the WP color picker fill available width */
+
+/*
+ * Color picker container: block-level so it takes full column width.
+ * Do NOT use flex/stretch on .wp-color-result itself – that breaks the
+ * left swatch area which relies on padding-left set by WP's JS.
+ */
 .adm-color-item .wp-picker-container {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-  gap: 6px !important;
-  width: 100%;
+  display: block !important;
+  width: 100% !important;
 }
 .adm-color-item .wp-picker-container .wp-color-result {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  /* padding-left is injected by WP JS (space for swatch) – do not override */
+}
+.adm-color-item .wp-picker-container .wp-color-result-text {
+  /* the text label fills the remaining space after the swatch */
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
 }
 
 .adm-color-reset-row {
@@ -226,7 +234,7 @@
   height: 15px !important;
 }
 
-/* ─── CSS Editor ──────────────────────────────────────────────────────────── */
+/* ─── CSS Editor ─────────────────────────────────────────────────────────────────────── */
 .adm-css-editor-wrap {
   border: 1px solid #dcdcde;
   border-radius: 6px;
@@ -249,14 +257,14 @@
 }
 .adm-css-editor::placeholder { color: #585b70; }
 
-/* ─── Submit ──────────────────────────────────────────────────────────────── */
+/* ─── Submit ──────────────────────────────────────────────────────────────────────────────── */
 .adm-submit-row {
   display: flex;
   gap: 10px;
   margin: 4px 0 20px;
 }
 
-/* ─── Footer ──────────────────────────────────────────────────────────────── */
+/* ─── Footer ─────────────────────────────────────────────────────────────────────────────── */
 .adm-footer {
   text-align: center;
   padding: 10px 0 4px;
@@ -300,14 +308,16 @@ body.adm-dark-active .adm-footer a               { color: var(--adm-link) !impor
 body.adm-dark-active .adm-status-active          { background: #12532e50; color: #6ee7a0; }
 body.adm-dark-active .adm-status-inactive        { background: #7f1d1d50; color: #fca5a5; }
 
-/* Color picker in dark mode:
-   - .wp-color-result background is set inline by JS → don't touch it
-   - only style the text label and the iris popup                         */
-body.adm-dark-active .wp-picker-container .wp-color-result {
+/*
+ * Color picker in dark mode:
+ * .wp-color-result background is set as inline style by WP's JS – do NOT override it.
+ * Only style the border, and the text label part.
+ */
+body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result {
   border-color: var(--adm-border) !important;
   box-shadow: none !important;
 }
-body.adm-dark-active .wp-picker-container .wp-color-result .wp-color-result-text {
+body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result-text {
   background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
   border-left-color: var(--adm-border) !important;
