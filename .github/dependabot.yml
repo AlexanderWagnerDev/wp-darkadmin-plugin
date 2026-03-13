@@ -5,6 +5,3 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      timezone: "Europe/Vienna"
-    commit-message:
-      prefix: "ci"
