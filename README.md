@@ -8,7 +8,7 @@ Simple, lightweight Dark Mode toggle for the WordPress Admin Dashboard.
 - **Requires at least:** 6.0
 - **Tested up to:** 6.9.4
 - **Requires PHP:** 7.4
-- **Stable tag:** 0.0.1
+- **Stable tag:** 0.0.2
 - **License:** GPLv2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
 
 ## Description
@@ -39,15 +39,14 @@ No. It only loads CSS in `wp-admin`.
 
 ## Changelog
 
+### 0.0.2
+
+- ...
+
 ### 0.0.1
 
 - Initial development release.
 
-## Upgrade Notice
-
-### 0.0.1
-
-First release.
 
 ---
 
@@ -83,12 +82,11 @@ Nein. Es lädt nur CSS im `wp-admin`.
 
 ## Changelog
 
+### 0.0.2
+
+- ...
+
+
 ### 0.0.1
 
 - Erste Development-Version.
-
-## Upgrade-Hinweis
-
-### 0.0.1
-
-Erste Version.
