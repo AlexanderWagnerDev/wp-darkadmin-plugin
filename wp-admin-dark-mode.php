@@ -3,7 +3,7 @@
  * Plugin Name: WP Admin Dark Mode
  * Plugin URI: https://alexanderwagnerdev.com/wp-admin-dark-mode-plugin/
  * Description: Simple, lightweight Dark Mode toggle for the WordPress Admin Dashboard.
- * Version: 0.0.1
+ * Version: 0.2.0
  * Requires at least: 6.0
  * Tested up to: 6.9.1
  * Requires PHP: 7.4
@@ -19,11 +19,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADM_VERSION', '0.0.1' );
+define( 'ADM_VERSION', '0.2.0' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Load translations from /languages.
+ * Default color palette (matches WP sidebar #1d2327 dark scheme).
+ */
+function adm_default_colors(): array {
+	return [
+		'bg'          => '#1d2327',
+		'card'        => '#2c3338',
+		'border'      => '#3c434a',
+		'text'        => '#dcdcde',
+		'text_muted'  => '#a7aaad',
+		'link'        => '#72aee6',
+		'primary'     => '#2271b1',
+		'success'     => '#00a32a',
+		'warning'     => '#d63638',
+	];
+}
+
+/**
+ * Load translations.
  */
 add_action( 'plugins_loaded', function () {
 	load_plugin_textdomain(
@@ -34,19 +51,45 @@ add_action( 'plugins_loaded', function () {
 } );
 
 /**
- * Enqueue admin CSS only when enabled.
+ * Enqueue admin CSS + inline custom CSS when dark mode is enabled.
  */
-add_action( 'admin_enqueue_scripts', function ( $hook ) {
+add_action( 'admin_enqueue_scripts', function () {
 	if ( ! get_option( 'adm_dark_mode_enabled', false ) ) {
 		return;
 	}
 
+	$colors = wp_parse_args(
+		(array) get_option( 'adm_colors', [] ),
+		adm_default_colors()
+	);
+
+	// Build CSS custom-property overrides
+	$vars = sprintf(
+		':root{--adm-bg:%s;--adm-card:%s;--adm-border:%s;--adm-text:%s;--adm-text-muted:%s;--adm-link:%s;--adm-primary:%s;--adm-success:%s;--adm-warning:%s;}',
+		sanitize_hex_color( $colors['bg'] )         ?? '#1d2327',
+		sanitize_hex_color( $colors['card'] )        ?? '#2c3338',
+		sanitize_hex_color( $colors['border'] )      ?? '#3c434a',
+		sanitize_hex_color( $colors['text'] )        ?? '#dcdcde',
+		sanitize_hex_color( $colors['text_muted'] )  ?? '#a7aaad',
+		sanitize_hex_color( $colors['link'] )        ?? '#72aee6',
+		sanitize_hex_color( $colors['primary'] )     ?? '#2271b1',
+		sanitize_hex_color( $colors['success'] )     ?? '#00a32a',
+		sanitize_hex_color( $colors['warning'] )     ?? '#d63638'
+	);
+
 	wp_enqueue_style(
 		'adm-darkmode',
 		ADM_URL . 'assets/css/wp-admin-dark.css',
-		array(),
+		[],
 		ADM_VERSION
 	);
+	wp_add_inline_style( 'adm-darkmode', $vars );
+
+	// Custom user CSS
+	$custom_css = get_option( 'adm_custom_css', '' );
+	if ( ! empty( $custom_css ) ) {
+		wp_add_inline_style( 'adm-darkmode', wp_strip_all_tags( $custom_css ) );
+	}
 } );
 
 /**
@@ -62,177 +105,482 @@ add_action( 'admin_menu', function () {
 	);
 } );
 
-function adm_settings_page() {
-	?>
-	<div class="wrap">
-		<h1><?php echo esc_html__( 'WP Admin Dark Mode', 'wp-admin-dark-mode' ); ?></h1>
-
-		<div class="adm-card">
-			<h2 style="margin-top:0;"><?php echo esc_html__( 'Dark Mode Settings', 'wp-admin-dark-mode' ); ?></h2>
-
-			<form method="post" action="options.php">
-				<?php
-				settings_fields( 'adm_settings' );
-				do_settings_sections( 'adm_settings' );
-				submit_button();
-				?>
-			</form>
-		</div>
-	</div>
-
-	<style>
-		.adm-card{
-			max-width:720px;
-			background:#fff;
-			border:1px solid #dcdcde;
-			border-radius:12px;
-			padding:18px 18px 6px;
-			box-shadow:0 1px 2px rgba(0,0,0,.06);
-		}
-
-		.adm-field-row{
-			display:flex;
-			align-items:center;
-			justify-content:space-between;
-			gap:16px;
-			padding:12px 0;
-		}
-
-		.adm-field-title{
-			font-size:14px;
-			font-weight:600;
-			margin:0;
-		}
-
-		.adm-toggle{
-			position:relative;
-			width:54px;
-			height:30px;
-			flex:0 0 auto;
-		}
-
-		.adm-toggle input{
-			opacity:0;
-			width:0;
-			height:0;
-		}
-
-		.adm-slider{
-			position:absolute;
-			inset:0;
-			background:#c3c4c7;
-			border-radius:999px;
-			transition:all .2s ease;
-			cursor:pointer;
-		}
-
-		.adm-slider::before{
-			content:"";
-			position:absolute;
-			width:24px;
-			height:24px;
-			left:3px;
-			top:3px;
-			background:#fff;
-			border-radius:50%;
-			transition:all .2s ease;
-			box-shadow:0 1px 2px rgba(0,0,0,.25);
-		}
-
-		.adm-toggle input:checked + .adm-slider{
-			background:#2271b1;
-		}
-
-		.adm-toggle input:checked + .adm-slider::before{
-			transform:translateX(24px);
-		}
-	</style>
-	<?php
-}
+/**
+ * Enqueue settings page assets.
+ */
+add_action( 'admin_enqueue_scripts', function ( $hook ) {
+	if ( $hook !== 'settings_page_wp-admin-dark-mode' ) {
+		return;
+	}
+	wp_enqueue_style( 'wp-color-picker' );
+	wp_enqueue_script( 'wp-color-picker' );
+	wp_enqueue_script(
+		'adm-settings-js',
+		ADM_URL . 'assets/js/settings.js',
+		[ 'wp-color-picker' ],
+		ADM_VERSION,
+		true
+	);
+} );
 
 /**
- * Register setting + field.
+ * Register settings.
  */
 add_action( 'admin_init', function () {
-	register_setting(
-		'adm_settings',
-		'adm_dark_mode_enabled',
-		array(
-			'type'              => 'boolean',
-			'sanitize_callback' => function ( $value ) {
-				return (bool) $value;
-			},
-			'default'           => false,
-		)
-	);
+	// Dark mode toggle
+	register_setting( 'adm_settings', 'adm_dark_mode_enabled', [
+		'type'              => 'boolean',
+		'sanitize_callback' => fn( $v ) => (bool) $v,
+		'default'           => false,
+	] );
 
-	add_settings_section(
-		'adm_section',
-		__( 'Settings', 'wp-admin-dark-mode' ),
-		'__return_null',
-		'adm_settings'
-	);
+	// Colors (array of hex values)
+	register_setting( 'adm_settings', 'adm_colors', [
+		'type'              => 'array',
+		'sanitize_callback' => 'adm_sanitize_colors',
+		'default'           => adm_default_colors(),
+	] );
 
-	add_settings_field(
-		'adm_enabled',
-		__( 'Enable Dark Mode', 'wp-admin-dark-mode' ),
-		'adm_render_enabled_field',
-		'adm_settings',
-		'adm_section'
-	);
+	// Custom CSS
+	register_setting( 'adm_settings', 'adm_custom_css', [
+		'type'              => 'string',
+		'sanitize_callback' => fn( $v ) => wp_strip_all_tags( $v ),
+		'default'           => '',
+	] );
 } );
 
-function adm_render_enabled_field() {
-	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
-	?>
-	<div class="adm-field-row">
-		<p class="adm-field-title"><?php echo esc_html__( 'Enable Dark Mode', 'wp-admin-dark-mode' ); ?></p>
-
-		<label class="adm-toggle">
-			<input
-				type="checkbox"
-				id="adm_dark_mode_enabled"
-				name="adm_dark_mode_enabled"
-				value="1"
-				<?php checked( true, $enabled ); ?>
-			/>
-			<span class="adm-slider" aria-hidden="true"></span>
-		</label>
-	</div>
-	<?php
+function adm_sanitize_colors( $input ): array {
+	$defaults = adm_default_colors();
+	$output   = [];
+	foreach ( $defaults as $key => $default ) {
+		$raw            = $input[ $key ] ?? $default;
+		$output[ $key ] = sanitize_hex_color( $raw ) ?: $default;
+	}
+	return $output;
 }
 
 /**
- * Admin notice after saving settings.
+ * Settings page HTML.
  */
-add_action( 'admin_notices', function () {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+function adm_settings_page() {
+	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
+	$colors  = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
+	$custom  = get_option( 'adm_custom_css', '' );
+	$version = ADM_VERSION;
 
-	$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-	if ( $page !== 'wp-admin-dark-mode' ) {
-		return;
-	}
+	$color_labels = [
+		'bg'         => __( 'Hintergrundfarbe (Basis)', 'wp-admin-dark-mode' ),
+		'card'       => __( 'Karten- / Contentbereich', 'wp-admin-dark-mode' ),
+		'border'     => __( 'Rahmenfarbe', 'wp-admin-dark-mode' ),
+		'text'       => __( 'Textfarbe', 'wp-admin-dark-mode' ),
+		'text_muted' => __( 'Gedämpfte Textfarbe', 'wp-admin-dark-mode' ),
+		'link'       => __( 'Linkfarbe', 'wp-admin-dark-mode' ),
+		'primary'    => __( 'Primärfarbe (Buttons)', 'wp-admin-dark-mode' ),
+		'success'    => __( 'Erfolgsfarbe', 'wp-admin-dark-mode' ),
+		'warning'    => __( 'Warnfarbe', 'wp-admin-dark-mode' ),
+	];
+	?>
+	<div class="wrap adm-settings-wrap">
 
-	if ( empty( $_GET['settings-updated'] ) ) {
-		return;
-	}
+		<div class="adm-page-header">
+			<div class="adm-page-header-inner">
+				<span class="adm-header-icon dashicons dashicons-visibility"></span>
+				<div>
+					<h1 class="adm-page-title"><?php esc_html_e( 'WP Admin Dark Mode', 'wp-admin-dark-mode' ); ?></h1>
+					<p class="adm-page-subtitle"><?php esc_html_e( 'Dunkles Theme für das WordPress-Backend', 'wp-admin-dark-mode' ); ?> &mdash; v<?php echo esc_html( $version ); ?></p>
+				</div>
+			</div>
+			<div class="adm-status-badge <?php echo $enabled ? 'adm-status-active' : 'adm-status-inactive'; ?>">
+				<span class="adm-status-dot"></span>
+				<?php echo $enabled ? esc_html__( 'Aktiv', 'wp-admin-dark-mode' ) : esc_html__( 'Inaktiv', 'wp-admin-dark-mode' ); ?>
+			</div>
+		</div>
 
-	if ( ! get_option( 'adm_dark_mode_enabled', false ) ) {
-		return;
-	}
+		<form method="post" action="options.php">
+			<?php settings_fields( 'adm_settings' ); ?>
 
-	echo '<div class="notice notice-success is-dismissible"><p>';
-	echo esc_html__( 'Admin Dark Mode is enabled.', 'wp-admin-dark-mode' );
-	echo '</p></div>';
+			<!-- ── Karte 1: Aktivierung ────────────────────────────────── -->
+			<div class="adm-card">
+				<div class="adm-card-header">
+					<span class="dashicons dashicons-admin-settings"></span>
+					<h2><?php esc_html_e( 'Allgemein', 'wp-admin-dark-mode' ); ?></h2>
+				</div>
+				<div class="adm-card-body">
+					<div class="adm-field-row">
+						<div class="adm-field-info">
+							<label for="adm_dark_mode_enabled" class="adm-field-title"><?php esc_html_e( 'Dark Mode aktivieren', 'wp-admin-dark-mode' ); ?></label>
+							<span class="adm-field-desc"><?php esc_html_e( 'Aktiviert das dunkle Design für alle Admin-Seiten.', 'wp-admin-dark-mode' ); ?></span>
+						</div>
+						<label class="adm-toggle">
+							<input type="checkbox" id="adm_dark_mode_enabled" name="adm_dark_mode_enabled" value="1" <?php checked( true, $enabled ); ?> />
+							<span class="adm-slider" aria-hidden="true"></span>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<!-- ── Karte 2: Farbanpassung ──────────────────────────────── -->
+			<div class="adm-card">
+				<div class="adm-card-header">
+					<span class="dashicons dashicons-color-picker"></span>
+					<h2><?php esc_html_e( 'Farbanpassung', 'wp-admin-dark-mode' ); ?></h2>
+				</div>
+				<div class="adm-card-body">
+					<p class="adm-card-description"><?php esc_html_e( 'Passe die Dark-Mode-Farben individuell an. Die Standardwerte orientieren sich an der WordPress-Sidebar-Palette.', 'wp-admin-dark-mode' ); ?></p>
+					<div class="adm-color-grid">
+						<?php foreach ( $color_labels as $key => $label ) : ?>
+							<div class="adm-color-item">
+								<label class="adm-color-label" for="adm_color_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label>
+								<input
+									type="text"
+									id="adm_color_<?php echo esc_attr( $key ); ?>"
+									name="adm_colors[<?php echo esc_attr( $key ); ?>]"
+									value="<?php echo esc_attr( $colors[ $key ] ); ?>"
+									class="adm-color-picker"
+									data-default-color="<?php echo esc_attr( adm_default_colors()[ $key ] ); ?>"
+								/>
+							</div>
+						<?php endforeach; ?>
+					</div>
+					<div class="adm-color-reset-row">
+						<button type="button" id="adm-reset-colors" class="button">
+							<span class="dashicons dashicons-image-rotate"></span>
+							<?php esc_html_e( 'Standardfarben wiederherstellen', 'wp-admin-dark-mode' ); ?>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- ── Karte 3: Custom CSS ─────────────────────────────────── -->
+			<div class="adm-card">
+				<div class="adm-card-header">
+					<span class="dashicons dashicons-editor-code"></span>
+					<h2><?php esc_html_e( 'Eigenes CSS', 'wp-admin-dark-mode' ); ?></h2>
+				</div>
+				<div class="adm-card-body">
+					<p class="adm-card-description"><?php esc_html_e( 'Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Du kannst die CSS-Variablen (--adm-bg, --adm-card, etc.) direkt verwenden.', 'wp-admin-dark-mode' ); ?></p>
+					<div class="adm-css-editor-wrap">
+						<textarea
+							id="adm_custom_css"
+							name="adm_custom_css"
+							class="adm-css-editor"
+							rows="12"
+							spellcheck="false"
+							placeholder="/* Dein eigenes CSS hier ... */
+/* Verfügbare Variablen:
+   --adm-bg, --adm-card, --adm-border,
+   --adm-text, --adm-text-muted, --adm-link,
+   --adm-primary, --adm-success, --adm-warning
+*/"
+						><?php echo esc_textarea( $custom ); ?></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="adm-submit-row">
+				<?php submit_button( __( 'Einstellungen speichern', 'wp-admin-dark-mode' ), 'primary', 'submit', false ); ?>
+			</div>
+
+		</form>
+
+		<!-- ── Info Footer ─────────────────────────────────────────────── -->
+		<div class="adm-footer">
+			<p>
+				<?php esc_html_e( 'WP Admin Dark Mode', 'wp-admin-dark-mode' ); ?> &ndash;
+				<a href="https://alexanderwagnerdev.com" target="_blank" rel="noopener">AlexanderWagnerDev</a> &mdash;
+				<a href="https://github.com/AlexanderWagnerDev/wp-admin-dark-mode-plugin" target="_blank" rel="noopener">GitHub</a>
+			</p>
+		</div>
+
+	</div>
+
+	<style id="adm-settings-page-css">
+		/* ── Layout ──────────────────────────────────────────────────────── */
+		.adm-settings-wrap {
+			max-width: 800px;
+		}
+
+		/* ── Page Header ─────────────────────────────────────────────────── */
+		.adm-page-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 20px 24px;
+			background: #fff;
+			border: 1px solid #dcdcde;
+			border-radius: 12px;
+			margin-bottom: 20px;
+			box-shadow: 0 1px 3px rgba(0,0,0,.07);
+		}
+		.adm-page-header-inner {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+		}
+		.adm-header-icon {
+			font-size: 32px;
+			width: 32px;
+			height: 32px;
+			color: #2271b1;
+		}
+		.adm-page-title {
+			margin: 0 0 2px;
+			padding: 0;
+			font-size: 20px;
+			font-weight: 700;
+			line-height: 1.2;
+			color: #1d2327;
+		}
+		.adm-page-subtitle {
+			margin: 0;
+			font-size: 12px;
+			color: #646970;
+		}
+
+		/* Status Badge */
+		.adm-status-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 5px 12px;
+			border-radius: 999px;
+			font-size: 12px;
+			font-weight: 600;
+			letter-spacing: .4px;
+			text-transform: uppercase;
+		}
+		.adm-status-active  { background: #d4edda; color: #155724; }
+		.adm-status-inactive{ background: #f8d7da; color: #721c24; }
+		.adm-status-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: currentColor;
+		}
+
+		/* ── Cards ───────────────────────────────────────────────────────── */
+		.adm-card {
+			background: #fff;
+			border: 1px solid #dcdcde;
+			border-radius: 12px;
+			margin-bottom: 20px;
+			box-shadow: 0 1px 3px rgba(0,0,0,.07);
+			overflow: hidden;
+		}
+		.adm-card-header {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 14px 20px;
+			background: #f6f7f7;
+			border-bottom: 1px solid #dcdcde;
+		}
+		.adm-card-header .dashicons {
+			color: #2271b1;
+			font-size: 18px;
+			width: 18px;
+			height: 18px;
+		}
+		.adm-card-header h2 {
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+			font-weight: 600;
+			color: #1d2327;
+		}
+		.adm-card-body {
+			padding: 20px;
+		}
+		.adm-card-description {
+			margin: 0 0 16px;
+			color: #646970;
+			font-size: 13px;
+		}
+
+		/* ── Toggle Row ──────────────────────────────────────────────────── */
+		.adm-field-row {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+		}
+		.adm-field-info {
+			display: flex;
+			flex-direction: column;
+			gap: 3px;
+		}
+		.adm-field-title {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 600;
+			color: #1d2327;
+			cursor: pointer;
+		}
+		.adm-field-desc {
+			font-size: 12px;
+			color: #646970;
+		}
+
+		/* Toggle switch */
+		.adm-toggle {
+			position: relative;
+			width: 54px;
+			height: 30px;
+			flex: 0 0 auto;
+		}
+		.adm-toggle input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+			position: absolute;
+		}
+		.adm-slider {
+			position: absolute;
+			inset: 0;
+			background: #c3c4c7;
+			border-radius: 999px;
+			transition: background .2s ease;
+			cursor: pointer;
+		}
+		.adm-slider::before {
+			content: "";
+			position: absolute;
+			width: 24px;
+			height: 24px;
+			left: 3px;
+			top: 3px;
+			background: #fff;
+			border-radius: 50%;
+			transition: transform .2s ease;
+			box-shadow: 0 1px 3px rgba(0,0,0,.3);
+		}
+		.adm-toggle input:checked + .adm-slider { background: #2271b1; }
+		.adm-toggle input:checked + .adm-slider::before { transform: translateX(24px); }
+		.adm-toggle input:focus-visible + .adm-slider { outline: 2px solid #2271b1; outline-offset: 2px; }
+
+		/* ── Color Grid ──────────────────────────────────────────────────── */
+		.adm-color-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 16px;
+			margin-bottom: 16px;
+		}
+		.adm-color-item {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+		}
+		.adm-color-label {
+			font-size: 12px;
+			font-weight: 600;
+			color: #1d2327;
+		}
+		.adm-color-reset-row {
+			padding-top: 8px;
+			border-top: 1px solid #dcdcde;
+		}
+		.adm-color-reset-row .button {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+		}
+		.adm-color-reset-row .dashicons {
+			font-size: 16px;
+			width: 16px;
+			height: 16px;
+		}
+
+		/* ── CSS Editor ──────────────────────────────────────────────────── */
+		.adm-css-editor-wrap {
+			border: 1px solid #dcdcde;
+			border-radius: 6px;
+			overflow: hidden;
+		}
+		.adm-css-editor {
+			width: 100%;
+			box-sizing: border-box;
+			resize: vertical;
+			min-height: 200px;
+			padding: 12px;
+			font-family: Consolas, Monaco, 'Courier New', monospace;
+			font-size: 13px;
+			line-height: 1.6;
+			background: #1e1e2e;
+			color: #cdd6f4;
+			border: none;
+			outline: none;
+			display: block;
+		}
+		.adm-css-editor::placeholder { color: #6c7086; }
+
+		/* ── Submit Row ──────────────────────────────────────────────────── */
+		.adm-submit-row {
+			display: flex;
+			gap: 10px;
+			margin-bottom: 16px;
+		}
+
+		/* ── Footer ──────────────────────────────────────────────────────── */
+		.adm-footer {
+			text-align: center;
+			padding: 12px 0 4px;
+			font-size: 12px;
+			color: #646970;
+		}
+		.adm-footer a { color: #2271b1; }
+
+		/* ── Dark Mode: Settings page itself ─────────────────────────────── */
+		body.wp-admin.adm-dark-active .adm-page-header,
+		body.wp-admin.adm-dark-active .adm-card {
+			background: #2c3338;
+			border-color: #3c434a;
+			color: #dcdcde;
+		}
+		body.wp-admin.adm-dark-active .adm-card-header {
+			background: #1d2327;
+			border-color: #3c434a;
+		}
+		body.wp-admin.adm-dark-active .adm-card-header h2,
+		body.wp-admin.adm-dark-active .adm-page-title,
+		body.wp-admin.adm-dark-active .adm-field-title,
+		body.wp-admin.adm-dark-active .adm-color-label { color: #dcdcde; }
+		body.wp-admin.adm-dark-active .adm-page-subtitle,
+		body.wp-admin.adm-dark-active .adm-field-desc,
+		body.wp-admin.adm-dark-active .adm-card-description,
+		body.wp-admin.adm-dark-active .adm-footer { color: #a7aaad; }
+		body.wp-admin.adm-dark-active .adm-color-reset-row { border-color: #3c434a; }
+		body.wp-admin.adm-dark-active .adm-css-editor-wrap { border-color: #3c434a; }
+		body.wp-admin.adm-dark-active .adm-footer a { color: #72aee6; }
+	</style>
+	<?php
+	// Add class to body if dark mode is active
+	if ( $enabled ) {
+		echo "<script>document.body.classList.add('adm-dark-active');</script>";
+	}
+}
+
+/**
+ * Settings Link in Plugins-Liste.
+ */
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $actions ) {
+	$url = admin_url( 'options-general.php?page=wp-admin-dark-mode' );
+	$actions['settings'] = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'wp-admin-dark-mode' ) . '</a>';
+	return $actions;
 } );
 
 /**
- * Settings Link im Plugins-Menü (auch wenn deaktiviert).
+ * Admin notice after saving.
  */
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $actions ) {
-	$settings_url = admin_url( 'options-general.php?page=wp-admin-dark-mode' );
-	$actions['settings'] = '<a href="' . esc_url( $settings_url ) . '">' . __( 'Settings', 'wp-admin-dark-mode' ) . '</a>';
-	return $actions;
+add_action( 'admin_notices', function () {
+	if ( ! current_user_can( 'manage_options' ) ) return;
+	$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+	if ( $page !== 'wp-admin-dark-mode' ) return;
+	if ( empty( $_GET['settings-updated'] ) ) return;
+
+	$enabled = get_option( 'adm_dark_mode_enabled', false );
+	$msg = $enabled
+		? __( '✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert.', 'wp-admin-dark-mode' )
+		: __( '✓ Einstellungen gespeichert. Dark Mode ist deaktiviert.', 'wp-admin-dark-mode' );
+	echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
 } );
