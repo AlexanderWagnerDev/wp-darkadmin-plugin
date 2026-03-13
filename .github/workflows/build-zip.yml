@@ -1,0 +1,92 @@
+name: Build Plugin ZIP
+
+# Triggers:
+#   1. Every push to main        → artifact only (downloadable for 90 days)
+#   2. GitHub Release published  → ZIP is attached to the release automatically
+#   3. Manual run via Actions UI → artifact only
+on:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & package
+    runs-on: ubuntu-latest
+
+    steps:
+      # ------------------------------------------------------------------ #
+      # 1. Checkout                                                          #
+      # ------------------------------------------------------------------ #
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------ #
+      # 2. Read version from plugin header                                  #
+      # ------------------------------------------------------------------ #
+      - name: Read plugin version
+        id: version
+        run: |
+          VERSION=$(grep -m1 'Version:' wp-admin-dark-mode.php | awk '{print $NF}')
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected plugin version: $VERSION"
+
+      # ------------------------------------------------------------------ #
+      # 3. Build the ZIP (exclude dev/repo files)                           #
+      # ------------------------------------------------------------------ #
+      - name: Create plugin ZIP
+        run: |
+          PLUGIN_SLUG="wp-admin-dark-mode"
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          ZIP_NAME="${PLUGIN_SLUG}-${VERSION}.zip"
+
+          # Copy only the needed files into a temp folder with the correct slug
+          mkdir -p /tmp/${PLUGIN_SLUG}
+
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='.editorconfig' \
+            --exclude='*.md' \
+            --exclude='*.txt' \
+            --exclude='*.zip' \
+            --exclude='node_modules' \
+            --exclude='tests' \
+            ./ /tmp/${PLUGIN_SLUG}/
+
+          # Include the readme files for WordPress.org compatibility
+          cp readme.txt /tmp/${PLUGIN_SLUG}/readme.txt 2>/dev/null || true
+
+          # Create the ZIP from the parent of the plugin folder
+          cd /tmp
+          zip -r "${ZIP_NAME}" "${PLUGIN_SLUG}/"
+
+          # Move ZIP back to workspace for upload
+          mv /tmp/${ZIP_NAME} $GITHUB_WORKSPACE/${ZIP_NAME}
+
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+
+      # ------------------------------------------------------------------ #
+      # 4. Upload as workflow artifact (always)                             #
+      #    → Actions tab → latest run → Artifacts                           #
+      # ------------------------------------------------------------------ #
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wp-admin-dark-mode-${{ steps.version.outputs.VERSION }}
+          path: ${{ env.ZIP_NAME }}
+          retention-days: 90
+
+      # ------------------------------------------------------------------ #
+      # 5. Attach ZIP to GitHub Release (only on release event)             #
+      # ------------------------------------------------------------------ #
+      - name: Upload ZIP to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
