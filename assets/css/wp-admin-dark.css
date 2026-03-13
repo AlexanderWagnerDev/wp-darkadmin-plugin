@@ -223,6 +223,44 @@ table.widefat thead th {
 }
 .column-primary strong a { color: var(--adm-link) !important; }
 
+/* ── Plugin List ─────────────────────────────────────────────────────────── */
+.plugins .plugin-title strong,
+.plugins .plugin-title span {
+  color: var(--adm-text) !important;
+}
+.plugins .plugin-description,
+.plugins .plugin-description p,
+.plugins td.desc p,
+.plugins td.desc,
+.plugins .second,
+.plugins .second p,
+.plugins .second .row-actions,
+.plugins .row-actions,
+.plugins .row-actions span,
+.plugins .row-actions a,
+.plugins td p {
+  color: var(--adm-text-muted) !important;
+}
+.plugins .row-actions a:hover {
+  color: var(--adm-text) !important;
+}
+.plugins tr.active td,
+.plugins tr.inactive td {
+  background: var(--adm-card) !important;
+  border-color: var(--adm-border) !important;
+}
+.plugins tr.inactive td {
+  background: #222829 !important;
+}
+.plugins tr.active td {
+  border-left: 4px solid var(--adm-primary) !important;
+}
+.plugins .update-message,
+.plugins .update-message p {
+  color: var(--adm-text) !important;
+  background: transparent !important;
+}
+
 /* ── Notices ─────────────────────────────────────────────────────────────── */
 .notice,
 div.updated,
