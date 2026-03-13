@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
 
 == Description ==
-Admin Dark Mode adds a minimal on/off toggle for dark styling inside wp-admin.
+Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
 
 Features:
 * One-click enable/disable
@@ -27,8 +27,8 @@ Features:
 = Does this affect the frontend? =
 No. It only loads CSS in wp-admin.
 
-= Where is the toggle? =
-Settings → Dark Mode.
+= Where is the settings? =
+Settings → WP Admin Dark Mode
 
 == Changelog ==
 = 0.0.2 =
@@ -48,7 +48,7 @@ Settings → Dark Mode.
 Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
 
 === Beschreibung ===
-Admin Dark Mode fügt einen minimalistischen Ein/Aus-Schalter für ein dunkles Design in wp-admin hinzu.
+Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
 
 Funktionen:
 * Ein-Klick aktivieren/deaktivieren
@@ -64,8 +64,8 @@ Funktionen:
 = Betrifft das das Frontend? =
 Nein. Es lädt nur CSS im wp-admin.
 
-= Wo ist der Schalter? =
-Einstellungen → Dark Mode.
+= Wo sind die Einstellungen? =
+Einstellungen → WP Admin Dark Mode
 
 === Changelog ===
 = 0.0.2 =
