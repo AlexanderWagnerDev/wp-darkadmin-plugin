@@ -3,7 +3,7 @@
  * Plugin Name: WP Admin Dark Mode
  * Plugin URI: https://github.com/AlexanderWagnerDev/wp-admin-dark-mode-plugin
  * Description: Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
- * Version: 0.0.3
+ * Version: 0.0.4
  * Requires at least: 6.0
  * Tested up to: 6.9.4
  * Requires PHP: 7.4
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADM_VERSION', '0.0.3' );
+define( 'ADM_VERSION', '0.0.4' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 
 /**
@@ -56,8 +56,8 @@ add_action( 'plugins_loaded', function () {
 } );
 
 /**
- * Enqueue global dark mode CSS + inject user colour overrides as CSS vars.
- * Also enqueues auto-darken JS if that option is active.
+ * Enqueue dark mode CSS and inject color token overrides as inline CSS variables.
+ * Also enqueues auto-darken JS when both dark mode and auto-darken are enabled.
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! get_option( 'adm_dark_mode_enabled', false ) ) {
@@ -71,20 +71,20 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	$sc = static fn( string $k, string $fb ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fb;
 
-	$vars = ':root{'                                    .
-		"--adm-bg:{$sc('bg','#1d2327')};"            .
-		"--adm-surface-1:{$sc('surface1','#2c3338')};" .
-		"--adm-surface-2:{$sc('surface2','#32393f')};" .
-		"--adm-surface-3:{$sc('surface3','#3c434a')};" .
-		"--adm-border:{$sc('border','#3c434a')};"     .
-		"--adm-text:{$sc('text','#dcdcde')};"         .
+	$vars = ':root{'                                       .
+		"--adm-bg:{$sc('bg','#1d2327')};"               .
+		"--adm-surface-1:{$sc('surface1','#2c3338')};"  .
+		"--adm-surface-2:{$sc('surface2','#32393f')};"  .
+		"--adm-surface-3:{$sc('surface3','#3c434a')};"  .
+		"--adm-border:{$sc('border','#3c434a')};"        .
+		"--adm-text:{$sc('text','#dcdcde')};"            .
 		"--adm-text-muted:{$sc('text_muted','#a7aaad')};" .
-		"--adm-text-soft:{$sc('text_soft','#787c82')};"   .
-		"--adm-link:{$sc('link','#72aee6')};"         .
-		"--adm-primary:{$sc('primary','#2271b1')};"   .
-		"--adm-success:{$sc('success','#00a32a')};"   .
-		"--adm-warning:{$sc('warning','#dba617')};"   .
-		"--adm-danger:{$sc('danger','#d63638')};"     .
+		"--adm-text-soft:{$sc('text_soft','#787c82')};"  .
+		"--adm-link:{$sc('link','#72aee6')};"            .
+		"--adm-primary:{$sc('primary','#2271b1')};"      .
+		"--adm-success:{$sc('success','#00a32a')};"      .
+		"--adm-warning:{$sc('warning','#dba617')};"      .
+		"--adm-danger:{$sc('danger','#d63638')};"        .
 		'}';
 
 	wp_enqueue_style(
@@ -100,20 +100,19 @@ add_action( 'admin_enqueue_scripts', function () {
 		wp_add_inline_style( 'adm-darkmode', wp_strip_all_tags( $custom ) );
 	}
 
-	// Auto Darken: only load when both dark mode AND auto darken are enabled.
 	if ( get_option( 'adm_auto_darken', false ) ) {
 		wp_enqueue_script(
 			'adm-auto-darken',
 			ADM_URL . 'assets/js/auto-darken.js',
 			[],
 			ADM_VERSION,
-			false // load in <head> to minimise FOUC
+			false
 		);
 	}
 } );
 
 /**
- * Settings menu entry.
+ * Register the settings menu page.
  */
 add_action( 'admin_menu', function () {
 	add_options_page(
@@ -126,7 +125,7 @@ add_action( 'admin_menu', function () {
 } );
 
 /**
- * Enqueue settings page assets (color picker + external CSS).
+ * Enqueue settings page assets (color picker + settings CSS/JS).
  */
 add_action( 'admin_enqueue_scripts', function ( $hook ) {
 	if ( $hook !== 'settings_page_wp-admin-dark-mode' ) {
@@ -150,7 +149,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 } );
 
 /**
- * Register settings.
+ * Register plugin settings.
  */
 add_action( 'admin_init', function () {
 	register_setting( 'adm_settings', 'adm_dark_mode_enabled', [
@@ -175,6 +174,9 @@ add_action( 'admin_init', function () {
 	] );
 } );
 
+/**
+ * Sanitize and validate the color palette input.
+ */
 function adm_sanitize_colors( $input ): array {
 	$defaults = adm_default_colors();
 	$output   = [];
@@ -186,14 +188,14 @@ function adm_sanitize_colors( $input ): array {
 }
 
 /**
- * Settings page HTML.
- * All styles live in assets/css/settings.css — zero inline <style> here.
+ * Render the settings page.
+ * All styles are in assets/css/settings.css.
  */
 function adm_settings_page() {
-	$enabled      = (bool) get_option( 'adm_dark_mode_enabled', false );
-	$auto_darken  = (bool) get_option( 'adm_auto_darken', false );
-	$colors       = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
-	$custom       = get_option( 'adm_custom_css', '' );
+	$enabled     = (bool) get_option( 'adm_dark_mode_enabled', false );
+	$auto_darken = (bool) get_option( 'adm_auto_darken', false );
+	$colors      = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
+	$custom      = get_option( 'adm_custom_css', '' );
 
 	if ( $enabled ) {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
@@ -217,7 +219,6 @@ function adm_settings_page() {
 	?>
 	<div class="wrap adm-settings-wrap">
 
-		<!-- Page header -->
 		<div class="adm-page-header">
 			<div class="adm-page-header-inner">
 				<span class="adm-header-icon dashicons dashicons-visibility"></span>
@@ -240,7 +241,6 @@ function adm_settings_page() {
 		<form method="post" action="options.php">
 			<?php settings_fields( 'adm_settings' ); ?>
 
-			<!-- General -->
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-admin-settings"></span>
@@ -248,7 +248,6 @@ function adm_settings_page() {
 				</div>
 				<div class="adm-card-body">
 
-					<!-- Toggle: Dark Mode -->
 					<div class="adm-field-row">
 						<div class="adm-field-info">
 							<label for="adm_dark_mode_enabled" class="adm-field-title">
@@ -267,7 +266,6 @@ function adm_settings_page() {
 
 					<hr class="adm-field-divider" />
 
-					<!-- Toggle: Auto Dark Mode -->
 					<div class="adm-field-row">
 						<div class="adm-field-info">
 							<label for="adm_auto_darken" class="adm-field-title">
@@ -290,7 +288,6 @@ function adm_settings_page() {
 				</div>
 			</div>
 
-			<!-- Colors -->
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-color-picker"></span>
@@ -329,7 +326,6 @@ function adm_settings_page() {
 				</div>
 			</div>
 
-			<!-- Custom CSS -->
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-editor-code"></span>
@@ -377,7 +373,7 @@ function adm_settings_page() {
 }
 
 /**
- * Settings link in Plugins list.
+ * Add a settings link in the Plugins list.
  */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $actions ) {
 	$url = admin_url( 'options-general.php?page=wp-admin-dark-mode' );
@@ -386,7 +382,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $ac
 } );
 
 /**
- * Admin notice after saving.
+ * Show an admin notice after settings are saved.
  */
 add_action( 'admin_notices', function () {
 	if ( ! current_user_can( 'manage_options' ) ) return;

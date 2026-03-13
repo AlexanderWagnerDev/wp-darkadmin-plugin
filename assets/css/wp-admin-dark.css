@@ -1,67 +1,50 @@
 /*
- * WP Admin Dark Mode – Core Stylesheet
- * Version: 0.0.3
+ * WP Admin Dark Mode - Core Stylesheet
+ * Version: 0.0.4
  * Author: AlexanderWagnerDev
  *
  * All colors are driven by CSS custom properties.
  * Override them via Settings > WP Admin Dark Mode.
  */
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS  (all user-customisable via the settings page)
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* =============================================================================
+   DESIGN TOKENS
+   ============================================================================= */
 :root {
-  /* Backgrounds */
-  --adm-bg:          #1d2327;   /* page background               */
-  --adm-surface-1:   #2c3338;   /* cards, tables                 */
-  --adm-surface-2:   #32393f;   /* inputs, dropdowns             */
-  --adm-surface-3:   #3c434a;   /* hover states                  */
-
-  /* Borders */
-  --adm-border:      #3c434a;
-  --adm-border-focus:#2271b1;
-
-  /* Typography */
-  --adm-text:        #dcdcde;   /* primary text                  */
-  --adm-text-muted:  #a7aaad;   /* secondary / description text  */
-  --adm-text-soft:   #787c82;   /* tertiary / row-actions        */
-
-  /* Interactive */
-  --adm-link:        #72aee6;
-  --adm-link-hover:  #93c5fd;
-  --adm-primary:     #2271b1;
+  --adm-bg:           #1d2327;
+  --adm-surface-1:    #2c3338;
+  --adm-surface-2:    #32393f;
+  --adm-surface-3:    #3c434a;
+  --adm-border:       #3c434a;
+  --adm-border-focus: #2271b1;
+  --adm-text:         #dcdcde;
+  --adm-text-muted:   #a7aaad;
+  --adm-text-soft:    #787c82;
+  --adm-link:         #72aee6;
+  --adm-link-hover:   #93c5fd;
+  --adm-primary:      #2271b1;
   --adm-primary-hover:#135e96;
-
-  /* Semantic */
-  --adm-success:     #00a32a;
-  --adm-warning:     #dba617;
-  --adm-danger:      #d63638;
-
-  /* Spacing scale */
+  --adm-success:      #00a32a;
+  --adm-warning:      #dba617;
+  --adm-danger:       #d63638;
   --adm-space-1: 4px;
   --adm-space-2: 8px;
   --adm-space-3: 12px;
   --adm-space-4: 16px;
   --adm-space-5: 20px;
   --adm-space-6: 24px;
-
-  /* Shape */
   --adm-radius-sm: 3px;
   --adm-radius-md: 6px;
   --adm-radius-lg: 10px;
-
-  /* Elevation */
   --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.25);
   --adm-shadow-md: 0 3px 10px rgba(0,0,0,.30);
-
-  /* Component sizes */
   --adm-input-h: 32px;
   --adm-btn-h:   30px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    BASE
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 html,
 body,
 body.wp-admin,
@@ -83,9 +66,9 @@ body.wp-admin,
   color: var(--adm-text);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    ADMIN BAR
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 #wpadminbar {
   background: #1a1f24 !important;
 }
@@ -111,9 +94,9 @@ body.wp-admin,
   color: #fff !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    SIDEBAR
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 #adminmenu,
 #adminmenuback,
 #adminmenuwrap {
@@ -160,9 +143,9 @@ body.wp-admin,
   color: var(--adm-text-muted) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    TYPOGRAPHY
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 h1, h2, h3, h4, h5, h6 {
   color: var(--adm-text) !important;
 }
@@ -175,15 +158,13 @@ a {
 a:hover {
   color: var(--adm-link-hover) !important;
 }
-
-/* Page title + inline button */
 .wp-heading-inline {
   color: var(--adm-text) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    BUTTONS
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .wp-core-ui .button,
 .wp-core-ui .button-secondary,
 a.page-title-action,
@@ -230,9 +211,9 @@ a.page-title-action {
   text-decoration: none !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    FORMS & INPUTS
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -274,9 +255,9 @@ input[type="radio"] {
   accent-color: var(--adm-primary);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    TABLES
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .wp-list-table,
 table.widefat {
   background: var(--adm-surface-1) !important;
@@ -306,8 +287,6 @@ table.widefat thead th {
 th.check-column {
   background: var(--adm-bg) !important;
 }
-
-/* SubSubSub filter links */
 .subsubsub {
   margin: 8px 0 12px !important;
   color: var(--adm-text-soft) !important;
@@ -319,8 +298,6 @@ th.check-column {
   color: var(--adm-text) !important;
   font-weight: 600;
 }
-
-/* Tablenav */
 .tablenav {
   margin: 8px 0 !important;
 }
@@ -336,9 +313,9 @@ th.check-column {
   padding: 0 4px !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   PLUGIN LIST (plugins.php)
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* =============================================================================
+   PLUGIN LIST
+   ============================================================================= */
 .plugins tr td {
   background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
@@ -369,9 +346,9 @@ th.check-column {
   background: transparent !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   PLUGIN INSTALL PAGE (plugin-install.php)
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* =============================================================================
+   PLUGIN INSTALL PAGE
+   ============================================================================= */
 .wp-filter {
   background: var(--adm-surface-1) !important;
   border-bottom: 1px solid var(--adm-border) !important;
@@ -407,8 +384,6 @@ th.check-column {
   background: var(--adm-surface-3) !important;
   color: #fff !important;
 }
-
-/* Plugin cards grid */
 #plugin-filter,
 .plugin-install-tab {
   background: transparent !important;
@@ -481,14 +456,13 @@ th.check-column {
   color: var(--adm-warning) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    WP COLOR PICKER (Iris)
-   IMPORTANT: .wp-color-result gets its background-color injected as an
-   inline style by WP's JS (e.g. style="background-color: #1d2327 !important").
-   Never set background-color on .wp-color-result in CSS — it will always
-   lose to the inline style and hide the colour swatch.
-   Only style the .wp-color-result-text child for the label area.
-   ═══════════════════════════════════════════════════════════════════════════ */
+   .wp-color-result receives its background-color as an inline style from WP's
+   JS. Never set background-color on that element in CSS - it will always lose
+   to the inline style and hide the colour swatch. Only style the child
+   .wp-color-result-text for the label area.
+   ============================================================================= */
 .wp-picker-container {
   display: inline-flex;
   flex-direction: row;
@@ -496,7 +470,6 @@ th.check-column {
   gap: var(--adm-space-2);
   flex-wrap: wrap;
 }
-/* Border + shape only on the result button — NO background override */
 .wp-picker-container .wp-color-result {
   height: var(--adm-btn-h) !important;
   padding: 0 0 0 30px !important;
@@ -504,9 +477,7 @@ th.check-column {
   border: 1px solid var(--adm-border) !important;
   box-shadow: none !important;
   overflow: hidden;
-  /* background-color intentionally omitted */
 }
-/* Text label inside the button */
 .wp-picker-container .wp-color-result .wp-color-result-text {
   height: 100%;
   line-height: var(--adm-btn-h) !important;
@@ -515,7 +486,6 @@ th.check-column {
   color: var(--adm-text) !important;
   border-left: 1px solid var(--adm-border) !important;
 }
-/* Hex input */
 .wp-picker-container input[type="text"].wp-color-picker {
   height: var(--adm-input-h) !important;
   width: 90px !important;
@@ -525,7 +495,6 @@ th.check-column {
   border: 1px solid var(--adm-border) !important;
   border-radius: var(--adm-radius-sm) !important;
 }
-/* Popup holder */
 .wp-picker-holder {
   margin-top: 4px;
 }
@@ -543,7 +512,6 @@ th.check-column {
 .iris-picker .iris-palette-container .iris-palette {
   border: 1px solid var(--adm-border) !important;
 }
-/* Clear / Close button inside picker */
 .wp-picker-input-wrap .button,
 .wp-picker-clear {
   height: var(--adm-btn-h) !important;
@@ -553,9 +521,9 @@ th.check-column {
   border-color: var(--adm-border) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    NOTICES
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .notice,
 div.notice,
 div.updated,
@@ -579,9 +547,9 @@ div.error,
 .notice-warning  { border-left-color: var(--adm-warning)  !important; }
 .notice-info     { border-left-color: var(--adm-primary)  !important; }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   POSTBOXES / CARDS
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* =============================================================================
+   POSTBOXES / METABOXES
+   ============================================================================= */
 .postbox,
 .postbox .inside,
 .stuffbox {
@@ -601,9 +569,9 @@ div.error,
   color: var(--adm-text) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    DASHBOARD WIDGETS
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 #dashboard-widgets .postbox-container .postbox,
 #wp-dashboard-right .meta-box-sortables .postbox,
 #wp-dashboard-left .meta-box-sortables .postbox {
@@ -631,9 +599,9 @@ div.error,
   color: var(--adm-text) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    SCREEN OPTIONS / HELP
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 #screen-meta,
 #screen-meta-links,
 #screen-options-wrap,
@@ -647,9 +615,9 @@ div.error,
   border-color: var(--adm-border) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    TABS
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .nav-tab-wrapper {
   border-bottom-color: var(--adm-border) !important;
 }
@@ -669,9 +637,9 @@ div.error,
   color: var(--adm-text) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    SETTINGS PAGES (form-table)
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .form-table,
 .form-table td,
 .form-table th {
@@ -683,18 +651,18 @@ div.error,
   color: var(--adm-text-muted) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    SEARCH & PAGINATION
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .search-box input[type="search"] {
   background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
   border: 1px solid var(--adm-border) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    MEDIA
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .media-frame,
 .media-sidebar,
 .media-toolbar,
@@ -705,9 +673,9 @@ div.error,
   color: var(--adm-text) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    GUTENBERG
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .editor-styles-wrapper {
   background: var(--adm-bg) !important;
   color: var(--adm-text) !important;
@@ -724,9 +692,9 @@ div.error,
   border-bottom-color: var(--adm-border) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    DROPDOWN MENUS
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 .dropdown-content,
 ul.wp-submenu {
   background: var(--adm-surface-1) !important;
@@ -734,9 +702,9 @@ ul.wp-submenu {
   box-shadow: var(--adm-shadow-md) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* =============================================================================
    FOOTER
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ============================================================================= */
 #wpfooter {
   border-top-color: var(--adm-border) !important;
 }

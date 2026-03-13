@@ -1,4 +1,4 @@
-/* WP Admin Dark Mode – Settings Page JS */
+/* WP Admin Dark Mode - Settings Page JS */
 (function ($) {
   'use strict';
 
@@ -13,14 +13,12 @@
   // Init WP Color Picker
   $('.adm-color-picker').wpColorPicker();
 
-  // Reset colors to defaults
+  // Reset all color pickers to their default values
   $('#adm-reset-colors').on('click', function () {
     $('.adm-color-picker').each(function () {
-      var key      = $(this).attr('name').replace('adm_colors[', '').replace(']', '');
       var defColor = $(this).data('default-color');
       if (defColor) {
         $(this).val(defColor).trigger('change');
-        // Update WP color picker iris
         var inst = $(this).closest('.wp-picker-container').find('.wp-color-picker');
         inst.wpColorPicker('color', defColor);
       }
