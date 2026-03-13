@@ -32,7 +32,18 @@ Settings → Dark Mode.
 
 == Changelog ==
 = 0.0.2 =
-* ...
+* Redesigned settings page with card-based layout, page header with status badge and version display
+* Added individual color customization for 9 dark mode colors via WordPress Color Picker
+* Added "Restore Default Colors" button to reset all colors to the WordPress sidebar palette
+* Added Custom CSS editor field to inject additional styles after the dark mode stylesheet
+* All dark mode colors are now driven by CSS custom properties (--adm-bg, --adm-card, etc.)
+* Base background color changed to #1d2327 (native WordPress sidebar color)
+* Fully optimized dark mode CSS: Admin Bar, Sidebar, Buttons, Forms, Tables, Notices, Gutenberg, Media, Screen Options, Dashboard Widgets
+* Settings page itself adapts to dark mode when active
+* Added GitHub Actions workflow to auto-compile .po → .mo language files on push
+* Added Dependabot configuration for automated GitHub Actions dependency updates
+* Updated all .po language files (de_AT, de_DE, en_US) and .pot template for new strings
+* Bumped version to 0.0.2
 
 = 0.0.1 =
 * Initial development release.
@@ -62,7 +73,18 @@ Einstellungen → Dark Mode.
 
 === Changelog ===
 = 0.0.2 =
-* ...
+* Einstellungsseite komplett neu gestaltet: Card-Layout, Page-Header mit Status-Badge und Versionsanzeige
+* Individuelle Farbanpassung für 9 Dark-Mode-Farben über den WordPress Color Picker
+* Schaltfläche „Standardfarben wiederherstellen“ zum Zurücksetzen auf die WordPress-Sidebar-Palette
+* Custom-CSS-Editor zum Einfügen eigener Styles nach dem Dark-Mode-Stylesheet
+* Alle Dark-Mode-Farben basieren nun auf CSS-Custom-Properties (--adm-bg, --adm-card, etc.)
+* Hintergrundfarbe auf #1d2327 geändert (native WordPress-Sidebar-Farbe)
+* Dark-Mode-CSS vollständig überarbeitet: Admin Bar, Sidebar, Buttons, Formulare, Tabellen, Hinweise, Gutenberg, Medien, Bildschirmoptionen, Dashboard-Widgets
+* Einstellungsseite passt sich selbst an den Dark Mode an, wenn dieser aktiv ist
+* GitHub-Actions-Workflow zur automatischen Kompilierung von .po → .mo Sprachdateien hinzugefügt
+* Dependabot-Konfiguration für automatische GitHub-Actions-Updates hinzugefügt
+* Alle .po-Sprachdateien (de_AT, de_DE, en_US) und das .pot-Template aktualisiert
+* Version auf 0.0.2 angehoben
 
 = 0.0.1 =
 * Erste Development-Version.
