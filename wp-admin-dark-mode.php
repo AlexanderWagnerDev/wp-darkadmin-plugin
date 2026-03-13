@@ -57,6 +57,7 @@ add_action( 'plugins_loaded', function () {
 
 /**
  * Enqueue global dark mode CSS + inject user colour overrides as CSS vars.
+ * Also enqueues auto-darken JS if that option is active.
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! get_option( 'adm_dark_mode_enabled', false ) ) {
@@ -97,6 +98,17 @@ add_action( 'admin_enqueue_scripts', function () {
 	$custom = get_option( 'adm_custom_css', '' );
 	if ( ! empty( $custom ) ) {
 		wp_add_inline_style( 'adm-darkmode', wp_strip_all_tags( $custom ) );
+	}
+
+	// Auto Darken: only load when both dark mode AND auto darken are enabled.
+	if ( get_option( 'adm_auto_darken', false ) ) {
+		wp_enqueue_script(
+			'adm-auto-darken',
+			ADM_URL . 'assets/js/auto-darken.js',
+			[],
+			ADM_VERSION,
+			false // load in <head> to minimise FOUC
+		);
 	}
 } );
 
@@ -146,6 +158,11 @@ add_action( 'admin_init', function () {
 		'sanitize_callback' => fn( $v ) => (bool) $v,
 		'default'           => false,
 	] );
+	register_setting( 'adm_settings', 'adm_auto_darken', [
+		'type'              => 'boolean',
+		'sanitize_callback' => fn( $v ) => (bool) $v,
+		'default'           => false,
+	] );
 	register_setting( 'adm_settings', 'adm_colors', [
 		'type'              => 'array',
 		'sanitize_callback' => 'adm_sanitize_colors',
@@ -173,9 +190,10 @@ function adm_sanitize_colors( $input ): array {
  * All styles live in assets/css/settings.css — zero inline <style> here.
  */
 function adm_settings_page() {
-	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
-	$colors  = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
-	$custom  = get_option( 'adm_custom_css', '' );
+	$enabled      = (bool) get_option( 'adm_dark_mode_enabled', false );
+	$auto_darken  = (bool) get_option( 'adm_auto_darken', false );
+	$colors       = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
+	$custom       = get_option( 'adm_custom_css', '' );
 
 	if ( $enabled ) {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
@@ -229,6 +247,8 @@ function adm_settings_page() {
 					<h2><?php esc_html_e( 'General', 'wp-admin-dark-mode' ); ?></h2>
 				</div>
 				<div class="adm-card-body">
+
+					<!-- Toggle: Dark Mode -->
 					<div class="adm-field-row">
 						<div class="adm-field-info">
 							<label for="adm_dark_mode_enabled" class="adm-field-title">
@@ -244,6 +264,29 @@ function adm_settings_page() {
 							<span class="adm-slider" aria-hidden="true"></span>
 						</label>
 					</div>
+
+					<hr class="adm-field-divider" />
+
+					<!-- Toggle: Auto Dark Mode -->
+					<div class="adm-field-row">
+						<div class="adm-field-info">
+							<label for="adm_auto_darken" class="adm-field-title">
+								<?php esc_html_e( 'Auto Dark Mode', 'wp-admin-dark-mode' ); ?>
+							</label>
+							<span class="adm-field-desc">
+								<?php esc_html_e(
+									'Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active.',
+									'wp-admin-dark-mode'
+								); ?>
+							</span>
+						</div>
+						<label class="adm-toggle">
+							<input type="checkbox" id="adm_auto_darken" name="adm_auto_darken" value="1"
+								<?php checked( true, $auto_darken ); ?> />
+							<span class="adm-slider" aria-hidden="true"></span>
+						</label>
+					</div>
+
 				</div>
 			</div>
 

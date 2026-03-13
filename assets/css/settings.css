@@ -116,6 +116,13 @@
   line-height: 1.5;
 }
 
+/* ─── Field divider ────────────────────────────────────────────────────────────────── */
+.adm-field-divider {
+  border: none;
+  border-top: 1px solid #dcdcde;
+  margin: 16px 0;
+}
+
 /* ─── General field row ───────────────────────────────────────────────────────────── */
 .adm-field-row {
   display: flex;
@@ -209,10 +216,8 @@
 .adm-color-item .wp-picker-container .wp-color-result {
   width: 100% !important;
   box-sizing: border-box !important;
-  /* padding-left is injected by WP JS (space for swatch) – do not override */
 }
 .adm-color-item .wp-picker-container .wp-color-result-text {
-  /* the text label fills the remaining space after the swatch */
   display: block !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
@@ -281,7 +286,6 @@
 
 /* ═══════════════════════════════════════════════════════════════════════════
    DARK MODE OVERRIDES  (active when body.adm-dark-active is present)
-   Uses CSS variables already defined by wp-admin-dark.css
    ═══════════════════════════════════════════════════════════════════════════ */
 body.adm-dark-active .adm-page-header,
 body.adm-dark-active .adm-card {
@@ -307,11 +311,11 @@ body.adm-dark-active .adm-css-editor-wrap        { border-color: var(--adm-borde
 body.adm-dark-active .adm-footer a               { color: var(--adm-link) !important; }
 body.adm-dark-active .adm-status-active          { background: #12532e50; color: #6ee7a0; }
 body.adm-dark-active .adm-status-inactive        { background: #7f1d1d50; color: #fca5a5; }
+body.adm-dark-active .adm-field-divider          { border-color: var(--adm-border) !important; }
 
 /*
  * Color picker in dark mode:
  * .wp-color-result background is set as inline style by WP's JS – do NOT override it.
- * Only style the border, and the text label part.
  */
 body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result {
   border-color: var(--adm-border) !important;
