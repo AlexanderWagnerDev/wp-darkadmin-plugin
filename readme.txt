@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.0
 Tested up to: 6.9.1
 Requires PHP: 7.4
-Stable tag: 0.0.1
+Stable tag: 0.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,12 +31,11 @@ No. It only loads CSS in wp-admin.
 Settings → Dark Mode.
 
 == Changelog ==
+= 0.0.2 =
+* ...
+
 = 0.0.1 =
 * Initial development release.
-
-== Upgrade Notice ==
-= 0.0.1 =
-First release.
 
 == Deutsch ==
 Einfacher, schlanker Dark-Mode-Schalter für das WordPress Admin-Dashboard.
@@ -62,6 +61,9 @@ Nein. Es lädt nur CSS im wp-admin.
 Einstellungen → Dark Mode.
 
 === Changelog ===
+= 0.0.2 =
+* ...
+
 = 0.0.1 =
 * Erste Development-Version.
 
