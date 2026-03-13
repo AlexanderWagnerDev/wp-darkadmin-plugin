@@ -73,3 +73,58 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 
 = 0.0.1 =
 * Initial development release.
+
+== Deutsch ==
+Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
+
+=== Beschreibung ===
+Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
+
+Funktionen:
+* Ein-Klick aktivieren/deaktivieren
+* Leichtgewichtiges CSS-basiertes Admin-Theme
+* Funktioniert auf allen Admin-Seiten
+* Individuelle Farbanpassung über den WordPress Color Picker
+* Unterstützung für eigenes Custom CSS mit eingebauten CSS-Variablen
+* Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
+
+=== Installation ===
+1. Lade den Plugin-Ordner nach `/wp-content/plugins/wp-admin-dark-mode/` hoch (oder installiere über „Plugins“).
+2. Aktiviere das Plugin in WordPress unter „Plugins“.
+3. Gehe zu Einstellungen → WP Admin Dark Mode und aktiviere es.
+
+=== FAQ ===
+= Betrifft das das Frontend? =
+Nein. Es lädt nur CSS im wp-admin.
+
+= Wo sind die Einstellungen? =
+Einstellungen → WP Admin Dark Mode
+
+= Kann ich die Farben anpassen? =
+Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und unterstützt zusätzlich eigenes Custom CSS.
+
+=== Changelog ===
+= 0.0.3 =
+* Komplettes CSS-Refactoring mit token-basiertem Design-System für Hintergründe, Flächen, Rahmen, Texte, Links, Buttons und Statusfarben
+* Neue anpassbare Farbvariablen hinzugefügt: `surface1`, `surface2`, `surface3`, `text_soft` und `danger`
+* Anzahl der anpassbaren Farb-Tokens von 9 auf 13 erhöht
+* Styling des "Plugin hinzufügen"-Buttons bzw. der Seitentitel-Actions korrigiert, damit der Text im Dark Mode lesbar bleibt
+* WordPress Color Picker korrekt gefixt, indem die Inline-Hintergrundfarbe des Farbfelds erhalten bleibt und nur der Textbereich separat gestylt wird
+* Abstände, Größen und Proportionen verbessert, damit das Verhältnis näher an der nativen WordPress-Admin-Oberfläche liegt
+* Styles der Einstellungsseite in eine eigene Datei assets/css/settings.css ausgelagert
+* Layout der Einstellungsseite für konsistentere Komponenten und sauberere Abstände überarbeitet
+* Plugin-Liste, Row-Actions, Tabellen, Notices, Formularelemente, Dashboard-Bereiche und Tabs weiter optimiert
+* Unerwünschte farbige Schatten bzw. blaue Hervorhebungs-Artefakte in Plugin-Tabellen entfernt
+
+= 0.0.2 =
+* Einstellungsseite komplett neu gestaltet: Card-Layout, Page-Header mit Status-Badge und Versionsanzeige
+* Individuelle Farbanpassung für 9 Dark-Mode-Farben über den WordPress Color Picker
+* Schaltfläche „Standardfarben wiederherstellen“ zum Zurücksetzen auf die WordPress-Sidebar-Palette
+* Custom-CSS-Editor zum Einfügen eigener Styles nach dem Dark-Mode-Stylesheet
+* Alle Dark-Mode-Farben basieren nun auf CSS-Custom-Properties (--adm-bg, --adm-card, etc.)
+* Hintergrundfarbe auf #1d2327 geändert (native WordPress-Sidebar-Farbe)
+* Dark-Mode-CSS vollständig überarbeitet: Admin Bar, Sidebar, Buttons, Formulare, Tabellen, Hinweise, Gutenberg, Medien, Bildschirmoptionen, Dashboard-Widgets
+* Einstellungsseite passt sich selbst an den Dark Mode an, wenn dieser aktiv ist
+
+= 0.0.1 =
+* Erste Development-Version.
