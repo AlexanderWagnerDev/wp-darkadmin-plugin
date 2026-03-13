@@ -45,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: wp-admin-dark-mode-${{ steps.version.outputs.VERSION }}
+          name: wp-admin-dark-mode
           path: ${{ env.ZIP_NAME }}
           retention-days: 90
 
