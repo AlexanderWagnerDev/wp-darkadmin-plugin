@@ -165,7 +165,7 @@ a:hover {
 /* =============================================================================
    BUTTONS
    ============================================================================= */
-.wp-core-ui .button:not(.wp-color-result),
+.wp-core-ui .button,
 .wp-core-ui .button-secondary,
 a.page-title-action,
 .page-title-action {
@@ -181,7 +181,7 @@ a.page-title-action,
   font-size: 13px !important;
   cursor: pointer;
 }
-.wp-core-ui .button:hover:not(.wp-color-result),
+.wp-core-ui .button:hover,
 .wp-core-ui .button-secondary:hover,
 a.page-title-action:hover,
 .page-title-action:hover {
