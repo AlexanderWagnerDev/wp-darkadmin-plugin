@@ -7,13 +7,13 @@
  * Light-mode fallbacks are defined inline (body.adm-dark-active overrides them).
  */
 
-/* ─── Layout ────────────────────────────────────────────────────────────────────────────── */
+/* ─── Layout ──────────────────────────────────────────────────────────── */
 .adm-settings-wrap {
   max-width: 900px;
   margin-top: 16px;
 }
 
-/* ─── Page Header ───────────────────────────────────────────────────────────────────── */
+/* ─── Page Header ─────────────────────────────────────────────────────── */
 .adm-page-header {
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
   background: currentColor;
 }
 
-/* ─── Cards ──────────────────────────────────────────────────────────────────────────────── */
+/* ─── Cards ───────────────────────────────────────────────────────────── */
 .adm-card {
   background: #fff;
   border: 1px solid #dcdcde;
@@ -116,14 +116,14 @@
   line-height: 1.5;
 }
 
-/* ─── Field divider ────────────────────────────────────────────────────────────────── */
+/* ─── Field divider ───────────────────────────────────────────────────── */
 .adm-field-divider {
   border: none;
   border-top: 1px solid #dcdcde;
   margin: 16px 0;
 }
 
-/* ─── General field row ───────────────────────────────────────────────────────────── */
+/* ─── General field row ───────────────────────────────────────────────── */
 .adm-field-row {
   display: flex;
   align-items: center;
@@ -148,7 +148,7 @@
   line-height: 1.4;
 }
 
-/* ─── Toggle switch ────────────────────────────────────────────────────────────────── */
+/* ─── Toggle switch ───────────────────────────────────────────────────── */
 .adm-toggle {
   position: relative;
   width: 52px;
@@ -185,7 +185,7 @@
 .adm-toggle input:checked + .adm-slider::before { transform: translateX(24px); }
 .adm-toggle input:focus-visible + .adm-slider { outline: 2px solid #2271b1; outline-offset: 2px; }
 
-/* ─── Color Grid ────────────────────────────────────────────────────────────────────── */
+/* ─── Color Grid ──────────────────────────────────────────────────────── */
 .adm-color-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -206,8 +206,10 @@
 
 /*
  * Color picker container: block-level so it takes full column width.
- * Do NOT use flex/stretch on .wp-color-result itself – that breaks the
- * left swatch area which relies on padding-left set by WP's JS.
+ * IMPORTANT: Never set background-color on .wp-color-result — WP's JS
+ * injects the swatch color as an inline style on that element. Any CSS
+ * background override (even without !important) can conflict with it.
+ * Only style the .wp-color-result-text child for the text area background.
  */
 .adm-color-item .wp-picker-container {
   display: block !important;
@@ -216,6 +218,7 @@
 .adm-color-item .wp-picker-container .wp-color-result {
   width: 100% !important;
   box-sizing: border-box !important;
+  /* No background here – let WP's inline style show the colour swatch */
 }
 .adm-color-item .wp-picker-container .wp-color-result-text {
   display: block !important;
@@ -239,7 +242,7 @@
   height: 15px !important;
 }
 
-/* ─── CSS Editor ─────────────────────────────────────────────────────────────────────── */
+/* ─── CSS Editor ──────────────────────────────────────────────────────── */
 .adm-css-editor-wrap {
   border: 1px solid #dcdcde;
   border-radius: 6px;
@@ -262,14 +265,14 @@
 }
 .adm-css-editor::placeholder { color: #585b70; }
 
-/* ─── Submit ──────────────────────────────────────────────────────────────────────────────── */
+/* ─── Submit ──────────────────────────────────────────────────────────── */
 .adm-submit-row {
   display: flex;
   gap: 10px;
   margin: 4px 0 20px;
 }
 
-/* ─── Footer ─────────────────────────────────────────────────────────────────────────────── */
+/* ─── Footer ──────────────────────────────────────────────────────────── */
 .adm-footer {
   text-align: center;
   padding: 10px 0 4px;
@@ -284,9 +287,9 @@
   text-decoration: underline;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════════════
    DARK MODE OVERRIDES  (active when body.adm-dark-active is present)
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════════════ */
 body.adm-dark-active .adm-page-header,
 body.adm-dark-active .adm-card {
   background: var(--adm-surface-1) !important;
@@ -314,12 +317,20 @@ body.adm-dark-active .adm-status-inactive        { background: #7f1d1d50; color:
 body.adm-dark-active .adm-field-divider          { border-color: var(--adm-border) !important; }
 
 /*
- * Color picker in dark mode:
- * .wp-color-result background is set as inline style by WP's JS – do NOT override it.
+ * Color picker in dark mode.
+ *
+ * DO NOT set background-color on .wp-color-result — WP's JS injects the
+ * swatch color as an inline style with !important on that button element.
+ * Any CSS background rule here will be overridden by the inline style and
+ * the swatch (left colored area) would disappear.
+ *
+ * Instead we only style .wp-color-result-text (the text label child) and
+ * other surrounding elements.
  */
 body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result {
   border-color: var(--adm-border) !important;
   box-shadow: none !important;
+  /* background intentionally omitted – controlled by WP JS inline style */
 }
 body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result-text {
   background: var(--adm-surface-2) !important;

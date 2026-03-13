@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Admin Dark Mode 0.0.3\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-13 22:00+0100\n"
-"PO-Revision-Date: 2026-03-13 22:00+0100\n"
+"POT-Creation-Date: 2026-03-13 23:00+0100\n"
+"PO-Revision-Date: 2026-03-13 23:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: en_US\n"
@@ -39,6 +39,14 @@ msgstr "Enable Dark Mode"
 #: wp-admin-dark-mode.php
 msgid "Enables the dark theme for all admin pages."
 msgstr "Enables the dark theme for all admin pages."
+
+#: wp-admin-dark-mode.php
+msgid "Auto Dark Mode"
+msgstr "Auto Dark Mode"
+
+#: wp-admin-dark-mode.php
+msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
+msgstr "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
 
 #: wp-admin-dark-mode.php
 msgid "Active"

@@ -183,7 +183,6 @@ a:hover {
 
 /* ═══════════════════════════════════════════════════════════════════════════
    BUTTONS
-   (covers all WP admin button variants incl. "Plugin hinzufügen")
    ═══════════════════════════════════════════════════════════════════════════ */
 .wp-core-ui .button,
 .wp-core-ui .button-secondary,
@@ -224,7 +223,6 @@ a.page-title-action:hover,
   opacity: .55 !important;
   cursor: not-allowed !important;
 }
-/* "Plugin hinzufügen" title-action button */
 a.page-title-action {
   margin-left: var(--adm-space-2) !important;
   vertical-align: middle !important;
@@ -344,7 +342,7 @@ th.check-column {
 .plugins tr td {
   background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
-  box-shadow: none !important;    /* removes ALL coloured borders/shadows */
+  box-shadow: none !important;
 }
 .plugins tr.inactive td {
   background: #252c32 !important;
@@ -374,8 +372,6 @@ th.check-column {
 /* ═══════════════════════════════════════════════════════════════════════════
    PLUGIN INSTALL PAGE (plugin-install.php)
    ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Filter bar (Hervorgehoben / Populär / Empfohlen / Favoriten / Stichwort) */
 .wp-filter {
   background: var(--adm-surface-1) !important;
   border-bottom: 1px solid var(--adm-border) !important;
@@ -399,7 +395,6 @@ th.check-column {
 .wp-filter .search-form .wp-filter-search::placeholder {
   color: var(--adm-text-soft) !important;
 }
-/* "Stichwort" button */
 #search-submit,
 .wp-filter .button {
   background: var(--adm-surface-2) !important;
@@ -445,7 +440,6 @@ th.check-column {
 .plugin-card .authors a:hover {
   color: var(--adm-link-hover) !important;
 }
-/* Plugin card action buttons (Jetzt installieren / Weitere Details) */
 .plugin-card .plugin-action-buttons a.install-now,
 .plugin-card .plugin-action-buttons a.activate-now {
   background: var(--adm-primary) !important;
@@ -467,19 +461,16 @@ th.check-column {
   background: var(--adm-surface-3) !important;
   color: #fff !important;
 }
-/* Plugin card bottom bar */
 .plugin-card .plugin-card-bottom {
   background: var(--adm-bg) !important;
   border-top: 1px solid var(--adm-border) !important;
 }
-/* Star ratings */
 .plugin-card .star-rating .star {
   color: var(--adm-warning) !important;
 }
 .plugin-card .num-ratings {
   color: var(--adm-text-soft) !important;
 }
-/* "Kompatibel" / "Getestet" badges */
 .plugin-card .compatibility-compatible strong {
   color: var(--adm-success) !important;
 }
@@ -492,8 +483,11 @@ th.check-column {
 
 /* ═══════════════════════════════════════════════════════════════════════════
    WP COLOR PICKER (Iris)
-   Key insight: .wp-color-result gets its background as inline style from JS.
-   Never override background on that element — only style the text part.
+   IMPORTANT: .wp-color-result gets its background-color injected as an
+   inline style by WP's JS (e.g. style="background-color: #1d2327 !important").
+   Never set background-color on .wp-color-result in CSS — it will always
+   lose to the inline style and hide the colour swatch.
+   Only style the .wp-color-result-text child for the label area.
    ═══════════════════════════════════════════════════════════════════════════ */
 .wp-picker-container {
   display: inline-flex;
@@ -502,16 +496,17 @@ th.check-column {
   gap: var(--adm-space-2);
   flex-wrap: wrap;
 }
-/* The colour result button: border + shape only, NO background override */
+/* Border + shape only on the result button — NO background override */
 .wp-picker-container .wp-color-result {
   height: var(--adm-btn-h) !important;
-  padding: 0 0 0 30px !important;   /* 30px = space for the swatch */
+  padding: 0 0 0 30px !important;
   border-radius: var(--adm-radius-sm) !important;
   border: 1px solid var(--adm-border) !important;
   box-shadow: none !important;
   overflow: hidden;
+  /* background-color intentionally omitted */
 }
-/* The text label inside the button */
+/* Text label inside the button */
 .wp-picker-container .wp-color-result .wp-color-result-text {
   height: 100%;
   line-height: var(--adm-btn-h) !important;
@@ -548,7 +543,7 @@ th.check-column {
 .iris-picker .iris-palette-container .iris-palette {
   border: 1px solid var(--adm-border) !important;
 }
-/* "Clear" / "Close" button inside picker */
+/* Clear / Close button inside picker */
 .wp-picker-input-wrap .button,
 .wp-picker-clear {
   height: var(--adm-btn-h) !important;
