@@ -40,10 +40,6 @@ Settings → Dark Mode.
 * Base background color changed to #1d2327 (native WordPress sidebar color)
 * Fully optimized dark mode CSS: Admin Bar, Sidebar, Buttons, Forms, Tables, Notices, Gutenberg, Media, Screen Options, Dashboard Widgets
 * Settings page itself adapts to dark mode when active
-* Added GitHub Actions workflow to auto-compile .po → .mo language files on push
-* Added Dependabot configuration for automated GitHub Actions dependency updates
-* Updated all .po language files (de_AT, de_DE, en_US) and .pot template for new strings
-* Bumped version to 0.0.2
 
 = 0.0.1 =
 * Initial development release.
@@ -81,10 +77,6 @@ Einstellungen → Dark Mode.
 * Hintergrundfarbe auf #1d2327 geändert (native WordPress-Sidebar-Farbe)
 * Dark-Mode-CSS vollständig überarbeitet: Admin Bar, Sidebar, Buttons, Formulare, Tabellen, Hinweise, Gutenberg, Medien, Bildschirmoptionen, Dashboard-Widgets
 * Einstellungsseite passt sich selbst an den Dark Mode an, wenn dieser aktiv ist
-* GitHub-Actions-Workflow zur automatischen Kompilierung von .po → .mo Sprachdateien hinzugefügt
-* Dependabot-Konfiguration für automatische GitHub-Actions-Updates hinzugefügt
-* Alle .po-Sprachdateien (de_AT, de_DE, en_US) und das .pot-Template aktualisiert
-* Version auf 0.0.2 angehoben
 
 = 0.0.1 =
 * Erste Development-Version.
