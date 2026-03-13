@@ -317,7 +317,7 @@ body.adm-dark-active .adm-field-divider          { border-color: var(--adm-borde
  * swatch. We explicitly revert background to unset here so the inline style
  * from WP's JS is respected, while still styling the text label child.
  */
-body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result {
+body.adm-dark-active .adm-color-item .wp-picker-container {
   background: unset !important;
   border-color: var(--adm-border) !important;
   box-shadow: none !important;
