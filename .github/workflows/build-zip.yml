@@ -16,22 +16,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Read plugin version
-        id: version
-        run: |
-          VERSION=$(grep -m1 'Version:' wp-admin-dark-mode.php | awk '{print $NF}')
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
-          echo "Detected plugin version: $VERSION"
+        uses: actions/checkout@v6
 
       - name: Create plugin ZIP
         run: |
-          ZIP_NAME="wp-admin-dark-mode-${{ steps.version.outputs.VERSION }}.zip"
+          ZIP_NAME="wp-admin-dark-mode.zip"
 
-          # Use find to collect everything except .github/ and .git/
-          # -not -path excludes the directory and all its contents
-          # zip reads file list from stdin via -@
           find . \
             -not -path './.git/*' \
             -not -path './.git' \
@@ -44,14 +34,13 @@ jobs:
 
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
 
-          # Show ZIP contents for verification
           echo "--- ZIP contents ---"
           unzip -l "$ZIP_NAME"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: wp-admin-dark-mode-${{ steps.version.outputs.VERSION }}
+          name: wp-admin-dark-mode
           path: ${{ env.ZIP_NAME }}
           retention-days: 90
 
