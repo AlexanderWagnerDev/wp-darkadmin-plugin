@@ -372,6 +372,125 @@ th.check-column {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   PLUGIN INSTALL PAGE (plugin-install.php)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Filter bar (Hervorgehoben / Populär / Empfohlen / Favoriten / Stichwort) */
+.wp-filter {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.wp-filter .filter-links li a {
+  color: var(--adm-text-muted) !important;
+}
+.wp-filter .filter-links li a:hover,
+.wp-filter .filter-links li a.current {
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+  border-bottom: 3px solid var(--adm-primary) !important;
+}
+.wp-filter .search-form .wp-filter-search {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.wp-filter .search-form .wp-filter-search::placeholder {
+  color: var(--adm-text-soft) !important;
+}
+/* "Stichwort" button */
+#search-submit,
+.wp-filter .button {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+#search-submit:hover,
+.wp-filter .button:hover {
+  background: var(--adm-surface-3) !important;
+  color: #fff !important;
+}
+
+/* Plugin cards grid */
+#plugin-filter,
+.plugin-install-tab {
+  background: transparent !important;
+}
+.plugin-card {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.plugin-card:hover {
+  border-color: var(--adm-primary) !important;
+  box-shadow: var(--adm-shadow-md) !important;
+}
+.plugin-card .plugin-card-top {
+  background: var(--adm-surface-1) !important;
+}
+.plugin-card .name,
+.plugin-card .name a {
+  color: var(--adm-text) !important;
+}
+.plugin-card .desc p,
+.plugin-card .desc {
+  color: var(--adm-text-muted) !important;
+}
+.plugin-card .authors,
+.plugin-card .authors a {
+  color: var(--adm-text-soft) !important;
+}
+.plugin-card .authors a:hover {
+  color: var(--adm-link-hover) !important;
+}
+/* Plugin card action buttons (Jetzt installieren / Weitere Details) */
+.plugin-card .plugin-action-buttons a.install-now,
+.plugin-card .plugin-action-buttons a.activate-now {
+  background: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+  color: #fff !important;
+}
+.plugin-card .plugin-action-buttons a.install-now:hover,
+.plugin-card .plugin-action-buttons a.activate-now:hover {
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+}
+.plugin-card .plugin-action-buttons a {
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+.plugin-card .plugin-action-buttons a:hover {
+  background: var(--adm-surface-3) !important;
+  color: #fff !important;
+}
+/* Plugin card bottom bar */
+.plugin-card .plugin-card-bottom {
+  background: var(--adm-bg) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+/* Star ratings */
+.plugin-card .star-rating .star {
+  color: var(--adm-warning) !important;
+}
+.plugin-card .num-ratings {
+  color: var(--adm-text-soft) !important;
+}
+/* "Kompatibel" / "Getestet" badges */
+.plugin-card .compatibility-compatible strong {
+  color: var(--adm-success) !important;
+}
+.plugin-card .compatibility-incompatible strong {
+  color: var(--adm-danger) !important;
+}
+.plugin-card .compatibility-warning strong {
+  color: var(--adm-warning) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    WP COLOR PICKER (Iris)
    Key insight: .wp-color-result gets its background as inline style from JS.
    Never override background on that element — only style the text part.
