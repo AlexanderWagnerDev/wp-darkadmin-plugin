@@ -205,11 +205,6 @@
   color: #1d2327;
   display: block;
 }
-
-/*
- * Never set background-color on .wp-color-result - WP's JS injects the swatch
- * color as an inline style on that element. Only style .wp-color-result-text.
- */
 .adm-color-item .wp-picker-container {
   display: block !important;
   width: 100% !important;
@@ -316,10 +311,14 @@ body.adm-dark-active .adm-status-inactive        { background: #7f1d1d50; color:
 body.adm-dark-active .adm-field-divider          { border-color: var(--adm-border) !important; }
 
 /*
- * Never set background-color on .wp-color-result - WP's JS injects the swatch
- * color as an inline style. Only style .wp-color-result-text.
+ * .wp-color-result gets its background-color as an inline style from WP's JS
+ * (wp-color-picker). The generic .button rule in wp-admin-dark.css sets
+ * background !important which would win over that inline style and hide the
+ * swatch. We explicitly revert background to unset here so the inline style
+ * from WP's JS is respected, while still styling the text label child.
  */
 body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result {
+  background: unset !important;
   border-color: var(--adm-border) !important;
   box-shadow: none !important;
 }
