@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Admin Dark Mode
  * Plugin URI: https://github.com/AlexanderWagnerDev/wp-admin-dark-mode-plugin
- * Description: Simple, lightweight Dark Mode toggle for the WordPress Admin Dashboard.
+ * Description: Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
  * Version: 0.0.3
  * Requires at least: 6.0
  * Tested up to: 6.9.4
