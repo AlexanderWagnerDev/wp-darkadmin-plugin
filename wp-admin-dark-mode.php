@@ -23,7 +23,7 @@ define( 'ADM_VERSION', '0.0.2' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Default color palette
+ * Default color palette (matches WP sidebar #1d2327 dark scheme).
  */
 function adm_default_colors(): array {
 	return [
@@ -40,7 +40,7 @@ function adm_default_colors(): array {
 }
 
 /**
- * Load translations
+ * Load translations.
  */
 add_action( 'plugins_loaded', function () {
 	load_plugin_textdomain(
@@ -51,7 +51,7 @@ add_action( 'plugins_loaded', function () {
 } );
 
 /**
- * Enqueue admin CSS + inline custom CSS when dark mode is enabled
+ * Enqueue admin CSS + inline custom CSS when dark mode is enabled.
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! get_option( 'adm_dark_mode_enabled', false ) ) {
@@ -91,7 +91,7 @@ add_action( 'admin_enqueue_scripts', function () {
 } );
 
 /**
- * Settings page
+ * Settings page (Settings -> WP Admin Dark Mode).
  */
 add_action( 'admin_menu', function () {
 	add_options_page(
@@ -104,7 +104,7 @@ add_action( 'admin_menu', function () {
 } );
 
 /**
- * Enqueue settings page assets
+ * Enqueue settings page assets.
  */
 add_action( 'admin_enqueue_scripts', function ( $hook ) {
 	if ( $hook !== 'settings_page_wp-admin-dark-mode' ) {
@@ -122,7 +122,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 } );
 
 /**
- * Register settings
+ * Register settings.
  */
 add_action( 'admin_init', function () {
 	register_setting( 'adm_settings', 'adm_dark_mode_enabled', [
@@ -155,7 +155,7 @@ function adm_sanitize_colors( $input ): array {
 }
 
 /**
- * Settings page HTML
+ * Settings page HTML.
  */
 function adm_settings_page() {
 	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
@@ -398,21 +398,56 @@ function adm_settings_page() {
 		.adm-footer { text-align: center; padding: 12px 0 4px; font-size: 12px; color: #646970; }
 		.adm-footer a { color: #2271b1; }
 
-		/* Dark Mode: Settings page itself */
-		body.wp-admin.adm-dark-active .adm-page-header,
-		body.wp-admin.adm-dark-active .adm-card { background: #2c3338; border-color: #3c434a; color: #dcdcde; }
-		body.wp-admin.adm-dark-active .adm-card-header { background: #1d2327; border-color: #3c434a; }
-		body.wp-admin.adm-dark-active .adm-card-header h2,
-		body.wp-admin.adm-dark-active .adm-page-title,
-		body.wp-admin.adm-dark-active .adm-field-title,
-		body.wp-admin.adm-dark-active .adm-color-label { color: #dcdcde; }
-		body.wp-admin.adm-dark-active .adm-page-subtitle,
-		body.wp-admin.adm-dark-active .adm-field-desc,
-		body.wp-admin.adm-dark-active .adm-card-description,
-		body.wp-admin.adm-dark-active .adm-footer { color: #a7aaad; }
-		body.wp-admin.adm-dark-active .adm-color-reset-row { border-color: #3c434a; }
-		body.wp-admin.adm-dark-active .adm-css-editor-wrap { border-color: #3c434a; }
-		body.wp-admin.adm-dark-active .adm-footer a { color: #72aee6; }
+		/* Dark Mode overrides for settings page */
+		body.adm-dark-active .adm-settings-wrap .adm-page-header,
+		body.adm-dark-active .adm-settings-wrap .adm-card {
+			background: #2c3338 !important;
+			border-color: #3c434a !important;
+			color: #dcdcde !important;
+		}
+		body.adm-dark-active .adm-settings-wrap .adm-card-header {
+			background: #1d2327 !important;
+			border-color: #3c434a !important;
+		}
+		body.adm-dark-active .adm-settings-wrap .adm-card-header h2,
+		body.adm-dark-active .adm-settings-wrap .adm-page-title,
+		body.adm-dark-active .adm-settings-wrap .adm-field-title,
+		body.adm-dark-active .adm-settings-wrap .adm-color-label { color: #dcdcde !important; }
+		body.adm-dark-active .adm-settings-wrap .adm-page-subtitle,
+		body.adm-dark-active .adm-settings-wrap .adm-field-desc,
+		body.adm-dark-active .adm-settings-wrap .adm-card-description,
+		body.adm-dark-active .adm-settings-wrap .adm-footer { color: #a7aaad !important; }
+		body.adm-dark-active .adm-settings-wrap .adm-color-reset-row { border-color: #3c434a !important; }
+		body.adm-dark-active .adm-settings-wrap .adm-css-editor-wrap { border-color: #3c434a !important; }
+		body.adm-dark-active .adm-settings-wrap .adm-footer a { color: #72aee6 !important; }
+
+		/* WP Color Picker overrides for dark mode */
+		body.adm-dark-active .wp-picker-container .wp-color-result {
+			background: #2c3338 !important;
+			border-color: #3c434a !important;
+			color: #dcdcde !important;
+		}
+		body.adm-dark-active .wp-picker-container input[type="text"] {
+			background: #2c3338 !important;
+			color: #dcdcde !important;
+			border-color: #3c434a !important;
+		}
+		body.adm-dark-active .wp-picker-container .wp-picker-open {
+			background: #1d2327 !important;
+			border-color: #3c434a !important;
+		}
+		body.adm-dark-active .iris-picker {
+			border-color: #3c434a !important;
+			background: #1d2327 !important;
+		}
+		body.adm-dark-active .iris-picker .iris-strip {
+			border-color: #3c434a !important;
+		}
+		body.adm-dark-active .iris-picker-inner input[type="text"] {
+			background: #2c3338 !important;
+			color: #dcdcde !important;
+			border-color: #3c434a !important;
+		}
 	</style>
 	<?php
 	if ( $enabled ) {
@@ -421,7 +456,7 @@ function adm_settings_page() {
 }
 
 /**
- * Settings Link in Plugins list
+ * Settings Link in Plugins list.
  */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $actions ) {
 	$url = admin_url( 'options-general.php?page=wp-admin-dark-mode' );
@@ -430,7 +465,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $ac
 } );
 
 /**
- * Admin notice after saving
+ * Admin notice after saving.
  */
 add_action( 'admin_notices', function () {
 	if ( ! current_user_can( 'manage_options' ) ) return;
@@ -440,7 +475,7 @@ add_action( 'admin_notices', function () {
 
 	$enabled = get_option( 'adm_dark_mode_enabled', false );
 	$msg = $enabled
-		? __( '\u2713 Dark Mode is active. Settings have been saved.', 'wp-admin-dark-mode' )
-		: __( '\u2713 Settings saved. Dark Mode is disabled.', 'wp-admin-dark-mode' );
+		? __( '✓ Dark Mode is active. Settings have been saved.', 'wp-admin-dark-mode' )
+		: __( '✓ Settings saved. Dark Mode is disabled.', 'wp-admin-dark-mode' );
 	echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
 } );
