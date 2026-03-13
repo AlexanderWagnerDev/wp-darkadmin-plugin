@@ -2,12 +2,13 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Admin Dark Mode 0.0.2\n"
+"Project-Id-Version: WP Admin Dark Mode 0.0.3\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-13 19:40+0100\n"
-"PO-Revision-Date: 2026-03-13 19:40+0100\n"
+"POT-Creation-Date: 2026-03-13 22:00+0100\n"
+"PO-Revision-Date: 2026-03-13 22:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,15 +52,23 @@ msgid "Color Customization"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Customize the dark mode colors individually. The defaults are based on the WordPress sidebar palette."
+msgid "Customize every color token individually. Changes are applied globally via CSS variables."
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Background Color (Base)"
+msgid "Background (Base)"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Card / Content Area"
+msgid "Surface 1 (Cards / Tables)"
+msgstr ""
+
+#: wp-admin-dark-mode.php
+msgid "Surface 2 (Inputs)"
+msgstr ""
+
+#: wp-admin-dark-mode.php
+msgid "Surface 3 (Hover)"
 msgstr ""
 
 #: wp-admin-dark-mode.php
@@ -67,11 +76,15 @@ msgid "Border Color"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Text Color"
+msgid "Primary Text"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Muted Text Color"
+msgid "Muted Text"
+msgstr ""
+
+#: wp-admin-dark-mode.php
+msgid "Soft Text (Row Actions)"
 msgstr ""
 
 #: wp-admin-dark-mode.php
@@ -79,15 +92,19 @@ msgid "Link Color"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Primary Color (Buttons)"
+msgid "Primary / Buttons"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Success Color"
+msgid "Success"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Warning Color"
+msgid "Warning"
+msgstr ""
+
+#: wp-admin-dark-mode.php
+msgid "Danger / Error"
 msgstr ""
 
 #: wp-admin-dark-mode.php
@@ -99,7 +116,7 @@ msgid "Custom CSS"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "Add your own CSS here, loaded after the dark mode stylesheet. You can use the CSS variables (--adm-bg, --adm-card, etc.) directly."
+msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
 msgstr ""
 
 #: wp-admin-dark-mode.php
@@ -107,9 +124,9 @@ msgid "Save Settings"
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "✓ Dark Mode is active. Settings have been saved."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: wp-admin-dark-mode.php
-msgid "✓ Settings saved. Dark Mode is disabled."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
 msgstr ""
