@@ -6,7 +6,9 @@
 
   // Collect default colors from data attributes before init
   $('.adm-color-picker').each(function () {
-    var key = $(this).attr('name').replace('adm_colors[', '').replace(']', '');
+    var nameAttr = $(this).attr('name') || '';
+    var match = nameAttr.match(/^adm_colors\[(.+)\]$/);
+    var key = match ? match[1] : nameAttr;
     defaults[key] = $(this).data('default-color');
   });
 
