@@ -1,6 +1,6 @@
 # WP Admin Dark Mode
 
-Simple, lightweight Dark Mode toggle for the WordPress Admin Dashboard.
+Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
 
 ## Plugin Info
 
@@ -58,7 +58,7 @@ No. It only loads CSS in `wp-admin`.
 
 # Deutsch
 
-Einfacher, schlanker Dark-Mode-Schalter für das WordPress Admin-Dashboard.
+Einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard.
 
 ## Beschreibung
 
