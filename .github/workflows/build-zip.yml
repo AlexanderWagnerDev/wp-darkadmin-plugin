@@ -18,18 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Read plugin version
-        id: version
-        run: |
-          VERSION=$(grep -m1 'Version:' wp-admin-dark-mode.php | awk '{print $NF}')
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
-          echo "Detected plugin version: $VERSION"
-
       - name: Create plugin ZIP
         run: |
           PLUGIN_SLUG="wp-admin-dark-mode"
-          VERSION="${{ steps.version.outputs.VERSION }}"
-          ZIP_NAME="${PLUGIN_SLUG}-${VERSION}.zip"
+          ZIP_NAME="${PLUGIN_SLUG}.zip"
 
           mkdir -p /tmp/${PLUGIN_SLUG}
 
@@ -46,7 +38,6 @@ jobs:
           cd /tmp
           zip -r "${ZIP_NAME}" "${PLUGIN_SLUG}/"
 
-          # Move ZIP back to workspace for upload
           mv /tmp/${ZIP_NAME} $GITHUB_WORKSPACE/${ZIP_NAME}
 
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
