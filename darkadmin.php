@@ -364,7 +364,7 @@ function adm_settings_page() {
 				<?php esc_html_e( 'DarkAdmin', 'darkadmin' ); ?> &ndash;
 				<a href="https://alexanderwagnerdev.com" target="_blank" rel="noopener">AlexanderWagnerDev</a>
 				&mdash;
-				<a href="https://github.com/AlexanderWagnerDev/wp-admin-dark-mode-plugin" target="_blank" rel="noopener">GitHub</a>
+				<a href="https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin" target="_blank" rel="noopener">GitHub</a>
 			</p>
 		</div>
 
