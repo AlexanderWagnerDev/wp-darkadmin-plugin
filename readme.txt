@@ -41,8 +41,8 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 == Screenshots ==
-1. Dark Mode – Admin Dashboard
-2. Dark Mode – Settings Page
+1. Settings Page – Default (Dark Mode off)
+2. Settings Page – Dark Mode active
 3. Dashboard – Default (Dark Mode off)
 4. Dashboard – Dark Mode active
 
@@ -121,8 +121,8 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 === Screenshots ===
-1. Dark Mode – Admin Dashboard
-2. Dark Mode – Settings Page
+1. Settings Page – Standard (Dark Mode deaktiviert)
+2. Settings Page – Dark Mode aktiv
 3. Dashboard – Standard (Dark Mode deaktiviert)
 4. Dashboard – Dark Mode aktiv
 

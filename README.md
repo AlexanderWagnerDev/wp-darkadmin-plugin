@@ -37,11 +37,11 @@ DarkAdmin transforms the WordPress admin dashboard into a clean, eye-friendly da
 
 ## Screenshots
 
-### Dark Mode – Admin Dashboard
-![DarkAdmin – Admin Dashboard](screenshot-1.png)
+### Settings Page – Default (Dark Mode off)
+![DarkAdmin – Settings Page without Dark Mode](screenshot-1.png)
 
-### Dark Mode – Settings Page
-![DarkAdmin – Settings Page](screenshot-2.png)
+### Settings Page – Dark Mode active
+![DarkAdmin – Settings Page with Dark Mode enabled](screenshot-2.png)
 
 ### Dashboard – Default (Dark Mode off)
 ![DarkAdmin – Dashboard without Dark Mode](screenshot-3.png)
@@ -142,11 +142,11 @@ DarkAdmin verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreun
 
 ## Screenshots
 
-### Dark Mode – Admin Dashboard
-![DarkAdmin – Admin Dashboard](screenshot-1.png)
+### Settings Page – Standard (Dark Mode deaktiviert)
+![DarkAdmin – Settings Page ohne Dark Mode](screenshot-1.png)
 
-### Dark Mode – Settings Page
-![DarkAdmin – Settings Page](screenshot-2.png)
+### Settings Page – Dark Mode aktiv
+![DarkAdmin – Settings Page mit aktiviertem Dark Mode](screenshot-2.png)
 
 ### Dashboard – Standard (Dark Mode deaktiviert)
 ![DarkAdmin – Dashboard ohne Dark Mode](screenshot-3.png)
