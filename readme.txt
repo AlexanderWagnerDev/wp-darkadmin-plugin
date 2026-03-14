@@ -1,4 +1,4 @@
-=== DarkAdmin ===
+=== DarkAdmin - Dark Mode for Adminpanel ===
 Contributors: alexanderwagnerdev
 Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.0
