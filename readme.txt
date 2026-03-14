@@ -40,6 +40,10 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 = What is Auto Dark Mode? =
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
+== Screenshots ==
+1. Dark Mode – Admin Dashboard
+2. Dark Mode – Settings Page
+
 == Changelog ==
 = 0.0.5 =
 * Rebranded plugin from "WP Admin Dark Mode" to "DarkAdmin - Dark Mode for Adminpanel"
@@ -113,6 +117,10 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 
 = Was ist der Auto Dark Mode? =
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
+
+=== Screenshots ===
+1. Dark Mode – Admin Dashboard
+2. Dark Mode – Settings Page
 
 === Changelog ===
 = 0.0.5 =
