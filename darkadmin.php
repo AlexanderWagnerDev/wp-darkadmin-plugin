@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: DarkAdmin - Dark Mode for Adminpanel
- * Plugin URI: https://github.com/AlexanderWagnerDev/wp-admin-dark-mode-plugin
+ * Plugin URI: https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin
  * Description: Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
  * Version: 0.0.5
  * Requires at least: 6.0
