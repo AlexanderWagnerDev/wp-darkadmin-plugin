@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 0.0.4
+Stable tag: 0.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,15 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 == Changelog ==
+= 0.0.5 =
+* Rebranded plugin from "WP Admin Dark Mode" to "DarkAdmin - Dark Mode for Adminpanel"
+* Renamed main plugin file from wp-admin-dark-mode.php to darkadmin.php
+* Renamed CSS file from wp-admin-dark.css to darkadmin-dark.css
+* Updated text domain from wp-admin-dark-mode to darkadmin
+* Updated all language files (de_AT, de_DE, en_US, .pot) to new darkadmin text domain
+* Updated settings menu slug from wp-admin-dark-mode to darkadmin
+* Updated plugin folder reference in readme to /wp-content/plugins/darkadmin/
+
 = 0.0.4 =
 * Added Auto Dark Mode option: optional JS-based pass that dynamically darkens bright backgrounds and lightens dark text from unknown plugins using WCAG luminance calculations
 * Auto Dark Mode uses a MutationObserver to also handle AJAX-loaded content
@@ -106,6 +115,15 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 === Changelog ===
+= 0.0.5 =
+* Plugin von "WP Admin Dark Mode" zu "DarkAdmin - Dark Mode for Adminpanel" umbenannt
+* Hauptdatei von wp-admin-dark-mode.php zu darkadmin.php umbenannt
+* CSS-Datei von wp-admin-dark.css zu darkadmin-dark.css umbenannt
+* Text-Domain von wp-admin-dark-mode auf darkadmin aktualisiert
+* Alle Sprachdateien (de_AT, de_DE, en_US, .pot) auf neue darkadmin Text-Domain aktualisiert
+* Einstellungen-Menü-Slug von wp-admin-dark-mode auf darkadmin aktualisiert
+* Plugin-Ordner-Referenz in der Readme auf /wp-content/plugins/darkadmin/ aktualisiert
+
 = 0.0.4 =
 * Auto Dark Mode hinzugefügt: optionaler JS-Pass, der helle Hintergründe und dunklen Text unbekannter Plugins dynamisch anpasst (WCAG-Luminanzberechnung)
 * Auto Dark Mode verwendet einen MutationObserver, um auch AJAX-geladene Inhalte zu verarbeiten
