@@ -770,6 +770,7 @@ ul.wp-submenu {
 
 /* =============================================================================
    DASHBOARD - ACTIVITY WIDGET
+   Full coverage: recent posts row, comment item block, meta, avatar area
    ============================================================================= */
 #dashboard_activity .subsubsub a {
   color: var(--adm-link) !important;
@@ -785,9 +786,60 @@ ul.wp-submenu {
 #dashboard_activity .activity-block ul li span {
   color: var(--adm-text-soft) !important;
 }
-#latest-comments .comment-meta,
-#latest-comments .comment-meta a {
+
+/* Recent posts list item row (the highlighted row visible in screenshot) */
+#dashboard_activity .activity-block ul li,
+#dashboard_activity #the-comment-list tr,
+#dashboard_activity #the-comment-list td {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* Comment item block (avatar + text area - the light grey box) */
+.dashboard-comment-wrap,
+#latest-comments .comment-item,
+#the-comment-list .comment-item {
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Avatar column next to comment */
+#latest-comments .comment-item .avatar-column,
+#latest-comments .comment-item .comment-body-column,
+.dashboard-comment-wrap .avatar,
+.dashboard-comment-wrap p {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Comment text content */
+#latest-comments .comment-item blockquote,
+#latest-comments .comment-item blockquote p,
+.dashboard-comment-wrap blockquote,
+.dashboard-comment-wrap blockquote p {
+  background: var(--adm-surface-2) !important;
   color: var(--adm-text-muted) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* Comment meta line (author, post title) */
+#latest-comments .comment-meta,
+#latest-comments .comment-meta a,
+.dashboard-comment-wrap .comment-meta,
+.dashboard-comment-wrap .comment-meta a {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Row actions (Approve, Reply, etc.) */
+#latest-comments .row-actions,
+.dashboard-comment-wrap .row-actions span a {
+  color: var(--adm-text-soft) !important;
+}
+#latest-comments .row-actions span a:hover,
+.dashboard-comment-wrap .row-actions span a:hover {
+  color: var(--adm-text) !important;
 }
 
 /* =============================================================================
