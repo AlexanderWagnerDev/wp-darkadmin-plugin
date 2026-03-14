@@ -17,7 +17,7 @@
 | **Contributors** | AlexanderWagnerDev |
 | **Plugin URI** | [wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel](https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/) |
 | **Requires at least** | 6.0 |
-| **Tested up to** | 6.9.4 |
+| **Tested up to** | 6.9 |
 | **Requires PHP** | 7.4 |
 | **Stable tag** | 0.0.6 |
 | **License** | GPLv2 or later |
@@ -81,7 +81,6 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 - Updated Text Domain from `darkadmin` to `darkadmin-dark-mode-for-adminpanel` to match the wordpress.org plugin slug
 - Updated `Plugin URI` to `https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/`
 - Updated all language files (`.po`, `.pot`) to new text domain
-- Bumped version to 0.0.6
 
 ### 0.0.5
 
@@ -193,7 +192,6 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 - Text Domain von `darkadmin` auf `darkadmin-dark-mode-for-adminpanel` aktualisiert (entspricht dem wordpress.org Plugin-Slug)
 - `Plugin URI` auf `https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/` aktualisiert
 - Alle Sprachdateien (`.po`, `.pot`) auf neue Text Domain aktualisiert
-- Version auf 0.0.6 erhöht
 
 ### 0.0.5
 
