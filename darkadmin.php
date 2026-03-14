@@ -45,17 +45,6 @@ function adm_default_colors(): array {
 }
 
 /**
- * Load translations.
- */
-add_action( 'plugins_loaded', function () {
-	load_plugin_textdomain(
-		'darkadmin',
-		false,
-		dirname( plugin_basename( __FILE__ ) ) . '/languages'
-	);
-} );
-
-/**
  * Enqueue dark mode CSS and inject color token overrides as inline CSS variables.
  * Also enqueues auto-darken JS when both dark mode and auto-darken are enabled.
  */
@@ -383,16 +372,28 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $ac
 
 /**
  * Show an admin notice after settings are saved.
+ * Both GET params below are read-only routing/status flags set by WP core
+ * (options.php redirect) — no user-submitted data is processed here.
  */
 add_action( 'admin_notices', function () {
-	if ( ! current_user_can( 'manage_options' ) ) return;
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only page slug, no form data processed
 	$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-	if ( $page !== 'darkadmin' ) return;
-	if ( empty( $_GET['settings-updated'] ) ) return;
+	if ( $page !== 'darkadmin' ) {
+		return;
+	}
+
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- WP core redirect flag after options.php save, no user data processed
+	if ( empty( $_GET['settings-updated'] ) ) {
+		return;
+	}
 
 	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
-	$msg = $enabled
-		? __( '✓ Dark Mode is active. Settings have been saved.', 'darkadmin' )
-		: __( '✓ Settings saved. Dark Mode is disabled.', 'darkadmin' );
+	$msg     = $enabled
+		? __( '\u2713 Dark Mode is active. Settings have been saved.', 'darkadmin' )
+		: __( '\u2713 Settings saved. Dark Mode is disabled.', 'darkadmin' );
 	echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
 } );
