@@ -1,0 +1,141 @@
+# Copyright (C) 2026 AlexanderWagnerDev
+# This file is distributed under the GPLv2+.
+msgid ""
+msgstr ""
+"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.6\n"
+"Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
+"POT-Creation-Date: 2026-03-14 17:30+0100\n"
+"PO-Revision-Date: 2026-03-14 17:30+0100\n"
+"Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
+"Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Manual 2026\n"
+"X-Domain: darkadmin-dark-mode-for-adminpanel\n"
+
+#: darkadmin.php
+msgid "DarkAdmin"
+msgstr "DarkAdmin"
+
+#: darkadmin.php
+msgid "Dark theme for the WordPress backend"
+msgstr "Dark theme for the WordPress backend"
+
+#: darkadmin.php
+msgid "Settings"
+msgstr "Settings"
+
+#: darkadmin.php
+msgid "General"
+msgstr "General"
+
+#: darkadmin.php
+msgid "Enable Dark Mode"
+msgstr "Enable Dark Mode"
+
+#: darkadmin.php
+msgid "Enables the dark theme for all admin pages."
+msgstr "Enables the dark theme for all admin pages."
+
+#: darkadmin.php
+msgid "Auto Dark Mode"
+msgstr "Auto Dark Mode"
+
+#: darkadmin.php
+msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
+msgstr "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
+
+#: darkadmin.php
+msgid "Active"
+msgstr "Active"
+
+#: darkadmin.php
+msgid "Inactive"
+msgstr "Inactive"
+
+#: darkadmin.php
+msgid "Color Customization"
+msgstr "Color Customization"
+
+#: darkadmin.php
+msgid "Customize every color token individually. Changes are applied globally via CSS variables."
+msgstr "Customize every color token individually. Changes are applied globally via CSS variables."
+
+#: darkadmin.php
+msgid "Background (Base)"
+msgstr "Background (Base)"
+
+#: darkadmin.php
+msgid "Surface 1 (Cards / Tables)"
+msgstr "Surface 1 (Cards / Tables)"
+
+#: darkadmin.php
+msgid "Surface 2 (Inputs)"
+msgstr "Surface 2 (Inputs)"
+
+#: darkadmin.php
+msgid "Surface 3 (Hover)"
+msgstr "Surface 3 (Hover)"
+
+#: darkadmin.php
+msgid "Border Color"
+msgstr "Border Color"
+
+#: darkadmin.php
+msgid "Primary Text"
+msgstr "Primary Text"
+
+#: darkadmin.php
+msgid "Muted Text"
+msgstr "Muted Text"
+
+#: darkadmin.php
+msgid "Soft Text (Row Actions)"
+msgstr "Soft Text (Row Actions)"
+
+#: darkadmin.php
+msgid "Link Color"
+msgstr "Link Color"
+
+#: darkadmin.php
+msgid "Primary / Buttons"
+msgstr "Primary / Buttons"
+
+#: darkadmin.php
+msgid "Success"
+msgstr "Success"
+
+#: darkadmin.php
+msgid "Warning"
+msgstr "Warning"
+
+#: darkadmin.php
+msgid "Danger / Error"
+msgstr "Danger / Error"
+
+#: darkadmin.php
+msgid "Restore Default Colors"
+msgstr "Restore Default Colors"
+
+#: darkadmin.php
+msgid "Custom CSS"
+msgstr "Custom CSS"
+
+#: darkadmin.php
+msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
+msgstr "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
+
+#: darkadmin.php
+msgid "Save Settings"
+msgstr "Save Settings"
+
+#: darkadmin.php
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode is active. Settings have been saved."
+
+#: darkadmin.php
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Settings saved. Dark Mode is disabled."
