@@ -393,7 +393,7 @@ add_action( 'admin_notices', function () {
 
 	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
 	$msg     = $enabled
-		? __( '\u2713 Dark Mode is active. Settings have been saved.', 'darkadmin-dark-mode-for-adminpanel' )
-		: __( '\u2713 Settings saved. Dark Mode is disabled.', 'darkadmin-dark-mode-for-adminpanel' );
+		? __( '✓ Dark Mode is active. Settings have been saved.', 'darkadmin-dark-mode-for-adminpanel' )
+		: __( '✓ Settings saved. Dark Mode is disabled.', 'darkadmin-dark-mode-for-adminpanel' );
 	echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
 } );
