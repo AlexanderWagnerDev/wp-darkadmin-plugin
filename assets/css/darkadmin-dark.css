@@ -712,3 +712,205 @@ ul.wp-submenu {
 #wpfooter a {
   color: var(--adm-text-muted) !important;
 }
+
+/* =============================================================================
+   DASHBOARD - WELCOME PANEL
+   ============================================================================= */
+.welcome-panel {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.welcome-panel-header {
+  background: var(--adm-bg) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.welcome-panel-header h2,
+.welcome-panel-header p {
+  color: var(--adm-text) !important;
+}
+.welcome-panel-header a {
+  color: var(--adm-link) !important;
+}
+
+/* Welcome panel lower content area (the light grey block) */
+.welcome-panel-content,
+.welcome-panel-column-container,
+.welcome-panel-column {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+.welcome-panel-content h3,
+.welcome-panel-content p,
+.welcome-panel-column h3,
+.welcome-panel-column p {
+  color: var(--adm-text) !important;
+}
+.welcome-panel-content a,
+.welcome-panel-column a {
+  color: var(--adm-link) !important;
+}
+.welcome-panel-content a:hover,
+.welcome-panel-column a:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+/* Welcome panel action icons (the dark rounded squares) */
+.welcome-panel .welcome-icon::before {
+  color: var(--adm-text-muted) !important;
+}
+
+/* "Dismiss" link */
+.welcome-panel-close {
+  color: var(--adm-text-soft) !important;
+}
+.welcome-panel-close:hover {
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - ACTIVITY WIDGET
+   ============================================================================= */
+#dashboard_activity .subsubsub a {
+  color: var(--adm-link) !important;
+}
+#dashboard_activity .activity-block h3,
+#dashboard_activity .activity-block .published,
+#dashboard_activity .activity-block time {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_activity .activity-block ul li a {
+  color: var(--adm-link) !important;
+}
+#dashboard_activity .activity-block ul li span {
+  color: var(--adm-text-soft) !important;
+}
+#latest-comments .comment-meta,
+#latest-comments .comment-meta a {
+  color: var(--adm-text-muted) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - WORDPRESS NEWS / EVENTS WIDGET
+   ============================================================================= */
+#dashboard_primary,
+#dashboard_secondary {
+  background: var(--adm-surface-1) !important;
+}
+
+/* WordPress news feed items */
+#dashboard_primary .rss-widget ul li,
+#dashboard_secondary .rss-widget ul li {
+  border-top: 1px solid var(--adm-border) !important;
+}
+#dashboard_primary .rss-widget ul li a,
+#dashboard_secondary .rss-widget ul li a {
+  color: var(--adm-link) !important;
+}
+#dashboard_primary .rss-widget ul li a:hover,
+#dashboard_secondary .rss-widget ul li a:hover {
+  color: var(--adm-link-hover) !important;
+}
+#dashboard_primary .rss-widget .rss-date,
+#dashboard_primary .rss-widget cite,
+#dashboard_secondary .rss-widget .rss-date,
+#dashboard_secondary .rss-widget cite {
+  color: var(--adm-text-soft) !important;
+}
+
+/* Community events widget */
+.community-events-toggle-location,
+.community-events-toggle-location:hover {
+  color: var(--adm-link) !important;
+}
+.community-events-form {
+  background: var(--adm-surface-2) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+.community-events-form label {
+  color: var(--adm-text-muted) !important;
+}
+.community-events-form input[type="text"] {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+#community-events-location {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.community-events-errors,
+.community-events-loading {
+  color: var(--adm-text-muted) !important;
+}
+.community-events-footer {
+  background: var(--adm-bg) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+.community-events-footer a {
+  color: var(--adm-link) !important;
+}
+.community-events-footer a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.community-events ul .event-title a {
+  color: var(--adm-link) !important;
+}
+.community-events ul .event-title a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.community-events ul .event-date-time,
+.community-events ul time {
+  color: var(--adm-text-muted) !important;
+}
+.community-events ul .event-location {
+  color: var(--adm-text-soft) !important;
+}
+
+/* WordCamp/Meetup event type badge */
+.community-events ul .event-type-badge {
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - QUICK DRAFT WIDGET
+   ============================================================================= */
+#dashboard-widgets #dashboard_quick_press label {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_quick_press .drafts h2,
+#dashboard_quick_press .drafts h3 {
+  color: var(--adm-text) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+#dashboard_quick_press .drafts ul li a {
+  color: var(--adm-link) !important;
+}
+#dashboard_quick_press .drafts ul li .draft-title a:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - AT A GLANCE WIDGET
+   ============================================================================= */
+#dashboard_right_now .main,
+#dashboard_right_now .versions {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+#dashboard_right_now .main li a,
+#dashboard_right_now .main li span {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_right_now .main li a:hover {
+  color: var(--adm-link-hover) !important;
+}
+#dashboard_right_now .versions p,
+#dashboard_right_now .versions a {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_right_now .versions a:hover {
+  color: var(--adm-link-hover) !important;
+}
