@@ -1,7 +1,7 @@
 # DarkAdmin - Dark Mode for Adminpanel
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AlexanderWagnerDev/wp-darkadmin-plugin/main/screenshot-1.png" alt="DarkAdmin Logo" width="128" />
+  <img src="https://raw.githubusercontent.com/AlexanderWagnerDev/wp-darkadmin-plugin/main/DarkAdmin-Logo.png" alt="DarkAdmin Logo" width="128" />
 </p>
 
 <p align="center">
