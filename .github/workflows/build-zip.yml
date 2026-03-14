@@ -32,6 +32,12 @@ jobs:
             -not -path './.github/*' \
             -not -path './.github' \
             -not -name '*.zip' \
+            -not -name '*.png' \
+            -not -name '*.jpg' \
+            -not -name '*.jpeg' \
+            -not -name '*.gif' \
+            -not -name '*.webp' \
+            -not -name '*.svg' \
             -type f \
           | sed 's|^\./||' \
           | zip "$ZIP_PATH" -@
