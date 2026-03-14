@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: DarkAdmin - Dark Mode for Adminpanel
- * Plugin URI: https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin
+ * Plugin URI: https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/
  * Description: Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
- * Version: 0.0.5
+ * Version: 0.0.6
  * Requires at least: 6.0
- * Tested up to: 6.9
+ * Tested up to: 6.9.4
  * Requires PHP: 7.4
  * Author: AlexanderWagnerDev
  * Author URI: https://alexanderwagnerdev.com
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADM_VERSION', '0.0.5' );
+define( 'ADM_VERSION', '0.0.6' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 
 /**
@@ -105,8 +105,8 @@ add_action( 'admin_enqueue_scripts', function () {
  */
 add_action( 'admin_menu', function () {
 	add_options_page(
-		__( 'DarkAdmin', 'darkadmin' ),
-		__( 'DarkAdmin', 'darkadmin' ),
+		__( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ),
+		__( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ),
 		'manage_options',
 		'darkadmin',
 		'adm_settings_page'
@@ -191,19 +191,19 @@ function adm_settings_page() {
 	}
 
 	$color_labels = [
-		'bg'         => __( 'Background (Base)', 'darkadmin' ),
-		'surface1'   => __( 'Surface 1 (Cards / Tables)', 'darkadmin' ),
-		'surface2'   => __( 'Surface 2 (Inputs)', 'darkadmin' ),
-		'surface3'   => __( 'Surface 3 (Hover)', 'darkadmin' ),
-		'border'     => __( 'Border Color', 'darkadmin' ),
-		'text'       => __( 'Primary Text', 'darkadmin' ),
-		'text_muted' => __( 'Muted Text', 'darkadmin' ),
-		'text_soft'  => __( 'Soft Text (Row Actions)', 'darkadmin' ),
-		'link'       => __( 'Link Color', 'darkadmin' ),
-		'primary'    => __( 'Primary / Buttons', 'darkadmin' ),
-		'success'    => __( 'Success', 'darkadmin' ),
-		'warning'    => __( 'Warning', 'darkadmin' ),
-		'danger'     => __( 'Danger / Error', 'darkadmin' ),
+		'bg'         => __( 'Background (Base)', 'darkadmin-dark-mode-for-adminpanel' ),
+		'surface1'   => __( 'Surface 1 (Cards / Tables)', 'darkadmin-dark-mode-for-adminpanel' ),
+		'surface2'   => __( 'Surface 2 (Inputs)', 'darkadmin-dark-mode-for-adminpanel' ),
+		'surface3'   => __( 'Surface 3 (Hover)', 'darkadmin-dark-mode-for-adminpanel' ),
+		'border'     => __( 'Border Color', 'darkadmin-dark-mode-for-adminpanel' ),
+		'text'       => __( 'Primary Text', 'darkadmin-dark-mode-for-adminpanel' ),
+		'text_muted' => __( 'Muted Text', 'darkadmin-dark-mode-for-adminpanel' ),
+		'text_soft'  => __( 'Soft Text (Row Actions)', 'darkadmin-dark-mode-for-adminpanel' ),
+		'link'       => __( 'Link Color', 'darkadmin-dark-mode-for-adminpanel' ),
+		'primary'    => __( 'Primary / Buttons', 'darkadmin-dark-mode-for-adminpanel' ),
+		'success'    => __( 'Success', 'darkadmin-dark-mode-for-adminpanel' ),
+		'warning'    => __( 'Warning', 'darkadmin-dark-mode-for-adminpanel' ),
+		'danger'     => __( 'Danger / Error', 'darkadmin-dark-mode-for-adminpanel' ),
 	];
 	?>
 	<div class="wrap adm-settings-wrap">
@@ -212,9 +212,9 @@ function adm_settings_page() {
 			<div class="adm-page-header-inner">
 				<span class="adm-header-icon dashicons dashicons-visibility"></span>
 				<div>
-					<h1 class="adm-page-title"><?php esc_html_e( 'DarkAdmin', 'darkadmin' ); ?></h1>
+					<h1 class="adm-page-title"><?php esc_html_e( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ); ?></h1>
 					<p class="adm-page-subtitle">
-						<?php esc_html_e( 'Dark theme for the WordPress backend', 'darkadmin' ); ?>
+						<?php esc_html_e( 'Dark theme for the WordPress backend', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 						&mdash; v<?php echo esc_html( ADM_VERSION ); ?>
 					</p>
 				</div>
@@ -222,8 +222,8 @@ function adm_settings_page() {
 			<div class="adm-status-badge <?php echo $enabled ? 'adm-status-active' : 'adm-status-inactive'; ?>">
 				<span class="adm-status-dot"></span>
 				<?php echo $enabled
-					? esc_html__( 'Active', 'darkadmin' )
-					: esc_html__( 'Inactive', 'darkadmin' ); ?>
+					? esc_html__( 'Active', 'darkadmin-dark-mode-for-adminpanel' )
+					: esc_html__( 'Inactive', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 			</div>
 		</div>
 
@@ -233,17 +233,17 @@ function adm_settings_page() {
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-admin-settings"></span>
-					<h2><?php esc_html_e( 'General', 'darkadmin' ); ?></h2>
+					<h2><?php esc_html_e( 'General', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
 				</div>
 				<div class="adm-card-body">
 
 					<div class="adm-field-row">
 						<div class="adm-field-info">
 							<label for="adm_dark_mode_enabled" class="adm-field-title">
-								<?php esc_html_e( 'Enable Dark Mode', 'darkadmin' ); ?>
+								<?php esc_html_e( 'Enable Dark Mode', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							</label>
 							<span class="adm-field-desc">
-								<?php esc_html_e( 'Enables the dark theme for all admin pages.', 'darkadmin' ); ?>
+								<?php esc_html_e( 'Enables the dark theme for all admin pages.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							</span>
 						</div>
 						<label class="adm-toggle">
@@ -258,12 +258,12 @@ function adm_settings_page() {
 					<div class="adm-field-row">
 						<div class="adm-field-info">
 							<label for="adm_auto_darken" class="adm-field-title">
-								<?php esc_html_e( 'Auto Dark Mode', 'darkadmin' ); ?>
+								<?php esc_html_e( 'Auto Dark Mode', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							</label>
 							<span class="adm-field-desc">
 								<?php esc_html_e(
 									'Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active.',
-									'darkadmin'
+									'darkadmin-dark-mode-for-adminpanel'
 								); ?>
 							</span>
 						</div>
@@ -280,13 +280,13 @@ function adm_settings_page() {
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-color-picker"></span>
-					<h2><?php esc_html_e( 'Color Customization', 'darkadmin' ); ?></h2>
+					<h2><?php esc_html_e( 'Color Customization', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
 				</div>
 				<div class="adm-card-body">
 					<p class="adm-card-description">
 						<?php esc_html_e(
 							'Customize every color token individually. Changes are applied globally via CSS variables.',
-							'darkadmin'
+							'darkadmin-dark-mode-for-adminpanel'
 						); ?>
 					</p>
 					<div class="adm-color-grid">
@@ -309,7 +309,7 @@ function adm_settings_page() {
 					<div class="adm-color-reset-row">
 						<button type="button" id="adm-reset-colors" class="button">
 							<span class="dashicons dashicons-image-rotate"></span>
-							<?php esc_html_e( 'Restore Default Colors', 'darkadmin' ); ?>
+							<?php esc_html_e( 'Restore Default Colors', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 						</button>
 					</div>
 				</div>
@@ -318,13 +318,13 @@ function adm_settings_page() {
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-editor-code"></span>
-					<h2><?php esc_html_e( 'Custom CSS', 'darkadmin' ); ?></h2>
+					<h2><?php esc_html_e( 'Custom CSS', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
 				</div>
 				<div class="adm-card-body">
 					<p class="adm-card-description">
 						<?php esc_html_e(
 							'Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available.',
-							'darkadmin'
+							'darkadmin-dark-mode-for-adminpanel'
 						); ?>
 					</p>
 					<div class="adm-css-editor-wrap">
@@ -344,13 +344,13 @@ function adm_settings_page() {
 			</div>
 
 			<div class="adm-submit-row">
-				<?php submit_button( __( 'Save Settings', 'darkadmin' ), 'primary', 'submit', false ); ?>
+				<?php submit_button( __( 'Save Settings', 'darkadmin-dark-mode-for-adminpanel' ), 'primary', 'submit', false ); ?>
 			</div>
 		</form>
 
 		<div class="adm-footer">
 			<p>
-				<?php esc_html_e( 'DarkAdmin', 'darkadmin' ); ?> &ndash;
+				<?php esc_html_e( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ); ?> &ndash;
 				<a href="https://alexanderwagnerdev.com" target="_blank" rel="noopener">AlexanderWagnerDev</a>
 				&mdash;
 				<a href="https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin" target="_blank" rel="noopener">GitHub</a>
@@ -366,14 +366,14 @@ function adm_settings_page() {
  */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $actions ) {
 	$url = admin_url( 'options-general.php?page=darkadmin' );
-	$actions['settings'] = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'darkadmin' ) . '</a>';
+	$actions['settings'] = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'darkadmin-dark-mode-for-adminpanel' ) . '</a>';
 	return $actions;
 } );
 
 /**
  * Show an admin notice after settings are saved.
  * Both GET params below are read-only routing/status flags set by WP core
- * (options.php redirect) — no user-submitted data is processed here.
+ * (options.php redirect) - no user-submitted data is processed here.
  */
 add_action( 'admin_notices', function () {
 	if ( ! current_user_can( 'manage_options' ) ) {
@@ -393,7 +393,7 @@ add_action( 'admin_notices', function () {
 
 	$enabled = (bool) get_option( 'adm_dark_mode_enabled', false );
 	$msg     = $enabled
-		? __( '\u2713 Dark Mode is active. Settings have been saved.', 'darkadmin' )
-		: __( '\u2713 Settings saved. Dark Mode is disabled.', 'darkadmin' );
+		? __( '\u2713 Dark Mode is active. Settings have been saved.', 'darkadmin-dark-mode-for-adminpanel' )
+		: __( '\u2713 Settings saved. Dark Mode is disabled.', 'darkadmin-dark-mode-for-adminpanel' );
 	echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
 } );
