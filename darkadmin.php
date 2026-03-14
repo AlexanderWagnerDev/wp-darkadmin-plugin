@@ -23,17 +23,6 @@ define( 'ADM_VERSION', '0.0.6' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Load plugin textdomain for translations.
- */
-add_action( 'init', function () {
-	load_plugin_textdomain(
-		'darkadmin-dark-mode-for-adminpanel',
-		false,
-		dirname( plugin_basename( __FILE__ ) ) . '/languages'
-	);
-} );
-
-/**
  * Default color palette.
  * Keys map 1:1 to CSS custom properties in darkadmin-dark.css (:root).
  */
