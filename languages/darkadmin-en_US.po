@@ -133,9 +133,9 @@ msgid "Save Settings"
 msgstr "Save Settings"
 
 #: darkadmin.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
-msgstr "\u2713 Dark Mode is active. Settings have been saved."
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode is active. Settings have been saved."
 
 #: darkadmin.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
-msgstr "\u2713 Settings saved. Dark Mode is disabled."
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Settings saved. Dark Mode is disabled."
