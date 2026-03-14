@@ -23,7 +23,7 @@ jobs:
 
       - name: Create plugin ZIP
         run: |
-          ZIP_NAME="wp-admin-dark-mode.zip"
+          ZIP_NAME="darkadmin.zip"
           ZIP_PATH="/tmp/${ZIP_NAME}"
 
           find . \
