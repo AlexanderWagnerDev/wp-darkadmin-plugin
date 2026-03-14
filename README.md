@@ -43,6 +43,12 @@ DarkAdmin transforms the WordPress admin dashboard into a clean, eye-friendly da
 ### Dark Mode – Settings Page
 ![DarkAdmin – Settings Page](screenshot-2.png)
 
+### Dashboard – Default (Dark Mode off)
+![DarkAdmin – Dashboard without Dark Mode](screenshot-3.png)
+
+### Dashboard – Dark Mode active
+![DarkAdmin – Dashboard with Dark Mode enabled](screenshot-4.png)
+
 ## Installation
 
 1. Upload the plugin folder to `/wp-content/plugins/darkadmin/` (or install via the Plugins screen).
@@ -141,6 +147,12 @@ DarkAdmin verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreun
 
 ### Dark Mode – Settings Page
 ![DarkAdmin – Settings Page](screenshot-2.png)
+
+### Dashboard – Standard (Dark Mode deaktiviert)
+![DarkAdmin – Dashboard ohne Dark Mode](screenshot-3.png)
+
+### Dashboard – Dark Mode aktiv
+![DarkAdmin – Dashboard mit aktiviertem Dark Mode](screenshot-4.png)
 
 ## Installation
 

@@ -43,6 +43,8 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 == Screenshots ==
 1. Dark Mode – Admin Dashboard
 2. Dark Mode – Settings Page
+3. Dashboard – Default (Dark Mode off)
+4. Dashboard – Dark Mode active
 
 == Changelog ==
 = 0.0.5 =
@@ -121,6 +123,8 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 === Screenshots ===
 1. Dark Mode – Admin Dashboard
 2. Dark Mode – Settings Page
+3. Dashboard – Standard (Dark Mode deaktiviert)
+4. Dashboard – Dark Mode aktiv
 
 === Changelog ===
 = 0.0.5 =
@@ -143,12 +147,12 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Neue anpassbare Farbvariablen hinzugefügt: `surface1`, `surface2`, `surface3`, `text_soft` und `danger`
 * Anzahl der anpassbaren Farb-Tokens von 9 auf 13 erhöht
 * Styling des "Plugin hinzufügen"-Buttons bzw. der Seitentitel-Actions korrigiert, damit der Text im Dark Mode lesbar bleibt
-* WordPress Color Picker korrekt gefixt, indem die Inline-Hintergrundfarbe des Farbfelds erhalten bleibt und nur der Textbereich separat gestylt wird
-* Abstände, Größen und Proportionen verbessert, damit das Verhältnis näher an der nativen WordPress-Admin-Oberfläche liegt
+* WordPress Color Picker korrekt gefixt
+* Abstände, Größen und Proportionen verbessert
 * Styles der Einstellungsseite in eine eigene Datei assets/css/settings.css ausgelagert
-* Layout der Einstellungsseite für konsistentere Komponenten und sauberere Abstände überarbeitet
-* Plugin-Liste, Row-Actions, Tabellen, Notices, Formularelemente, Dashboard-Bereiche und Tabs weiter optimiert
-* Unerwünschte farbige Schatten bzw. blaue Hervorhebungs-Artefakte in Plugin-Tabellen entfernt
+* Layout der Einstellungsseite überarbeitet
+* Plugin-Liste, Row-Actions, Tabellen, Notices, Formularelemente weiter optimiert
+* Unerwünschte farbige Schatten in Plugin-Tabellen entfernt
 
 = 0.0.2 =
 * Einstellungsseite komplett neu gestaltet: Card-Layout, Page-Header mit Status-Badge und Versionsanzeige
@@ -156,9 +160,9 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Schaltfläche „Standardfarben wiederherstellen" zum Zurücksetzen auf die WordPress-Sidebar-Palette
 * Custom-CSS-Editor zum Einfügen eigener Styles nach dem Dark-Mode-Stylesheet
 * Alle Dark-Mode-Farben basieren nun auf CSS-Custom-Properties (--adm-bg, --adm-card, etc.)
-* Hintergrundfarbe auf #1d2327 geändert (native WordPress-Sidebar-Farbe)
-* Dark-Mode-CSS vollständig überarbeitet: Admin Bar, Sidebar, Buttons, Formulare, Tabellen, Hinweise, Gutenberg, Medien, Bildschirmoptionen, Dashboard-Widgets
-* Einstellungsseite passt sich selbst an den Dark Mode an, wenn dieser aktiv ist
+* Hintergrundfarbe auf #1d2327 geändert
+* Dark-Mode-CSS vollständig überarbeitet
+* Einstellungsseite passt sich selbst an den Dark Mode an
 
 = 0.0.1 =
 * Erste Development-Version.
