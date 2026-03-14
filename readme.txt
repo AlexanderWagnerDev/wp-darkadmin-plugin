@@ -1,4 +1,4 @@
-=== WP Admin Dark Mode ===
+=== DarkAdmin - Dark Mode for Adminpanel ===
 Contributors: alexanderwagnerdev
 Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.0
@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with full color customization and Auto Dark Mode support.
 
 == Description ==
-WP Admin Dark Mode transforms the WordPress admin dashboard into a clean, eye-friendly dark interface. The plugin is purely CSS-based, keeping it fast and non-intrusive. All colors are driven by CSS custom properties, making the theme fully customizable through a dedicated settings page — no code editing required. An optional Auto Dark Mode feature uses JavaScript to dynamically handle third-party plugin areas not covered by the built-in stylesheet.
+DarkAdmin transforms the WordPress admin dashboard into a clean, eye-friendly dark interface. The plugin is purely CSS-based, keeping it fast and non-intrusive. All colors are driven by CSS custom properties, making the theme fully customizable through a dedicated settings page — no code editing required. An optional Auto Dark Mode feature uses JavaScript to dynamically handle third-party plugin areas not covered by the built-in stylesheet.
 
 Features:
 * One-click enable/disable
@@ -23,16 +23,16 @@ Features:
 * Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 
 == Installation ==
-1. Upload the plugin folder to `/wp-content/plugins/wp-admin-dark-mode/` (or install via the Plugins screen).
+1. Upload the plugin folder to `/wp-content/plugins/darkadmin/` (or install via the Plugins screen).
 2. Activate the plugin through the "Plugins" screen in WordPress.
-3. Go to Settings > WP Admin Dark Mode and enable it.
+3. Go to Settings > DarkAdmin and enable it.
 
 == Frequently Asked Questions ==
 = Does this affect the frontend? =
 No. It only loads CSS in wp-admin.
 
 = Where are the settings? =
-Settings > WP Admin Dark Mode
+Settings > DarkAdmin
 
 = Can I customize the colors? =
 Yes. The plugin includes multiple color pickers for the complete admin theme and also supports additional custom CSS.
@@ -76,7 +76,7 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit vollständiger Farbanpassung und Auto-Dark-Mode-Unterstützung.
 
 === Beschreibung ===
-WP Admin Dark Mode verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreundliche dunkle Oberfläche. Das Plugin basiert vollständig auf CSS und ist dadurch schnell und nicht intrusiv. Alle Farben werden über CSS-Custom-Properties gesteuert und sind über eine dedizierte Einstellungsseite vollständig anpassbar — ohne Code-Änderungen. Eine optionale Auto-Dark-Mode-Funktion nutzt JavaScript, um Drittanbieter-Plugin-Bereiche dynamisch abzudecken, die vom eingebauten Stylesheet nicht erfasst werden.
+DarkAdmin verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreundliche dunkle Oberfläche. Das Plugin basiert vollständig auf CSS und ist dadurch schnell und nicht intrusiv. Alle Farben werden über CSS-Custom-Properties gesteuert und sind über eine dedizierte Einstellungsseite vollständig anpassbar — ohne Code-Änderungen. Eine optionale Auto-Dark-Mode-Funktion nutzt JavaScript, um Drittanbieter-Plugin-Bereiche dynamisch abzudecken, die vom eingebauten Stylesheet nicht erfasst werden.
 
 Funktionen:
 * Ein-Klick aktivieren/deaktivieren
@@ -88,16 +88,16 @@ Funktionen:
 * Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 
 === Installation ===
-1. Lade den Plugin-Ordner nach `/wp-content/plugins/wp-admin-dark-mode/` hoch (oder installiere über „Plugins").
+1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin/` hoch (oder installiere über „Plugins").
 2. Aktiviere das Plugin in WordPress unter „Plugins".
-3. Gehe zu Einstellungen → WP Admin Dark Mode und aktiviere es.
+3. Gehe zu Einstellungen → DarkAdmin und aktiviere es.
 
 === FAQ ===
 = Betrifft das das Frontend? =
 Nein. Es lädt nur CSS im wp-admin.
 
 = Wo sind die Einstellungen? =
-Einstellungen → WP Admin Dark Mode
+Einstellungen → DarkAdmin
 
 = Kann ich die Farben anpassen? =
 Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und unterstützt zusätzlich eigenes Custom CSS.
