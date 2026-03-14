@@ -31,6 +31,8 @@ jobs:
             -not -path './.git' \
             -not -path './.github/*' \
             -not -path './.github' \
+            -not -name '*.md' \
+            -not -name 'LICENSE' \
             -not -name '*.zip' \
             -not -name '*.png' \
             -not -name '*.jpg' \
