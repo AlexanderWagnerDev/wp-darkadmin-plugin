@@ -5,7 +5,7 @@
  * Description: Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
  * Version: 0.0.6
  * Requires at least: 6.0
- * Tested up to: 6.9.4
+ * Tested up to: 6.9
  * Requires PHP: 7.4
  * Author: AlexanderWagnerDev
  * Author URI: https://alexanderwagnerdev.com
