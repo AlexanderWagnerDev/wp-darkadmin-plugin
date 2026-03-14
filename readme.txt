@@ -2,7 +2,7 @@
 Contributors: alexanderwagnerdev
 Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.0
-Tested up to: 6.9.4
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 0.0.5
 License: GPLv2 or later
