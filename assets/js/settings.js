@@ -1,30 +1,36 @@
-/* WP Admin Dark Mode - Settings Page JS */
-(function ($) {
-  'use strict';
+/* global wp */
+( function ( $ ) {
+	'use strict';
 
-  var defaults = {};
+	// Initialize all color pickers.
+	$( '.adm-color-picker' ).wpColorPicker();
 
-  // Collect default colors from data attributes before init
-  $('.adm-color-picker').each(function () {
-    var nameAttr = $(this).attr('name') || '';
-    var match = nameAttr.match(/^adm_colors\[(.+)\]$/);
-    var key = match ? match[1] : nameAttr;
-    defaults[key] = $(this).data('default-color');
-  });
+	// Reset all color pickers to their default values.
+	$( '#adm-reset-colors' ).on( 'click', function () {
+		$( '.adm-color-picker' ).each( function () {
+			const $input   = $( this );
+			const defColor = $input.data( 'default-color' );
+			if ( defColor ) {
+				$input.wpColorPicker( 'color', defColor );
+			}
+		} );
+	} );
 
-  // Init WP Color Picker
-  $('.adm-color-picker').wpColorPicker();
+	// Copy CSS variable name to clipboard on click.
+	$( document ).on( 'click', '.adm-var-copy', function () {
+		const varName = $( this ).data( 'var' );
+		if ( ! varName ) {
+			return;
+		}
+		navigator.clipboard.writeText( 'var(' + varName + ')' ).then( function () {
+			const $btn  = $( '.adm-var-copy[data-var="' + varName + '"]' );
+			const $code = $btn.find( 'code' );
+			const orig  = $code.text();
+			$code.text( '✓ Copied!' );
+			setTimeout( function () {
+				$code.text( orig );
+			}, 1500 );
+		} );
+	} );
 
-  // Reset all color pickers to their default values
-  $('#adm-reset-colors').on('click', function () {
-    $('.adm-color-picker').each(function () {
-      var defColor = $(this).data('default-color');
-      if (defColor) {
-        $(this).val(defColor).trigger('change');
-        var inst = $(this).closest('.wp-picker-container').find('.wp-color-picker');
-        inst.wpColorPicker('color', defColor);
-      }
-    });
-  });
-
-}(jQuery));
+} )( jQuery );

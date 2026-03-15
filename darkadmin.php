@@ -45,6 +45,27 @@ function adm_default_colors(): array {
 }
 
 /**
+ * Maps each color key to its CSS custom property name and a human-readable label.
+ */
+function adm_css_variable_map(): array {
+	return [
+		'bg'         => [ 'var' => '--adm-bg',         'label' => 'Background (Base)' ],
+		'surface1'   => [ 'var' => '--adm-surface-1',  'label' => 'Surface 1 (Cards / Tables)' ],
+		'surface2'   => [ 'var' => '--adm-surface-2',  'label' => 'Surface 2 (Inputs)' ],
+		'surface3'   => [ 'var' => '--adm-surface-3',  'label' => 'Surface 3 (Hover)' ],
+		'border'     => [ 'var' => '--adm-border',      'label' => 'Border Color' ],
+		'text'       => [ 'var' => '--adm-text',        'label' => 'Primary Text' ],
+		'text_muted' => [ 'var' => '--adm-text-muted',  'label' => 'Muted Text' ],
+		'text_soft'  => [ 'var' => '--adm-text-soft',   'label' => 'Soft Text (Row Actions)' ],
+		'link'       => [ 'var' => '--adm-link',        'label' => 'Link Color' ],
+		'primary'    => [ 'var' => '--adm-primary',     'label' => 'Primary / Buttons' ],
+		'success'    => [ 'var' => '--adm-success',     'label' => 'Success' ],
+		'warning'    => [ 'var' => '--adm-warning',     'label' => 'Warning' ],
+		'danger'     => [ 'var' => '--adm-danger',      'label' => 'Danger / Error' ],
+	];
+}
+
+/**
  * Enqueue dark mode CSS and inject color token overrides as inline CSS variables.
  * Also enqueues auto-darken JS when both dark mode and auto-darken are enabled.
  */
@@ -327,6 +348,42 @@ function adm_settings_page() {
 							'darkadmin-dark-mode-for-adminpanel'
 						); ?>
 					</p>
+
+					<?php
+					$defaults  = adm_default_colors();
+					$var_map   = adm_css_variable_map();
+					$cur_colors = wp_parse_args( (array) get_option( 'adm_colors', [] ), $defaults );
+					?>
+					<details class="adm-var-reference">
+						<summary class="adm-var-reference-summary">
+							<span class="dashicons dashicons-editor-code"></span>
+							<?php esc_html_e( 'Available CSS Variables', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							<span class="adm-var-count"><?php echo count( $var_map ); ?></span>
+						</summary>
+						<div class="adm-var-grid">
+							<?php foreach ( $var_map as $key => $info ) :
+								$current_color = sanitize_hex_color( $cur_colors[ $key ] ?? '' ) ?: $defaults[ $key ];
+							?>
+								<div class="adm-var-item">
+									<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>
+									<div class="adm-var-info">
+										<button
+											type="button"
+											class="adm-var-copy"
+											data-var="<?php echo esc_attr( $info['var'] ); ?>"
+											title="<?php esc_attr_e( 'Click to copy', 'darkadmin-dark-mode-for-adminpanel' ); ?>"
+										>
+											<code><?php echo esc_html( $info['var'] ); ?></code>
+											<span class="adm-var-copy-icon dashicons dashicons-clipboard"></span>
+										</button>
+										<span class="adm-var-label"><?php echo esc_html( $info['label'] ); ?></span>
+									</div>
+									<span class="adm-var-hex"><?php echo esc_html( $current_color ); ?></span>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</details>
+
 					<div class="adm-css-editor-wrap">
 						<textarea
 							id="adm_custom_css"
@@ -334,10 +391,7 @@ function adm_settings_page() {
 							class="adm-css-editor"
 							rows="12"
 							spellcheck="false"
-							placeholder="/* Your custom CSS here */
-/* Variables: --adm-bg, --adm-surface-1, --adm-surface-2, --adm-surface-3,
-   --adm-border, --adm-text, --adm-text-muted, --adm-text-soft,
-   --adm-link, --adm-primary, --adm-success, --adm-warning, --adm-danger */"
+							placeholder="/* Your custom CSS here */"
 						><?php echo esc_textarea( $custom ); ?></textarea>
 					</div>
 				</div>

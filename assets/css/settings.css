@@ -235,6 +235,126 @@
 }
 
 /* =============================================================================
+   CSS VARIABLE REFERENCE
+   ============================================================================= */
+.adm-var-reference {
+  margin-bottom: 14px;
+  border: 1px solid #dcdcde;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.adm-var-reference-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #f6f7f7;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1d2327;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+.adm-var-reference-summary::-webkit-details-marker { display: none; }
+.adm-var-reference-summary::before {
+  content: "▶";
+  font-size: 9px;
+  color: #646970;
+  transition: transform .15s ease;
+  flex-shrink: 0;
+}
+details.adm-var-reference[open] .adm-var-reference-summary::before {
+  transform: rotate(90deg);
+}
+.adm-var-reference-summary .dashicons {
+  font-size: 15px !important;
+  width: 15px !important;
+  height: 15px !important;
+  color: #2271b1;
+}
+.adm-var-count {
+  margin-left: auto;
+  background: #2271b1;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 7px;
+  line-height: 1.6;
+}
+.adm-var-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1px;
+  background: #dcdcde;
+  border-top: 1px solid #dcdcde;
+}
+.adm-var-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #fff;
+}
+.adm-var-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,.1);
+}
+.adm-var-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+.adm-var-copy {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-align: left;
+}
+.adm-var-copy code {
+  font-size: 11px;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  color: #2271b1;
+  background: none;
+  padding: 0;
+  border: none;
+}
+.adm-var-copy:hover code { text-decoration: underline; }
+.adm-var-copy-icon {
+  font-size: 12px !important;
+  width: 12px !important;
+  height: 12px !important;
+  color: #646970;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.adm-var-copy:hover .adm-var-copy-icon { opacity: 1; }
+.adm-var-label {
+  font-size: 11px;
+  color: #646970;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.adm-var-hex {
+  font-size: 10px;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  color: #646970;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
    CSS EDITOR
    ============================================================================= */
 .adm-css-editor-wrap {
@@ -309,6 +429,36 @@ body.adm-dark-active .adm-footer a               { color: var(--adm-link) !impor
 body.adm-dark-active .adm-status-active          { background: #12532e50; color: #6ee7a0; }
 body.adm-dark-active .adm-status-inactive        { background: #7f1d1d50; color: #fca5a5; }
 body.adm-dark-active .adm-field-divider          { border-color: var(--adm-border) !important; }
+
+/* Variable reference - dark overrides */
+body.adm-dark-active .adm-var-reference {
+  border-color: var(--adm-border) !important;
+}
+body.adm-dark-active .adm-var-reference-summary {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+body.adm-dark-active .adm-var-reference-summary::before {
+  color: var(--adm-text-muted) !important;
+}
+body.adm-dark-active .adm-var-grid {
+  background: var(--adm-border) !important;
+  border-color: var(--adm-border) !important;
+}
+body.adm-dark-active .adm-var-item {
+  background: var(--adm-surface-2) !important;
+}
+body.adm-dark-active .adm-var-copy code {
+  color: var(--adm-link) !important;
+}
+body.adm-dark-active .adm-var-label,
+body.adm-dark-active .adm-var-hex {
+  color: var(--adm-text-muted) !important;
+}
+body.adm-dark-active .adm-var-copy-icon {
+  color: var(--adm-text-muted) !important;
+}
 
 /*
  * .wp-color-result gets its background-color as an inline style from WP's JS
