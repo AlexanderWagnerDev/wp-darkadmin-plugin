@@ -287,6 +287,13 @@ table.widefat thead th {
 th.check-column {
   background: var(--adm-bg) !important;
 }
+/* Override WP core: .widefat sets color:#2c3338 (near-black) on p/ul/ol
+   which makes text invisible on dark backgrounds */
+.widefat p,
+.widefat ul,
+.widefat ol {
+  color: var(--adm-text) !important;
+}
 .subsubsub {
   margin: 8px 0 12px !important;
   color: var(--adm-text-soft) !important;
