@@ -23,7 +23,7 @@ jobs:
 
       - name: Create plugin ZIP
         run: |
-          ZIP_NAME="darkadmin.zip"
+          ZIP_NAME="darkadmin-dark-mode-for-adminpanel.zip"
           ZIP_PATH="/tmp/${ZIP_NAME}"
 
           find . \
@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           archive: false
-          name: wp-admin-dark-mode
+          name: darkadmin-dark-mode-for-adminpanel
           path: ${{ env.ZIP_PATH }}
           retention-days: 1
 
