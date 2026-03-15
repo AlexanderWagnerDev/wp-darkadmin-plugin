@@ -1,6 +1,5 @@
 /*
- * DarkAdmin - Core Stylesheet
- * Version: 0.0.4
+ * DarkAdmin - Dark Mode for Adminpanel - Core Stylesheet
  * Author: AlexanderWagnerDev
  *
  * All colors are driven by CSS custom properties.
@@ -287,8 +286,6 @@ table.widefat thead th {
 th.check-column {
   background: var(--adm-bg) !important;
 }
-/* Override WP core: .widefat sets color:#2c3338 (near-black) on p/ul/ol
-   which makes text invisible on dark backgrounds */
 .widefat p,
 .widefat ul,
 .widefat ol {
@@ -463,12 +460,6 @@ th.check-column {
   color: var(--adm-warning) !important;
 }
 
-/* =============================================================================
-   PLUGIN UPLOAD FORM  (Plugins > Add New > Upload Plugin)
-   Overrides WP core: .upload-plugin .wp-upload-form, .upload-theme .wp-upload-form
-   which sets background:#f6f7f7 and border:#c3c4c7 in load-styles.php.
-   Using body scoping + direct child selector for maximum specificity.
-   ============================================================================= */
 body.wp-admin .upload-plugin-wrap .upload-plugin .wp-upload-form,
 body.wp-admin div.upload-plugin > form.wp-upload-form {
   background: var(--adm-surface-1) !important;
@@ -479,14 +470,12 @@ body.wp-admin div.upload-plugin > form.wp-upload-form {
   color: var(--adm-text) !important;
 }
 
-/* Outer wrap container */
 body.wp-admin .upload-plugin-wrap,
 body.wp-admin .upload-plugin,
 body.wp-admin div.upload-plugin {
   background: var(--adm-bg) !important;
 }
 
-/* File input */
 body.wp-admin div.upload-plugin > form.wp-upload-form input[type="file"],
 body.wp-admin .upload-plugin .wp-upload-form input[type="file"] {
   background: var(--adm-surface-2) !important;
@@ -495,13 +484,11 @@ body.wp-admin .upload-plugin .wp-upload-form input[type="file"] {
   border-radius: var(--adm-radius-sm) !important;
 }
 
-/* Label text */
 body.wp-admin div.upload-plugin > form.wp-upload-form label,
 body.wp-admin .upload-plugin .wp-upload-form label {
   color: var(--adm-text) !important;
 }
 
-/* Install Now submit button */
 body.wp-admin div.upload-plugin > form.wp-upload-form input[type="submit"],
 body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary,
 body.wp-admin .upload-plugin .wp-upload-form input[type="submit"],
@@ -522,10 +509,6 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 
 /* =============================================================================
    WP COLOR PICKER (Iris)
-   .wp-color-result receives its background-color as an inline style from WP's
-   JS. Never set background-color on that element in CSS - it will always lose
-   to the inline style and hide the colour swatch. Only style the child
-   .wp-color-result-text for the label area.
    ============================================================================= */
 .wp-picker-container {
   display: inline-flex;
@@ -797,7 +780,6 @@ ul.wp-submenu {
   color: var(--adm-link) !important;
 }
 
-/* Welcome panel lower content area (the light grey block) */
 .welcome-panel-content,
 .welcome-panel-column-container,
 .welcome-panel-column {
@@ -819,12 +801,10 @@ ul.wp-submenu {
   color: var(--adm-link-hover) !important;
 }
 
-/* Welcome panel action icons (the dark rounded squares) */
 .welcome-panel .welcome-icon::before {
   color: var(--adm-text-muted) !important;
 }
 
-/* "Dismiss" link */
 .welcome-panel-close {
   color: var(--adm-text-soft) !important;
 }
@@ -834,7 +814,6 @@ ul.wp-submenu {
 
 /* =============================================================================
    DASHBOARD - ACTIVITY WIDGET
-   Full coverage: recent posts row, comment item block, meta, avatar area
    ============================================================================= */
 #dashboard_activity .subsubsub a {
   color: var(--adm-link) !important;
@@ -851,7 +830,6 @@ ul.wp-submenu {
   color: var(--adm-text-soft) !important;
 }
 
-/* Recent posts list item row (the highlighted row visible in screenshot) */
 #dashboard_activity .activity-block ul li,
 #dashboard_activity #the-comment-list tr,
 #dashboard_activity #the-comment-list td {
@@ -860,7 +838,6 @@ ul.wp-submenu {
   border-color: var(--adm-border) !important;
 }
 
-/* Comment item block (avatar + text area - the light grey box) */
 .dashboard-comment-wrap,
 #latest-comments .comment-item,
 #the-comment-list .comment-item {
@@ -869,7 +846,6 @@ ul.wp-submenu {
   color: var(--adm-text) !important;
 }
 
-/* Avatar column next to comment */
 #latest-comments .comment-item .avatar-column,
 #latest-comments .comment-item .comment-body-column,
 .dashboard-comment-wrap .avatar,
@@ -878,7 +854,6 @@ ul.wp-submenu {
   color: var(--adm-text) !important;
 }
 
-/* Comment text content */
 #latest-comments .comment-item blockquote,
 #latest-comments .comment-item blockquote p,
 .dashboard-comment-wrap blockquote,
@@ -888,7 +863,6 @@ ul.wp-submenu {
   border-color: var(--adm-border) !important;
 }
 
-/* Comment meta line (author, post title) */
 #latest-comments .comment-meta,
 #latest-comments .comment-meta a,
 .dashboard-comment-wrap .comment-meta,
@@ -896,7 +870,6 @@ ul.wp-submenu {
   color: var(--adm-text-muted) !important;
 }
 
-/* Row actions (Approve, Reply, etc.) */
 #latest-comments .row-actions,
 .dashboard-comment-wrap .row-actions span a {
   color: var(--adm-text-soft) !important;
@@ -914,7 +887,6 @@ ul.wp-submenu {
   background: var(--adm-surface-1) !important;
 }
 
-/* WordPress news feed items */
 #dashboard_primary .rss-widget ul li,
 #dashboard_secondary .rss-widget ul li {
   border-top: 1px solid var(--adm-border) !important;
@@ -934,7 +906,6 @@ ul.wp-submenu {
   color: var(--adm-text-soft) !important;
 }
 
-/* Community events widget */
 .community-events-toggle-location,
 .community-events-toggle-location:hover {
   color: var(--adm-link) !important;
@@ -984,7 +955,6 @@ ul.wp-submenu {
   color: var(--adm-text-soft) !important;
 }
 
-/* WordCamp/Meetup event type badge */
 .community-events ul .event-type-badge {
   background: var(--adm-surface-3) !important;
   color: var(--adm-text-muted) !important;
