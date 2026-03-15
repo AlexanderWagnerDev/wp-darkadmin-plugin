@@ -19,7 +19,7 @@
 | **Requires at least** | 6.0 |
 | **Tested up to** | 6.9 |
 | **Requires PHP** | 7.4 |
-| **Stable tag** | 0.0.6 |
+| **Stable tag** | 0.0.7 |
 | **License** | GPLv2 or later |
 
 ## Description
@@ -75,6 +75,12 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 ## Changelog
+
+### 0.0.7
+
+- Fixed Plugin Upload Form (Plugins > Add New > Upload Plugin) not being styled correctly due to WP core CSS specificity conflict
+- Replaced generic `.upload-plugin .wp-upload-form` selectors with scoped `body.wp-admin div.upload-plugin > form.wp-upload-form` to override WordPress default `background: #f6f7f7` and `border: #c3c4c7`
+- Fixed all language files (`.po`, `.pot`, `de_AT`, `de_DE`, `en_US`): replaced invalid `\uXXXX` Unicode escape sequences with native UTF-8 characters to resolve `msgfmt` fatal errors
 
 ### 0.0.6
 
@@ -186,6 +192,12 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 ## Changelog
+
+### 0.0.7
+
+- Plugin-Upload-Formular (Plugins > Neu hinzufügen > Plugin hochladen) wird nun korrekt gestylt — WP-Core-CSS-Spezifitätskonflikt behoben
+- Generische `.upload-plugin .wp-upload-form`-Selektoren durch `body.wp-admin div.upload-plugin > form.wp-upload-form` ersetzt, um WordPress-Standard `background: #f6f7f7` und `border: #c3c4c7` zu überschreiben
+- Alle Sprachdateien (`.po`, `.pot`, `de_AT`, `de_DE`, `en_US`) korrigiert: ungültige `\uXXXX` Unicode-Escape-Sequenzen durch native UTF-8-Zeichen ersetzt, die `msgfmt` fatal errors verursacht haben
 
 ### 0.0.6
 

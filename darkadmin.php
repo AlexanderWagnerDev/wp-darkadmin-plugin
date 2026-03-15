@@ -3,7 +3,7 @@
  * Plugin Name: DarkAdmin - Dark Mode for Adminpanel
  * Plugin URI: https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/
  * Description: Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
- * Version: 0.0.6
+ * Version: 0.0.7
  * Requires at least: 6.0
  * Tested up to: 6.9
  * Requires PHP: 7.4
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADM_VERSION', '0.0.6' );
+define( 'ADM_VERSION', '0.0.7' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 
 /**
@@ -290,7 +290,7 @@ function adm_settings_page() {
 						</div>
 						<label class="adm-toggle">
 							<input type="checkbox" id="adm_auto_darken" name="adm_auto_darken" value="1"
-								<?php checked( true, $auto_darken ); ?> />
+							<?php checked( true, $auto_darken ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
 						</label>
 					</div>
