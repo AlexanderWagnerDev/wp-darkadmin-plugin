@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.6\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-14 17:30+0100\n"
-"PO-Revision-Date: 2026-03-14 17:30+0100\n"
+"POT-Creation-Date: 2026-03-15 12:10+0100\n"
+"PO-Revision-Date: 2026-03-15 12:10+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -127,13 +127,21 @@ msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS var
 msgstr ""
 
 #: darkadmin.php
+msgid "Available CSS Variables"
+msgstr ""
+
+#: darkadmin.php
+msgid "Click to copy"
+msgstr ""
+
+#: darkadmin.php
 msgid "Save Settings"
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
 msgstr ""

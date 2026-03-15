@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.6\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-14 17:30+0100\n"
-"PO-Revision-Date: 2026-03-14 17:30+0100\n"
+"POT-Creation-Date: 2026-03-15 12:10+0100\n"
+"PO-Revision-Date: 2026-03-15 12:10+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: de_DE\n"
@@ -22,7 +22,7 @@ msgstr "DarkAdmin"
 
 #: darkadmin.php
 msgid "Dark theme for the WordPress backend"
-msgstr "Dunkles Theme für das WordPress-Backend"
+msgstr "Dunkles Theme f\u00fcr das WordPress-Backend"
 
 #: darkadmin.php
 msgid "Settings"
@@ -38,7 +38,7 @@ msgstr "Dark Mode aktivieren"
 
 #: darkadmin.php
 msgid "Enables the dark theme for all admin pages."
-msgstr "Aktiviert das dunkle Design für alle Admin-Seiten."
+msgstr "Aktiviert das dunkle Design f\u00fcr alle Admin-Seiten."
 
 #: darkadmin.php
 msgid "Auto Dark Mode"
@@ -46,7 +46,7 @@ msgstr "Auto Dark Mode"
 
 #: darkadmin.php
 msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
-msgstr "Verdunkelt automatisch helle Hintergründe und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
+msgstr "Verdunkelt automatisch helle Hintergr\u00fcnde und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
 
 #: darkadmin.php
 msgid "Active"
@@ -62,7 +62,7 @@ msgstr "Farbanpassung"
 
 #: darkadmin.php
 msgid "Customize every color token individually. Changes are applied globally via CSS variables."
-msgstr "Passe jeden Farbwert individuell an. Änderungen werden global über CSS-Variablen angewendet."
+msgstr "Passe jeden Farbwert individuell an. \u00c4nderungen werden global \u00fcber CSS-Variablen angewendet."
 
 #: darkadmin.php
 msgid "Background (Base)"
@@ -70,15 +70,15 @@ msgstr "Hintergrund (Basis)"
 
 #: darkadmin.php
 msgid "Surface 1 (Cards / Tables)"
-msgstr "Fläche 1 (Karten / Tabellen)"
+msgstr "Fl\u00e4che 1 (Karten / Tabellen)"
 
 #: darkadmin.php
 msgid "Surface 2 (Inputs)"
-msgstr "Fläche 2 (Eingabefelder)"
+msgstr "Fl\u00e4che 2 (Eingabefelder)"
 
 #: darkadmin.php
 msgid "Surface 3 (Hover)"
-msgstr "Fläche 3 (Hover)"
+msgstr "Fl\u00e4che 3 (Hover)"
 
 #: darkadmin.php
 msgid "Border Color"
@@ -86,11 +86,11 @@ msgstr "Rahmenfarbe"
 
 #: darkadmin.php
 msgid "Primary Text"
-msgstr "Primärer Text"
+msgstr "Prim\u00e4rer Text"
 
 #: darkadmin.php
 msgid "Muted Text"
-msgstr "Gedämpfter Text"
+msgstr "Ged\u00e4mpfter Text"
 
 #: darkadmin.php
 msgid "Soft Text (Row Actions)"
@@ -102,7 +102,7 @@ msgstr "Linkfarbe"
 
 #: darkadmin.php
 msgid "Primary / Buttons"
-msgstr "Primärfarbe / Buttons"
+msgstr "Prim\u00e4rfarbe / Buttons"
 
 #: darkadmin.php
 msgid "Success"
@@ -126,16 +126,24 @@ msgstr "Eigenes CSS"
 
 #: darkadmin.php
 msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
-msgstr "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfügbar."
+msgstr "F\u00fcge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verf\u00fcgbar."
+
+#: darkadmin.php
+msgid "Available CSS Variables"
+msgstr "Verf\u00fcgbare CSS-Variablen"
+
+#: darkadmin.php
+msgid "Click to copy"
+msgstr "Klicken zum Kopieren"
 
 #: darkadmin.php
 msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
-msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgstr "\u2713 Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
-msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr "\u2713 Einstellungen gespeichert. Dark Mode ist deaktiviert."
