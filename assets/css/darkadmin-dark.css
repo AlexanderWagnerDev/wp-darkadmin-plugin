@@ -457,6 +457,43 @@ th.check-column {
 }
 
 /* =============================================================================
+   PLUGIN UPLOAD FORM  (Plugins > Add New > Upload Plugin)
+   ============================================================================= */
+#plugin-upload-form,
+.wp-upload-form {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-md) !important;
+  box-shadow: none !important;
+  padding: 20px !important;
+}
+#plugin-upload-form input[type="file"],
+.wp-upload-form input[type="file"] {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-sm) !important;
+}
+/* "Install Now" submit button inside the upload form */
+#plugin-upload-form .button.button-primary,
+.wp-upload-form .button.button-primary,
+#plugin-upload-form input[type="submit"],
+.wp-upload-form input[type="submit"] {
+  background: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+#plugin-upload-form .button.button-primary:hover,
+.wp-upload-form .button.button-primary:hover,
+#plugin-upload-form input[type="submit"]:hover,
+.wp-upload-form input[type="submit"]:hover {
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+}
+
+/* =============================================================================
    WP COLOR PICKER (Iris)
    .wp-color-result receives its background-color as an inline style from WP's
    JS. Never set background-color on that element in CSS - it will always lose
