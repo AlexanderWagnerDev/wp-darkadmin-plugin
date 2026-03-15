@@ -1,6 +1,5 @@
 /*
- * WP Admin Dark Mode - Settings Page Styles
- * Version: 0.0.4
+ *DarkAdmin - Dark Mode for Adminpanel - Settings Page Styles
  * Author: AlexanderWagnerDev
  */
 
@@ -460,13 +459,6 @@ body.adm-dark-active .adm-var-copy-icon {
   color: var(--adm-text-muted) !important;
 }
 
-/*
- * .wp-color-result gets its background-color as an inline style from WP's JS
- * (wp-color-picker). The generic .button rule in wp-admin-dark.css sets
- * background !important which would win over that inline style and hide the
- * swatch. We explicitly revert background to unset here so the inline style
- * from WP's JS is respected, while still styling the text label child.
- */
 body.adm-dark-active .adm-color-item .wp-picker-container {
   background: unset !important;
   border-color: var(--adm-border) !important;
