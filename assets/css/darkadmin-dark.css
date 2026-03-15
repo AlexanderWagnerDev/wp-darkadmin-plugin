@@ -458,31 +458,57 @@ th.check-column {
 
 /* =============================================================================
    PLUGIN UPLOAD FORM  (Plugins > Add New > Upload Plugin)
+   Overrides WP core: .upload-plugin .wp-upload-form, .upload-theme .wp-upload-form
+   which sets background:#f6f7f7 and border:#c3c4c7 in load-styles.php.
+   Using body scoping + direct child selector for maximum specificity.
    ============================================================================= */
-.upload-plugin .wp-upload-form {
+body.wp-admin .upload-plugin-wrap .upload-plugin .wp-upload-form,
+body.wp-admin div.upload-plugin > form.wp-upload-form {
   background: var(--adm-surface-1) !important;
   border: 1px solid var(--adm-border) !important;
   border-radius: var(--adm-radius-md) !important;
   box-shadow: none !important;
   padding: 20px !important;
+  color: var(--adm-text) !important;
 }
-.upload-plugin .wp-upload-form input[type="file"] {
+
+/* Outer wrap container */
+body.wp-admin .upload-plugin-wrap,
+body.wp-admin .upload-plugin,
+body.wp-admin div.upload-plugin {
+  background: var(--adm-bg) !important;
+}
+
+/* File input */
+body.wp-admin div.upload-plugin > form.wp-upload-form input[type="file"],
+body.wp-admin .upload-plugin .wp-upload-form input[type="file"] {
   background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
   border: 1px solid var(--adm-border) !important;
   border-radius: var(--adm-radius-sm) !important;
 }
-/* "Install Now" submit button inside the upload form */
-.upload-plugin .wp-upload-form .button.button-primary,
-.upload-plugin .wp-upload-form input[type="submit"] {
+
+/* Label text */
+body.wp-admin div.upload-plugin > form.wp-upload-form label,
+body.wp-admin .upload-plugin .wp-upload-form label {
+  color: var(--adm-text) !important;
+}
+
+/* Install Now submit button */
+body.wp-admin div.upload-plugin > form.wp-upload-form input[type="submit"],
+body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary,
+body.wp-admin .upload-plugin .wp-upload-form input[type="submit"],
+body.wp-admin .upload-plugin .wp-upload-form .button-primary {
   background: var(--adm-primary) !important;
   border-color: var(--adm-primary) !important;
   color: #fff !important;
   box-shadow: none !important;
   text-shadow: none !important;
 }
-.upload-plugin .wp-upload-form .button.button-primary:hover,
-.upload-plugin .wp-upload-form input[type="submit"]:hover {
+body.wp-admin div.upload-plugin > form.wp-upload-form input[type="submit"]:hover,
+body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary:hover,
+body.wp-admin .upload-plugin .wp-upload-form input[type="submit"]:hover,
+body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
   background: var(--adm-primary-hover) !important;
   border-color: var(--adm-primary-hover) !important;
 }
