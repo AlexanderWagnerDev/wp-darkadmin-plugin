@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 0.0.7
+Stable tag: 0.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,12 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 4. Dashboard – Dark Mode active
 
 == Changelog ==
+= 0.0.8 =
+* Fixed invisible text in .widefat tables (update-core.php and similar pages): override WP core rule `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` with dark theme color token
+
+= 0.0.7 =
+* Added version to darkadmin-dark.css header comment
+
 = 0.0.6 =
 * Updated Text Domain from darkadmin to darkadmin-dark-mode-for-adminpanel to match the wordpress.org plugin slug
 * Updated Plugin URI to https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/
@@ -132,6 +138,12 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 4. Dashboard – Dark Mode aktiv
 
 === Changelog ===
+= 0.0.8 =
+* Unsichtbaren Text in .widefat-Tabellen behoben (update-core.php und ähnliche Seiten): WP-Core-Regel `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` wird nun mit dem Dark-Theme-Farbtoken überschrieben
+
+= 0.0.7 =
+* Version in den darkadmin-dark.css Header-Kommentar eingefügt
+
 = 0.0.6 =
 * Text Domain von darkadmin auf darkadmin-dark-mode-for-adminpanel aktualisiert (entspricht dem wordpress.org Plugin-Slug)
 * Plugin URI auf https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/ aktualisiert
