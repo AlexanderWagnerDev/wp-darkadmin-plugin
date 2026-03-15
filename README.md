@@ -19,7 +19,7 @@
 | **Requires at least** | 6.0 |
 | **Tested up to** | 6.9 |
 | **Requires PHP** | 7.4 |
-| **Stable tag** | 0.0.7 |
+| **Stable tag** | 0.0.8 |
 | **License** | GPLv2 or later |
 
 ## Description
@@ -75,6 +75,10 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 ## Changelog
+
+### 0.0.8
+
+- Fixed invisible text in `.widefat` tables (update-core.php and similar pages): override WP core rule `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` with dark theme color token
 
 ### 0.0.7
 
@@ -190,6 +194,10 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 ## Changelog
+
+### 0.0.8
+
+- Unsichtbaren Text in `.widefat`-Tabellen behoben (update-core.php und ähnliche Seiten): WP-Core-Regel `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` wird nun mit dem Dark-Theme-Farbtoken überschrieben
 
 ### 0.0.7
 
