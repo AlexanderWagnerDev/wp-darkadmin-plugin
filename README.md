@@ -52,7 +52,7 @@ DarkAdmin transforms the WordPress admin dashboard into a clean, eye-friendly da
 
 ## Installation
 
-1. Upload the plugin folder to `/wp-content/plugins/darkadmin/` (or install via the Plugins screen).
+1. Upload the plugin folder to `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` (or install via the Plugins screen).
 2. Activate the plugin through the **Plugins** screen in WordPress.
 3. Go to **Settings → DarkAdmin** and enable it.
 
@@ -80,7 +80,6 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 
 - Fixed Plugin Upload Form (Plugins > Add New > Upload Plugin) not being styled correctly due to WP core CSS specificity conflict
 - Replaced generic `.upload-plugin .wp-upload-form` selectors with scoped `body.wp-admin div.upload-plugin > form.wp-upload-form` to override WordPress default `background: #f6f7f7` and `border: #c3c4c7`
-- Fixed all language files (`.po`, `.pot`, `de_AT`, `de_DE`, `en_US`): replaced invalid `\uXXXX` Unicode escape sequences with native UTF-8 characters to resolve `msgfmt` fatal errors
 
 ### 0.0.6
 
@@ -96,7 +95,6 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 - Updated text domain from `wp-admin-dark-mode` to `darkadmin`
 - Updated all language files (`de_AT`, `de_DE`, `en_US`, `.pot`) to new `darkadmin` text domain
 - Updated settings menu slug from `wp-admin-dark-mode` to `darkadmin`
-- Updated plugin folder reference in readme to `/wp-content/plugins/darkadmin/`
 
 ### 0.0.4
 
@@ -169,7 +167,7 @@ DarkAdmin verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreun
 
 ## Installation
 
-1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin/` hoch (oder installiere über „Plugins").
+1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` hoch (oder installiere über „Plugins").
 2. Aktiviere das Plugin in WordPress unter „Plugins".
 3. Gehe zu **Einstellungen → DarkAdmin** und aktiviere es.
 
@@ -197,7 +195,6 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 
 - Plugin-Upload-Formular (Plugins > Neu hinzufügen > Plugin hochladen) wird nun korrekt gestylt — WP-Core-CSS-Spezifitätskonflikt behoben
 - Generische `.upload-plugin .wp-upload-form`-Selektoren durch `body.wp-admin div.upload-plugin > form.wp-upload-form` ersetzt, um WordPress-Standard `background: #f6f7f7` und `border: #c3c4c7` zu überschreiben
-- Alle Sprachdateien (`.po`, `.pot`, `de_AT`, `de_DE`, `en_US`) korrigiert: ungültige `\uXXXX` Unicode-Escape-Sequenzen durch native UTF-8-Zeichen ersetzt, die `msgfmt` fatal errors verursacht haben
 
 ### 0.0.6
 
@@ -213,7 +210,7 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 - Text-Domain von `wp-admin-dark-mode` auf `darkadmin` aktualisiert
 - Alle Sprachdateien (`de_AT`, `de_DE`, `en_US`, `.pot`) auf neue `darkadmin` Text-Domain aktualisiert
 - Einstellungen-Menü-Slug von `wp-admin-dark-mode` auf `darkadmin` aktualisiert
-- Plugin-Ordner-Referenz in der Readme auf `/wp-content/plugins/darkadmin/` aktualisiert
+- Plugin-Ordner-Referenz in der Readme auf `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` aktualisiert
 
 ### 0.0.4
 
