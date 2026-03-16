@@ -22,7 +22,7 @@ msgstr "DarkAdmin"
 
 #: includes/settings-page.php
 msgid "Dark theme for the WordPress backend"
-msgstr "Dunkles Theme f\u00fcr das WordPress-Backend"
+msgstr "Dunkles Theme für das WordPress-Backend"
 
 #: darkadmin.php
 msgid "Settings"
@@ -38,7 +38,7 @@ msgstr "Dark Mode aktivieren"
 
 #: includes/settings-page.php
 msgid "Enables the dark theme for all admin pages. Administrators always see dark mode when this is active."
-msgstr "Aktiviert das dunkle Design f\u00fcr alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
+msgstr "Aktiviert das dunkle Design für alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
 
 #: includes/settings-page.php
 msgid "Auto Dark Mode"
@@ -46,7 +46,7 @@ msgstr "Auto Dark Mode"
 
 #: includes/settings-page.php
 msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
-msgstr "Verdunkelt automatisch helle Hintergr\u00fcnde und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
+msgstr "Verdunkelt automatisch helle Hintergründe und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
 
 #: includes/settings-page.php
 msgid "Active"
@@ -62,11 +62,11 @@ msgstr "Benutzerzugriff"
 
 #: includes/settings-page.php
 msgid "Select which non-admin users should see dark mode. Administrators always have dark mode active. Leave all unchecked to apply dark mode to all users."
-msgstr "W\u00e4hle aus, welche Nicht-Admin-Benutzer den Dark Mode sehen sollen. Administratoren haben den Dark Mode immer aktiv. Wenn nichts ausgew\u00e4hlt ist, gilt der Dark Mode f\u00fcr alle Benutzer."
+msgstr "Wähle aus, welche Nicht-Admin-Benutzer den Dark Mode sehen sollen. Administratoren haben den Dark Mode immer aktiv. Wenn nichts ausgewählt ist, gilt der Dark Mode für alle Benutzer."
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here \u2014 they always have dark mode active."
-msgstr "Administratoren werden hier nicht angezeigt \u2014 sie haben den Dark Mode immer aktiv."
+msgid "Administrators are not listed here — they always have dark mode active."
+msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode immer aktiv."
 
 #: includes/settings-page.php
 msgid "Color Customization"
@@ -74,7 +74,7 @@ msgstr "Farbanpassung"
 
 #: includes/settings-page.php
 msgid "Customize every color token individually. Changes are previewed live."
-msgstr "Passe jeden Farbwert individuell an. \u00c4nderungen werden sofort als Vorschau angezeigt."
+msgstr "Passe jeden Farbwert individuell an. Änderungen werden sofort als Vorschau angezeigt."
 
 #: includes/settings-page.php
 msgid "Export Palette"
@@ -94,11 +94,11 @@ msgstr "Eigenes CSS"
 
 #: includes/settings-page.php
 msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
-msgstr "F\u00fcge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verf\u00fcgbar."
+msgstr "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfügbar."
 
 #: includes/settings-page.php
 msgid "Available CSS Variables"
-msgstr "Verf\u00fcgbare CSS-Variablen"
+msgstr "Verfügbare CSS-Variablen"
 
 #: includes/settings-page.php
 msgid "Click to copy"
@@ -109,9 +109,9 @@ msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
 #: darkadmin.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
-msgstr "\u2713 Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: darkadmin.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
-msgstr "\u2713 Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
