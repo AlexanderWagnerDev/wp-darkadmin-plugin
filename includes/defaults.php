@@ -55,42 +55,42 @@ function adm_default_colors(): array {
 
 /**
  * Preset color palettes.
- * 'default' mirrors adm_default_colors().
- * 'modern'  targets the WP 7.0 design language: deep blue-grey base, high contrast, glassmorphism-inspired.
+ * 'default'    mirrors adm_default_colors() (classic WP 6.x dark).
+ * 'modern'     targets the WP Modern design language: deep navy base, teal accent, high contrast.
  */
 function adm_preset_colors(): array {
 	return [
 		'default' => adm_default_colors(),
 		'modern'  => [
 			// Backgrounds
-			'bg'               => '#0a0e17',
-			'bg_bar'           => '#080c14',
-			'bg_deep'          => '#050810',
-			'bg_darker'        => '#060a12',
+			'bg'               => '#0f172a',
+			'bg_bar'           => '#0b1120',
+			'bg_deep'          => '#090e1a',
+			'bg_darker'        => '#07091a',
 			// Surfaces
-			'surface1'         => '#111827',
-			'surface2'         => '#1a2235',
-			'surface3'         => '#243044',
-			'table_alt'        => '#0f1624',
-			'plugin_inactive'  => '#0d1420',
+			'surface1'         => '#1e293b',
+			'surface2'         => '#263147',
+			'surface3'         => '#2f3d57',
+			'table_alt'        => '#161f30',
+			'plugin_inactive'  => '#131c2d',
 			// Borders
-			'border'           => '#1e3a5f',
-			'border_focus'     => '#3b82f6',
-			'border_hover'     => '#4b6a8a',
+			'border'           => '#2d3d57',
+			'border_focus'     => '#0ea5e9',
+			'border_hover'     => '#3b82f6',
 			// Text
-			'text'             => '#e2e8f0',
+			'text'             => '#f0f4f8',
 			'text_muted'       => '#94a3b8',
 			'text_soft'        => '#64748b',
 			'text_on_primary'  => '#ffffff',
 			// Links
-			'link'             => '#60a5fa',
-			'link_hover'       => '#93c5fd',
+			'link'             => '#38bdf8',
+			'link_hover'       => '#7dd3fc',
 			// Brand
-			'primary'          => '#3b82f6',
-			'primary_hover'    => '#2563eb',
-			'success'          => '#22c55e',
+			'primary'          => '#0ea5e9',
+			'primary_hover'    => '#0284c7',
+			'success'          => '#10b981',
 			'warning'          => '#f59e0b',
-			'danger'           => '#ef4444',
+			'danger'           => '#f43f5e',
 			// CodeMirror syntax tokens
 			'cm_keyword'       => '#a78bfa',
 			'cm_operator'      => '#67e8f9',
@@ -113,7 +113,7 @@ function adm_preset_colors(): array {
 function adm_preset_css_file( string $preset ): string {
 	$map = [
 		'default' => 'darkadmin-dark.css',
-		'modern'  => 'darkadmin-modern.css',
+		'modern'  => 'darkadmin-wp-modern.css',
 	];
 	return $map[ $preset ] ?? 'darkadmin-dark.css';
 }
