@@ -34,6 +34,7 @@ function adm_settings_page(): void {
 	}
 
 	$selectable_users = adm_get_selectable_users();
+	$has_users        = ! empty( $selectable_users );
 
 	/**
 	 * Preview swatch colors — must match adm_preset_colors() in defaults.php.
@@ -223,9 +224,10 @@ function adm_settings_page(): void {
 							</span>
 						</label>
 
-						<label class="adm-access-mode-option <?php echo $user_access_mode === 'include' ? 'is-active' : ''; ?>">
+						<label class="adm-access-mode-option <?php echo $user_access_mode === 'include' ? 'is-active' : ''; echo ! $has_users ? ' is-disabled' : ''; ?>">
 							<input type="radio" name="adm_user_access_mode" value="include"
-								<?php checked( $user_access_mode, 'include' ); ?> />
+								<?php checked( $user_access_mode, 'include' ); ?>
+								<?php disabled( ! $has_users ); ?> />
 							<span class="dashicons dashicons-yes-alt"></span>
 							<span class="adm-access-mode-label">
 								<strong><?php esc_html_e( 'Include', 'darkadmin-dark-mode-for-adminpanel' ); ?></strong>
@@ -233,9 +235,10 @@ function adm_settings_page(): void {
 							</span>
 						</label>
 
-						<label class="adm-access-mode-option <?php echo $user_access_mode === 'exclude' ? 'is-active' : ''; ?>">
+						<label class="adm-access-mode-option <?php echo $user_access_mode === 'exclude' ? 'is-active' : ''; echo ! $has_users ? ' is-disabled' : ''; ?>">
 							<input type="radio" name="adm_user_access_mode" value="exclude"
-								<?php checked( $user_access_mode, 'exclude' ); ?> />
+								<?php checked( $user_access_mode, 'exclude' ); ?>
+								<?php disabled( ! $has_users ); ?> />
 							<span class="dashicons dashicons-dismiss"></span>
 							<span class="adm-access-mode-label">
 								<strong><?php esc_html_e( 'Exclude', 'darkadmin-dark-mode-for-adminpanel' ); ?></strong>
@@ -244,8 +247,8 @@ function adm_settings_page(): void {
 						</label>
 					</div>
 
-					<!-- User list (hidden when mode = all or no selectable users exist) -->
-					<?php if ( ! empty( $selectable_users ) ) : ?>
+					<!-- User list or empty state -->
+					<?php if ( $has_users ) : ?>
 					<div class="adm-user-grid" id="adm-user-grid"
 						<?php echo $user_access_mode === 'all' ? 'style="display:none;"' : ''; ?>>
 						<?php foreach ( $selectable_users as $user ) : ?>
@@ -265,10 +268,12 @@ function adm_settings_page(): void {
 						<?php endforeach; ?>
 					</div>
 					<?php else : ?>
-					<p class="adm-field-desc" style="margin-top:10px;">
-						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
-						<?php esc_html_e( 'No non-administrator users found. Create additional users to manage their dark mode access here.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-					</p>
+					<div class="adm-user-empty-state">
+						<span class="dashicons dashicons-groups adm-user-empty-icon"></span>
+						<p class="adm-user-empty-text">
+							<?php esc_html_e( 'No non-administrator users found. Create additional users to manage their dark mode access here.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+						</p>
+					</div>
 					<?php endif; ?>
 
 					<p class="adm-field-desc" style="margin-top:10px;">

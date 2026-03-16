@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.10\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-16 20:00+0100\n"
-"PO-Revision-Date: 2026-03-16 20:00+0100\n"
+"POT-Creation-Date: 2026-03-16 21:00+0100\n"
+"PO-Revision-Date: 2026-03-16 21:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: de_AT\n"
@@ -123,6 +123,10 @@ msgstr "Alle außer den ausgewählten Benutzern erhalten den Dark Mode."
 #: includes/settings-page.php
 msgid "Administrators are not listed here — they always have dark mode active."
 msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode immer aktiv."
+
+#: includes/settings-page.php
+msgid "No non-administrator users found. Create additional users to manage their dark mode access here."
+msgstr "Keine Nicht-Administrator-Benutzer gefunden. Erstelle weitere Benutzer, um deren Dark-Mode-Zugriff hier zu verwalten."
 
 #: includes/settings-page.php
 msgid "Color Customization"

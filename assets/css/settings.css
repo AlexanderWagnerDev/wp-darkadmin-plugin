@@ -220,6 +220,13 @@
   background: #f0f6fc;
   box-shadow: 0 0 0 3px rgba(34,113,177,.15);
 }
+/* Disabled state: no users exist */
+.adm-access-mode-option.is-disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(.4);
+}
 .adm-access-mode-option input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -253,6 +260,35 @@
   font-size: 11px;
   color: #646970;
   line-height: 1.4;
+}
+
+/* =============================================================================
+   USER ACCESS — EMPTY STATE
+   ============================================================================= */
+.adm-user-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 20px;
+  margin-bottom: 4px;
+  border: 1px dashed #c3c4c7;
+  border-radius: 8px;
+  background: #f6f7f7;
+  text-align: center;
+}
+.adm-user-empty-icon {
+  font-size: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  color: #c3c4c7;
+}
+.adm-user-empty-text {
+  margin: 0 !important;
+  font-size: 13px;
+  color: #646970;
+  line-height: 1.5;
+  max-width: 380px;
 }
 
 /* =============================================================================
@@ -875,11 +911,22 @@ body.adm-dark-active .adm-access-mode-option.is-active {
   background: var(--adm-surface-3) !important;
   box-shadow: 0 0 0 3px rgba(34,113,177,.18) !important;
 }
+body.adm-dark-active .adm-access-mode-option.is-disabled {
+  opacity: .3 !important;
+}
 body.adm-dark-active .adm-access-mode-option .dashicons      { color: var(--adm-text-muted) !important; }
 body.adm-dark-active .adm-access-mode-option.is-active .dashicons,
 body.adm-dark-active .adm-access-mode-option:hover .dashicons { color: var(--adm-link) !important; }
 body.adm-dark-active .adm-access-mode-label strong           { color: var(--adm-text) !important; }
 body.adm-dark-active .adm-access-mode-label span             { color: var(--adm-text-muted) !important; }
+
+/* Empty state - dark */
+body.adm-dark-active .adm-user-empty-state {
+  background: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+}
+body.adm-dark-active .adm-user-empty-icon { color: var(--adm-border) !important; }
+body.adm-dark-active .adm-user-empty-text { color: var(--adm-text-muted) !important; }
 
 /* User grid - dark */
 body.adm-dark-active .adm-user-item {
