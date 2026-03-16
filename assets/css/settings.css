@@ -185,6 +185,77 @@
 .adm-toggle input:focus-visible + .adm-slider { outline: 2px solid #2271b1; outline-offset: 2px; }
 
 /* =============================================================================
+   USER ACCESS — MODE SELECTOR
+   ============================================================================= */
+.adm-access-mode {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) {
+  .adm-access-mode { grid-template-columns: 1fr; }
+}
+.adm-access-mode-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 2px solid #dcdcde;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s, box-shadow .15s;
+  background: #fafafa;
+  user-select: none;
+  position: relative;
+}
+.adm-access-mode-option:hover {
+  border-color: #2271b1;
+  background: #f0f6fc;
+  box-shadow: 0 0 0 3px rgba(34,113,177,.10);
+}
+.adm-access-mode-option.is-active {
+  border-color: #2271b1;
+  background: #f0f6fc;
+  box-shadow: 0 0 0 3px rgba(34,113,177,.15);
+}
+.adm-access-mode-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.adm-access-mode-option .dashicons {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: #646970;
+  transition: color .15s;
+}
+.adm-access-mode-option.is-active .dashicons,
+.adm-access-mode-option:hover .dashicons {
+  color: #2271b1;
+}
+.adm-access-mode-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.adm-access-mode-label strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d2327;
+  line-height: 1.2;
+}
+.adm-access-mode-label span {
+  font-size: 11px;
+  color: #646970;
+  line-height: 1.4;
+}
+
+/* =============================================================================
    USER ACCESS GRID
    ============================================================================= */
 .adm-user-grid {
@@ -792,6 +863,23 @@ body.adm-dark-active .adm-footer a               { color: var(--adm-link) !impor
 body.adm-dark-active .adm-status-active          { background: #12532e50; color: #6ee7a0; }
 body.adm-dark-active .adm-status-inactive        { background: #7f1d1d50; color: #fca5a5; }
 body.adm-dark-active .adm-field-divider          { border-color: var(--adm-border) !important; }
+
+/* Access mode - dark */
+body.adm-dark-active .adm-access-mode-option {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+body.adm-dark-active .adm-access-mode-option:hover,
+body.adm-dark-active .adm-access-mode-option.is-active {
+  border-color: var(--adm-primary) !important;
+  background: var(--adm-surface-3) !important;
+  box-shadow: 0 0 0 3px rgba(34,113,177,.18) !important;
+}
+body.adm-dark-active .adm-access-mode-option .dashicons      { color: var(--adm-text-muted) !important; }
+body.adm-dark-active .adm-access-mode-option.is-active .dashicons,
+body.adm-dark-active .adm-access-mode-option:hover .dashicons { color: var(--adm-link) !important; }
+body.adm-dark-active .adm-access-mode-label strong           { color: var(--adm-text) !important; }
+body.adm-dark-active .adm-access-mode-label span             { color: var(--adm-text-muted) !important; }
 
 /* User grid - dark */
 body.adm-dark-active .adm-user-item {
