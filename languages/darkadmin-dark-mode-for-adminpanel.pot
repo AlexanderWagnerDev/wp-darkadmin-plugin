@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.9\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-16 09:37+0100\n"
-"PO-Revision-Date: 2026-03-16 09:37+0100\n"
+"POT-Creation-Date: 2026-03-16 12:29+0100\n"
+"PO-Revision-Date: 2026-03-16 12:29+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -52,6 +52,38 @@ msgstr ""
 
 #: includes/settings-page.php
 msgid "Inactive"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Preset Themes"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Choose a preset to load its color palette. You can further customize colors below after loading."
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Default"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Classic WP 6.x dark theme"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Modern"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "WP 7.0 deep blue, high contrast"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Load Preset"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "✓ Active"
 msgstr ""
 
 #: includes/settings-page.php

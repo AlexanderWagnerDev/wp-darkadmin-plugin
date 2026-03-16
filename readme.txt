@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 0.0.8
+Stable tag: 0.0.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ Features:
 * Custom CSS support using built-in CSS variables
 * Token-based design system for backgrounds, text, borders, buttons and states
 * Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
+* Preset Themes: choose between Default (WP 6.x) and Modern (WP 7.0) color palettes
 
 == Installation ==
 1. Upload the plugin folder to `/wp-content/plugins/darkadmin/` (or install via the Plugins screen).
@@ -47,6 +48,20 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 4. Dashboard – Dark Mode active
 
 == Changelog ==
+= 0.0.9 =
+* Added Preset Themes: choose between Default (WP 6.x classic dark) and Modern (WP 7.0 deep blue, glassmorphism-inspired) color palettes
+* Each preset ships with its own CSS file (darkadmin-dark.css / darkadmin-modern.css) loaded dynamically based on the active preset
+* Added adm_preset option with live preset switching on the settings page
+* Added per-user Dark Mode: administrators always see dark mode, non-admin users can be individually enabled via a new User Access card
+* Added live color preview: color picker changes update CSS variables instantly without saving
+* Added Export / Import palette as JSON file
+* Added custom CSS sanitizer (adm_sanitize_custom_css) — preserves valid CSS while stripping dangerous HTML/PHP tags
+* Added CSS cache-busting based on md5 hash of current color values
+* Refactored plugin into modular includes: defaults.php, user-settings.php, enqueue.php, settings-page.php
+* Added uninstall.php to clean up all options on plugin removal
+* Color pickers now grouped by category (Backgrounds, Surfaces, Borders, Text, Links, Brand, CodeMirror) on the settings page
+* Expanded color tokens from 23 to 34 (new: bg_bar, bg_deep, bg_darker, table_alt, plugin_inactive, border_hover, text_on_primary, link_hover, primary_hover, cm_keyword–cm_bracket)
+
 = 0.0.8 =
 * Fixed invisible text in .widefat tables (update-core.php and similar pages): override WP core rule `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` with dark theme color token
 
@@ -112,6 +127,7 @@ Funktionen:
 * Unterstützung für eigenes Custom CSS mit eingebauten CSS-Variablen
 * Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
 * Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
+* Preset-Themes: Wechsel zwischen Default (WP 6.x) und Modern (WP 7.0) Farbpaletten
 
 === Installation ===
 1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin/` hoch (oder installiere über „Plugins").
@@ -138,6 +154,20 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 4. Dashboard – Dark Mode aktiv
 
 === Changelog ===
+= 0.0.9 =
+* Preset-Themes hinzugefügt: Wechsel zwischen Default (klassisches WP 6.x Dark) und Modern (WP 7.0 Tiefblau, Glassmorphism) Farbpaletten
+* Jedes Preset hat eine eigene CSS-Datei (darkadmin-dark.css / darkadmin-modern.css), die dynamisch geladen wird
+* adm_preset-Option mit Live-Preset-Wechsel auf der Einstellungsseite hinzugefügt
+* Benutzerspezifischer Dark Mode: Admins sehen immer Dark Mode, Nicht-Admin-Benutzer können über eine neue User-Access-Karte einzeln aktiviert werden
+* Live-Farbvorschau: Farbwähler-Änderungen aktualisieren CSS-Variablen sofort ohne Speichern
+* Export / Import der Farbpalette als JSON-Datei
+* Eigener CSS-Sanitizer (adm_sanitize_custom_css) — erhält gültiges CSS, entfernt gefährliche HTML/PHP-Tags
+* CSS-Cache-Busting auf Basis des md5-Hashes der aktuellen Farbwerte
+* Plugin in modulare Includes aufgeteilt: defaults.php, user-settings.php, enqueue.php, settings-page.php
+* uninstall.php hinzugefügt — entfernt alle Optionen beim Deinstallieren
+* Farbwähler auf der Einstellungsseite nach Kategorien gruppiert (Hintergründe, Flächen, Rahmen, Text, Links, Brand, CodeMirror)
+* Farb-Tokens von 23 auf 34 erweitert
+
 = 0.0.8 =
 * Unsichtbaren Text in .widefat-Tabellen behoben (update-core.php und ähnliche Seiten): WP-Core-Regel `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` wird nun mit dem Dark-Theme-Farbtoken überschrieben
 
