@@ -32,7 +32,7 @@
   /* Links */
   --adm-link:            #7b96f5;
   --adm-link-hover:      #a5b8fa;
-  /* Brand — WP 7.0 Modern Blue */
+  /* Brand - WP 7.0 Modern Blue */
   --adm-primary:         #3858e9;
   --adm-primary-hover:   #2145d4;
   --adm-success:         #00ba37;
@@ -74,8 +74,12 @@
 }
 
 /* =============================================================================
-   BASE — force override of WP default #f0f0f1 / #1d2327
+   BASE - force override of WP default #f0f0f1 / #1d2327
    ============================================================================= */
+html body.wp-admin,
+html body.wp-core-ui {
+  background-color: var(--adm-bg) !important;
+}
 html,
 body,
 body.wp-admin,
@@ -85,26 +89,30 @@ body.wp-core-ui,
 #wpbody,
 #wpbody-content,
 #wpfooter,
-#dashboard-widgets-wrap,
+#dashboard-widgets-wrap {
+  background-color: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
 .wrap,
 #wpbody-content .wrap {
   background-color: var(--adm-bg) !important;
   color: var(--adm-text) !important;
 }
 
-/* Catch-all for any remaining white backgrounds */
-body.wp-admin div,
-body.wp-admin section,
-body.wp-admin article,
-body.wp-admin main {
-  background-color: inherit;
-}
-
 /* =============================================================================
    ADMIN BAR
    ============================================================================= */
-#wpadminbar,
-#wpadminbar * {
+#wpadminbar {
+  background: var(--adm-bg-bar) !important;
+  border-bottom: 1px solid var(--adm-border);
+}
+#wpadminbar .ab-item,
+#wpadminbar a.ab-item,
+#wpadminbar > #wp-toolbar,
+#wpadminbar .ab-top-menu,
+#wpadminbar .ab-top-menu > li,
+#wpadminbar #wp-admin-bar-root-default,
+#wpadminbar #wp-admin-bar-top-secondary {
   background: var(--adm-bg-bar) !important;
 }
 #wpadminbar .ab-top-menu > li > .ab-item,
@@ -168,6 +176,20 @@ body.wp-admin main {
 #adminmenu li.opensub > a.menu-top {
   background: rgba(255,255,255,.12) !important;
   color: var(--adm-text-on-primary) !important;
+}
+/* Fix white icon overlay on active/hover items */
+#adminmenu li.menu-top:hover > a > .wp-menu-image::before,
+#adminmenu li.opensub > a > .wp-menu-image::before,
+#adminmenu li.wp-has-current-submenu > a > .wp-menu-image::before,
+#adminmenu li.current > a > .wp-menu-image::before {
+  color: var(--adm-text-on-primary) !important;
+  opacity: 1;
+}
+/* Remove WP's white box pseudo-element on active menu items */
+#adminmenu li.wp-has-current-submenu > a::before,
+#adminmenu li.current > a::before,
+#adminmenu .wp-has-current-submenu a.wp-has-current-submenu::before {
+  display: none !important;
 }
 #adminmenu .wp-menu-arrow,
 #adminmenu .wp-menu-arrow div {

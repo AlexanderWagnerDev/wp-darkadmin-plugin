@@ -65,41 +65,45 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	$sc = static fn( string $k, string $fb ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fb;
 
-	$vars = ':root{'                                                        .
-		"--adm-bg:{$sc('bg','#1d2327')};"                               .
-		"--adm-bg-bar:{$sc('bg_bar','#1a1f24')};"                       .
-		"--adm-bg-deep:{$sc('bg_deep','#101517')};"                     .
-		"--adm-bg-darker:{$sc('bg_darker','#161b1f')};"                 .
-		"--adm-surface-1:{$sc('surface1','#2c3338')};"                  .
-		"--adm-surface-2:{$sc('surface2','#32393f')};"                  .
-		"--adm-surface-3:{$sc('surface3','#3c434a')};"                  .
-		"--adm-table-alt:{$sc('table_alt','#272e35')};"                 .
-		"--adm-plugin-inactive:{$sc('plugin_inactive','#252c32')};"     .
-		"--adm-border:{$sc('border','#3c434a')};"                       .
-		"--adm-border-focus:{$sc('border_focus','#2271b1')};"           .
-		"--adm-border-hover:{$sc('border_hover','#5a6470')};"           .
-		"--adm-text:{$sc('text','#dcdcde')};"                           .
-		"--adm-text-muted:{$sc('text_muted','#a7aaad')};"               .
-		"--adm-text-soft:{$sc('text_soft','#787c82')};"                 .
-		"--adm-text-on-primary:{$sc('text_on_primary','#ffffff')};"     .
-		"--adm-link:{$sc('link','#72aee6')};"                           .
-		"--adm-link-hover:{$sc('link_hover','#93c5fd')};"               .
-		"--adm-primary:{$sc('primary','#2271b1')};"                     .
-		"--adm-primary-hover:{$sc('primary_hover','#135e96')};"         .
-		"--adm-success:{$sc('success','#00a32a')};"                     .
-		"--adm-warning:{$sc('warning','#dba617')};"                     .
-		"--adm-danger:{$sc('danger','#d63638')};"                       .
-		"--adm-cm-keyword:{$sc('cm_keyword','#c792ea')};"               .
-		"--adm-cm-operator:{$sc('cm_operator','#89ddff')};"             .
-		"--adm-cm-variable2:{$sc('cm_variable2','#82aaff')};"           .
-		"--adm-cm-property:{$sc('cm_property','#b2ccd6')};"             .
-		"--adm-cm-number:{$sc('cm_number','#f78c6c')};"                 .
-		"--adm-cm-string:{$sc('cm_string','#c3e88d')};"                 .
-		"--adm-cm-string2:{$sc('cm_string2','#f07178')};"               .
-		"--adm-cm-comment:{$sc('cm_comment','#546e7a')};"               .
-		"--adm-cm-tag:{$sc('cm_tag','#f07178')};"                       .
-		"--adm-cm-attribute:{$sc('cm_attribute','#ffcb6b')};"           .
-		"--adm-cm-bracket:{$sc('cm_bracket','#89ddff')};"               .
+	// Fallback values match the Modern preset (WP 7.0 design language).
+	$vars = ':root{'                                                          .
+		"--adm-bg:{$sc('bg','#1e1e1e')};"                                 .
+		"--adm-bg-bar:{$sc('bg_bar','#0c0c0c')};"                         .
+		"--adm-bg-deep:{$sc('bg_deep','#0c0c0c')};"                       .
+		"--adm-bg-darker:{$sc('bg_darker','#080808')};"                   .
+		"--adm-surface-1:{$sc('surface1','#2a2a2a')};"                    .
+		"--adm-surface-2:{$sc('surface2','#333333')};"                    .
+		"--adm-surface-3:{$sc('surface3','#3d3d3d')};"                    .
+		"--adm-table-alt:{$sc('table_alt','#242424')};"                   .
+		"--adm-plugin-inactive:{$sc('plugin_inactive','#202020')};"       .
+		"--adm-border:{$sc('border','#3a3a3a')};"                         .
+		"--adm-border-focus:{$sc('border_focus','#3858e9')};"             .
+		"--adm-border-hover:{$sc('border_hover','#6b7aee')};"             .
+		"--adm-text:{$sc('text','#f0f0f0')};"                             .
+		"--adm-text-muted:{$sc('text_muted','#a0a0a0')};"                 .
+		"--adm-text-soft:{$sc('text_soft','#666666')};"                   .
+		"--adm-text-on-primary:{$sc('text_on_primary','#ffffff')};"       .
+		"--adm-link:{$sc('link','#7b96f5')};"                             .
+		"--adm-link-hover:{$sc('link_hover','#a5b8fa')};"                 .
+		"--adm-primary:{$sc('primary','#3858e9')};"                       .
+		"--adm-primary-hover:{$sc('primary_hover','#2145d4')};"           .
+		"--adm-success:{$sc('success','#00ba37')};"                       .
+		"--adm-warning:{$sc('warning','#dba617')};"                       .
+		"--adm-danger:{$sc('danger','#d63638')};"                         .
+		"--adm-sidebar-bg:#1e1e1e;"                                        .
+		"--adm-sidebar-active:#3858e9;"                                    .
+		"--adm-sidebar-text:#c8c8c8;"                                      .
+		"--adm-cm-keyword:{$sc('cm_keyword','#c792ea')};"                 .
+		"--adm-cm-operator:{$sc('cm_operator','#89ddff')};"               .
+		"--adm-cm-variable2:{$sc('cm_variable2','#82aaff')};"             .
+		"--adm-cm-property:{$sc('cm_property','#b2ccd6')};"               .
+		"--adm-cm-number:{$sc('cm_number','#f78c6c')};"                   .
+		"--adm-cm-string:{$sc('cm_string','#c3e88d')};"                   .
+		"--adm-cm-string2:{$sc('cm_string2','#f07178')};"                 .
+		"--adm-cm-comment:{$sc('cm_comment','#546e7a')};"                 .
+		"--adm-cm-tag:{$sc('cm_tag','#f07178')};"                         .
+		"--adm-cm-attribute:{$sc('cm_attribute','#ffcb6b')};"             .
+		"--adm-cm-bracket:{$sc('cm_bracket','#89ddff')};"                 .
 		'}';
 
 	wp_enqueue_style(
