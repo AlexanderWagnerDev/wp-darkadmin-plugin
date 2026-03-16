@@ -114,7 +114,7 @@ body.wp-admin,
   color: var(--adm-text) !important;
 }
 #wpadminbar .menupop .ab-sub-wrapper {
-  background: var(--adm-surface-1) !important;
+  background: var(--adm-bg-bar) !important;
   border: 1px solid var(--adm-border) !important;
   box-shadow: var(--adm-shadow-md) !important;
 }
@@ -149,8 +149,10 @@ body.wp-admin,
   color: var(--adm-text-on-primary) !important;
 }
 #adminmenu .wp-has-current-submenu .wp-submenu,
-#adminmenu .wp-has-current-submenu .wp-submenu-wrap {
-  background: rgba(0,0,0,.35) !important;
+#adminmenu .wp-has-current-submenu .wp-submenu-wrap,
+#adminmenu li.opensub .wp-submenu,
+#adminmenu li:hover .wp-submenu {
+  background: var(--adm-bg-bar) !important;
 }
 #adminmenu .wp-submenu a {
   color: var(--adm-sidebar-text) !important;
@@ -212,7 +214,7 @@ body.wp-admin,
   color: var(--adm-text-muted) !important;
 }
 .folded #adminmenu li.menu-top:hover > div.wp-menu-name {
-  background: var(--adm-sidebar-bg) !important;
+  background: var(--adm-bg-bar) !important;
   border: 1px solid var(--adm-border) !important;
   border-radius: var(--adm-radius-md) !important;
   color: var(--adm-text) !important;
@@ -847,7 +849,7 @@ div.error,
    ============================================================================= */
 .dropdown-content,
 ul.wp-submenu {
-  background: var(--adm-surface-1) !important;
+  background: var(--adm-bg-bar) !important;
   border-color: var(--adm-border) !important;
   box-shadow: var(--adm-shadow-md) !important;
 }
