@@ -1,7 +1,7 @@
 /*
  * DarkAdmin - WP Modern Preset
- * Based on the WordPress Modern admin design language.
- * Deep navy base, teal/blue accent, high contrast, clean typography.
+ * Faithful dark-mode port of the WordPress 7.0 Modern admin design language.
+ * Base: #1e1e1e | Deep: #0c0c0c | Brand: #3858e9
  * Selectors are kept in full sync with darkadmin-dark.css.
  */
 
@@ -10,34 +10,34 @@
    ============================================================================= */
 :root {
   /* Backgrounds */
-  --adm-bg:              #0f172a;
-  --adm-bg-bar:          #0b1120;
-  --adm-bg-deep:         #090e1a;
-  --adm-bg-darker:       #07091a;
+  --adm-bg:              #1e1e1e;
+  --adm-bg-bar:          #0c0c0c;
+  --adm-bg-deep:         #0c0c0c;
+  --adm-bg-darker:       #080808;
   /* Surfaces */
-  --adm-surface-1:       #1e293b;
-  --adm-surface-2:       #263147;
-  --adm-surface-3:       #2f3d57;
-  --adm-table-alt:       #161f30;
-  --adm-plugin-inactive: #131c2d;
+  --adm-surface-1:       #2a2a2a;
+  --adm-surface-2:       #333333;
+  --adm-surface-3:       #3d3d3d;
+  --adm-table-alt:       #242424;
+  --adm-plugin-inactive: #202020;
   /* Borders */
-  --adm-border:          #2d3d57;
-  --adm-border-focus:    #0ea5e9;
-  --adm-border-hover:    #3b82f6;
+  --adm-border:          #3a3a3a;
+  --adm-border-focus:    #3858e9;
+  --adm-border-hover:    #6b7aee;
   /* Text */
-  --adm-text:            #f0f4f8;
-  --adm-text-muted:      #94a3b8;
-  --adm-text-soft:       #64748b;
+  --adm-text:            #f0f0f0;
+  --adm-text-muted:      #a0a0a0;
+  --adm-text-soft:       #666666;
   --adm-text-on-primary: #ffffff;
   /* Links */
-  --adm-link:            #38bdf8;
-  --adm-link-hover:      #7dd3fc;
-  /* Brand */
-  --adm-primary:         #0ea5e9;
-  --adm-primary-hover:   #0284c7;
-  --adm-success:         #10b981;
-  --adm-warning:         #f59e0b;
-  --adm-danger:          #f43f5e;
+  --adm-link:            #7b96f5;
+  --adm-link-hover:      #a5b8fa;
+  /* Brand — WP 7.0 Modern Blue */
+  --adm-primary:         #3858e9;
+  --adm-primary-hover:   #2145d4;
+  --adm-success:         #00ba37;
+  --adm-warning:         #dba617;
+  --adm-danger:          #d63638;
   /* Spacing */
   --adm-space-1: 4px;
   --adm-space-2: 8px;
@@ -50,27 +50,27 @@
   --adm-radius-md: 6px;
   --adm-radius-lg: 10px;
   /* Shadows */
-  --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.35);
-  --adm-shadow-md: 0 4px 20px rgba(0,0,0,.55);
+  --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.5);
+  --adm-shadow-md: 0 4px 20px rgba(0,0,0,.7);
   /* Sizes */
   --adm-input-h: 32px;
   --adm-btn-h:   30px;
   /* Sidebar */
-  --adm-sidebar-bg:     #1a1a2e;
-  --adm-sidebar-active: #0ea5e9;
-  --adm-sidebar-text:   #cbd5e1;
+  --adm-sidebar-bg:     #1a1a1a;
+  --adm-sidebar-active: #3858e9;
+  --adm-sidebar-text:   #c8c8c8;
   /* CodeMirror */
-  --adm-cm-keyword:   #a78bfa;
-  --adm-cm-operator:  #67e8f9;
-  --adm-cm-variable2: #93c5fd;
-  --adm-cm-property:  #bfdbfe;
-  --adm-cm-number:    #fb923c;
-  --adm-cm-string:    #86efac;
-  --adm-cm-string2:   #f9a8d4;
-  --adm-cm-comment:   #475569;
-  --adm-cm-tag:       #f87171;
-  --adm-cm-attribute: #fde68a;
-  --adm-cm-bracket:   #67e8f9;
+  --adm-cm-keyword:   #c792ea;
+  --adm-cm-operator:  #89ddff;
+  --adm-cm-variable2: #82aaff;
+  --adm-cm-property:  #b2ccd6;
+  --adm-cm-number:    #f78c6c;
+  --adm-cm-string:    #c3e88d;
+  --adm-cm-string2:   #f07178;
+  --adm-cm-comment:   #546e7a;
+  --adm-cm-tag:       #f07178;
+  --adm-cm-attribute: #ffcb6b;
+  --adm-cm-bracket:   #89ddff;
 }
 
 /* =============================================================================
@@ -150,7 +150,7 @@ body.wp-admin,
 }
 #adminmenu .wp-has-current-submenu .wp-submenu,
 #adminmenu .wp-has-current-submenu .wp-submenu-wrap {
-  background: rgba(0,0,0,.3) !important;
+  background: rgba(0,0,0,.35) !important;
 }
 #adminmenu .wp-submenu a {
   color: var(--adm-sidebar-text) !important;
@@ -447,7 +447,7 @@ th.check-column {
   background: transparent !important;
 }
 .plugin-update-tr .update-message {
-  background: rgba(14,165,233,.08) !important;
+  background: rgba(56,88,233,.10) !important;
   border-top-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
@@ -861,7 +861,7 @@ ul.wp-submenu {
   box-shadow: none !important;
 }
 .welcome-panel-header {
-  background: rgba(14,165,233,.12) !important;
+  background: rgba(56,88,233,.15) !important;
   border-bottom: 1px solid var(--adm-border) !important;
 }
 .welcome-panel-header h2,
@@ -1256,18 +1256,18 @@ ul.wp-submenu {
 }
 .CodeMirror-selected,
 .CodeMirror-focused .CodeMirror-selected {
-  background: rgba(14,165,233,.25) !important;
+  background: rgba(56,88,233,.30) !important;
 }
 .CodeMirror-activeline-background {
   background: rgba(255,255,255,.03) !important;
 }
 .CodeMirror-matchingbracket {
   color: var(--adm-text-on-primary) !important;
-  background: rgba(16,185,129,.25) !important;
+  background: rgba(0,186,55,.20) !important;
   border-bottom: 1px solid var(--adm-success) !important;
 }
 .CodeMirror-searching {
-  background: rgba(245,158,11,.3) !important;
+  background: rgba(219,166,23,.35) !important;
 }
 .cm-keyword    { color: var(--adm-cm-keyword)   !important; }
 .cm-operator   { color: var(--adm-cm-operator)  !important; }
@@ -1286,7 +1286,7 @@ ul.wp-submenu {
 .cm-qualifier  { color: var(--adm-cm-attribute)  !important; }
 .cm-builtin    { color: var(--adm-cm-attribute)  !important; }
 .cm-bracket    { color: var(--adm-cm-bracket)    !important; }
-.cm-error      { color: var(--adm-danger)        !important; background: rgba(244,63,94,.15) !important; }
+.cm-error      { color: var(--adm-danger)        !important; background: rgba(214,54,56,.15) !important; }
 
 .CodeMirror-vscrollbar::-webkit-scrollbar,
 .CodeMirror-hscrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -1372,7 +1372,7 @@ input.tag-add:hover,
    ============================================================================= */
 #the-comment-list .comment-item,
 #the-comment-list tr { color: var(--adm-text) !important; }
-#the-comment-list tr.unapproved td { background: rgba(245,158,11,.06) !important; }
+#the-comment-list tr.unapproved td { background: rgba(219,166,23,.08) !important; }
 #the-comment-list .comment-author { color: var(--adm-text) !important; }
 .comment-text blockquote {
   border-left-color: var(--adm-border) !important;
