@@ -1300,7 +1300,7 @@ ul.wp-submenu {
 .cm-qualifier { color: var(--adm-cm-attribute)  !important; }
 .cm-builtin   { color: var(--adm-cm-attribute)  !important; }
 .cm-bracket   { color: var(--adm-cm-bracket)    !important; }
-.cm-error     { color: var(--adm-danger)        !important; background: rgba(214,54,56,.15) !important; }
+.cm-error     { color: var(--adm-danger)        !important; background: rgba(214,54,56,.05) !important; }
 .CodeMirror-vscrollbar::-webkit-scrollbar,
 .CodeMirror-hscrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
 .CodeMirror-vscrollbar::-webkit-scrollbar-track,
@@ -1415,6 +1415,32 @@ input.tag-add:hover,
 .theme-overlay .theme-about .theme-description { color: var(--adm-text-muted) !important; }
 .theme-actions .button { border-radius: var(--adm-radius-md) !important; }
 
+.theme-browser .theme .theme-name {
+  background-color: var(--adm-bg-darker) !important;
+}
+.theme-overlay .theme-actions {
+  background-color: var(--adm-bg-darker) !important;
+  border-top: none !important;
+}
+.theme-overlay .theme-tags {
+  color: var(--adm-text-muted) !important;
+}
+.theme-overlay .theme-tags span {
+  color: var(--adm-text-soft) !important;
+}
+.theme-overlay .theme-header .theme-title {
+  color: var(--adm-text) !important;
+}
+.theme-overlay .theme-author {
+  color: var(--adm-text-muted) !important;
+}
+.theme-overlay .theme-version {
+  color: var(--adm-text-soft) !important;
+}
+.theme-overlay .theme-rating .star-rating .star {
+  color: var(--adm-warning) !important;
+}
+
 /* =============================================================================
    WIDGETS
    ============================================================================= */
@@ -1465,6 +1491,20 @@ input.tag-add:hover,
   background: var(--adm-surface-2) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   THEME EDITOR / TEMPLATE SIDE
+   ============================================================================= */
+#templateside > ul {
+  background-color: var(--adm-bg-darker) !important;
+}
+.importer-title {
+  color: var(--adm-text-muted) !important;
+}
+.color-option.selected,
+.color-option:hover {
+  background-color: var(--adm-bg-deep) !important;
 }
 
 /* =============================================================================
