@@ -32,6 +32,11 @@ add_action( 'admin_init', function () {
 		'sanitize_callback' => fn( $v ) => array_map( 'absint', (array) $v ),
 		'default'           => [],
 	] );
+	register_setting( 'adm_settings', 'adm_user_access_mode', [
+		'type'              => 'string',
+		'sanitize_callback' => 'adm_sanitize_user_access_mode',
+		'default'           => 'all',
+	] );
 	register_setting( 'adm_settings', 'adm_preset', [
 		'type'              => 'string',
 		'sanitize_callback' => function ( $v ) {

@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.9\n"
+"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.10\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-16 16:00+0100\n"
-"PO-Revision-Date: 2026-03-16 16:00+0100\n"
+"POT-Creation-Date: 2026-03-16 20:00+0100\n"
+"PO-Revision-Date: 2026-03-16 20:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: en_US\n"
@@ -85,8 +85,8 @@ msgid "Load Preset"
 msgstr "Load Preset"
 
 #: includes/settings-page.php
-msgid "✓ Active"
-msgstr "✓ Active"
+msgid "\u2713 Active"
+msgstr "\u2713 Active"
 
 #: includes/settings-page.php
 msgid "Preview"
@@ -97,12 +97,32 @@ msgid "User Access"
 msgstr "User Access"
 
 #: includes/settings-page.php
-msgid "Select which non-admin users should see dark mode. Administrators always have dark mode active. Leave all unchecked to apply dark mode to all users."
-msgstr "Select which non-admin users should see dark mode. Administrators always have dark mode active. Leave all unchecked to apply dark mode to all users."
+msgid "All Users"
+msgstr "All Users"
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
-msgstr "Administrators are not listed here — they always have dark mode active."
+msgid "Dark mode applies to everyone."
+msgstr "Dark mode applies to everyone."
+
+#: includes/settings-page.php
+msgid "Include"
+msgstr "Include"
+
+#: includes/settings-page.php
+msgid "Only selected users get dark mode."
+msgstr "Only selected users get dark mode."
+
+#: includes/settings-page.php
+msgid "Exclude"
+msgstr "Exclude"
+
+#: includes/settings-page.php
+msgid "Everyone except selected users gets dark mode."
+msgstr "Everyone except selected users gets dark mode."
+
+#: includes/settings-page.php
+msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgstr "Administrators are not listed here \u2014 they always have dark mode active."
 
 #: includes/settings-page.php
 msgid "Color Customization"
@@ -145,12 +165,12 @@ msgid "Save Settings"
 msgstr "Save Settings"
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
-msgstr "✓ Dark Mode is active. Settings have been saved."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgstr "\u2713 Dark Mode is active. Settings have been saved."
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
-msgstr "✓ Settings saved. Dark Mode is disabled."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr "\u2713 Settings saved. Dark Mode is disabled."
 
 #: includes/defaults.php
 msgid "Backgrounds"
