@@ -51,7 +51,7 @@ add_action( 'admin_init', function () {
  * IMPORTANT: These values must be identical to adm_preset_colors()
  * in defaults.php. Keep both in sync when adding or changing presets.
  *
- * @param string $preset Preset key ('default', 'modern', …).
+ * @param string $preset Preset key ('default', 'modern', ...).
  * @return array<string,string> Map of color key => hex value.
  */
 function adm_preset_fallbacks( string $preset ): array {
@@ -65,9 +65,18 @@ function adm_preset_fallbacks( string $preset ): array {
  * Enqueue dark mode CSS and inject color token overrides as inline CSS.
  * Fallback colors are chosen based on the active preset so each preset
  * starts from its own baseline before any user customization is applied.
+ *
+ * Excluded pages: site-editor.php (Full Site Editor) - the block editor
+ * ships its own color scheme and conflicts with the dark mode styles.
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! adm_is_dark_mode_active() ) {
+		return;
+	}
+
+	// Exclude the Full Site Editor (site-editor.php).
+	global $pagenow;
+	if ( 'site-editor.php' === $pagenow ) {
 		return;
 	}
 
