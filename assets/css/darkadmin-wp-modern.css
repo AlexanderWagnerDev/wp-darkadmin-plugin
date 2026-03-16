@@ -2,40 +2,32 @@
  * DarkAdmin - WP Modern Preset
  * Faithful dark-mode port of the WordPress 7.0 Modern admin design language.
  * Base: #1e1e1e | Deep: #0c0c0c | Brand: #3858e9
- * Selectors are kept in full sync with darkadmin-dark.css.
  */
 
 /* =============================================================================
    DESIGN TOKENS
-   Token values are injected via enqueue.php inline style (preset-aware).
-   This :root block only defines tokens not covered by enqueue.php.
    ============================================================================= */
 :root {
-  /* Spacing */
   --adm-space-1: 4px;
   --adm-space-2: 8px;
   --adm-space-3: 12px;
   --adm-space-4: 16px;
   --adm-space-5: 20px;
   --adm-space-6: 24px;
-  /* Shape */
   --adm-radius-sm: 3px;
   --adm-radius-md: 6px;
   --adm-radius-lg: 10px;
-  /* Shadows */
   --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.5);
   --adm-shadow-md: 0 4px 20px rgba(0,0,0,.7);
-  /* Sizes */
   --adm-input-h: 32px;
   --adm-btn-h:   30px;
-  /* Sidebar - uses color tokens set by enqueue.php */
   --adm-sidebar-bg:     var(--adm-bg);
   --adm-sidebar-active: var(--adm-primary);
   --adm-sidebar-text:   #c8c8c8;
 }
 
 /* =============================================================================
-   BASE - force override of WP default #f0f0f1 / #1d2327
+   BASE
    ============================================================================= */
 html body.wp-admin,
 html body.wp-core-ui {
@@ -176,9 +168,6 @@ body.wp-core-ui,
 #adminmenu li.current .wp-menu-image,
 #adminmenu li:hover .wp-menu-image {
   filter: brightness(1);
-}
-#adminmenu li.wp-has-submenu > a::after {
-  border-top-color: var(--adm-sidebar-text) !important;
 }
 .wp-submenu-head {
   color: var(--adm-text-soft) !important;
