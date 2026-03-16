@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.7\n"
+"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.9\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-15 12:10+0100\n"
-"PO-Revision-Date: 2026-03-15 12:33+0100\n"
+"POT-Creation-Date: 2026-03-16 09:37+0100\n"
+"PO-Revision-Date: 2026-03-16 09:37+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: de_AT\n"
@@ -16,134 +16,102 @@ msgstr ""
 "X-Generator: Manual 2026\n"
 "X-Domain: darkadmin-dark-mode-for-adminpanel\n"
 
-#: darkadmin.php
+#: darkadmin.php includes/settings-page.php
 msgid "DarkAdmin"
 msgstr "DarkAdmin"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Dark theme for the WordPress backend"
-msgstr "Dunkles Theme für das WordPress-Backend"
+msgstr "Dunkles Theme f\u00fcr das WordPress-Backend"
 
 #: darkadmin.php
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "General"
 msgstr "Allgemein"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Enable Dark Mode"
 msgstr "Dark Mode aktivieren"
 
-#: darkadmin.php
-msgid "Enables the dark theme for all admin pages."
-msgstr "Aktiviert das dunkle Design für alle Admin-Seiten."
+#: includes/settings-page.php
+msgid "Enables the dark theme for all admin pages. Administrators always see dark mode when this is active."
+msgstr "Aktiviert das dunkle Design f\u00fcr alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Auto Dark Mode"
 msgstr "Auto Dark Mode"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
-msgstr "Verdunkelt automatisch helle Hintergründe und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
+msgstr "Verdunkelt automatisch helle Hintergr\u00fcnde und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Active"
 msgstr "Aktiv"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: darkadmin.php
+#: includes/settings-page.php
+msgid "User Access"
+msgstr "Benutzerzugriff"
+
+#: includes/settings-page.php
+msgid "Select which non-admin users should see dark mode. Administrators always have dark mode active. Leave all unchecked to apply dark mode to all users."
+msgstr "W\u00e4hle aus, welche Nicht-Admin-Benutzer den Dark Mode sehen sollen. Administratoren haben den Dark Mode immer aktiv. Wenn nichts ausgew\u00e4hlt ist, gilt der Dark Mode f\u00fcr alle Benutzer."
+
+#: includes/settings-page.php
+msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgstr "Administratoren werden hier nicht angezeigt \u2014 sie haben den Dark Mode immer aktiv."
+
+#: includes/settings-page.php
 msgid "Color Customization"
 msgstr "Farbanpassung"
 
-#: darkadmin.php
-msgid "Customize every color token individually. Changes are applied globally via CSS variables."
-msgstr "Passe jeden Farbwert individuell an. Änderungen werden global über CSS-Variablen angewendet."
+#: includes/settings-page.php
+msgid "Customize every color token individually. Changes are previewed live."
+msgstr "Passe jeden Farbwert individuell an. \u00c4nderungen werden sofort als Vorschau angezeigt."
 
-#: darkadmin.php
-msgid "Background (Base)"
-msgstr "Hintergrund (Basis)"
+#: includes/settings-page.php
+msgid "Export Palette"
+msgstr "Palette exportieren"
 
-#: darkadmin.php
-msgid "Surface 1 (Cards / Tables)"
-msgstr "Fläche 1 (Karten / Tabellen)"
+#: includes/settings-page.php
+msgid "Import Palette"
+msgstr "Palette importieren"
 
-#: darkadmin.php
-msgid "Surface 2 (Inputs)"
-msgstr "Fläche 2 (Eingabefelder)"
-
-#: darkadmin.php
-msgid "Surface 3 (Hover)"
-msgstr "Fläche 3 (Hover)"
-
-#: darkadmin.php
-msgid "Border Color"
-msgstr "Rahmenfarbe"
-
-#: darkadmin.php
-msgid "Primary Text"
-msgstr "Primärer Text"
-
-#: darkadmin.php
-msgid "Muted Text"
-msgstr "Gedämpfter Text"
-
-#: darkadmin.php
-msgid "Soft Text (Row Actions)"
-msgstr "Weicher Text (Zeilen-Aktionen)"
-
-#: darkadmin.php
-msgid "Link Color"
-msgstr "Linkfarbe"
-
-#: darkadmin.php
-msgid "Primary / Buttons"
-msgstr "Primärfarbe / Buttons"
-
-#: darkadmin.php
-msgid "Success"
-msgstr "Erfolgsmeldung"
-
-#: darkadmin.php
-msgid "Warning"
-msgstr "Warnung"
-
-#: darkadmin.php
-msgid "Danger / Error"
-msgstr "Fehler / Gefahr"
-
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Restore Default Colors"
 msgstr "Standardfarben wiederherstellen"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Custom CSS"
 msgstr "Eigenes CSS"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
-msgstr "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfügbar."
+msgstr "F\u00fcge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verf\u00fcgbar."
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Available CSS Variables"
-msgstr "Verfügbare CSS-Variablen"
+msgstr "Verf\u00fcgbare CSS-Variablen"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Click to copy"
 msgstr "Klicken zum Kopieren"
 
-#: darkadmin.php
+#: includes/settings-page.php
 msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
-msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgstr "\u2713 Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
-msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr "\u2713 Einstellungen gespeichert. Dark Mode ist deaktiviert."
