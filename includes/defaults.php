@@ -55,54 +55,59 @@ function adm_default_colors(): array {
 
 /**
  * Preset color palettes.
- * 'default'    mirrors adm_default_colors() (classic WP 6.x dark).
- * 'modern'     targets the WP Modern design language: deep navy base, teal accent, high contrast.
+ * 'default' mirrors adm_default_colors() (classic WP 6.x dark).
+ * 'modern'  faithful dark port of the WP Modern (7.0) design language:
+ *           deep navy base, sky-blue accent, high contrast.
+ *
+ * IMPORTANT: These values must stay in sync with:
+ *   - adm_preset_fallbacks() in enqueue.php
+ *   - $preset_meta in settings-page.php (preview swatches)
  */
 function adm_preset_colors(): array {
 	return [
 		'default' => adm_default_colors(),
 		'modern'  => [
 			// Backgrounds
-			'bg'               => '#0f172a',
-			'bg_bar'           => '#0b1120',
-			'bg_deep'          => '#090e1a',
-			'bg_darker'        => '#07091a',
+			'bg'               => '#1e1e1e',
+			'bg_bar'           => '#0c0c0c',
+			'bg_deep'          => '#0c0c0c',
+			'bg_darker'        => '#080808',
 			// Surfaces
-			'surface1'         => '#1e293b',
-			'surface2'         => '#263147',
-			'surface3'         => '#2f3d57',
-			'table_alt'        => '#161f30',
-			'plugin_inactive'  => '#131c2d',
+			'surface1'         => '#2a2a2a',
+			'surface2'         => '#333333',
+			'surface3'         => '#3d3d3d',
+			'table_alt'        => '#242424',
+			'plugin_inactive'  => '#202020',
 			// Borders
-			'border'           => '#2d3d57',
-			'border_focus'     => '#0ea5e9',
-			'border_hover'     => '#3b82f6',
+			'border'           => '#3a3a3a',
+			'border_focus'     => '#3858e9',
+			'border_hover'     => '#6b7aee',
 			// Text
-			'text'             => '#f0f4f8',
-			'text_muted'       => '#94a3b8',
-			'text_soft'        => '#64748b',
+			'text'             => '#f0f0f0',
+			'text_muted'       => '#a0a0a0',
+			'text_soft'        => '#666666',
 			'text_on_primary'  => '#ffffff',
 			// Links
-			'link'             => '#38bdf8',
-			'link_hover'       => '#7dd3fc',
+			'link'             => '#7b96f5',
+			'link_hover'       => '#a5b8fa',
 			// Brand
-			'primary'          => '#0ea5e9',
-			'primary_hover'    => '#0284c7',
-			'success'          => '#10b981',
-			'warning'          => '#f59e0b',
-			'danger'           => '#f43f5e',
+			'primary'          => '#3858e9',
+			'primary_hover'    => '#2145d4',
+			'success'          => '#00ba37',
+			'warning'          => '#dba617',
+			'danger'           => '#d63638',
 			// CodeMirror syntax tokens
-			'cm_keyword'       => '#a78bfa',
-			'cm_operator'      => '#67e8f9',
-			'cm_variable2'     => '#93c5fd',
-			'cm_property'      => '#bfdbfe',
-			'cm_number'        => '#fb923c',
-			'cm_string'        => '#86efac',
-			'cm_string2'       => '#f9a8d4',
-			'cm_comment'       => '#475569',
-			'cm_tag'           => '#f87171',
-			'cm_attribute'     => '#fde68a',
-			'cm_bracket'       => '#67e8f9',
+			'cm_keyword'       => '#c792ea',
+			'cm_operator'      => '#89ddff',
+			'cm_variable2'     => '#82aaff',
+			'cm_property'      => '#b2ccd6',
+			'cm_number'        => '#f78c6c',
+			'cm_string'        => '#c3e88d',
+			'cm_string2'       => '#f07178',
+			'cm_comment'       => '#546e7a',
+			'cm_tag'           => '#f07178',
+			'cm_attribute'     => '#ffcb6b',
+			'cm_bracket'       => '#89ddff',
 		],
 	];
 }
@@ -155,7 +160,7 @@ function adm_css_variable_map(): array {
 		'cm_string2'      => [ 'var' => '--adm-cm-string2',      'label' => 'Code: String (alt)',                  'group' => 'CodeMirror' ],
 		'cm_comment'      => [ 'var' => '--adm-cm-comment',      'label' => 'Code: Comment',                       'group' => 'CodeMirror' ],
 		'cm_tag'          => [ 'var' => '--adm-cm-tag',          'label' => 'Code: Tag',                           'group' => 'CodeMirror' ],
-		'cm_attribute'    => [ 'var' => '--adm-cm-attribute',    'label' => 'Code: Attribute / Qualifier / Builtin','group' => 'CodeMirror' ],
+		'cm_attribute'    => [ 'var' => '--adm-cm-attribute',    'label' => 'Code: Attribute / Qualifier / Builtin', 'group' => 'CodeMirror' ],
 		'cm_bracket'      => [ 'var' => '--adm-cm-bracket',      'label' => 'Code: Bracket',                       'group' => 'CodeMirror' ],
 	];
 }
@@ -178,10 +183,8 @@ function adm_sanitize_colors( $input ): array {
  * Strips HTML tags but preserves valid CSS content.
  */
 function adm_sanitize_custom_css( string $css ): string {
-	// Remove any HTML tags and PHP tags that could cause XSS.
 	$css = preg_replace( '/<\/?(?:script|style|iframe|object|embed|form|input|link|meta|base)[^>]*>/i', '', $css );
 	$css = preg_replace( '/<\?(?:php)?.*?\?>/is', '', $css );
-	// Strip remaining HTML tags.
 	$css = strip_tags( $css );
 	return $css;
 }

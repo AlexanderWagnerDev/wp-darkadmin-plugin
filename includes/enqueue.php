@@ -44,89 +44,20 @@ add_action( 'admin_init', function () {
 
 /**
  * Returns the base fallback colors for a given preset.
- * These are used when the user has not customized a specific token.
+ * Used when the user has not customized a specific token.
  * Each preset defines its own baseline so the inline style block
  * always reflects the correct starting point.
+ *
+ * IMPORTANT: These values must be identical to adm_preset_colors()
+ * in defaults.php. Keep both in sync when adding or changing presets.
  *
  * @param string $preset Preset key ('default', 'modern', …).
  * @return array<string,string> Map of color key => hex value.
  */
 function adm_preset_fallbacks( string $preset ): array {
-	$presets = [
-		'default' => [
-			'bg'               => '#1d2327',
-			'bg_bar'           => '#1a1f24',
-			'bg_deep'          => '#101517',
-			'bg_darker'        => '#161b1f',
-			'surface1'         => '#2c3338',
-			'surface2'         => '#32393f',
-			'surface3'         => '#3c434a',
-			'table_alt'        => '#272e35',
-			'plugin_inactive'  => '#252c32',
-			'border'           => '#3c434a',
-			'border_focus'     => '#2271b1',
-			'border_hover'     => '#5a6470',
-			'text'             => '#dcdcde',
-			'text_muted'       => '#a7aaad',
-			'text_soft'        => '#787c82',
-			'text_on_primary'  => '#ffffff',
-			'link'             => '#72aee6',
-			'link_hover'       => '#93c5fd',
-			'primary'          => '#2271b1',
-			'primary_hover'    => '#135e96',
-			'success'          => '#00a32a',
-			'warning'          => '#dba617',
-			'danger'           => '#d63638',
-			'cm_keyword'       => '#c792ea',
-			'cm_operator'      => '#89ddff',
-			'cm_variable2'     => '#82aaff',
-			'cm_property'      => '#b2ccd6',
-			'cm_number'        => '#f78c6c',
-			'cm_string'        => '#c3e88d',
-			'cm_string2'       => '#f07178',
-			'cm_comment'       => '#546e7a',
-			'cm_tag'           => '#f07178',
-			'cm_attribute'     => '#ffcb6b',
-			'cm_bracket'       => '#89ddff',
-		],
-		'modern' => [
-			'bg'               => '#1e1e1e',
-			'bg_bar'           => '#0c0c0c',
-			'bg_deep'          => '#0c0c0c',
-			'bg_darker'        => '#080808',
-			'surface1'         => '#2a2a2a',
-			'surface2'         => '#333333',
-			'surface3'         => '#3d3d3d',
-			'table_alt'        => '#242424',
-			'plugin_inactive'  => '#202020',
-			'border'           => '#3a3a3a',
-			'border_focus'     => '#3858e9',
-			'border_hover'     => '#6b7aee',
-			'text'             => '#f0f0f0',
-			'text_muted'       => '#a0a0a0',
-			'text_soft'        => '#666666',
-			'text_on_primary'  => '#ffffff',
-			'link'             => '#7b96f5',
-			'link_hover'       => '#a5b8fa',
-			'primary'          => '#3858e9',
-			'primary_hover'    => '#2145d4',
-			'success'          => '#00ba37',
-			'warning'          => '#dba617',
-			'danger'           => '#d63638',
-			'cm_keyword'       => '#c792ea',
-			'cm_operator'      => '#89ddff',
-			'cm_variable2'     => '#82aaff',
-			'cm_property'      => '#b2ccd6',
-			'cm_number'        => '#f78c6c',
-			'cm_string'        => '#c3e88d',
-			'cm_string2'       => '#f07178',
-			'cm_comment'       => '#546e7a',
-			'cm_tag'           => '#f07178',
-			'cm_attribute'     => '#ffcb6b',
-			'cm_bracket'       => '#89ddff',
-		],
-	];
-
+	// Delegate directly to adm_preset_colors() so there is a single
+	// source of truth and both arrays can never drift apart.
+	$presets = adm_preset_colors();
 	return $presets[ $preset ] ?? $presets['default'];
 }
 

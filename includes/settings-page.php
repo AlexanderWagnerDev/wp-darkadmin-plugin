@@ -35,24 +35,28 @@ function adm_settings_page(): void {
 
 	$selectable_users = adm_get_selectable_users();
 
+	/**
+	 * Preview swatch colors — must match adm_preset_colors() in defaults.php.
+	 * bg/surface/primary/text/bar are used for the live mini-preview only.
+	 */
 	$preset_meta = [
 		'default' => [
-			'label'    => __( 'Default', 'darkadmin-dark-mode-for-adminpanel' ),
-			'desc'     => __( 'Classic WP 6.x dark theme', 'darkadmin-dark-mode-for-adminpanel' ),
-			'bg'       => '#1d2327',
-			'surface'  => '#2c3338',
-			'primary'  => '#2271b1',
-			'text'     => '#dcdcde',
-			'bar'      => '#1d2327',
+			'label'   => __( 'Default', 'darkadmin-dark-mode-for-adminpanel' ),
+			'desc'    => __( 'Classic WP 6.x dark theme', 'darkadmin-dark-mode-for-adminpanel' ),
+			'bg'      => '#1d2327',
+			'surface' => '#2c3338',
+			'primary' => '#2271b1',
+			'text'    => '#dcdcde',
+			'bar'     => '#1a1f24',
 		],
 		'modern' => [
-			'label'    => __( 'Modern', 'darkadmin-dark-mode-for-adminpanel' ),
-			'desc'     => __( 'WP 7.0 deep blue, high contrast', 'darkadmin-dark-mode-for-adminpanel' ),
-			'bg'       => '#0a0e17',
-			'surface'  => '#111827',
-			'primary'  => '#3b82f6',
-			'text'     => '#e2e8f0',
-			'bar'      => '#0d1117',
+			'label'   => __( 'Modern', 'darkadmin-dark-mode-for-adminpanel' ),
+			'desc'    => __( 'WP Modern design language (dark)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'bg'      => '#1e1e1e',
+			'surface' => '#2a2a2a',
+			'primary' => '#3858e9',
+			'text'    => '#f0f0f0',
+			'bar'     => '#0c0c0c',
 		],
 	];
 	?>
@@ -119,7 +123,7 @@ function adm_settings_page(): void {
 							<input type="checkbox" id="adm_auto_darken" name="adm_auto_darken" value="1"
 								<?php checked( true, $auto_darken ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
-					</label>
+						</label>
 					</div>
 
 				</div>
