@@ -32,6 +32,14 @@ add_action( 'admin_init', function () {
 		'sanitize_callback' => fn( $v ) => array_map( 'absint', (array) $v ),
 		'default'           => [],
 	] );
+	register_setting( 'adm_settings', 'adm_preset', [
+		'type'              => 'string',
+		'sanitize_callback' => function ( $v ) {
+			$allowed = array_keys( adm_preset_colors() );
+			return in_array( $v, $allowed, true ) ? $v : 'default';
+		},
+		'default'           => 'default',
+	] );
 } );
 
 /**
@@ -47,6 +55,9 @@ add_action( 'admin_enqueue_scripts', function () {
 		(array) get_option( 'adm_colors', [] ),
 		adm_default_colors()
 	);
+
+	$preset  = get_option( 'adm_preset', 'default' );
+	$css_file = adm_preset_css_file( $preset );
 
 	// Cache-busting: combine plugin version + hash of current color values.
 	$color_hash = substr( md5( serialize( $c ) ), 0, 8 );
@@ -93,7 +104,7 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	wp_enqueue_style(
 		'adm-darkmode',
-		ADM_URL . 'assets/css/darkadmin-dark.css',
+		ADM_URL . 'assets/css/' . $css_file,
 		[],
 		$ver
 	);
@@ -138,10 +149,11 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 		true
 	);
 
-	// Pass default colors and CSS var map to JS for live preview + export.
+	// Pass default colors, CSS var map and presets to JS.
 	wp_localize_script( 'adm-settings-js', 'admData', [
 		'defaults' => adm_default_colors(),
 		'varMap'   => array_map( fn( $v ) => $v['var'], adm_css_variable_map() ),
+		'presets'  => adm_preset_colors(),
 	] );
 } );
 

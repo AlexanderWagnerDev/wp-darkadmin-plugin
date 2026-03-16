@@ -25,18 +25,47 @@
 
 	// Reset all color pickers to their default values.
 	$( '#adm-reset-colors' ).on( 'click', function () {
+		loadPresetColors( admData.defaults );
+		$( '#adm_preset' ).val( 'default' );
+		updatePresetTiles( 'default' );
+	} );
+
+	// Load a preset: set all pickers + live preview + update hidden input.
+	function loadPresetColors( colors ) {
 		$( '.adm-color-picker' ).each( function () {
-			const $input   = $( this );
-			const key      = $input.data( 'key' );
-			const defColor = $input.data( 'default-color' );
-			if ( defColor ) {
-				$input.wpColorPicker( 'color', defColor );
+			const $input = $( this );
+			const key    = $input.data( 'key' );
+			const color  = colors[ key ];
+			if ( key && color ) {
+				$input.wpColorPicker( 'color', color );
 				const cssVar = admData.varMap[ key ];
 				if ( cssVar ) {
-					root.style.setProperty( cssVar, defColor );
+					root.style.setProperty( cssVar, color );
 				}
 			}
 		} );
+	}
+
+	function updatePresetTiles( activeSlug ) {
+		$( '.adm-preset-tile' ).each( function () {
+			const slug = $( this ).data( 'preset' );
+			$( this ).toggleClass( 'adm-preset-active', slug === activeSlug );
+			$( this ).find( '.adm-preset-load-btn' ).text(
+				slug === activeSlug ? '\u2713 Active' : 'Load Preset'
+			);
+		} );
+	}
+
+	// Handle preset load button clicks.
+	$( document ).on( 'click', '.adm-preset-load-btn', function () {
+		const slug   = $( this ).data( 'preset' );
+		const colors = admData.presets[ slug ];
+		if ( ! colors ) {
+			return;
+		}
+		loadPresetColors( colors );
+		$( '#adm_preset' ).val( slug );
+		updatePresetTiles( slug );
 	} );
 
 	// Export current palette as JSON file.
@@ -88,13 +117,13 @@
 						applied++;
 					}
 				} );
-				$status.text( '✓ ' + applied + ' colors imported' ).addClass( 'adm-import-ok' ).removeClass( 'adm-import-err' );
+				$status.text( '\u2713 ' + applied + ' colors imported' ).addClass( 'adm-import-ok' ).removeClass( 'adm-import-err' );
 			} catch ( err ) {
-				$status.text( '✗ Invalid palette file' ).addClass( 'adm-import-err' ).removeClass( 'adm-import-ok' );
+				$status.text( '\u2717 Invalid palette file' ).addClass( 'adm-import-err' ).removeClass( 'adm-import-ok' );
 			}
 		};
 		reader.readAsText( file );
-		// Reset so the same file can be re-imported
+		// Reset so the same file can be re-imported.
 		this.value = '';
 	} );
 
@@ -108,7 +137,7 @@
 			const $btn  = $( '.adm-var-copy[data-var="' + varName + '"]' );
 			const $code = $btn.find( 'code' );
 			const orig  = $code.text();
-			$code.text( '✓ Copied!' );
+			$code.text( '\u2713 Copied!' );
 			setTimeout( function () { $code.text( orig ); }, 1500 );
 		} );
 	} );

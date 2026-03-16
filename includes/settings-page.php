@@ -13,6 +13,7 @@ function adm_settings_page(): void {
 	$custom      = get_option( 'adm_custom_css', '' );
 	$allowed     = (array) get_option( 'adm_allowed_users', [] );
 	$allowed     = array_map( 'intval', $allowed );
+	$active_preset = get_option( 'adm_preset', 'default' );
 
 	if ( $enabled ) {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
@@ -20,6 +21,7 @@ function adm_settings_page(): void {
 
 	$var_map  = adm_css_variable_map();
 	$defaults = adm_default_colors();
+	$presets  = adm_preset_colors();
 
 	$color_groups = [];
 	foreach ( $var_map as $key => $info ) {
@@ -32,6 +34,25 @@ function adm_settings_page(): void {
 	}
 
 	$selectable_users = adm_get_selectable_users();
+
+	$preset_meta = [
+		'default' => [
+			'label'    => __( 'Default', 'darkadmin-dark-mode-for-adminpanel' ),
+			'desc'     => __( 'Classic WP 6.x dark theme', 'darkadmin-dark-mode-for-adminpanel' ),
+			'bg'       => '#1d2327',
+			'surface'  => '#2c3338',
+			'primary'  => '#2271b1',
+			'text'     => '#dcdcde',
+		],
+		'modern' => [
+			'label'    => __( 'Modern', 'darkadmin-dark-mode-for-adminpanel' ),
+			'desc'     => __( 'WP 7.0 deep blue, high contrast', 'darkadmin-dark-mode-for-adminpanel' ),
+			'bg'       => '#0a0e17',
+			'surface'  => '#111827',
+			'primary'  => '#3b82f6',
+			'text'     => '#e2e8f0',
+		],
+	];
 	?>
 	<div class="wrap adm-settings-wrap">
 
@@ -99,6 +120,40 @@ function adm_settings_page(): void {
 						</label>
 					</div>
 
+				</div>
+			</div>
+
+			<!-- Preset Themes -->
+			<div class="adm-card">
+				<div class="adm-card-header">
+					<span class="dashicons dashicons-admin-appearance"></span>
+					<h2><?php esc_html_e( 'Preset Themes', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
+				</div>
+				<div class="adm-card-body">
+					<p class="adm-card-description">
+						<?php esc_html_e( 'Choose a preset to load its color palette. You can further customize colors below after loading.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+					</p>
+					<div class="adm-preset-grid">
+						<?php foreach ( $preset_meta as $slug => $meta ) : ?>
+							<div class="adm-preset-tile <?php echo $active_preset === $slug ? 'adm-preset-active' : ''; ?>" data-preset="<?php echo esc_attr( $slug ); ?>">
+								<div class="adm-preset-swatch" style="background:<?php echo esc_attr( $meta['bg'] ); ?>;">
+									<span class="adm-preset-swatch-surface" style="background:<?php echo esc_attr( $meta['surface'] ); ?>;"></span>
+									<span class="adm-preset-swatch-accent" style="background:<?php echo esc_attr( $meta['primary'] ); ?>;"></span>
+									<span class="adm-preset-swatch-text" style="color:<?php echo esc_attr( $meta['text'] ); ?>;"><?php echo esc_html( $meta['label'] ); ?></span>
+								</div>
+								<div class="adm-preset-info">
+									<strong><?php echo esc_html( $meta['label'] ); ?></strong>
+									<span><?php echo esc_html( $meta['desc'] ); ?></span>
+								</div>
+								<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
+									<?php echo $active_preset === $slug
+										? esc_html__( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' )
+										: esc_html__( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+								</button>
+							</div>
+						<?php endforeach; ?>
+					</div>
+					<input type="hidden" id="adm_preset" name="adm_preset" value="<?php echo esc_attr( $active_preset ); ?>" />
 				</div>
 			</div>
 

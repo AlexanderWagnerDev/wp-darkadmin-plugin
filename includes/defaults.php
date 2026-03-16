@@ -54,6 +54,71 @@ function adm_default_colors(): array {
 }
 
 /**
+ * Preset color palettes.
+ * 'default' mirrors adm_default_colors().
+ * 'modern'  targets the WP 7.0 design language: deep blue-grey base, high contrast, glassmorphism-inspired.
+ */
+function adm_preset_colors(): array {
+	return [
+		'default' => adm_default_colors(),
+		'modern'  => [
+			// Backgrounds
+			'bg'               => '#0a0e17',
+			'bg_bar'           => '#080c14',
+			'bg_deep'          => '#050810',
+			'bg_darker'        => '#060a12',
+			// Surfaces
+			'surface1'         => '#111827',
+			'surface2'         => '#1a2235',
+			'surface3'         => '#243044',
+			'table_alt'        => '#0f1624',
+			'plugin_inactive'  => '#0d1420',
+			// Borders
+			'border'           => '#1e3a5f',
+			'border_focus'     => '#3b82f6',
+			'border_hover'     => '#4b6a8a',
+			// Text
+			'text'             => '#e2e8f0',
+			'text_muted'       => '#94a3b8',
+			'text_soft'        => '#64748b',
+			'text_on_primary'  => '#ffffff',
+			// Links
+			'link'             => '#60a5fa',
+			'link_hover'       => '#93c5fd',
+			// Brand
+			'primary'          => '#3b82f6',
+			'primary_hover'    => '#2563eb',
+			'success'          => '#22c55e',
+			'warning'          => '#f59e0b',
+			'danger'           => '#ef4444',
+			// CodeMirror syntax tokens
+			'cm_keyword'       => '#a78bfa',
+			'cm_operator'      => '#67e8f9',
+			'cm_variable2'     => '#93c5fd',
+			'cm_property'      => '#bfdbfe',
+			'cm_number'        => '#fb923c',
+			'cm_string'        => '#86efac',
+			'cm_string2'       => '#f9a8d4',
+			'cm_comment'       => '#475569',
+			'cm_tag'           => '#f87171',
+			'cm_attribute'     => '#fde68a',
+			'cm_bracket'       => '#67e8f9',
+		],
+	];
+}
+
+/**
+ * Returns the CSS filename for a given preset slug.
+ */
+function adm_preset_css_file( string $preset ): string {
+	$map = [
+		'default' => 'darkadmin-dark.css',
+		'modern'  => 'darkadmin-modern.css',
+	];
+	return $map[ $preset ] ?? 'darkadmin-dark.css';
+}
+
+/**
  * Maps each color key to its CSS custom property name, label and group.
  */
 function adm_css_variable_map(): array {
