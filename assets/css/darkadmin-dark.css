@@ -10,42 +10,29 @@
    DESIGN TOKENS
    ============================================================================= */
 :root {
-  /* --- Backgrounds --- */
   --adm-bg:              #1d2327;
   --adm-bg-bar:          #1a1f24;
   --adm-bg-deep:         #101517;
   --adm-bg-darker:       #161b1f;
-
-  /* --- Surfaces --- */
   --adm-surface-1:       #2c3338;
   --adm-surface-2:       #32393f;
   --adm-surface-3:       #3c434a;
   --adm-table-alt:       #272e35;
   --adm-plugin-inactive: #252c32;
-
-  /* --- Borders --- */
   --adm-border:          #3c434a;
   --adm-border-focus:    #2271b1;
   --adm-border-hover:    #5a6470;
-
-  /* --- Text --- */
   --adm-text:            #dcdcde;
   --adm-text-muted:      #a7aaad;
   --adm-text-soft:       #787c82;
   --adm-text-on-primary: #ffffff;
-
-  /* --- Links --- */
   --adm-link:            #72aee6;
   --adm-link-hover:      #93c5fd;
-
-  /* --- Brand Colors --- */
   --adm-primary:         #2271b1;
   --adm-primary-hover:   #135e96;
   --adm-success:         #00a32a;
   --adm-warning:         #dba617;
   --adm-danger:          #d63638;
-
-  /* --- CodeMirror Syntax Tokens --- */
   --adm-cm-keyword:      #c792ea;
   --adm-cm-operator:     #89ddff;
   --adm-cm-variable2:    #82aaff;
@@ -57,25 +44,17 @@
   --adm-cm-tag:          #f07178;
   --adm-cm-attribute:    #ffcb6b;
   --adm-cm-bracket:      #89ddff;
-
-  /* --- Spacing --- */
   --adm-space-1: 4px;
   --adm-space-2: 8px;
   --adm-space-3: 12px;
   --adm-space-4: 16px;
   --adm-space-5: 20px;
   --adm-space-6: 24px;
-
-  /* --- Shape --- */
   --adm-radius-sm: 3px;
   --adm-radius-md: 6px;
   --adm-radius-lg: 10px;
-
-  /* --- Shadows --- */
   --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.25);
   --adm-shadow-md: 0 3px 10px rgba(0,0,0,.30);
-
-  /* --- Sizes --- */
   --adm-input-h: 32px;
   --adm-btn-h:   30px;
 }
@@ -214,9 +193,6 @@ body.wp-admin,
 #adminmenu li.current .wp-menu-image,
 #adminmenu li:hover .wp-menu-image {
   filter: brightness(1);
-}
-#adminmenu li.wp-has-submenu > a::after {
-  border-top-color: var(--adm-text-muted) !important;
 }
 .wp-submenu-head {
   color: var(--adm-text-soft) !important;
