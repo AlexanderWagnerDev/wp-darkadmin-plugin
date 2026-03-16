@@ -204,7 +204,6 @@ function adm_settings_page(): void {
 			</div>
 
 			<!-- User Access -->
-			<?php if ( ! empty( $selectable_users ) ) : ?>
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-groups"></span>
@@ -245,7 +244,8 @@ function adm_settings_page(): void {
 						</label>
 					</div>
 
-					<!-- User list (hidden when mode = all) -->
+					<!-- User list (hidden when mode = all or no selectable users exist) -->
+					<?php if ( ! empty( $selectable_users ) ) : ?>
 					<div class="adm-user-grid" id="adm-user-grid"
 						<?php echo $user_access_mode === 'all' ? 'style="display:none;"' : ''; ?>>
 						<?php foreach ( $selectable_users as $user ) : ?>
@@ -264,6 +264,12 @@ function adm_settings_page(): void {
 							</label>
 						<?php endforeach; ?>
 					</div>
+					<?php else : ?>
+					<p class="adm-field-desc" style="margin-top:10px;">
+						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
+						<?php esc_html_e( 'No non-administrator users found. Create additional users to manage their dark mode access here.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+					</p>
+					<?php endif; ?>
 
 					<p class="adm-field-desc" style="margin-top:10px;">
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
@@ -271,7 +277,6 @@ function adm_settings_page(): void {
 					</p>
 				</div>
 			</div>
-			<?php endif; ?>
 
 			<!-- Color Customization -->
 			<div class="adm-card">
