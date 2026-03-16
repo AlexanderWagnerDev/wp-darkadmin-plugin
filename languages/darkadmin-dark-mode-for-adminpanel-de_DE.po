@@ -85,8 +85,8 @@ msgid "Load Preset"
 msgstr "Preset laden"
 
 #: includes/settings-page.php
-msgid "\u2713 Active"
-msgstr "\u2713 Aktiv"
+msgid "✓ Active"
+msgstr "✓ Aktiv"
 
 #: includes/settings-page.php
 msgid "Preview"
@@ -101,8 +101,8 @@ msgid "Select which non-admin users should see dark mode. Administrators always 
 msgstr "Wähle aus, welche Nicht-Admin-Benutzer den Dark Mode sehen sollen. Administratoren haben den Dark Mode immer aktiv. Wenn nichts ausgewählt ist, gilt der Dark Mode für alle Benutzer."
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here \u2014 they always have dark mode active."
-msgstr "Administratoren werden hier nicht angezeigt \u2014 sie haben den Dark Mode immer aktiv."
+msgid "Administrators are not listed here — they always have dark mode active."
+msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode immer aktiv."
 
 #: includes/settings-page.php
 msgid "Color Customization"
@@ -145,12 +145,12 @@ msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
 #: darkadmin.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
-msgstr "\u2713 Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: darkadmin.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
-msgstr "\u2713 Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
 
 #: includes/defaults.php
 msgid "Backgrounds"

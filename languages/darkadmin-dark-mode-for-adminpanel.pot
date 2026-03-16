@@ -83,7 +83,7 @@ msgid "Load Preset"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "\u2713 Active"
+msgid "✓ Active"
 msgstr ""
 
 #: includes/settings-page.php
@@ -99,7 +99,7 @@ msgid "Select which non-admin users should see dark mode. Administrators always 
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgid "Administrators are not listed here — they always have dark mode active."
 msgstr ""
 
 #: includes/settings-page.php
@@ -143,11 +143,11 @@ msgid "Save Settings"
 msgstr ""
 
 #: darkadmin.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: darkadmin.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgid "✓ Settings saved. Dark Mode is disabled."
 msgstr ""
 
 #: includes/defaults.php
