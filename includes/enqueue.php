@@ -66,17 +66,20 @@ function adm_preset_fallbacks( string $preset ): array {
  * Fallback colors are chosen based on the active preset so each preset
  * starts from its own baseline before any user customization is applied.
  *
- * Excluded pages: site-editor.php (Full Site Editor) - the block editor
- * ships its own color scheme and conflicts with the dark mode styles.
+ * Excluded pages:
+ *   - site-editor.php  (Full Site Editor)
+ *   - post-new.php     (Block Editor / new post)
+ * Both ship their own color scheme and conflict with the dark mode styles.
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! adm_is_dark_mode_active() ) {
 		return;
 	}
 
-	// Exclude the Full Site Editor (site-editor.php).
+	// Exclude specific admin pages.
 	global $pagenow;
-	if ( 'site-editor.php' === $pagenow ) {
+	$excluded = [ 'site-editor.php', 'post-new.php' ];
+	if ( in_array( $pagenow, $excluded, true ) ) {
 		return;
 	}
 
