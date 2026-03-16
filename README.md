@@ -16,7 +16,7 @@
 |---|---|
 | **Contributors** | AlexanderWagnerDev |
 | **Plugin URI** | [wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel](https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/) |
-| **Requires at least** | 6.0 |
+| **Requires at least** | 6.3 |
 | **Tested up to** | 6.9 |
 | **Requires PHP** | 7.4 |
 | **Stable tag** | 0.0.8 |
