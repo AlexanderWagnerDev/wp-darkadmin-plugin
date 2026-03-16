@@ -22,6 +22,7 @@ Features:
 * Token-based design system for backgrounds, text, borders, buttons and states
 * Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 * Preset Themes: choose between Default (WP 6.x) and Modern (WP 7.0) color palettes
+* Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
 
 == Installation ==
 1. Upload the plugin folder to `/wp-content/plugins/darkadmin/` (or install via the Plugins screen).
@@ -54,6 +55,9 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Reduced .cm-error background opacity from .15 to .05 for a more subtle error highlight in CodeMirror
 * All changes applied to both darkadmin-dark.css and darkadmin-wp-modern.css
 * Fixed invalid control sequences in all language files (de_AT, de_DE, en_US, .pot): replaced \uXXXX Unicode escapes with literal UTF-8 characters to resolve msgfmt compilation errors
+* User Access: Include and Exclude options are now greyed out and non-clickable when no non-administrator users exist (disabled radio input + CSS pointer-events: none)
+* User Access: replaced plain text fallback with a styled empty-state block (centered layout, dashed border, large icon)
+* i18n: added missing string "No non-administrator users found. Create additional users to manage their dark mode access here." to .pot, de_AT, de_DE and en_US language files
 
 = 0.0.9 =
 * Added Preset Themes: choose between Default (WP 6.x classic dark) and Modern (WP 7.0 deep blue, glassmorphism-inspired) color palettes
