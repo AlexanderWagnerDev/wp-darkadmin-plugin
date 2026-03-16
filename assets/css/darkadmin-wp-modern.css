@@ -56,7 +56,7 @@
   --adm-input-h: 32px;
   --adm-btn-h:   30px;
   /* Sidebar */
-  --adm-sidebar-bg:     #1a1a1a;
+  --adm-sidebar-bg:     #1e1e1e;
   --adm-sidebar-active: #3858e9;
   --adm-sidebar-text:   #c8c8c8;
   /* CodeMirror */
@@ -74,35 +74,38 @@
 }
 
 /* =============================================================================
-   BASE
+   BASE — force override of WP default #f0f0f1 / #1d2327
    ============================================================================= */
 html,
 body,
 body.wp-admin,
-#wpwrap {
-  background-color: var(--adm-bg) !important;
-  color: var(--adm-text) !important;
-}
-
+body.wp-core-ui,
+#wpwrap,
 #wpcontent,
 #wpbody,
 #wpbody-content,
 #wpfooter,
-#dashboard-widgets-wrap {
+#dashboard-widgets-wrap,
+.wrap,
+#wpbody-content .wrap {
   background-color: var(--adm-bg) !important;
   color: var(--adm-text) !important;
 }
 
-.wrap {
-  color: var(--adm-text);
+/* Catch-all for any remaining white backgrounds */
+body.wp-admin div,
+body.wp-admin section,
+body.wp-admin article,
+body.wp-admin main {
+  background-color: inherit;
 }
 
 /* =============================================================================
    ADMIN BAR
    ============================================================================= */
-#wpadminbar {
+#wpadminbar,
+#wpadminbar * {
   background: var(--adm-bg-bar) !important;
-  border-bottom: 1px solid var(--adm-border);
 }
 #wpadminbar .ab-top-menu > li > .ab-item,
 #wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-item {
