@@ -53,12 +53,13 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Added Theme Editor / Template Side section: dark styling for #templateside > ul, .importer-title and .color-option.selected / .color-option:hover
 * Reduced .cm-error background opacity from .15 to .05 for a more subtle error highlight in CodeMirror
 * All changes applied to both darkadmin-dark.css and darkadmin-wp-modern.css
+* Fixed invalid control sequences in all language files (de_AT, de_DE, en_US, .pot): replaced \uXXXX Unicode escapes with literal UTF-8 characters to resolve msgfmt compilation errors
 
 = 0.0.9 =
 * Added Preset Themes: choose between Default (WP 6.x classic dark) and Modern (WP 7.0 deep blue, glassmorphism-inspired) color palettes
 * Each preset ships with its own CSS file (darkadmin-dark.css / darkadmin-modern.css) loaded dynamically based on the active preset
 * Added adm_preset option with live preset switching on the settings page
-* Added per-user Dark Mode: administrators always see dark mode, non-admin users can be individually enabled via a new User Access card
+* Added per-user Dark Mode: administrators always have dark mode, non-admin users can be individually enabled via a new User Access card
 * Added live color preview: color picker changes update CSS variables instantly without saving
 * Added Export / Import palette as JSON file
 * Added custom CSS sanitizer (adm_sanitize_custom_css) — preserves valid CSS while stripping dangerous HTML/PHP tags

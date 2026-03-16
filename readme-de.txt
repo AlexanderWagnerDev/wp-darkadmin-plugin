@@ -53,6 +53,7 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Theme-Editor / Template-Side-Bereich hinzugefügt: Dark-Styling für #templateside > ul, .importer-title und .color-option.selected / .color-option:hover
 * .cm-error-Hintergrund-Deckkraft von .15 auf .05 reduziert für subtileres Fehler-Highlighting in CodeMirror
 * Alle Änderungen in darkadmin-dark.css und darkadmin-wp-modern.css umgesetzt
+* Ungültige Steuerzeichen in allen Sprachdateien (de_AT, de_DE, en_US, .pot) behoben: \uXXXX-Unicode-Escapes durch direkte UTF-8-Zeichen ersetzt, um msgfmt-Kompilierungsfehler zu beheben
 
 = 0.0.9 =
 * Preset-Themes hinzugefügt: Wechsel zwischen Default (klassisches WP 6.x Dark) und Modern (WP 7.0 Tiefblau, Glassmorphism) Farbpaletten
