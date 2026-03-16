@@ -43,65 +43,154 @@ add_action( 'admin_init', function () {
 } );
 
 /**
+ * Returns the base fallback colors for a given preset.
+ * These are used when the user has not customized a specific token.
+ * Each preset defines its own baseline so the inline style block
+ * always reflects the correct starting point.
+ *
+ * @param string $preset Preset key ('default', 'modern', …).
+ * @return array<string,string> Map of color key => hex value.
+ */
+function adm_preset_fallbacks( string $preset ): array {
+	$presets = [
+		'default' => [
+			'bg'               => '#1d2327',
+			'bg_bar'           => '#1a1f24',
+			'bg_deep'          => '#101517',
+			'bg_darker'        => '#161b1f',
+			'surface1'         => '#2c3338',
+			'surface2'         => '#32393f',
+			'surface3'         => '#3c434a',
+			'table_alt'        => '#272e35',
+			'plugin_inactive'  => '#252c32',
+			'border'           => '#3c434a',
+			'border_focus'     => '#2271b1',
+			'border_hover'     => '#5a6470',
+			'text'             => '#dcdcde',
+			'text_muted'       => '#a7aaad',
+			'text_soft'        => '#787c82',
+			'text_on_primary'  => '#ffffff',
+			'link'             => '#72aee6',
+			'link_hover'       => '#93c5fd',
+			'primary'          => '#2271b1',
+			'primary_hover'    => '#135e96',
+			'success'          => '#00a32a',
+			'warning'          => '#dba617',
+			'danger'           => '#d63638',
+			'cm_keyword'       => '#c792ea',
+			'cm_operator'      => '#89ddff',
+			'cm_variable2'     => '#82aaff',
+			'cm_property'      => '#b2ccd6',
+			'cm_number'        => '#f78c6c',
+			'cm_string'        => '#c3e88d',
+			'cm_string2'       => '#f07178',
+			'cm_comment'       => '#546e7a',
+			'cm_tag'           => '#f07178',
+			'cm_attribute'     => '#ffcb6b',
+			'cm_bracket'       => '#89ddff',
+		],
+		'modern' => [
+			'bg'               => '#1e1e1e',
+			'bg_bar'           => '#0c0c0c',
+			'bg_deep'          => '#0c0c0c',
+			'bg_darker'        => '#080808',
+			'surface1'         => '#2a2a2a',
+			'surface2'         => '#333333',
+			'surface3'         => '#3d3d3d',
+			'table_alt'        => '#242424',
+			'plugin_inactive'  => '#202020',
+			'border'           => '#3a3a3a',
+			'border_focus'     => '#3858e9',
+			'border_hover'     => '#6b7aee',
+			'text'             => '#f0f0f0',
+			'text_muted'       => '#a0a0a0',
+			'text_soft'        => '#666666',
+			'text_on_primary'  => '#ffffff',
+			'link'             => '#7b96f5',
+			'link_hover'       => '#a5b8fa',
+			'primary'          => '#3858e9',
+			'primary_hover'    => '#2145d4',
+			'success'          => '#00ba37',
+			'warning'          => '#dba617',
+			'danger'           => '#d63638',
+			'cm_keyword'       => '#c792ea',
+			'cm_operator'      => '#89ddff',
+			'cm_variable2'     => '#82aaff',
+			'cm_property'      => '#b2ccd6',
+			'cm_number'        => '#f78c6c',
+			'cm_string'        => '#c3e88d',
+			'cm_string2'       => '#f07178',
+			'cm_comment'       => '#546e7a',
+			'cm_tag'           => '#f07178',
+			'cm_attribute'     => '#ffcb6b',
+			'cm_bracket'       => '#89ddff',
+		],
+	];
+
+	return $presets[ $preset ] ?? $presets['default'];
+}
+
+/**
  * Enqueue dark mode CSS and inject color token overrides as inline CSS.
- * Uses a hash of the stored color values as the cache-busting version.
+ * Fallback colors are chosen based on the active preset so each preset
+ * starts from its own baseline before any user customization is applied.
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! adm_is_dark_mode_active() ) {
 		return;
 	}
 
-	$c = wp_parse_args(
-		(array) get_option( 'adm_colors', [] ),
-		adm_default_colors()
-	);
-
-	$preset  = get_option( 'adm_preset', 'default' );
+	$preset   = get_option( 'adm_preset', 'default' );
 	$css_file = adm_preset_css_file( $preset );
+
+	// Merge user-saved colors on top of the preset-specific fallbacks.
+	$fallbacks = adm_preset_fallbacks( $preset );
+	$c         = wp_parse_args(
+		(array) get_option( 'adm_colors', [] ),
+		$fallbacks
+	);
 
 	// Cache-busting: combine plugin version + hash of current color values.
 	$color_hash = substr( md5( serialize( $c ) ), 0, 8 );
 	$ver        = ADM_VERSION . '-' . $color_hash;
 
-	$sc = static fn( string $k, string $fb ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fb;
+	$sc = static fn( string $k ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fallbacks[ $k ];
 
-	// Fallback values reflect the default dark preset (classic WP dark).
-	// Preset CSS files override these via higher-specificity :root rules.
-	$vars = ':root{'                                                        .
-		"--adm-bg:{$sc('bg','#1d2327')};"                               .
-		"--adm-bg-bar:{$sc('bg_bar','#1a1f24')};"                       .
-		"--adm-bg-deep:{$sc('bg_deep','#101517')};"                     .
-		"--adm-bg-darker:{$sc('bg_darker','#161b1f')};"                 .
-		"--adm-surface-1:{$sc('surface1','#2c3338')};"                  .
-		"--adm-surface-2:{$sc('surface2','#32393f')};"                  .
-		"--adm-surface-3:{$sc('surface3','#3c434a')};"                  .
-		"--adm-table-alt:{$sc('table_alt','#272e35')};"                 .
-		"--adm-plugin-inactive:{$sc('plugin_inactive','#252c32')};"     .
-		"--adm-border:{$sc('border','#3c434a')};"                       .
-		"--adm-border-focus:{$sc('border_focus','#2271b1')};"           .
-		"--adm-border-hover:{$sc('border_hover','#5a6470')};"           .
-		"--adm-text:{$sc('text','#dcdcde')};"                           .
-		"--adm-text-muted:{$sc('text_muted','#a7aaad')};"               .
-		"--adm-text-soft:{$sc('text_soft','#787c82')};"                 .
-		"--adm-text-on-primary:{$sc('text_on_primary','#ffffff')};"     .
-		"--adm-link:{$sc('link','#72aee6')};"                           .
-		"--adm-link-hover:{$sc('link_hover','#93c5fd')};"               .
-		"--adm-primary:{$sc('primary','#2271b1')};"                     .
-		"--adm-primary-hover:{$sc('primary_hover','#135e96')};"         .
-		"--adm-success:{$sc('success','#00a32a')};"                     .
-		"--adm-warning:{$sc('warning','#dba617')};"                     .
-		"--adm-danger:{$sc('danger','#d63638')};"                       .
-		"--adm-cm-keyword:{$sc('cm_keyword','#c792ea')};"               .
-		"--adm-cm-operator:{$sc('cm_operator','#89ddff')};"             .
-		"--adm-cm-variable2:{$sc('cm_variable2','#82aaff')};"           .
-		"--adm-cm-property:{$sc('cm_property','#b2ccd6')};"             .
-		"--adm-cm-number:{$sc('cm_number','#f78c6c')};"                 .
-		"--adm-cm-string:{$sc('cm_string','#c3e88d')};"                 .
-		"--adm-cm-string2:{$sc('cm_string2','#f07178')};"               .
-		"--adm-cm-comment:{$sc('cm_comment','#546e7a')};"               .
-		"--adm-cm-tag:{$sc('cm_tag','#f07178')};"                       .
-		"--adm-cm-attribute:{$sc('cm_attribute','#ffcb6b')};"           .
-		"--adm-cm-bracket:{$sc('cm_bracket','#89ddff')};"               .
+	$vars = ':root{'                                          .
+		"--adm-bg:{$sc('bg')};"                           .
+		"--adm-bg-bar:{$sc('bg_bar')};"                   .
+		"--adm-bg-deep:{$sc('bg_deep')};"                 .
+		"--adm-bg-darker:{$sc('bg_darker')};"             .
+		"--adm-surface-1:{$sc('surface1')};"              .
+		"--adm-surface-2:{$sc('surface2')};"              .
+		"--adm-surface-3:{$sc('surface3')};"              .
+		"--adm-table-alt:{$sc('table_alt')};"             .
+		"--adm-plugin-inactive:{$sc('plugin_inactive')};" .
+		"--adm-border:{$sc('border')};"                   .
+		"--adm-border-focus:{$sc('border_focus')};"       .
+		"--adm-border-hover:{$sc('border_hover')};"       .
+		"--adm-text:{$sc('text')};"                       .
+		"--adm-text-muted:{$sc('text_muted')};"           .
+		"--adm-text-soft:{$sc('text_soft')};"             .
+		"--adm-text-on-primary:{$sc('text_on_primary')};" .
+		"--adm-link:{$sc('link')};"                       .
+		"--adm-link-hover:{$sc('link_hover')};"           .
+		"--adm-primary:{$sc('primary')};"                 .
+		"--adm-primary-hover:{$sc('primary_hover')};"     .
+		"--adm-success:{$sc('success')};"                 .
+		"--adm-warning:{$sc('warning')};"                 .
+		"--adm-danger:{$sc('danger')};"                   .
+		"--adm-cm-keyword:{$sc('cm_keyword')};"           .
+		"--adm-cm-operator:{$sc('cm_operator')};"         .
+		"--adm-cm-variable2:{$sc('cm_variable2')};"       .
+		"--adm-cm-property:{$sc('cm_property')};"         .
+		"--adm-cm-number:{$sc('cm_number')};"             .
+		"--adm-cm-string:{$sc('cm_string')};"             .
+		"--adm-cm-string2:{$sc('cm_string2')};"           .
+		"--adm-cm-comment:{$sc('cm_comment')};"           .
+		"--adm-cm-tag:{$sc('cm_tag')};"                   .
+		"--adm-cm-attribute:{$sc('cm_attribute')};"       .
+		"--adm-cm-bracket:{$sc('cm_bracket')};"           .
 		'}';
 
 	wp_enqueue_style(

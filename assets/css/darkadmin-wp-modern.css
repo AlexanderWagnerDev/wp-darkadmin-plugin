@@ -7,39 +7,10 @@
 
 /* =============================================================================
    DESIGN TOKENS
-   html :root has higher specificity than plain :root, which beats the
-   wp_add_inline_style() block in enqueue.php (plain :root fallbacks).
+   Token values are injected via enqueue.php inline style (preset-aware).
+   This :root block only defines tokens not covered by enqueue.php.
    ============================================================================= */
-html :root {
-  /* Backgrounds */
-  --adm-bg:              #1e1e1e;
-  --adm-bg-bar:          #0c0c0c;
-  --adm-bg-deep:         #0c0c0c;
-  --adm-bg-darker:       #080808;
-  /* Surfaces */
-  --adm-surface-1:       #2a2a2a;
-  --adm-surface-2:       #333333;
-  --adm-surface-3:       #3d3d3d;
-  --adm-table-alt:       #242424;
-  --adm-plugin-inactive: #202020;
-  /* Borders */
-  --adm-border:          #3a3a3a;
-  --adm-border-focus:    #3858e9;
-  --adm-border-hover:    #6b7aee;
-  /* Text */
-  --adm-text:            #f0f0f0;
-  --adm-text-muted:      #a0a0a0;
-  --adm-text-soft:       #666666;
-  --adm-text-on-primary: #ffffff;
-  /* Links */
-  --adm-link:            #7b96f5;
-  --adm-link-hover:      #a5b8fa;
-  /* Brand - WP 7.0 Modern Blue */
-  --adm-primary:         #3858e9;
-  --adm-primary-hover:   #2145d4;
-  --adm-success:         #00ba37;
-  --adm-warning:         #dba617;
-  --adm-danger:          #d63638;
+:root {
   /* Spacing */
   --adm-space-1: 4px;
   --adm-space-2: 8px;
@@ -57,22 +28,10 @@ html :root {
   /* Sizes */
   --adm-input-h: 32px;
   --adm-btn-h:   30px;
-  /* Sidebar */
-  --adm-sidebar-bg:     #1e1e1e;
-  --adm-sidebar-active: #3858e9;
+  /* Sidebar - uses color tokens set by enqueue.php */
+  --adm-sidebar-bg:     var(--adm-bg);
+  --adm-sidebar-active: var(--adm-primary);
   --adm-sidebar-text:   #c8c8c8;
-  /* CodeMirror */
-  --adm-cm-keyword:   #c792ea;
-  --adm-cm-operator:  #89ddff;
-  --adm-cm-variable2: #82aaff;
-  --adm-cm-property:  #b2ccd6;
-  --adm-cm-number:    #f78c6c;
-  --adm-cm-string:    #c3e88d;
-  --adm-cm-string2:   #f07178;
-  --adm-cm-comment:   #546e7a;
-  --adm-cm-tag:       #f07178;
-  --adm-cm-attribute: #ffcb6b;
-  --adm-cm-bracket:   #89ddff;
 }
 
 /* =============================================================================
