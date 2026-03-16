@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 0.0.9
+Stable tag: 0.0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,12 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 4. Dashboard – Dark Mode active
 
 == Changelog ==
+= 0.0.10 =
+* Extended Themes section: added dark styling for .theme-browser .theme .theme-name, .theme-overlay .theme-actions, .theme-overlay .theme-tags, .theme-overlay .theme-header .theme-title, .theme-overlay .theme-author, .theme-overlay .theme-version and .theme-overlay .theme-rating .star-rating .star
+* Added Theme Editor / Template Side section: dark styling for #templateside > ul, .importer-title and .color-option.selected / .color-option:hover
+* Reduced .cm-error background opacity from .15 to .05 for a more subtle error highlight in CodeMirror
+* All changes applied to both darkadmin-dark.css and darkadmin-wp-modern.css
+
 = 0.0.9 =
 * Added Preset Themes: choose between Default (WP 6.x classic dark) and Modern (WP 7.0 deep blue, glassmorphism-inspired) color palettes
 * Each preset ships with its own CSS file (darkadmin-dark.css / darkadmin-modern.css) loaded dynamically based on the active preset

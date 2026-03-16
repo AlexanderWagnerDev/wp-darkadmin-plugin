@@ -19,7 +19,7 @@
 | **Requires at least** | 6.3 |
 | **Tested up to** | 6.9 |
 | **Requires PHP** | 7.4 |
-| **Stable tag** | 0.0.9 |
+| **Stable tag** | 0.0.10 |
 | **License** | GPLv2 or later |
 
 ## Description
@@ -76,6 +76,13 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 ## Changelog
+
+### 0.0.10
+
+- Extended Themes section: added dark styling for `.theme-browser .theme .theme-name`, `.theme-overlay .theme-actions`, `.theme-overlay .theme-tags`, `.theme-overlay .theme-header .theme-title`, `.theme-overlay .theme-author`, `.theme-overlay .theme-version` and `.theme-overlay .theme-rating .star-rating .star`
+- Added Theme Editor / Template Side section: dark styling for `#templateside > ul`, `.importer-title` and `.color-option.selected` / `.color-option:hover`
+- Reduced `.cm-error` background opacity from `.15` to `.05` for a more subtle error highlight in CodeMirror
+- All changes applied to both `darkadmin-dark.css` and `darkadmin-wp-modern.css`
 
 ### 0.0.9
 
@@ -211,6 +218,13 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 ## Changelog
+
+### 0.0.10
+
+- Themes-Bereich erweitert: Dark-Styling für `.theme-browser .theme .theme-name`, `.theme-overlay .theme-actions`, `.theme-overlay .theme-tags`, `.theme-overlay .theme-header .theme-title`, `.theme-overlay .theme-author`, `.theme-overlay .theme-version` und `.theme-overlay .theme-rating .star-rating .star`
+- Theme-Editor / Template-Side-Bereich hinzugefügt: Dark-Styling für `#templateside > ul`, `.importer-title` und `.color-option.selected` / `.color-option:hover`
+- `.cm-error`-Hintergrund-Deckkraft von `.15` auf `.05` reduziert für ein subtileres Fehler-Highlighting in CodeMirror
+- Alle Änderungen in `darkadmin-dark.css` und `darkadmin-wp-modern.css` umgesetzt
 
 ### 0.0.9
 
