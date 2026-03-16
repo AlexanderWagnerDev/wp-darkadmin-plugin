@@ -7,8 +7,10 @@
 
 /* =============================================================================
    DESIGN TOKENS
+   html :root has higher specificity than plain :root, which beats the
+   wp_add_inline_style() block in enqueue.php (plain :root fallbacks).
    ============================================================================= */
-:root {
+html :root {
   /* Backgrounds */
   --adm-bg:              #1e1e1e;
   --adm-bg-bar:          #0c0c0c;
