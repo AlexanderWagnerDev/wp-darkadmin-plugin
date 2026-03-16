@@ -186,6 +186,6 @@ function adm_sanitize_colors( $input ): array {
 function adm_sanitize_custom_css( string $css ): string {
 	$css = preg_replace( '/<\/?(?:script|style|iframe|object|embed|form|input|link|meta|base)[^>]*>/i', '', $css );
 	$css = preg_replace( '/<\?(?:php)?.*?\?>/is', '', $css );
-	$css = strip_tags( $css );
+	$css = wp_strip_all_tags( $css );
 	return $css;
 }
