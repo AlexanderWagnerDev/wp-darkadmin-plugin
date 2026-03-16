@@ -36,6 +36,7 @@ DarkAdmin transforms the WordPress admin dashboard into a clean, eye-friendly da
 - Token-based design system for backgrounds, text, borders, buttons and states
 - Auto Dark Mode: dynamically darkens bright plugin backgrounds not covered by the stylesheet
 - Preset Themes: choose between Default (WP 6.x) and Modern (WP 7.0) color palettes
+- Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
 
 ## Screenshots
 
@@ -84,6 +85,9 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 - Reduced `.cm-error` background opacity from `.15` to `.05` for a more subtle error highlight in CodeMirror
 - All changes applied to both `darkadmin-dark.css` and `darkadmin-wp-modern.css`
 - Fixed invalid control sequences in all language files (`de_AT`, `de_DE`, `en_US`, `.pot`): replaced `\uXXXX` Unicode escapes with literal UTF-8 characters to resolve `msgfmt` compilation errors
+- User Access: Include and Exclude options are now greyed out and non-clickable when no non-administrator users exist (disabled radio input + CSS `pointer-events: none`)
+- User Access: replaced plain text fallback with a styled empty-state block (centered layout, dashed border, large icon)
+- i18n: added missing string "No non-administrator users found. Create additional users to manage their dark mode access here." to `.pot`, `de_AT`, `de_DE` and `en_US` language files
 
 ### 0.0.9
 
@@ -179,6 +183,7 @@ DarkAdmin verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreun
 - Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
 - Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 - Preset-Themes: Wechsel zwischen Default (WP 6.x) und Modern (WP 7.0) Farbpaletten
+- Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 
 ## Screenshots
 
@@ -227,6 +232,9 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 - `.cm-error`-Hintergrund-Deckkraft von `.15` auf `.05` reduziert für ein subtileres Fehler-Highlighting in CodeMirror
 - Alle Änderungen in `darkadmin-dark.css` und `darkadmin-wp-modern.css` umgesetzt
 - Ungültige Steuerzeichen in allen Sprachdateien (`de_AT`, `de_DE`, `en_US`, `.pot`) behoben: `\uXXXX`-Unicode-Escapes durch direkte UTF-8-Zeichen ersetzt, um `msgfmt`-Kompilierungsfehler zu beheben
+- Benutzerzugriff: Einschließen- und Ausschließen-Optionen werden nun ausgegraut und nicht klickbar, wenn keine Nicht-Administrator-Benutzer vorhanden sind (deaktivierter Radio-Input + CSS `pointer-events: none`)
+- Benutzerzugriff: Einfachen Text-Fallback durch gestalteten Empty-State-Block ersetzt (zentriertes Layout, gestrichelter Rahmen, großes Icon)
+- i18n: fehlenden String „Keine Nicht-Administrator-Benutzer gefunden. Erstelle weitere Benutzer, um deren Dark-Mode-Zugriff hier zu verwalten.“ in `.pot`, `de_AT`, `de_DE` und `en_US` Sprachdateien ergänzt
 
 ### 0.0.9
 
