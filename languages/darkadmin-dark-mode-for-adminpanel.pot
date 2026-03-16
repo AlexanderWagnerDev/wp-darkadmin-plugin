@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.9\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-16 12:29+0100\n"
-"PO-Revision-Date: 2026-03-16 12:29+0100\n"
+"POT-Creation-Date: 2026-03-16 16:00+0100\n"
+"PO-Revision-Date: 2026-03-16 16:00+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,14 @@ msgstr ""
 
 #: darkadmin.php
 msgid "Settings"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Active"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Inactive"
 msgstr ""
 
 #: includes/settings-page.php
@@ -47,14 +55,6 @@ msgid "Automatically darkens bright backgrounds and lightens dark text from unkn
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Active"
-msgstr ""
-
-#: includes/settings-page.php
-msgid "Inactive"
-msgstr ""
-
-#: includes/settings-page.php
 msgid "Preset Themes"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgid "Modern"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "WP 7.0 deep blue, high contrast"
+msgid "WP Modern design language (dark)"
 msgstr ""
 
 #: includes/settings-page.php
@@ -83,7 +83,11 @@ msgid "Load Preset"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "✓ Active"
+msgid "\u2713 Active"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Preview"
 msgstr ""
 
 #: includes/settings-page.php
@@ -95,7 +99,7 @@ msgid "Select which non-admin users should see dark mode. Administrators always 
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
+msgid "Administrators are not listed here \u2014 they always have dark mode active."
 msgstr ""
 
 #: includes/settings-page.php
@@ -119,14 +123,6 @@ msgid "Restore Default Colors"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Custom CSS"
-msgstr ""
-
-#: includes/settings-page.php
-msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
-msgstr ""
-
-#: includes/settings-page.php
 msgid "Available CSS Variables"
 msgstr ""
 
@@ -135,13 +131,185 @@ msgid "Click to copy"
 msgstr ""
 
 #: includes/settings-page.php
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
+msgstr ""
+
+#: includes/settings-page.php
 msgid "Save Settings"
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr ""
+
+#: includes/defaults.php
+msgid "Backgrounds"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Surfaces"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Borders"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Text"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Links"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Brand"
+msgstr ""
+
+#: includes/defaults.php
+msgid "CodeMirror"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Background (Base)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Background (Admin Bar)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Background (Deep / Submenu)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Background (Darker / Editor Gutter)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Surface 1 (Cards / Tables)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Surface 2 (Inputs)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Surface 3 (Hover)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Table Row Alternate"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Plugin Inactive Row"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Border"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Border (Focus)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Border (Hover)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Primary Text"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Muted Text"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Soft Text (Row Actions)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Text on Primary / White"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Link Color"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Link Hover"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Primary / Buttons"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Primary Hover"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Success"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Warning"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Danger / Error"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Keyword"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Operator / Bracket"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Variable / Def"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Property"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Number / Atom"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: String"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: String (alt)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Comment"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Tag"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Attribute / Qualifier / Builtin"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Code: Bracket"
 msgstr ""

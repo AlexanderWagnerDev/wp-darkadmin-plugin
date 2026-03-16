@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.9\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-16 12:29+0100\n"
-"PO-Revision-Date: 2026-03-16 12:29+0100\n"
+"POT-Creation-Date: 2026-03-16 16:00+0100\n"
+"PO-Revision-Date: 2026-03-16 16:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: de_DE\n"
@@ -29,6 +29,14 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: includes/settings-page.php
+msgid "Active"
+msgstr "Aktiv"
+
+#: includes/settings-page.php
+msgid "Inactive"
+msgstr "Inaktiv"
+
+#: includes/settings-page.php
 msgid "General"
 msgstr "Allgemein"
 
@@ -47,14 +55,6 @@ msgstr "Auto Dark Mode"
 #: includes/settings-page.php
 msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
 msgstr "Verdunkelt automatisch helle Hintergründe und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
-
-#: includes/settings-page.php
-msgid "Active"
-msgstr "Aktiv"
-
-#: includes/settings-page.php
-msgid "Inactive"
-msgstr "Inaktiv"
 
 #: includes/settings-page.php
 msgid "Preset Themes"
@@ -77,16 +77,20 @@ msgid "Modern"
 msgstr "Modern"
 
 #: includes/settings-page.php
-msgid "WP 7.0 deep blue, high contrast"
-msgstr "WP 7.0 Tiefblau, hoher Kontrast"
+msgid "WP Modern design language (dark)"
+msgstr "WP Modern Design Language (dunkel)"
 
 #: includes/settings-page.php
 msgid "Load Preset"
 msgstr "Preset laden"
 
 #: includes/settings-page.php
-msgid "✓ Active"
-msgstr "✓ Aktiv"
+msgid "\u2713 Active"
+msgstr "\u2713 Aktiv"
+
+#: includes/settings-page.php
+msgid "Preview"
+msgstr "Vorschau"
 
 #: includes/settings-page.php
 msgid "User Access"
@@ -97,8 +101,8 @@ msgid "Select which non-admin users should see dark mode. Administrators always 
 msgstr "Wähle aus, welche Nicht-Admin-Benutzer den Dark Mode sehen sollen. Administratoren haben den Dark Mode immer aktiv. Wenn nichts ausgewählt ist, gilt der Dark Mode für alle Benutzer."
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
-msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode immer aktiv."
+msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgstr "Administratoren werden hier nicht angezeigt \u2014 sie haben den Dark Mode immer aktiv."
 
 #: includes/settings-page.php
 msgid "Color Customization"
@@ -121,14 +125,6 @@ msgid "Restore Default Colors"
 msgstr "Standardfarben wiederherstellen"
 
 #: includes/settings-page.php
-msgid "Custom CSS"
-msgstr "Eigenes CSS"
-
-#: includes/settings-page.php
-msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
-msgstr "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfügbar."
-
-#: includes/settings-page.php
 msgid "Available CSS Variables"
 msgstr "Verfügbare CSS-Variablen"
 
@@ -137,13 +133,185 @@ msgid "Click to copy"
 msgstr "Klicken zum Kopieren"
 
 #: includes/settings-page.php
+msgid "Custom CSS"
+msgstr "Eigenes CSS"
+
+#: includes/settings-page.php
+msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
+msgstr "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfügbar."
+
+#: includes/settings-page.php
 msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
-msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgstr "\u2713 Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
-msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr "\u2713 Einstellungen gespeichert. Dark Mode ist deaktiviert."
+
+#: includes/defaults.php
+msgid "Backgrounds"
+msgstr "Hintergründe"
+
+#: includes/defaults.php
+msgid "Surfaces"
+msgstr "Flächen"
+
+#: includes/defaults.php
+msgid "Borders"
+msgstr "Rahmen"
+
+#: includes/defaults.php
+msgid "Text"
+msgstr "Text"
+
+#: includes/defaults.php
+msgid "Links"
+msgstr "Links"
+
+#: includes/defaults.php
+msgid "Brand"
+msgstr "Markenfarben"
+
+#: includes/defaults.php
+msgid "CodeMirror"
+msgstr "CodeMirror"
+
+#: includes/defaults.php
+msgid "Background (Base)"
+msgstr "Hintergrund (Basis)"
+
+#: includes/defaults.php
+msgid "Background (Admin Bar)"
+msgstr "Hintergrund (Admin-Bar)"
+
+#: includes/defaults.php
+msgid "Background (Deep / Submenu)"
+msgstr "Hintergrund (Tief / Untermenü)"
+
+#: includes/defaults.php
+msgid "Background (Darker / Editor Gutter)"
+msgstr "Hintergrund (Dunkler / Editor-Gutter)"
+
+#: includes/defaults.php
+msgid "Surface 1 (Cards / Tables)"
+msgstr "Fläche 1 (Karten / Tabellen)"
+
+#: includes/defaults.php
+msgid "Surface 2 (Inputs)"
+msgstr "Fläche 2 (Eingabefelder)"
+
+#: includes/defaults.php
+msgid "Surface 3 (Hover)"
+msgstr "Fläche 3 (Hover)"
+
+#: includes/defaults.php
+msgid "Table Row Alternate"
+msgstr "Tabellenzeile (alternierend)"
+
+#: includes/defaults.php
+msgid "Plugin Inactive Row"
+msgstr "Inaktive Plugin-Zeile"
+
+#: includes/defaults.php
+msgid "Border"
+msgstr "Rahmen"
+
+#: includes/defaults.php
+msgid "Border (Focus)"
+msgstr "Rahmen (Fokus)"
+
+#: includes/defaults.php
+msgid "Border (Hover)"
+msgstr "Rahmen (Hover)"
+
+#: includes/defaults.php
+msgid "Primary Text"
+msgstr "Primärer Text"
+
+#: includes/defaults.php
+msgid "Muted Text"
+msgstr "Gedämpfter Text"
+
+#: includes/defaults.php
+msgid "Soft Text (Row Actions)"
+msgstr "Weicher Text (Zeilenaktionen)"
+
+#: includes/defaults.php
+msgid "Text on Primary / White"
+msgstr "Text auf Primärfarbe / Weiß"
+
+#: includes/defaults.php
+msgid "Link Color"
+msgstr "Linkfarbe"
+
+#: includes/defaults.php
+msgid "Link Hover"
+msgstr "Link (Hover)"
+
+#: includes/defaults.php
+msgid "Primary / Buttons"
+msgstr "Primärfarbe / Buttons"
+
+#: includes/defaults.php
+msgid "Primary Hover"
+msgstr "Primärfarbe (Hover)"
+
+#: includes/defaults.php
+msgid "Success"
+msgstr "Erfolg"
+
+#: includes/defaults.php
+msgid "Warning"
+msgstr "Warnung"
+
+#: includes/defaults.php
+msgid "Danger / Error"
+msgstr "Gefahr / Fehler"
+
+#: includes/defaults.php
+msgid "Code: Keyword"
+msgstr "Code: Schlüsselwort"
+
+#: includes/defaults.php
+msgid "Code: Operator / Bracket"
+msgstr "Code: Operator / Klammer"
+
+#: includes/defaults.php
+msgid "Code: Variable / Def"
+msgstr "Code: Variable / Definition"
+
+#: includes/defaults.php
+msgid "Code: Property"
+msgstr "Code: Eigenschaft"
+
+#: includes/defaults.php
+msgid "Code: Number / Atom"
+msgstr "Code: Zahl / Atom"
+
+#: includes/defaults.php
+msgid "Code: String"
+msgstr "Code: Zeichenkette"
+
+#: includes/defaults.php
+msgid "Code: String (alt)"
+msgstr "Code: Zeichenkette (alt)"
+
+#: includes/defaults.php
+msgid "Code: Comment"
+msgstr "Code: Kommentar"
+
+#: includes/defaults.php
+msgid "Code: Tag"
+msgstr "Code: Tag"
+
+#: includes/defaults.php
+msgid "Code: Attribute / Qualifier / Builtin"
+msgstr "Code: Attribut / Qualifier / Builtin"
+
+#: includes/defaults.php
+msgid "Code: Bracket"
+msgstr "Code: Klammer"
