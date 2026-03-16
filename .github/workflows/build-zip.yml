@@ -40,6 +40,7 @@ jobs:
             -not -name '*.gif' \
             -not -name '*.webp' \
             -not -name '*.svg' \
+            -not -name 'readme-de.txt' \
             -type f \
           | sed 's|^\./||' \
           | zip "$ZIP_PATH" -@
