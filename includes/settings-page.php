@@ -43,6 +43,7 @@ function adm_settings_page(): void {
 			'surface'  => '#2c3338',
 			'primary'  => '#2271b1',
 			'text'     => '#dcdcde',
+			'bar'      => '#1d2327',
 		],
 		'modern' => [
 			'label'    => __( 'Modern', 'darkadmin-dark-mode-for-adminpanel' ),
@@ -51,6 +52,7 @@ function adm_settings_page(): void {
 			'surface'  => '#111827',
 			'primary'  => '#3b82f6',
 			'text'     => '#e2e8f0',
+			'bar'      => '#0d1117',
 		],
 	];
 	?>
@@ -117,7 +119,7 @@ function adm_settings_page(): void {
 							<input type="checkbox" id="adm_auto_darken" name="adm_auto_darken" value="1"
 								<?php checked( true, $auto_darken ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
-						</label>
+					</label>
 					</div>
 
 				</div>
@@ -133,26 +135,72 @@ function adm_settings_page(): void {
 					<p class="adm-card-description">
 						<?php esc_html_e( 'Choose a preset to load its color palette. You can further customize colors below after loading.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 					</p>
-					<div class="adm-preset-grid">
-						<?php foreach ( $preset_meta as $slug => $meta ) : ?>
-							<div class="adm-preset-tile <?php echo $active_preset === $slug ? 'adm-preset-active' : ''; ?>" data-preset="<?php echo esc_attr( $slug ); ?>">
-								<div class="adm-preset-swatch" style="background:<?php echo esc_attr( $meta['bg'] ); ?>;">
-									<span class="adm-preset-swatch-surface" style="background:<?php echo esc_attr( $meta['surface'] ); ?>;"></span>
-									<span class="adm-preset-swatch-accent" style="background:<?php echo esc_attr( $meta['primary'] ); ?>;"></span>
-									<span class="adm-preset-swatch-text" style="color:<?php echo esc_attr( $meta['text'] ); ?>;"><?php echo esc_html( $meta['label'] ); ?></span>
+
+					<!-- JSON data for JS -->
+					<script id="adm-preset-meta" type="application/json"><?php echo wp_json_encode( $preset_meta ); ?></script>
+
+					<div class="adm-preset-layout">
+
+						<!-- Preset tiles -->
+						<div class="adm-preset-grid">
+							<?php foreach ( $preset_meta as $slug => $meta ) : ?>
+								<div class="adm-preset-tile <?php echo $active_preset === $slug ? 'adm-preset-active' : ''; ?>" data-preset="<?php echo esc_attr( $slug ); ?>">
+									<div class="adm-preset-swatch" style="background:<?php echo esc_attr( $meta['bg'] ); ?>;">
+										<span class="adm-preset-swatch-surface" style="background:<?php echo esc_attr( $meta['surface'] ); ?>;"></span>
+										<span class="adm-preset-swatch-accent" style="background:<?php echo esc_attr( $meta['primary'] ); ?>;"></span>
+										<span class="adm-preset-swatch-text" style="color:<?php echo esc_attr( $meta['text'] ); ?>;"><?php echo esc_html( $meta['label'] ); ?></span>
+									</div>
+									<div class="adm-preset-info">
+										<strong><?php echo esc_html( $meta['label'] ); ?></strong>
+										<span><?php echo esc_html( $meta['desc'] ); ?></span>
+									</div>
+									<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
+										<?php echo $active_preset === $slug
+											? esc_html__( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' )
+											: esc_html__( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+									</button>
 								</div>
-								<div class="adm-preset-info">
-									<strong><?php echo esc_html( $meta['label'] ); ?></strong>
-									<span><?php echo esc_html( $meta['desc'] ); ?></span>
+							<?php endforeach; ?>
+						</div>
+
+						<!-- Live preview panel -->
+						<?php
+						$prev = $preset_meta[ $active_preset ];
+						?>
+						<div>
+							<p class="adm-preview-label"><?php esc_html_e( 'Preview', 'darkadmin-dark-mode-for-adminpanel' ); ?></p>
+							<div class="adm-preset-preview" id="adm-preset-preview"
+								style="--adm-preview-bg:<?php echo esc_attr( $prev['bg'] ); ?>;--adm-preview-surface:<?php echo esc_attr( $prev['surface'] ); ?>;--adm-preview-primary:<?php echo esc_attr( $prev['primary'] ); ?>;--adm-preview-text:<?php echo esc_attr( $prev['text'] ); ?>;--adm-preview-bar:<?php echo esc_attr( $prev['bar'] ); ?>;">
+								<div class="adm-preview-topbar">
+									<div class="adm-preview-topbar-logo"></div>
+									<div class="adm-preview-topbar-items">
+										<div class="adm-preview-topbar-item" style="width:40px"></div>
+										<div class="adm-preview-topbar-item" style="width:28px"></div>
+										<div class="adm-preview-topbar-item" style="width:34px"></div>
+									</div>
 								</div>
-								<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
-									<?php echo $active_preset === $slug
-										? esc_html__( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' )
-										: esc_html__( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-								</button>
+								<div class="adm-preview-main">
+									<div class="adm-preview-sidebar">
+										<div class="adm-preview-sidebar-item is-active"></div>
+										<div class="adm-preview-sidebar-item"></div>
+										<div class="adm-preview-sidebar-item"></div>
+										<div class="adm-preview-sidebar-item"></div>
+										<div class="adm-preview-sidebar-item"></div>
+										<div class="adm-preview-sidebar-item"></div>
+									</div>
+									<div class="adm-preview-content">
+										<div class="adm-preview-content-bar is-title"></div>
+										<div class="adm-preview-content-bar" style="width:80%"></div>
+										<div class="adm-preview-content-card"></div>
+										<div class="adm-preview-content-btn"></div>
+									</div>
+								</div>
+								<div class="adm-preview-name" id="adm-preview-name"><?php echo esc_html( $prev['label'] ); ?></div>
 							</div>
-						<?php endforeach; ?>
-					</div>
+						</div>
+
+					</div><!-- .adm-preset-layout -->
+
 					<input type="hidden" id="adm_preset" name="adm_preset" value="<?php echo esc_attr( $active_preset ); ?>" />
 				</div>
 			</div>

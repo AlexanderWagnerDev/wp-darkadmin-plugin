@@ -1,145 +1,211 @@
-/* global wp, admData */
-( function ( $ ) {
+/* DarkAdmin - Settings Page JS */
+( function () {
 	'use strict';
 
-	const root = document.documentElement;
-
-	// Initialize all color pickers with live preview on change.
-	$( '.adm-color-picker' ).wpColorPicker( {
-		change: function ( event, ui ) {
-			const key    = $( this ).data( 'key' );
-			const cssVar = admData.varMap[ key ];
-			if ( cssVar ) {
-				root.style.setProperty( cssVar, ui.color.toString() );
-			}
-		},
-		clear: function () {
-			const key    = $( this ).data( 'key' );
-			const cssVar = admData.varMap[ key ];
-			const def    = admData.defaults[ key ];
-			if ( cssVar && def ) {
-				root.style.setProperty( cssVar, def );
-			}
-		},
-	} );
-
-	// Reset all color pickers to their default values.
-	$( '#adm-reset-colors' ).on( 'click', function () {
-		loadPresetColors( admData.defaults );
-		$( '#adm_preset' ).val( 'default' );
-		updatePresetTiles( 'default' );
-	} );
-
-	// Load a preset: set all pickers + live preview + update hidden input.
-	function loadPresetColors( colors ) {
-		$( '.adm-color-picker' ).each( function () {
-			const $input = $( this );
-			const key    = $input.data( 'key' );
-			const color  = colors[ key ];
-			if ( key && color ) {
-				$input.wpColorPicker( 'color', color );
-				const cssVar = admData.varMap[ key ];
-				if ( cssVar ) {
-					root.style.setProperty( cssVar, color );
-				}
-			}
+	/* -----------------------------------------------------------------------
+	 * Color picker live preview
+	 * --------------------------------------------------------------------- */
+	function initColorPickers() {
+		const pickers = document.querySelectorAll( '.adm-color-picker' );
+		pickers.forEach( function ( input ) {
+			jQuery( input ).wpColorPicker( {
+				change: function ( _e, ui ) {
+					const key = input.dataset.key;
+					if ( key ) {
+						document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), ui.color.toString() );
+					}
+				},
+				clear: function () {
+					const key = input.dataset.key;
+					const def = input.dataset.defaultColor;
+					if ( key && def ) {
+						document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), def );
+					}
+				},
+			} );
 		} );
+	}
+
+	/* -----------------------------------------------------------------------
+	 * Preset tiles + live preview panel
+	 * --------------------------------------------------------------------- */
+	function initPresets() {
+		const metaEl = document.getElementById( 'adm-preset-meta' );
+		if ( ! metaEl ) return;
+		const meta = JSON.parse( metaEl.textContent || '{}' );
+
+		const presetInput  = document.getElementById( 'adm_preset' );
+		const previewPanel = document.getElementById( 'adm-preset-preview' );
+		const previewName  = document.getElementById( 'adm-preview-name' );
+		const tiles        = document.querySelectorAll( '.adm-preset-tile' );
+		const loadBtns     = document.querySelectorAll( '.adm-preset-load-btn' );
+		const admPresets   = window.admPresets || {};
+
+		function updatePreview( slug ) {
+			if ( ! previewPanel || ! meta[ slug ] ) return;
+			const m = meta[ slug ];
+			previewPanel.style.setProperty( '--adm-preview-bg',      m.bg );
+			previewPanel.style.setProperty( '--adm-preview-surface', m.surface );
+			previewPanel.style.setProperty( '--adm-preview-primary', m.primary );
+			previewPanel.style.setProperty( '--adm-preview-text',    m.text );
+			previewPanel.style.setProperty( '--adm-preview-bar',     m.bar || m.bg );
+			if ( previewName ) previewName.textContent = m.label;
+		}
+
+		function setActive( slug ) {
+			tiles.forEach( function ( t ) {
+				const isThis = t.dataset.preset === slug;
+				t.classList.toggle( 'adm-preset-active', isThis );
+			} );
+			loadBtns.forEach( function ( btn ) {
+				const isThis = btn.dataset.preset === slug;
+				btn.textContent = isThis ? '\u2713 Active' : 'Load Preset';
+				if ( window.admI18n ) {
+					btn.textContent = isThis ? window.admI18n.active : window.admI18n.loadPreset;
+				}
+			} );
+			if ( presetInput ) presetInput.value = slug;
+		}
+
+		/* Hover: show preview without committing */
+		tiles.forEach( function ( tile ) {
+			tile.addEventListener( 'mouseenter', function () {
+				updatePreview( tile.dataset.preset );
+			} );
+			tile.addEventListener( 'mouseleave', function () {
+				/* Restore to currently selected preset */
+				updatePreview( presetInput ? presetInput.value : 'default' );
+			} );
+		} );
+
+		/* Click Load Preset button */
+		loadBtns.forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				const slug = btn.dataset.preset;
+				const colors = admPresets[ slug ];
+				if ( colors ) {
+					loadPresetColors( slug, colors );
+				}
+				setActive( slug );
+				updatePreview( slug );
+			} );
+		} );
+	}
+
+	/* -----------------------------------------------------------------------
+	 * Load preset colors into color pickers
+	 * --------------------------------------------------------------------- */
+	function loadPresetColors( slug, colors ) {
+		Object.keys( colors ).forEach( function ( key ) {
+			const input = document.getElementById( 'adm_color_' + key );
+			if ( ! input ) return;
+			const val = colors[ key ];
+			jQuery( input ).wpColorPicker( 'color', val );
+			document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), val );
+		} );
+		updatePresetTiles( slug );
 	}
 
 	function updatePresetTiles( activeSlug ) {
-		$( '.adm-preset-tile' ).each( function () {
-			const slug = $( this ).data( 'preset' );
-			$( this ).toggleClass( 'adm-preset-active', slug === activeSlug );
-			$( this ).find( '.adm-preset-load-btn' ).text(
-				slug === activeSlug ? '\u2713 Active' : 'Load Preset'
-			);
+		document.querySelectorAll( '.adm-preset-tile' ).forEach( function ( tile ) {
+			tile.classList.toggle( 'adm-preset-active', tile.dataset.preset === activeSlug );
+		} );
+		document.querySelectorAll( '.adm-preset-load-btn' ).forEach( function ( btn ) {
+			const isActive = btn.dataset.preset === activeSlug;
+			btn.textContent = isActive
+				? ( window.admI18n ? window.admI18n.active    : '\u2713 Active' )
+				: ( window.admI18n ? window.admI18n.loadPreset : 'Load Preset' );
 		} );
 	}
 
-	// Handle preset load button clicks.
-	$( document ).on( 'click', '.adm-preset-load-btn', function () {
-		const slug   = $( this ).data( 'preset' );
-		const colors = admData.presets[ slug ];
-		if ( ! colors ) {
-			return;
-		}
-		loadPresetColors( colors );
-		$( '#adm_preset' ).val( slug );
-		updatePresetTiles( slug );
-	} );
-
-	// Export current palette as JSON file.
-	$( '#adm-export-colors' ).on( 'click', function () {
-		const palette = {};
-		$( '.adm-color-picker' ).each( function () {
-			const key = $( this ).data( 'key' );
-			if ( key ) {
-				palette[ key ] = $( this ).val();
-			}
+	/* -----------------------------------------------------------------------
+	 * Reset colors
+	 * --------------------------------------------------------------------- */
+	function initReset() {
+		const btn = document.getElementById( 'adm-reset-colors' );
+		if ( ! btn ) return;
+		const admDefaults = window.admDefaults || {};
+		btn.addEventListener( 'click', function () {
+			Object.keys( admDefaults ).forEach( function ( key ) {
+				const input = document.getElementById( 'adm_color_' + key );
+				if ( ! input ) return;
+				jQuery( input ).wpColorPicker( 'color', admDefaults[ key ] );
+				document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), admDefaults[ key ] );
+			} );
 		} );
-		const blob = new Blob(
-			[ JSON.stringify( { darkadmin_palette: palette }, null, 2 ) ],
-			{ type: 'application/json' }
-		);
-		const url  = URL.createObjectURL( blob );
-		const a    = document.createElement( 'a' );
-		a.href     = url;
-		a.download = 'darkadmin-palette.json';
-		a.click();
-		URL.revokeObjectURL( url );
-	} );
+	}
 
-	// Import palette from JSON file.
-	$( '#adm-import-file' ).on( 'change', function () {
-		const file = this.files[ 0 ];
-		if ( ! file ) {
-			return;
+	/* -----------------------------------------------------------------------
+	 * Export / Import palette
+	 * --------------------------------------------------------------------- */
+	function initPaletteIO() {
+		const exportBtn  = document.getElementById( 'adm-export-colors' );
+		const importFile = document.getElementById( 'adm-import-file' );
+		const statusEl   = document.getElementById( 'adm-import-status' );
+
+		if ( exportBtn ) {
+			exportBtn.addEventListener( 'click', function () {
+				const pickers = document.querySelectorAll( '.adm-color-picker' );
+				const palette = {};
+				pickers.forEach( function ( p ) { palette[ p.dataset.key ] = p.value; } );
+				const blob = new Blob( [ JSON.stringify( palette, null, 2 ) ], { type: 'application/json' } );
+				const url  = URL.createObjectURL( blob );
+				const a    = document.createElement( 'a' );
+				a.href     = url;
+				a.download = 'darkadmin-palette.json';
+				a.click();
+				URL.revokeObjectURL( url );
+			} );
 		}
-		const $status = $( '#adm-import-status' );
-		const reader  = new FileReader();
-		reader.onload = function ( e ) {
-			try {
-				const data    = JSON.parse( e.target.result );
-				const palette = data.darkadmin_palette;
-				if ( ! palette || typeof palette !== 'object' ) {
-					throw new Error( 'Invalid format' );
-				}
-				let applied = 0;
-				$( '.adm-color-picker' ).each( function () {
-					const key   = $( this ).data( 'key' );
-					const color = palette[ key ];
-					if ( key && color && /^#[0-9a-fA-F]{3,8}$/.test( color ) ) {
-						$( this ).wpColorPicker( 'color', color );
-						const cssVar = admData.varMap[ key ];
-						if ( cssVar ) {
-							root.style.setProperty( cssVar, color );
-						}
-						applied++;
+
+		if ( importFile ) {
+			importFile.addEventListener( 'change', function () {
+				const file = importFile.files[ 0 ];
+				if ( ! file ) return;
+				const reader = new FileReader();
+				reader.onload = function ( e ) {
+					try {
+						const data = JSON.parse( e.target.result );
+						Object.keys( data ).forEach( function ( key ) {
+							const input = document.getElementById( 'adm_color_' + key );
+							if ( ! input ) return;
+							jQuery( input ).wpColorPicker( 'color', data[ key ] );
+							document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), data[ key ] );
+						} );
+						if ( statusEl ) { statusEl.textContent = '\u2713 Imported'; statusEl.className = 'adm-import-status adm-import-ok'; }
+					} catch ( err ) {
+						if ( statusEl ) { statusEl.textContent = '\u2715 Invalid JSON'; statusEl.className = 'adm-import-status adm-import-err'; }
 					}
-				} );
-				$status.text( '\u2713 ' + applied + ' colors imported' ).addClass( 'adm-import-ok' ).removeClass( 'adm-import-err' );
-			} catch ( err ) {
-				$status.text( '\u2717 Invalid palette file' ).addClass( 'adm-import-err' ).removeClass( 'adm-import-ok' );
-			}
-		};
-		reader.readAsText( file );
-		// Reset so the same file can be re-imported.
-		this.value = '';
-	} );
-
-	// Copy CSS variable name to clipboard on click.
-	$( document ).on( 'click', '.adm-var-copy', function () {
-		const varName = $( this ).data( 'var' );
-		if ( ! varName ) {
-			return;
+					importFile.value = '';
+				};
+				reader.readAsText( file );
+			} );
 		}
-		navigator.clipboard.writeText( 'var(' + varName + ')' ).then( function () {
-			const $btn  = $( '.adm-var-copy[data-var="' + varName + '"]' );
-			const $code = $btn.find( 'code' );
-			const orig  = $code.text();
-			$code.text( '\u2713 Copied!' );
-			setTimeout( function () { $code.text( orig ); }, 1500 );
-		} );
-	} );
+	}
 
-} )( jQuery );
+	/* -----------------------------------------------------------------------
+	 * Copy CSS var to clipboard
+	 * --------------------------------------------------------------------- */
+	function initVarCopy() {
+		document.querySelectorAll( '.adm-var-copy' ).forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
+					const orig = btn.innerHTML;
+					btn.innerHTML = '<code>\u2713 Copied!</code>';
+					setTimeout( function () { btn.innerHTML = orig; }, 1400 );
+				} ).catch( function () {} );
+			} );
+		} );
+	}
+
+	/* -----------------------------------------------------------------------
+	 * Boot
+	 * --------------------------------------------------------------------- */
+	document.addEventListener( 'DOMContentLoaded', function () {
+		initColorPickers();
+		initPresets();
+		initReset();
+		initPaletteIO();
+		initVarCopy();
+	} );
+} )();

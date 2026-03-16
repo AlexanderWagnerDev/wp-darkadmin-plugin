@@ -242,6 +242,247 @@
 }
 
 /* =============================================================================
+   PRESET THEMES
+   ============================================================================= */
+.adm-preset-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 700px) {
+  .adm-preset-layout { grid-template-columns: 1fr; }
+}
+
+/* --- Tile list (left column) --- */
+.adm-preset-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.adm-preset-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 2px solid #dcdcde;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+  background: #fafafa;
+  user-select: none;
+}
+.adm-preset-tile:hover {
+  border-color: #2271b1;
+  background: #f0f6fc;
+  box-shadow: 0 0 0 3px rgba(34,113,177,.12);
+}
+.adm-preset-tile.adm-preset-active {
+  border-color: #2271b1;
+  background: #f0f6fc;
+  box-shadow: 0 0 0 3px rgba(34,113,177,.18);
+}
+
+/* Swatch strip */
+.adm-preset-swatch {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.1);
+}
+.adm-preset-swatch-surface {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  height: 18px;
+  border-radius: 3px;
+  opacity: .9;
+}
+.adm-preset-swatch-accent {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  width: 20px;
+  height: 8px;
+  border-radius: 3px;
+}
+.adm-preset-swatch-text {
+  position: absolute;
+  bottom: 8px;
+  left: 30px;
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Tile text */
+.adm-preset-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.adm-preset-info strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d2327;
+}
+.adm-preset-info span {
+  font-size: 11px;
+  color: #646970;
+}
+
+/* Load button */
+.adm-preset-load-btn {
+  flex-shrink: 0;
+  font-size: 11px !important;
+  padding: 3px 10px !important;
+  height: auto !important;
+  line-height: 1.6 !important;
+  white-space: nowrap;
+}
+.adm-preset-tile.adm-preset-active .adm-preset-load-btn {
+  background: #2271b1 !important;
+  color: #fff !important;
+  border-color: #2271b1 !important;
+  cursor: default !important;
+}
+
+/* --- Preview panel (right column) --- */
+.adm-preset-preview {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dcdcde;
+  box-shadow: 0 2px 8px rgba(0,0,0,.10);
+  background: #1d2327;
+  transition: background .25s;
+}
+.adm-preview-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: #646970;
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+/* Topbar */
+.adm-preview-topbar {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  background: var(--adm-preview-bar, #1d2327);
+  transition: background .25s;
+}
+.adm-preview-topbar-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--adm-preview-primary, #2271b1);
+  opacity: .9;
+  flex-shrink: 0;
+  transition: background .25s;
+}
+.adm-preview-topbar-items {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+}
+.adm-preview-topbar-item {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--adm-preview-text, #dcdcde);
+  opacity: .25;
+  transition: background .25s;
+}
+/* Main area */
+.adm-preview-main {
+  display: flex;
+  height: 110px;
+}
+/* Sidebar */
+.adm-preview-sidebar {
+  width: 54px;
+  background: var(--adm-preview-bg, #1d2327);
+  border-right: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 6px;
+  transition: background .25s;
+}
+.adm-preview-sidebar-item {
+  height: 7px;
+  border-radius: 3px;
+  background: var(--adm-preview-text, #dcdcde);
+  opacity: .2;
+  transition: background .25s;
+}
+.adm-preview-sidebar-item.is-active {
+  background: var(--adm-preview-primary, #2271b1);
+  opacity: .85;
+}
+/* Content */
+.adm-preview-content {
+  flex: 1;
+  background: var(--adm-preview-surface, #2c3338);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transition: background .25s;
+}
+.adm-preview-content-bar {
+  height: 7px;
+  border-radius: 3px;
+  background: var(--adm-preview-text, #dcdcde);
+  opacity: .18;
+  transition: background .25s;
+}
+.adm-preview-content-bar.is-title {
+  width: 45%;
+  opacity: .35;
+  height: 9px;
+}
+.adm-preview-content-card {
+  flex: 1;
+  border-radius: 4px;
+  background: var(--adm-preview-bg, #1d2327);
+  opacity: .7;
+  transition: background .25s;
+}
+.adm-preview-content-btn {
+  align-self: flex-start;
+  width: 38px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--adm-preview-primary, #2271b1);
+  opacity: .85;
+  transition: background .25s;
+}
+/* Preset name label inside preview */
+.adm-preview-name {
+  padding: 6px 10px;
+  background: var(--adm-preview-bg, #1d2327);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--adm-preview-text, #dcdcde);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  transition: background .25s, color .25s;
+}
+
+/* =============================================================================
    COLOR GRID & PALETTE ACTIONS
    ============================================================================= */
 .adm-palette-actions {
@@ -588,3 +829,22 @@ body.adm-dark-active .wp-picker-input-wrap .button,
 body.adm-dark-active .wp-picker-clear { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; border-color: var(--adm-border) !important; }
 body.adm-dark-active .iris-picker { background: var(--adm-surface-1) !important; border-color: var(--adm-border) !important; box-shadow: var(--adm-shadow-md) !important; }
 body.adm-dark-active .iris-picker .iris-picker-inner input[type="text"] { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; border-color: var(--adm-border) !important; }
+
+/* Preset tiles - dark */
+body.adm-dark-active .adm-preset-tile {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+body.adm-dark-active .adm-preset-tile:hover {
+  border-color: var(--adm-primary) !important;
+  background: var(--adm-surface-3) !important;
+  box-shadow: 0 0 0 3px rgba(34,113,177,.18) !important;
+}
+body.adm-dark-active .adm-preset-tile.adm-preset-active {
+  border-color: var(--adm-primary) !important;
+  background: var(--adm-surface-3) !important;
+}
+body.adm-dark-active .adm-preset-info strong { color: var(--adm-text) !important; }
+body.adm-dark-active .adm-preset-info span   { color: var(--adm-text-muted) !important; }
+body.adm-dark-active .adm-preview-label      { color: var(--adm-text-muted) !important; }
+body.adm-dark-active .adm-preset-preview     { border-color: var(--adm-border) !important; }
