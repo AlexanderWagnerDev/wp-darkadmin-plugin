@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADM_VERSION', '0.0.9' );
+define( 'ADM_VERSION', '0.0.10' );
 define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
 define( 'ADM_PATH', plugin_dir_path( __FILE__ ) );
 
