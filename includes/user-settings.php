@@ -8,11 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Logic:
  *  1. Global dark mode must be enabled (adm_dark_mode_enabled).
- *  2. If the current user is a super-admin / administrator:
- *     - Dark mode is always active for them.
- *  3. For non-admins:
- *     - Check if their user ID is in the allowed-users list (adm_allowed_users).
- *     - If adm_allowed_users is empty, dark mode applies to ALL users (default).
+ *  2. Administrators always get dark mode when it's globally enabled.
+ *  3. For non-admins the adm_user_access_mode option controls behaviour:
+ *     - 'all'     : dark mode applies to everyone (default).
+ *     - 'include' : dark mode only for users listed in adm_allowed_users.
+ *     - 'exclude' : dark mode for everyone EXCEPT users listed in adm_allowed_users.
  *
  * @return bool
  */
@@ -26,19 +26,24 @@ function adm_is_dark_mode_active(): bool {
 		return false;
 	}
 
-	// Administrators always get dark mode when it's globally enabled.
+	// Administrators always get dark mode when globally enabled.
 	if ( current_user_can( 'manage_options' ) ) {
 		return true;
 	}
 
-	$allowed = (array) get_option( 'adm_allowed_users', [] );
+	$mode    = get_option( 'adm_user_access_mode', 'all' );
+	$listed  = array_map( 'strval', (array) get_option( 'adm_allowed_users', [] ) );
+	$user_id_str = (string) $user_id;
 
-	// Empty list = applies to all users.
-	if ( empty( $allowed ) ) {
-		return true;
+	switch ( $mode ) {
+		case 'include':
+			return in_array( $user_id_str, $listed, true );
+		case 'exclude':
+			return ! in_array( $user_id_str, $listed, true );
+		case 'all':
+		default:
+			return true;
 	}
-
-	return in_array( (string) $user_id, array_map( 'strval', $allowed ), true );
 }
 
 /**

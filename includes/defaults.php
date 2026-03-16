@@ -180,6 +180,15 @@ function adm_sanitize_colors( $input ): array {
 }
 
 /**
+ * Sanitize the user access mode option.
+ * Allowed values: 'all', 'include', 'exclude'.
+ */
+function adm_sanitize_user_access_mode( string $value ): string {
+	$allowed = [ 'all', 'include', 'exclude' ];
+	return in_array( $value, $allowed, true ) ? $value : 'all';
+}
+
+/**
  * Sanitize custom CSS input.
  * Strips HTML tags but preserves valid CSS content.
  */

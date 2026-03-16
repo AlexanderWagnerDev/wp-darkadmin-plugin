@@ -67,18 +67,15 @@
 			if ( presetInput ) presetInput.value = slug;
 		}
 
-		/* Hover: show preview without committing */
 		tiles.forEach( function ( tile ) {
 			tile.addEventListener( 'mouseenter', function () {
 				updatePreview( tile.dataset.preset );
 			} );
 			tile.addEventListener( 'mouseleave', function () {
-				/* Restore to currently selected preset */
 				updatePreview( presetInput ? presetInput.value : 'default' );
 			} );
 		} );
 
-		/* Click Load Preset button */
 		loadBtns.forEach( function ( btn ) {
 			btn.addEventListener( 'click', function () {
 				const slug = btn.dataset.preset;
@@ -199,6 +196,29 @@
 	}
 
 	/* -----------------------------------------------------------------------
+	 * User Access Mode — show/hide user grid + highlight active radio card
+	 * --------------------------------------------------------------------- */
+	function initUserAccessMode() {
+		const radios   = document.querySelectorAll( 'input[name="adm_user_access_mode"]' );
+		const userGrid = document.getElementById( 'adm-user-grid' );
+		if ( ! radios.length || ! userGrid ) return;
+
+		function update( val ) {
+			userGrid.style.display = val === 'all' ? 'none' : '';
+			document.querySelectorAll( '.adm-access-mode-option' ).forEach( function ( label ) {
+				const radio = label.querySelector( 'input[type="radio"]' );
+				label.classList.toggle( 'is-active', radio && radio.value === val );
+			} );
+		}
+
+		radios.forEach( function ( radio ) {
+			radio.addEventListener( 'change', function () {
+				update( radio.value );
+			} );
+		} );
+	}
+
+	/* -----------------------------------------------------------------------
 	 * Boot
 	 * --------------------------------------------------------------------- */
 	document.addEventListener( 'DOMContentLoaded', function () {
@@ -207,5 +227,6 @@
 		initReset();
 		initPaletteIO();
 		initVarCopy();
+		initUserAccessMode();
 	} );
 } )();

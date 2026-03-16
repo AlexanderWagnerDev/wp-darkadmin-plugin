@@ -7,13 +7,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Render the settings page.
  */
 function adm_settings_page(): void {
-	$enabled     = (bool) get_option( 'adm_dark_mode_enabled', false );
-	$auto_darken = (bool) get_option( 'adm_auto_darken', false );
-	$colors      = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
-	$custom      = get_option( 'adm_custom_css', '' );
-	$allowed     = (array) get_option( 'adm_allowed_users', [] );
-	$allowed     = array_map( 'intval', $allowed );
-	$active_preset = get_option( 'adm_preset', 'default' );
+	$enabled          = (bool) get_option( 'adm_dark_mode_enabled', false );
+	$auto_darken      = (bool) get_option( 'adm_auto_darken', false );
+	$colors           = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
+	$custom           = get_option( 'adm_custom_css', '' );
+	$allowed          = array_map( 'intval', (array) get_option( 'adm_allowed_users', [] ) );
+	$user_access_mode = get_option( 'adm_user_access_mode', 'all' );
+	$active_preset    = get_option( 'adm_preset', 'default' );
 
 	if ( $enabled ) {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
@@ -37,7 +37,6 @@ function adm_settings_page(): void {
 
 	/**
 	 * Preview swatch colors — must match adm_preset_colors() in defaults.php.
-	 * bg/surface/primary/text/bar are used for the live mini-preview only.
 	 */
 	$preset_meta = [
 		'default' => [
@@ -140,12 +139,10 @@ function adm_settings_page(): void {
 						<?php esc_html_e( 'Choose a preset to load its color palette. You can further customize colors below after loading.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 					</p>
 
-					<!-- JSON data for JS -->
 					<script id="adm-preset-meta" type="application/json"><?php echo wp_json_encode( $preset_meta ); ?></script>
 
 					<div class="adm-preset-layout">
 
-						<!-- Preset tiles -->
 						<div class="adm-preset-grid">
 							<?php foreach ( $preset_meta as $slug => $meta ) : ?>
 								<div class="adm-preset-tile <?php echo $active_preset === $slug ? 'adm-preset-active' : ''; ?>" data-preset="<?php echo esc_attr( $slug ); ?>">
@@ -167,10 +164,7 @@ function adm_settings_page(): void {
 							<?php endforeach; ?>
 						</div>
 
-						<!-- Live preview panel -->
-						<?php
-						$prev = $preset_meta[ $active_preset ];
-						?>
+						<?php $prev = $preset_meta[ $active_preset ]; ?>
 						<div>
 							<p class="adm-preview-label"><?php esc_html_e( 'Preview', 'darkadmin-dark-mode-for-adminpanel' ); ?></p>
 							<div class="adm-preset-preview" id="adm-preset-preview"
@@ -217,13 +211,43 @@ function adm_settings_page(): void {
 					<h2><?php esc_html_e( 'User Access', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
 				</div>
 				<div class="adm-card-body">
-					<p class="adm-card-description">
-						<?php esc_html_e(
-							'Select which non-admin users should see dark mode. Administrators always have dark mode active. Leave all unchecked to apply dark mode to all users.',
-							'darkadmin-dark-mode-for-adminpanel'
-						); ?>
-					</p>
-					<div class="adm-user-grid">
+
+					<!-- Access mode selector -->
+					<div class="adm-access-mode">
+						<label class="adm-access-mode-option <?php echo $user_access_mode === 'all' ? 'is-active' : ''; ?>">
+							<input type="radio" name="adm_user_access_mode" value="all"
+								<?php checked( $user_access_mode, 'all' ); ?> />
+							<span class="dashicons dashicons-groups"></span>
+							<span class="adm-access-mode-label">
+								<strong><?php esc_html_e( 'All Users', 'darkadmin-dark-mode-for-adminpanel' ); ?></strong>
+								<span><?php esc_html_e( 'Dark mode applies to everyone.', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
+							</span>
+						</label>
+
+						<label class="adm-access-mode-option <?php echo $user_access_mode === 'include' ? 'is-active' : ''; ?>">
+							<input type="radio" name="adm_user_access_mode" value="include"
+								<?php checked( $user_access_mode, 'include' ); ?> />
+							<span class="dashicons dashicons-yes-alt"></span>
+							<span class="adm-access-mode-label">
+								<strong><?php esc_html_e( 'Include', 'darkadmin-dark-mode-for-adminpanel' ); ?></strong>
+								<span><?php esc_html_e( 'Only selected users get dark mode.', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
+							</span>
+						</label>
+
+						<label class="adm-access-mode-option <?php echo $user_access_mode === 'exclude' ? 'is-active' : ''; ?>">
+							<input type="radio" name="adm_user_access_mode" value="exclude"
+								<?php checked( $user_access_mode, 'exclude' ); ?> />
+							<span class="dashicons dashicons-dismiss"></span>
+							<span class="adm-access-mode-label">
+								<strong><?php esc_html_e( 'Exclude', 'darkadmin-dark-mode-for-adminpanel' ); ?></strong>
+								<span><?php esc_html_e( 'Everyone except selected users gets dark mode.', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
+							</span>
+						</label>
+					</div>
+
+					<!-- User list (hidden when mode = all) -->
+					<div class="adm-user-grid" id="adm-user-grid"
+						<?php echo $user_access_mode === 'all' ? 'style="display:none;"' : ''; ?>>
 						<?php foreach ( $selectable_users as $user ) : ?>
 							<label class="adm-user-item">
 								<input
@@ -240,6 +264,7 @@ function adm_settings_page(): void {
 							</label>
 						<?php endforeach; ?>
 					</div>
+
 					<p class="adm-field-desc" style="margin-top:10px;">
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php esc_html_e( 'Administrators are not listed here — they always have dark mode active.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
