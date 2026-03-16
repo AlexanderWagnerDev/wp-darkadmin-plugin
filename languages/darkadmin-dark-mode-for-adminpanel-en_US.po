@@ -65,8 +65,8 @@ msgid "Select which non-admin users should see dark mode. Administrators always 
 msgstr "Select which non-admin users should see dark mode. Administrators always have dark mode active. Leave all unchecked to apply dark mode to all users."
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here \u2014 they always have dark mode active."
-msgstr "Administrators are not listed here \u2014 they always have dark mode active."
+msgid "Administrators are not listed here — they always have dark mode active."
+msgstr "Administrators are not listed here — they always have dark mode active."
 
 #: includes/settings-page.php
 msgid "Color Customization"
@@ -109,9 +109,9 @@ msgid "Save Settings"
 msgstr "Save Settings"
 
 #: darkadmin.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
-msgstr "\u2713 Dark Mode is active. Settings have been saved."
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode is active. Settings have been saved."
 
 #: darkadmin.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
-msgstr "\u2713 Settings saved. Dark Mode is disabled."
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Settings saved. Dark Mode is disabled."
