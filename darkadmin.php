@@ -28,19 +28,47 @@ define( 'ADM_URL', plugin_dir_url( __FILE__ ) );
  */
 function adm_default_colors(): array {
 	return [
-		'bg'         => '#1d2327',
-		'surface1'   => '#2c3338',
-		'surface2'   => '#32393f',
-		'surface3'   => '#3c434a',
-		'border'     => '#3c434a',
-		'text'       => '#dcdcde',
-		'text_muted' => '#a7aaad',
-		'text_soft'  => '#787c82',
-		'link'       => '#72aee6',
-		'primary'    => '#2271b1',
-		'success'    => '#00a32a',
-		'warning'    => '#dba617',
-		'danger'     => '#d63638',
+		// Backgrounds
+		'bg'               => '#1d2327',
+		'bg_bar'           => '#1a1f24',
+		'bg_deep'          => '#101517',
+		'bg_darker'        => '#161b1f',
+		// Surfaces
+		'surface1'         => '#2c3338',
+		'surface2'         => '#32393f',
+		'surface3'         => '#3c434a',
+		'table_alt'        => '#272e35',
+		'plugin_inactive'  => '#252c32',
+		// Borders
+		'border'           => '#3c434a',
+		'border_focus'     => '#2271b1',
+		'border_hover'     => '#5a6470',
+		// Text
+		'text'             => '#dcdcde',
+		'text_muted'       => '#a7aaad',
+		'text_soft'        => '#787c82',
+		'text_on_primary'  => '#ffffff',
+		// Links
+		'link'             => '#72aee6',
+		'link_hover'       => '#93c5fd',
+		// Brand
+		'primary'          => '#2271b1',
+		'primary_hover'    => '#135e96',
+		'success'          => '#00a32a',
+		'warning'          => '#dba617',
+		'danger'           => '#d63638',
+		// CodeMirror syntax tokens
+		'cm_keyword'       => '#c792ea',
+		'cm_operator'      => '#89ddff',
+		'cm_variable2'     => '#82aaff',
+		'cm_property'      => '#b2ccd6',
+		'cm_number'        => '#f78c6c',
+		'cm_string'        => '#c3e88d',
+		'cm_string2'       => '#f07178',
+		'cm_comment'       => '#546e7a',
+		'cm_tag'           => '#f07178',
+		'cm_attribute'     => '#ffcb6b',
+		'cm_bracket'       => '#89ddff',
 	];
 }
 
@@ -49,19 +77,47 @@ function adm_default_colors(): array {
  */
 function adm_css_variable_map(): array {
 	return [
-		'bg'         => [ 'var' => '--adm-bg',         'label' => 'Background (Base)' ],
-		'surface1'   => [ 'var' => '--adm-surface-1',  'label' => 'Surface 1 (Cards / Tables)' ],
-		'surface2'   => [ 'var' => '--adm-surface-2',  'label' => 'Surface 2 (Inputs)' ],
-		'surface3'   => [ 'var' => '--adm-surface-3',  'label' => 'Surface 3 (Hover)' ],
-		'border'     => [ 'var' => '--adm-border',      'label' => 'Border Color' ],
-		'text'       => [ 'var' => '--adm-text',        'label' => 'Primary Text' ],
-		'text_muted' => [ 'var' => '--adm-text-muted',  'label' => 'Muted Text' ],
-		'text_soft'  => [ 'var' => '--adm-text-soft',   'label' => 'Soft Text (Row Actions)' ],
-		'link'       => [ 'var' => '--adm-link',        'label' => 'Link Color' ],
-		'primary'    => [ 'var' => '--adm-primary',     'label' => 'Primary / Buttons' ],
-		'success'    => [ 'var' => '--adm-success',     'label' => 'Success' ],
-		'warning'    => [ 'var' => '--adm-warning',     'label' => 'Warning' ],
-		'danger'     => [ 'var' => '--adm-danger',      'label' => 'Danger / Error' ],
+		// Backgrounds
+		'bg'              => [ 'var' => '--adm-bg',              'label' => 'Background (Base)',           'group' => 'Backgrounds' ],
+		'bg_bar'          => [ 'var' => '--adm-bg-bar',          'label' => 'Background (Admin Bar)',       'group' => 'Backgrounds' ],
+		'bg_deep'         => [ 'var' => '--adm-bg-deep',         'label' => 'Background (Deep / Submenu)', 'group' => 'Backgrounds' ],
+		'bg_darker'       => [ 'var' => '--adm-bg-darker',       'label' => 'Background (Darker / Editor Gutter)', 'group' => 'Backgrounds' ],
+		// Surfaces
+		'surface1'        => [ 'var' => '--adm-surface-1',       'label' => 'Surface 1 (Cards / Tables)',  'group' => 'Surfaces' ],
+		'surface2'        => [ 'var' => '--adm-surface-2',       'label' => 'Surface 2 (Inputs)',          'group' => 'Surfaces' ],
+		'surface3'        => [ 'var' => '--adm-surface-3',       'label' => 'Surface 3 (Hover)',           'group' => 'Surfaces' ],
+		'table_alt'       => [ 'var' => '--adm-table-alt',       'label' => 'Table Row Alternate',         'group' => 'Surfaces' ],
+		'plugin_inactive' => [ 'var' => '--adm-plugin-inactive', 'label' => 'Plugin Inactive Row',         'group' => 'Surfaces' ],
+		// Borders
+		'border'          => [ 'var' => '--adm-border',          'label' => 'Border',                      'group' => 'Borders' ],
+		'border_focus'    => [ 'var' => '--adm-border-focus',    'label' => 'Border (Focus)',               'group' => 'Borders' ],
+		'border_hover'    => [ 'var' => '--adm-border-hover',    'label' => 'Border (Hover)',               'group' => 'Borders' ],
+		// Text
+		'text'            => [ 'var' => '--adm-text',            'label' => 'Primary Text',                'group' => 'Text' ],
+		'text_muted'      => [ 'var' => '--adm-text-muted',      'label' => 'Muted Text',                  'group' => 'Text' ],
+		'text_soft'       => [ 'var' => '--adm-text-soft',       'label' => 'Soft Text (Row Actions)',     'group' => 'Text' ],
+		'text_on_primary' => [ 'var' => '--adm-text-on-primary', 'label' => 'Text on Primary / White',    'group' => 'Text' ],
+		// Links
+		'link'            => [ 'var' => '--adm-link',            'label' => 'Link Color',                  'group' => 'Links' ],
+		'link_hover'      => [ 'var' => '--adm-link-hover',      'label' => 'Link Hover',                  'group' => 'Links' ],
+		// Brand
+		'primary'         => [ 'var' => '--adm-primary',         'label' => 'Primary / Buttons',           'group' => 'Brand' ],
+		'primary_hover'   => [ 'var' => '--adm-primary-hover',   'label' => 'Primary Hover',               'group' => 'Brand' ],
+		'success'         => [ 'var' => '--adm-success',         'label' => 'Success',                     'group' => 'Brand' ],
+		'warning'         => [ 'var' => '--adm-warning',         'label' => 'Warning',                     'group' => 'Brand' ],
+		'danger'          => [ 'var' => '--adm-danger',          'label' => 'Danger / Error',              'group' => 'Brand' ],
+		// CodeMirror syntax tokens
+		'cm_keyword'      => [ 'var' => '--adm-cm-keyword',      'label' => 'Code: Keyword',               'group' => 'CodeMirror' ],
+		'cm_operator'     => [ 'var' => '--adm-cm-operator',     'label' => 'Code: Operator / Bracket',   'group' => 'CodeMirror' ],
+		'cm_variable2'    => [ 'var' => '--adm-cm-variable2',    'label' => 'Code: Variable / Def',       'group' => 'CodeMirror' ],
+		'cm_property'     => [ 'var' => '--adm-cm-property',     'label' => 'Code: Property',             'group' => 'CodeMirror' ],
+		'cm_number'       => [ 'var' => '--adm-cm-number',       'label' => 'Code: Number / Atom',        'group' => 'CodeMirror' ],
+		'cm_string'       => [ 'var' => '--adm-cm-string',       'label' => 'Code: String',               'group' => 'CodeMirror' ],
+		'cm_string2'      => [ 'var' => '--adm-cm-string2',      'label' => 'Code: String (alt)',         'group' => 'CodeMirror' ],
+		'cm_comment'      => [ 'var' => '--adm-cm-comment',      'label' => 'Code: Comment',              'group' => 'CodeMirror' ],
+		'cm_tag'          => [ 'var' => '--adm-cm-tag',          'label' => 'Code: Tag',                  'group' => 'CodeMirror' ],
+		'cm_attribute'    => [ 'var' => '--adm-cm-attribute',    'label' => 'Code: Attribute / Qualifier / Builtin', 'group' => 'CodeMirror' ],
+		'cm_bracket'      => [ 'var' => '--adm-cm-bracket',      'label' => 'Code: Bracket',              'group' => 'CodeMirror' ],
 	];
 }
 
@@ -81,20 +137,41 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	$sc = static fn( string $k, string $fb ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fb;
 
-	$vars = ':root{'                                       .
-		"--adm-bg:{$sc('bg','#1d2327')};"               .
-		"--adm-surface-1:{$sc('surface1','#2c3338')};"  .
-		"--adm-surface-2:{$sc('surface2','#32393f')};"  .
-		"--adm-surface-3:{$sc('surface3','#3c434a')};"  .
-		"--adm-border:{$sc('border','#3c434a')};"        .
-		"--adm-text:{$sc('text','#dcdcde')};"            .
-		"--adm-text-muted:{$sc('text_muted','#a7aaad')};" .
-		"--adm-text-soft:{$sc('text_soft','#787c82')};"  .
-		"--adm-link:{$sc('link','#72aee6')};"            .
-		"--adm-primary:{$sc('primary','#2271b1')};"      .
-		"--adm-success:{$sc('success','#00a32a')};"      .
-		"--adm-warning:{$sc('warning','#dba617')};"      .
-		"--adm-danger:{$sc('danger','#d63638')};"        .
+	$vars = ':root{'                                                           .
+		"--adm-bg:{$sc('bg','#1d2327')};"                                  .
+		"--adm-bg-bar:{$sc('bg_bar','#1a1f24')};"                          .
+		"--adm-bg-deep:{$sc('bg_deep','#101517')};"                        .
+		"--adm-bg-darker:{$sc('bg_darker','#161b1f')};"                    .
+		"--adm-surface-1:{$sc('surface1','#2c3338')};"                     .
+		"--adm-surface-2:{$sc('surface2','#32393f')};"                     .
+		"--adm-surface-3:{$sc('surface3','#3c434a')};"                     .
+		"--adm-table-alt:{$sc('table_alt','#272e35')};"                    .
+		"--adm-plugin-inactive:{$sc('plugin_inactive','#252c32')};"        .
+		"--adm-border:{$sc('border','#3c434a')};"                          .
+		"--adm-border-focus:{$sc('border_focus','#2271b1')};"              .
+		"--adm-border-hover:{$sc('border_hover','#5a6470')};"              .
+		"--adm-text:{$sc('text','#dcdcde')};"                              .
+		"--adm-text-muted:{$sc('text_muted','#a7aaad')};"                  .
+		"--adm-text-soft:{$sc('text_soft','#787c82')};"                    .
+		"--adm-text-on-primary:{$sc('text_on_primary','#ffffff')};"        .
+		"--adm-link:{$sc('link','#72aee6')};"                              .
+		"--adm-link-hover:{$sc('link_hover','#93c5fd')};"                  .
+		"--adm-primary:{$sc('primary','#2271b1')};"                        .
+		"--adm-primary-hover:{$sc('primary_hover','#135e96')};"            .
+		"--adm-success:{$sc('success','#00a32a')};"                        .
+		"--adm-warning:{$sc('warning','#dba617')};"                        .
+		"--adm-danger:{$sc('danger','#d63638')};"                          .
+		"--adm-cm-keyword:{$sc('cm_keyword','#c792ea')};"                  .
+		"--adm-cm-operator:{$sc('cm_operator','#89ddff')};"                .
+		"--adm-cm-variable2:{$sc('cm_variable2','#82aaff')};"              .
+		"--adm-cm-property:{$sc('cm_property','#b2ccd6')};"                .
+		"--adm-cm-number:{$sc('cm_number','#f78c6c')};"                    .
+		"--adm-cm-string:{$sc('cm_string','#c3e88d')};"                    .
+		"--adm-cm-string2:{$sc('cm_string2','#f07178')};"                  .
+		"--adm-cm-comment:{$sc('cm_comment','#546e7a')};"                  .
+		"--adm-cm-tag:{$sc('cm_tag','#f07178')};"                          .
+		"--adm-cm-attribute:{$sc('cm_attribute','#ffcb6b')};"              .
+		"--adm-cm-bracket:{$sc('cm_bracket','#89ddff')};"                  .
 		'}';
 
 	wp_enqueue_style(
@@ -211,21 +288,14 @@ function adm_settings_page() {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
 	}
 
-	$color_labels = [
-		'bg'         => __( 'Background (Base)', 'darkadmin-dark-mode-for-adminpanel' ),
-		'surface1'   => __( 'Surface 1 (Cards / Tables)', 'darkadmin-dark-mode-for-adminpanel' ),
-		'surface2'   => __( 'Surface 2 (Inputs)', 'darkadmin-dark-mode-for-adminpanel' ),
-		'surface3'   => __( 'Surface 3 (Hover)', 'darkadmin-dark-mode-for-adminpanel' ),
-		'border'     => __( 'Border Color', 'darkadmin-dark-mode-for-adminpanel' ),
-		'text'       => __( 'Primary Text', 'darkadmin-dark-mode-for-adminpanel' ),
-		'text_muted' => __( 'Muted Text', 'darkadmin-dark-mode-for-adminpanel' ),
-		'text_soft'  => __( 'Soft Text (Row Actions)', 'darkadmin-dark-mode-for-adminpanel' ),
-		'link'       => __( 'Link Color', 'darkadmin-dark-mode-for-adminpanel' ),
-		'primary'    => __( 'Primary / Buttons', 'darkadmin-dark-mode-for-adminpanel' ),
-		'success'    => __( 'Success', 'darkadmin-dark-mode-for-adminpanel' ),
-		'warning'    => __( 'Warning', 'darkadmin-dark-mode-for-adminpanel' ),
-		'danger'     => __( 'Danger / Error', 'darkadmin-dark-mode-for-adminpanel' ),
-	];
+	$var_map  = adm_css_variable_map();
+	$defaults = adm_default_colors();
+
+	// Build grouped color labels for the color picker section
+	$color_groups = [];
+	foreach ( $var_map as $key => $info ) {
+		$color_groups[ $info['group'] ][ $key ] = $info['label'];
+	}
 	?>
 	<div class="wrap adm-settings-wrap">
 
@@ -251,6 +321,7 @@ function adm_settings_page() {
 		<form method="post" action="options.php">
 			<?php settings_fields( 'adm_settings' ); ?>
 
+			<!-- General Settings -->
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-admin-settings"></span>
@@ -298,6 +369,7 @@ function adm_settings_page() {
 				</div>
 			</div>
 
+			<!-- Color Customization - grouped by category -->
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-color-picker"></span>
@@ -310,23 +382,31 @@ function adm_settings_page() {
 							'darkadmin-dark-mode-for-adminpanel'
 						); ?>
 					</p>
-					<div class="adm-color-grid">
-						<?php foreach ( $color_labels as $key => $label ) : ?>
-							<div class="adm-color-item">
-								<label class="adm-color-label" for="adm_color_<?php echo esc_attr( $key ); ?>">
-									<?php echo esc_html( $label ); ?>
-								</label>
-								<input
-									type="text"
-									id="adm_color_<?php echo esc_attr( $key ); ?>"
-									name="adm_colors[<?php echo esc_attr( $key ); ?>]"
-									value="<?php echo esc_attr( $colors[ $key ] ?? adm_default_colors()[ $key ] ); ?>"
-									class="adm-color-picker"
-									data-default-color="<?php echo esc_attr( adm_default_colors()[ $key ] ); ?>"
-								/>
+
+					<?php foreach ( $color_groups as $group_name => $group_keys ) : ?>
+						<div class="adm-color-group">
+							<h3 class="adm-color-group-title"><?php echo esc_html( $group_name ); ?></h3>
+							<div class="adm-color-grid">
+								<?php foreach ( $group_keys as $key => $label ) : ?>
+									<div class="adm-color-item">
+										<label class="adm-color-label" for="adm_color_<?php echo esc_attr( $key ); ?>">
+											<?php echo esc_html( $label ); ?>
+											<code class="adm-color-var-name"><?php echo esc_html( $var_map[ $key ]['var'] ); ?></code>
+										</label>
+										<input
+											type="text"
+											id="adm_color_<?php echo esc_attr( $key ); ?>"
+											name="adm_colors[<?php echo esc_attr( $key ); ?>]"
+											value="<?php echo esc_attr( $colors[ $key ] ?? $defaults[ $key ] ); ?>"
+											class="adm-color-picker"
+											data-default-color="<?php echo esc_attr( $defaults[ $key ] ); ?>"
+										/>
+									</div>
+								<?php endforeach; ?>
 							</div>
-						<?php endforeach; ?>
-					</div>
+						</div>
+					<?php endforeach; ?>
+
 					<div class="adm-color-reset-row">
 						<button type="button" id="adm-reset-colors" class="button">
 							<span class="dashicons dashicons-image-rotate"></span>
@@ -336,6 +416,7 @@ function adm_settings_page() {
 				</div>
 			</div>
 
+			<!-- Custom CSS -->
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-editor-code"></span>
@@ -350,9 +431,11 @@ function adm_settings_page() {
 					</p>
 
 					<?php
-					$defaults  = adm_default_colors();
-					$var_map   = adm_css_variable_map();
 					$cur_colors = wp_parse_args( (array) get_option( 'adm_colors', [] ), $defaults );
+					$grouped_vars = [];
+					foreach ( $var_map as $key => $info ) {
+						$grouped_vars[ $info['group'] ][] = [ 'key' => $key, 'info' => $info ];
+					}
 					?>
 					<details class="adm-var-reference">
 						<summary class="adm-var-reference-summary">
@@ -360,28 +443,35 @@ function adm_settings_page() {
 							<?php esc_html_e( 'Available CSS Variables', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							<span class="adm-var-count"><?php echo count( $var_map ); ?></span>
 						</summary>
-						<div class="adm-var-grid">
-							<?php foreach ( $var_map as $key => $info ) :
-								$current_color = sanitize_hex_color( $cur_colors[ $key ] ?? '' ) ?: $defaults[ $key ];
-							?>
-								<div class="adm-var-item">
-									<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>
-									<div class="adm-var-info">
-										<button
-											type="button"
-											class="adm-var-copy"
-											data-var="<?php echo esc_attr( $info['var'] ); ?>"
-											title="<?php esc_attr_e( 'Click to copy', 'darkadmin-dark-mode-for-adminpanel' ); ?>"
-										>
-											<code><?php echo esc_html( $info['var'] ); ?></code>
-											<span class="adm-var-copy-icon dashicons dashicons-clipboard"></span>
-										</button>
-										<span class="adm-var-label"><?php echo esc_html( $info['label'] ); ?></span>
-									</div>
-									<span class="adm-var-hex"><?php echo esc_html( $current_color ); ?></span>
+						<?php foreach ( $grouped_vars as $group_name => $entries ) : ?>
+							<div class="adm-var-group">
+								<h4 class="adm-var-group-title"><?php echo esc_html( $group_name ); ?></h4>
+								<div class="adm-var-grid">
+									<?php foreach ( $entries as $entry ) :
+										$key           = $entry['key'];
+										$info          = $entry['info'];
+										$current_color = sanitize_hex_color( $cur_colors[ $key ] ?? '' ) ?: $defaults[ $key ];
+									?>
+										<div class="adm-var-item">
+											<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>
+											<div class="adm-var-info">
+												<button
+													type="button"
+													class="adm-var-copy"
+													data-var="<?php echo esc_attr( $info['var'] ); ?>"
+													title="<?php esc_attr_e( 'Click to copy', 'darkadmin-dark-mode-for-adminpanel' ); ?>"
+												>
+													<code><?php echo esc_html( $info['var'] ); ?></code>
+													<span class="adm-var-copy-icon dashicons dashicons-clipboard"></span>
+												</button>
+												<span class="adm-var-label"><?php echo esc_html( $info['label'] ); ?></span>
+											</div>
+											<span class="adm-var-hex"><?php echo esc_html( $current_color ); ?></span>
+										</div>
+									<?php endforeach; ?>
 								</div>
-							<?php endforeach; ?>
-						</div>
+							</div>
+						<?php endforeach; ?>
 					</details>
 
 					<div class="adm-css-editor-wrap">

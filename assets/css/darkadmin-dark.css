@@ -10,33 +10,72 @@
    DESIGN TOKENS
    ============================================================================= */
 :root {
-  --adm-bg:           #1d2327;
-  --adm-surface-1:    #2c3338;
-  --adm-surface-2:    #32393f;
-  --adm-surface-3:    #3c434a;
-  --adm-border:       #3c434a;
-  --adm-border-focus: #2271b1;
-  --adm-text:         #dcdcde;
-  --adm-text-muted:   #a7aaad;
-  --adm-text-soft:    #787c82;
-  --adm-link:         #72aee6;
-  --adm-link-hover:   #93c5fd;
-  --adm-primary:      #2271b1;
-  --adm-primary-hover:#135e96;
-  --adm-success:      #00a32a;
-  --adm-warning:      #dba617;
-  --adm-danger:       #d63638;
+  /* --- Backgrounds --- */
+  --adm-bg:              #1d2327;
+  --adm-bg-bar:          #1a1f24;
+  --adm-bg-deep:         #101517;
+  --adm-bg-darker:       #161b1f;
+
+  /* --- Surfaces --- */
+  --adm-surface-1:       #2c3338;
+  --adm-surface-2:       #32393f;
+  --adm-surface-3:       #3c434a;
+  --adm-table-alt:       #272e35;
+  --adm-plugin-inactive: #252c32;
+
+  /* --- Borders --- */
+  --adm-border:          #3c434a;
+  --adm-border-focus:    #2271b1;
+  --adm-border-hover:    #5a6470;
+
+  /* --- Text --- */
+  --adm-text:            #dcdcde;
+  --adm-text-muted:      #a7aaad;
+  --adm-text-soft:       #787c82;
+  --adm-text-on-primary: #ffffff;
+
+  /* --- Links --- */
+  --adm-link:            #72aee6;
+  --adm-link-hover:      #93c5fd;
+
+  /* --- Brand Colors --- */
+  --adm-primary:         #2271b1;
+  --adm-primary-hover:   #135e96;
+  --adm-success:         #00a32a;
+  --adm-warning:         #dba617;
+  --adm-danger:          #d63638;
+
+  /* --- CodeMirror Syntax Tokens --- */
+  --adm-cm-keyword:      #c792ea;
+  --adm-cm-operator:     #89ddff;
+  --adm-cm-variable2:    #82aaff;
+  --adm-cm-property:     #b2ccd6;
+  --adm-cm-number:       #f78c6c;
+  --adm-cm-string:       #c3e88d;
+  --adm-cm-string2:      #f07178;
+  --adm-cm-comment:      #546e7a;
+  --adm-cm-tag:          #f07178;
+  --adm-cm-attribute:    #ffcb6b;
+  --adm-cm-bracket:      #89ddff;
+
+  /* --- Spacing --- */
   --adm-space-1: 4px;
   --adm-space-2: 8px;
   --adm-space-3: 12px;
   --adm-space-4: 16px;
   --adm-space-5: 20px;
   --adm-space-6: 24px;
+
+  /* --- Shape --- */
   --adm-radius-sm: 3px;
   --adm-radius-md: 6px;
   --adm-radius-lg: 10px;
+
+  /* --- Shadows --- */
   --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.25);
   --adm-shadow-md: 0 3px 10px rgba(0,0,0,.30);
+
+  /* --- Sizes --- */
   --adm-input-h: 32px;
   --adm-btn-h:   30px;
 }
@@ -69,7 +108,7 @@ body.wp-admin,
    ADMIN BAR
    ============================================================================= */
 #wpadminbar {
-  background: #1a1f24 !important;
+  background: var(--adm-bg-bar) !important;
 }
 #wpadminbar .ab-top-menu > li > .ab-item,
 #wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-item {
@@ -90,7 +129,7 @@ body.wp-admin,
 }
 #wpadminbar .menupop .ab-sub-wrapper a:hover {
   background: var(--adm-surface-3) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 
 /* =============================================================================
@@ -107,23 +146,23 @@ body.wp-admin,
 #adminmenu .wp-has-current-submenu > a,
 #adminmenu .current > a,
 #adminmenu a:hover {
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 #adminmenu .wp-has-current-submenu .wp-submenu,
 #adminmenu .wp-has-current-submenu .wp-submenu-wrap {
-  background: #101517 !important;
+  background: var(--adm-bg-deep) !important;
 }
 #adminmenu .wp-submenu a {
   color: var(--adm-text-muted) !important;
 }
 #adminmenu .wp-submenu a:hover,
 #adminmenu .wp-submenu .current a {
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 #adminmenu li.menu-top:hover,
 #adminmenu li.opensub > a.menu-top {
   background: var(--adm-surface-1) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 #adminmenu .wp-menu-arrow,
 #adminmenu .wp-menu-arrow div {
@@ -185,18 +224,18 @@ a.page-title-action,
 a.page-title-action:hover,
 .page-title-action:hover {
   background: var(--adm-surface-3) !important;
-  border-color: #5a6470 !important;
-  color: #fff !important;
+  border-color: var(--adm-border-hover) !important;
+  color: var(--adm-text-on-primary) !important;
 }
 .wp-core-ui .button-primary {
   background: var(--adm-primary) !important;
   border-color: var(--adm-primary) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 .wp-core-ui .button-primary:hover {
   background: var(--adm-primary-hover) !important;
   border-color: var(--adm-primary-hover) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 .wp-core-ui .button:disabled,
 .wp-core-ui .button[disabled] {
@@ -272,7 +311,7 @@ table.widefat td {
 }
 .wp-list-table .alternate td,
 table.widefat .alternate td {
-  background: #272e35 !important;
+  background: var(--adm-table-alt) !important;
 }
 .wp-list-table thead th,
 table.widefat thead th {
@@ -326,7 +365,7 @@ th.check-column {
   box-shadow: none !important;
 }
 .plugins tr.inactive td {
-  background: #252c32 !important;
+  background: var(--adm-plugin-inactive) !important;
 }
 .plugins .plugin-title strong,
 .plugins .plugin-title strong a {
@@ -386,7 +425,7 @@ th.check-column {
 #search-submit:hover,
 .wp-filter .button:hover {
   background: var(--adm-surface-3) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 #plugin-filter,
 .plugin-install-tab {
@@ -423,7 +462,7 @@ th.check-column {
 .plugin-card .plugin-action-buttons a.activate-now {
   background: var(--adm-primary) !important;
   border-color: var(--adm-primary) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 .plugin-card .plugin-action-buttons a.install-now:hover,
 .plugin-card .plugin-action-buttons a.activate-now:hover {
@@ -438,7 +477,7 @@ th.check-column {
 }
 .plugin-card .plugin-action-buttons a:hover {
   background: var(--adm-surface-3) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 .plugin-card .plugin-card-bottom {
   background: var(--adm-bg) !important;
@@ -495,7 +534,7 @@ body.wp-admin .upload-plugin .wp-upload-form input[type="submit"],
 body.wp-admin .upload-plugin .wp-upload-form .button-primary {
   background: var(--adm-primary) !important;
   border-color: var(--adm-primary) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
   box-shadow: none !important;
   text-shadow: none !important;
 }
@@ -1048,7 +1087,7 @@ ul.wp-submenu {
 .health-check-accordion-trigger:hover,
 .privacy-settings-accordion-trigger:hover {
   background: var(--adm-surface-2) !important;
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
 }
 .health-check-accordion-trigger .title,
 .privacy-settings-accordion-trigger .title {
@@ -1059,7 +1098,6 @@ ul.wp-submenu {
   color: var(--adm-text-muted) !important;
 }
 
-/* Site Health accordion panels */
 .health-check-accordion-panel,
 .privacy-settings-accordion-panel {
   background: var(--adm-bg) !important;
@@ -1074,7 +1112,6 @@ ul.wp-submenu {
   color: var(--adm-text-muted) !important;
 }
 
-/* Site Health status colors */
 .site-health-issues-count-title {
   color: var(--adm-text) !important;
 }
@@ -1123,7 +1160,7 @@ ul.wp-submenu {
    CODEMIRROR (Theme Editor)
    ============================================================================= */
 .CodeMirror {
-  background: #1a1f24 !important;
+  background: var(--adm-bg-bar) !important;
   color: var(--adm-text) !important;
   border: 1px solid var(--adm-border) !important;
   font-family: Consolas, "Courier New", monospace !important;
@@ -1131,10 +1168,10 @@ ul.wp-submenu {
   line-height: 1.6 !important;
 }
 .CodeMirror-scroll {
-  background: #1a1f24 !important;
+  background: var(--adm-bg-bar) !important;
 }
 .CodeMirror-gutters {
-  background: #161b1f !important;
+  background: var(--adm-bg-darker) !important;
   border-right: 1px solid var(--adm-border) !important;
 }
 .CodeMirror-linenumber {
@@ -1151,37 +1188,35 @@ ul.wp-submenu {
   background: rgba(255, 255, 255, 0.04) !important;
 }
 .CodeMirror-matchingbracket {
-  color: #fff !important;
+  color: var(--adm-text-on-primary) !important;
   background: rgba(0, 163, 42, 0.25) !important;
   border-bottom: 1px solid var(--adm-success) !important;
 }
 
 /* CodeMirror syntax highlighting tokens */
-.cm-keyword   { color: #c792ea !important; }
-.cm-operator  { color: #89ddff !important; }
-.cm-variable  { color: var(--adm-text) !important; }
-.cm-variable-2 { color: #82aaff !important; }
-.cm-def       { color: #82aaff !important; }
-.cm-property  { color: #b2ccd6 !important; }
-.cm-number    { color: #f78c6c !important; }
-.cm-string    { color: #c3e88d !important; }
-.cm-string-2  { color: #f07178 !important; }
-.cm-comment   { color: #546e7a !important; font-style: italic !important; }
-.cm-atom      { color: #f78c6c !important; }
-.cm-meta      { color: var(--adm-text-muted) !important; }
-.cm-tag       { color: #f07178 !important; }
-.cm-attribute { color: #ffcb6b !important; }
-.cm-qualifier { color: #decb6b !important; }
-.cm-builtin   { color: #ffcb6b !important; }
-.cm-bracket   { color: #89ddff !important; }
-.cm-error     { color: var(--adm-danger) !important; background: rgba(214,54,56,0.15) !important; }
+.cm-keyword   { color: var(--adm-cm-keyword)   !important; }
+.cm-operator  { color: var(--adm-cm-operator)  !important; }
+.cm-variable  { color: var(--adm-text)          !important; }
+.cm-variable-2 { color: var(--adm-cm-variable2) !important; }
+.cm-def       { color: var(--adm-cm-variable2)  !important; }
+.cm-property  { color: var(--adm-cm-property)  !important; }
+.cm-number    { color: var(--adm-cm-number)     !important; }
+.cm-string    { color: var(--adm-cm-string)     !important; }
+.cm-string-2  { color: var(--adm-cm-string2)    !important; }
+.cm-comment   { color: var(--adm-cm-comment)   !important; font-style: italic !important; }
+.cm-atom      { color: var(--adm-cm-number)     !important; }
+.cm-meta      { color: var(--adm-text-muted)    !important; }
+.cm-tag       { color: var(--adm-cm-tag)        !important; }
+.cm-attribute { color: var(--adm-cm-attribute)  !important; }
+.cm-qualifier { color: var(--adm-cm-attribute)  !important; }
+.cm-builtin   { color: var(--adm-cm-attribute)  !important; }
+.cm-bracket   { color: var(--adm-cm-bracket)    !important; }
+.cm-error     { color: var(--adm-danger)        !important; background: rgba(214,54,56,0.15) !important; }
 
-/* CodeMirror search/match highlight */
 .CodeMirror-searching {
   background: rgba(219, 166, 23, 0.3) !important;
 }
 
-/* Scrollbar styling inside CodeMirror */
 .CodeMirror-vscrollbar::-webkit-scrollbar,
 .CodeMirror-hscrollbar::-webkit-scrollbar {
   width: 8px;
@@ -1189,7 +1224,7 @@ ul.wp-submenu {
 }
 .CodeMirror-vscrollbar::-webkit-scrollbar-track,
 .CodeMirror-hscrollbar::-webkit-scrollbar-track {
-  background: #161b1f;
+  background: var(--adm-bg-darker);
 }
 .CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
 .CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
