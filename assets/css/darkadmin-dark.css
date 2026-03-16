@@ -1000,3 +1000,199 @@ ul.wp-submenu {
 #dashboard_right_now .versions a:hover {
   color: var(--adm-link-hover) !important;
 }
+
+/* =============================================================================
+   CARD (generic WP .card component)
+   ============================================================================= */
+.card {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+.card h2,
+.card h3,
+.card p {
+  color: var(--adm-text) !important;
+}
+.card a {
+  color: var(--adm-link) !important;
+}
+.card a:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+/* =============================================================================
+   SITE HEALTH - HEADER & ACCORDION
+   ============================================================================= */
+.health-check-header,
+.privacy-settings-header {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.health-check-header h1,
+.health-check-header p,
+.privacy-settings-header h1,
+.privacy-settings-header p {
+  color: var(--adm-text) !important;
+}
+
+.health-check-accordion-trigger,
+.privacy-settings-accordion-trigger {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+.health-check-accordion-trigger:hover,
+.privacy-settings-accordion-trigger:hover {
+  background: var(--adm-surface-2) !important;
+  color: #fff !important;
+}
+.health-check-accordion-trigger .title,
+.privacy-settings-accordion-trigger .title {
+  color: var(--adm-text) !important;
+}
+.health-check-accordion-trigger .badge,
+.privacy-settings-accordion-trigger .badge {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Site Health accordion panels */
+.health-check-accordion-panel,
+.privacy-settings-accordion-panel {
+  background: var(--adm-bg) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-top: none !important;
+  color: var(--adm-text) !important;
+}
+.health-check-accordion-panel p,
+.health-check-accordion-panel ul,
+.privacy-settings-accordion-panel p,
+.privacy-settings-accordion-panel ul {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Site Health status colors */
+.site-health-issues-count-title {
+  color: var(--adm-text) !important;
+}
+.health-check-issues-wrapper .health-check-accordion-heading button.health-check-accordion-trigger {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* =============================================================================
+   NOTIFICATION DIALOG (.notification-dialog)
+   ============================================================================= */
+.notification-dialog-background {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+.notification-dialog {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+.notification-dialog h1,
+.notification-dialog h2,
+.notification-dialog h3,
+.notification-dialog p {
+  color: var(--adm-text) !important;
+}
+.notification-dialog a {
+  color: var(--adm-link) !important;
+}
+.notification-dialog a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.file-editor-warning-content,
+.file-editor-warning-message {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+.file-editor-warning-content h1,
+.file-editor-warning-message h1,
+.file-editor-warning-content p,
+.file-editor-warning-message p {
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   CODEMIRROR (Theme Editor)
+   ============================================================================= */
+.CodeMirror {
+  background: #1a1f24 !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  font-family: Consolas, "Courier New", monospace !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+.CodeMirror-scroll {
+  background: #1a1f24 !important;
+}
+.CodeMirror-gutters {
+  background: #161b1f !important;
+  border-right: 1px solid var(--adm-border) !important;
+}
+.CodeMirror-linenumber {
+  color: var(--adm-text-soft) !important;
+}
+.CodeMirror-cursor {
+  border-left-color: var(--adm-text) !important;
+}
+.CodeMirror-selected,
+.CodeMirror-focused .CodeMirror-selected {
+  background: rgba(34, 113, 177, 0.3) !important;
+}
+.CodeMirror-activeline-background {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.CodeMirror-matchingbracket {
+  color: #fff !important;
+  background: rgba(0, 163, 42, 0.25) !important;
+  border-bottom: 1px solid var(--adm-success) !important;
+}
+
+/* CodeMirror syntax highlighting tokens */
+.cm-keyword   { color: #c792ea !important; }
+.cm-operator  { color: #89ddff !important; }
+.cm-variable  { color: var(--adm-text) !important; }
+.cm-variable-2 { color: #82aaff !important; }
+.cm-def       { color: #82aaff !important; }
+.cm-property  { color: #b2ccd6 !important; }
+.cm-number    { color: #f78c6c !important; }
+.cm-string    { color: #c3e88d !important; }
+.cm-string-2  { color: #f07178 !important; }
+.cm-comment   { color: #546e7a !important; font-style: italic !important; }
+.cm-atom      { color: #f78c6c !important; }
+.cm-meta      { color: var(--adm-text-muted) !important; }
+.cm-tag       { color: #f07178 !important; }
+.cm-attribute { color: #ffcb6b !important; }
+.cm-qualifier { color: #decb6b !important; }
+.cm-builtin   { color: #ffcb6b !important; }
+.cm-bracket   { color: #89ddff !important; }
+.cm-error     { color: var(--adm-danger) !important; background: rgba(214,54,56,0.15) !important; }
+
+/* CodeMirror search/match highlight */
+.CodeMirror-searching {
+  background: rgba(219, 166, 23, 0.3) !important;
+}
+
+/* Scrollbar styling inside CodeMirror */
+.CodeMirror-vscrollbar::-webkit-scrollbar,
+.CodeMirror-hscrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.CodeMirror-vscrollbar::-webkit-scrollbar-track,
+.CodeMirror-hscrollbar::-webkit-scrollbar-track {
+  background: #161b1f;
+}
+.CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
+.CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
+  background: var(--adm-surface-3);
+  border-radius: 4px;
+}
