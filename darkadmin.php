@@ -44,6 +44,11 @@ add_action( 'admin_notices', function () {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
+	if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'darkadmin-settings' ) ) {
+		if ( ! empty( $_GET['settings-updated'] ) ) {
+			return;
+		}
+	}
 	$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 	if ( $page !== 'darkadmin' ) {
 		return;
