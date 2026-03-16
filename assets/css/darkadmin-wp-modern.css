@@ -1307,7 +1307,7 @@ ul.wp-submenu {
   background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
 }
-.wp-editor-container { border-color: var(--adm-border) !important; }
+.wp-editor-container { border-color: var(--adm-border) !important; background: var(--adm-surface-3) !important; }
 .wp-editor-area {
   background: var(--adm-surface-2) !important;
   color: var(--adm-text) !important;
