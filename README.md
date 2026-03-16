@@ -83,6 +83,7 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 - Added Theme Editor / Template Side section: dark styling for `#templateside > ul`, `.importer-title` and `.color-option.selected` / `.color-option:hover`
 - Reduced `.cm-error` background opacity from `.15` to `.05` for a more subtle error highlight in CodeMirror
 - All changes applied to both `darkadmin-dark.css` and `darkadmin-wp-modern.css`
+- Fixed invalid control sequences in all language files (`de_AT`, `de_DE`, `en_US`, `.pot`): replaced `\uXXXX` Unicode escapes with literal UTF-8 characters to resolve `msgfmt` compilation errors
 
 ### 0.0.9
 
@@ -225,6 +226,7 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 - Theme-Editor / Template-Side-Bereich hinzugefügt: Dark-Styling für `#templateside > ul`, `.importer-title` und `.color-option.selected` / `.color-option:hover`
 - `.cm-error`-Hintergrund-Deckkraft von `.15` auf `.05` reduziert für ein subtileres Fehler-Highlighting in CodeMirror
 - Alle Änderungen in `darkadmin-dark.css` und `darkadmin-wp-modern.css` umgesetzt
+- Ungültige Steuerzeichen in allen Sprachdateien (`de_AT`, `de_DE`, `en_US`, `.pot`) behoben: `\uXXXX`-Unicode-Escapes durch direkte UTF-8-Zeichen ersetzt, um `msgfmt`-Kompilierungsfehler zu beheben
 
 ### 0.0.9
 
