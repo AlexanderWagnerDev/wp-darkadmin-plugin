@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.0.10\n"
+"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.0\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
 "POT-Creation-Date: 2026-03-16 21:00+0100\n"
 "PO-Revision-Date: 2026-03-16 21:00+0100\n"
