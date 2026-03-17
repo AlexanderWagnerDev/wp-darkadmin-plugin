@@ -23,18 +23,19 @@ Funktionen:
 * Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 * Preset-Themes: Wechsel zwischen Default (WP 6.x) und Modern (WP 7.0) Farbpaletten
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
+* Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
 
 == Installation ==
-1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin/` hoch (oder installiere über „Plugins").
-2. Aktiviere das Plugin in WordPress unter „Plugins".
-3. Gehe zu Einstellungen → DarkAdmin und aktiviere es.
+1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin/` hoch (oder installiere über "Plugins").
+2. Aktiviere das Plugin in WordPress unter "Plugins".
+3. Gehe zu Einstellungen -> DarkAdmin und aktiviere es.
 
 == Häufige Fragen ==
 = Betrifft das das Frontend? =
 Nein. Es lädt nur CSS im wp-admin.
 
 = Wo sind die Einstellungen? =
-Einstellungen → DarkAdmin
+Einstellungen -> DarkAdmin
 
 = Kann ich die Farben anpassen? =
 Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und unterstützt zusätzlich eigenes Custom CSS.
@@ -54,6 +55,12 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Benutzerzugriffskontrolle hinzugefügt (Benutzer ein-/ausschließen)
 * Voreingestellte Designs hinzugefügt (Standard und Modern)
 * Kritische JavaScript-Fehler in der Voreinstellungs- und Zurücksetzungsfunktion behoben
+* Fehlende schliessende geschweifte Klammer in initPaletteIO() importFile-Block in settings.js behoben
+* XSS-Sicherheitslücke in printf-Ausgabe (settings-page.php) behoben
+* Unicode-Escapes in Sprachdateien behoben: \uXXXX-Sequenzen durch direkte UTF-8-Zeichen ersetzt
+* admI18n JS-Lokalisierung via wp_localize_script für übersetzte UI-Strings hinzugefügt
+* Redundantes wp-color-picker Script-Enqueue entfernt
+* .l10n.php Sprach-Cache-Dateien für alle Locales (de_AT, de_DE, en_US) mit ABSPATH-Schutz hinzugefügt
 * Hexadezimalvalidierung für JSON-Palettenimporte hinzugefügt
 * Dokumentation für neue Funktionen aktualisiert
 
@@ -65,7 +72,7 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Ungültige Steuerzeichen in allen Sprachdateien (de_AT, de_DE, en_US, .pot) behoben: \uXXXX-Unicode-Escapes durch direkte UTF-8-Zeichen ersetzt, um msgfmt-Kompilierungsfehler zu beheben
 * Benutzerzugriff: Einschließen- und Ausschließen-Optionen werden nun ausgegraut und nicht klickbar, wenn keine Nicht-Administrator-Benutzer vorhanden sind (deaktivierter Radio-Input + CSS pointer-events: none)
 * Benutzerzugriff: Einfachen Text-Fallback durch gestalteten Empty-State-Block ersetzt (zentriertes Layout, gestrichelter Rahmen, großes Icon)
-* i18n: fehlenden String „Keine Nicht-Administrator-Benutzer gefunden. Erstelle weitere Benutzer, um deren Dark-Mode-Zugriff hier zu verwalten.“ in .pot, de_AT, de_DE und en_US Sprachdateien ergänzt
+* i18n: fehlenden String "Keine Nicht-Administrator-Benutzer gefunden. Erstelle weitere Benutzer, um deren Dark-Mode-Zugriff hier zu verwalten." in .pot, de_AT, de_DE und en_US Sprachdateien ergänzt
 
 = 0.0.9 =
 * Preset-Themes hinzugefügt: Wechsel zwischen Default (klassisches WP 6.x Dark) und Modern (WP 7.0 Tiefblau, Glassmorphism) Farbpaletten

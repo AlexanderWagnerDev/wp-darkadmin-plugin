@@ -55,6 +55,12 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Added user access control (include/exclude users)
 * Added preset themes (default and modern)
 * Fixed critical JS bugs in preset and reset functionality
+* Fixed missing closing brace in initPaletteIO() importFile block in settings.js
+* Fixed XSS vulnerability in printf output (settings-page.php)
+* Fixed Unicode escapes in language files: replaced \uXXXX sequences with literal UTF-8 characters
+* Added admI18n JS localization via wp_localize_script for translated UI strings
+* Removed redundant wp-color-picker script enqueue
+* Added .l10n.php language cache files for all locales (de_AT, de_DE, en_US) with ABSPATH protection
 * Added hex validation for JSON palette imports
 * Updated documentation for new features
 
