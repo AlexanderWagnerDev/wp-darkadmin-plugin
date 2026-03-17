@@ -79,6 +79,14 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 
 ## Changelog
 
+###  0.1.0
+- Added support for excluded pages in settings
+- Added user access control (include/exclude users)
+- Added preset themes (default and modern)
+- Fixed critical JS bugs in preset and reset functionality
+- Added hex validation for JSON palette imports
+- Updated documentation for new features
+
 ### 0.0.10
 
 - Extended Themes section: added dark styling for `.theme-browser .theme .theme-name`, `.theme-overlay .theme-actions`, `.theme-overlay .theme-tags`, `.theme-overlay .theme-header .theme-title`, `.theme-overlay .theme-author`, `.theme-overlay .theme-version` and `.theme-overlay .theme-rating .star-rating .star`
@@ -226,6 +234,14 @@ Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und u
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 ## Changelog
+
+### 0.1.0
+- Unterstützung für ausgeschlossene Seiten in den Einstellungen hinzugefügt
+- Benutzerzugriffskontrolle hinzugefügt (Benutzer ein-/ausschließen)
+- Voreingestellte Designs hinzugefügt (Standard und Modern)
+- Kritische JavaScript-Fehler in der Voreinstellungs- und Zurücksetzungsfunktion behoben
+- Hexadezimalvalidierung für JSON-Palettenimporte hinzugefügt
+- Dokumentation für neue Funktionen aktualisiert
 
 ### 0.0.10
 
