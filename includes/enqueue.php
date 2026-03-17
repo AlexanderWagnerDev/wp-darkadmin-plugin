@@ -45,6 +45,11 @@ add_action( 'admin_init', function () {
 		},
 		'default'           => 'default',
 	] );
+	register_setting( 'adm_settings', 'adm_excluded_pages', [
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_textarea_field',
+		'default'           => '',
+	] );
 } );
 
 /**
@@ -67,26 +72,97 @@ function adm_preset_fallbacks( string $preset ): array {
 }
 
 /**
+ * Parse the adm_excluded_pages textarea value into a clean array.
+ *
+ * Rules:
+ *   - One entry per line.
+ *   - Lines starting with # are treated as comments and ignored.
+ *   - Blank / whitespace-only lines are ignored.
+ *   - Values are trimmed; duplicates are removed.
+ *   - Comparison is intentionally case-sensitive (WordPress slugs are exact).
+ *
+ * @param string $raw Raw option value from the DB.
+ * @return string[] Deduplicated list of exclusion entries.
+ */
+function adm_parse_excluded_pages( string $raw ): array {
+	$lines = explode( "\n", $raw );
+	$out   = [];
+	foreach ( $lines as $line ) {
+		$line = trim( $line );
+		if ( '' === $line || str_starts_with( $line, '#' ) ) {
+			continue;
+		}
+		$out[] = $line;
+	}
+	return array_unique( $out );
+}
+
+/**
+ * Check whether the current admin page matches a user-supplied exclusion entry.
+ *
+ * Supported formats:
+ *   - Plain filename : plugins.php, edit.php
+ *   - Query-string  : admin.php?page=woocommerce  (page param compared exactly)
+ *
+ * @param string[] $entries      Parsed exclusion list from adm_parse_excluded_pages().
+ * @param string   $pagenow      Global $pagenow value.
+ * @param string   $hook_suffix  Hook suffix passed to admin_enqueue_scripts.
+ * @return bool True when the current page should be excluded.
+ */
+function adm_is_page_excluded( array $entries, string $pagenow, string $hook_suffix ): bool {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$current_page_slug = isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '';
+
+	foreach ( $entries as $entry ) {
+		// Entry contains a query string — compare only the page= parameter.
+		if ( str_contains( $entry, '?' ) ) {
+			parse_str( (string) parse_url( $entry, PHP_URL_QUERY ), $params );
+			$entry_slug = isset( $params['page'] ) ? sanitize_key( $params['page'] ) : '';
+			if ( '' !== $entry_slug && $entry_slug === $current_page_slug ) {
+				return true;
+			}
+			continue;
+		}
+		// Plain filename — match against pagenow or hook_suffix.
+		if ( $entry === $pagenow || $entry === $hook_suffix ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * Enqueue dark mode CSS and inject color token overrides as inline CSS.
  * Fallback colors are chosen based on the active preset so each preset
  * starts from its own baseline before any user customization is applied.
  *
- * Excluded pages:
+ * Hard-coded excluded pages:
  *   - site-editor.php  (Full Site Editor)
  *   - post-new.php     (Block Editor / new post)
  *   - post.php         (Block Editor / existing post)
  * All three ship their own color scheme and conflict with the dark mode styles.
+ *
+ * Additional pages can be excluded via Settings > DarkAdmin > Excluded Pages.
  */
-add_action( 'admin_enqueue_scripts', function () {
+add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 	if ( ! adm_is_dark_mode_active() ) {
 		return;
 	}
 
-	// Exclude specific admin pages.
+	// Hard-coded excludes.
 	global $pagenow;
 	$excluded = [ 'site-editor.php', 'post-new.php', 'post.php' ];
 	if ( in_array( $pagenow, $excluded, true ) ) {
 		return;
+	}
+
+	// User-defined excludes.
+	$raw_exclusions = get_option( 'adm_excluded_pages', '' );
+	if ( '' !== $raw_exclusions ) {
+		$user_excluded = adm_parse_excluded_pages( $raw_exclusions );
+		if ( adm_is_page_excluded( $user_excluded, $pagenow, $hook_suffix ) ) {
+			return;
+		}
 	}
 
 	$preset   = get_option( 'adm_preset', 'default' );

@@ -14,6 +14,7 @@ function adm_settings_page(): void {
 	$allowed          = array_map( 'intval', (array) get_option( 'adm_allowed_users', [] ) );
 	$user_access_mode = get_option( 'adm_user_access_mode', 'all' );
 	$active_preset    = get_option( 'adm_preset', 'default' );
+	$excluded_pages   = get_option( 'adm_excluded_pages', '' );
 
 	if ( $enabled ) {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
@@ -392,6 +393,51 @@ function adm_settings_page(): void {
 							placeholder="/* Your custom CSS here */"
 						><?php echo esc_textarea( $custom ); ?></textarea>
 					</div>
+				</div>
+			</div>
+
+			<!-- Advanced -->
+			<div class="adm-card">
+				<div class="adm-card-header">
+					<span class="dashicons dashicons-admin-tools"></span>
+					<h2><?php esc_html_e( 'Advanced', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
+				</div>
+				<div class="adm-card-body">
+
+					<div class="adm-field-info" style="margin-bottom:8px;">
+						<label for="adm_excluded_pages" class="adm-field-title">
+							<?php esc_html_e( 'Excluded Pages', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+						</label>
+						<span class="adm-field-desc">
+							<?php esc_html_e( 'One entry per line. Dark mode styles will not be loaded on matching admin pages.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							<?php esc_html_e( 'Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+						</span>
+					</div>
+
+					<div class="adm-css-editor-wrap">
+						<textarea
+							id="adm_excluded_pages"
+							name="adm_excluded_pages"
+							class="adm-css-editor"
+							rows="6"
+							spellcheck="false"
+							placeholder="# Examples:
+plugins.php
+tools.php
+admin.php?page=my-plugin"
+						><?php echo esc_textarea( $excluded_pages ); ?></textarea>
+					</div>
+
+					<p class="adm-field-desc" style="margin-top:8px;">
+						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
+						<?php
+						printf(
+							esc_html__( 'The following pages are always excluded regardless of this list: %s', 'darkadmin-dark-mode-for-adminpanel' ),
+							'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
+						);
+						?>
+					</p>
+
 				</div>
 			</div>
 
