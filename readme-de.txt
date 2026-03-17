@@ -49,6 +49,14 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 4. Dashboard – Dark Mode aktiv
 
 == Changelog ==
+= 0.1.0 =
+* Unterstützung für ausgeschlossene Seiten in den Einstellungen hinzugefügt
+* Benutzerzugriffskontrolle hinzugefügt (Benutzer ein-/ausschließen)
+* Voreingestellte Designs hinzugefügt (Standard und Modern)
+* Kritische JavaScript-Fehler in der Voreinstellungs- und Zurücksetzungsfunktion behoben
+* Hexadezimalvalidierung für JSON-Palettenimporte hinzugefügt
+* Dokumentation für neue Funktionen aktualisiert
+
 = 0.0.10 =
 * Themes-Bereich erweitert: Dark-Styling für .theme-browser .theme .theme-name, .theme-overlay .theme-actions, .theme-overlay .theme-tags, .theme-overlay .theme-header .theme-title, .theme-overlay .theme-author, .theme-overlay .theme-version und .theme-overlay .theme-rating .star-rating .star
 * Theme-Editor / Template-Side-Bereich hinzugefügt: Dark-Styling für #templateside > ul, .importer-title und .color-option.selected / .color-option:hover
