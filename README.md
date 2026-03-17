@@ -18,7 +18,7 @@
 | **Plugin URI** | [wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel](https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/) |
 | **Requires at least** | 6.3 |
 | **Tested up to** | 6.9 |
-| **Requires PHP** | 7.4 |
+| **Requires PHP** | 8.0 |
 | **Stable tag** | 0.0.10 |
 | **License** | GPLv2 or later |
 
