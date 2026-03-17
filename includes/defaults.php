@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Default color palette.
  * Keys map 1:1 to CSS custom properties in darkadmin-dark.css (:root).
  */
-function adm_default_colors(): array {
+function darkadmin_default_colors(): array {
 	return [
 		// Backgrounds
 		'bg'               => '#1d2327',
@@ -55,24 +55,24 @@ function adm_default_colors(): array {
 
 /**
  * Preset color palettes.
- * 'default' mirrors adm_default_colors() (classic WP 6.x dark).
+ * 'default' mirrors darkadmin_default_colors() (classic WP 6.x dark).
  * 'modern'  faithful dark port of the WP Modern design language:
  *           deep dark base, indigo accent, high contrast.
  *
  * IMPORTANT: These values must stay in sync with:
- *   - adm_preset_fallbacks() in enqueue.php  (delegates here directly)
+ *   - darkadmin_preset_fallbacks() in enqueue.php  (delegates here directly)
  *   - $preset_meta in settings-page.php (preview swatches)
  *
  * Uses a static cache so repeated calls within the same request do not
  * rebuild the array each time.
  */
-function adm_preset_colors(): array {
+function darkadmin_preset_colors(): array {
 	static $cache = null;
 	if ( null !== $cache ) {
 		return $cache;
 	}
 	$cache = [
-		'default' => adm_default_colors(),
+		'default' => darkadmin_default_colors(),
 		'modern'  => [
 			// Backgrounds
 			'bg'               => '#1e1e1e',
@@ -123,7 +123,7 @@ function adm_preset_colors(): array {
 /**
  * Returns the CSS filename for a given preset slug.
  */
-function adm_preset_css_file( string $preset ): string {
+function darkadmin_preset_css_file( string $preset ): string {
 	$map = [
 		'default' => 'darkadmin-dark.css',
 		'modern'  => 'darkadmin-wp-modern.css',
@@ -135,7 +135,7 @@ function adm_preset_css_file( string $preset ): string {
  * Maps each color key to its CSS custom property name, translated label and translated group.
  * All labels and group names are wrapped in __() for i18n.
  */
-function adm_css_variable_map(): array {
+function darkadmin_css_variable_map(): array {
 	return [
 		'bg'              => [ 'var' => '--adm-bg',              'label' => __( 'Background (Base)',                   'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ) ],
 		'bg_bar'          => [ 'var' => '--adm-bg-bar',          'label' => __( 'Background (Admin Bar)',              'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ) ],
@@ -177,8 +177,8 @@ function adm_css_variable_map(): array {
 /**
  * Sanitize and validate the color palette input.
  */
-function adm_sanitize_colors( $input ): array {
-	$defaults = adm_default_colors();
+function darkadmin_sanitize_colors( $input ): array {
+	$defaults = darkadmin_default_colors();
 	$output   = [];
 	foreach ( $defaults as $key => $default ) {
 		$raw            = $input[ $key ] ?? $default;
@@ -191,7 +191,7 @@ function adm_sanitize_colors( $input ): array {
  * Sanitize the user access mode option.
  * Allowed values: 'all', 'include', 'exclude'.
  */
-function adm_sanitize_user_access_mode( string $value ): string {
+function darkadmin_sanitize_user_access_mode( string $value ): string {
 	$allowed = [ 'all', 'include', 'exclude' ];
 	return in_array( $value, $allowed, true ) ? $value : 'all';
 }
@@ -201,6 +201,6 @@ function adm_sanitize_user_access_mode( string $value ): string {
  * CSS cannot contain HTML, so wp_strip_all_tags() is sufficient and
  * more robust than a hand-rolled regex allowlist.
  */
-function adm_sanitize_custom_css( string $css ): string {
+function darkadmin_sanitize_custom_css( string $css ): string {
 	return wp_strip_all_tags( $css );
 }

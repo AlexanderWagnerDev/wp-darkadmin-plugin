@@ -7,45 +7,45 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Register plugin settings.
  */
 add_action( 'admin_init', function () {
-	register_setting( 'adm_settings', 'adm_dark_mode_enabled', [
+	register_setting( 'darkadmin_settings', 'darkadmin_dark_mode_enabled', [
 		'type'              => 'boolean',
 		'sanitize_callback' => fn( $v ) => (bool) $v,
 		'default'           => false,
 	] );
-	register_setting( 'adm_settings', 'adm_auto_darken', [
+	register_setting( 'darkadmin_settings', 'darkadmin_auto_darken', [
 		'type'              => 'boolean',
 		'sanitize_callback' => fn( $v ) => (bool) $v,
 		'default'           => false,
 	] );
-	register_setting( 'adm_settings', 'adm_colors', [
+	register_setting( 'darkadmin_settings', 'darkadmin_colors', [
 		'type'              => 'array',
-		'sanitize_callback' => 'adm_sanitize_colors',
-		'default'           => adm_default_colors(),
+		'sanitize_callback' => 'darkadmin_sanitize_colors',
+		'default'           => darkadmin_default_colors(),
 	] );
-	register_setting( 'adm_settings', 'adm_custom_css', [
+	register_setting( 'darkadmin_settings', 'darkadmin_custom_css', [
 		'type'              => 'string',
-		'sanitize_callback' => 'adm_sanitize_custom_css',
+		'sanitize_callback' => 'darkadmin_sanitize_custom_css',
 		'default'           => '',
 	] );
-	register_setting( 'adm_settings', 'adm_allowed_users', [
+	register_setting( 'darkadmin_settings', 'darkadmin_allowed_users', [
 		'type'              => 'array',
 		'sanitize_callback' => fn( $v ) => array_map( 'absint', (array) $v ),
 		'default'           => [],
 	] );
-	register_setting( 'adm_settings', 'adm_user_access_mode', [
+	register_setting( 'darkadmin_settings', 'darkadmin_user_access_mode', [
 		'type'              => 'string',
-		'sanitize_callback' => 'adm_sanitize_user_access_mode',
+		'sanitize_callback' => 'darkadmin_sanitize_user_access_mode',
 		'default'           => 'all',
 	] );
-	register_setting( 'adm_settings', 'adm_preset', [
+	register_setting( 'darkadmin_settings', 'darkadmin_preset', [
 		'type'              => 'string',
 		'sanitize_callback' => function ( $v ) {
-			$allowed = array_keys( adm_preset_colors() );
+			$allowed = array_keys( darkadmin_preset_colors() );
 			return in_array( $v, $allowed, true ) ? $v : 'default';
 		},
 		'default'           => 'default',
 	] );
-	register_setting( 'adm_settings', 'adm_excluded_pages', [
+	register_setting( 'darkadmin_settings', 'darkadmin_excluded_pages', [
 		'type'              => 'string',
 		'sanitize_callback' => 'sanitize_textarea_field',
 		'default'           => '',
@@ -58,21 +58,21 @@ add_action( 'admin_init', function () {
  * Each preset defines its own baseline so the inline style block
  * always reflects the correct starting point.
  *
- * IMPORTANT: These values must be identical to adm_preset_colors()
+ * IMPORTANT: These values must be identical to darkadmin_preset_colors()
  * in defaults.php. Keep both in sync when adding or changing presets.
  *
  * @param string $preset Preset key ('default', 'modern', ...).
  * @return array<string,string> Map of color key => hex value.
  */
-function adm_preset_fallbacks( string $preset ): array {
-	// Delegate directly to adm_preset_colors() so there is a single
+function darkadmin_preset_fallbacks( string $preset ): array {
+	// Delegate directly to darkadmin_preset_colors() so there is a single
 	// source of truth and both arrays can never drift apart.
-	$presets = adm_preset_colors();
+	$presets = darkadmin_preset_colors();
 	return $presets[ $preset ] ?? $presets['default'];
 }
 
 /**
- * Parse the adm_excluded_pages textarea value into a clean array.
+ * Parse the darkadmin_excluded_pages textarea value into a clean array.
  *
  * Rules:
  *   - One entry per line.
@@ -84,7 +84,7 @@ function adm_preset_fallbacks( string $preset ): array {
  * @param string $raw Raw option value from the DB.
  * @return string[] Deduplicated list of exclusion entries.
  */
-function adm_parse_excluded_pages( string $raw ): array {
+function darkadmin_parse_excluded_pages( string $raw ): array {
 	$lines = explode( "\n", $raw );
 	$out   = [];
 	foreach ( $lines as $line ) {
@@ -104,12 +104,12 @@ function adm_parse_excluded_pages( string $raw ): array {
  *   - Plain filename : plugins.php, edit.php
  *   - Query-string  : admin.php?page=woocommerce  (page param compared exactly)
  *
- * @param string[] $entries      Parsed exclusion list from adm_parse_excluded_pages().
+ * @param string[] $entries      Parsed exclusion list from darkadmin_parse_excluded_pages().
  * @param string   $pagenow      Global $pagenow value.
  * @param string   $hook_suffix  Hook suffix passed to admin_enqueue_scripts.
  * @return bool True when the current page should be excluded.
  */
-function adm_is_page_excluded( array $entries, string $pagenow, string $hook_suffix ): bool {
+function darkadmin_is_page_excluded( array $entries, string $pagenow, string $hook_suffix ): bool {
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$current_page_slug = isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '';
 
@@ -145,7 +145,7 @@ function adm_is_page_excluded( array $entries, string $pagenow, string $hook_suf
  * Additional pages can be excluded via Settings > DarkAdmin > Excluded Pages.
  */
 add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
-	if ( ! adm_is_dark_mode_active() ) {
+	if ( ! darkadmin_is_dark_mode_active() ) {
 		return;
 	}
 
@@ -157,27 +157,27 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 	}
 
 	// User-defined excludes.
-	$raw_exclusions = get_option( 'adm_excluded_pages', '' );
+	$raw_exclusions = get_option( 'darkadmin_excluded_pages', '' );
 	if ( '' !== $raw_exclusions ) {
-		$user_excluded = adm_parse_excluded_pages( $raw_exclusions );
-		if ( adm_is_page_excluded( $user_excluded, $pagenow, $hook_suffix ) ) {
+		$user_excluded = darkadmin_parse_excluded_pages( $raw_exclusions );
+		if ( darkadmin_is_page_excluded( $user_excluded, $pagenow, $hook_suffix ) ) {
 			return;
 		}
 	}
 
-	$preset   = get_option( 'adm_preset', 'default' );
-	$css_file = adm_preset_css_file( $preset );
+	$preset   = get_option( 'darkadmin_preset', 'default' );
+	$css_file = darkadmin_preset_css_file( $preset );
 
 	// Merge user-saved colors on top of the preset-specific fallbacks.
-	$fallbacks = adm_preset_fallbacks( $preset );
+	$fallbacks = darkadmin_preset_fallbacks( $preset );
 	$c         = wp_parse_args(
-		(array) get_option( 'adm_colors', [] ),
+		(array) get_option( 'darkadmin_colors', [] ),
 		$fallbacks
 	);
 
 	// Cache-busting: combine plugin version + hash of current color values.
 	$color_hash = substr( md5( wp_json_encode( $c ) ), 0, 8 );
-	$ver        = ADM_VERSION . '-' . $color_hash;
+	$ver        = DARKADMIN_VERSION . '-' . $color_hash;
 
 	$sc = static fn( string $k ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fallbacks[ $k ];
 
@@ -219,25 +219,25 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 		'}';
 
 	wp_enqueue_style(
-		'adm-darkmode',
-		ADM_URL . 'assets/css/' . $css_file,
+		'darkadmin-darkmode',
+		DARKADMIN_URL . 'assets/css/' . $css_file,
 		[],
 		$ver
 	);
-	wp_add_inline_style( 'adm-darkmode', $vars );
+	wp_add_inline_style( 'darkadmin-darkmode', $vars );
 
-	$custom = get_option( 'adm_custom_css', '' );
+	$custom = get_option( 'darkadmin_custom_css', '' );
 	if ( ! empty( $custom ) ) {
-		// Custom CSS is already sanitized on save via adm_sanitize_custom_css().
-		wp_add_inline_style( 'adm-darkmode', $custom );
+		// Custom CSS is already sanitized on save via darkadmin_sanitize_custom_css().
+		wp_add_inline_style( 'darkadmin-darkmode', $custom );
 	}
 
-	if ( get_option( 'adm_auto_darken', false ) ) {
+	if ( get_option( 'darkadmin_auto_darken', false ) ) {
 		wp_enqueue_script(
-			'adm-auto-darken',
-			ADM_URL . 'assets/js/auto-darken.js',
+			'darkadmin-auto-darken',
+			DARKADMIN_URL . 'assets/js/auto-darken.js',
 			[],
-			ADM_VERSION,
+			DARKADMIN_VERSION,
 			false
 		);
 	}
@@ -252,26 +252,26 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 	}
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_style(
-		'adm-settings-css',
-		ADM_URL . 'assets/css/settings.css',
+		'darkadmin-settings-css',
+		DARKADMIN_URL . 'assets/css/settings.css',
 		[ 'wp-color-picker' ],
-		ADM_VERSION
+		DARKADMIN_VERSION
 	);
 	wp_enqueue_script(
-		'adm-settings-js',
-		ADM_URL . 'assets/js/settings.js',
+		'darkadmin-settings-js',
+		DARKADMIN_URL . 'assets/js/settings.js',
 		[ 'jquery', 'wp-color-picker' ],
-		ADM_VERSION,
+		DARKADMIN_VERSION,
 		true
 	);
 
 	// Pass default colors, CSS var map, presets and i18n strings to JS.
-	wp_localize_script( 'adm-settings-js', 'admData', [
-		'defaults' => adm_default_colors(),
-		'varMap'   => array_map( fn( $v ) => $v['var'], adm_css_variable_map() ),
-		'presets'  => adm_preset_colors(),
+	wp_localize_script( 'darkadmin-settings-js', 'admData', [
+		'defaults' => darkadmin_default_colors(),
+		'varMap'   => array_map( fn( $v ) => $v['var'], darkadmin_css_variable_map() ),
+		'presets'  => darkadmin_preset_colors(),
 	] );
-	wp_localize_script( 'adm-settings-js', 'admI18n', [
+	wp_localize_script( 'darkadmin-settings-js', 'admI18n', [
 		'active'     => __( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' ),
 		'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
 	] );
@@ -286,6 +286,6 @@ add_action( 'admin_menu', function () {
 		__( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ),
 		'manage_options',
 		'darkadmin',
-		'adm_settings_page'
+		'darkadmin_settings_page'
 	);
 } );

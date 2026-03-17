@@ -6,23 +6,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Render the settings page.
  */
-function adm_settings_page(): void {
-	$enabled          = (bool) get_option( 'adm_dark_mode_enabled', false );
-	$auto_darken      = (bool) get_option( 'adm_auto_darken', false );
-	$colors           = wp_parse_args( (array) get_option( 'adm_colors', [] ), adm_default_colors() );
-	$custom           = get_option( 'adm_custom_css', '' );
-	$allowed          = array_map( 'intval', (array) get_option( 'adm_allowed_users', [] ) );
-	$user_access_mode = get_option( 'adm_user_access_mode', 'all' );
-	$active_preset    = get_option( 'adm_preset', 'default' );
-	$excluded_pages   = get_option( 'adm_excluded_pages', '' );
+function darkadmin_settings_page(): void {
+	$enabled          = (bool) get_option( 'darkadmin_dark_mode_enabled', false );
+	$auto_darken      = (bool) get_option( 'darkadmin_auto_darken', false );
+	$colors           = wp_parse_args( (array) get_option( 'darkadmin_colors', [] ), darkadmin_default_colors() );
+	$custom           = get_option( 'darkadmin_custom_css', '' );
+	$allowed          = array_map( 'intval', (array) get_option( 'darkadmin_allowed_users', [] ) );
+	$user_access_mode = get_option( 'darkadmin_user_access_mode', 'all' );
+	$active_preset    = get_option( 'darkadmin_preset', 'default' );
+	$excluded_pages   = get_option( 'darkadmin_excluded_pages', '' );
 
 	if ( $enabled ) {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
 	}
 
-	$var_map  = adm_css_variable_map();
-	$defaults = adm_default_colors();
-	$presets  = adm_preset_colors();
+	$var_map  = darkadmin_css_variable_map();
+	$defaults = darkadmin_default_colors();
+	$presets  = darkadmin_preset_colors();
 
 	$color_groups = [];
 	$grouped_vars = [];
@@ -31,11 +31,11 @@ function adm_settings_page(): void {
 		$grouped_vars[ $info['group'] ][]        = [ 'key' => $key, 'info' => $info ];
 	}
 
-	$selectable_users = adm_get_selectable_users();
+	$selectable_users = darkadmin_get_selectable_users();
 	$has_users        = ! empty( $selectable_users );
 
 	/**
-	 * Preview swatch colors — must match adm_preset_colors() in defaults.php.
+	 * Preview swatch colors — must match darkadmin_preset_colors() in defaults.php.
 	 */
 	$preset_meta = [
 		'default' => [
@@ -67,7 +67,7 @@ function adm_settings_page(): void {
 					<h1 class="adm-page-title"><?php esc_html_e( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ); ?></h1>
 					<p class="adm-page-subtitle">
 						<?php esc_html_e( 'Dark theme for the WordPress backend', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-						&mdash; v<?php echo esc_html( ADM_VERSION ); ?>
+						&mdash; v<?php echo esc_html( DARKADMIN_VERSION ); ?>
 					</p>
 				</div>
 			</div>
@@ -80,7 +80,7 @@ function adm_settings_page(): void {
 		</div>
 
 		<form method="post" action="options.php">
-			<?php settings_fields( 'adm_settings' ); ?>
+			<?php settings_fields( 'darkadmin_settings' ); ?>
 
 			<!-- General Settings -->
 			<div class="adm-card">
@@ -92,7 +92,7 @@ function adm_settings_page(): void {
 
 					<div class="adm-field-row">
 						<div class="adm-field-info">
-							<label for="adm_dark_mode_enabled" class="adm-field-title">
+							<label for="darkadmin_dark_mode_enabled" class="adm-field-title">
 								<?php esc_html_e( 'Enable Dark Mode', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							</label>
 							<span class="adm-field-desc">
@@ -100,7 +100,7 @@ function adm_settings_page(): void {
 							</span>
 						</div>
 						<label class="adm-toggle">
-							<input type="checkbox" id="adm_dark_mode_enabled" name="adm_dark_mode_enabled" value="1"
+							<input type="checkbox" id="darkadmin_dark_mode_enabled" name="darkadmin_dark_mode_enabled" value="1"
 								<?php checked( true, $enabled ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
 						</label>
@@ -110,7 +110,7 @@ function adm_settings_page(): void {
 
 					<div class="adm-field-row">
 						<div class="adm-field-info">
-							<label for="adm_auto_darken" class="adm-field-title">
+							<label for="darkadmin_auto_darken" class="adm-field-title">
 								<?php esc_html_e( 'Auto Dark Mode', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							</label>
 							<span class="adm-field-desc">
@@ -118,7 +118,7 @@ function adm_settings_page(): void {
 							</span>
 						</div>
 						<label class="adm-toggle">
-							<input type="checkbox" id="adm_auto_darken" name="adm_auto_darken" value="1"
+							<input type="checkbox" id="darkadmin_auto_darken" name="darkadmin_auto_darken" value="1"
 								<?php checked( true, $auto_darken ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
 						</label>
@@ -198,7 +198,7 @@ function adm_settings_page(): void {
 
 					</div><!-- .adm-preset-layout -->
 
-					<input type="hidden" id="adm_preset" name="adm_preset" value="<?php echo esc_attr( $active_preset ); ?>" />
+					<input type="hidden" id="darkadmin_preset" name="darkadmin_preset" value="<?php echo esc_attr( $active_preset ); ?>" />
 				</div>
 			</div>
 
@@ -213,7 +213,7 @@ function adm_settings_page(): void {
 					<!-- Access mode selector -->
 					<div class="adm-access-mode">
 						<label class="adm-access-mode-option <?php echo $user_access_mode === 'all' ? 'is-active' : ''; ?>">
-							<input type="radio" name="adm_user_access_mode" value="all"
+							<input type="radio" name="darkadmin_user_access_mode" value="all"
 								<?php checked( $user_access_mode, 'all' ); ?> />
 							<span class="dashicons dashicons-groups"></span>
 							<span class="adm-access-mode-label">
@@ -223,7 +223,7 @@ function adm_settings_page(): void {
 						</label>
 
 						<label class="adm-access-mode-option <?php echo $user_access_mode === 'include' ? 'is-active' : ''; echo ! $has_users ? ' is-disabled' : ''; ?>">
-							<input type="radio" name="adm_user_access_mode" value="include"
+							<input type="radio" name="darkadmin_user_access_mode" value="include"
 								<?php checked( $user_access_mode, 'include' ); ?>
 								<?php disabled( ! $has_users ); ?> />
 							<span class="dashicons dashicons-yes-alt"></span>
@@ -234,7 +234,7 @@ function adm_settings_page(): void {
 						</label>
 
 						<label class="adm-access-mode-option <?php echo $user_access_mode === 'exclude' ? 'is-active' : ''; echo ! $has_users ? ' is-disabled' : ''; ?>">
-							<input type="radio" name="adm_user_access_mode" value="exclude"
+							<input type="radio" name="darkadmin_user_access_mode" value="exclude"
 								<?php checked( $user_access_mode, 'exclude' ); ?>
 								<?php disabled( ! $has_users ); ?> />
 							<span class="dashicons dashicons-dismiss"></span>
@@ -253,7 +253,7 @@ function adm_settings_page(): void {
 							<label class="adm-user-item">
 								<input
 									type="checkbox"
-									name="adm_allowed_users[]"
+									name="darkadmin_allowed_users[]"
 									value="<?php echo esc_attr( $user->ID ); ?>"
 									<?php checked( in_array( $user->ID, $allowed, true ) ); ?>
 								/>
@@ -318,7 +318,7 @@ function adm_settings_page(): void {
 										<input
 											type="text"
 											id="adm_color_<?php echo esc_attr( $key ); ?>"
-											name="adm_colors[<?php echo esc_attr( $key ); ?>]"
+											name="darkadmin_colors[<?php echo esc_attr( $key ); ?>]"
 											value="<?php echo esc_attr( $colors[ $key ] ?? $defaults[ $key ] ); ?>"
 											class="adm-color-picker"
 											data-key="<?php echo esc_attr( $key ); ?>"
@@ -382,8 +382,8 @@ function adm_settings_page(): void {
 					</details>
 					<div class="adm-css-editor-wrap">
 						<textarea
-							id="adm_custom_css"
-							name="adm_custom_css"
+							id="darkadmin_custom_css"
+							name="darkadmin_custom_css"
 							class="adm-css-editor"
 							rows="12"
 							spellcheck="false"
@@ -402,7 +402,7 @@ function adm_settings_page(): void {
 				<div class="adm-card-body">
 
 					<div class="adm-field-info" style="margin-bottom:8px;">
-						<label for="adm_excluded_pages" class="adm-field-title">
+						<label for="darkadmin_excluded_pages" class="adm-field-title">
 							<?php esc_html_e( 'Excluded Pages', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 						</label>
 						<span class="adm-field-desc">
@@ -413,8 +413,8 @@ function adm_settings_page(): void {
 
 					<div class="adm-css-editor-wrap">
 						<textarea
-							id="adm_excluded_pages"
-							name="adm_excluded_pages"
+							id="darkadmin_excluded_pages"
+							name="darkadmin_excluded_pages"
 							class="adm-css-editor"
 							rows="6"
 							spellcheck="false"
