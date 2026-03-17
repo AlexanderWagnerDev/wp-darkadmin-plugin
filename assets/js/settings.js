@@ -157,27 +157,37 @@
 
 		if ( importFile ) {
 			importFile.addEventListener( 'change', function () {
-				const file = importFile.files[ 0 ];
-				if ( ! file ) return;
-				const reader = new FileReader();
-				reader.onload = function ( e ) {
-					try {
-						const data = JSON.parse( e.target.result );
-						Object.keys( data ).forEach( function ( key ) {
-							const input = document.getElementById( 'adm_color_' + key );
-							if ( ! input ) return;
-							jQuery( input ).wpColorPicker( 'color', data[ key ] );
-							document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), data[ key ] );
-						} );
-						if ( statusEl ) { statusEl.textContent = '✓ Imported'; statusEl.className = 'adm-import-status adm-import-ok'; }
-					} catch ( err ) {
-						if ( statusEl ) { statusEl.textContent = '✕ Invalid JSON'; statusEl.className = 'adm-import-status adm-import-err'; }
+			const file = importFile.files[ 0 ];
+			if ( ! file ) return;
+			const reader = new FileReader();
+			reader.onload = function ( e ) {
+				try {
+					const data = JSON.parse( e.target.result );
+					for ( const key in data ) {
+						if ( ! /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test( data[ key ] ) ) {
+							throw new Error( `Invalid hex color value for key: ${key}` );
+						}
 					}
-					importFile.value = '';
-				};
-				reader.readAsText( file );
-			} );
-		}
+					Object.keys( data ).forEach( function ( key ) {
+						const input = document.getElementById( 'adm_color_' + key );
+						if ( ! input ) return;
+						jQuery( input ).wpColorPicker( 'color', data[ key ] );
+						document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), data[ key ] );
+					} );
+					if ( statusEl ) {
+						statusEl.textContent = '✓ Imported';
+						statusEl.className = 'adm-import-status adm-import-ok';
+					}
+				} catch ( err ) {
+					if ( statusEl ) {
+						statusEl.textContent = '✕ Invalid JSON or Hex color';
+						statusEl.className = 'adm-import-status adm-import-err';
+					}
+				}
+				importFile.value = '';
+			};
+			reader.readAsText( file );
+		} );
 	}
 
 	/* -----------------------------------------------------------------------
