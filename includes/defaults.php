@@ -62,9 +62,16 @@ function adm_default_colors(): array {
  * IMPORTANT: These values must stay in sync with:
  *   - adm_preset_fallbacks() in enqueue.php  (delegates here directly)
  *   - $preset_meta in settings-page.php (preview swatches)
+ *
+ * Uses a static cache so repeated calls within the same request do not
+ * rebuild the array each time.
  */
 function adm_preset_colors(): array {
-	return [
+	static $cache = null;
+	if ( null !== $cache ) {
+		return $cache;
+	}
+	$cache = [
 		'default' => adm_default_colors(),
 		'modern'  => [
 			// Backgrounds
@@ -110,6 +117,7 @@ function adm_preset_colors(): array {
 			'cm_bracket'       => '#89ddff',
 		],
 	];
+	return $cache;
 }
 
 /**
@@ -190,11 +198,9 @@ function adm_sanitize_user_access_mode( string $value ): string {
 
 /**
  * Sanitize custom CSS input.
- * Strips HTML tags but preserves valid CSS content.
+ * CSS cannot contain HTML, so wp_strip_all_tags() is sufficient and
+ * more robust than a hand-rolled regex allowlist.
  */
 function adm_sanitize_custom_css( string $css ): string {
-	$css = preg_replace( '/<\/?(?:script|style|iframe|object|embed|form|input|link|meta|base)[^>]*>/i', '', $css );
-	$css = preg_replace( '/<\?(?:php)?.*?\?>/is', '', $css );
-	$css = wp_strip_all_tags( $css );
-	return $css;
+	return wp_strip_all_tags( $css );
 }

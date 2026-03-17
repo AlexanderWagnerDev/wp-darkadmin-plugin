@@ -24,13 +24,10 @@ function adm_settings_page(): void {
 	$presets  = adm_preset_colors();
 
 	$color_groups = [];
-	foreach ( $var_map as $key => $info ) {
-		$color_groups[ $info['group'] ][ $key ] = $info['label'];
-	}
-
 	$grouped_vars = [];
 	foreach ( $var_map as $key => $info ) {
-		$grouped_vars[ $info['group'] ][] = [ 'key' => $key, 'info' => $info ];
+		$color_groups[ $info['group'] ][ $key ] = $info['label'];
+		$grouped_vars[ $info['group'] ][]        = [ 'key' => $key, 'info' => $info ];
 	}
 
 	$selectable_users = adm_get_selectable_users();
@@ -358,7 +355,7 @@ function adm_settings_page(): void {
 							<span class="adm-var-count"><?php echo count( $var_map ); ?></span>
 						</summary>
 						<?php
-						$cur_colors = wp_parse_args( (array) get_option( 'adm_colors', [] ), $defaults );
+						// Re-use the already-loaded $colors array instead of calling get_option() again.
 						foreach ( $grouped_vars as $group_name => $entries ) :
 						?>
 							<div class="adm-var-group">
@@ -367,7 +364,7 @@ function adm_settings_page(): void {
 									<?php foreach ( $entries as $entry ) :
 										$key           = $entry['key'];
 										$info          = $entry['info'];
-										$current_color = sanitize_hex_color( $cur_colors[ $key ] ?? '' ) ?: $defaults[ $key ];
+										$current_color = sanitize_hex_color( $colors[ $key ] ?? '' ) ?: $defaults[ $key ];
 									?>
 										<div class="adm-var-item">
 											<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>

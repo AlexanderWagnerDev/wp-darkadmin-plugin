@@ -55,7 +55,6 @@ function adm_get_selectable_users(): array {
 	return get_users( [
 		'orderby'      => 'display_name',
 		'order'        => 'ASC',
-		'exclude'      => [],
 		'role__not_in' => [ 'administrator' ],
 	] );
 }
