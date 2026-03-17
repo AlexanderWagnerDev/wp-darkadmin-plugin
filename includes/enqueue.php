@@ -116,7 +116,7 @@ function darkadmin_is_page_excluded( array $entries, string $pagenow, string $ho
 	foreach ( $entries as $entry ) {
 		// Entry contains a query string — compare only the page= parameter.
 		if ( str_contains( $entry, '?' ) ) {
-			parse_str( (string) parse_url( $entry, PHP_URL_QUERY ), $params );
+			parse_str( (string) wp_parse_url( $entry, PHP_URL_QUERY ), $params );
 			$entry_slug = isset( $params['page'] ) ? sanitize_key( $params['page'] ) : '';
 			if ( '' !== $entry_slug && $entry_slug === $current_page_slug ) {
 				return true;
