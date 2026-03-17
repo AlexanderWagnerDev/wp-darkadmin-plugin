@@ -39,7 +39,7 @@
 		const previewName  = document.getElementById( 'adm-preview-name' );
 		const tiles        = document.querySelectorAll( '.adm-preset-tile' );
 		const loadBtns     = document.querySelectorAll( '.adm-preset-load-btn' );
-		const admPresets   = window.admPresets || {};
+		const admPresets   = window.admData.presets || {};
 
 		function updatePreview( slug ) {
 			if ( ! previewPanel || ! meta[ slug ] ) return;
@@ -121,7 +121,7 @@
 	function initReset() {
 		const btn = document.getElementById( 'adm-reset-colors' );
 		if ( ! btn ) return;
-		const admDefaults = window.admDefaults || {};
+		const admDefaults = window.admData.defaults;
 		btn.addEventListener( 'click', function () {
 			Object.keys( admDefaults ).forEach( function ( key ) {
 				const input = document.getElementById( 'adm_color_' + key );
@@ -169,9 +169,9 @@
 							jQuery( input ).wpColorPicker( 'color', data[ key ] );
 							document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), data[ key ] );
 						} );
-						if ( statusEl ) { statusEl.textContent = '\u2713 Imported'; statusEl.className = 'adm-import-status adm-import-ok'; }
+						if ( statusEl ) { statusEl.textContent = '✓ Imported'; statusEl.className = 'adm-import-status adm-import-ok'; }
 					} catch ( err ) {
-						if ( statusEl ) { statusEl.textContent = '\u2715 Invalid JSON'; statusEl.className = 'adm-import-status adm-import-err'; }
+						if ( statusEl ) { statusEl.textContent = '✕ Invalid JSON'; statusEl.className = 'adm-import-status adm-import-err'; }
 					}
 					importFile.value = '';
 				};
