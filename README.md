@@ -19,7 +19,7 @@
 | **Requires at least** | 6.3 |
 | **Tested up to** | 6.9 |
 | **Requires PHP** | 8.0 |
-| **Stable tag** | 0.0.10 |
+| **Stable tag** | 0.1.0 |
 | **License** | GPLv2 or later |
 
 ## Description
@@ -37,6 +37,7 @@ DarkAdmin transforms the WordPress admin dashboard into a clean, eye-friendly da
 - Auto Dark Mode: dynamically darkens bright plugin backgrounds not covered by the stylesheet
 - Preset Themes: choose between Default (WP 6.x) and Modern (WP 7.0) color palettes
 - Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
+- Excluded Pages: specify admin pages where dark mode should not be applied
 
 ## Screenshots
 
@@ -184,6 +185,7 @@ DarkAdmin verwandelt das WordPress-Admin-Dashboard in eine angenehme, augenfreun
 - Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 - Preset-Themes: Wechsel zwischen Default (WP 6.x) und Modern (WP 7.0) Farbpaletten
 - Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
+- Ausgeschlossene Seiten: Geben Sie die Admin-Seiten an, auf denen der Dunkelmodus nicht angewendet werden soll.
 
 ## Screenshots
 
