@@ -261,7 +261,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 	wp_enqueue_script(
 		'adm-settings-js',
 		ADM_URL . 'assets/js/settings.js',
-		[ 'wp-color-picker' ],
+		[ 'jquery', 'wp-color-picker' ],
 		ADM_VERSION,
 		true
 	);
