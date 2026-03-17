@@ -31,6 +31,12 @@ jobs:
       - name: Generate .l10n.php files
         run: wp i18n make-php languages/
 
+      - name: Add direct file access protection
+        run: |
+          for f in languages/*.l10n.php; do
+            sed -i 's/<?php/<?php\nif ( ! defined( '"'"'ABSPATH'"'"' ) ) {\n\texit;\n}/' "$f"
+          done
+
       - name: Commit generated .l10n.php files
         run: |
           git config user.name "github-actions[bot]"
