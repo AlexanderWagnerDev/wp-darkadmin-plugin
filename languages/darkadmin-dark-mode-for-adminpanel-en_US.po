@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.0\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-17 16:00+0100\n"
-"PO-Revision-Date: 2026-03-17 16:00+0100\n"
+"POT-Creation-Date: 2026-03-17 18:00+0100\n"
+"PO-Revision-Date: 2026-03-17 18:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: en_US\n"
@@ -167,6 +167,10 @@ msgstr "Add your own CSS here, loaded after the dark mode stylesheet. All CSS va
 #: includes/settings-page.php
 msgid "Save Settings"
 msgstr "Save Settings"
+
+#: includes/settings-page.php
+msgid "✕ Invalid JSON or Hex color"
+msgstr "✕ Invalid JSON or Hex color"
 
 #: darkadmin.php
 msgid "✓ Dark Mode is active. Settings have been saved."
