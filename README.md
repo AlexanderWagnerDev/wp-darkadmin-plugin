@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.1.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.1.1-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -47,6 +47,9 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 ---
 
 ## Changelog
+
+### 0.1.1
+- Fixed `uninstall.php`: corrected all option names from wrong `adm_` prefix to `darkadmin_` prefix so options are properly removed on plugin deletion
 
 ### 0.1.0
 - Added support for excluded pages in settings
@@ -163,6 +166,9 @@ Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit
 ---
 
 ## Changelog
+
+### 0.1.1
+- Behoben: `uninstall.php` korrigiert — alle Optionsnamen vom falschen `adm_`-Prefix auf den korrekten `darkadmin_`-Prefix geändert, damit Optionen beim Deinstallieren sauber entfernt werden
 
 ### 0.1.0
 - Unterstützung für ausgeschlossene Seiten in den Einstellungen hinzugefügt
