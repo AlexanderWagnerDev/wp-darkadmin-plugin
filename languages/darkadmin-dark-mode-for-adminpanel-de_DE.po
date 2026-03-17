@@ -188,6 +188,10 @@ msgstr "Ein Eintrag pro Zeile. Dark-Mode-Stile werden auf den entsprechenden Adm
 msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
 msgstr "Unterstützt einfache Dateinamen (plugins.php) und benutzerdefinierte Seiten-Slugs (admin.php?page=my-plugin). Zeilen, die mit # beginnen, werden als Kommentare behandelt."
 
+#: includes/settings-page.php
+msgid "The following pages are always excluded: %s"
+msgstr "Die folgenden Seiten sind immer ausgeschlossen: %s"
+
 #: darkadmin.php
 msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
