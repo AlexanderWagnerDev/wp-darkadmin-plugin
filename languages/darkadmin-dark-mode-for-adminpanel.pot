@@ -188,6 +188,10 @@ msgstr ""
 msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
 msgstr ""
 
+#: includes/settings-page.php
+msgid "The following pages are always excluded regardless of this list: %s"
+msgstr ""
+
 #: darkadmin.php
 msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr ""
