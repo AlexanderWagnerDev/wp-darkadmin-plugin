@@ -59,7 +59,7 @@
 			} );
 			loadBtns.forEach( function ( btn ) {
 				const isThis = btn.dataset.preset === slug;
-				btn.textContent = isThis ? '\u2713 Active' : 'Load Preset';
+				btn.textContent = isThis ? '✓ Active' : 'Load Preset';
 				if ( window.admI18n ) {
 					btn.textContent = isThis ? window.admI18n.active : window.admI18n.loadPreset;
 				}
@@ -110,7 +110,7 @@
 		document.querySelectorAll( '.adm-preset-load-btn' ).forEach( function ( btn ) {
 			const isActive = btn.dataset.preset === activeSlug;
 			btn.textContent = isActive
-				? ( window.admI18n ? window.admI18n.active    : '\u2713 Active' )
+				? ( window.admI18n ? window.admI18n.active    : '✓ Active' )
 				: ( window.admI18n ? window.admI18n.loadPreset : 'Load Preset' );
 		} );
 	}
@@ -175,12 +175,12 @@
 							document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), data[ key ] );
 						} );
 						if ( statusEl ) {
-							statusEl.textContent = '\u2713 Imported';
+							statusEl.textContent = '✓ Imported';
 							statusEl.className = 'adm-import-status adm-import-ok';
 						}
 					} catch ( err ) {
 						if ( statusEl ) {
-							statusEl.textContent = '\u2715 Invalid JSON or Hex color';
+							statusEl.textContent = '✕ Invalid JSON or Hex color';
 							statusEl.className = 'adm-import-status adm-import-err';
 						}
 					}
@@ -199,7 +199,7 @@
 			btn.addEventListener( 'click', function () {
 				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
 					const orig = btn.innerHTML;
-					btn.innerHTML = '<code>\u2713 Copied!</code>';
+					btn.innerHTML = '<code>✓ Copied!</code>';
 					setTimeout( function () { btn.innerHTML = orig; }, 1400 );
 				} ).catch( function () {} );
 			} );
