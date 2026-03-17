@@ -131,4 +131,120 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 
 ---
 
-*Developed by [AlexanderWagnerDev](https://alexanderwagnerdev.com)*
+---
+
+# DarkAdmin – Dark Mode für das Adminpanel
+
+Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit vollständiger Farbanpassung und Auto-Dark-Mode-Unterstützung.
+
+---
+
+## Funktionen
+
+- Ein-Klick aktivieren/deaktivieren
+- Leichtgewichtiges CSS-basiertes Admin-Theme
+- Funktioniert auf allen Admin-Seiten
+- Individuelle Farbanpassung über den WordPress Color Picker
+- Unterstützung für eigenes Custom CSS mit eingebauten CSS-Variablen
+- Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
+- Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
+- Preset-Themes: Wechsel zwischen Default (WP 6.x) und Modern (WP 7.0) Farbpaletten
+- Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
+- Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
+
+---
+
+## Installation
+
+1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin/` hoch
+2. Aktiviere das Plugin in WordPress unter **Plugins**
+3. Gehe zu **Einstellungen > DarkAdmin** und aktiviere es
+
+---
+
+## Changelog
+
+### 0.1.0
+- Unterstützung für ausgeschlossene Seiten in den Einstellungen hinzugefügt
+- Benutzerzugriffskontrolle hinzugefügt (Benutzer ein-/ausschließen)
+- Voreingestellte Designs hinzugefügt (Standard und Modern)
+- Kritische JavaScript-Fehler in der Voreinstellungs- und Zurücksetzungsfunktion behoben
+- Fehlende schliessende geschweifte Klammer in `initPaletteIO()` importFile-Block in `settings.js` behoben
+- XSS-Sicherheitslücke in `printf`-Ausgabe (`settings-page.php`) behoben
+- Unicode-Escapes in Sprachdateien behoben: `\uXXXX`-Sequenzen durch direkte UTF-8-Zeichen ersetzt
+- `admI18n` JS-Lokalisierung via `wp_localize_script` für übersetzte UI-Strings hinzugefügt
+- Redundantes `wp-color-picker` Script-Enqueue entfernt
+- `.l10n.php` Sprach-Cache-Dateien für alle Locales (`de_AT`, `de_DE`, `en_US`) mit ABSPATH-Schutz hinzugefügt
+- Hexadezimalvalidierung für JSON-Palettenimporte hinzugefügt
+- Dokumentation für neue Funktionen aktualisiert
+
+### 0.0.10
+- Themes-Bereich erweitert: Dark-Styling für `.theme-browser .theme .theme-name`, `.theme-overlay .theme-actions`, `.theme-overlay .theme-tags`, `.theme-overlay .theme-header .theme-title`, `.theme-overlay .theme-author`, `.theme-overlay .theme-version` und `.theme-overlay .theme-rating .star-rating .star`
+- Theme-Editor / Template-Side-Bereich hinzugefügt: Dark-Styling für `#templateside > ul`, `.importer-title` und `.color-option.selected` / `.color-option:hover`
+- `.cm-error`-Hintergrund-Deckkraft von `.15` auf `.05` reduziert für subtileres Fehler-Highlighting in CodeMirror
+- Alle Änderungen in `darkadmin-dark.css` und `darkadmin-wp-modern.css` umgesetzt
+- Ungültige Steuerzeichen in allen Sprachdateien (`de_AT`, `de_DE`, `en_US`, `.pot`) behoben
+- Benutzerzugriff: Einschließen- und Ausschließen-Optionen werden nun ausgegraut und nicht klickbar, wenn keine Nicht-Administrator-Benutzer vorhanden sind
+- Benutzerzugriff: Einfachen Text-Fallback durch gestalteten Empty-State-Block ersetzt
+- i18n: fehlenden String „Keine Nicht-Administrator-Benutzer gefunden" in allen Sprachdateien ergänzt
+
+### 0.0.9
+- Preset-Themes hinzugefügt: Default (klassisches WP 6.x Dark) und Modern (WP 7.0 Tiefblau)
+- Jedes Preset hat eine eigene CSS-Datei, die dynamisch geladen wird
+- `adm_preset`-Option mit Live-Preset-Wechsel hinzugefügt
+- Benutzerspezifischer Dark Mode mit User-Access-Karte
+- Live-Farbvorschau: Farbwähler-Änderungen aktualisieren CSS-Variablen sofort ohne Speichern
+- Export / Import der Farbpalette als JSON-Datei
+- Eigener CSS-Sanitizer (`adm_sanitize_custom_css`)
+- CSS-Cache-Busting auf Basis des md5-Hashes der aktuellen Farbwerte
+- Plugin in modulare Includes aufgeteilt
+- `uninstall.php` hinzugefügt
+- Farbwähler nach Kategorien gruppiert
+- Farb-Tokens von 23 auf 34 erweitert
+
+### 0.0.8
+- Unsichtbaren Text in `.widefat`-Tabellen behoben
+
+### 0.0.7
+- Version in den `darkadmin-dark.css` Header-Kommentar eingefügt
+
+### 0.0.6
+- Text Domain auf `darkadmin-dark-mode-for-adminpanel` aktualisiert
+- Plugin URI auf wordpress.org aktualisiert
+- Alle Sprachdateien auf neue Text Domain aktualisiert
+
+### 0.0.5
+- Plugin von „WP Admin Dark Mode" zu „DarkAdmin - Dark Mode for Adminpanel" umbenannt
+- Hauptdateien, CSS-Dateien, Text-Domain und Menü-Slug umbenannt
+- Alle Sprachdateien aktualisiert
+
+### 0.0.4
+- Auto Dark Mode mit WCAG-Luminanzberechnungen hinzugefügt
+- Auto Dark Mode verwendet MutationObserver für AJAX-geladene Inhalte
+- Farbfeld-Anzeige des Color Pickers korrigiert
+- Alle Übersetzungsdateien aktualisiert
+
+### 0.0.3
+- Komplettes CSS-Refactoring mit token-basiertem Design-System
+- Neue anpassbare Farbvariablen hinzugefügt
+- Anzahl der Farb-Tokens von 9 auf 13 erhöht
+- Diverse Styling-Fixes und Layout-Verbesserungen
+
+### 0.0.2
+- Einstellungsseite komplett neu gestaltet mit Card-Layout
+- Individuelle Farbanpassung über den WordPress Color Picker
+- Custom-CSS-Editor hinzugefügt
+- Alle Dark-Mode-Farben basieren nun auf CSS-Custom-Properties
+
+### 0.0.1
+- Erste Development-Version.
+
+---
+
+## Lizenz
+
+[GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+
+---
+
+*Entwickelt von [AlexanderWagnerDev](https://alexanderwagnerdev.com)*
