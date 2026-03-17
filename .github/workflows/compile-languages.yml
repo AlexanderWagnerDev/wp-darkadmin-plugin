@@ -2,44 +2,51 @@ name: Compile Language Files
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'languages/**.po'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   compile-languages:
-    name: Compile .po to .mo and .l10n.php
+    name: Compile .po to .mo + .l10n.php
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install gettext tools
+      - name: Install gettext (msgfmt)
         run: sudo apt-get install -y gettext
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.5'
-          tools: wp-cli
-
-      - name: Compile .po files to .mo
+      - name: Install WP-CLI
         run: |
-          find languages -name "*.po" | while read po_file; do
+          curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+
+      - name: Compile all .po files to .mo
+        run: |
+          for po_file in languages/*.po; do
             mo_file="${po_file%.po}.mo"
-            echo "Compiling $po_file -> $mo_file"
+            echo "Compiling: $po_file -> $mo_file"
             msgfmt "$po_file" -o "$mo_file"
           done
 
-      - name: Generate .l10n.php files via WP-CLI
+      - name: Generate .l10n.php files
+        run: wp i18n make-php languages/
+
+      - name: Add direct file access protection
         run: |
-          find languages -name "*.po" | while read po_file; do
-            php_file="${po_file%.po}.l10n.php"
-            echo "Generating $php_file from $po_file"
-            wp i18n make-php "$po_file" "$php_file" --allow-root
+          for f in languages/*.l10n.php; do
+            sed -i 's/<?php/<?php\nif ( ! defined( '"'"'ABSPATH'"'"' ) ) {\n\texit;\n}/' "$f"
           done
 
       - name: Commit compiled files
@@ -48,8 +55,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add languages/*.mo languages/*.l10n.php
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "No changes to commit."
           else
-            git commit -m "Auto-compile language files (.mo + .l10n.php) from .po"
+            git commit -m "ci: recompile .mo + .l10n.php from updated .po [skip ci]"
             git push
           fi
