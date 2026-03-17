@@ -40,7 +40,10 @@ jobs:
             -not -name '*.gif' \
             -not -name '*.webp' \
             -not -name '*.svg' \
+            -not -name '*.po' \
+            -not -name '*.pot' \
             -not -name 'readme-de.txt' \
+            -not -name 'CHANGELOG*.txt' \
             -type f \
           | sed 's|^\./||' \
           | zip "$ZIP_PATH" -@
