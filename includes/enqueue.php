@@ -74,7 +74,8 @@ function adm_preset_fallbacks( string $preset ): array {
  * Excluded pages:
  *   - site-editor.php  (Full Site Editor)
  *   - post-new.php     (Block Editor / new post)
- * Both ship their own color scheme and conflict with the dark mode styles.
+ *   - post.php         (Block Editor / existing post)
+ * All three ship their own color scheme and conflict with the dark mode styles.
  */
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! adm_is_dark_mode_active() ) {
@@ -83,7 +84,7 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	// Exclude specific admin pages.
 	global $pagenow;
-	$excluded = [ 'site-editor.php', 'post-new.php' ];
+	$excluded = [ 'site-editor.php', 'post-new.php', 'post.php' ];
 	if ( in_array( $pagenow, $excluded, true ) ) {
 		return;
 	}
@@ -99,7 +100,7 @@ add_action( 'admin_enqueue_scripts', function () {
 	);
 
 	// Cache-busting: combine plugin version + hash of current color values.
-	$color_hash = substr( md5( serialize( $c ) ), 0, 8 );
+	$color_hash = substr( md5( wp_json_encode( $c ) ), 0, 8 );
 	$ver        = ADM_VERSION . '-' . $color_hash;
 
 	$sc = static fn( string $k ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fallbacks[ $k ];
@@ -151,7 +152,8 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	$custom = get_option( 'adm_custom_css', '' );
 	if ( ! empty( $custom ) ) {
-		wp_add_inline_style( 'adm-darkmode', adm_sanitize_custom_css( $custom ) );
+		// Custom CSS is already sanitized on save via adm_sanitize_custom_css().
+		wp_add_inline_style( 'adm-darkmode', $custom );
 	}
 
 	if ( get_option( 'adm_auto_darken', false ) ) {
