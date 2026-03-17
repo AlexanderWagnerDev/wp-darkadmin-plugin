@@ -23,6 +23,7 @@ Features:
 * Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 * Preset Themes: choose between Default (WP 6.x) and Modern (WP 7.0) color palettes
 * Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
+* Excluded Pages: specify admin pages where dark mode should not be applied
 
 == Installation ==
 1. Upload the plugin folder to `/wp-content/plugins/darkadmin/` (or install via the Plugins screen).
