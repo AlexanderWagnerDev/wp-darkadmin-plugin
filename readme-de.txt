@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,9 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 4. Dashboard – Dark Mode aktiv
 
 == Changelog ==
+= 0.1.1 =
+* Behoben: uninstall.php korrigiert — alle Optionsnamen vom falschen adm_-Prefix auf den korrekten darkadmin_-Prefix geaendert, damit Optionen beim Deinstallieren sauber entfernt werden
+
 = 0.1.0 =
 * Unterstützung für ausgeschlossene Seiten in den Einstellungen hinzugefügt
 * Benutzerzugriffskontrolle hinzugefügt (Benutzer ein-/ausschließen)
