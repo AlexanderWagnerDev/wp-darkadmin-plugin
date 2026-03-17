@@ -172,6 +172,22 @@ msgstr "Save Settings"
 msgid "✕ Invalid JSON or Hex color"
 msgstr "✕ Invalid JSON or Hex color"
 
+#: includes/settings-page.php
+msgid "Advanced"
+msgstr "Advanced"
+
+#: includes/settings-page.php
+msgid "Excluded Pages"
+msgstr "Excluded Pages"
+
+#: includes/settings-page.php
+msgid "One entry per line. Dark mode styles will not be loaded on matching admin pages."
+msgstr "One entry per line. Dark mode styles will not be loaded on matching admin pages."
+
+#: includes/settings-page.php
+msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
+msgstr "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
+
 #: darkadmin.php
 msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr "✓ Dark Mode is active. Settings have been saved."
