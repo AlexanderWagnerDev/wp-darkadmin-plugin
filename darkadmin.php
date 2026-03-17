@@ -6,7 +6,7 @@
  * Version: 0.0.10
  * Requires at least: 6.3
  * Tested up to: 6.9
- * Requires PHP: 7.4
+ * Requires PHP: 8.0
  * Author: AlexanderWagnerDev
  * Author URI: https://alexanderwagnerdev.com
  * License: GPLv2 or later
