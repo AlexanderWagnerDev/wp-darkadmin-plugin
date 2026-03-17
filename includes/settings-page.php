@@ -355,10 +355,7 @@ function adm_settings_page(): void {
 							<?php esc_html_e( 'Available CSS Variables', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							<span class="adm-var-count"><?php echo count( $var_map ); ?></span>
 						</summary>
-						<?php
-						// Re-use the already-loaded $colors array instead of calling get_option() again.
-						foreach ( $grouped_vars as $group_name => $entries ) :
-						?>
+						<?php foreach ( $grouped_vars as $group_name => $entries ) : ?>
 							<div class="adm-var-group">
 								<h4 class="adm-var-group-title"><?php echo esc_html( $group_name ); ?></h4>
 								<div class="adm-var-grid">
@@ -431,9 +428,13 @@ admin.php?page=my-plugin"
 					<p class="adm-field-desc" style="margin-top:8px;">
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php
-						printf(
-							esc_html__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
-							'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
+						echo wp_kses(
+							sprintf(
+								/* translators: %s: comma-separated list of excluded page filenames wrapped in <code> tags */
+								__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
+								'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
+							),
+							[ 'code' => [] ]
 						);
 						?>
 					</p>
