@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![Version](https://img.shields.io/badge/Version-0.1.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
-![DarkAdmin Logo](DarkAdmin-Logo.png)
+<img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
 A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with full color customization and Auto Dark Mode support.
 
