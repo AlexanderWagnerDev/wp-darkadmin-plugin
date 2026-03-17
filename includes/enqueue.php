@@ -257,7 +257,6 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 		[ 'wp-color-picker' ],
 		ADM_VERSION
 	);
-	wp_enqueue_script( 'wp-color-picker' );
 	wp_enqueue_script(
 		'adm-settings-js',
 		ADM_URL . 'assets/js/settings.js',
@@ -266,11 +265,15 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 		true
 	);
 
-	// Pass default colors, CSS var map and presets to JS.
+	// Pass default colors, CSS var map, presets and i18n strings to JS.
 	wp_localize_script( 'adm-settings-js', 'admData', [
 		'defaults' => adm_default_colors(),
 		'varMap'   => array_map( fn( $v ) => $v['var'], adm_css_variable_map() ),
 		'presets'  => adm_preset_colors(),
+	] );
+	wp_localize_script( 'adm-settings-js', 'admI18n', [
+		'active'     => __( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' ),
+		'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
 	] );
 } );
 
