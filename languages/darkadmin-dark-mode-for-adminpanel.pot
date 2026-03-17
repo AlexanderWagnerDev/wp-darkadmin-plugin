@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.1\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-17 16:00+0100\n"
-"PO-Revision-Date: 2026-03-17 16:00+0100\n"
+"POT-Creation-Date: 2026-03-17 18:00+0100\n"
+"PO-Revision-Date: 2026-03-17 18:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: \n"
@@ -166,6 +166,10 @@ msgstr ""
 
 #: includes/settings-page.php
 msgid "Save Settings"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "✕ Invalid JSON or Hex color"
 msgstr ""
 
 #: darkadmin.php
