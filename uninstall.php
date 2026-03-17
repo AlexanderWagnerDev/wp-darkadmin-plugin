@@ -12,3 +12,5 @@ delete_option( 'adm_auto_darken' );
 delete_option( 'adm_colors' );
 delete_option( 'adm_custom_css' );
 delete_option( 'adm_allowed_users' );
+delete_option( 'adm_user_access_mode' );
+delete_option( 'adm_preset' );
