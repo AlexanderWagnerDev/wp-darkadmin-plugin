@@ -432,7 +432,7 @@ admin.php?page=my-plugin"
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php
 						printf(
-							esc_html__( 'The following pages are always excluded regardless of this list: %s', 'darkadmin-dark-mode-for-adminpanel' ),
+							esc_html__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
 							'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
 						);
 						?>
