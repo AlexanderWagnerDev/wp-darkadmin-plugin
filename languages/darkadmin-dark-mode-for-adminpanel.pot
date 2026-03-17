@@ -189,7 +189,7 @@ msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?p
 msgstr ""
 
 #: includes/settings-page.php
-msgid "The following pages are always excluded regardless of this list: %s"
+msgid "The following pages are always excluded: %s"
 msgstr ""
 
 #: darkadmin.php
