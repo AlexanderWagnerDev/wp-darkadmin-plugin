@@ -105,6 +105,13 @@ jobs:
         echo "=== Run PHPUnit Tests ==="
         /home/runner/work/wp-darkadmin-plugin/wp-darkadmin-plugin/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/vendor/bin/phpunit --verbose
 
+    - name: Full WP Integration Tests
+      uses: 10up/action-wordpress-plugin-test@v1
+      with:
+        php-version: ${{ matrix.php }}
+        wp-version: ${{ matrix.wp }}
+        plugin-slug: darkadmin-dark-mode-for-adminpanel
+
     - name: Upload Debug Logs
       if: failure()
       uses: actions/upload-artifact@v7
