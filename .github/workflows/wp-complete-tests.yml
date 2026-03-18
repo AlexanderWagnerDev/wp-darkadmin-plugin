@@ -60,16 +60,16 @@ jobs:
         if [ "${{ matrix.wp }}" = "trunk" ]; then
           svn co https://develop.svn.wordpress.org/trunk/ .
         else
-          svn co https://wordpress.org/tags/${{ matrix.wp }}/. .
+          svn co https://wordpress.org/tags/${{ matrix.wp }} .
         fi
         
-        # Plugin ins WP-Verzeichnis kopieren
+        # Plugin copy         
         cp -rf ../* wp-content/plugins/darkadmin-dark-mode-for-adminpanel/
         
-        # DB erstellen
+        # DB create
         mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} -uwordpress -pwordpress <<< "CREATE DATABASE wordpress_test"
         
-        # WP Tests setup (macht wp-config.php + DB-Setup)
+        # WP Tests setup
         bash tools/phpunit/setup.sh wordpress_test wordpress wordpress 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
         
         echo "WP_TESTS_DIR=$(pwd)" >> $GITHUB_ENV
@@ -89,7 +89,7 @@ jobs:
         wp plugin list
         
         echo "=== Run PHPUnit Tests ==="
-        ./vendor/bin/phpunit ../phpunit.xml --verbose
+        ./vendor/bin/phpunit ../tests/phpunit/tests/ --verbose
 
     - name: Upload Debug Logs
       if: failure()
