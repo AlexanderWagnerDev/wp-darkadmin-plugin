@@ -78,7 +78,7 @@ jobs:
         rm -rf "$PLUGIN_DIR"
         mkdir -p "$PLUGIN_DIR"
         rsync -av --exclude='.git/' --exclude='.github/' --exclude='wp-tests/' --exclude='tests/' \
-          --exclude='tools/' ../* "$PLUGIN_DIR"/  # Aus checkout
+          --exclude='tools/' ../* "$PLUGIN_DIR"/ 
         
         cd "$PLUGIN_DIR"
         composer require --dev --no-interaction wp-phpunit/wp-phpunit yoast/phpunit-polyfills:^3.0
@@ -108,7 +108,7 @@ jobs:
         wp plugin list
         
         echo "=== Run PHPUnit Tests ==="
-         ../vendor/bin/phpunit --verbose
+         ../../../vendor/bin/phpunit --verbose
 
     - name: Upload Debug Logs
       if: failure()
