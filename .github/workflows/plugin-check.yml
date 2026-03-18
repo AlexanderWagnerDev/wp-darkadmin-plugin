@@ -3,9 +3,7 @@ name: Plugin Check
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
   plugin-check:
@@ -18,6 +16,7 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         slug: "darkadmin-dark-mode-for-adminpanel"
         exclude: |
+          .github/
           tests/
           vendor/
           composer.json
@@ -37,6 +36,7 @@ jobs:
         include-experimental: true
         strict: true
         exclude: |
+          .github/
           tests/
           vendor/
           composer.json
