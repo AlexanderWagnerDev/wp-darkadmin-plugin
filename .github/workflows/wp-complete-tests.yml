@@ -49,6 +49,9 @@ jobs:
         php-version: ${{ matrix.php }}
         extensions: mysql, imagick, gd, zip, mbstring
 
+    - name: Install SVN
+      run: sudo apt-get update -qq && sudo apt-get install -y subversion
+
     - name: Install WP + Tests + Plugin
       run: |
         # WP Core + Test Suite + Plugin kopieren
