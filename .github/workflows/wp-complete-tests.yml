@@ -100,14 +100,14 @@ jobs:
       working-directory: ${{ env.WP_TESTS_DIR }}
       run: |
         echo "=== WP-CLI Status ==="
-        wp core version
-        wp plugin list
+        wp core version --path=/tmp/wordpress
+        wp plugin list --path=/tmp/wordpress
         
         echo "=== Activate DarkAdmin ==="
-        wp plugin activate darkadmin-dark-mode-for-adminpanel --quiet --allow-root
+        wp plugin activate darkadmin-dark-mode-for-adminpanel --quiet --allow-root --path=/tmp/wordpress
         
         echo "=== Plugin activated - run tests ==="
-        wp plugin list
+        wp plugin list --path=/tmp/wordpress
         
         echo "=== Run PHPUnit Tests ==="
         /home/runner/work/wp-darkadmin-plugin/wp-darkadmin-plugin/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/vendor/bin/phpunit --verbose
