@@ -56,12 +56,17 @@ jobs:
         extensions: mysql, imagick, gd, zip, mbstring
         coverage: none
 
+    - name: Wait for MySQL
+      run: |
+        while ! mysqladmin ping -h=127.0.0.1 -P${{ job.services.mysql.ports[3306] }} --silent; do
+          sleep 1
+        done
+
     - name: Setup WordPress Test Environment
       id: wp-setup
       uses: sjinks/setup-wordpress-test-library@master
       with:
         version: ${{ matrix.wp }}
-        dir: ${{ env.WORDPRESS_DIR }}
         db_host: 127.0.0.1:${{ job.services.mysql.ports[3306] }}
         db_user: wordpress
         db_password: wordpress
@@ -70,19 +75,19 @@ jobs:
     - name: Prepare Plugin Directory
       run: |
         PLUGIN_SLUG="darkadmin-dark-mode-for-adminpanel"
-        mkdir -p ${{ env.WORDPRESS_DIR }}/wp-content/plugins/$PLUGIN_SLUG
-        rsync -av --exclude='.git*' --exclude='.github' ./ ${{ env.WORDPRESS_DIR }}/wp-content/plugins/$PLUGIN_SLUG/
+        mkdir -p ${{ env.WP_TESTS_DIR }}/wp-content/plugins/$PLUGIN_SLUG
+        rsync -av --exclude='.git*' --exclude='.github' ./ ${{ env.WP_TESTS_DIR }}/wp-content/plugins/$PLUGIN_SLUG/
 
     - name: Activate Plugin
       run: |
         PLUGIN_SLUG="darkadmin-dark-mode-for-adminpanel"
-        ${{ env.WP_CLI }} plugin activate $PLUGIN_SLUG --path=${{ env.WORDPRESS_DIR }}
+        wp plugin activate $PLUGIN_SLUG --path=${{ env.WP_TESTS_DIR }}
 
     - name: Run PHPUnit Tests
-      working-directory: ${{ env.WORDPRESS_DIR }}
+      working-directory: ${{ env.WP_TESTS_DIR }}
       run: |
         if [ -f ../tests/bootstrap.php ]; then
-          ${{ env.WP_CLI }} eval-file ../tests/bootstrap.php --allow-root
+          wp eval-file ../tests/bootstrap.php --allow-root
         fi
         ../vendor/bin/phpunit ../phpunit.xml --verbose || true
 
