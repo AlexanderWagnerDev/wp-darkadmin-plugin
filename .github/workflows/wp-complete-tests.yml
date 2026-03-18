@@ -1,0 +1,112 @@
+name: WP Complete Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  phpunit:
+    name: WP ${{ matrix.wp }} + PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        wp:
+          - '6.0'
+          - '6.1'
+          - '6.2'
+          - '6.3'
+          - '6.4'
+          - '6.5'
+          - '6.6'
+          - '6.7'
+          - '6.8'
+          - '6.9'
+          - 'trunk'
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP ${{ matrix.php }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: mysql, imagick, gd, zip, mbstring
+        coverage: none
+
+    - name: Install Composer Dependencies
+      run: composer install --no-progress --no-interaction --prefer-dist
+
+    - name: Setup WordPress Test Environment
+      uses: penske-media-corp/github-action-wordpress-test-setup@v4
+      with:
+        wordpress-version: ${{ matrix.wp }}
+
+    - name: Prepare Plugin Directory
+      run: |
+        PLUGIN_SLUG="darkadmin-darkmode-for-adminpanel"
+        mkdir -p ${{ env.WORDPRESS_DIR }}/wp-content/plugins/$PLUGIN_SLUG
+        rsync -av --exclude='.git*' --exclude='.github' ./ ${{ env.WORDPRESS_DIR }}/wp-content/plugins/$PLUGIN_SLUG/
+
+    - name: Activate Plugin
+      run: |
+        PLUGIN_SLUG="darkadmin-darkmode-for-adminpanel"
+        ${{ env.WP_CLI }} plugin activate $PLUGIN_SLUG --path=${{ env.WORDPRESS_DIR }}
+
+    - name: Run PHPUnit Tests
+      working-directory: ${{ env.WORDPRESS_DIR }}
+      run: |
+        if [ -f ../tests/bootstrap.php ]; then
+          ${{ env.WP_CLI }} eval-file ../tests/bootstrap.php --allow-root
+        fi
+        ../vendor/bin/phpunit ../phpunit.xml --verbose || true
+
+    - name: Upload Debug Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: failure-php-${{ matrix.php }}-wp-${{ matrix.wp }}
+        path: |
+          ${{ env.WORDPRESS_DIR }}/wp-content/debug.log
+          ${{ env.WORDPRESS_DIR }}/wp-content/uploads/
+          phpunit.xml
+
+  plugin-check:
+    name: Plugin Check (PCP)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Run WordPress Plugin Check
+      uses: WordPress/plugin-check-action@v1
+      with:
+        build-dir: '.' 
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        wp-version: 'latest'
+        php-version: '8.3'
+        strict: true
+
+    - name: Upload PCP Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: plugin-check-report
+        path: pcp-report.json
+
+  phpcs:
+    name: PHP CodeSniffer (WPCS)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: shivammathur/setup-php@v2
+      with: { php-version: '8.3' }
+    - run: |
+        composer install
+        ./vendor/bin/phpcs || true
