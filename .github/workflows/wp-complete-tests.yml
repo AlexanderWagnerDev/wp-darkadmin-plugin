@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mariadb:latest
+        image: mariadb:10.11
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: wordpress_test
@@ -97,9 +97,9 @@ jobs:
       with:
         name: failure-php-${{ matrix.php }}-wp-${{ matrix.wp }}
         path: |
-          ${{ env.WORDPRESS_DIR }}/wp-content/debug.log
-          ${{ env.WORDPRESS_DIR }}/wp-content/uploads/
-          ${{ env.WORDPRESS_DIR }}/wp-content/plugins/darkadmin-darkmode-for-adminpanel/
+          ${{ env.WP_TESTS_DIR }}/wp-content/debug.log
+          ${{ env.WP_TESTS_DIR }}/wp-content/uploads/
+          ${{ env.WP_TESTS_DIR }}/wp-content/plugins/darkadmin-darkmode-for-adminpanel/
           phpunit.xml
 
   plugin-check:
@@ -115,7 +115,6 @@ jobs:
         build-dir: '.'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         wp-version: 'latest'
-        php-version: '8.3'
         strict: true
         slug: "darkadmin-dark-mode-for-adminpanel"
 
