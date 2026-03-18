@@ -89,7 +89,7 @@ jobs:
          127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
         
         cd ../..
-        echo "WP_TESTS_DIR=$(pwd)/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/wp-tests" >> $GITHUB_ENV
+        echo "WP_TESTS_DIR=wp-content/plugins/darkadmin-dark-mode-for-adminpanel/wp-tests" >> $GITHUB_ENV
         echo "✓ WP ${{ matrix.wp }} Tests ready!"
       env:
         WP_CLI_PHP_ARGS: "-d memory_limit=512M"
