@@ -54,36 +54,28 @@ jobs:
 
     - name: Install WP + Tests + Plugin
       run: |
-        # WP Core + Test Suite + Plugin copy
+        set -e
         mkdir wp-tests && cd wp-tests
         
+        # WP Core
         if [ "${{ matrix.wp }}" = "trunk" ]; then
           svn co https://develop.svn.wordpress.org/trunk/ .
         else
-          svn co https://develop.svn.wordpress.org/tags/${{ matrix.wp }} .
+          svn co https://develop.svn.wordpress.org/tags/${{ matrix.wp }}/ .
         fi
         
-        # Plugin directory create and copy
+        # Plugin
         cd ..
         PLUGIN_TARGET="wp-tests/wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
         mkdir -p "$PLUGIN_TARGET"
-        rsync -av \
-        --exclude='.git/' \
-        --exclude='.github/' \
-        --exclude='wp-tests/' \
-        --exclude='tests/' \
-        --exclude='tools/' \
-        --exclude='*.yml' \
-        --exclude='*.md' \
-        --exclude='.gitignore' \
-        ./* "$PLUGIN_TARGET"/
+        rsync -av --exclude='.git/' --exclude='.github/' --exclude='wp-tests/' --exclude='tests/' --exclude='tools/' --exclude='*.yml' --exclude='*.md' ./* "$PLUGIN_TARGET"/ 2>/dev/null || true
+        
         cd wp-tests
         
-        # WP Tests setup
-        bash tools/phpunit/setup.sh wordpress_test wordpress wordpress 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
-        
+        # DB
+        mysql -h127.0.0.1 -uwordpress -pwordpress -P3306 <<< "CREATE DATABASE IF NOT EXISTS wordpress_test;"
+                
         echo "WP_TESTS_DIR=$(pwd)" >> $GITHUB_ENV
-        echo "✓ WP ${{ matrix.wp }} ready!"
 
     - name: Activate & Test Plugin
       working-directory: ${{ env.WP_TESTS_DIR }}
@@ -93,7 +85,7 @@ jobs:
         wp plugin list
         
         echo "=== Activate DarkAdmin ==="
-        wp plugin activate darkadmin-dark-mode-for-adminpanel --quiet
+        wp plugin activate darkadmin-dark-mode-for-adminpanel --quiet --allow-root
         
         echo "=== Plugin activated - run tests ==="
         wp plugin list
