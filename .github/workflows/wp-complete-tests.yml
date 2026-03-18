@@ -79,9 +79,6 @@ jobs:
         ./* "$PLUGIN_TARGET"/
         cd wp-tests
         
-        # DB create
-        mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} -uwordpress -pwordpress <<< "CREATE DATABASE wordpress_test"
-        
         # WP Tests setup
         bash tools/phpunit/setup.sh wordpress_test wordpress wordpress 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
         
