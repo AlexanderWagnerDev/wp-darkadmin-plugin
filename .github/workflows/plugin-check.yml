@@ -1,5 +1,8 @@
 name: Plugin Check
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   push:
