@@ -16,14 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mariadb:10.11
+        image: bitnami/mariadb:11
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: wordpress_test
           MYSQL_USER: wordpress
           MYSQL_PASSWORD: wordpress
-          MARIADB_INITDB_SKIP_TZINFO: 1
-          INNODB_USE_NATIVE_AIO: 0
         ports:
           - 3306:3306
     
@@ -57,12 +55,6 @@ jobs:
         php-version: ${{ matrix.php }}
         extensions: mysql, imagick, gd, zip, mbstring
         coverage: none
-
-    - name: Wait for MySQL
-      run: |
-        while ! mysqladmin ping -h=127.0.0.1 -P${{ job.services.mysql.ports[3306] }} --silent; do
-          sleep 1
-        done
 
     - name: Setup WordPress Test Environment
       id: wp-setup
