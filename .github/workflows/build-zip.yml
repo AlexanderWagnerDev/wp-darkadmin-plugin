@@ -31,6 +31,10 @@ jobs:
             -not -path './.git' \
             -not -path './.github/*' \
             -not -path './.github' \
+            -not -path './tests/*' \
+            -not -path './tests' \
+            -not -path './vendor/*' \
+            -not -path './vendor' \
             -not -name '*.md' \
             -not -name 'LICENSE' \
             -not -name '*.zip' \
@@ -44,6 +48,10 @@ jobs:
             -not -name '*.pot' \
             -not -name 'readme-de.txt' \
             -not -name 'CHANGELOG*.txt' \
+            -not -name 'composer.json' \
+            -not -name 'composer.lock' \
+            -not -name 'phpunit.xml' \
+            -not -name '.distignore' \
             -type f \
           | sed 's|^\./||' \
           | zip "$ZIP_PATH" -@
