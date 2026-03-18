@@ -17,6 +17,13 @@ jobs:
         build-dir: '.'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         slug: "darkadmin-dark-mode-for-adminpanel"
+        exclude: |
+          tests/
+          vendor/
+          composer.json
+          composer.lock
+          phpunit.xml
+          .distignore
   plugin-check-trunk:
     runs-on: ubuntu-latest
     steps:
@@ -29,3 +36,10 @@ jobs:
         wp-version: trunk
         include-experimental: true
         strict: true
+        exclude: |
+          tests/
+          vendor/
+          composer.json
+          composer.lock
+          phpunit.xml
+          .distignore
