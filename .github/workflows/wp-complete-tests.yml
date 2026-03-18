@@ -120,18 +120,3 @@ jobs:
       with:
         name: plugin-check-report
         path: pcp-report.json
-
-  phpcs:
-    name: PHP CodeSniffer (WPCS)
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v6
-
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.3'
-
-    - name: Run PHPCS
-      run: ./vendor/bin/phpcs || true
