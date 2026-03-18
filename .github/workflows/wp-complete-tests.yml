@@ -55,8 +55,6 @@ jobs:
        wp core download --version=${{ matrix.wp }} --path=wp-tests --quiet
        cd wp-tests
        
-       wp scaffold plugin-tests ../ --quiet
-       
        wp config create \
        --dbname=wordpress_test \
        --dbuser=wordpress \
@@ -71,6 +69,8 @@ jobs:
        --admin_email="test@example.com" \
        --quiet \
        --allow-root
+
+       wp scaffold plugin-tests ../ --quiet
        
        PLUGIN_DIR="wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
        rm -rf "$PLUGIN_DIR"
