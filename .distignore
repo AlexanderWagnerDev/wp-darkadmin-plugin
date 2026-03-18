@@ -28,6 +28,7 @@ webpack.config.js
 
 # Tests
 tests
+phpunit
 phpunit.xml
 phpunit.xml.dist
 .phpunit.result.cache
