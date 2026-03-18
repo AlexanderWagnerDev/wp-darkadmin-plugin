@@ -85,7 +85,7 @@ jobs:
         
         wp scaffold plugin-tests darkadmin-dark-mode-for-adminpanel --ci=github --allow-root
         
-        bash bin/install-wp-tests.sh wordpress_test wordpress wordpress \
+        echo "y" | bash bin/install-wp-tests.sh wordpress_test wordpress wordpress \
          127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
         
         cd ../..
