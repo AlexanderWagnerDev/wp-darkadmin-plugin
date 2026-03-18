@@ -55,41 +55,31 @@ jobs:
         extensions: mysql, imagick, gd, zip, mbstring
         tools: wp-cli
 
-    - name: WP-CLI Full Setup + Tests
+    - name: Install Composer & WP Tests
       run: |
-       timeout 120s bash -c '
-       until mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} \
-        -uwordpress -pwordpress -e "SELECT 1" wordpress_test >/dev/null 2>&1; do
-        echo "Waiting for MySQL..."
-        sleep 2
-       done
-       echo "MySQL ready!"
-       '
-       wp core download --version=${{ matrix.wp }} --path=wp-tests --quiet
-       cd wp-tests
-       
-       wp config create \
-       --dbname=wordpress_test \
-       --dbuser=wordpress \
-       --dbpass=wordpress \
-       --dbhost=127.0.0.1:3306 \
-       --quiet
-       wp core install \
-       --url="http://localhost" \
-       --title="Test" \
-       --admin_user="admin" \
-       --admin_password="admin" \
-       --admin_email="test@example.com" \
-       --quiet \
-       --allow-root
-       
-       PLUGIN_DIR="wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
-       rm -rf "$PLUGIN_DIR"
-       mkdir -p "$PLUGIN_DIR"
-       rsync -av --exclude='.git/' --exclude='.github/' --exclude='wp-tests/' --exclude='tests/' --exclude='tools/' ../* "$PLUGIN_DIR"/
-       
-       echo "WP_TESTS_DIR=$(pwd)" >> $GITHUB_ENV
-       echo "✓ WP ${{ matrix.wp }} + Tests ready!"
+        # Wait for MySQL
+        timeout 120s bash -c '
+        until mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} \
+         -uwordpress -pwordpress -e "SELECT 1" wordpress_test >/dev/null 2>&1; do
+         echo "Waiting for MySQL..."
+         sleep 2
+        done
+        echo "MySQL ready!"
+        '
+        # Install PHPUnit dependencies
+        composer require --dev --no-interaction wp-phpunit/wp-phpunit yoast/phpunit-polyfills:^3.0
+        
+        # Generate tests scaffold + WP test suite
+        wp scaffold plugin-tests darkadmin-dark-mode-for-adminpanel --ci=github --allow-root
+        
+        # Install WP tests with version (calls install-wp-tests.sh)
+        bash bin/install-wp-tests.sh wordpress_test wordpress wordpress 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
+        
+        # Set env for next step
+        echo "WP_TESTS_DIR=$(pwd)/wp-tests" >> $GITHUB_ENV
+        echo "✓ WP ${{ matrix.wp }} Tests ready!"
+      env:
+        WP_CLI_PHP_ARGS: "-d memory_limit=512M"
     
     - name: Activate & Test Plugin
       working-directory: ${{ env.WP_TESTS_DIR }}
@@ -105,7 +95,7 @@ jobs:
         wp plugin list
         
         echo "=== Run PHPUnit Tests ==="
-        ./vendor/bin/phpunit ../tests/phpunit/tests/ --verbose
+         ../vendor/bin/phpunit --verbose
 
     - name: Upload Debug Logs
       if: failure()
