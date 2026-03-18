@@ -70,6 +70,8 @@ jobs:
         wp core download --version=${{ matrix.wp }} --path=./ --quiet --allow-root
         wp config create --dbname=wordpress_test --dbuser=wordpress --dbpass=wordpress \
          --dbhost=127.0.0.1:${{ job.services.mysql.ports[3306] }} --quiet --allow-root
+         wp core install --url=http://localhost --title=Test --admin_user=admin \
+         --admin_password=admin --admin_email=test@example.com --quiet --allow-root
         
         # Install PHPUnit dependencies
         composer require --dev --no-interaction wp-phpunit/wp-phpunit yoast/phpunit-polyfills:^3.0
