@@ -68,7 +68,6 @@ jobs:
         PLUGIN_TARGET="wp-tests/wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
         mkdir -p "$PLUGIN_TARGET"
         rsync -av \
-        --max-depth=1 \
         --exclude='.git/' \
         --exclude='.github/' \
         --exclude='wp-tests/' \
