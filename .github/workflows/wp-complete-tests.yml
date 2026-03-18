@@ -7,16 +7,13 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  WORDPRESS_DIR: ${{ github.workspace }}/wordpress-test
-
 jobs:
   phpunit:
     name: WP ${{ matrix.wp }} + PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: bitnami/mariadb:11
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: wordpress_test
@@ -67,18 +64,23 @@ jobs:
         db_name: wordpress_test
 
     - name: Prepare Plugin Directory
+      env:
+        WP_TESTS_DIR: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
       run: |
         PLUGIN_SLUG="darkadmin-dark-mode-for-adminpanel"
-        mkdir -p ${{ env.WP_TESTS_DIR }}/wp-content/plugins/$PLUGIN_SLUG
-        rsync -av --exclude='.git*' --exclude='.github' ./ ${{ env.WP_TESTS_DIR }}/wp-content/plugins/$PLUGIN_SLUG/
+        mkdir -p "$WP_TESTS_DIR/wp-content/plugins/$PLUGIN_SLUG"
+        rsync -av --exclude='.git*' --exclude='.github' ./ "$WP_TESTS_DIR/wp-content/plugins/$PLUGIN_SLUG/"
 
     - name: Activate Plugin
+      env:
+        WP_TESTS_DIR: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
       run: |
-        PLUGIN_SLUG="darkadmin-dark-mode-for-adminpanel"
-        wp plugin activate $PLUGIN_SLUG --path=${{ env.WP_TESTS_DIR }}
+        wp plugin activate "$PLUGIN_SLUG" --path="$WP_TESTS_DIR"
 
     - name: Run PHPUnit Tests
-      working-directory: ${{ env.WP_TESTS_DIR }}
+      env:
+        WP_TESTS_DIR: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
+      working-directory: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
       run: |
         if [ -f ../tests/bootstrap.php ]; then
           wp eval-file ../tests/bootstrap.php --allow-root
@@ -91,9 +93,9 @@ jobs:
       with:
         name: failure-php-${{ matrix.php }}-wp-${{ matrix.wp }}
         path: |
-          ${{ env.WP_TESTS_DIR }}/wp-content/debug.log
-          ${{ env.WP_TESTS_DIR }}/wp-content/uploads/
-          ${{ env.WP_TESTS_DIR }}/wp-content/plugins/darkadmin-darkmode-for-adminpanel/
+          ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}/wp-content/debug.log
+          ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}/wp-content/uploads/
+          ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}/wp-content/plugins/darkadmin-darkmode-for-adminpanel/
           phpunit.xml
 
   plugin-check:
@@ -109,6 +111,7 @@ jobs:
         build-dir: '.'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         wp-version: 'latest'
+        php-version: '8.3'
         strict: true
         slug: "darkadmin-dark-mode-for-adminpanel"
 
