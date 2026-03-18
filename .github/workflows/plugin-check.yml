@@ -1,0 +1,19 @@
+name: Plugin Check
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  plugin-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: WordPress/plugin-check-action@v1
+      with:
+        build-dir: '.'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        slug: "darkadmin-dark-mode-for-adminpanel"
