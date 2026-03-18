@@ -1,0 +1,73 @@
+name: PHPUnit Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  phpunit:
+    name: PHP ${{ matrix.php }} / WP ${{ matrix.wp }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        wp: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7', '6.8', '6.9', 'latest', 'trunk']
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DB_NAME: wordpress_test
+      DB_USER: root
+      DB_PASS: root
+      DB_HOST: 127.0.0.1
+      WP_VERSION: ${{ matrix.wp }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli, pdo_mysql
+          tools: composer
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Install WP-CLI
+        run: |
+          curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+
+      - name: Download install-wp-tests.sh
+        run: |
+          mkdir -p bin
+          curl -sO https://raw.githubusercontent.com/wp-cli/scaffold-command/main/templates/install-wp-tests.sh
+          mv install-wp-tests.sh bin/install-wp-tests.sh
+          chmod +x bin/install-wp-tests.sh
+
+      - name: Install WordPress test suite
+        run: |
+          echo Y | bash bin/install-wp-tests.sh "$DB_NAME" "$DB_USER" "$DB_PASS" "$DB_HOST" "$WP_VERSION"
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit --configuration phpunit.xml
