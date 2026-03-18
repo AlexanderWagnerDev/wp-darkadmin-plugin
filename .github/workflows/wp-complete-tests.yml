@@ -82,10 +82,6 @@ jobs:
        --admin_email="test@example.com" \
        --quiet \
        --allow-root
-
-       cd ..
-       wp scaffold plugin-tests darkadmin-dark-mode-for-adminpanel --dir=wp-tests
-       cd wp-tests/
        
        PLUGIN_DIR="wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
        rm -rf "$PLUGIN_DIR"
