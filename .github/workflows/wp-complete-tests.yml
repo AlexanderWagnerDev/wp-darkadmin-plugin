@@ -43,83 +43,66 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v6
 
-    - name: Install SVN
-      run: sudo apt-get update && sudo apt-get install -y subversion
-
     - name: Setup PHP ${{ matrix.php }}
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
         extensions: mysql, imagick, gd, zip, mbstring
-        coverage: none
 
-    - name: Setup WordPress Test Environment
-      id: wp-setup
-      uses: sjinks/setup-wordpress-test-library@master
-      with:
-        version: ${{ matrix.wp }}
-        db_host: 127.0.0.1:${{ job.services.mysql.ports[3306] }}
-        db_user: wordpress
-        db_password: wordpress
-        db_name: wordpress_test
-
-    - name: Prepare Plugin Directory
-      env:
-        WP_TESTS_DIR: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
+    - name: Install WP + Tests + Plugin
       run: |
-        sudo mkdir -p "$WP_TESTS_DIR/wp-content/plugins"
-        sudo chown -R $(whoami) "$WP_TESTS_DIR"
-        PLUGIN_SLUG="darkadmin-dark-mode-for-adminpanel"
-        mkdir -p "$WP_TESTS_DIR/wp-content/plugins/$PLUGIN_SLUG"
-        rsync -av --exclude='.git*' --exclude='.github' ./ "$WP_TESTS_DIR/wp-content/plugins/$PLUGIN_SLUG/"
-
-    - name: Activate Plugin
-      env:
-        WP_TESTS_DIR: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
-      run: |
-        wp plugin activate "$PLUGIN_SLUG" --path="$WP_TESTS_DIR"
-
-    - name: Run PHPUnit Tests
-      env:
-        WP_TESTS_DIR: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
-      working-directory: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
-      run: |
-        if [ -f ../tests/bootstrap.php ]; then
-          wp eval-file ../tests/bootstrap.php --allow-root
+        # WP Core + Test Suite + Plugin kopieren
+        mkdir wp-tests && cd wp-tests
+        
+        if [ "${{ matrix.wp }}" = "trunk" ]; then
+          svn co https://develop.svn.wordpress.org/trunk/ .
+        else
+          svn co https://wordpress.org/tags/${{ matrix.wp }}/. .
         fi
-        ../vendor/bin/phpunit ../phpunit.xml --verbose || true
+        
+        # Plugin ins WP-Verzeichnis kopieren
+        cp -rf ../* wp-content/plugins/darkadmin-dark-mode-for-adminpanel/
+        
+        # DB erstellen
+        mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} -uwordpress -pwordpress <<< "CREATE DATABASE wordpress_test"
+        
+        # WP Tests setup (macht wp-config.php + DB-Setup)
+        bash tools/phpunit/setup.sh wordpress_test wordpress wordpress 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
+        
+        echo "WP_TESTS_DIR=$(pwd)" >> $GITHUB_ENV
+        echo "✓ WP ${{ matrix.wp }} ready!"
+
+    - name: Activate & Test Plugin
+      working-directory: ${{ env.WP_TESTS_DIR }}
+      run: |
+        echo "=== WP-CLI Status ==="
+        wp core version
+        wp plugin list
+        
+        echo "=== Activate DarkAdmin ==="
+        wp plugin activate darkadmin-dark-mode-for-adminpanel --quiet
+        
+        echo "=== Plugin activated - run tests ==="
+        wp plugin list
+        
+        echo "=== Run PHPUnit Tests ==="
+        ./vendor/bin/phpunit ../phpunit.xml --verbose
 
     - name: Upload Debug Logs
       if: failure()
       uses: actions/upload-artifact@v7
       with:
-        name: failure-php-${{ matrix.php }}-wp-${{ matrix.wp }}
+        name: failure-${{ matrix.php }}-${{ matrix.wp }}
         path: |
-          ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}/wp-content/debug.log
-          ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}/wp-content/uploads/
-          ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}/wp-content/plugins/darkadmin-darkmode-for-adminpanel/
-          phpunit.xml
+          ${{ env.WP_TESTS_DIR }}/wp-content/debug.log
+          ${{ env.WP_TESTS_DIR }}/*.log
 
   plugin-check:
-    name: Plugin Check (PCP)
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v6
-
-    - name: Run WordPress Plugin Check
-      uses: WordPress/plugin-check-action@v1
+    - uses: actions/checkout@v6
+    - uses: WordPress/plugin-check-action@v1
       with:
         build-dir: '.'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        wp-version: 'latest'
-        php-version: '8.3'
-        strict: true
         slug: "darkadmin-dark-mode-for-adminpanel"
-
-    - name: Upload PCP Report
-      if: always()
-      uses: actions/upload-artifact@v7
-      with:
-        name: plugin-check-report
-        path: pcp-report.json
