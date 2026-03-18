@@ -1,0 +1,47 @@
+name: Check PHP Compatibility
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  phpcompat:
+    name: 'PHP ${{ matrix.php }} compatibility'
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Create temporary composer.json
+        run: |
+          composer init \
+            --name="darkadmin/darkmode-for-adminpanel-compat" \
+            --description="Temp compat config" \
+            --type="project" \
+            --no-interaction
+          composer require --dev \
+            squizlabs/php_codesniffer \
+            phpcompatibility/php-compatibility \
+            --no-interaction --no-progress
+          vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility
+
+      - name: Run PHPCompatibility check
+        run: |
+          vendor/bin/phpcs \
+            --standard=PHPCompatibility \
+            --runtime-set testVersion ${{ matrix.php }} \
+            --extensions=php \
+            includes/ darkadmin.php uninstall.php
