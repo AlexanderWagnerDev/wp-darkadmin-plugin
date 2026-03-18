@@ -57,6 +57,8 @@ jobs:
 
     - name: Install Composer & WP Tests
       run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y subversion
         # Wait for MySQL
         timeout 120s bash -c '
         until mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} \
