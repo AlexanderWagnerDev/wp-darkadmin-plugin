@@ -63,8 +63,9 @@ jobs:
           svn co https://develop.svn.wordpress.org/tags/${{ matrix.wp }} .
         fi
         
-        # Plugin copy         
-        cp -rf ../* wp-content/plugins/darkadmin-dark-mode-for-adminpanel/
+        # Plugin directory create and copy
+        mkdir -p wp-content/plugins/darkadmin-dark-mode-for-adminpanel/
+        rsync -av --exclude='.git/' --exclude='.github/' --exclude='tests/' --exclude='tools/' --exclude='*.md/' ../ wp-content/plugins/darkadmin-dark-mode-for-adminpanel/
         
         # DB create
         mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} -uwordpress -pwordpress <<< "CREATE DATABASE wordpress_test"
