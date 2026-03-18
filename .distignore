@@ -1,0 +1,38 @@
+# Development files
+.git
+.github
+.gitignore
+.distignore
+
+# Documentation (GitHub-only)
+README.md
+readme-de.txt
+
+# Screenshots and branding (not needed in plugin zip)
+screenshot-1.png
+screenshot-2.png
+screenshot-3.png
+screenshot-4.png
+DarkAdmin-Logo.png
+
+# Node / build tools
+node_modules
+package.json
+package-lock.json
+composer.json
+composer.lock
+webpack.config.js
+.babelrc
+.eslintrc
+.stylelintrc
+
+# Tests
+tests
+phpunit.xml
+phpunit.xml.dist
+.phpunit.result.cache
+
+# Misc
+*.log
+*.DS_Store
+Thumbs.db
