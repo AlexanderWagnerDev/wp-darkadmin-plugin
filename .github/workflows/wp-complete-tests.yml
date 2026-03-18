@@ -21,6 +21,11 @@ jobs:
           MYSQL_PASSWORD: wordpress
         ports:
           - 3306:3306
+        options: >-
+            --health-cmd="mysqladmin ping -hlocalhost -uwordpress -pwordpress"
+            --health-interval=10s
+            --health-timeout=5s
+            --health-retries=5
     
     strategy:
       fail-fast: false
@@ -52,6 +57,14 @@ jobs:
 
     - name: WP-CLI Full Setup + Tests
       run: |
+       timeout 120s bash -c '
+       until mysql -h127.0.0.1 -P${{ job.services.mysql.ports[3306] }} \
+        -uwordpress -pwordpress -e "SELECT 1" wordpress_test >/dev/null 2>&1; do
+        echo "Waiting for MySQL..."
+        sleep 2
+       done
+       echo "MySQL ready!"
+       '
        wp core download --version=${{ matrix.wp }} --path=wp-tests --quiet
        cd wp-tests
        
