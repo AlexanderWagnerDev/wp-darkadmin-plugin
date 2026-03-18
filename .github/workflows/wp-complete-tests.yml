@@ -48,6 +48,7 @@ jobs:
       with:
         php-version: ${{ matrix.php }}
         extensions: mysql, imagick, gd, zip, mbstring
+        tools: wp-cli
 
     - name: Install SVN
       run: sudo apt-get update -qq && sudo apt-get install -y subversion
