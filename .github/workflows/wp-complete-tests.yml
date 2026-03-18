@@ -117,7 +117,7 @@ jobs:
         wp-version: 'latest'
         php-version: '8.3'
         strict: true
-        phpcs-args: "--runtime-set text_domain darkadmin-dark-mode-for-adminpanel"
+        slug: "darkadmin-dark-mode-for-adminpanel"
 
     - name: Upload PCP Report
       if: always()
