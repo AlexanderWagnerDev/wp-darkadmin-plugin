@@ -66,8 +66,10 @@ jobs:
         done
         echo "MySQL ready!"
         '
-
+        
         wp core download --version=${{ matrix.wp }} --path=./ --quiet --allow-root
+        wp config create --dbname=wordpress_test --dbuser=wordpress --dbpass=wordpress \
+         --dbhost=127.0.0.1:${{ job.services.mysql.ports[3306] }} --quiet --allow-root
         
         # Install PHPUnit dependencies
         composer require --dev --no-interaction wp-phpunit/wp-phpunit yoast/phpunit-polyfills:^3.0
