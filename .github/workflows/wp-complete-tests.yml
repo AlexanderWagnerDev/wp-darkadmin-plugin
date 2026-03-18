@@ -72,25 +72,22 @@ jobs:
          --dbhost=127.0.0.1:${{ job.services.mysql.ports[3306] }} --quiet --allow-root
          wp core install --url=http://localhost --title=Test --admin_user=admin \
          --admin_password=admin --admin_email=test@example.com --quiet --allow-root
-         
-        PLUGIN_DIR="wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
+         PLUGIN_DIR="wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
+        rm -rf "$PLUGIN_DIR"
         mkdir -p "$PLUGIN_DIR"
         rsync -av --exclude='.git/' --exclude='.github/' --exclude='wp-tests/' --exclude='tests/' \
-          --exclude='tools/' --exclude='vendor/' --exclude='*.md/' ./* "$PLUGIN_DIR"/
-
-        # Install PHPUnit dependencies
+          --exclude='tools/' ../* "$PLUGIN_DIR"/  # Aus checkout
+        
         cd "$PLUGIN_DIR"
         composer require --dev --no-interaction wp-phpunit/wp-phpunit yoast/phpunit-polyfills:^3.0
-        cd ../..
         
-        # Generate tests scaffold + WP test suite
         wp scaffold plugin-tests darkadmin-dark-mode-for-adminpanel --ci=github --allow-root
         
-        # Install WP tests with version (calls install-wp-tests.sh)
-        bash bin/install-wp-tests.sh wordpress_test wordpress wordpress 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
+        bash bin/install-wp-tests.sh wordpress_test wordpress wordpress \
+         127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
         
-        # Set env for next step
-        echo "WP_TESTS_DIR=$(pwd)/wp-tests" >> $GITHUB_ENV
+        cd ../..
+        echo "WP_TESTS_DIR=$(pwd)/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/wp-tests" >> $GITHUB_ENV
         echo "✓ WP ${{ matrix.wp }} Tests ready!"
       env:
         WP_CLI_PHP_ARGS: "-d memory_limit=512M"
