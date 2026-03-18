@@ -81,6 +81,13 @@ jobs:
     - name: Activate & Test Plugin
       working-directory: ${{ env.WP_TESTS_DIR }}
       run: |
+        wp config create \
+        --dbname=wordpress_test \
+        --dbuser=wordpress \
+        --dbpass=wordpress \
+        --dbhost=127.0.0.1:3306 \
+        --quiet
+        
         echo "=== WP-CLI Status ==="
         wp core version
         wp plugin list
