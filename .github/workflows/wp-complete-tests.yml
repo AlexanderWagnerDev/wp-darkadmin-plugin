@@ -84,9 +84,14 @@ jobs:
         composer require --dev --no-interaction wp-phpunit/wp-phpunit yoast/phpunit-polyfills:^3.0
         
         wp scaffold plugin-tests darkadmin-dark-mode-for-adminpanel --ci=github --allow-root
-        
+
+        ls -la bin/
+        cat bin/install-wp-tests.sh | head -10
+
         echo "y" | bash bin/install-wp-tests.sh wordpress_test wordpress wordpress \
          127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
+
+        ls -la wp-tests/ || echo "wp-tests FAILED to create!"
         
         cd ../..
         echo "WP_TESTS_DIR=wp-content/plugins/darkadmin-dark-mode-for-adminpanel/wp-tests" >> $GITHUB_ENV
