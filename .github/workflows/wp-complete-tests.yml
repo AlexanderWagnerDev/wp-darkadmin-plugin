@@ -40,9 +40,6 @@ jobs:
         extensions: mysql, imagick, gd, zip, mbstring
         coverage: none
 
-    - name: Install Composer Dependencies
-      run: composer install --no-progress --no-interaction --prefer-dist
-
     - name: Setup WordPress Test Environment
       uses: sjinks/setup-wordpress-test-library@master
       with:
