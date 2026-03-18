@@ -85,16 +85,13 @@ jobs:
         
         wp scaffold plugin-tests darkadmin-dark-mode-for-adminpanel --ci=github --allow-root
 
-        ls -la bin/
-        cat bin/install-wp-tests.sh | head -10
-
         echo "y" | bash bin/install-wp-tests.sh wordpress_test wordpress wordpress \
          127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
 
         ls -la wp-tests/ || echo "wp-tests FAILED to create!"
         
         cd ../..
-        echo "WP_TESTS_DIR=wp-content/plugins/darkadmin-dark-mode-for-adminpanel/wp-tests" >> $GITHUB_ENV
+        echo "WP_TESTS_DIR=/tmp/wordpress-tests-lib" >> $GITHUB_ENV
         echo "✓ WP ${{ matrix.wp }} Tests ready!"
       env:
         WP_CLI_PHP_ARGS: "-d memory_limit=512M"
@@ -113,7 +110,7 @@ jobs:
         wp plugin list
         
         echo "=== Run PHPUnit Tests ==="
-         ../../../vendor/bin/phpunit --verbose
+        /home/runner/work/wp-darkadmin-plugin/wp-darkadmin-plugin/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/vendor/bin/phpunit --verbose
 
     - name: Upload Debug Logs
       if: failure()
