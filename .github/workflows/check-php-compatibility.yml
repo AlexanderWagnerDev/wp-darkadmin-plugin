@@ -9,6 +9,8 @@ jobs:
   phpcompat:
     name: 'PHP ${{ matrix.php }} compatibility'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     strategy:
       fail-fast: false
