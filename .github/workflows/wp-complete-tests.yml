@@ -67,6 +67,8 @@ jobs:
       env:
         WP_TESTS_DIR: ${{ steps.wp-setup.outputs.WP_TESTS_DIR }}
       run: |
+        sudo mkdir -p "$WP_TESTS_DIR/wp-content/plugins"
+        sudo chown -R $(whoami) "$WP_TESTS_DIR"
         PLUGIN_SLUG="darkadmin-dark-mode-for-adminpanel"
         mkdir -p "$WP_TESTS_DIR/wp-content/plugins/$PLUGIN_SLUG"
         rsync -av --exclude='.git*' --exclude='.github' ./ "$WP_TESTS_DIR/wp-content/plugins/$PLUGIN_SLUG/"
