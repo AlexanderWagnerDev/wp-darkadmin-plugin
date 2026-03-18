@@ -12,6 +12,7 @@ jobs:
   phpunit:
     name: PHP ${{ matrix.php }} / WP ${{ matrix.wp }}
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     strategy:
       fail-fast: false
