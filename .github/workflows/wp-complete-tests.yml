@@ -50,44 +50,39 @@ jobs:
         extensions: mysql, imagick, gd, zip, mbstring
         tools: wp-cli
 
-    - name: Install SVN
-      run: sudo apt-get update -qq && sudo apt-get install -y subversion
-
-    - name: Install WP + Tests + Plugin
+    - name: WP-CLI Full Setup + Tests
       run: |
-        set -e
-        mkdir wp-tests && cd wp-tests
-        
-        # WP Core
-        if [ "${{ matrix.wp }}" = "trunk" ]; then
-          svn co https://develop.svn.wordpress.org/trunk/ .
-        else
-          svn co https://develop.svn.wordpress.org/tags/${{ matrix.wp }}/ .
-        fi
-        
-        # Plugin
-        cd ..
-        PLUGIN_TARGET="wp-tests/wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
-        mkdir -p "$PLUGIN_TARGET"
-        rsync -av --exclude='.git/' --exclude='.github/' --exclude='wp-tests/' --exclude='tests/' --exclude='tools/' --exclude='*.yml' --exclude='*.md' ./* "$PLUGIN_TARGET"/ 2>/dev/null || true
-        
-        cd wp-tests
-        
-        # DB
-        mysql -h127.0.0.1 -uwordpress -pwordpress -P3306 <<< "CREATE DATABASE IF NOT EXISTS wordpress_test;"
-                
-        echo "WP_TESTS_DIR=$(pwd)" >> $GITHUB_ENV
-
+       wp core download --version=${{ matrix.wp }} --path=wp-tests --quiet
+       cd wp-tests
+       
+       wp scaffold plugin-tests ../ --quiet
+       
+       wp config create \
+       --dbname=wordpress_test \
+       --dbuser=wordpress \
+       --dbpass=wordpress \
+       --dbhost=127.0.0.1:3306 \
+       --quiet
+       wp core install \
+       --url="http://localhost" \
+       --title="Test" \
+       --admin_user="admin" \
+       --admin_password="admin" \
+       --admin_email="test@example.com" \
+       --quiet \
+       --allow-root
+       
+       PLUGIN_DIR="wp-content/plugins/darkadmin-dark-mode-for-adminpanel"
+       rm -rf "$PLUGIN_DIR"
+       mkdir -p "$PLUGIN_DIR"
+       rsync -av --exclude='.git/' --exclude='.github/' --exclude='wp-tests/' --exclude='tests/' --exclude='tools/' ../* "$PLUGIN_DIR"/
+       
+       echo "WP_TESTS_DIR=$(pwd)" >> $GITHUB_ENV
+       echo "✓ WP ${{ matrix.wp }} + Tests ready!"
+    
     - name: Activate & Test Plugin
       working-directory: ${{ env.WP_TESTS_DIR }}
       run: |
-        wp config create \
-        --dbname=wordpress_test \
-        --dbuser=wordpress \
-        --dbpass=wordpress \
-        --dbhost=127.0.0.1:3306 \
-        --quiet
-        
         echo "=== WP-CLI Status ==="
         wp core version
         wp plugin list
