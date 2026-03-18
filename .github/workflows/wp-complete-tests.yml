@@ -54,13 +54,13 @@ jobs:
 
     - name: Install WP + Tests + Plugin
       run: |
-        # WP Core + Test Suite + Plugin kopieren
+        # WP Core + Test Suite + Plugin copy
         mkdir wp-tests && cd wp-tests
         
         if [ "${{ matrix.wp }}" = "trunk" ]; then
           svn co https://develop.svn.wordpress.org/trunk/ .
         else
-          svn co https://wordpress.org/tags/${{ matrix.wp }} .
+          svn co https://develop.svn.wordpress.org/tags/${{ matrix.wp }} .
         fi
         
         # Plugin copy         
