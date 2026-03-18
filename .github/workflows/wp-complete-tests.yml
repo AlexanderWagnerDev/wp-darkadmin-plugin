@@ -7,10 +7,28 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  WORDPRESS_DIR: ${{ github.workspace }}/wordpress-test
+
 jobs:
   phpunit:
     name: WP ${{ matrix.wp }} + PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress_test
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
     
     strategy:
       fail-fast: false
@@ -31,7 +49,10 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
+
+    - name: Install SVN
+      run: sudo apt-get update && sudo apt-get install -y subversion
 
     - name: Setup PHP ${{ matrix.php }}
       uses: shivammathur/setup-php@v2
@@ -40,10 +61,22 @@ jobs:
         extensions: mysql, imagick, gd, zip, mbstring
         coverage: none
 
+    - name: Wait for MySQL
+      run: |
+        while ! mysqladmin ping -h=127.0.0.1 -P${{ job.services.mysql.ports[3306] }} --silent; do
+          sleep 1
+        done
+
     - name: Setup WordPress Test Environment
+      id: wp-setup
       uses: sjinks/setup-wordpress-test-library@master
       with:
-        wordpress-version: ${{ matrix.wp }}
+        version: ${{ matrix.wp }}
+        dir: ${{ env.WORDPRESS_DIR }}
+        db_host: 127.0.0.1:${{ job.services.mysql.ports[3306] }}
+        db_user: wordpress
+        db_password: wordpress
+        db_name: wordpress_test
 
     - name: Prepare Plugin Directory
       run: |
@@ -66,12 +99,13 @@ jobs:
 
     - name: Upload Debug Logs
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: failure-php-${{ matrix.php }}-wp-${{ matrix.wp }}
         path: |
           ${{ env.WORDPRESS_DIR }}/wp-content/debug.log
           ${{ env.WORDPRESS_DIR }}/wp-content/uploads/
+          ${{ env.WORDPRESS_DIR }}/wp-content/plugins/darkadmin-darkmode-for-adminpanel/
           phpunit.xml
 
   plugin-check:
@@ -79,12 +113,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Run WordPress Plugin Check
       uses: WordPress/plugin-check-action@v1
       with:
-        build-dir: '.' 
+        build-dir: '.'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         wp-version: 'latest'
         php-version: '8.3'
@@ -92,7 +126,7 @@ jobs:
 
     - name: Upload PCP Report
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: plugin-check-report
         path: pcp-report.json
@@ -101,9 +135,13 @@ jobs:
     name: PHP CodeSniffer (WPCS)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: shivammathur/setup-php@v2
-      with: { php-version: '8.3' }
-    - run: |
-        composer install
-        ./vendor/bin/phpcs || true
+    - name: Checkout Code
+      uses: actions/checkout@v6
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+
+    - name: Run PHPCS
+      run: ./vendor/bin/phpcs || true
