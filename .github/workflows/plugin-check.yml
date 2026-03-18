@@ -27,12 +27,12 @@ jobs:
                   --exclude='*.md' \
                   --exclude='readme-de.txt' \
                   ./ ../plugin-clean/
-
     - uses: WordPress/plugin-check-action@v1
       with:
         build-dir: '../plugin-clean'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         slug: "darkadmin-dark-mode-for-adminpanel"
+        
   plugin-check-trunk:
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +51,6 @@ jobs:
                   --exclude='*.md' \
                   --exclude='readme-de.txt' \
                   ./ ../plugin-clean/
-
     - uses: WordPress/plugin-check-action@v1
       with:
         build-dir: '../plugin-clean'
