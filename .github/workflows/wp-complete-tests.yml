@@ -101,13 +101,17 @@ jobs:
       run: |
         echo "=== WP-CLI Status ==="
         wp core version --path=/tmp/wordpress
-        wp plugin list --path=/tmp/wordpress
         
         echo "=== Activate DarkAdmin ==="
-        wp plugin activate darkadmin-dark-mode-for-adminpanel --quiet --allow-root --path=/tmp/wordpress
+        wp plugin activate darkadmin-dark-mode-for-adminpanel \
+         --path=/tmp/wordpress \
+         --extra-plugin-paths=/home/runner/work/wp-darkadmin-plugin/wp-darkadmin-plugin/wp-content \
+         --allow-root
         
         echo "=== Plugin activated - run tests ==="
-        wp plugin list --path=/tmp/wordpress
+        wp plugin list \
+         --path=/tmp/wordpress \
+         --extra-plugin-paths=/home/runner/work/wp-darkadmin-plugin/wp-darkadmin-plugin/wp-content
         
         echo "=== Run PHPUnit Tests ==="
         /home/runner/work/wp-darkadmin-plugin/wp-darkadmin-plugin/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/vendor/bin/phpunit --verbose
