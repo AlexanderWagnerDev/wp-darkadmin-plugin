@@ -32,27 +32,3 @@ jobs:
         build-dir: '../plugin-clean'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         slug: "darkadmin-dark-mode-for-adminpanel"
-        
-  plugin-check-trunk:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v6
-    - name: Prepare clean plugin directory
-      run: |
-        mkdir ../plugin-clean
-        rsync -av --exclude='.git' \
-                  --exclude='.github' \
-                  --exclude='tests' \
-                  --exclude='vendor' \
-                  --exclude='composer.json' \
-                  --exclude='composer.lock' \
-                  --exclude='phpunit.xml' \
-                  --exclude='.distignore' \
-                  --exclude='*.md' \
-                  --exclude='readme-de.txt' \
-                  ./ ../plugin-clean/
-    - uses: WordPress/plugin-check-action@v1
-      with:
-        build-dir: '../plugin-clean'
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        slug: "darkadmin-dark-mode-for-adminpanel"
