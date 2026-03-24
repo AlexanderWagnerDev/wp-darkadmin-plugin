@@ -622,10 +622,10 @@ div.error,
 .notice .notice-dismiss:hover::before {
   color: var(--adm-danger) !important;
 }
-.notice-success  { border-left-color: var(--adm-success)  !important; }
-.notice-error    { border-left-color: var(--adm-danger)   !important; }
-.notice-warning  { border-left-color: var(--adm-warning)  !important; }
-.notice-info     { border-left-color: var(--adm-primary)  !important; }
+div.notice-success, .notice.notice-success { border-left-color: var(--adm-success)  !important; }
+div.notice-error, .notice.notice-error { border-left-color: var(--adm-danger)   !important; }
+div.notice-warning, .notice.notice-warning { border-left-color: var(--adm-warning)  !important; }
+div.notice-info, .notice.notice-info { border-left-color: var(--adm-primary)  !important; }
 
 /* =============================================================================
    POSTBOXES / METABOXES
