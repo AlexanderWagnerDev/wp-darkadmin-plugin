@@ -38,6 +38,10 @@ function darkadmin_default_colors(): array {
 		'success'          => '#00a32a',
 		'warning'          => '#dba617',
 		'danger'           => '#d63638',
+		// Sidebar
+		'sidebar_bg'       => '#1d2327',
+		'sidebar_active'   => '#2c3338',
+		'sidebar_text'     => '#a7aaad',
 		// CodeMirror syntax tokens
 		'cm_keyword'       => '#c792ea',
 		'cm_operator'      => '#89ddff',
@@ -103,6 +107,10 @@ function darkadmin_preset_colors(): array {
 			'success'          => '#00ba37',
 			'warning'          => '#dba617',
 			'danger'           => '#d63638',
+			// Sidebar
+			'sidebar_bg'       => '#1e1e1e',
+			'sidebar_active'   => '#3858e9',
+			'sidebar_text'     => '#c8c8c8',
 			// CodeMirror syntax tokens
 			'cm_keyword'       => '#c792ea',
 			'cm_operator'      => '#89ddff',
@@ -160,6 +168,9 @@ function darkadmin_css_variable_map(): array {
 		'success'         => [ 'var' => '--adm-success',         'label' => __( 'Success',                             'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ],
 		'warning'         => [ 'var' => '--adm-warning',         'label' => __( 'Warning',                             'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ],
 		'danger'          => [ 'var' => '--adm-danger',          'label' => __( 'Danger / Error',                      'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ],
+		'sidebar_bg'      => [ 'var' => '--adm-sidebar-bg',      'label' => __( 'Sidebar Background',                  'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Sidebar',     'darkadmin-dark-mode-for-adminpanel' ) ],
+		'sidebar_active'  => [ 'var' => '--adm-sidebar-active',  'label' => __( 'Sidebar Active Item',                 'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Sidebar',     'darkadmin-dark-mode-for-adminpanel' ) ],
+		'sidebar_text'    => [ 'var' => '--adm-sidebar-text',    'label' => __( 'Sidebar Text',                        'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Sidebar',     'darkadmin-dark-mode-for-adminpanel' ) ],
 		'cm_keyword'      => [ 'var' => '--adm-cm-keyword',      'label' => __( 'Code: Keyword',                       'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ],
 		'cm_operator'     => [ 'var' => '--adm-cm-operator',     'label' => __( 'Code: Operator / Bracket',            'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ],
 		'cm_variable2'    => [ 'var' => '--adm-cm-variable2',    'label' => __( 'Code: Variable / Def',                'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ],

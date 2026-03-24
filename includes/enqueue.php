@@ -181,41 +181,44 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 
 	$sc = static fn( string $k ) => sanitize_hex_color( $c[ $k ] ?? '' ) ?: $fallbacks[ $k ];
 
-	$vars = ':root{'                                          .
-		"--adm-bg:{$sc('bg')};"                           .
-		"--adm-bg-bar:{$sc('bg_bar')};"                   .
-		"--adm-bg-deep:{$sc('bg_deep')};"                 .
-		"--adm-bg-darker:{$sc('bg_darker')};"             .
-		"--adm-surface-1:{$sc('surface1')};"              .
-		"--adm-surface-2:{$sc('surface2')};"              .
-		"--adm-surface-3:{$sc('surface3')};"              .
-		"--adm-table-alt:{$sc('table_alt')};"             .
-		"--adm-plugin-inactive:{$sc('plugin_inactive')};" .
-		"--adm-border:{$sc('border')};"                   .
-		"--adm-border-focus:{$sc('border_focus')};"       .
-		"--adm-border-hover:{$sc('border_hover')};"       .
-		"--adm-text:{$sc('text')};"                       .
-		"--adm-text-muted:{$sc('text_muted')};"           .
-		"--adm-text-soft:{$sc('text_soft')};"             .
-		"--adm-text-on-primary:{$sc('text_on_primary')};" .
-		"--adm-link:{$sc('link')};"                       .
-		"--adm-link-hover:{$sc('link_hover')};"           .
-		"--adm-primary:{$sc('primary')};"                 .
-		"--adm-primary-hover:{$sc('primary_hover')};"     .
-		"--adm-success:{$sc('success')};"                 .
-		"--adm-warning:{$sc('warning')};"                 .
-		"--adm-danger:{$sc('danger')};"                   .
-		"--adm-cm-keyword:{$sc('cm_keyword')};"           .
-		"--adm-cm-operator:{$sc('cm_operator')};"         .
-		"--adm-cm-variable2:{$sc('cm_variable2')};"       .
-		"--adm-cm-property:{$sc('cm_property')};"         .
-		"--adm-cm-number:{$sc('cm_number')};"             .
-		"--adm-cm-string:{$sc('cm_string')};"             .
-		"--adm-cm-string2:{$sc('cm_string2')};"           .
-		"--adm-cm-comment:{$sc('cm_comment')};"           .
-		"--adm-cm-tag:{$sc('cm_tag')};"                   .
-		"--adm-cm-attribute:{$sc('cm_attribute')};"       .
-		"--adm-cm-bracket:{$sc('cm_bracket')};"           .
+	$vars = ':root{'                                                   .
+		"--adm-bg:{$sc('bg')};"                                    .
+		"--adm-bg-bar:{$sc('bg_bar')};"                            .
+		"--adm-bg-deep:{$sc('bg_deep')};"                          .
+		"--adm-bg-darker:{$sc('bg_darker')};"                      .
+		"--adm-surface-1:{$sc('surface1')};"                       .
+		"--adm-surface-2:{$sc('surface2')};"                       .
+		"--adm-surface-3:{$sc('surface3')};"                       .
+		"--adm-table-alt:{$sc('table_alt')};"                      .
+		"--adm-plugin-inactive:{$sc('plugin_inactive')};"          .
+		"--adm-border:{$sc('border')};"                            .
+		"--adm-border-focus:{$sc('border_focus')};"                .
+		"--adm-border-hover:{$sc('border_hover')};"                .
+		"--adm-text:{$sc('text')};"                                .
+		"--adm-text-muted:{$sc('text_muted')};"                    .
+		"--adm-text-soft:{$sc('text_soft')};"                      .
+		"--adm-text-on-primary:{$sc('text_on_primary')};"          .
+		"--adm-link:{$sc('link')};"                                .
+		"--adm-link-hover:{$sc('link_hover')};"                    .
+		"--adm-primary:{$sc('primary')};"                          .
+		"--adm-primary-hover:{$sc('primary_hover')};"              .
+		"--adm-success:{$sc('success')};"                          .
+		"--adm-warning:{$sc('warning')};"                          .
+		"--adm-danger:{$sc('danger')};"                            .
+		"--adm-sidebar-bg:{$sc('sidebar_bg')};"                    .
+		"--adm-sidebar-active:{$sc('sidebar_active')};"            .
+		"--adm-sidebar-text:{$sc('sidebar_text')};"                .
+		"--adm-cm-keyword:{$sc('cm_keyword')};"                    .
+		"--adm-cm-operator:{$sc('cm_operator')};"                  .
+		"--adm-cm-variable2:{$sc('cm_variable2')};"                .
+		"--adm-cm-property:{$sc('cm_property')};"                  .
+		"--adm-cm-number:{$sc('cm_number')};"                      .
+		"--adm-cm-string:{$sc('cm_string')};"                      .
+		"--adm-cm-string2:{$sc('cm_string2')};"                    .
+		"--adm-cm-comment:{$sc('cm_comment')};"                    .
+		"--adm-cm-tag:{$sc('cm_tag')};"                            .
+		"--adm-cm-attribute:{$sc('cm_attribute')};"                .
+		"--adm-cm-bracket:{$sc('cm_bracket')};"                    .
 		'}';
 
 	wp_enqueue_style(
@@ -272,7 +275,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 		'presets'  => darkadmin_preset_colors(),
 	] );
 	wp_localize_script( 'darkadmin-settings-js', 'admI18n', [
-		'active'     => __( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' ),
+		'active'     => __( 'Active', 'darkadmin-dark-mode-for-adminpanel' ),
 		'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
 	] );
 } );
