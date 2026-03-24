@@ -1405,6 +1405,95 @@ input.tag-add:hover,
 }
 
 /* =============================================================================
+   CUSTOMIZER
+   ============================================================================= */
+#customize-controls,
+#customize-outer-pane,
+.wp-full-overlay-sidebar,
+.wp-full-overlay-sidebar-content,
+.wp-full-overlay .customize-info,
+#customize-header-actions,
+#customize-outer-pane .customize-pane-parent,
+.accordion-section-title,
+.customize-panel-back,
+.customize-section-back,
+.customize-controls-close {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.accordion-section-title {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.accordion-section-title:hover,
+.accordion-section-title:focus {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.accordion-section-title .customize-action {
+  color: var(--adm-text-soft) !important;
+}
+.accordion-section-title::after {
+  color: var(--adm-text-muted) !important;
+}
+#customize-header-actions {
+  background: var(--adm-bg-bar) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.wp-full-overlay .customize-info,
+.customize-info .preview-notice {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+.customize-info .customize-help-toggle {
+  color: var(--adm-text-muted) !important;
+}
+#customize-footer-actions {
+  background: var(--adm-bg-bar) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+#customize-footer-actions .devices button {
+  color: var(--adm-text-muted) !important;
+}
+#customize-footer-actions .devices button.active,
+#customize-footer-actions .devices button:hover {
+  color: var(--adm-text) !important;
+  border-bottom: 2px solid var(--adm-primary) !important;
+}
+.customize-controls-preview-toggle {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.customize-section-description-container {
+  background: var(--adm-surface-2) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.customize-section-description {
+  color: var(--adm-text-muted) !important;
+}
+#customize-theme-controls .customize-pane-child {
+  background: var(--adm-bg) !important;
+}
+.customize-control label,
+.customize-control .customize-control-title {
+  color: var(--adm-text) !important;
+}
+.customize-control .description {
+  color: var(--adm-text-muted) !important;
+}
+.wp-full-overlay .wp-full-overlay-sidebar {
+  background: var(--adm-bg) !important;
+}
+#accordion-panel-themes .accordion-section-title,
+#accordion-section-themes .accordion-section-title {
+  background: var(--adm-surface-1) !important;
+}
+
+/* =============================================================================
    WIDGETS
    ============================================================================= */
 .widget,
