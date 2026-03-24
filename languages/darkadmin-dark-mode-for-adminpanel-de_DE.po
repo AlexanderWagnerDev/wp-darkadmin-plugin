@@ -201,12 +201,12 @@ msgid "The following pages are always excluded: %s"
 msgstr "Die folgenden Seiten sind immer ausgeschlossen: %s"
 
 #: darkadmin.php
-msgid "Dark Mode is active. Settings have been saved."
-msgstr "Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: darkadmin.php
-msgid "Settings saved. Dark Mode is disabled."
-msgstr "Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
 
 #: includes/defaults.php
 msgid "Backgrounds"
