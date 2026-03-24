@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.2\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-24 15:25+0100\n"
-"PO-Revision-Date: 2026-03-24 15:25+0100\n"
+"POT-Creation-Date: 2026-03-24 15:33+0100\n"
+"PO-Revision-Date: 2026-03-24 15:33+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: \n"
@@ -85,7 +85,7 @@ msgid "Load Preset"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "\u2713 Active"
+msgid "✓ Active"
 msgstr ""
 
 #: includes/settings-page.php
@@ -121,7 +121,7 @@ msgid "Everyone except selected users gets dark mode."
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgid "Administrators are not listed here — they always have dark mode active."
 msgstr ""
 
 #: includes/settings-page.php
@@ -169,7 +169,7 @@ msgid "Save Settings"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "\u2715 Invalid JSON or Hex color"
+msgid "✕ Invalid JSON or Hex color"
 msgstr ""
 
 #: includes/settings-page.php
@@ -193,11 +193,11 @@ msgid "The following pages are always excluded: %s"
 msgstr ""
 
 #: darkadmin.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: darkadmin.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgid "✓ Settings saved. Dark Mode is disabled."
 msgstr ""
 
 #: includes/defaults.php
