@@ -4,15 +4,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.2\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-24 15:33+0100\n"
-"PO-Revision-Date: 2026-03-24 15:33+0100\n"
+"POT-Creation-Date: 2026-03-24 16:25+0100\n"
+"PO-Revision-Date: 2026-03-24 16:25+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: AWDev 2026\n"
 "X-Domain: darkadmin-dark-mode-for-adminpanel\n"
 
@@ -85,10 +83,6 @@ msgid "Load Preset"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "✓ Active"
-msgstr ""
-
-#: includes/settings-page.php
 msgid "Preview"
 msgstr ""
 
@@ -121,11 +115,23 @@ msgid "Everyone except selected users gets dark mode."
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
+msgid "Administrators are not listed here -- they always have dark mode active."
 msgstr ""
 
 #: includes/settings-page.php
 msgid "No non-administrator users found. Create additional users to manage their dark mode access here."
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Layout & Spacing"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Adjust spacing, button sizes, border radii and shadow. px values only for size fields; shadow accepts any valid CSS box-shadow value."
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Restore Default Layout"
 msgstr ""
 
 #: includes/settings-page.php
@@ -169,10 +175,6 @@ msgid "Save Settings"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "✕ Invalid JSON or Hex color"
-msgstr ""
-
-#: includes/settings-page.php
 msgid "Advanced"
 msgstr ""
 
@@ -193,11 +195,11 @@ msgid "The following pages are always excluded: %s"
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
+msgid "Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
+msgid "Settings saved. Dark Mode is disabled."
 msgstr ""
 
 #: includes/defaults.php
@@ -378,4 +380,36 @@ msgstr ""
 
 #: includes/defaults.php
 msgid "Code: Bracket"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Spacing (Small)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Spacing (Medium)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Button Height"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Input Height"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Border Radius (Small)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Border Radius (Medium)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Border Radius (Large)"
+msgstr ""
+
+#: includes/defaults.php
+msgid "Shadow"
 msgstr ""

@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.2\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-24 15:33+0100\n"
-"PO-Revision-Date: 2026-03-24 15:33+0100\n"
+"POT-Creation-Date: 2026-03-24 16:25+0100\n"
+"PO-Revision-Date: 2026-03-24 16:25+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: en_US\n"
@@ -85,10 +85,6 @@ msgid "Load Preset"
 msgstr "Load Preset"
 
 #: includes/settings-page.php
-msgid "✓ Active"
-msgstr "✓ Active"
-
-#: includes/settings-page.php
 msgid "Preview"
 msgstr "Preview"
 
@@ -121,12 +117,24 @@ msgid "Everyone except selected users gets dark mode."
 msgstr "Everyone except selected users gets dark mode."
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
-msgstr "Administrators are not listed here — they always have dark mode active."
+msgid "Administrators are not listed here -- they always have dark mode active."
+msgstr "Administrators are not listed here -- they always have dark mode active."
 
 #: includes/settings-page.php
 msgid "No non-administrator users found. Create additional users to manage their dark mode access here."
 msgstr "No non-administrator users found. Create additional users to manage their dark mode access here."
+
+#: includes/settings-page.php
+msgid "Layout & Spacing"
+msgstr "Layout & Spacing"
+
+#: includes/settings-page.php
+msgid "Adjust spacing, button sizes, border radii and shadow. px values only for size fields; shadow accepts any valid CSS box-shadow value."
+msgstr "Adjust spacing, button sizes, border radii and shadow. px values only for size fields; shadow accepts any valid CSS box-shadow value."
+
+#: includes/settings-page.php
+msgid "Restore Default Layout"
+msgstr "Restore Default Layout"
 
 #: includes/settings-page.php
 msgid "Color Customization"
@@ -169,10 +177,6 @@ msgid "Save Settings"
 msgstr "Save Settings"
 
 #: includes/settings-page.php
-msgid "✕ Invalid JSON or Hex color"
-msgstr "✕ Invalid JSON or Hex color"
-
-#: includes/settings-page.php
 msgid "Advanced"
 msgstr "Advanced"
 
@@ -193,12 +197,12 @@ msgid "The following pages are always excluded: %s"
 msgstr "The following pages are always excluded: %s"
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
-msgstr "✓ Dark Mode is active. Settings have been saved."
+msgid "Dark Mode is active. Settings have been saved."
+msgstr "Dark Mode is active. Settings have been saved."
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
-msgstr "✓ Settings saved. Dark Mode is disabled."
+msgid "Settings saved. Dark Mode is disabled."
+msgstr "Settings saved. Dark Mode is disabled."
 
 #: includes/defaults.php
 msgid "Backgrounds"
@@ -379,3 +383,35 @@ msgstr "Code: Attribute / Qualifier / Builtin"
 #: includes/defaults.php
 msgid "Code: Bracket"
 msgstr "Code: Bracket"
+
+#: includes/defaults.php
+msgid "Spacing (Small)"
+msgstr "Spacing (Small)"
+
+#: includes/defaults.php
+msgid "Spacing (Medium)"
+msgstr "Spacing (Medium)"
+
+#: includes/defaults.php
+msgid "Button Height"
+msgstr "Button Height"
+
+#: includes/defaults.php
+msgid "Input Height"
+msgstr "Input Height"
+
+#: includes/defaults.php
+msgid "Border Radius (Small)"
+msgstr "Border Radius (Small)"
+
+#: includes/defaults.php
+msgid "Border Radius (Medium)"
+msgstr "Border Radius (Medium)"
+
+#: includes/defaults.php
+msgid "Border Radius (Large)"
+msgstr "Border Radius (Large)"
+
+#: includes/defaults.php
+msgid "Shadow"
+msgstr "Shadow"

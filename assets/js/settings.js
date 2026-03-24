@@ -27,6 +27,20 @@
 	}
 
 	/* -----------------------------------------------------------------------
+	 * Layout inputs live preview
+	 * --------------------------------------------------------------------- */
+	function initLayoutInputs() {
+		document.querySelectorAll( '.adm-layout-input' ).forEach( function ( input ) {
+			input.addEventListener( 'input', function () {
+				const key = input.dataset.key;
+				if ( key ) {
+					document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), input.value );
+				}
+			} );
+		} );
+	}
+
+	/* -----------------------------------------------------------------------
 	 * Preset tiles + live preview panel
 	 * --------------------------------------------------------------------- */
 	function initPresets() {
@@ -34,12 +48,13 @@
 		if ( ! metaEl ) return;
 		const meta = JSON.parse( metaEl.textContent || '{}' );
 
-		const presetInput  = document.getElementById( 'darkadmin_preset' );
-		const previewPanel = document.getElementById( 'adm-preset-preview' );
-		const previewName  = document.getElementById( 'adm-preview-name' );
-		const tiles        = document.querySelectorAll( '.adm-preset-tile' );
-		const loadBtns     = document.querySelectorAll( '.adm-preset-load-btn' );
-		const admPresets   = window.admData.presets || {};
+		const presetInput    = document.getElementById( 'darkadmin_preset' );
+		const previewPanel   = document.getElementById( 'adm-preset-preview' );
+		const previewName    = document.getElementById( 'adm-preview-name' );
+		const tiles          = document.querySelectorAll( '.adm-preset-tile' );
+		const loadBtns       = document.querySelectorAll( '.adm-preset-load-btn' );
+		const admPresets     = ( window.admData && window.admData.presets )     || {};
+		const admLayoutPresets = ( window.admData && window.admData.layoutPresets ) || {};
 
 		function updatePreview( slug ) {
 			if ( ! previewPanel || ! meta[ slug ] ) return;
@@ -59,10 +74,9 @@
 			} );
 			loadBtns.forEach( function ( btn ) {
 				const isThis = btn.dataset.preset === slug;
-				btn.textContent = isThis ? '\u2713 Active' : 'Load Preset';
-				if ( window.admI18n ) {
-					btn.textContent = isThis ? window.admI18n.active : window.admI18n.loadPreset;
-				}
+				btn.textContent = isThis
+					? ( window.admI18n ? window.admI18n.active    : '\u2713 Active' )
+					: ( window.admI18n ? window.admI18n.loadPreset : 'Load Preset' );
 			} );
 			if ( presetInput ) presetInput.value = slug;
 		}
@@ -78,10 +92,14 @@
 
 		loadBtns.forEach( function ( btn ) {
 			btn.addEventListener( 'click', function () {
-				const slug = btn.dataset.preset;
+				const slug   = btn.dataset.preset;
 				const colors = admPresets[ slug ];
 				if ( colors ) {
-					loadPresetColors( slug, colors );
+					loadPresetColors( colors );
+				}
+				const layout = admLayoutPresets[ slug ];
+				if ( layout ) {
+					loadPresetLayout( layout );
 				}
 				setActive( slug );
 				updatePreview( slug );
@@ -92,7 +110,7 @@
 	/* -----------------------------------------------------------------------
 	 * Load preset colors into color pickers
 	 * --------------------------------------------------------------------- */
-	function loadPresetColors( slug, colors ) {
+	function loadPresetColors( colors ) {
 		Object.keys( colors ).forEach( function ( key ) {
 			const input = document.getElementById( 'adm_color_' + key );
 			if ( ! input ) return;
@@ -100,7 +118,19 @@
 			jQuery( input ).wpColorPicker( 'color', val );
 			document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), val );
 		} );
-		updatePresetTiles( slug );
+	}
+
+	/* -----------------------------------------------------------------------
+	 * Load preset layout values into layout inputs
+	 * --------------------------------------------------------------------- */
+	function loadPresetLayout( layout ) {
+		Object.keys( layout ).forEach( function ( key ) {
+			const input = document.getElementById( 'adm_layout_' + key );
+			if ( ! input ) return;
+			const val = layout[ key ];
+			input.value = val;
+			document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), val );
+		} );
 	}
 
 	function updatePresetTiles( activeSlug ) {
@@ -119,17 +149,31 @@
 	 * Reset colors
 	 * --------------------------------------------------------------------- */
 	function initReset() {
-		const btn = document.getElementById( 'adm-reset-colors' );
-		if ( ! btn ) return;
-		const admDefaults = window.admData.defaults;
-		btn.addEventListener( 'click', function () {
-			Object.keys( admDefaults ).forEach( function ( key ) {
-				const input = document.getElementById( 'adm_color_' + key );
-				if ( ! input ) return;
-				jQuery( input ).wpColorPicker( 'color', admDefaults[ key ] );
-				document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), admDefaults[ key ] );
+		const btnColors = document.getElementById( 'adm-reset-colors' );
+		if ( btnColors ) {
+			const admDefaults = window.admData.defaults;
+			btnColors.addEventListener( 'click', function () {
+				Object.keys( admDefaults ).forEach( function ( key ) {
+					const input = document.getElementById( 'adm_color_' + key );
+					if ( ! input ) return;
+					jQuery( input ).wpColorPicker( 'color', admDefaults[ key ] );
+					document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), admDefaults[ key ] );
+				} );
 			} );
-		} );
+		}
+
+		const btnLayout = document.getElementById( 'adm-reset-layout' );
+		if ( btnLayout ) {
+			const layoutDefaults = ( window.admData && window.admData.layoutDefaults ) || {};
+			btnLayout.addEventListener( 'click', function () {
+				Object.keys( layoutDefaults ).forEach( function ( key ) {
+					const input = document.getElementById( 'adm_layout_' + key );
+					if ( ! input ) return;
+					input.value = layoutDefaults[ key ];
+					document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), layoutDefaults[ key ] );
+				} );
+			} );
+		}
 	}
 
 	/* -----------------------------------------------------------------------
@@ -207,7 +251,7 @@
 	}
 
 	/* -----------------------------------------------------------------------
-	 * User Access Mode — show/hide user grid + highlight active radio card
+	 * User Access Mode -- show/hide user grid + highlight active radio card
 	 * --------------------------------------------------------------------- */
 	function initUserAccessMode() {
 		const radios   = document.querySelectorAll( 'input[name="darkadmin_user_access_mode"]' );
@@ -234,6 +278,7 @@
 	 * --------------------------------------------------------------------- */
 	document.addEventListener( 'DOMContentLoaded', function () {
 		initColorPickers();
+		initLayoutInputs();
 		initPresets();
 		initReset();
 		initPaletteIO();
