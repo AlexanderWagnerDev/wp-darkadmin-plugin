@@ -79,6 +79,10 @@ msgid "WP Modern design language (dark)"
 msgstr ""
 
 #: includes/settings-page.php
+msgid "✓ Active"
+msgstr ""
+
+#: includes/settings-page.php
 msgid "Load Preset"
 msgstr ""
 
@@ -115,7 +119,7 @@ msgid "Everyone except selected users gets dark mode."
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here -- they always have dark mode active."
+msgid "Administrators are not listed here — they always have dark mode active."
 msgstr ""
 
 #: includes/settings-page.php
