@@ -428,6 +428,7 @@ admin.php?page=my-plugin"
 					<p class="adm-field-desc" style="margin-top:8px;">
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php
+						/* translators: %s: comma-separated list of always-excluded admin page filenames */
 						echo wp_kses(
 							sprintf(
 								__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
