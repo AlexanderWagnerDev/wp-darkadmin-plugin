@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.2\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
 "POT-Creation-Date: 2026-03-24 16:25+0100\n"
-"PO-Revision-Date: 2026-03-24 16:25+0100\n"
+"PO-Revision-Date: 2026-03-24 17:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: de_AT\n"
@@ -22,7 +22,7 @@ msgstr "DarkAdmin"
 
 #: includes/settings-page.php
 msgid "Dark theme for the WordPress backend"
-msgstr "Dunkles Theme fuer das WordPress-Backend"
+msgstr "Dunkles Theme für das WordPress-Backend"
 
 #: darkadmin.php
 msgid "Settings"
@@ -46,7 +46,7 @@ msgstr "Dark Mode aktivieren"
 
 #: includes/settings-page.php
 msgid "Enables the dark theme for all admin pages. Administrators always see dark mode when this is active."
-msgstr "Aktiviert das dunkle Design fuer alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
+msgstr "Aktiviert das dunkle Design für alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
 
 #: includes/settings-page.php
 msgid "Auto Dark Mode"
@@ -54,7 +54,7 @@ msgstr "Auto Dark Mode"
 
 #: includes/settings-page.php
 msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
-msgstr "Verdunkelt automatisch helle Hintergruende und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
+msgstr "Verdunkelt automatisch helle Hintergründe und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
 
 #: includes/settings-page.php
 msgid "Preset Themes"
@@ -62,7 +62,7 @@ msgstr "Preset-Themes"
 
 #: includes/settings-page.php
 msgid "Choose a preset to load its color palette. You can further customize colors below after loading."
-msgstr "Waehle ein Preset aus, um dessen Farbpalette zu laden. Farben koennen anschliessend weiter angepasst werden."
+msgstr "Wähle ein Preset aus, um dessen Farbpalette zu laden. Farben können anschließend weiter angepasst werden."
 
 #: includes/settings-page.php
 msgid "Default"
@@ -79,6 +79,10 @@ msgstr "Modern"
 #: includes/settings-page.php
 msgid "WP Modern design language (dark)"
 msgstr "WP Modern Design Language (dunkel)"
+
+#: includes/settings-page.php
+msgid "&#10003; Active"
+msgstr "✓ Aktiv"
 
 #: includes/settings-page.php
 msgid "Load Preset"
@@ -98,27 +102,31 @@ msgstr "Alle Benutzer"
 
 #: includes/settings-page.php
 msgid "Dark mode applies to everyone."
-msgstr "Dark Mode gilt fuer alle Benutzer."
+msgstr "Dark Mode gilt für alle Benutzer."
 
 #: includes/settings-page.php
 msgid "Include"
-msgstr "Einschliessen"
+msgstr "Einschließen"
 
 #: includes/settings-page.php
 msgid "Only selected users get dark mode."
-msgstr "Nur ausgewaehlte Benutzer erhalten den Dark Mode."
+msgstr "Nur ausgewählte Benutzer erhalten den Dark Mode."
 
 #: includes/settings-page.php
 msgid "Exclude"
-msgstr "Ausschliessen"
+msgstr "Ausschließen"
 
 #: includes/settings-page.php
 msgid "Everyone except selected users gets dark mode."
-msgstr "Alle ausser den ausgewaehlten Benutzern erhalten den Dark Mode."
+msgstr "Alle außer den ausgewählten Benutzern erhalten den Dark Mode."
+
+#: includes/settings-page.php
+msgid "Administrators are not listed here — they always have dark mode active."
+msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode immer aktiv."
 
 #: includes/settings-page.php
 msgid "Administrators are not listed here -- they always have dark mode active."
-msgstr "Administratoren werden hier nicht angezeigt -- sie haben den Dark Mode immer aktiv."
+msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode immer aktiv."
 
 #: includes/settings-page.php
 msgid "No non-administrator users found. Create additional users to manage their dark mode access here."
@@ -126,11 +134,11 @@ msgstr "Keine Nicht-Administrator-Benutzer gefunden. Erstelle weitere Benutzer, 
 
 #: includes/settings-page.php
 msgid "Layout & Spacing"
-msgstr "Layout & Abstands"
+msgstr "Layout & Abstände"
 
 #: includes/settings-page.php
 msgid "Adjust spacing, button sizes, border radii and shadow. px values only for size fields; shadow accepts any valid CSS box-shadow value."
-msgstr "Passe Abstaende, Button-Groessen, Rahmenradien und Schatten an. Groessenfelder nur in px; Schatten akzeptiert jeden gueltigen CSS-box-shadow-Wert."
+msgstr "Passe Abstände, Button-Größen, Rahmenradien und Schatten an. Größenfelder nur in px; Schatten akzeptiert jeden gültigen CSS-box-shadow-Wert."
 
 #: includes/settings-page.php
 msgid "Restore Default Layout"
@@ -142,7 +150,7 @@ msgstr "Farbanpassung"
 
 #: includes/settings-page.php
 msgid "Customize every color token individually. Changes are previewed live."
-msgstr "Passe jeden Farbwert individuell an. Aenderungen werden sofort als Vorschau angezeigt."
+msgstr "Passe jeden Farbwert individuell an. Änderungen werden sofort als Vorschau angezeigt."
 
 #: includes/settings-page.php
 msgid "Export Palette"
@@ -158,7 +166,7 @@ msgstr "Standardfarben wiederherstellen"
 
 #: includes/settings-page.php
 msgid "Available CSS Variables"
-msgstr "Verfuegbare CSS-Variablen"
+msgstr "Verfügbare CSS-Variablen"
 
 #: includes/settings-page.php
 msgid "Click to copy"
@@ -170,7 +178,7 @@ msgstr "Eigenes CSS"
 
 #: includes/settings-page.php
 msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
-msgstr "Fuege hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfuegbar."
+msgstr "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfügbar."
 
 #: includes/settings-page.php
 msgid "Save Settings"
@@ -190,7 +198,7 @@ msgstr "Ein Eintrag pro Zeile. Dark-Mode-Stile werden auf den entsprechenden Adm
 
 #: includes/settings-page.php
 msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
-msgstr "Unterstuetzt einfache Dateinamen (plugins.php) und benutzerdefinierte Seiten-Slugs (admin.php?page=my-plugin). Zeilen, die mit # beginnen, werden als Kommentare behandelt."
+msgstr "Unterstützt einfache Dateinamen (plugins.php) und benutzerdefinierte Seiten-Slugs (admin.php?page=my-plugin). Zeilen, die mit # beginnen, werden als Kommentare behandelt."
 
 #: includes/settings-page.php
 msgid "The following pages are always excluded: %s"
@@ -206,11 +214,11 @@ msgstr "Einstellungen gespeichert. Dark Mode ist deaktiviert."
 
 #: includes/defaults.php
 msgid "Backgrounds"
-msgstr "Hintergruende"
+msgstr "Hintergründe"
 
 #: includes/defaults.php
 msgid "Surfaces"
-msgstr "Flaechen"
+msgstr "Flächen"
 
 #: includes/defaults.php
 msgid "Borders"
@@ -246,7 +254,7 @@ msgstr "Hintergrund (Admin-Bar)"
 
 #: includes/defaults.php
 msgid "Background (Deep / Submenu)"
-msgstr "Hintergrund (Tief / Untermenue)"
+msgstr "Hintergrund (Tief / Untermenüs)"
 
 #: includes/defaults.php
 msgid "Background (Darker / Editor Gutter)"
@@ -254,15 +262,15 @@ msgstr "Hintergrund (Dunkler / Editor-Gutter)"
 
 #: includes/defaults.php
 msgid "Surface 1 (Cards / Tables)"
-msgstr "Flaeche 1 (Karten / Tabellen)"
+msgstr "Fläche 1 (Karten / Tabellen)"
 
 #: includes/defaults.php
 msgid "Surface 2 (Inputs)"
-msgstr "Flaeche 2 (Eingabefelder)"
+msgstr "Fläche 2 (Eingabefelder)"
 
 #: includes/defaults.php
 msgid "Surface 3 (Hover)"
-msgstr "Flaeche 3 (Hover)"
+msgstr "Fläche 3 (Hover)"
 
 #: includes/defaults.php
 msgid "Table Row Alternate"
@@ -286,11 +294,11 @@ msgstr "Rahmen (Hover)"
 
 #: includes/defaults.php
 msgid "Primary Text"
-msgstr "Primaerer Text"
+msgstr "Primärer Text"
 
 #: includes/defaults.php
 msgid "Muted Text"
-msgstr "Gedaempfter Text"
+msgstr "Gedämpfter Text"
 
 #: includes/defaults.php
 msgid "Soft Text (Row Actions)"
@@ -298,7 +306,7 @@ msgstr "Weicher Text (Zeilenaktionen)"
 
 #: includes/defaults.php
 msgid "Text on Primary / White"
-msgstr "Text auf Primaerfarbe / Weiss"
+msgstr "Text auf Primärfarbe / Weiß"
 
 #: includes/defaults.php
 msgid "Link Color"
@@ -310,11 +318,11 @@ msgstr "Link (Hover)"
 
 #: includes/defaults.php
 msgid "Primary / Buttons"
-msgstr "Primaerfarbe / Buttons"
+msgstr "Primärfarbe / Buttons"
 
 #: includes/defaults.php
 msgid "Primary Hover"
-msgstr "Primaerfarbe (Hover)"
+msgstr "Primärfarbe (Hover)"
 
 #: includes/defaults.php
 msgid "Success"
@@ -342,7 +350,7 @@ msgstr "Sidebar-Text"
 
 #: includes/defaults.php
 msgid "Code: Keyword"
-msgstr "Code: Schluesselwort"
+msgstr "Code: Schlüsselwort"
 
 #: includes/defaults.php
 msgid "Code: Operator / Bracket"
@@ -394,11 +402,11 @@ msgstr "Abstand (Mittel)"
 
 #: includes/defaults.php
 msgid "Button Height"
-msgstr "Button-Hoehe"
+msgstr "Button-Höhe"
 
 #: includes/defaults.php
 msgid "Input Height"
-msgstr "Eingabefeld-Hoehe"
+msgstr "Eingabefeld-Höhe"
 
 #: includes/defaults.php
 msgid "Border Radius (Small)"
@@ -410,7 +418,7 @@ msgstr "Rahmenradius (Mittel)"
 
 #: includes/defaults.php
 msgid "Border Radius (Large)"
-msgstr "Rahmenradius (Gross)"
+msgstr "Rahmenradius (Groß)"
 
 #: includes/defaults.php
 msgid "Shadow"
