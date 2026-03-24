@@ -176,9 +176,28 @@ function darkadmin_css_variable_map(): array {
 
 /**
  * Sanitize and validate the color palette input.
+ *
+ * Fallback colors are based on the preset that was submitted alongside the
+ * color values so that missing tokens default to the correct preset baseline
+ * instead of always falling back to the 'default' preset palette.
+ *
+ * @param mixed $input Raw input array from the Settings API.
+ * @return array<string,string> Sanitized color map.
  */
 function darkadmin_sanitize_colors( $input ): array {
-	$defaults = darkadmin_default_colors();
+	// Read the preset from the submitted form data so fallbacks match the
+	// selected preset rather than always using the 'default' palette.
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$submitted_preset = isset( $_POST['darkadmin_preset'] )
+		? sanitize_key( wp_unslash( $_POST['darkadmin_preset'] ) )
+		: 'default';
+
+	$allowed_presets = array_keys( darkadmin_preset_colors() );
+	if ( ! in_array( $submitted_preset, $allowed_presets, true ) ) {
+		$submitted_preset = 'default';
+	}
+
+	$defaults = darkadmin_preset_fallbacks( $submitted_preset );
 	$output   = [];
 	foreach ( $defaults as $key => $default ) {
 		$raw            = $input[ $key ] ?? $default;
