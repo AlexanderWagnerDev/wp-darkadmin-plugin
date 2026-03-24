@@ -198,9 +198,8 @@ function darkadmin_css_variable_map(): array {
 function darkadmin_sanitize_colors( $input ): array {
 	// Read the preset from the submitted form data so fallbacks match the
 	// selected preset rather than always using the 'default' palette.
-	// phpcs:ignore WordPress.Security.NonceVerification.Missing
-	$submitted_preset = isset( $_POST['darkadmin_preset'] )
-		? sanitize_key( wp_unslash( $_POST['darkadmin_preset'] ) )
+	$submitted_preset = isset( $_POST['darkadmin_preset'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		? sanitize_key( wp_unslash( $_POST['darkadmin_preset'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		: 'default';
 
 	$allowed_presets = array_keys( darkadmin_preset_colors() );
