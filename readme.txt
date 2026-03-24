@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,12 +44,16 @@ Yes. The plugin includes multiple color pickers for the complete admin theme and
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 == Screenshots ==
-1. Settings Page – Default (Dark Mode off)
-2. Settings Page – Dark Mode active
-3. Dashboard – Default (Dark Mode off)
-4. Dashboard – Dark Mode active
+1. Settings Page - Default (Dark Mode off)
+2. Settings Page - Dark Mode active
+3. Dashboard - Default (Dark Mode off)
+4. Dashboard - Dark Mode active
 
 == Changelog ==
+= 0.1.2 =
+* Added dedicated Sidebar color group with three new tokens: Sidebar Background (--adm-sidebar-bg), Sidebar Active Item (--adm-sidebar-active) and Sidebar Text (--adm-sidebar-text)
+* Added sidebar token translations to all language files (de_AT, de_DE, en_US, .pot, .l10n.php)
+
 = 0.1.1 =
 * Fixed uninstall.php: corrected all option names from wrong adm_ prefix to darkadmin_ prefix so options are properly removed on plugin deletion
 
@@ -84,12 +88,12 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Added per-user Dark Mode: administrators always have dark mode, non-admin users can be individually enabled via a new User Access card
 * Added live color preview: color picker changes update CSS variables instantly without saving
 * Added Export / Import palette as JSON file
-* Added custom CSS sanitizer (adm_sanitize_custom_css) — preserves valid CSS while stripping dangerous HTML/PHP tags
+* Added custom CSS sanitizer (adm_sanitize_custom_css) -- preserves valid CSS while stripping dangerous HTML/PHP tags
 * Added CSS cache-busting based on md5 hash of current color values
 * Refactored plugin into modular includes: defaults.php, user-settings.php, enqueue.php, settings-page.php
 * Added uninstall.php to clean up all options on plugin removal
 * Color pickers now grouped by category (Backgrounds, Surfaces, Borders, Text, Links, Brand, CodeMirror) on the settings page
-* Expanded color tokens from 23 to 34 (new: bg_bar, bg_deep, bg_darker, table_alt, plugin_inactive, border_hover, text_on_primary, link_hover, primary_hover, cm_keyword–cm_bracket)
+* Expanded color tokens from 23 to 34 (new: bg_bar, bg_deep, bg_darker, table_alt, plugin_inactive, border_hover, text_on_primary, link_hover, primary_hover, cm_keyword-cm_bracket)
 
 = 0.0.8 =
 * Fixed invisible text in .widefat tables (update-core.php and similar pages): override WP core rule `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` with dark theme color token
