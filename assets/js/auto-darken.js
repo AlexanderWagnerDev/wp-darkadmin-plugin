@@ -12,22 +12,30 @@
 	'use strict';
 
 	/**
-	 * Parse an rgb/rgba string into [r, g, b] (0-255) or null.
+	 * Parse an rgb/rgba string into { r, g, b, a } or null.
+	 * Handles both 'rgb(r, g, b)' and 'rgba(r, g, b, a)' including
+	 * values without spaces between components.
 	 * @param {string} color
-	 * @returns {number[]|null}
+	 * @returns {{ r: number, g: number, b: number, a: number }|null}
 	 */
 	function parseRgb( color ) {
-		var m = color.match( /rgba?\(\s*(\d+),\s*(\d+),\s*(\d+)/ );
-		return m ? [ parseInt( m[1] ), parseInt( m[2] ), parseInt( m[3] ) ] : null;
+		var m = color.match( /rgba?\(\s*(\d+)[,\s]+\s*(\d+)[,\s]+\s*(\d+)(?:[,\s\/]+\s*([\d.]+))?\s*\)/ );
+		if ( ! m ) return null;
+		return {
+			r: parseInt( m[1], 10 ),
+			g: parseInt( m[2], 10 ),
+			b: parseInt( m[3], 10 ),
+			a: m[4] !== undefined ? parseFloat( m[4] ) : 1,
+		};
 	}
 
 	/**
 	 * Relative luminance (0 = black, 1 = white) per WCAG 2.1.
-	 * @param {number[]} rgb
+	 * @param {{ r: number, g: number, b: number }} rgb
 	 * @returns {number}
 	 */
 	function luminance( rgb ) {
-		var c = rgb.map( function ( v ) {
+		var c = [ rgb.r, rgb.g, rgb.b ].map( function ( v ) {
 			v /= 255;
 			return v <= 0.03928 ? v / 12.92 : Math.pow( ( v + 0.055 ) / 1.055, 2.4 );
 		} );
@@ -35,29 +43,29 @@
 	}
 
 	/**
-	 * Darken an rgb array by a factor (0 = black, 1 = unchanged).
-	 * @param {number[]} rgb
-	 * @param {number}   factor
+	 * Darken an rgb object by a factor (0 = black, 1 = unchanged).
+	 * @param {{ r: number, g: number, b: number }} rgb
+	 * @param {number} factor
 	 * @returns {string}
 	 */
 	function darkenRgb( rgb, factor ) {
 		return 'rgb(' +
-			Math.round( rgb[0] * factor ) + ',' +
-			Math.round( rgb[1] * factor ) + ',' +
-			Math.round( rgb[2] * factor ) + ')';
+			Math.round( rgb.r * factor ) + ',' +
+			Math.round( rgb.g * factor ) + ',' +
+			Math.round( rgb.b * factor ) + ')';
 	}
 
 	/**
-	 * Lighten an rgb array towards white by a multiplier.
-	 * @param {number[]} rgb
-	 * @param {number}   factor
+	 * Lighten an rgb object towards white by a multiplier.
+	 * @param {{ r: number, g: number, b: number }} rgb
+	 * @param {number} factor
 	 * @returns {string}
 	 */
 	function lightenRgb( rgb, factor ) {
 		return 'rgb(' +
-			Math.min( 255, Math.round( rgb[0] * factor ) ) + ',' +
-			Math.min( 255, Math.round( rgb[1] * factor ) ) + ',' +
-			Math.min( 255, Math.round( rgb[2] * factor ) ) + ')';
+			Math.min( 255, Math.round( rgb.r * factor ) ) + ',' +
+			Math.min( 255, Math.round( rgb.g * factor ) ) + ',' +
+			Math.min( 255, Math.round( rgb.b * factor ) ) + ')';
 	}
 
 	var SKIP_TAGS = new Set( [
@@ -83,9 +91,7 @@
 		var bg = parseRgb( style.backgroundColor );
 		if ( bg ) {
 			var bgLum = luminance( bg );
-			var isTransparent = style.backgroundColor.indexOf( 'rgba' ) === 0 &&
-								style.backgroundColor.indexOf( ', 0)' ) !== -1;
-			if ( ! isTransparent && bgLum > 0.15 ) {
+			if ( bg.a >= 0.1 && bgLum > 0.15 ) {
 				el.style.backgroundColor = darkenRgb( bg, 0.15 );
 			}
 		}
