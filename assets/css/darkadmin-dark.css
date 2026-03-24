@@ -7,59 +7,6 @@
  */
 
 /* =============================================================================
-   DESIGN TOKENS
-   ============================================================================= */
-:root {
-  --adm-bg:              #1d2327;
-  --adm-bg-bar:          #1a1f24;
-  --adm-bg-deep:         #101517;
-  --adm-bg-darker:       #161b1f;
-  --adm-surface-1:       #2c3338;
-  --adm-surface-2:       #32393f;
-  --adm-surface-3:       #3c434a;
-  --adm-table-alt:       #272e35;
-  --adm-plugin-inactive: #252c32;
-  --adm-border:          #3c434a;
-  --adm-border-focus:    #2271b1;
-  --adm-border-hover:    #5a6470;
-  --adm-text:            #dcdcde;
-  --adm-text-muted:      #a7aaad;
-  --adm-text-soft:       #787c82;
-  --adm-text-on-primary: #ffffff;
-  --adm-link:            #72aee6;
-  --adm-link-hover:      #93c5fd;
-  --adm-primary:         #2271b1;
-  --adm-primary-hover:   #135e96;
-  --adm-success:         #00a32a;
-  --adm-warning:         #dba617;
-  --adm-danger:          #d63638;
-  --adm-cm-keyword:      #c792ea;
-  --adm-cm-operator:     #89ddff;
-  --adm-cm-variable2:    #82aaff;
-  --adm-cm-property:     #b2ccd6;
-  --adm-cm-number:       #f78c6c;
-  --adm-cm-string:       #c3e88d;
-  --adm-cm-string2:      #f07178;
-  --adm-cm-comment:      #546e7a;
-  --adm-cm-tag:          #f07178;
-  --adm-cm-attribute:    #ffcb6b;
-  --adm-cm-bracket:      #89ddff;
-  --adm-space-1: 4px;
-  --adm-space-2: 8px;
-  --adm-space-3: 12px;
-  --adm-space-4: 16px;
-  --adm-space-5: 20px;
-  --adm-space-6: 24px;
-  --adm-radius-sm: 3px;
-  --adm-radius-md: 6px;
-  --adm-radius-lg: 10px;
-  --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.25);
-  --adm-shadow-md: 0 3px 10px rgba(0,0,0,.30);
-  --adm-input-h: 32px;
-  --adm-btn-h:   30px;
-}
-
-/* =============================================================================
    BASE
    ============================================================================= */
 html,
