@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.2\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-24 13:00+0100\n"
-"PO-Revision-Date: 2026-03-24 13:00+0100\n"
+"POT-Creation-Date: 2026-03-24 15:25+0100\n"
+"PO-Revision-Date: 2026-03-24 15:25+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: de_DE\n"
@@ -22,7 +22,7 @@ msgstr "DarkAdmin"
 
 #: includes/settings-page.php
 msgid "Dark theme for the WordPress backend"
-msgstr "Dunkles Theme für das WordPress-Backend"
+msgstr "Dunkles Theme f\u00fcr das WordPress-Backend"
 
 #: darkadmin.php
 msgid "Settings"
@@ -46,7 +46,7 @@ msgstr "Dark Mode aktivieren"
 
 #: includes/settings-page.php
 msgid "Enables the dark theme for all admin pages. Administrators always see dark mode when this is active."
-msgstr "Aktiviert das dunkle Design für alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
+msgstr "Aktiviert das dunkle Design f\u00fcr alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
 
 #: includes/settings-page.php
 msgid "Auto Dark Mode"
@@ -54,7 +54,7 @@ msgstr "Auto Dark Mode"
 
 #: includes/settings-page.php
 msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
-msgstr "Verdunkelt automatisch helle Hintergründe und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
+msgstr "Verdunkelt automatisch helle Hintergr\u00fcnde und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
 
 #: includes/settings-page.php
 msgid "Preset Themes"
@@ -62,7 +62,7 @@ msgstr "Preset-Themes"
 
 #: includes/settings-page.php
 msgid "Choose a preset to load its color palette. You can further customize colors below after loading."
-msgstr "Wähle ein Preset aus, um dessen Farbpalette zu laden. Farben können anschließend weiter angepasst werden."
+msgstr "W\u00e4hle ein Preset aus, um dessen Farbpalette zu laden. Farben k\u00f6nnen anschlie\u00dfend weiter angepasst werden."
 
 #: includes/settings-page.php
 msgid "Default"
@@ -85,8 +85,8 @@ msgid "Load Preset"
 msgstr "Preset laden"
 
 #: includes/settings-page.php
-msgid "✓ Active"
-msgstr "✓ Aktiv"
+msgid "\u2713 Active"
+msgstr "\u2713 Aktiv"
 
 #: includes/settings-page.php
 msgid "Preview"
@@ -102,27 +102,27 @@ msgstr "Alle Benutzer"
 
 #: includes/settings-page.php
 msgid "Dark mode applies to everyone."
-msgstr "Dark Mode gilt für alle Benutzer."
+msgstr "Dark Mode gilt f\u00fcr alle Benutzer."
 
 #: includes/settings-page.php
 msgid "Include"
-msgstr "Einschließen"
+msgstr "Einschlie\u00dfen"
 
 #: includes/settings-page.php
 msgid "Only selected users get dark mode."
-msgstr "Nur ausgewählte Benutzer erhalten den Dark Mode."
+msgstr "Nur ausgew\u00e4hlte Benutzer erhalten den Dark Mode."
 
 #: includes/settings-page.php
 msgid "Exclude"
-msgstr "Ausschließen"
+msgstr "Ausschlie\u00dfen"
 
 #: includes/settings-page.php
 msgid "Everyone except selected users gets dark mode."
-msgstr "Alle außer den ausgewählten Benutzern erhalten den Dark Mode."
+msgstr "Alle au\u00dfer den ausgew\u00e4hlten Benutzern erhalten den Dark Mode."
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
-msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode immer aktiv."
+msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgstr "Administratoren werden hier nicht angezeigt \u2014 sie haben den Dark Mode immer aktiv."
 
 #: includes/settings-page.php
 msgid "No non-administrator users found. Create additional users to manage their dark mode access here."
@@ -134,7 +134,7 @@ msgstr "Farbanpassung"
 
 #: includes/settings-page.php
 msgid "Customize every color token individually. Changes are previewed live."
-msgstr "Passe jeden Farbwert individuell an. Änderungen werden sofort als Vorschau angezeigt."
+msgstr "Passe jeden Farbwert individuell an. \u00c4nderungen werden sofort als Vorschau angezeigt."
 
 #: includes/settings-page.php
 msgid "Export Palette"
@@ -150,7 +150,7 @@ msgstr "Standardfarben wiederherstellen"
 
 #: includes/settings-page.php
 msgid "Available CSS Variables"
-msgstr "Verfügbare CSS-Variablen"
+msgstr "Verf\u00fcgbare CSS-Variablen"
 
 #: includes/settings-page.php
 msgid "Click to copy"
@@ -162,15 +162,15 @@ msgstr "Eigenes CSS"
 
 #: includes/settings-page.php
 msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
-msgstr "Füge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verfügbar."
+msgstr "F\u00fcge hier dein eigenes CSS hinzu, das nach dem Dark-Mode-Stylesheet geladen wird. Alle CSS-Variablen sind verf\u00fcgbar."
 
 #: includes/settings-page.php
 msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
 #: includes/settings-page.php
-msgid "✕ Invalid JSON or Hex color"
-msgstr "✕ Ungültige JSON- oder Hex-Farben"
+msgid "\u2715 Invalid JSON or Hex color"
+msgstr "\u2715 Ung\u00fcltige JSON- oder Hex-Farben"
 
 #: includes/settings-page.php
 msgid "Advanced"
@@ -186,27 +186,27 @@ msgstr "Ein Eintrag pro Zeile. Dark-Mode-Stile werden auf den entsprechenden Adm
 
 #: includes/settings-page.php
 msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
-msgstr "Unterstützt einfache Dateinamen (plugins.php) und benutzerdefinierte Seiten-Slugs (admin.php?page=my-plugin). Zeilen, die mit # beginnen, werden als Kommentare behandelt."
+msgstr "Unterst\u00fctzt einfache Dateinamen (plugins.php) und benutzerdefinierte Seiten-Slugs (admin.php?page=my-plugin). Zeilen, die mit # beginnen, werden als Kommentare behandelt."
 
 #: includes/settings-page.php
 msgid "The following pages are always excluded: %s"
 msgstr "Die folgenden Seiten sind immer ausgeschlossen: %s"
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
-msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgstr "\u2713 Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
-msgstr "✓ Einstellungen gespeichert. Dark Mode ist deaktiviert."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr "\u2713 Einstellungen gespeichert. Dark Mode ist deaktiviert."
 
 #: includes/defaults.php
 msgid "Backgrounds"
-msgstr "Hintergründe"
+msgstr "Hintergr\u00fcnde"
 
 #: includes/defaults.php
 msgid "Surfaces"
-msgstr "Flächen"
+msgstr "Fl\u00e4chen"
 
 #: includes/defaults.php
 msgid "Borders"
@@ -225,6 +225,10 @@ msgid "Brand"
 msgstr "Markenfarben"
 
 #: includes/defaults.php
+msgid "Sidebar"
+msgstr "Sidebar"
+
+#: includes/defaults.php
 msgid "CodeMirror"
 msgstr "CodeMirror"
 
@@ -238,7 +242,7 @@ msgstr "Hintergrund (Admin-Bar)"
 
 #: includes/defaults.php
 msgid "Background (Deep / Submenu)"
-msgstr "Hintergrund (Tief / Untermenü)"
+msgstr "Hintergrund (Tief / Untermen\u00fc)"
 
 #: includes/defaults.php
 msgid "Background (Darker / Editor Gutter)"
@@ -246,15 +250,15 @@ msgstr "Hintergrund (Dunkler / Editor-Gutter)"
 
 #: includes/defaults.php
 msgid "Surface 1 (Cards / Tables)"
-msgstr "Fläche 1 (Karten / Tabellen)"
+msgstr "Fl\u00e4che 1 (Karten / Tabellen)"
 
 #: includes/defaults.php
 msgid "Surface 2 (Inputs)"
-msgstr "Fläche 2 (Eingabefelder)"
+msgstr "Fl\u00e4che 2 (Eingabefelder)"
 
 #: includes/defaults.php
 msgid "Surface 3 (Hover)"
-msgstr "Fläche 3 (Hover)"
+msgstr "Fl\u00e4che 3 (Hover)"
 
 #: includes/defaults.php
 msgid "Table Row Alternate"
@@ -278,11 +282,11 @@ msgstr "Rahmen (Hover)"
 
 #: includes/defaults.php
 msgid "Primary Text"
-msgstr "Primärer Text"
+msgstr "Prim\u00e4rer Text"
 
 #: includes/defaults.php
 msgid "Muted Text"
-msgstr "Gedämpfter Text"
+msgstr "Ged\u00e4mpfter Text"
 
 #: includes/defaults.php
 msgid "Soft Text (Row Actions)"
@@ -290,7 +294,7 @@ msgstr "Weicher Text (Zeilenaktionen)"
 
 #: includes/defaults.php
 msgid "Text on Primary / White"
-msgstr "Text auf Primärfarbe / Weiß"
+msgstr "Text auf Prim\u00e4rfarbe / Wei\u00df"
 
 #: includes/defaults.php
 msgid "Link Color"
@@ -302,11 +306,11 @@ msgstr "Link (Hover)"
 
 #: includes/defaults.php
 msgid "Primary / Buttons"
-msgstr "Primärfarbe / Buttons"
+msgstr "Prim\u00e4rfarbe / Buttons"
 
 #: includes/defaults.php
 msgid "Primary Hover"
-msgstr "Primärfarbe (Hover)"
+msgstr "Prim\u00e4rfarbe (Hover)"
 
 #: includes/defaults.php
 msgid "Success"
@@ -321,8 +325,20 @@ msgid "Danger / Error"
 msgstr "Gefahr / Fehler"
 
 #: includes/defaults.php
+msgid "Sidebar Background"
+msgstr "Sidebar-Hintergrund"
+
+#: includes/defaults.php
+msgid "Sidebar Active Item"
+msgstr "Sidebar aktives Element"
+
+#: includes/defaults.php
+msgid "Sidebar Text"
+msgstr "Sidebar-Text"
+
+#: includes/defaults.php
 msgid "Code: Keyword"
-msgstr "Code: Schlüsselwort"
+msgstr "Code: Schl\u00fcsselwort"
 
 #: includes/defaults.php
 msgid "Code: Operator / Bracket"

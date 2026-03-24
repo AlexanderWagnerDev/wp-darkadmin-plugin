@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.2\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-24 13:00+0100\n"
-"PO-Revision-Date: 2026-03-24 13:00+0100\n"
+"POT-Creation-Date: 2026-03-24 15:25+0100\n"
+"PO-Revision-Date: 2026-03-24 15:25+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: en_US\n"
@@ -85,8 +85,8 @@ msgid "Load Preset"
 msgstr "Load Preset"
 
 #: includes/settings-page.php
-msgid "✓ Active"
-msgstr "✓ Active"
+msgid "\u2713 Active"
+msgstr "\u2713 Active"
 
 #: includes/settings-page.php
 msgid "Preview"
@@ -121,8 +121,8 @@ msgid "Everyone except selected users gets dark mode."
 msgstr "Everyone except selected users gets dark mode."
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
-msgstr "Administrators are not listed here — they always have dark mode active."
+msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgstr "Administrators are not listed here \u2014 they always have dark mode active."
 
 #: includes/settings-page.php
 msgid "No non-administrator users found. Create additional users to manage their dark mode access here."
@@ -169,8 +169,8 @@ msgid "Save Settings"
 msgstr "Save Settings"
 
 #: includes/settings-page.php
-msgid "✕ Invalid JSON or Hex color"
-msgstr "✕ Invalid JSON or Hex color"
+msgid "\u2715 Invalid JSON or Hex color"
+msgstr "\u2715 Invalid JSON or Hex color"
 
 #: includes/settings-page.php
 msgid "Advanced"
@@ -188,18 +188,17 @@ msgstr "One entry per line. Dark mode styles will not be loaded on matching admi
 msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
 msgstr "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
 
-
 #: includes/settings-page.php
 msgid "The following pages are always excluded: %s"
 msgstr "The following pages are always excluded: %s"
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
-msgstr "✓ Dark Mode is active. Settings have been saved."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgstr "\u2713 Dark Mode is active. Settings have been saved."
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
-msgstr "✓ Settings saved. Dark Mode is disabled."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgstr "\u2713 Settings saved. Dark Mode is disabled."
 
 #: includes/defaults.php
 msgid "Backgrounds"
@@ -224,6 +223,10 @@ msgstr "Links"
 #: includes/defaults.php
 msgid "Brand"
 msgstr "Brand"
+
+#: includes/defaults.php
+msgid "Sidebar"
+msgstr "Sidebar"
 
 #: includes/defaults.php
 msgid "CodeMirror"
@@ -320,6 +323,18 @@ msgstr "Warning"
 #: includes/defaults.php
 msgid "Danger / Error"
 msgstr "Danger / Error"
+
+#: includes/defaults.php
+msgid "Sidebar Background"
+msgstr "Sidebar Background"
+
+#: includes/defaults.php
+msgid "Sidebar Active Item"
+msgstr "Sidebar Active Item"
+
+#: includes/defaults.php
+msgid "Sidebar Text"
+msgstr "Sidebar Text"
 
 #: includes/defaults.php
 msgid "Code: Keyword"
