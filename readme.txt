@@ -26,7 +26,7 @@ Features:
 * Excluded Pages: specify admin pages where dark mode should not be applied
 
 == Installation ==
-1. Upload the plugin folder to `/wp-content/plugins/darkadmin/` (or install via the Plugins screen).
+1. Upload the plugin folder to `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` (or install via the Plugins screen).
 2. Activate the plugin through the "Plugins" screen in WordPress.
 3. Go to Settings > DarkAdmin and enable it.
 
