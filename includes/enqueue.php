@@ -238,7 +238,7 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 			DARKADMIN_URL . 'assets/js/auto-darken.js',
 			[],
 			DARKADMIN_VERSION,
-			false
+			true
 		);
 	}
 } );
