@@ -3,13 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Render the settings page.
- */
 function darkadmin_settings_page(): void {
 	$enabled          = (bool) get_option( 'darkadmin_dark_mode_enabled', false );
 	$auto_darken      = (bool) get_option( 'darkadmin_auto_darken', false );
 	$colors           = wp_parse_args( (array) get_option( 'darkadmin_colors', [] ), darkadmin_default_colors() );
+	$layout           = wp_parse_args( (array) get_option( 'darkadmin_layout', [] ), darkadmin_default_layout() );
 	$custom           = get_option( 'darkadmin_custom_css', '' );
 	$allowed          = array_map( 'intval', (array) get_option( 'darkadmin_allowed_users', [] ) );
 	$user_access_mode = get_option( 'darkadmin_user_access_mode', 'all' );
@@ -20,9 +18,11 @@ function darkadmin_settings_page(): void {
 		echo '<script>document.body.classList.add("adm-dark-active");</script>';
 	}
 
-	$var_map  = darkadmin_css_variable_map();
-	$defaults = darkadmin_default_colors();
-	$presets  = darkadmin_preset_colors();
+	$var_map      = darkadmin_css_variable_map();
+	$defaults     = darkadmin_default_colors();
+	$presets      = darkadmin_preset_colors();
+	$layout_map   = darkadmin_layout_variable_map();
+	$layout_defaults = darkadmin_default_layout();
 
 	$color_groups = [];
 	$grouped_vars = [];
@@ -34,9 +34,6 @@ function darkadmin_settings_page(): void {
 	$selectable_users = darkadmin_get_selectable_users();
 	$has_users        = ! empty( $selectable_users );
 
-	/**
-	 * Preview swatch colors — must match darkadmin_preset_colors() in defaults.php.
-	 */
 	$preset_meta = [
 		'default' => [
 			'label'   => __( 'Default', 'darkadmin-dark-mode-for-adminpanel' ),
@@ -156,7 +153,7 @@ function darkadmin_settings_page(): void {
 									</div>
 									<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
 										<?php echo $active_preset === $slug
-											? esc_html__( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' )
+											? esc_html__( '&#10003; Active', 'darkadmin-dark-mode-for-adminpanel' )
 											: esc_html__( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 									</button>
 								</div>
@@ -210,7 +207,6 @@ function darkadmin_settings_page(): void {
 				</div>
 				<div class="adm-card-body">
 
-					<!-- Access mode selector -->
 					<div class="adm-access-mode">
 						<label class="adm-access-mode-option <?php echo $user_access_mode === 'all' ? 'is-active' : ''; ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="all"
@@ -245,7 +241,6 @@ function darkadmin_settings_page(): void {
 						</label>
 					</div>
 
-					<!-- User list or empty state -->
 					<?php if ( $has_users ) : ?>
 					<div class="adm-user-grid" id="adm-user-grid"
 						<?php echo $user_access_mode === 'all' ? 'style="display:none;"' : ''; ?>>
@@ -278,6 +273,44 @@ function darkadmin_settings_page(): void {
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php esc_html_e( 'Administrators are not listed here — they always have dark mode active.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 					</p>
+				</div>
+			</div>
+
+			<!-- Layout & Spacing -->
+			<div class="adm-card">
+				<div class="adm-card-header">
+					<span class="dashicons dashicons-editor-table"></span>
+					<h2><?php esc_html_e( 'Layout &amp; Spacing', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
+				</div>
+				<div class="adm-card-body">
+					<p class="adm-card-description">
+						<?php esc_html_e( 'Adjust spacing, button sizes, border radii and shadow. px values only for size fields; shadow accepts any valid CSS box-shadow value.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+					</p>
+					<div class="adm-layout-grid">
+						<?php foreach ( $layout_map as $key => $info ) : ?>
+							<div class="adm-layout-item">
+								<label class="adm-layout-label" for="adm_layout_<?php echo esc_attr( $key ); ?>">
+									<?php echo esc_html( $info['label'] ); ?>
+									<code class="adm-color-var-name"><?php echo esc_html( $info['var'] ); ?></code>
+								</label>
+								<input
+									type="text"
+									id="adm_layout_<?php echo esc_attr( $key ); ?>"
+									name="darkadmin_layout[<?php echo esc_attr( $key ); ?>]"
+									value="<?php echo esc_attr( $layout[ $key ] ?? $layout_defaults[ $key ] ); ?>"
+									class="adm-layout-input"
+									data-key="<?php echo esc_attr( $key ); ?>"
+									data-default="<?php echo esc_attr( $layout_defaults[ $key ] ); ?>"
+								/>
+							</div>
+						<?php endforeach; ?>
+					</div>
+					<div class="adm-color-reset-row">
+						<button type="button" id="adm-reset-layout" class="button">
+							<span class="dashicons dashicons-image-rotate"></span>
+							<?php esc_html_e( 'Restore Default Layout', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+						</button>
+					</div>
 				</div>
 			</div>
 
@@ -353,7 +386,7 @@ function darkadmin_settings_page(): void {
 						<summary class="adm-var-reference-summary">
 							<span class="dashicons dashicons-editor-code"></span>
 							<?php esc_html_e( 'Available CSS Variables', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-							<span class="adm-var-count"><?php echo count( $var_map ); ?></span>
+							<span class="adm-var-count"><?php echo count( $var_map ) + count( $layout_map ); ?></span>
 						</summary>
 						<?php foreach ( $grouped_vars as $group_name => $entries ) : ?>
 							<div class="adm-var-group">
@@ -379,6 +412,24 @@ function darkadmin_settings_page(): void {
 								</div>
 							</div>
 						<?php endforeach; ?>
+						<div class="adm-var-group">
+							<h4 class="adm-var-group-title"><?php esc_html_e( 'Layout &amp; Spacing', 'darkadmin-dark-mode-for-adminpanel' ); ?></h4>
+							<div class="adm-var-grid">
+								<?php foreach ( $layout_map as $key => $info ) : ?>
+									<div class="adm-var-item">
+										<span class="adm-var-swatch" style="background:var(--adm-surface-3);"></span>
+										<div class="adm-var-info">
+											<button type="button" class="adm-var-copy" data-var="<?php echo esc_attr( $info['var'] ); ?>" title="<?php esc_attr_e( 'Click to copy', 'darkadmin-dark-mode-for-adminpanel' ); ?>">
+												<code><?php echo esc_html( $info['var'] ); ?></code>
+												<span class="adm-var-copy-icon dashicons dashicons-clipboard"></span>
+											</button>
+											<span class="adm-var-label"><?php echo esc_html( $info['label'] ); ?></span>
+										</div>
+										<span class="adm-var-hex"><?php echo esc_html( $layout[ $key ] ?? $layout_defaults[ $key ] ); ?></span>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
 					</details>
 					<div class="adm-css-editor-wrap">
 						<textarea

@@ -3,46 +3,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Default color palette.
- * Keys map 1:1 to CSS custom properties in darkadmin-dark.css (:root).
- */
 function darkadmin_default_colors(): array {
 	return [
-		// Backgrounds
 		'bg'               => '#1d2327',
 		'bg_bar'           => '#1a1f24',
 		'bg_deep'          => '#101517',
 		'bg_darker'        => '#161b1f',
-		// Surfaces
 		'surface1'         => '#2c3338',
 		'surface2'         => '#32393f',
 		'surface3'         => '#3c434a',
 		'table_alt'        => '#272e35',
 		'plugin_inactive'  => '#252c32',
-		// Borders
 		'border'           => '#3c434a',
 		'border_focus'     => '#2271b1',
 		'border_hover'     => '#5a6470',
-		// Text
 		'text'             => '#dcdcde',
 		'text_muted'       => '#a7aaad',
 		'text_soft'        => '#787c82',
 		'text_on_primary'  => '#ffffff',
-		// Links
 		'link'             => '#72aee6',
 		'link_hover'       => '#93c5fd',
-		// Brand
 		'primary'          => '#2271b1',
 		'primary_hover'    => '#135e96',
 		'success'          => '#00a32a',
 		'warning'          => '#dba617',
 		'danger'           => '#d63638',
-		// Sidebar
 		'sidebar_bg'       => '#1d2327',
 		'sidebar_active'   => '#2c3338',
 		'sidebar_text'     => '#a7aaad',
-		// CodeMirror syntax tokens
 		'cm_keyword'       => '#c792ea',
 		'cm_operator'      => '#89ddff',
 		'cm_variable2'     => '#82aaff',
@@ -57,19 +45,6 @@ function darkadmin_default_colors(): array {
 	];
 }
 
-/**
- * Preset color palettes.
- * 'default' mirrors darkadmin_default_colors() (classic WP 6.x dark).
- * 'modern'  faithful dark port of the WP Modern design language:
- *           deep dark base, indigo accent, high contrast.
- *
- * IMPORTANT: These values must stay in sync with:
- *   - darkadmin_preset_fallbacks() in enqueue.php  (delegates here directly)
- *   - $preset_meta in settings-page.php (preview swatches)
- *
- * Uses a static cache so repeated calls within the same request do not
- * rebuild the array each time.
- */
 function darkadmin_preset_colors(): array {
 	static $cache = null;
 	if ( null !== $cache ) {
@@ -78,40 +53,32 @@ function darkadmin_preset_colors(): array {
 	$cache = [
 		'default' => darkadmin_default_colors(),
 		'modern'  => [
-			// Backgrounds
 			'bg'               => '#1e1e1e',
 			'bg_bar'           => '#0c0c0c',
 			'bg_deep'          => '#0c0c0c',
 			'bg_darker'        => '#080808',
-			// Surfaces
 			'surface1'         => '#2a2a2a',
 			'surface2'         => '#333333',
 			'surface3'         => '#3d3d3d',
 			'table_alt'        => '#242424',
 			'plugin_inactive'  => '#202020',
-			// Borders
 			'border'           => '#3a3a3a',
 			'border_focus'     => '#3858e9',
 			'border_hover'     => '#6b7aee',
-			// Text
 			'text'             => '#f0f0f0',
 			'text_muted'       => '#a0a0a0',
 			'text_soft'        => '#666666',
 			'text_on_primary'  => '#ffffff',
-			// Links
 			'link'             => '#7b96f5',
 			'link_hover'       => '#a5b8fa',
-			// Brand
 			'primary'          => '#3858e9',
 			'primary_hover'    => '#2145d4',
 			'success'          => '#00ba37',
 			'warning'          => '#dba617',
 			'danger'           => '#d63638',
-			// Sidebar
 			'sidebar_bg'       => '#1e1e1e',
 			'sidebar_active'   => '#3858e9',
 			'sidebar_text'     => '#c8c8c8',
-			// CodeMirror syntax tokens
 			'cm_keyword'       => '#c792ea',
 			'cm_operator'      => '#89ddff',
 			'cm_variable2'     => '#82aaff',
@@ -128,9 +95,6 @@ function darkadmin_preset_colors(): array {
 	return $cache;
 }
 
-/**
- * Returns the CSS filename for a given preset slug.
- */
 function darkadmin_preset_css_file( string $preset ): string {
 	$map = [
 		'default' => 'darkadmin-dark.css',
@@ -139,10 +103,6 @@ function darkadmin_preset_css_file( string $preset ): string {
 	return $map[ $preset ] ?? 'darkadmin-dark.css';
 }
 
-/**
- * Maps each color key to its CSS custom property name, translated label and translated group.
- * All labels and group names are wrapped in __() for i18n.
- */
 function darkadmin_css_variable_map(): array {
 	return [
 		'bg'              => [ 'var' => '--adm-bg',              'label' => __( 'Background (Base)',                   'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ) ],
@@ -185,19 +145,49 @@ function darkadmin_css_variable_map(): array {
 	];
 }
 
-/**
- * Sanitize and validate the color palette input.
- *
- * Fallback colors are based on the preset that was submitted alongside the
- * color values so that missing tokens default to the correct preset baseline
- * instead of always falling back to the 'default' preset palette.
- *
- * @param mixed $input Raw input array from the Settings API.
- * @return array<string,string> Sanitized color map.
- */
+function darkadmin_default_layout(): array {
+	return [
+		'space_2'   => '8px',
+		'space_3'   => '12px',
+		'btn_h'     => '30px',
+		'input_h'   => '30px',
+		'radius_sm' => '3px',
+		'radius_md' => '6px',
+		'radius_lg' => '8px',
+		'shadow_md' => '0 2px 8px rgba(0,0,0,.35)',
+	];
+}
+
+function darkadmin_preset_layout(): array {
+	return [
+		'default' => darkadmin_default_layout(),
+		'modern'  => [
+			'space_2'   => '8px',
+			'space_3'   => '14px',
+			'btn_h'     => '32px',
+			'input_h'   => '32px',
+			'radius_sm' => '6px',
+			'radius_md' => '8px',
+			'radius_lg' => '12px',
+			'shadow_md' => '0 2px 12px rgba(0,0,0,.5)',
+		],
+	];
+}
+
+function darkadmin_layout_variable_map(): array {
+	return [
+		'space_2'   => [ 'var' => '--adm-space-2',   'label' => __( 'Spacing (Small)',      'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ],
+		'space_3'   => [ 'var' => '--adm-space-3',   'label' => __( 'Spacing (Medium)',     'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ],
+		'btn_h'     => [ 'var' => '--adm-btn-h',     'label' => __( 'Button Height',        'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ],
+		'input_h'   => [ 'var' => '--adm-input-h',   'label' => __( 'Input Height',         'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ],
+		'radius_sm' => [ 'var' => '--adm-radius-sm', 'label' => __( 'Border Radius (Small)', 'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ],
+		'radius_md' => [ 'var' => '--adm-radius-md', 'label' => __( 'Border Radius (Medium)', 'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ],
+		'radius_lg' => [ 'var' => '--adm-radius-lg', 'label' => __( 'Border Radius (Large)', 'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ],
+		'shadow_md' => [ 'var' => '--adm-shadow-md', 'label' => __( 'Shadow',               'darkadmin-dark-mode-for-adminpanel' ), 'unit' => '' ],
+	];
+}
+
 function darkadmin_sanitize_colors( $input ): array {
-	// Read the preset from the submitted form data so fallbacks match the
-	// selected preset rather than always using the 'default' palette.
 	$submitted_preset = isset( $_POST['darkadmin_preset'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		? sanitize_key( wp_unslash( $_POST['darkadmin_preset'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		: 'default';
@@ -216,20 +206,42 @@ function darkadmin_sanitize_colors( $input ): array {
 	return $output;
 }
 
-/**
- * Sanitize the user access mode option.
- * Allowed values: 'all', 'include', 'exclude'.
- */
+function darkadmin_sanitize_layout( $input ): array {
+	$submitted_preset = isset( $_POST['darkadmin_preset'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		? sanitize_key( wp_unslash( $_POST['darkadmin_preset'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		: 'default';
+
+	$presets = darkadmin_preset_layout();
+	if ( ! isset( $presets[ $submitted_preset ] ) ) {
+		$submitted_preset = 'default';
+	}
+
+	$defaults = $presets[ $submitted_preset ];
+	$var_map  = darkadmin_layout_variable_map();
+	$output   = [];
+
+	foreach ( $defaults as $key => $default ) {
+		$raw = isset( $input[ $key ] ) ? sanitize_text_field( wp_unslash( $input[ $key ] ) ) : $default;
+		if ( '' === trim( $raw ) ) {
+			$raw = $default;
+		}
+		if ( '' !== $var_map[ $key ]['unit'] ) {
+			$numeric = (float) $raw;
+			if ( $numeric < 0 ) {
+				$numeric = 0;
+			}
+			$raw = $numeric . $var_map[ $key ]['unit'];
+		}
+		$output[ $key ] = $raw;
+	}
+	return $output;
+}
+
 function darkadmin_sanitize_user_access_mode( string $value ): string {
 	$allowed = [ 'all', 'include', 'exclude' ];
 	return in_array( $value, $allowed, true ) ? $value : 'all';
 }
 
-/**
- * Sanitize custom CSS input.
- * CSS cannot contain HTML, so wp_strip_all_tags() is sufficient and
- * more robust than a hand-rolled regex allowlist.
- */
 function darkadmin_sanitize_custom_css( string $css ): string {
 	return wp_strip_all_tags( $css );
 }
