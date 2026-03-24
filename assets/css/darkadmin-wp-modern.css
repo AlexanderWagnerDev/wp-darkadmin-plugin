@@ -4,32 +4,6 @@
  */
 
 /* =============================================================================
-   DESIGN TOKENS
-   ============================================================================= */
-:root {
-  --adm-space-1: 4px;
-  --adm-space-2: 8px;
-  --adm-space-3: 12px;
-  --adm-space-4: 16px;
-  --adm-space-5: 20px;
-  --adm-space-6: 24px;
-  --adm-radius-sm: 3px;
-  --adm-radius-md: 6px;
-  --adm-radius-lg: 10px;
-  --adm-shadow-sm: 0 1px 2px rgba(0,0,0,.5);
-  --adm-shadow-md: 0 4px 20px rgba(0,0,0,.7);
-  --adm-input-h: 32px;
-  --adm-btn-h:   30px;
-  --adm-sidebar-bg:     var(--adm-bg);
-  --adm-sidebar-active: var(--adm-primary);
-  --adm-sidebar-text:   #c8c8c8;
-  /* Tokens also required when this preset is loaded standalone */
-  --adm-bg-darker:      #161b1f;
-  --adm-table-alt:      #1e2529;
-  --adm-plugin-inactive: #252c32;
-}
-
-/* =============================================================================
    BASE
    ============================================================================= */
 html body.wp-admin,
