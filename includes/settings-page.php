@@ -280,7 +280,7 @@ function darkadmin_settings_page(): void {
 			<div class="adm-card">
 				<div class="adm-card-header">
 					<span class="dashicons dashicons-editor-table"></span>
-					<h2><?php esc_html_e( 'Layout &amp; Spacing', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
+					<h2><?php esc_html_e( 'Layout & Spacing', 'darkadmin-dark-mode-for-adminpanel' ); ?></h2>
 				</div>
 				<div class="adm-card-body">
 					<p class="adm-card-description">
@@ -413,7 +413,7 @@ function darkadmin_settings_page(): void {
 							</div>
 						<?php endforeach; ?>
 						<div class="adm-var-group">
-							<h4 class="adm-var-group-title"><?php esc_html_e( 'Layout &amp; Spacing', 'darkadmin-dark-mode-for-adminpanel' ); ?></h4>
+							<h4 class="adm-var-group-title"><?php esc_html_e( 'Layout & Spacing', 'darkadmin-dark-mode-for-adminpanel' ); ?></h4>
 							<div class="adm-var-grid">
 								<?php foreach ( $layout_map as $key => $info ) : ?>
 									<div class="adm-var-item">
