@@ -664,14 +664,35 @@
   width: 100% !important;
 }
 .adm-color-item .wp-picker-container .wp-color-result {
+  display: flex !important;
+  align-items: center !important;
   width: 100% !important;
   box-sizing: border-box !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  height: 34px !important;
+  border-radius: 3px !important;
+}
+.adm-color-item .wp-picker-container .wp-color-result::before {
+  content: "" !important;
+  display: block !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 100% !important;
+  background: inherit !important;
+  border-right: 2px solid rgba(0,0,0,.15) !important;
+  flex-shrink: 0 !important;
 }
 .adm-color-item .wp-picker-container .wp-color-result-text {
   display: block !important;
+  flex: 1 !important;
+  text-align: center !important;
+  padding: 0 8px !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
+  background: transparent !important;
+  border-left: none !important;
 }
 .adm-color-reset-row {
   padding-top: 12px;
@@ -958,7 +979,9 @@ body.adm-dark-active .adm-var-hex                { color: var(--adm-text-muted) 
 body.adm-dark-active .adm-var-copy-icon          { color: var(--adm-text-muted) !important; }
 
 body.adm-dark-active .adm-color-item .wp-picker-container { background: unset !important; border-color: var(--adm-border) !important; box-shadow: none !important; }
-body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result-text { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; border-left-color: var(--adm-border) !important; }
+body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result { border-color: var(--adm-border) !important; }
+body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result::before { border-right-color: var(--adm-border) !important; }
+body.adm-dark-active .adm-color-item .wp-picker-container .wp-color-result-text { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; }
 body.adm-dark-active .wp-picker-container input[type="text"].wp-color-picker { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; border-color: var(--adm-border) !important; }
 body.adm-dark-active .wp-picker-input-wrap .button,
 body.adm-dark-active .wp-picker-clear { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; border-color: var(--adm-border) !important; }
