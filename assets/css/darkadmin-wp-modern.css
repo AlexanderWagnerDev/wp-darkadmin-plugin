@@ -23,6 +23,10 @@
   --adm-sidebar-bg:     var(--adm-bg);
   --adm-sidebar-active: var(--adm-primary);
   --adm-sidebar-text:   #c8c8c8;
+  /* Tokens also required when this preset is loaded standalone */
+  --adm-bg-darker:      #161b1f;
+  --adm-table-alt:      #1e2529;
+  --adm-plugin-inactive: #252c32;
 }
 
 /* =============================================================================
