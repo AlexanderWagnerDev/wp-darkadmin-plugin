@@ -185,7 +185,7 @@
 .adm-toggle input:focus-visible + .adm-slider { outline: 2px solid #2271b1; outline-offset: 2px; }
 
 /* =============================================================================
-   USER ACCESS — MODE SELECTOR
+   USER ACCESS -- MODE SELECTOR
    ============================================================================= */
 .adm-access-mode {
   display: grid;
@@ -263,7 +263,7 @@
 }
 
 /* =============================================================================
-   USER ACCESS — EMPTY STATE
+   USER ACCESS -- EMPTY STATE
    ============================================================================= */
 .adm-user-empty-state {
   display: flex;
@@ -587,6 +587,66 @@
   letter-spacing: .5px;
   border-top: 1px solid rgba(255,255,255,.06);
   transition: background .25s, color .25s;
+}
+
+/* =============================================================================
+   LAYOUT & SPACING GRID
+   ============================================================================= */
+.adm-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 20px;
+  margin-bottom: 16px;
+}
+@media (max-width: 780px) {
+  .adm-layout-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .adm-layout-grid { grid-template-columns: 1fr; }
+}
+.adm-layout-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.adm-layout-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1d2327;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: default;
+}
+.adm-layout-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  background: #fff;
+  color: #1d2327;
+  transition: border-color .15s, box-shadow .15s;
+  height: 30px;
+}
+.adm-layout-input:focus {
+  border-color: #2271b1;
+  box-shadow: 0 0 0 2px rgba(34,113,177,.15);
+  outline: none;
+}
+
+/* Dark mode overrides for layout grid */
+body.adm-dark-active .adm-layout-label { color: var(--adm-text) !important; }
+body.adm-dark-active .adm-layout-input {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+body.adm-dark-active .adm-layout-input:focus {
+  border-color: var(--adm-primary) !important;
+  box-shadow: 0 0 0 2px rgba(34,113,177,.25) !important;
 }
 
 /* =============================================================================
