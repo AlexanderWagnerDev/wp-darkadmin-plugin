@@ -53,6 +53,16 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 = 0.1.2 =
 * Added dedicated Sidebar color group with three new tokens: Sidebar Background (--adm-sidebar-bg), Sidebar Active Item (--adm-sidebar-active) and Sidebar Text (--adm-sidebar-text)
 * Added sidebar token translations to all language files (de_AT, de_DE, en_US, .pot, .l10n.php)
+* Added layout token system (spacing, radius, shadow) with per-preset defaults and settings UI
+* Unified layout tokens across presets, added layout JS handlers, updated all language files
+* Added .adm-layout-grid CSS: 4-column grid with responsive breakpoints and dark mode overrides
+* Improved color picker swatch display in settings page
+* Fixed translators comment and phpcs:ignore placement in settings-page.php
+* Fixed: replaced &amp; HTML entity with literal UTF-8 ampersand in i18n strings (settings-page.php)
+* Fixed: replaced PHP \u2713 escape with literal UTF-8 checkmark character in admin notice strings
+* Fixed: replaced &#10003; HTML entity with literal UTF-8 checkmark in preset button PHP and all .po files
+* Fixed: replaced ASCII-escaped umlauts with proper UTF-8 characters in all language files, added missing msgids (checkmark Active, em-dash in admin notice)
+* Updated darkadmin-dark.css and darkadmin-wp-modern.css
 
 = 0.1.1 =
 * Fixed uninstall.php: corrected all option names from wrong adm_ prefix to darkadmin_ prefix so options are properly removed on plugin deletion

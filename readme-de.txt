@@ -53,6 +53,16 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 = 0.1.2 =
 * Neue Sidebar-Farbgruppe hinzugefügt mit drei neuen Tokens: Sidebar-Hintergrund (--adm-sidebar-bg), Sidebar aktives Element (--adm-sidebar-active) und Sidebar-Text (--adm-sidebar-text)
 * Sidebar-Token-Übersetzungen in alle Sprachdateien eingetragen (de_AT, de_DE, en_US, .pot, .l10n.php)
+* Layout-Token-System hinzugefügt (Spacing, Radius, Shadow) mit per-Preset-Defaults und Settings-UI
+* Layout-Tokens über Presets vereinheitlicht, Layout-JS-Handler hinzugefügt, alle Sprachdateien aktualisiert
+* .adm-layout-grid CSS hinzugefügt: 4-Spalten-Grid mit responsiven Breakpoints und Dark-Mode-Overrides
+* Darstellung der Color-Picker-Swatches in der Einstellungsseite verbessert
+* Fix: translators-Kommentar und phpcs:ignore in settings-page.php korrekt gesetzt
+* Fix: &amp; HTML-Entity durch direktes UTF-8-Ampersand in i18n-Strings ersetzt (settings-page.php)
+* Fix: PHP \u2713-Escape durch direktes UTF-8-Häkchen in Admin-Notice-Strings ersetzt
+* Fix: &#10003; HTML-Entity durch direktes UTF-8-Häkchen im Preset-Button-PHP und allen .po-Dateien ersetzt
+* Fix: ASCII-escaped Umlaute durch korrekte UTF-8-Zeichen in allen Sprachdateien ersetzt, fehlende msgids ergänzt (Häkchen Active, Em-Dash in Admin-Notice)
+* darkadmin-dark.css und darkadmin-wp-modern.css aktualisiert
 
 = 0.1.1 =
 * Behoben: uninstall.php korrigiert — alle Optionsnamen vom falschen adm_-Prefix auf den korrekten darkadmin_-Prefix geändert, damit Optionen beim Deinstallieren sauber entfernt werden

@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.1.1-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.1.2-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -49,7 +49,17 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 ## Changelog
 ### 0.1.2
 - Added dedicated Sidebar color group with three new tokens: Sidebar Background (--adm-sidebar-bg), Sidebar Active Item (--adm-sidebar-active), Sidebar Text (--adm-sidebar-text)
-- Added sidebar token translations to all language files
+- Added sidebar token translations to all language files (de_AT, de_DE, en_US, .pot, .l10n.php)
+- Added layout token system (spacing, radius, shadow) with per-preset defaults and settings UI
+- Unified layout tokens across presets, added layout JS handlers, updated all language files
+- Added `.adm-layout-grid` CSS: 4-column grid with responsive breakpoints and dark mode overrides
+- Improved color picker swatch display in settings page
+- Fixed `translators` comment and `phpcs:ignore` placement in `settings-page.php`
+- Fixed: replaced `&amp;` HTML entity with literal UTF-8 ampersand in i18n strings (`settings-page.php`)
+- Fixed: replaced PHP `\u2713` escape with literal UTF-8 checkmark character in admin notice strings
+- Fixed: replaced `&#10003;` HTML entity with literal UTF-8 checkmark in preset button PHP and all `.po` files
+- Fixed: replaced ASCII-escaped umlauts with proper UTF-8 characters in all language files, added missing msgids (checkmark "Active", em-dash in admin notice)
+- Updated `darkadmin-dark.css` and `darkadmin-wp-modern.css`
 
 ### 0.1.1
 - Fixed `uninstall.php`: corrected all option names from wrong `adm_` prefix to `darkadmin_` prefix so options are properly removed on plugin deletion
@@ -170,8 +180,18 @@ Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit
 
 ## Changelog
 ### 0.1.2
-- Neue Sidebar-Farbgruppe hinzugefuegt mit drei neuen Tokens: Sidebar-Hintergrund (--adm-sidebar-bg), Sidebar aktives Element (--adm-sidebar-active) und Sidebar-Text (--adm-sidebar-text)
-- Sidebar-Token-Uebersetzungen in alle Sprachdateien eingetragen
+- Neue Sidebar-Farbgruppe hinzugefügt mit drei neuen Tokens: Sidebar-Hintergrund (--adm-sidebar-bg), Sidebar aktives Element (--adm-sidebar-active) und Sidebar-Text (--adm-sidebar-text)
+- Sidebar-Token-Übersetzungen in alle Sprachdateien eingetragen (de_AT, de_DE, en_US, .pot, .l10n.php)
+- Layout-Token-System hinzugefügt (Spacing, Radius, Shadow) mit per-Preset-Defaults und Settings-UI
+- Layout-Tokens über Presets vereinheitlicht, Layout-JS-Handler hinzugefügt, alle Sprachdateien aktualisiert
+- `.adm-layout-grid` CSS hinzugefügt: 4-Spalten-Grid mit responsiven Breakpoints und Dark-Mode-Overrides
+- Darstellung der Color-Picker-Swatches in der Einstellungsseite verbessert
+- Fix: `translators`-Kommentar und `phpcs:ignore` in `settings-page.php` korrekt gesetzt
+- Fix: `&amp;` HTML-Entity durch direktes UTF-8-Ampersand in i18n-Strings ersetzt (`settings-page.php`)
+- Fix: PHP `\u2713`-Escape durch direktes UTF-8-Häkchen in Admin-Notice-Strings ersetzt
+- Fix: `&#10003;` HTML-Entity durch direktes UTF-8-Häkchen im Preset-Button-PHP und allen `.po`-Dateien ersetzt
+- Fix: ASCII-escaped Umlaute durch korrekte UTF-8-Zeichen in allen Sprachdateien ersetzt, fehlende msgids ergänzt (Häkchen „Active", Em-Dash in Admin-Notice)
+- `darkadmin-dark.css` und `darkadmin-wp-modern.css` aktualisiert
 
 ### 0.1.1
 - Behoben: `uninstall.php` korrigiert — alle Optionsnamen vom falschen `adm_`-Prefix auf den korrekten `darkadmin_`-Prefix geändert, damit Optionen beim Deinstallieren sauber entfernt werden
@@ -181,7 +201,7 @@ Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit
 - Benutzerzugriffskontrolle hinzugefügt (Benutzer ein-/ausschließen)
 - Voreingestellte Designs hinzugefügt (Standard und Modern)
 - Kritische JavaScript-Fehler in der Voreinstellungs- und Zurücksetzungsfunktion behoben
-- Fehlende schliessende geschweifte Klammer in `initPaletteIO()` importFile-Block in `settings.js` behoben
+- Fehlende schließende geschweifte Klammer in `initPaletteIO()` importFile-Block in `settings.js` behoben
 - XSS-Sicherheitslücke in `printf`-Ausgabe (`settings-page.php`) behoben
 - Unicode-Escapes in Sprachdateien behoben: `\uXXXX`-Sequenzen durch direkte UTF-8-Zeichen ersetzt
 - `admI18n` JS-Lokalisierung via `wp_localize_script` für übersetzte UI-Strings hinzugefügt
