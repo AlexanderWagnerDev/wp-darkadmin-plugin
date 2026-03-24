@@ -28,7 +28,7 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 
 ## Installation
 
-1. Upload the plugin folder to `/wp-content/plugins/darkadmin/`
+1. Upload the plugin folder to `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/`
 2. Activate through **Plugins** in WordPress
 3. Go to **Settings > DarkAdmin** and enable it
 
@@ -47,6 +47,9 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 ---
 
 ## Changelog
+### 0.1.2
+- Added dedicated Sidebar color group with three new tokens: Sidebar Background (--adm-sidebar-bg), Sidebar Active Item (--adm-sidebar-active), Sidebar Text (--adm-sidebar-text)
+- Added sidebar token translations to all language files
 
 ### 0.1.1
 - Fixed `uninstall.php`: corrected all option names from wrong `adm_` prefix to `darkadmin_` prefix so options are properly removed on plugin deletion
@@ -159,13 +162,16 @@ Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit
 
 ## Installation
 
-1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin/` hoch
+1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` hoch
 2. Aktiviere das Plugin in WordPress unter **Plugins**
 3. Gehe zu **Einstellungen > DarkAdmin** und aktiviere es
 
 ---
 
 ## Changelog
+### 0.1.2
+- Neue Sidebar-Farbgruppe hinzugefuegt mit drei neuen Tokens: Sidebar-Hintergrund (--adm-sidebar-bg), Sidebar aktives Element (--adm-sidebar-active) und Sidebar-Text (--adm-sidebar-text)
+- Sidebar-Token-Uebersetzungen in alle Sprachdateien eingetragen
 
 ### 0.1.1
 - Behoben: `uninstall.php` korrigiert — alle Optionsnamen vom falschen `adm_`-Prefix auf den korrekten `darkadmin_`-Prefix geändert, damit Optionen beim Deinstallieren sauber entfernt werden
