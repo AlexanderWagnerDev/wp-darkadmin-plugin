@@ -272,8 +272,9 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 		'layoutPresets'  => darkadmin_preset_layout(),
 	] );
 	wp_localize_script( 'darkadmin-settings-js', 'darkadminI18n', [
-		'active'     => __( 'Active', 'darkadmin-dark-mode-for-adminpanel' ),
+		'active'     => __( 'Active',      'darkadmin-dark-mode-for-adminpanel' ),
 		'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
+		'copied'     => __( 'Copied!',     'darkadmin-dark-mode-for-adminpanel' ),
 	] );
 
 	// Inject dark-mode body class via inline script instead of raw echo.

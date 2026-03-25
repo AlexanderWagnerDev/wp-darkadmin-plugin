@@ -242,9 +242,10 @@
 		document.querySelectorAll( '.adm-var-copy' ).forEach( function ( btn ) {
 			btn.addEventListener( 'click', function () {
 				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
-					const orig = btn.innerHTML;
-					btn.innerHTML = '<code>\u2713 Copied!</code>';
-					setTimeout( function () { btn.innerHTML = orig; }, 1400 );
+					const orig   = btn.textContent;
+					const label  = window.darkadminI18n ? window.darkadminI18n.copied : 'Copied!';
+					btn.textContent = '\u2713 ' + label;
+					setTimeout( function () { btn.textContent = orig; }, 1400 );
 				} ).catch( function () {} );
 			} );
 		} );
