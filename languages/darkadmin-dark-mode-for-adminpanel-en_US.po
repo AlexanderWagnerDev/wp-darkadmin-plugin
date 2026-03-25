@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.2\n"
+"Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel 0.1.3\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
-"POT-Creation-Date: 2026-03-24 16:25+0100\n"
-"PO-Revision-Date: 2026-03-24 17:00+0100\n"
+"POT-Creation-Date: 2026-03-26 00:40+0100\n"
+"PO-Revision-Date: 2026-03-26 00:40+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: en_US\n"
@@ -81,7 +81,7 @@ msgid "WP Modern design language (dark)"
 msgstr "WP Modern design language (dark)"
 
 #: includes/settings-page.php
-msgid "&#10003; Active"
+msgid "✓ Active"
 msgstr "✓ Active"
 
 #: includes/settings-page.php
@@ -122,10 +122,6 @@ msgstr "Everyone except selected users gets dark mode."
 
 #: includes/settings-page.php
 msgid "Administrators are not listed here — they always have dark mode active."
-msgstr "Administrators are not listed here — they always have dark mode active."
-
-#: includes/settings-page.php
-msgid "Administrators are not listed here -- they always have dark mode active."
 msgstr "Administrators are not listed here — they always have dark mode active."
 
 #: includes/settings-page.php
@@ -172,6 +168,10 @@ msgstr "Available CSS Variables"
 msgid "Click to copy"
 msgstr "Click to copy"
 
+#: includes/enqueue.php
+msgid "Copied!"
+msgstr "Copied!"
+
 #: includes/settings-page.php
 msgid "Custom CSS"
 msgstr "Custom CSS"
@@ -205,12 +205,12 @@ msgid "The following pages are always excluded: %s"
 msgstr "The following pages are always excluded: %s"
 
 #: darkadmin.php
-msgid "Dark Mode is active. Settings have been saved."
-msgstr "Dark Mode is active. Settings have been saved."
+msgid "✓ Dark Mode is active. Settings have been saved."
+msgstr "✓ Dark Mode is active. Settings have been saved."
 
 #: darkadmin.php
-msgid "Settings saved. Dark Mode is disabled."
-msgstr "Settings saved. Dark Mode is disabled."
+msgid "✓ Settings saved. Dark Mode is disabled."
+msgstr "✓ Settings saved. Dark Mode is disabled."
 
 #: includes/defaults.php
 msgid "Backgrounds"
