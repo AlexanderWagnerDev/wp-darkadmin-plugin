@@ -59,6 +59,10 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Fixed: removed direct $_POST access in darkadmin_sanitize_colors() and darkadmin_sanitize_layout(); preset value now read from $input array
 * Fixed: added late escaping via wp_strip_all_tags() to both wp_add_inline_style() calls for $vars and $custom
 * Fixed: renamed generic JS object names admData and admI18n to darkadminData and darkadminI18n in enqueue.php and settings.js
+* Added i18n string "Copied!" to enqueue.php via wp_localize_script (darkadminI18n.copied)
+* Fixed: replaced hardcoded 'Copied!' string in settings.js initVarCopy() with darkadminI18n.copied for full translateability
+* Fixed: replaced innerHTML with textContent in initVarCopy() to prevent potential XSS
+* Updated all language files (.pot, de_AT, de_DE, en_US): added Copied! / Kopiert! translation, bumped version to 0.1.3, updated timestamps
 
 = 0.1.2 =
 * Added dedicated Sidebar color group with three new tokens: Sidebar Background (--adm-sidebar-bg), Sidebar Active Item (--adm-sidebar-active) and Sidebar Text (--adm-sidebar-text)

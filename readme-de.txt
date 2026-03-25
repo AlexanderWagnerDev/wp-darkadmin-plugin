@@ -1,10 +1,10 @@
 === DarkAdmin - Dark Mode for Adminpanel ===
 Contributors: alexanderwagnerdev
 Tags: dark mode, admin, dashboard, ui, accessibility
-Requires at least: 6.3
+Requires at least: 6.7
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,20 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 4. Dashboard - Dark Mode aktiv
 
 == Changelog ==
+= 0.1.3 =
+* Mindest-WordPress-Version auf 6.7 angehoben
+* Mindest-PHP-Version auf 8.0 angehoben (bereits erforderlich durch Verwendung von str_starts_with, str_contains und Named Arguments)
+* Defer-Ladestrategie für darkadmin-settings-js und darkadmin-auto-darken via strategy-Argument (eingeführt in WordPress 6.3) hinzugefügt
+* Fix: Inline-echo '<script>' in settings-page.php durch wp_add_inline_script() ersetzt
+* Fix: Anonyme Arrow-Function-Sanitize-Callbacks in register_setting() durch benannte Funktionen darkadmin_sanitize_bool(), darkadmin_sanitize_user_ids() und darkadmin_sanitize_preset() ersetzt
+* Fix: Direkten $_POST-Zugriff in darkadmin_sanitize_colors() und darkadmin_sanitize_layout() entfernt; Preset-Wert wird nun aus dem $input-Array gelesen
+* Fix: Spätes Escaping via wp_strip_all_tags() zu beiden wp_add_inline_style()-Aufrufen für $vars und $custom hinzugefügt
+* Fix: Generische JS-Objektnamen admData und admI18n in enqueue.php und settings.js zu darkadminData und darkadminI18n umbenannt
+* i18n-String "Copied!" in enqueue.php via wp_localize_script (darkadminI18n.copied) hinzugefügt
+* Fix: Hardcodierten 'Copied!'-String in settings.js initVarCopy() durch darkadminI18n.copied ersetzt für vollständige Übersetzbarkeit
+* Fix: innerHTML in initVarCopy() durch textContent ersetzt (verhindert potenzielles XSS)
+* Alle Sprachdateien aktualisiert (.pot, de_AT, de_DE, en_US): Copied! / Kopiert!-Übersetzung hinzugefügt, Version auf 0.1.3 angehoben, Zeitstempel aktualisiert
+
 = 0.1.2 =
 * Neue Sidebar-Farbgruppe hinzugefügt mit drei neuen Tokens: Sidebar-Hintergrund (--adm-sidebar-bg), Sidebar aktives Element (--adm-sidebar-active) und Sidebar-Text (--adm-sidebar-text)
 * Sidebar-Token-Übersetzungen in alle Sprachdateien eingetragen (de_AT, de_DE, en_US, .pot, .l10n.php)
