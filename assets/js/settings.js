@@ -219,12 +219,12 @@
 							document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), data[ key ] );
 						} );
 						if ( statusEl ) {
-							statusEl.textContent = '\u2713 Imported';
+							statusEl.textContent = '✓ Imported';
 							statusEl.className = 'adm-import-status adm-import-ok';
 						}
 					} catch ( err ) {
 						if ( statusEl ) {
-							statusEl.textContent = '\u2715 Invalid JSON or Hex color';
+							statusEl.textContent = '✕ Invalid JSON or Hex color';
 							statusEl.className = 'adm-import-status adm-import-err';
 						}
 					}
@@ -244,7 +244,7 @@
 				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
 					const orig   = btn.textContent;
 					const label  = window.darkadminI18n ? window.darkadminI18n.copied : 'Copied!';
-					btn.textContent = '\u2713 ' + label;
+					btn.textContent = '✓ ' + label;
 					setTimeout( function () { btn.textContent = orig; }, 1400 );
 				} ).catch( function () {} );
 			} );
