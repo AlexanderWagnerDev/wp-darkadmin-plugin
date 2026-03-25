@@ -234,7 +234,10 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 			DARKADMIN_URL . 'assets/js/auto-darken.js',
 			[],
 			DARKADMIN_VERSION,
-			true
+			[
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			]
 		);
 	}
 } );
@@ -256,7 +259,10 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 		DARKADMIN_URL . 'assets/js/settings.js',
 		[ 'jquery', 'wp-color-picker' ],
 		DARKADMIN_VERSION,
-		true
+		[
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		]
 	);
 
 	wp_localize_script( 'darkadmin-settings-js', 'darkadminData', [
