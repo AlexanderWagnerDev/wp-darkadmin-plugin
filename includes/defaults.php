@@ -183,9 +183,19 @@ function darkadmin_layout_variable_map(): array {
 	];
 }
 
+/**
+ * Sanitize callback for the darkadmin_colors setting.
+ *
+ * Receives the submitted array from the Settings API (nonce already verified
+ * by options.php via settings_fields()). No direct $_POST access is performed.
+ *
+ * @param mixed $input
+ * @return array
+ */
 function darkadmin_sanitize_colors( $input ): array {
+	$input  = is_array( $input ) ? $input : [];
 	$preset = isset( $input['_preset'] )
-		? sanitize_key( wp_unslash( (string) $input['_preset'] ) )
+		? sanitize_key( (string) $input['_preset'] )
 		: 'default';
 
 	$allowed_presets = array_keys( darkadmin_preset_colors() );
@@ -202,9 +212,19 @@ function darkadmin_sanitize_colors( $input ): array {
 	return $output;
 }
 
+/**
+ * Sanitize callback for the darkadmin_layout setting.
+ *
+ * Receives the submitted array from the Settings API (nonce already verified
+ * by options.php via settings_fields()). No direct $_POST access is performed.
+ *
+ * @param mixed $input
+ * @return array
+ */
 function darkadmin_sanitize_layout( $input ): array {
+	$input  = is_array( $input ) ? $input : [];
 	$preset = isset( $input['_preset'] )
-		? sanitize_key( wp_unslash( (string) $input['_preset'] ) )
+		? sanitize_key( (string) $input['_preset'] )
 		: 'default';
 
 	$presets = darkadmin_preset_layout();
