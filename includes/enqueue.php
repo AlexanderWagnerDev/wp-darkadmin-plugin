@@ -107,8 +107,7 @@ function darkadmin_parse_excluded_pages( string $raw ): array {
 }
 
 function darkadmin_is_page_excluded( array $entries, string $pagenow, string $hook_suffix ): bool {
-	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$current_page_slug = isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '';
+	$current_page_slug = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 
 	foreach ( $entries as $entry ) {
 		if ( str_contains( $entry, '?' ) ) {
