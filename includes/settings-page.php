@@ -131,7 +131,7 @@ function darkadmin_settings_page(): void {
 						<?php esc_html_e( 'Choose a preset to load its color palette. You can further customize colors below after loading.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 					</p>
 
-					<script id="adm-preset-meta" type="application/json"><?php echo wp_json_encode( $preset_meta ); ?></script>
+					<script id="adm-preset-meta" type="application/json"><?php echo wp_json_encode( $preset_meta, JSON_HEX_TAG | JSON_HEX_AMP ); ?></script>
 
 					<div class="adm-preset-layout">
 
