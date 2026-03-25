@@ -221,13 +221,11 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 		$ver
 	);
 
-	// $vars contains only sanitize_hex_color() and sanitize_text_field() values; safe for inline CSS.
-	wp_add_inline_style( 'darkadmin-darkmode', $vars );
+	wp_add_inline_style( 'darkadmin-darkmode', wp_strip_all_tags( $vars ) );
 
 	$custom = get_option( 'darkadmin_custom_css', '' );
 	if ( ! empty( $custom ) ) {
-		// $custom is sanitized via darkadmin_sanitize_custom_css() (wp_strip_all_tags) on save.
-		wp_add_inline_style( 'darkadmin-darkmode', $custom );
+		wp_add_inline_style( 'darkadmin-darkmode', wp_strip_all_tags( $custom ) );
 	}
 
 	if ( get_option( 'darkadmin_auto_darken', false ) ) {
