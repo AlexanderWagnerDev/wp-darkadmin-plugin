@@ -48,13 +48,13 @@
 		if ( ! metaEl ) return;
 		const meta = JSON.parse( metaEl.textContent || '{}' );
 
-		const presetInput    = document.getElementById( 'darkadmin_preset' );
-		const previewPanel   = document.getElementById( 'adm-preset-preview' );
-		const previewName    = document.getElementById( 'adm-preview-name' );
-		const tiles          = document.querySelectorAll( '.adm-preset-tile' );
-		const loadBtns       = document.querySelectorAll( '.adm-preset-load-btn' );
-		const admPresets     = ( window.admData && window.admData.presets )     || {};
-		const admLayoutPresets = ( window.admData && window.admData.layoutPresets ) || {};
+		const presetInput      = document.getElementById( 'darkadmin_preset' );
+		const previewPanel     = document.getElementById( 'adm-preset-preview' );
+		const previewName      = document.getElementById( 'adm-preview-name' );
+		const tiles            = document.querySelectorAll( '.adm-preset-tile' );
+		const loadBtns         = document.querySelectorAll( '.adm-preset-load-btn' );
+		const darkadminPresets       = ( window.darkadminData && window.darkadminData.presets )       || {};
+		const darkadminLayoutPresets = ( window.darkadminData && window.darkadminData.layoutPresets ) || {};
 
 		function updatePreview( slug ) {
 			if ( ! previewPanel || ! meta[ slug ] ) return;
@@ -75,8 +75,8 @@
 			loadBtns.forEach( function ( btn ) {
 				const isThis = btn.dataset.preset === slug;
 				btn.textContent = isThis
-					? ( window.admI18n ? window.admI18n.active    : '\u2713 Active' )
-					: ( window.admI18n ? window.admI18n.loadPreset : 'Load Preset' );
+					? ( window.darkadminI18n ? window.darkadminI18n.active     : 'Active' )
+					: ( window.darkadminI18n ? window.darkadminI18n.loadPreset  : 'Load Preset' );
 			} );
 			if ( presetInput ) presetInput.value = slug;
 		}
@@ -93,11 +93,11 @@
 		loadBtns.forEach( function ( btn ) {
 			btn.addEventListener( 'click', function () {
 				const slug   = btn.dataset.preset;
-				const colors = admPresets[ slug ];
+				const colors = darkadminPresets[ slug ];
 				if ( colors ) {
 					loadPresetColors( colors );
 				}
-				const layout = admLayoutPresets[ slug ];
+				const layout = darkadminLayoutPresets[ slug ];
 				if ( layout ) {
 					loadPresetLayout( layout );
 				}
@@ -140,8 +140,8 @@
 		document.querySelectorAll( '.adm-preset-load-btn' ).forEach( function ( btn ) {
 			const isActive = btn.dataset.preset === activeSlug;
 			btn.textContent = isActive
-				? ( window.admI18n ? window.admI18n.active    : '\u2713 Active' )
-				: ( window.admI18n ? window.admI18n.loadPreset : 'Load Preset' );
+				? ( window.darkadminI18n ? window.darkadminI18n.active     : 'Active' )
+				: ( window.darkadminI18n ? window.darkadminI18n.loadPreset  : 'Load Preset' );
 		} );
 	}
 
@@ -151,20 +151,20 @@
 	function initReset() {
 		const btnColors = document.getElementById( 'adm-reset-colors' );
 		if ( btnColors ) {
-			const admDefaults = window.admData.defaults;
+			const darkadminDefaults = window.darkadminData.defaults;
 			btnColors.addEventListener( 'click', function () {
-				Object.keys( admDefaults ).forEach( function ( key ) {
+				Object.keys( darkadminDefaults ).forEach( function ( key ) {
 					const input = document.getElementById( 'adm_color_' + key );
 					if ( ! input ) return;
-					jQuery( input ).wpColorPicker( 'color', admDefaults[ key ] );
-					document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), admDefaults[ key ] );
+					jQuery( input ).wpColorPicker( 'color', darkadminDefaults[ key ] );
+					document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), darkadminDefaults[ key ] );
 				} );
 			} );
 		}
 
 		const btnLayout = document.getElementById( 'adm-reset-layout' );
 		if ( btnLayout ) {
-			const layoutDefaults = ( window.admData && window.admData.layoutDefaults ) || {};
+			const layoutDefaults = ( window.darkadminData && window.darkadminData.layoutDefaults ) || {};
 			btnLayout.addEventListener( 'click', function () {
 				Object.keys( layoutDefaults ).forEach( function ( key ) {
 					const input = document.getElementById( 'adm_layout_' + key );
