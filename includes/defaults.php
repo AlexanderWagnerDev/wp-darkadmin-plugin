@@ -184,40 +184,40 @@ function darkadmin_layout_variable_map(): array {
 }
 
 function darkadmin_sanitize_colors( $input ): array {
-	$submitted_preset = isset( $_POST['darkadmin_preset'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-		? sanitize_key( wp_unslash( $_POST['darkadmin_preset'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$preset = isset( $input['_preset'] )
+		? sanitize_key( wp_unslash( (string) $input['_preset'] ) )
 		: 'default';
 
 	$allowed_presets = array_keys( darkadmin_preset_colors() );
-	if ( ! in_array( $submitted_preset, $allowed_presets, true ) ) {
-		$submitted_preset = 'default';
+	if ( ! in_array( $preset, $allowed_presets, true ) ) {
+		$preset = 'default';
 	}
 
-	$defaults = darkadmin_preset_fallbacks( $submitted_preset );
+	$defaults = darkadmin_preset_fallbacks( $preset );
 	$output   = [];
 	foreach ( $defaults as $key => $default ) {
-		$raw            = $input[ $key ] ?? $default;
+		$raw            = isset( $input[ $key ] ) ? (string) $input[ $key ] : $default;
 		$output[ $key ] = sanitize_hex_color( $raw ) ?: $default;
 	}
 	return $output;
 }
 
 function darkadmin_sanitize_layout( $input ): array {
-	$submitted_preset = isset( $_POST['darkadmin_preset'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-		? sanitize_key( wp_unslash( $_POST['darkadmin_preset'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$preset = isset( $input['_preset'] )
+		? sanitize_key( wp_unslash( (string) $input['_preset'] ) )
 		: 'default';
 
 	$presets = darkadmin_preset_layout();
-	if ( ! isset( $presets[ $submitted_preset ] ) ) {
-		$submitted_preset = 'default';
+	if ( ! isset( $presets[ $preset ] ) ) {
+		$preset = 'default';
 	}
 
-	$defaults = $presets[ $submitted_preset ];
+	$defaults = $presets[ $preset ];
 	$var_map  = darkadmin_layout_variable_map();
 	$output   = [];
 
 	foreach ( $defaults as $key => $default ) {
-		$raw = isset( $input[ $key ] ) ? sanitize_text_field( wp_unslash( $input[ $key ] ) ) : $default;
+		$raw = isset( $input[ $key ] ) ? sanitize_text_field( wp_unslash( (string) $input[ $key ] ) ) : $default;
 		if ( '' === trim( $raw ) ) {
 			$raw = $default;
 		}

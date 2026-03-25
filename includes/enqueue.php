@@ -3,15 +3,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Sanitize callback for boolean settings.
+ *
+ * @param mixed $v
+ * @return bool
+ */
+function darkadmin_sanitize_bool( $v ): bool {
+	return (bool) $v;
+}
+
+/**
+ * Sanitize callback for the allowed-users array setting.
+ *
+ * @param mixed $v
+ * @return int[]
+ */
+function darkadmin_sanitize_user_ids( $v ): array {
+	return array_map( 'absint', (array) $v );
+}
+
 add_action( 'admin_init', function () {
 	register_setting( 'darkadmin_settings', 'darkadmin_dark_mode_enabled', [
 		'type'              => 'boolean',
-		'sanitize_callback' => fn( $v ) => (bool) $v,
+		'sanitize_callback' => 'darkadmin_sanitize_bool',
 		'default'           => false,
 	] );
 	register_setting( 'darkadmin_settings', 'darkadmin_auto_darken', [
 		'type'              => 'boolean',
-		'sanitize_callback' => fn( $v ) => (bool) $v,
+		'sanitize_callback' => 'darkadmin_sanitize_bool',
 		'default'           => false,
 	] );
 	register_setting( 'darkadmin_settings', 'darkadmin_colors', [
@@ -31,7 +51,7 @@ add_action( 'admin_init', function () {
 	] );
 	register_setting( 'darkadmin_settings', 'darkadmin_allowed_users', [
 		'type'              => 'array',
-		'sanitize_callback' => fn( $v ) => array_map( 'absint', (array) $v ),
+		'sanitize_callback' => 'darkadmin_sanitize_user_ids',
 		'default'           => [],
 	] );
 	register_setting( 'darkadmin_settings', 'darkadmin_user_access_mode', [
@@ -41,10 +61,7 @@ add_action( 'admin_init', function () {
 	] );
 	register_setting( 'darkadmin_settings', 'darkadmin_preset', [
 		'type'              => 'string',
-		'sanitize_callback' => function ( $v ) {
-			$allowed = array_keys( darkadmin_preset_colors() );
-			return in_array( $v, $allowed, true ) ? $v : 'default';
-		},
+		'sanitize_callback' => 'darkadmin_sanitize_preset',
 		'default'           => 'default',
 	] );
 	register_setting( 'darkadmin_settings', 'darkadmin_excluded_pages', [
@@ -53,6 +70,18 @@ add_action( 'admin_init', function () {
 		'default'           => '',
 	] );
 } );
+
+/**
+ * Sanitize callback for the preset setting.
+ *
+ * @param mixed $v
+ * @return string
+ */
+function darkadmin_sanitize_preset( $v ): string {
+	$allowed = array_keys( darkadmin_preset_colors() );
+	$v       = sanitize_key( (string) $v );
+	return in_array( $v, $allowed, true ) ? $v : 'default';
+}
 
 function darkadmin_preset_fallbacks( string $preset ): array {
 	$presets = darkadmin_preset_colors();
@@ -191,10 +220,13 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 		[],
 		$ver
 	);
+
+	// $vars contains only sanitize_hex_color() and sanitize_text_field() values; safe for inline CSS.
 	wp_add_inline_style( 'darkadmin-darkmode', $vars );
 
 	$custom = get_option( 'darkadmin_custom_css', '' );
 	if ( ! empty( $custom ) ) {
+		// $custom is sanitized via darkadmin_sanitize_custom_css() (wp_strip_all_tags) on save.
 		wp_add_inline_style( 'darkadmin-darkmode', $custom );
 	}
 
@@ -209,10 +241,11 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 	}
 } );
 
-add_action( 'admin_enqueue_scripts', function ( $hook ) {
-	if ( $hook !== 'settings_page_darkadmin' ) {
+add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
+	if ( 'settings_page_darkadmin' !== $hook_suffix ) {
 		return;
 	}
+
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_style(
 		'darkadmin-settings-css',
@@ -228,17 +261,22 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 		true
 	);
 
-	wp_localize_script( 'darkadmin-settings-js', 'admData', [
+	wp_localize_script( 'darkadmin-settings-js', 'darkadminData', [
 		'defaults'       => darkadmin_default_colors(),
 		'varMap'         => array_map( fn( $v ) => $v['var'], darkadmin_css_variable_map() ),
 		'presets'        => darkadmin_preset_colors(),
 		'layoutDefaults' => darkadmin_default_layout(),
 		'layoutPresets'  => darkadmin_preset_layout(),
 	] );
-	wp_localize_script( 'darkadmin-settings-js', 'admI18n', [
+	wp_localize_script( 'darkadmin-settings-js', 'darkadminI18n', [
 		'active'     => __( 'Active', 'darkadmin-dark-mode-for-adminpanel' ),
 		'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
 	] );
+
+	// Inject dark-mode body class via inline script instead of raw echo.
+	if ( (bool) get_option( 'darkadmin_dark_mode_enabled', false ) ) {
+		wp_add_inline_script( 'darkadmin-settings-js', 'document.body.classList.add("adm-dark-active");', 'before' );
+	}
 } );
 
 add_action( 'admin_menu', function () {

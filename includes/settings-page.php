@@ -14,14 +14,10 @@ function darkadmin_settings_page(): void {
 	$active_preset    = get_option( 'darkadmin_preset', 'default' );
 	$excluded_pages   = get_option( 'darkadmin_excluded_pages', '' );
 
-	if ( $enabled ) {
-		echo '<script>document.body.classList.add("adm-dark-active");</script>';
-	}
-
-	$var_map      = darkadmin_css_variable_map();
-	$defaults     = darkadmin_default_colors();
-	$presets      = darkadmin_preset_colors();
-	$layout_map   = darkadmin_layout_variable_map();
+	$var_map         = darkadmin_css_variable_map();
+	$defaults        = darkadmin_default_colors();
+	$presets         = darkadmin_preset_colors();
+	$layout_map      = darkadmin_layout_variable_map();
 	$layout_defaults = darkadmin_default_layout();
 
 	$color_groups = [];
@@ -153,7 +149,7 @@ function darkadmin_settings_page(): void {
 									</div>
 									<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
 										<?php echo $active_preset === $slug
-											? esc_html__( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' )
+											? esc_html__( 'Active', 'darkadmin-dark-mode-for-adminpanel' )
 											: esc_html__( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 									</button>
 								</div>
