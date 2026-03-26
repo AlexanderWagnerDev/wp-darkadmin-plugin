@@ -63,6 +63,13 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Fixed: replaced hardcoded 'Copied!' string in settings.js initVarCopy() with darkadminI18n.copied for full translateability
 * Fixed: replaced innerHTML with textContent in initVarCopy() to prevent potential XSS
 * Updated all language files (.pot, de_AT, de_DE, en_US): added Copied! / Kopiert! translation, bumped version to 0.1.3, updated timestamps
+* Fixed: added missing @package DarkAdmin tag to darkadmin.php file comment
+* Fixed: add_filter() and add_action() calls in darkadmin.php now comply with WPCS multi-line function call rules (opening parenthesis last on line, one argument per line, closing parenthesis on its own line)
+* Fixed: equals sign alignment for $has_users in settings-page.php (7 spaces expected)
+* Fixed: closing PHP tag not on its own line in settings-page.php ($prev assignment block)
+* Fixed: opening PHP tag not on its own line in settings-page.php ($current_color block)
+* Fixed: replaced short ternary ?: with explicit isset() check and full ternary for $current_color in settings-page.php
+* Fixed: incorrect indentation in settings-page.php (10 tabs expected, 9 found)
 
 = 0.1.2 =
 * Added dedicated Sidebar color group with three new tokens: Sidebar Background (--adm-sidebar-bg), Sidebar Active Item (--adm-sidebar-active) and Sidebar Text (--adm-sidebar-text)
