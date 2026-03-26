@@ -172,13 +172,10 @@ function darkadmin_parse_excluded_pages( string $raw ): array {
 /**
  * Checks whether the current admin page matches any of the excluded entries.
  *
- * The current page slug is passed in as a parameter (resolved in the hook
- * context) so this function does not need to access $_GET directly.
- *
  * @param string[] $entries     Parsed exclusion list.
  * @param string   $pagenow     Current $pagenow value (e.g. 'admin.php').
  * @param string   $hook_suffix Current hook suffix from admin_enqueue_scripts.
- * @param string   $page_slug   Sanitized value of $_GET['page'], or empty string.
+ * @param string   $page_slug   Current page slug resolved from get_current_screen().
  * @return bool
  */
 function darkadmin_is_page_excluded( array $entries, string $pagenow, string $hook_suffix, string $page_slug = '' ): bool {
@@ -198,6 +195,37 @@ function darkadmin_is_page_excluded( array $entries, string $pagenow, string $ho
 	return false;
 }
 
+/**
+ * Resolves the current admin page slug using get_current_screen().
+ *
+ * Returns the value of the 'page' query var from the screen's base when
+ * available, falling back to an empty string. This avoids direct $_GET access.
+ *
+ * @return string Sanitized page slug, or empty string.
+ */
+function darkadmin_current_page_slug(): string {
+	$screen = get_current_screen();
+	if ( ! $screen instanceof WP_Screen ) {
+		return '';
+	}
+	// WP_Screen::$id contains the full hook suffix; for plugin pages registered
+	// via add_options_page / add_menu_page the parent slug is in $screen->parent_base
+	// and the page slug is the last segment of $screen->id after the last underscore.
+	// The most reliable approach is $screen->base for pagenow and the registered
+	// page slug embedded in $screen->id (format: "settings_page_{slug}").
+	$id = $screen->id;
+	if ( str_starts_with( $id, 'settings_page_' ) ) {
+		return sanitize_key( substr( $id, strlen( 'settings_page_' ) ) );
+	}
+	// For pages registered on other parents the id is "{parent_slug}_{slug}".
+	// Extract everything after the first underscore-delimited segment.
+	$pos = strpos( $id, '_' );
+	if ( false !== $pos ) {
+		return sanitize_key( substr( $id, $pos + 1 ) );
+	}
+	return sanitize_key( $id );
+}
+
 add_action(
 	'admin_enqueue_scripts',
 	function ( string $hook_suffix ) {
@@ -214,8 +242,7 @@ add_action(
 		$raw_exclusions = get_option( 'darkadmin_excluded_pages', '' );
 		if ( '' !== $raw_exclusions ) {
 			$user_excluded = darkadmin_parse_excluded_pages( $raw_exclusions );
-			// Resolve the current page slug here (read-only routing check, no nonce needed).
-			$page_slug = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$page_slug     = darkadmin_current_page_slug();
 			if ( darkadmin_is_page_excluded( $user_excluded, $pagenow, $hook_suffix, $page_slug ) ) {
 				return;
 			}
@@ -364,9 +391,9 @@ add_action(
 			'darkadmin-settings-js',
 			'darkadminI18n',
 			array(
-				'active'     => __( 'Active', 'darkadmin-dark-mode-for-adminpanel' ),
+				'active'     => __( 'Active',      'darkadmin-dark-mode-for-adminpanel' ),
 				'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
-				'copied'     => __( 'Copied!', 'darkadmin-dark-mode-for-adminpanel' ),
+				'copied'     => __( 'Copied!',     'darkadmin-dark-mode-for-adminpanel' ),
 			)
 		);
 
