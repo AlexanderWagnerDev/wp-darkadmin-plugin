@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.7
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 0.1.3
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,7 +50,7 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 4. Dashboard - Dark Mode active
 
 == Changelog ==
-= 0.1.3 =
+= 0.2.0 =
 * Raised minimum WordPress version to 6.7
 * Raised minimum PHP version requirement to 8.0 (already required by existing use of str_starts_with, str_contains and named arguments)
 * Added defer loading strategy to darkadmin-settings-js and darkadmin-auto-darken via the strategy argument introduced in WordPress 6.3
