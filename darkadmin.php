@@ -54,7 +54,7 @@ add_action( 'admin_notices', function () {
 		return;
 	}
 
-	if ( empty( $_GET['settings-updated'] ) ) {
+	if ( empty( sanitize_key( wp_unslash( $_GET['settings-updated'] ?? '' ) ) ) ) {
 		return;
 	}
 

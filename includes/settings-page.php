@@ -50,6 +50,20 @@ function darkadmin_settings_page(): void {
 			'bar'     => '#0c0c0c',
 		],
 	];
+
+	$allowed_avatar_tags = [
+		'img' => [
+			'src'    => [],
+			'srcset' => [],
+			'alt'    => [],
+			'width'  => [],
+			'height' => [],
+			'class'  => [],
+			'style'  => [],
+			'loading' => [],
+			'decoding' => [],
+		],
+	];
 	?>
 	<div class="wrap adm-settings-wrap">
 
@@ -248,7 +262,7 @@ function darkadmin_settings_page(): void {
 									value="<?php echo esc_attr( $user->ID ); ?>"
 									<?php checked( in_array( $user->ID, $allowed, true ) ); ?>
 								/>
-								<span class="adm-user-avatar"><?php echo get_avatar( $user->ID, 28 ); ?></span>
+								<span class="adm-user-avatar"><?php echo wp_kses( get_avatar( $user->ID, 28 ), $allowed_avatar_tags ); ?></span>
 								<span class="adm-user-info">
 									<strong><?php echo esc_html( $user->display_name ); ?></strong>
 									<span><?php echo esc_html( $user->user_login ); ?> &middot; <?php echo esc_html( implode( ', ', $user->roles ) ); ?></span>
