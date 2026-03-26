@@ -483,7 +483,7 @@ function darkadmin_sanitize_layout( $input ): array {
 				$numeric = 0;
 			}
 			$raw = $numeric . $var_map[ $key ]['unit'];
-		} elseif ( ! preg_match( '/^[a-zA-Z0-9\s\-\.,%#()\/:]+ $/', $raw ) ) {
+		} elseif ( ! preg_match( '/^[a-zA-Z0-9\s\-.,%#()\/:]+ $/', $raw ) ) {
 			// shadow_md: allow only safe CSS box-shadow values.
 			// Pattern permits: lengths (px/em/rem/%), colors (hex, rgb, rgba, hsl, hsla),
 			// keywords (inset, none), digits, spaces, commas, dots, slashes and parentheses.
