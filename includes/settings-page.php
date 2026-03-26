@@ -1,15 +1,26 @@
 <?php
+/**
+ * Settings page output for the DarkAdmin plugin.
+ *
+ * @package DarkAdmin
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Renders the DarkAdmin settings page.
+ *
+ * @return void
+ */
 function darkadmin_settings_page(): void {
 	$enabled          = (bool) get_option( 'darkadmin_dark_mode_enabled', false );
 	$auto_darken      = (bool) get_option( 'darkadmin_auto_darken', false );
-	$colors           = wp_parse_args( (array) get_option( 'darkadmin_colors', [] ), darkadmin_default_colors() );
-	$layout           = wp_parse_args( (array) get_option( 'darkadmin_layout', [] ), darkadmin_default_layout() );
+	$colors           = wp_parse_args( (array) get_option( 'darkadmin_colors', array() ), darkadmin_default_colors() );
+	$layout           = wp_parse_args( (array) get_option( 'darkadmin_layout', array() ), darkadmin_default_layout() );
 	$custom           = get_option( 'darkadmin_custom_css', '' );
-	$allowed          = array_map( 'intval', (array) get_option( 'darkadmin_allowed_users', [] ) );
+	$allowed          = array_map( 'intval', (array) get_option( 'darkadmin_allowed_users', array() ) );
 	$user_access_mode = get_option( 'darkadmin_user_access_mode', 'all' );
 	$active_preset    = get_option( 'darkadmin_preset', 'default' );
 	$excluded_pages   = get_option( 'darkadmin_excluded_pages', '' );
@@ -20,18 +31,21 @@ function darkadmin_settings_page(): void {
 	$layout_map      = darkadmin_layout_variable_map();
 	$layout_defaults = darkadmin_default_layout();
 
-	$color_groups = [];
-	$grouped_vars = [];
+	$color_groups = array();
+	$grouped_vars = array();
 	foreach ( $var_map as $key => $info ) {
 		$color_groups[ $info['group'] ][ $key ] = $info['label'];
-		$grouped_vars[ $info['group'] ][]        = [ 'key' => $key, 'info' => $info ];
+		$grouped_vars[ $info['group'] ][]        = array(
+			'key'  => $key,
+			'info' => $info,
+		);
 	}
 
 	$selectable_users = darkadmin_get_selectable_users();
 	$has_users        = ! empty( $selectable_users );
 
-	$preset_meta = [
-		'default' => [
+	$preset_meta = array(
+		'default' => array(
 			'label'   => __( 'Default', 'darkadmin-dark-mode-for-adminpanel' ),
 			'desc'    => __( 'Classic WP 6.x dark theme', 'darkadmin-dark-mode-for-adminpanel' ),
 			'bg'      => '#1d2327',
@@ -39,8 +53,8 @@ function darkadmin_settings_page(): void {
 			'primary' => '#2271b1',
 			'text'    => '#dcdcde',
 			'bar'     => '#1a1f24',
-		],
-		'modern' => [
+		),
+		'modern'  => array(
 			'label'   => __( 'Modern', 'darkadmin-dark-mode-for-adminpanel' ),
 			'desc'    => __( 'WP Modern design language (dark)', 'darkadmin-dark-mode-for-adminpanel' ),
 			'bg'      => '#1e1e1e',
@@ -48,22 +62,22 @@ function darkadmin_settings_page(): void {
 			'primary' => '#3858e9',
 			'text'    => '#f0f0f0',
 			'bar'     => '#0c0c0c',
-		],
-	];
+		),
+	);
 
-	$allowed_avatar_tags = [
-		'img' => [
-			'src'    => [],
-			'srcset' => [],
-			'alt'    => [],
-			'width'  => [],
-			'height' => [],
-			'class'  => [],
-			'style'  => [],
-			'loading' => [],
-			'decoding' => [],
-		],
-	];
+	$allowed_avatar_tags = array(
+		'img' => array(
+			'src'      => array(),
+			'srcset'   => array(),
+			'alt'      => array(),
+			'width'    => array(),
+			'height'   => array(),
+			'class'    => array(),
+			'style'    => array(),
+			'loading'  => array(),
+			'decoding' => array(),
+		),
+	);
 	?>
 	<div class="wrap adm-settings-wrap">
 
@@ -495,7 +509,7 @@ admin.php?page=my-plugin"
 								__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
 								'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
 							),
-							[ 'code' => [] ]
+							array( 'code' => array() )
 						);
 						?>
 					</p>
