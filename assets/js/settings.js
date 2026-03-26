@@ -75,7 +75,7 @@
 			loadBtns.forEach( function ( btn ) {
 				const isThis = btn.dataset.preset === slug;
 				btn.textContent = isThis
-					? ( window.darkadminI18n ? window.darkadminI18n.active     : 'Active' )
+					? ( window.darkadminI18n ? window.darkadminI18n.active     : '✓ Active' )
 					: ( window.darkadminI18n ? window.darkadminI18n.loadPreset : 'Load Preset' );
 			} );
 			if ( presetInput ) presetInput.value = slug;
@@ -140,7 +140,7 @@
 		document.querySelectorAll( '.adm-preset-load-btn' ).forEach( function ( btn ) {
 			const isActive = btn.dataset.preset === activeSlug;
 			btn.textContent = isActive
-				? ( window.darkadminI18n ? window.darkadminI18n.active     : 'Active' )
+				? ( window.darkadminI18n ? window.darkadminI18n.active     : '✓ Active' )
 				: ( window.darkadminI18n ? window.darkadminI18n.loadPreset : 'Load Preset' );
 		} );
 	}
@@ -219,12 +219,12 @@
 							document.documentElement.style.setProperty( '--adm-' + key.replace( /_/g, '-' ), data[ key ] );
 						} );
 						if ( statusEl ) {
-							statusEl.textContent = ( window.darkadminI18n && window.darkadminI18n.importOk ) ? window.darkadminI18n.importOk : 'Palette imported successfully.';
+							statusEl.textContent = ( window.darkadminI18n && window.darkadminI18n.importOk ) ? window.darkadminI18n.importOk : '✓ Palette imported successfully.';
 							statusEl.className = 'adm-import-status adm-import-ok';
 						}
 					} catch ( err ) {
 						if ( statusEl ) {
-							statusEl.textContent = ( window.darkadminI18n && window.darkadminI18n.importErr ) ? window.darkadminI18n.importErr : 'Invalid JSON or color value.';
+							statusEl.textContent = ( window.darkadminI18n && window.darkadminI18n.importErr ) ? window.darkadminI18n.importErr : '✕ Invalid JSON or color value.';
 							statusEl.className = 'adm-import-status adm-import-err';
 						}
 					}
@@ -243,8 +243,8 @@
 			btn.addEventListener( 'click', function () {
 				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
 					const orig  = btn.textContent;
-					const label = window.darkadminI18n ? window.darkadminI18n.copied : 'Copied!';
-					btn.textContent = '\u2713 ' + label;
+					const label = window.darkadminI18n ? window.darkadminI18n.copied : '✓ Copied!';
+					btn.textContent = label;
 					setTimeout( function () { btn.textContent = orig; }, 1400 );
 				} ).catch( function () {} );
 			} );
