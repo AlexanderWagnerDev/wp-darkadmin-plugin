@@ -80,7 +80,7 @@ msgid "WP Modern design language (dark)"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "\u2713 Active"
+msgid "✓ Active"
 msgstr ""
 
 #: includes/settings-page.php
@@ -120,7 +120,7 @@ msgid "Everyone except selected users gets dark mode."
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here \u2014 they always have dark mode active."
+msgid "Administrators are not listed here — they always have dark mode active."
 msgstr ""
 
 #: includes/settings-page.php
@@ -216,11 +216,11 @@ msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
 #: darkadmin.php
-msgid "\u2713 Dark Mode is active. Settings have been saved."
+msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: darkadmin.php
-msgid "\u2713 Settings saved. Dark Mode is disabled."
+msgid "✓ Settings saved. Dark Mode is disabled."
 msgstr ""
 
 #: includes/defaults.php
