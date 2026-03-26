@@ -204,6 +204,10 @@ msgstr "Supports plain filenames (plugins.php) and custom page slugs (admin.php?
 msgid "The following pages are always excluded: %s"
 msgstr "The following pages are always excluded: %s"
 
+#: includes/settings-page.php
+msgid "You do not have sufficient permissions to access this page."
+msgstr "You do not have sufficient permissions to access this page."
+
 #: darkadmin.php
 msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr "✓ Dark Mode is active. Settings have been saved."

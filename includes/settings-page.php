@@ -98,11 +98,9 @@ function darkadmin_settings_page(): void {
 			</div>
 			<div class="adm-status-badge <?php echo esc_attr( $enabled ? 'adm-status-active' : 'adm-status-inactive' ); ?>">
 				<span class="adm-status-dot"></span>
-				<?php
-				echo $enabled
+				<?php echo $enabled
 					? esc_html__( 'Active', 'darkadmin-dark-mode-for-adminpanel' )
-					: esc_html__( 'Inactive', 'darkadmin-dark-mode-for-adminpanel' );
-				?>
+					: esc_html__( 'Inactive', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 			</div>
 		</div>
 
@@ -182,11 +180,9 @@ function darkadmin_settings_page(): void {
 										<span><?php echo esc_html( $meta['desc'] ); ?></span>
 									</div>
 									<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
-										<?php
-										echo $active_preset === $slug
-											? esc_html__( 'Active', 'darkadmin-dark-mode-for-adminpanel' )
-											: esc_html__( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' );
-										?>
+										<?php echo $active_preset === $slug
+											? esc_html__( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' )
+											: esc_html__( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 									</button>
 								</div>
 							<?php endforeach; ?>
@@ -240,7 +236,7 @@ function darkadmin_settings_page(): void {
 				<div class="adm-card-body">
 
 					<div class="adm-access-mode">
-						<label class="adm-access-mode-option <?php echo esc_attr( 'all' === $user_access_mode ? 'is-active' : '' ); ?>">
+						<label class="adm-access-mode-option <?php echo esc_attr( $user_access_mode === 'all' ? 'is-active' : '' ); ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="all"
 								<?php checked( $user_access_mode, 'all' ); ?> />
 							<span class="dashicons dashicons-groups"></span>
@@ -250,7 +246,7 @@ function darkadmin_settings_page(): void {
 							</span>
 						</label>
 
-						<label class="adm-access-mode-option <?php echo esc_attr( 'include' === $user_access_mode ? 'is-active' : '' ); ?><?php echo esc_attr( ! $has_users ? ' is-disabled' : '' ); ?>">
+						<label class="adm-access-mode-option <?php echo esc_attr( $user_access_mode === 'include' ? 'is-active' : '' ); ?><?php echo esc_attr( ! $has_users ? ' is-disabled' : '' ); ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="include"
 								<?php checked( $user_access_mode, 'include' ); ?>
 								<?php disabled( ! $has_users ); ?> />
@@ -261,7 +257,7 @@ function darkadmin_settings_page(): void {
 							</span>
 						</label>
 
-						<label class="adm-access-mode-option <?php echo esc_attr( 'exclude' === $user_access_mode ? 'is-active' : '' ); ?><?php echo esc_attr( ! $has_users ? ' is-disabled' : '' ); ?>">
+						<label class="adm-access-mode-option <?php echo esc_attr( $user_access_mode === 'exclude' ? 'is-active' : '' ); ?><?php echo esc_attr( ! $has_users ? ' is-disabled' : '' ); ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="exclude"
 								<?php checked( $user_access_mode, 'exclude' ); ?>
 								<?php disabled( ! $has_users ); ?> />
@@ -275,11 +271,7 @@ function darkadmin_settings_page(): void {
 
 					<?php if ( $has_users ) : ?>
 					<div class="adm-user-grid" id="adm-user-grid"
-						<?php
-						if ( 'all' === $user_access_mode ) {
-							echo 'style="display:none;"';
-						}
-						?>>
+						<?php if ( $user_access_mode === 'all' ) echo 'style="display:none;"'; ?>>
 						<?php foreach ( $selectable_users as $user ) : ?>
 							<label class="adm-user-item">
 								<input

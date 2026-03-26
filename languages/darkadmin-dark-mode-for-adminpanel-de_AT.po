@@ -204,6 +204,10 @@ msgstr "Unterstützt einfache Dateinamen (plugins.php) und benutzerdefinierte Se
 msgid "The following pages are always excluded: %s"
 msgstr "Die folgenden Seiten sind immer ausgeschlossen: %s"
 
+#: includes/settings-page.php
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Du verfügst nicht über ausreichende Berechtigungen, um auf diese Seite zuzugreifen."
+
 #: darkadmin.php
 msgid "✓ Dark Mode is active. Settings have been saved."
 msgstr "✓ Dark Mode ist aktiv. Die Einstellungen wurden gespeichert."
