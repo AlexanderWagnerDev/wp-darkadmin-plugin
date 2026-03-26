@@ -364,9 +364,9 @@ add_action(
 			'darkadmin-settings-js',
 			'darkadminI18n',
 			array(
-				'active'     => __( 'Active',      'darkadmin-dark-mode-for-adminpanel' ),
+				'active'     => __( 'Active', 'darkadmin-dark-mode-for-adminpanel' ),
 				'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
-				'copied'     => __( 'Copied!',     'darkadmin-dark-mode-for-adminpanel' ),
+				'copied'     => __( 'Copied!', 'darkadmin-dark-mode-for-adminpanel' ),
 			)
 		);
 
