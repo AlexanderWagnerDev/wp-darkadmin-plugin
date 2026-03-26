@@ -12,7 +12,6 @@ jobs:
   checkcs:
     name: 'Check code style'
     runs-on: ubuntu-latest
-    continue-on-error: true
 
     steps:
       - name: Checkout code
