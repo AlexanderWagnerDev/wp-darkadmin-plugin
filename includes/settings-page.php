@@ -39,14 +39,14 @@ function darkadmin_settings_page(): void {
 	$grouped_vars = array();
 	foreach ( $var_map as $key => $info ) {
 		$color_groups[ $info['group'] ][ $key ] = $info['label'];
-		$grouped_vars[ $info['group'] ][]        = array(
+		$grouped_vars[ $info['group'] ][]      = array(
 			'key'  => $key,
 			'info' => $info,
 		);
 	}
 
-	$selectable_users = darkadmin_get_selectable_users();
-	$has_users       = ! empty( $selectable_users );
+	$selectable_users  = darkadmin_get_selectable_users();
+	$has_users         = ! empty( $selectable_users );
 
 	$preset_meta = array(
 		'default' => array(
@@ -437,7 +437,7 @@ function darkadmin_settings_page(): void {
 										$raw_color     = isset( $colors[ $key ] ) ? $colors[ $key ] : '';
 										$sanitized     = sanitize_hex_color( $raw_color );
 										$current_color = ( '' !== $sanitized ) ? $sanitized : $defaults[ $key ];
-										?>
+									?>
 										<div class="adm-var-item">
 											<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>
 											<div class="adm-var-info">
