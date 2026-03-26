@@ -92,7 +92,7 @@ function darkadmin_settings_page(): void {
 					</p>
 				</div>
 			</div>
-			<div class="adm-status-badge <?php echo $enabled ? 'adm-status-active' : 'adm-status-inactive'; ?>">
+			<div class="adm-status-badge <?php echo esc_attr( $enabled ? 'adm-status-active' : 'adm-status-inactive' ); ?>">
 				<span class="adm-status-dot"></span>
 				<?php echo $enabled
 					? esc_html__( 'Active', 'darkadmin-dark-mode-for-adminpanel' )
@@ -165,7 +165,7 @@ function darkadmin_settings_page(): void {
 
 						<div class="adm-preset-grid">
 							<?php foreach ( $preset_meta as $slug => $meta ) : ?>
-								<div class="adm-preset-tile <?php echo $active_preset === $slug ? 'adm-preset-active' : ''; ?>" data-preset="<?php echo esc_attr( $slug ); ?>">
+								<div class="adm-preset-tile <?php echo esc_attr( $active_preset === $slug ? 'adm-preset-active' : '' ); ?>" data-preset="<?php echo esc_attr( $slug ); ?>">
 									<div class="adm-preset-swatch" style="background:<?php echo esc_attr( $meta['bg'] ); ?>;">
 										<span class="adm-preset-swatch-surface" style="background:<?php echo esc_attr( $meta['surface'] ); ?>;"></span>
 										<span class="adm-preset-swatch-accent" style="background:<?php echo esc_attr( $meta['primary'] ); ?>;"></span>
@@ -232,7 +232,7 @@ function darkadmin_settings_page(): void {
 				<div class="adm-card-body">
 
 					<div class="adm-access-mode">
-						<label class="adm-access-mode-option <?php echo $user_access_mode === 'all' ? 'is-active' : ''; ?>">
+						<label class="adm-access-mode-option <?php echo esc_attr( $user_access_mode === 'all' ? 'is-active' : '' ); ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="all"
 								<?php checked( $user_access_mode, 'all' ); ?> />
 							<span class="dashicons dashicons-groups"></span>
@@ -242,7 +242,7 @@ function darkadmin_settings_page(): void {
 							</span>
 						</label>
 
-						<label class="adm-access-mode-option <?php echo $user_access_mode === 'include' ? 'is-active' : ''; echo ! $has_users ? ' is-disabled' : ''; ?>">
+						<label class="adm-access-mode-option <?php echo esc_attr( $user_access_mode === 'include' ? 'is-active' : '' ); ?><?php echo esc_attr( ! $has_users ? ' is-disabled' : '' ); ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="include"
 								<?php checked( $user_access_mode, 'include' ); ?>
 								<?php disabled( ! $has_users ); ?> />
@@ -253,7 +253,7 @@ function darkadmin_settings_page(): void {
 							</span>
 						</label>
 
-						<label class="adm-access-mode-option <?php echo $user_access_mode === 'exclude' ? 'is-active' : ''; echo ! $has_users ? ' is-disabled' : ''; ?>">
+						<label class="adm-access-mode-option <?php echo esc_attr( $user_access_mode === 'exclude' ? 'is-active' : '' ); ?><?php echo esc_attr( ! $has_users ? ' is-disabled' : '' ); ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="exclude"
 								<?php checked( $user_access_mode, 'exclude' ); ?>
 								<?php disabled( ! $has_users ); ?> />
@@ -267,7 +267,7 @@ function darkadmin_settings_page(): void {
 
 					<?php if ( $has_users ) : ?>
 					<div class="adm-user-grid" id="adm-user-grid"
-						<?php echo $user_access_mode === 'all' ? 'style="display:none;"' : ''; ?>>
+						<?php if ( $user_access_mode === 'all' ) echo 'style="display:none;"'; ?>>
 						<?php foreach ( $selectable_users as $user ) : ?>
 							<label class="adm-user-item">
 								<input
@@ -410,7 +410,7 @@ function darkadmin_settings_page(): void {
 						<summary class="adm-var-reference-summary">
 							<span class="dashicons dashicons-editor-code"></span>
 							<?php esc_html_e( 'Available CSS Variables', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-							<span class="adm-var-count"><?php echo count( $var_map ) + count( $layout_map ); ?></span>
+							<span class="adm-var-count"><?php echo absint( count( $var_map ) + count( $layout_map ) ); ?></span>
 						</summary>
 						<?php foreach ( $grouped_vars as $group_name => $entries ) : ?>
 							<div class="adm-var-group">
