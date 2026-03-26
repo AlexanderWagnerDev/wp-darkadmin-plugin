@@ -16,7 +16,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Replaced inline `echo '<script>'` in `settings-page.php` with `wp_add_inline_script()`
 - Replaced anonymous arrow function sanitize callbacks in `register_setting()` with named functions `darkadmin_sanitize_bool()`, `darkadmin_sanitize_user_ids()` and `darkadmin_sanitize_preset()`
+- Used strict boolean check (`true === $value`) instead of loose cast in `darkadmin_sanitize_bool()`
 - Removed direct `$_POST` access in `darkadmin_sanitize_colors()` and `darkadmin_sanitize_layout()`; preset value now read from `$input` array
+- Added `shadow_md` value validation against a safe CSS pattern in `darkadmin_sanitize_layout()`
 - Added late escaping via `wp_strip_all_tags()` to both `wp_add_inline_style()` calls for `$vars` and `$custom`
 - Renamed generic JS object names `admData` and `admI18n` to `darkadminData` and `darkadminI18n` in `enqueue.php` and `settings.js`
 - Added i18n string `"Copied!"` to `enqueue.php` via `wp_localize_script` (`darkadminI18n.copied`)
@@ -30,6 +32,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed opening PHP tag not on its own line in `settings-page.php` (`$current_color` block)
 - Replaced short ternary `?:` with explicit `isset()` check and full ternary for `$current_color` in `settings-page.php`
 - Fixed incorrect indentation in `settings-page.php` (10 tabs expected, 9 found)
+- Fixed Yoda conditions for all comparisons in `settings-page.php`
+- Replaced inline control structure with braced block in `settings-page.php`
+- Replaced `$_GET['page']` with `get_current_screen()` in `enqueue.php` to avoid direct superglobal access
+- Added `current_user_can()` capability check at the top of `darkadmin_settings_page()` in `settings-page.php`
+- Added missing `darkadmin_layout` option cleanup in `uninstall.php`
+- Fixed proper UTF-8 umlauts in `readme-de.txt` (replaced ASCII substitutions with correct characters)
+- Replaced escaped HTML entity checkmark with literal UTF-8 character in preset button (`settings-page.php`)
 
 ---
 

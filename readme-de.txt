@@ -56,7 +56,9 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Defer-Ladestrategie für darkadmin-settings-js und darkadmin-auto-darken via strategy-Argument (eingeführt in WordPress 6.3) hinzugefügt
 * Fix: Inline-echo '<script>' in settings-page.php durch wp_add_inline_script() ersetzt
 * Fix: Anonyme Arrow-Function-Sanitize-Callbacks in register_setting() durch benannte Funktionen darkadmin_sanitize_bool(), darkadmin_sanitize_user_ids() und darkadmin_sanitize_preset() ersetzt
+* Fix: Strikten Boolean-Check (true === $value) statt losem Cast in darkadmin_sanitize_bool() verwendet
 * Fix: Direkten $_POST-Zugriff in darkadmin_sanitize_colors() und darkadmin_sanitize_layout() entfernt; Preset-Wert wird nun aus dem $input-Array gelesen
+* Fix: shadow_md-Wert-Validierung gegen sicheres CSS-Pattern in darkadmin_sanitize_layout() hinzugefügt
 * Fix: Spätes Escaping via wp_strip_all_tags() zu beiden wp_add_inline_style()-Aufrufen für $vars und $custom hinzugefügt
 * Fix: Generische JS-Objektnamen admData und admI18n in enqueue.php und settings.js zu darkadminData und darkadminI18n umbenannt
 * i18n-String "Copied!" in enqueue.php via wp_localize_script (darkadminI18n.copied) hinzugefügt
@@ -70,6 +72,13 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Fix: Öffnendes PHP-Tag nicht auf eigener Zeile in settings-page.php behoben ($current_color-Block)
 * Fix: Short-Ternary ?: durch explizites isset()-Check und vollständiges Ternary für $current_color in settings-page.php ersetzt
 * Fix: Falsche Einrückung in settings-page.php korrigiert (10 Tabs erwartet, 9 gefunden)
+* Fix: Yoda-Bedingungen für alle Vergleiche in settings-page.php korrigiert
+* Fix: Inline-Kontrollstruktur durch Block mit geschweiften Klammern in settings-page.php ersetzt
+* Fix: $_GET['page'] durch get_current_screen() in enqueue.php ersetzt (kein direkter Superglobal-Zugriff)
+* Fix: current_user_can()-Berechtigungsprüfung am Anfang von darkadmin_settings_page() in settings-page.php hinzugefügt
+* Fix: Fehlende darkadmin_layout-Option-Bereinigung in uninstall.php ergänzt
+* Fix: Korrekte UTF-8-Umlaute in readme-de.txt (ASCII-Ersetzungen durch korrekte Zeichen ersetzt)
+* Fix: Escaptes HTML-Entity-Häkchen durch direktes UTF-8-Zeichen im Preset-Button (settings-page.php) ersetzt
 
 = 0.1.2 =
 * Neue Sidebar-Farbgruppe hinzugefügt mit drei neuen Tokens: Sidebar-Hintergrund (--adm-sidebar-bg), Sidebar aktives Element (--adm-sidebar-active) und Sidebar-Text (--adm-sidebar-text)

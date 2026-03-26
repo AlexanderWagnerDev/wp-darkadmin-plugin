@@ -54,7 +54,9 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 - Added defer loading strategy to `darkadmin-settings-js` and `darkadmin-auto-darken` via the `strategy` argument introduced in WordPress 6.3
 - Fixed: replaced inline `echo '<script>'` in `settings-page.php` with `wp_add_inline_script()`
 - Fixed: replaced anonymous arrow function sanitize callbacks in `register_setting()` with named functions `darkadmin_sanitize_bool()`, `darkadmin_sanitize_user_ids()` and `darkadmin_sanitize_preset()`
+- Fixed: used strict boolean check (`true === $value`) instead of loose cast in `darkadmin_sanitize_bool()`
 - Fixed: removed direct `$_POST` access in `darkadmin_sanitize_colors()` and `darkadmin_sanitize_layout()`; preset value now read from `$input` array
+- Fixed: added `shadow_md` value validation against a safe CSS pattern in `darkadmin_sanitize_layout()`
 - Fixed: added late escaping via `wp_strip_all_tags()` to both `wp_add_inline_style()` calls for `$vars` and `$custom`
 - Fixed: renamed generic JS object names `admData` and `admI18n` to `darkadminData` and `darkadminI18n` in `enqueue.php` and `settings.js`
 - Added i18n string `"Copied!"` to `enqueue.php` via `wp_localize_script` (`darkadminI18n.copied`)
@@ -68,6 +70,13 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 - Fixed: opening PHP tag not on its own line in `settings-page.php` (`$current_color` block)
 - Fixed: replaced short ternary `?:` with explicit `isset()` check and full ternary for `$current_color` in `settings-page.php`
 - Fixed: incorrect indentation in `settings-page.php` (10 tabs expected, 9 found)
+- Fixed: Yoda conditions for all comparisons in `settings-page.php`
+- Fixed: replaced inline control structure with braced block in `settings-page.php`
+- Fixed: replaced `$_GET['page']` with `get_current_screen()` in `enqueue.php` to avoid direct superglobal access
+- Fixed: added `current_user_can()` capability check at the top of `darkadmin_settings_page()` in `settings-page.php`
+- Fixed: added missing `darkadmin_layout` option cleanup in `uninstall.php`
+- Fixed: proper UTF-8 umlauts in `readme-de.txt` (replaced ASCII substitutions with correct characters)
+- Fixed: replaced escaped HTML entity checkmark with literal UTF-8 character in preset button (`settings-page.php`)
 
 ### 0.1.2
 - Added dedicated Sidebar color group with three new tokens: Sidebar Background (`--adm-sidebar-bg`), Sidebar Active Item (`--adm-sidebar-active`), Sidebar Text (`--adm-sidebar-text`)
@@ -171,9 +180,9 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 
 ---
 
-# DarkAdmin - Dark Mode fuer das Adminpanel
+# DarkAdmin - Dark Mode für das Adminpanel
 
-Ein einfaches, schlankes Dark-Mode-Plugin fuer das WordPress Admin-Dashboard mit vollstaendiger Farbanpassung und Auto-Dark-Mode-Unterstuetzung.
+Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit vollständiger Farbanpassung und Auto-Dark-Mode-Unterstützung.
 
 ---
 
@@ -182,12 +191,12 @@ Ein einfaches, schlankes Dark-Mode-Plugin fuer das WordPress Admin-Dashboard mit
 - Ein-Klick aktivieren/deaktivieren
 - Leichtgewichtiges CSS-basiertes Admin-Theme
 - Funktioniert auf allen Admin-Seiten
-- Individuelle Farbanpassung ueber den WordPress Color Picker
-- Unterstuetzung fuer eigenes Custom CSS mit eingebauten CSS-Variablen
-- Token-basiertes Design-System fuer Hintergruende, Texte, Rahmen, Buttons und Statusfarben
-- Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergruende, die vom Stylesheet nicht abgedeckt werden
+- Individuelle Farbanpassung über den WordPress Color Picker
+- Unterstützung für eigenes Custom CSS mit eingebauten CSS-Variablen
+- Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
+- Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 - Preset-Themes: Wechsel zwischen Default (WP 6.x) und Modern (WP 7.0) Farbpaletten
-- Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschliessen / Ausschliessen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
+- Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 - Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
 
 ---
@@ -205,68 +214,77 @@ Ein einfaches, schlankes Dark-Mode-Plugin fuer das WordPress Admin-Dashboard mit
 ### 0.1.3
 - Mindest-WordPress-Version auf 6.7 angehoben
 - Mindest-PHP-Version auf 8.0 angehoben (bereits erforderlich durch Verwendung von `str_starts_with`, `str_contains` und Named Arguments)
-- Defer-Ladestrategie fuer `darkadmin-settings-js` und `darkadmin-auto-darken` via `strategy`-Argument (eingefuehrt in WordPress 6.3) hinzugefuegt
+- Defer-Ladestrategie für `darkadmin-settings-js` und `darkadmin-auto-darken` via `strategy`-Argument (eingeführt in WordPress 6.3) hinzugefügt
 - Fix: Inline-`echo '<script>'` in `settings-page.php` durch `wp_add_inline_script()` ersetzt
 - Fix: Anonyme Arrow-Function-Sanitize-Callbacks in `register_setting()` durch benannte Funktionen `darkadmin_sanitize_bool()`, `darkadmin_sanitize_user_ids()` und `darkadmin_sanitize_preset()` ersetzt
+- Fix: Strikten Boolean-Check (`true === $value`) statt losem Cast in `darkadmin_sanitize_bool()` verwendet
 - Fix: Direkten `$_POST`-Zugriff in `darkadmin_sanitize_colors()` und `darkadmin_sanitize_layout()` entfernt; Preset-Wert wird nun aus dem `$input`-Array gelesen
-- Fix: Spaetes Escaping via `wp_strip_all_tags()` zu beiden `wp_add_inline_style()`-Aufrufen fuer `$vars` und `$custom` hinzugefuegt
+- Fix: `shadow_md`-Wert-Validierung gegen sicheres CSS-Pattern in `darkadmin_sanitize_layout()` hinzugefügt
+- Fix: Spätes Escaping via `wp_strip_all_tags()` zu beiden `wp_add_inline_style()`-Aufrufen für `$vars` und `$custom` hinzugefügt
 - Fix: Generische JS-Objektnamen `admData` und `admI18n` in `enqueue.php` und `settings.js` zu `darkadminData` und `darkadminI18n` umbenannt
-- i18n-String `"Copied!"` in `enqueue.php` via `wp_localize_script` (`darkadminI18n.copied`) hinzugefuegt
-- Fix: Hardcodierten `'Copied!'`-String in `settings.js` `initVarCopy()` durch `darkadminI18n.copied` ersetzt fuer vollstaendige Uebersetzbarkeit
+- i18n-String `"Copied!"` in `enqueue.php` via `wp_localize_script` (`darkadminI18n.copied`) hinzugefügt
+- Fix: Hardcodierten `'Copied!'`-String in `settings.js` `initVarCopy()` durch `darkadminI18n.copied` ersetzt für vollständige Übersetzbarkeit
 - Fix: `innerHTML` in `initVarCopy()` durch `textContent` ersetzt (verhindert potenzielles XSS)
-- Alle Sprachdateien aktualisiert (`.pot`, `de_AT`, `de_DE`, `en_US`): `Copied!` / `Kopiert!`-Uebersetzung hinzugefuegt, Version auf 0.1.3 angehoben, Zeitstempel aktualisiert
-- Fix: Fehlendes `@package DarkAdmin` Tag im Datei-Kommentar von `darkadmin.php` ergaenzt
-- Fix: `add_filter()`- und `add_action()`-Aufrufe in `darkadmin.php` auf WPCS-konforme Multi-line-Syntax umgestellt (oeffnende Klammer letzte Sache auf der Zeile, jedes Argument auf eigener Zeile, schliessende Klammer auf eigener Zeile)
-- Fix: Gleichheitszeichen-Ausrichtung fuer `$has_users` in `settings-page.php` korrigiert (7 Leerzeichen erwartet)
-- Fix: Schliessendes PHP-Tag nicht auf eigener Zeile in `settings-page.php` behoben (`$prev`-Zuweisung)
-- Fix: Oeffnendes PHP-Tag nicht auf eigener Zeile in `settings-page.php` behoben (`$current_color`-Block)
-- Fix: Short-Ternary `?:` durch explizites `isset()`-Check und vollstaendiges Ternary fuer `$current_color` in `settings-page.php` ersetzt
-- Fix: Falsche Einrueckung in `settings-page.php` korrigiert (10 Tabs erwartet, 9 gefunden)
+- Alle Sprachdateien aktualisiert (`.pot`, `de_AT`, `de_DE`, `en_US`): `Copied!` / `Kopiert!`-Übersetzung hinzugefügt, Version auf 0.1.3 angehoben, Zeitstempel aktualisiert
+- Fix: Fehlendes `@package DarkAdmin` Tag im Datei-Kommentar von `darkadmin.php` ergänzt
+- Fix: `add_filter()`- und `add_action()`-Aufrufe in `darkadmin.php` auf WPCS-konforme Multi-line-Syntax umgestellt (öffnende Klammer letzte Sache auf der Zeile, jedes Argument auf eigener Zeile, schließende Klammer auf eigener Zeile)
+- Fix: Gleichheitszeichen-Ausrichtung für `$has_users` in `settings-page.php` korrigiert (7 Leerzeichen erwartet)
+- Fix: Schließendes PHP-Tag nicht auf eigener Zeile in `settings-page.php` behoben (`$prev`-Zuweisung)
+- Fix: Öffnendes PHP-Tag nicht auf eigener Zeile in `settings-page.php` behoben (`$current_color`-Block)
+- Fix: Short-Ternary `?:` durch explizites `isset()`-Check und vollständiges Ternary für `$current_color` in `settings-page.php` ersetzt
+- Fix: Falsche Einrückung in `settings-page.php` korrigiert (10 Tabs erwartet, 9 gefunden)
+- Fix: Yoda-Bedingungen für alle Vergleiche in `settings-page.php` korrigiert
+- Fix: Inline-Kontrollstruktur durch Block mit geschweiften Klammern in `settings-page.php` ersetzt
+- Fix: `$_GET['page']` durch `get_current_screen()` in `enqueue.php` ersetzt (kein direkter Superglobal-Zugriff)
+- Fix: `current_user_can()`-Berechtigungsprüfung am Anfang von `darkadmin_settings_page()` in `settings-page.php` hinzugefügt
+- Fix: Fehlende `darkadmin_layout`-Option-Bereinigung in `uninstall.php` ergänzt
+- Fix: Korrekte UTF-8-Umlaute in `readme-de.txt` (ASCII-Ersetzungen durch korrekte Zeichen ersetzt)
+- Fix: Escaptes HTML-Entity-Häkchen durch direktes UTF-8-Zeichen im Preset-Button (`settings-page.php`) ersetzt
 
 ### 0.1.2
-- Neue Sidebar-Farbgruppe hinzugefuegt mit drei neuen Tokens: Sidebar-Hintergrund (`--adm-sidebar-bg`), Sidebar aktives Element (`--adm-sidebar-active`) und Sidebar-Text (`--adm-sidebar-text`)
-- Sidebar-Token-Uebersetzungen in alle Sprachdateien eingetragen (`de_AT`, `de_DE`, `en_US`, `.pot`, `.l10n.php`)
-- Layout-Token-System hinzugefuegt (Spacing, Radius, Shadow) mit per-Preset-Defaults und Settings-UI
-- Layout-Tokens ueber Presets vereinheitlicht, Layout-JS-Handler hinzugefuegt, alle Sprachdateien aktualisiert
-- `.adm-layout-grid` CSS hinzugefuegt: 4-Spalten-Grid mit responsiven Breakpoints und Dark-Mode-Overrides
+- Neue Sidebar-Farbgruppe hinzugefügt mit drei neuen Tokens: Sidebar-Hintergrund (`--adm-sidebar-bg`), Sidebar aktives Element (`--adm-sidebar-active`) und Sidebar-Text (`--adm-sidebar-text`)
+- Sidebar-Token-Übersetzungen in alle Sprachdateien eingetragen (`de_AT`, `de_DE`, `en_US`, `.pot`, `.l10n.php`)
+- Layout-Token-System hinzugefügt (Spacing, Radius, Shadow) mit per-Preset-Defaults und Settings-UI
+- Layout-Tokens über Presets vereinheitlicht, Layout-JS-Handler hinzugefügt, alle Sprachdateien aktualisiert
+- `.adm-layout-grid` CSS hinzugefügt: 4-Spalten-Grid mit responsiven Breakpoints und Dark-Mode-Overrides
 - Darstellung der Color-Picker-Swatches in der Einstellungsseite verbessert
 - Fix: `translators`-Kommentar und `phpcs:ignore` in `settings-page.php` korrekt gesetzt
 - Fix: `&amp;` HTML-Entity durch direktes UTF-8-Ampersand in i18n-Strings ersetzt (`settings-page.php`)
-- Fix: PHP `\u2713`-Escape durch direktes UTF-8-Haekchen in Admin-Notice-Strings ersetzt
-- Fix: `&#10003;` HTML-Entity durch direktes UTF-8-Haekchen im Preset-Button-PHP und allen `.po`-Dateien ersetzt
-- Fix: ASCII-escaped Umlaute durch korrekte UTF-8-Zeichen in allen Sprachdateien ersetzt, fehlende msgids ergaenzt
+- Fix: PHP `\u2713`-Escape durch direktes UTF-8-Häkchen in Admin-Notice-Strings ersetzt
+- Fix: `&#10003;` HTML-Entity durch direktes UTF-8-Häkchen im Preset-Button-PHP und allen `.po`-Dateien ersetzt
+- Fix: ASCII-escaped Umlaute durch korrekte UTF-8-Zeichen in allen Sprachdateien ersetzt, fehlende msgids ergänzt
 - `darkadmin-dark.css` und `darkadmin-wp-modern.css` aktualisiert
 
 ### 0.1.1
-- Behoben: `uninstall.php` korrigiert -- alle Optionsnamen vom falschen `adm_`-Prefix auf den korrekten `darkadmin_`-Prefix geaendert
+- Behoben: `uninstall.php` korrigiert -- alle Optionsnamen vom falschen `adm_`-Prefix auf den korrekten `darkadmin_`-Prefix geändert
 
 ### 0.1.0
-- Unterstuetzung fuer ausgeschlossene Seiten in den Einstellungen hinzugefuegt
-- Benutzerzugriffskontrolle hinzugefuegt (Benutzer ein-/ausschliessen)
-- Voreingestellte Designs hinzugefuegt (Standard und Modern)
+- Unterstützung für ausgeschlossene Seiten in den Einstellungen hinzugefügt
+- Benutzerzugriffskontrolle hinzugefügt (Benutzer ein-/ausschließen)
+- Voreingestellte Designs hinzugefügt (Standard und Modern)
 - Kritische JavaScript-Fehler behoben
-- Fehlende schliessende geschweifte Klammer in `initPaletteIO()` behoben
-- XSS-Sicherheitsluecke in `printf`-Ausgabe behoben
+- Fehlende schließende geschweifte Klammer in `initPaletteIO()` behoben
+- XSS-Sicherheitslücke in `printf`-Ausgabe behoben
 - Unicode-Escapes in Sprachdateien behoben
-- `admI18n` JS-Lokalisierung via `wp_localize_script` hinzugefuegt
+- `admI18n` JS-Lokalisierung via `wp_localize_script` hinzugefügt
 - Redundantes `wp-color-picker` Script-Enqueue entfernt
-- `.l10n.php` Sprach-Cache-Dateien hinzugefuegt
-- Hexadezimalvalidierung fuer JSON-Palettenimporte hinzugefuegt
+- `.l10n.php` Sprach-Cache-Dateien hinzugefügt
+- Hexadezimalvalidierung für JSON-Palettenimporte hinzugefügt
 
 ### 0.0.10
-- Themes-Bereich erweitert mit Dark-Styling fuer Theme-Browser und Theme-Editor-Elemente
+- Themes-Bereich erweitert mit Dark-Styling für Theme-Browser und Theme-Editor-Elemente
 - `.cm-error`-Hintergrund-Deckkraft von `.15` auf `.05` reduziert
-- Ungueltiqe Steuerzeichen in allen Sprachdateien behoben
-- Benutzerzugriff: Einschliessen- und Ausschliessen-Optionen werden ausgegraut wenn keine Nicht-Administrator-Benutzer vorhanden sind
+- Ungültige Steuerzeichen in allen Sprachdateien behoben
+- Benutzerzugriff: Einschließen- und Ausschließen-Optionen werden ausgegraut wenn keine Nicht-Administrator-Benutzer vorhanden sind
 - Benutzerzugriff: Einfachen Text-Fallback durch gestalteten Empty-State-Block ersetzt
-- i18n: fehlenden String in allen Sprachdateien ergaenzt
+- i18n: fehlenden String in allen Sprachdateien ergänzt
 
 ### 0.0.9
-- Preset-Themes hinzugefuegt (Default und Modern)
+- Preset-Themes hinzugefügt (Default und Modern)
 - Benutzerspezifischer Dark Mode mit User-Access-Karte
-- Live-Farbvorschau hinzugefuegt
+- Live-Farbvorschau hinzugefügt
 - Export / Import der Farbpalette als JSON-Datei
-- CSS-Cache-Busting hinzugefuegt
+- CSS-Cache-Busting hinzugefügt
 - Plugin in modulare Includes aufgeteilt
 - Farb-Tokens von 23 auf 34 erweitert
 
@@ -274,7 +292,7 @@ Ein einfaches, schlankes Dark-Mode-Plugin fuer das WordPress Admin-Dashboard mit
 - Unsichtbaren Text in `.widefat`-Tabellen behoben
 
 ### 0.0.7
-- Version in den `darkadmin-dark.css` Header-Kommentar eingefuegt
+- Version in den `darkadmin-dark.css` Header-Kommentar eingefügt
 
 ### 0.0.6
 - Text Domain auf `darkadmin-dark-mode-for-adminpanel` aktualisiert
@@ -282,22 +300,22 @@ Ein einfaches, schlankes Dark-Mode-Plugin fuer das WordPress Admin-Dashboard mit
 
 ### 0.0.5
 - Plugin von "WP Admin Dark Mode" zu "DarkAdmin - Dark Mode for Adminpanel" umbenannt
-- Hauptdateien, CSS-Dateien, Text-Domain und Menue-Slug umbenannt
+- Hauptdateien, CSS-Dateien, Text-Domain und Menü-Slug umbenannt
 
 ### 0.0.4
-- Auto Dark Mode mit WCAG-Luminanzberechnungen hinzugefuegt
-- Auto Dark Mode verwendet `MutationObserver` fuer AJAX-geladene Inhalte
+- Auto Dark Mode mit WCAG-Luminanzberechnungen hinzugefügt
+- Auto Dark Mode verwendet `MutationObserver` für AJAX-geladene Inhalte
 - Farbfeld-Anzeige des Color Pickers korrigiert
 
 ### 0.0.3
 - Komplettes CSS-Refactoring mit token-basiertem Design-System
-- Neue anpassbare Farbvariablen hinzugefuegt
-- Anzahl der Farb-Tokens von 9 auf 13 erhoeht
+- Neue anpassbare Farbvariablen hinzugefügt
+- Anzahl der Farb-Tokens von 9 auf 13 erhöht
 
 ### 0.0.2
 - Einstellungsseite komplett neu gestaltet mit Card-Layout
-- Individuelle Farbanpassung ueber den WordPress Color Picker
-- Custom-CSS-Editor hinzugefuegt
+- Individuelle Farbanpassung über den WordPress Color Picker
+- Custom-CSS-Editor hinzugefügt
 - Alle Dark-Mode-Farben basieren nun auf CSS-Custom-Properties
 
 ### 0.0.1
