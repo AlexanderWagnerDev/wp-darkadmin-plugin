@@ -331,11 +331,16 @@ add_action(
 			$ver
 		);
 
-		wp_add_inline_style( 'darkadmin-darkmode', wp_strip_all_tags( $vars ) );
+		// All values in $vars are already sanitized at the source:
+		// $sc() runs sanitize_hex_color(), $sl() runs sanitize_text_field()
+		// plus numeric cast / regex whitelist for shadow. No further wrapping needed.
+		wp_add_inline_style( 'darkadmin-darkmode', $vars );
 
 		$custom = get_option( 'darkadmin_custom_css', '' );
 		if ( ! empty( $custom ) ) {
-			wp_add_inline_style( 'darkadmin-darkmode', wp_strip_all_tags( $custom ) );
+			// Sanitized on save via darkadmin_sanitize_custom_css() -> wp_strip_all_tags().
+			// Re-applying wp_strip_all_tags() here would corrupt valid CSS.
+			wp_add_inline_style( 'darkadmin-darkmode', $custom );
 		}
 
 		if ( get_option( 'darkadmin_auto_darken', false ) ) {
