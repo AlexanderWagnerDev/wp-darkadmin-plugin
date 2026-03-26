@@ -32,8 +32,8 @@ require_once DARKADMIN_PATH . 'includes/settings-page.php';
  * Add a settings link in the Plugins list.
  */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $actions ) {
-	$url                    = admin_url( 'options-general.php?page=darkadmin' );
-	$actions['settings']    = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'darkadmin-dark-mode-for-adminpanel' ) . '</a>';
+	$url                 = admin_url( 'options-general.php?page=darkadmin' );
+	$actions['settings'] = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'darkadmin-dark-mode-for-adminpanel' ) . '</a>';
 	return $actions;
 } );
 
@@ -50,7 +50,7 @@ add_action( 'admin_notices', function () {
 	$nonce = isset( $_GET['_wpnonce'] ) ? sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ) : '';
 	$page  = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 
-	if ( $page !== 'darkadmin' ) {
+	if ( 'darkadmin' !== $page ) {
 		return;
 	}
 
