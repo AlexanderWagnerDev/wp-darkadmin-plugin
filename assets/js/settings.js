@@ -48,11 +48,11 @@
 		if ( ! metaEl ) return;
 		const meta = JSON.parse( metaEl.textContent || '{}' );
 
-		const presetInput      = document.getElementById( 'darkadmin_preset' );
-		const previewPanel     = document.getElementById( 'adm-preset-preview' );
-		const previewName      = document.getElementById( 'adm-preview-name' );
-		const tiles            = document.querySelectorAll( '.adm-preset-tile' );
-		const loadBtns         = document.querySelectorAll( '.adm-preset-load-btn' );
+		const presetInput            = document.getElementById( 'darkadmin_preset' );
+		const previewPanel           = document.getElementById( 'adm-preset-preview' );
+		const previewName            = document.getElementById( 'adm-preview-name' );
+		const tiles                  = document.querySelectorAll( '.adm-preset-tile' );
+		const loadBtns               = document.querySelectorAll( '.adm-preset-load-btn' );
 		const darkadminPresets       = ( window.darkadminData && window.darkadminData.presets )       || {};
 		const darkadminLayoutPresets = ( window.darkadminData && window.darkadminData.layoutPresets ) || {};
 
@@ -76,7 +76,7 @@
 				const isThis = btn.dataset.preset === slug;
 				btn.textContent = isThis
 					? ( window.darkadminI18n ? window.darkadminI18n.active     : 'Active' )
-					: ( window.darkadminI18n ? window.darkadminI18n.loadPreset  : 'Load Preset' );
+					: ( window.darkadminI18n ? window.darkadminI18n.loadPreset : 'Load Preset' );
 			} );
 			if ( presetInput ) presetInput.value = slug;
 		}
@@ -141,7 +141,7 @@
 			const isActive = btn.dataset.preset === activeSlug;
 			btn.textContent = isActive
 				? ( window.darkadminI18n ? window.darkadminI18n.active     : 'Active' )
-				: ( window.darkadminI18n ? window.darkadminI18n.loadPreset  : 'Load Preset' );
+				: ( window.darkadminI18n ? window.darkadminI18n.loadPreset : 'Load Preset' );
 		} );
 	}
 
@@ -242,8 +242,8 @@
 		document.querySelectorAll( '.adm-var-copy' ).forEach( function ( btn ) {
 			btn.addEventListener( 'click', function () {
 				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
-					const orig   = btn.textContent;
-					const label  = window.darkadminI18n ? window.darkadminI18n.copied : 'Copied!';
+					const orig  = btn.textContent;
+					const label = window.darkadminI18n ? window.darkadminI18n.copied : 'Copied!';
 					btn.textContent = '✓ ' + label;
 					setTimeout( function () { btn.textContent = orig; }, 1400 );
 				} ).catch( function () {} );
