@@ -106,14 +106,24 @@ function darkadmin_parse_excluded_pages( string $raw ): array {
 	return array_unique( $out );
 }
 
-function darkadmin_is_page_excluded( array $entries, string $pagenow, string $hook_suffix ): bool {
-	$current_page_slug = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-
+/**
+ * Checks whether the current admin page matches any of the excluded entries.
+ *
+ * The current page slug is passed in as a parameter (resolved in the hook
+ * context) so this function does not need to access $_GET directly.
+ *
+ * @param string[] $entries     Parsed exclusion list.
+ * @param string   $pagenow     Current $pagenow value (e.g. 'admin.php').
+ * @param string   $hook_suffix Current hook suffix from admin_enqueue_scripts.
+ * @param string   $page_slug   Sanitized value of $_GET['page'], or empty string.
+ * @return bool
+ */
+function darkadmin_is_page_excluded( array $entries, string $pagenow, string $hook_suffix, string $page_slug = '' ): bool {
 	foreach ( $entries as $entry ) {
 		if ( str_contains( $entry, '?' ) ) {
 			parse_str( (string) wp_parse_url( $entry, PHP_URL_QUERY ), $params );
 			$entry_slug = isset( $params['page'] ) ? sanitize_key( $params['page'] ) : '';
-			if ( '' !== $entry_slug && $entry_slug === $current_page_slug ) {
+			if ( '' !== $entry_slug && $entry_slug === $page_slug ) {
 				return true;
 			}
 			continue;
@@ -139,7 +149,9 @@ add_action( 'admin_enqueue_scripts', function ( string $hook_suffix ) {
 	$raw_exclusions = get_option( 'darkadmin_excluded_pages', '' );
 	if ( '' !== $raw_exclusions ) {
 		$user_excluded = darkadmin_parse_excluded_pages( $raw_exclusions );
-		if ( darkadmin_is_page_excluded( $user_excluded, $pagenow, $hook_suffix ) ) {
+		// Resolve the current page slug here (read-only routing check, no nonce needed).
+		$page_slug = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( darkadmin_is_page_excluded( $user_excluded, $pagenow, $hook_suffix, $page_slug ) ) {
 			return;
 		}
 	}
