@@ -449,6 +449,11 @@ function darkadmin_sanitize_colors( $input ): array {
  * Receives the submitted array from the Settings API (nonce already verified
  * by options.php via settings_fields()). No direct $_POST access is performed.
  *
+ * For fields with a px unit the value is cast to a non-negative float.
+ * For the shadow_md field (empty unit) the value is validated against a safe
+ * CSS box-shadow pattern to prevent CSS injection; invalid values fall back
+ * to the preset default.
+ *
  * @param mixed $input Raw input from the Settings API.
  * @return array Sanitized layout values.
  */
@@ -478,6 +483,13 @@ function darkadmin_sanitize_layout( $input ): array {
 				$numeric = 0;
 			}
 			$raw = $numeric . $var_map[ $key ]['unit'];
+		} else {
+			// shadow_md: allow only safe CSS box-shadow values.
+			// Pattern permits: lengths (px/em/rem/%), colors (hex, rgb, rgba, hsl, hsla),
+			// keywords (inset, none), digits, spaces, commas, dots, slashes and parentheses.
+			if ( ! preg_match( '/^[a-zA-Z0-9\s\-\.,%#()\/:]+$/', $raw ) ) {
+				$raw = $default;
+			}
 		}
 		$output[ $key ] = $raw;
 	}
