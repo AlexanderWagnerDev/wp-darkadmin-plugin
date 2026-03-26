@@ -192,7 +192,9 @@ function darkadmin_settings_page(): void {
 							<?php endforeach; ?>
 						</div>
 
-						<?php $prev = $preset_meta[ $active_preset ]; ?>
+						<?php
+						$prev = $preset_meta[ $active_preset ];
+						?>
 						<div>
 							<p class="adm-preview-label"><?php esc_html_e( 'Preview', 'darkadmin-dark-mode-for-adminpanel' ); ?></p>
 							<div class="adm-preset-preview" id="adm-preset-preview"
@@ -428,10 +430,13 @@ function darkadmin_settings_page(): void {
 							<div class="adm-var-group">
 								<h4 class="adm-var-group-title"><?php echo esc_html( $group_name ); ?></h4>
 								<div class="adm-var-grid">
-									<?php foreach ( $entries as $entry ) :
+									<?php
+									foreach ( $entries as $entry ) :
 										$key           = $entry['key'];
 										$info          = $entry['info'];
-										$current_color = sanitize_hex_color( $colors[ $key ] ?? '' ) ?: $defaults[ $key ];
+										$raw_color     = isset( $colors[ $key ] ) ? $colors[ $key ] : '';
+										$sanitized     = sanitize_hex_color( $raw_color );
+										$current_color = ( '' !== $sanitized ) ? $sanitized : $defaults[ $key ];
 									?>
 										<div class="adm-var-item">
 											<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>
