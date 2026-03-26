@@ -401,6 +401,8 @@ add_action(
 				'active'     => __( 'Active', 'darkadmin-dark-mode-for-adminpanel' ),
 				'loadPreset' => __( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ),
 				'copied'     => __( 'Copied!', 'darkadmin-dark-mode-for-adminpanel' ),
+				'importOk'   => __( 'Palette imported successfully.', 'darkadmin-dark-mode-for-adminpanel' ),
+				'importErr'  => __( 'Invalid JSON or color value.', 'darkadmin-dark-mode-for-adminpanel' ),
 			)
 		);
 

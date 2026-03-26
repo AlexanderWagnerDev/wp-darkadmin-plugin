@@ -8,6 +8,7 @@ msgstr ""
 "PO-Revision-Date: 2026-03-26 16:30+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,7 +80,7 @@ msgid "WP Modern design language (dark)"
 msgstr ""
 
 #: includes/settings-page.php
-msgid "✓ Active"
+msgid "\u2713 Active"
 msgstr ""
 
 #: includes/settings-page.php
@@ -119,7 +120,7 @@ msgid "Everyone except selected users gets dark mode."
 msgstr ""
 
 #: includes/settings-page.php
-msgid "Administrators are not listed here — they always have dark mode active."
+msgid "Administrators are not listed here \u2014 they always have dark mode active."
 msgstr ""
 
 #: includes/settings-page.php
@@ -170,6 +171,14 @@ msgstr ""
 msgid "Copied!"
 msgstr ""
 
+#: includes/enqueue.php
+msgid "Palette imported successfully."
+msgstr ""
+
+#: includes/enqueue.php
+msgid "Invalid JSON or color value."
+msgstr ""
+
 #: includes/settings-page.php
 msgid "Custom CSS"
 msgstr ""
@@ -207,11 +216,11 @@ msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Dark Mode is active. Settings have been saved."
+msgid "\u2713 Dark Mode is active. Settings have been saved."
 msgstr ""
 
 #: darkadmin.php
-msgid "✓ Settings saved. Dark Mode is disabled."
+msgid "\u2713 Settings saved. Dark Mode is disabled."
 msgstr ""
 
 #: includes/defaults.php
