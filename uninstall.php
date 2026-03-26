@@ -2,7 +2,10 @@
 /**
  * Fired when the plugin is uninstalled.
  * Removes all plugin options from wp_options.
+ *
+ * @package DarkAdmin
  */
+
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
