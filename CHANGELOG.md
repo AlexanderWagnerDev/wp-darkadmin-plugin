@@ -6,7 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.1.3] - 2026-03-26
+## [0.2.0] - 2026-03-26
 
 ### Changed
 - Raised minimum WordPress version requirement to 6.7
@@ -42,7 +42,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.1.2] - 2025
+## [0.1.2] - 2026
 
 ### Added
 - Dedicated Sidebar color group with three new tokens: Sidebar Background (`--adm-sidebar-bg`), Sidebar Active Item (`--adm-sidebar-active`) and Sidebar Text (`--adm-sidebar-text`)
@@ -64,14 +64,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.1.1] - 2025
+## [0.1.1] - 2026
 
 ### Fixed
 - `uninstall.php`: corrected all option names from wrong `adm_` prefix to `darkadmin_` prefix so options are properly removed on plugin deletion
 
 ---
 
-## [0.1.0] - 2025
+## [0.1.0] - 2026
 
 ### Added
 - Support for excluded pages in settings
@@ -91,7 +91,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.10] - 2025
+## [0.0.10] - 2026
 
 ### Added
 - Extended Themes section: added dark styling for `.theme-browser .theme .theme-name`, `.theme-overlay .theme-actions`, `.theme-overlay .theme-tags`, `.theme-overlay .theme-header .theme-title`, `.theme-overlay .theme-author`, `.theme-overlay .theme-version` and `.theme-overlay .theme-rating .star-rating .star`
@@ -109,7 +109,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.9] - 2025
+## [0.0.9] - 2026
 
 ### Added
 - Preset Themes: choose between Default (WP 6.x classic dark) and Modern (WP 7.0 deep blue, glassmorphism-inspired) color palettes
@@ -129,21 +129,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.8] - 2025
+## [0.0.8] - 2026
 
 ### Fixed
 - Fixed invisible text in `.widefat` tables (`update-core.php` and similar pages): override WP core rule `.widefat ol, .widefat p, .widefat ul { color: #2c3338 }` with dark theme color token
 
 ---
 
-## [0.0.7] - 2025
+## [0.0.7] - 2026
 
 ### Changed
 - Added version to `darkadmin-dark.css` header comment
 
 ---
 
-## [0.0.6] - 2025
+## [0.0.6] - 2026
 
 ### Changed
 - Updated Text Domain from `darkadmin` to `darkadmin-dark-mode-for-adminpanel` to match the wordpress.org plugin slug
@@ -152,7 +152,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.5] - 2025
+## [0.0.5] - 2026
 
 ### Changed
 - Rebranded plugin from "WP Admin Dark Mode" to "DarkAdmin - Dark Mode for Adminpanel"
@@ -165,7 +165,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.4] - 2025
+## [0.0.4] - 2026
 
 ### Added
 - Auto Dark Mode option: optional JS-based pass that dynamically darkens bright backgrounds and lightens dark text from unknown plugins using WCAG luminance calculations
@@ -177,7 +177,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.3] - 2025
+## [0.0.3] - 2026
 
 ### Added
 - Full CSS overhaul with a token-based design system for backgrounds, surfaces, borders, text, links, buttons and semantic states
@@ -197,7 +197,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.2] - 2025
+## [0.0.2] - 2026
 
 ### Added
 - Redesigned settings page with card-based layout, page header with status badge and version display
@@ -213,7 +213,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.0.1] - 2025
+## [0.0.1] - 2026
 
 ### Added
 - Initial development release
