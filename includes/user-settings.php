@@ -1,4 +1,10 @@
 <?php
+/**
+ * User-specific dark mode access logic for the DarkAdmin plugin.
+ *
+ * @package DarkAdmin
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -31,8 +37,8 @@ function darkadmin_is_dark_mode_active(): bool {
 		return true;
 	}
 
-	$mode    = get_option( 'darkadmin_user_access_mode', 'all' );
-	$listed  = array_map( 'strval', (array) get_option( 'darkadmin_allowed_users', [] ) );
+	$mode        = get_option( 'darkadmin_user_access_mode', 'all' );
+	$listed      = array_map( 'strval', (array) get_option( 'darkadmin_allowed_users', array() ) );
 	$user_id_str = (string) $user_id;
 
 	switch ( $mode ) {
@@ -52,9 +58,11 @@ function darkadmin_is_dark_mode_active(): bool {
  * @return WP_User[]
  */
 function darkadmin_get_selectable_users(): array {
-	return get_users( [
-		'orderby'      => 'display_name',
-		'order'        => 'ASC',
-		'role__not_in' => [ 'administrator' ],
-	] );
+	return get_users(
+		array(
+			'orderby'      => 'display_name',
+			'order'        => 'ASC',
+			'role__not_in' => array( 'administrator' ),
+		)
+	);
 }
