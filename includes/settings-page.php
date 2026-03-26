@@ -46,7 +46,7 @@ function darkadmin_settings_page(): void {
 	}
 
 	$selectable_users = darkadmin_get_selectable_users();
-	$has_users       = ! empty( $selectable_users );
+	$has_users        = ! empty( $selectable_users );
 
 	$preset_meta = array(
 		'default' => array(
