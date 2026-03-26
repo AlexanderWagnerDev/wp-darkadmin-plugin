@@ -183,7 +183,7 @@ function darkadmin_settings_page(): void {
 									</div>
 									<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
 										<?php if ( $active_preset === $slug ) : ?>
-											&#x2713; <?php esc_html_e( 'Active', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+											<?php esc_html_e( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 										<?php else : ?>
 											<?php esc_html_e( 'Load Preset', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 										<?php endif; ?>
