@@ -419,8 +419,11 @@ function darkadmin_layout_variable_map(): array {
  * Receives the submitted array from the Settings API (nonce already verified
  * by options.php via settings_fields()). No direct $_POST access is performed.
  *
+ * sanitize_hex_color() returns null for invalid values (not false or ''),
+ * so we check with is_string() and a non-empty guard instead.
+ *
  * @param mixed $input Raw input from the Settings API.
- * @return array Sanitized color values.
+ * @return array<string, string> Sanitized color values.
  */
 function darkadmin_sanitize_colors( $input ): array {
 	$input  = is_array( $input ) ? $input : array();
@@ -436,9 +439,9 @@ function darkadmin_sanitize_colors( $input ): array {
 	$defaults = darkadmin_preset_colors()[ $preset ];
 	$output   = array();
 	foreach ( $defaults as $key => $default ) {
-		$raw            = isset( $input[ $key ] ) ? (string) $input[ $key ] : $default;
+		$raw            = isset( $input[ $key ] ) ? (string) $input[ $key ] : '';
 		$sanitized      = sanitize_hex_color( $raw );
-		$output[ $key ] = ( false !== $sanitized && '' !== $sanitized ) ? $sanitized : $default;
+		$output[ $key ] = ( is_string( $sanitized ) && '' !== $sanitized ) ? $sanitized : $default;
 	}
 	return $output;
 }
@@ -455,7 +458,7 @@ function darkadmin_sanitize_colors( $input ): array {
  * to the preset default.
  *
  * @param mixed $input Raw input from the Settings API.
- * @return array Sanitized layout values.
+ * @return array<string, string> Sanitized layout values.
  */
 function darkadmin_sanitize_layout( $input ): array {
 	$input  = is_array( $input ) ? $input : array();
@@ -483,7 +486,7 @@ function darkadmin_sanitize_layout( $input ): array {
 				$numeric = 0;
 			}
 			$raw = $numeric . $var_map[ $key ]['unit'];
-		} elseif ( ! preg_match( '/^[a-zA-Z0-9\s\-.,%#()\/:]$/', $raw ) ) {
+		} elseif ( ! preg_match( '/^[a-zA-Z0-9\s\-.,%#()\/:]+$/', $raw ) ) {
 			// shadow_md: allow only safe CSS box-shadow values.
 			// Pattern permits: lengths (px/em/rem/%), colors (hex, rgb, rgba, hsl, hsla),
 			// keywords (inset, none), digits, spaces, commas, dots, slashes and parentheses.
