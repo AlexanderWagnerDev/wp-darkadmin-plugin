@@ -12,11 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Sanitize callback for boolean settings.
  *
+ * Treats only the string '1' and the integer 1 as true, matching the value
+ * emitted by WordPress checkbox inputs (value="1"). Everything else is false.
+ *
  * @param mixed $v Raw input value.
  * @return bool
  */
 function darkadmin_sanitize_bool( $v ): bool {
-	return (bool) $v;
+	return 1 === absint( $v );
 }
 
 /**
@@ -198,8 +201,10 @@ function darkadmin_is_page_excluded( array $entries, string $pagenow, string $ho
 /**
  * Resolves the current admin page slug using get_current_screen().
  *
- * Returns the value of the 'page' query var from the screen's base when
- * available, falling back to an empty string. This avoids direct $_GET access.
+ * Only extracts a slug for pages registered under a known parent prefix
+ * (settings_page_, toplevel_page_, etc.). For all other screen IDs an empty
+ * string is returned so that slug-based exclusion never fires unexpectedly on
+ * built-in screens like edit.php (edit_posts -> 'posts').
  *
  * @return string Sanitized page slug, or empty string.
  */
@@ -208,22 +213,19 @@ function darkadmin_current_page_slug(): string {
 	if ( ! $screen instanceof WP_Screen ) {
 		return '';
 	}
-	// WP_Screen::$id contains the full hook suffix; for plugin pages registered
-	// via add_options_page / add_menu_page the parent slug is in $screen->parent_base
-	// and the page slug is the last segment of $screen->id after the last underscore.
-	// The most reliable approach is $screen->base for pagenow and the registered
-	// page slug embedded in $screen->id (format: "settings_page_{slug}").
 	$id = $screen->id;
-	if ( str_starts_with( $id, 'settings_page_' ) ) {
-		return sanitize_key( substr( $id, strlen( 'settings_page_' ) ) );
+	// Only match explicit plugin page patterns to avoid false positives.
+	$prefixes = array(
+		'settings_page_',
+		'toplevel_page_',
+		'admin_page_',
+	);
+	foreach ( $prefixes as $prefix ) {
+		if ( str_starts_with( $id, $prefix ) ) {
+			return sanitize_key( substr( $id, strlen( $prefix ) ) );
+		}
 	}
-	// For pages registered on other parents the id is "{parent_slug}_{slug}".
-	// Extract everything after the first underscore-delimited segment.
-	$pos = strpos( $id, '_' );
-	if ( false !== $pos ) {
-		return sanitize_key( substr( $id, $pos + 1 ) );
-	}
-	return sanitize_key( $id );
+	return '';
 }
 
 add_action(
