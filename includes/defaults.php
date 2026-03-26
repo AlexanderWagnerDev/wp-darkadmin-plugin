@@ -114,6 +114,12 @@ function darkadmin_preset_colors(): array {
 	return $cache;
 }
 
+/**
+ * Returns the CSS filename for a given preset slug.
+ *
+ * @param string $preset Preset slug (e.g. 'default', 'modern').
+ * @return string CSS filename.
+ */
 function darkadmin_preset_css_file( string $preset ): string {
 	$map = array(
 		'default' => 'darkadmin-dark.css',
@@ -122,51 +128,209 @@ function darkadmin_preset_css_file( string $preset ): string {
 	return $map[ $preset ] ?? 'darkadmin-dark.css';
 }
 
+/**
+ * Returns the CSS variable map for all color tokens.
+ *
+ * Each entry maps a color key to its CSS variable name, human-readable label,
+ * and display group used on the settings page.
+ *
+ * @return array<string, array{var: string, label: string, group: string}>
+ */
 function darkadmin_css_variable_map(): array {
 	return array(
-		'bg'              => array( 'var' => '--adm-bg',              'label' => __( 'Background (Base)',                     'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ) ),
-		'bg_bar'          => array( 'var' => '--adm-bg-bar',          'label' => __( 'Background (Admin Bar)',                'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ) ),
-		'bg_deep'         => array( 'var' => '--adm-bg-deep',         'label' => __( 'Background (Deep / Submenu)',           'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ) ),
-		'bg_darker'       => array( 'var' => '--adm-bg-darker',       'label' => __( 'Background (Darker / Editor Gutter)',   'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ) ),
-		'surface1'        => array( 'var' => '--adm-surface-1',       'label' => __( 'Surface 1 (Cards / Tables)',            'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Surfaces',    'darkadmin-dark-mode-for-adminpanel' ) ),
-		'surface2'        => array( 'var' => '--adm-surface-2',       'label' => __( 'Surface 2 (Inputs)',                    'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Surfaces',    'darkadmin-dark-mode-for-adminpanel' ) ),
-		'surface3'        => array( 'var' => '--adm-surface-3',       'label' => __( 'Surface 3 (Hover)',                     'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Surfaces',    'darkadmin-dark-mode-for-adminpanel' ) ),
-		'table_alt'       => array( 'var' => '--adm-table-alt',       'label' => __( 'Table Row Alternate',                   'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Surfaces',    'darkadmin-dark-mode-for-adminpanel' ) ),
-		'plugin_inactive' => array( 'var' => '--adm-plugin-inactive', 'label' => __( 'Plugin Inactive Row',                   'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Surfaces',    'darkadmin-dark-mode-for-adminpanel' ) ),
-		'border'          => array( 'var' => '--adm-border',          'label' => __( 'Border',                                'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Borders',     'darkadmin-dark-mode-for-adminpanel' ) ),
-		'border_focus'    => array( 'var' => '--adm-border-focus',    'label' => __( 'Border (Focus)',                        'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Borders',     'darkadmin-dark-mode-for-adminpanel' ) ),
-		'border_hover'    => array( 'var' => '--adm-border-hover',    'label' => __( 'Border (Hover)',                        'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Borders',     'darkadmin-dark-mode-for-adminpanel' ) ),
-		'text'            => array( 'var' => '--adm-text',            'label' => __( 'Primary Text',                          'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Text',        'darkadmin-dark-mode-for-adminpanel' ) ),
-		'text_muted'      => array( 'var' => '--adm-text-muted',      'label' => __( 'Muted Text',                            'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Text',        'darkadmin-dark-mode-for-adminpanel' ) ),
-		'text_soft'       => array( 'var' => '--adm-text-soft',       'label' => __( 'Soft Text (Row Actions)',                'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Text',        'darkadmin-dark-mode-for-adminpanel' ) ),
-		'text_on_primary' => array( 'var' => '--adm-text-on-primary', 'label' => __( 'Text on Primary / White',               'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Text',        'darkadmin-dark-mode-for-adminpanel' ) ),
-		'link'            => array( 'var' => '--adm-link',            'label' => __( 'Link Color',                            'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Links',       'darkadmin-dark-mode-for-adminpanel' ) ),
-		'link_hover'      => array( 'var' => '--adm-link-hover',      'label' => __( 'Link Hover',                            'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Links',       'darkadmin-dark-mode-for-adminpanel' ) ),
-		'primary'         => array( 'var' => '--adm-primary',         'label' => __( 'Primary / Buttons',                     'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ),
-		'primary_hover'   => array( 'var' => '--adm-primary-hover',   'label' => __( 'Primary Hover',                         'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ),
-		'success'         => array( 'var' => '--adm-success',         'label' => __( 'Success',                               'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ),
-		'warning'         => array( 'var' => '--adm-warning',         'label' => __( 'Warning',                               'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ),
-		'danger'          => array( 'var' => '--adm-danger',          'label' => __( 'Danger / Error',                        'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Brand',       'darkadmin-dark-mode-for-adminpanel' ) ),
-		'sidebar_bg'      => array( 'var' => '--adm-sidebar-bg',      'label' => __( 'Sidebar Background',                    'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Sidebar',     'darkadmin-dark-mode-for-adminpanel' ) ),
-		'sidebar_active'  => array( 'var' => '--adm-sidebar-active',  'label' => __( 'Sidebar Active Item',                   'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Sidebar',     'darkadmin-dark-mode-for-adminpanel' ) ),
-		'sidebar_text'    => array( 'var' => '--adm-sidebar-text',    'label' => __( 'Sidebar Text',                          'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'Sidebar',     'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_keyword'      => array( 'var' => '--adm-cm-keyword',      'label' => __( 'Code: Keyword',                         'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_operator'     => array( 'var' => '--adm-cm-operator',     'label' => __( 'Code: Operator / Bracket',              'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_variable2'    => array( 'var' => '--adm-cm-variable2',    'label' => __( 'Code: Variable / Def',                  'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_property'     => array( 'var' => '--adm-cm-property',     'label' => __( 'Code: Property',                        'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_number'       => array( 'var' => '--adm-cm-number',       'label' => __( 'Code: Number / Atom',                   'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_string'       => array( 'var' => '--adm-cm-string',       'label' => __( 'Code: String',                          'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_string2'      => array( 'var' => '--adm-cm-string2',      'label' => __( 'Code: String (alt)',                    'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_comment'      => array( 'var' => '--adm-cm-comment',      'label' => __( 'Code: Comment',                         'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_tag'          => array( 'var' => '--adm-cm-tag',          'label' => __( 'Code: Tag',                             'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_attribute'    => array( 'var' => '--adm-cm-attribute',    'label' => __( 'Code: Attribute / Qualifier / Builtin', 'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
-		'cm_bracket'      => array( 'var' => '--adm-cm-bracket',      'label' => __( 'Code: Bracket',                         'darkadmin-dark-mode-for-adminpanel' ), 'group' => __( 'CodeMirror',  'darkadmin-dark-mode-for-adminpanel' ) ),
+		'bg'              => array(
+			'var'   => '--adm-bg',
+			'label' => __( 'Background (Base)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'bg_bar'          => array(
+			'var'   => '--adm-bg-bar',
+			'label' => __( 'Background (Admin Bar)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'bg_deep'         => array(
+			'var'   => '--adm-bg-deep',
+			'label' => __( 'Background (Deep / Submenu)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'bg_darker'       => array(
+			'var'   => '--adm-bg-darker',
+			'label' => __( 'Background (Darker / Editor Gutter)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Backgrounds', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'surface1'        => array(
+			'var'   => '--adm-surface-1',
+			'label' => __( 'Surface 1 (Cards / Tables)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Surfaces', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'surface2'        => array(
+			'var'   => '--adm-surface-2',
+			'label' => __( 'Surface 2 (Inputs)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Surfaces', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'surface3'        => array(
+			'var'   => '--adm-surface-3',
+			'label' => __( 'Surface 3 (Hover)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Surfaces', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'table_alt'       => array(
+			'var'   => '--adm-table-alt',
+			'label' => __( 'Table Row Alternate', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Surfaces', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'plugin_inactive' => array(
+			'var'   => '--adm-plugin-inactive',
+			'label' => __( 'Plugin Inactive Row', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Surfaces', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'border'          => array(
+			'var'   => '--adm-border',
+			'label' => __( 'Border', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Borders', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'border_focus'    => array(
+			'var'   => '--adm-border-focus',
+			'label' => __( 'Border (Focus)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Borders', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'border_hover'    => array(
+			'var'   => '--adm-border-hover',
+			'label' => __( 'Border (Hover)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Borders', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'text'            => array(
+			'var'   => '--adm-text',
+			'label' => __( 'Primary Text', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Text', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'text_muted'      => array(
+			'var'   => '--adm-text-muted',
+			'label' => __( 'Muted Text', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Text', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'text_soft'       => array(
+			'var'   => '--adm-text-soft',
+			'label' => __( 'Soft Text (Row Actions)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Text', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'text_on_primary' => array(
+			'var'   => '--adm-text-on-primary',
+			'label' => __( 'Text on Primary / White', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Text', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'link'            => array(
+			'var'   => '--adm-link',
+			'label' => __( 'Link Color', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Links', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'link_hover'      => array(
+			'var'   => '--adm-link-hover',
+			'label' => __( 'Link Hover', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Links', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'primary'         => array(
+			'var'   => '--adm-primary',
+			'label' => __( 'Primary / Buttons', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Brand', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'primary_hover'   => array(
+			'var'   => '--adm-primary-hover',
+			'label' => __( 'Primary Hover', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Brand', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'success'         => array(
+			'var'   => '--adm-success',
+			'label' => __( 'Success', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Brand', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'warning'         => array(
+			'var'   => '--adm-warning',
+			'label' => __( 'Warning', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Brand', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'danger'          => array(
+			'var'   => '--adm-danger',
+			'label' => __( 'Danger / Error', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Brand', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'sidebar_bg'      => array(
+			'var'   => '--adm-sidebar-bg',
+			'label' => __( 'Sidebar Background', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Sidebar', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'sidebar_active'  => array(
+			'var'   => '--adm-sidebar-active',
+			'label' => __( 'Sidebar Active Item', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Sidebar', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'sidebar_text'    => array(
+			'var'   => '--adm-sidebar-text',
+			'label' => __( 'Sidebar Text', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'Sidebar', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_keyword'      => array(
+			'var'   => '--adm-cm-keyword',
+			'label' => __( 'Code: Keyword', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_operator'     => array(
+			'var'   => '--adm-cm-operator',
+			'label' => __( 'Code: Operator / Bracket', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_variable2'    => array(
+			'var'   => '--adm-cm-variable2',
+			'label' => __( 'Code: Variable / Def', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_property'     => array(
+			'var'   => '--adm-cm-property',
+			'label' => __( 'Code: Property', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_number'       => array(
+			'var'   => '--adm-cm-number',
+			'label' => __( 'Code: Number / Atom', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_string'       => array(
+			'var'   => '--adm-cm-string',
+			'label' => __( 'Code: String', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_string2'      => array(
+			'var'   => '--adm-cm-string2',
+			'label' => __( 'Code: String (alt)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_comment'      => array(
+			'var'   => '--adm-cm-comment',
+			'label' => __( 'Code: Comment', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_tag'          => array(
+			'var'   => '--adm-cm-tag',
+			'label' => __( 'Code: Tag', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_attribute'    => array(
+			'var'   => '--adm-cm-attribute',
+			'label' => __( 'Code: Attribute / Qualifier / Builtin', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
+		'cm_bracket'      => array(
+			'var'   => '--adm-cm-bracket',
+			'label' => __( 'Code: Bracket', 'darkadmin-dark-mode-for-adminpanel' ),
+			'group' => __( 'CodeMirror', 'darkadmin-dark-mode-for-adminpanel' ),
+		),
 	);
 }
 
 /**
  * Shared layout defaults used by all presets.
  * Both presets use the same values so users start from an identical base.
+ *
+ * @return array<string, string>
  */
 function darkadmin_default_layout(): array {
 	return array(
@@ -181,6 +345,13 @@ function darkadmin_default_layout(): array {
 	);
 }
 
+/**
+ * Returns layout presets keyed by preset slug.
+ *
+ * Currently all presets share the same layout defaults.
+ *
+ * @return array<string, array<string, string>>
+ */
 function darkadmin_preset_layout(): array {
 	$shared = darkadmin_default_layout();
 	return array(
@@ -189,16 +360,56 @@ function darkadmin_preset_layout(): array {
 	);
 }
 
+/**
+ * Returns the CSS variable map for all layout tokens.
+ *
+ * Each entry maps a layout key to its CSS variable name, human-readable label,
+ * and the CSS unit used for sanitization.
+ *
+ * @return array<string, array{var: string, label: string, unit: string}>
+ */
 function darkadmin_layout_variable_map(): array {
 	return array(
-		'space_2'   => array( 'var' => '--adm-space-2',   'label' => __( 'Spacing (Small)',         'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ),
-		'space_3'   => array( 'var' => '--adm-space-3',   'label' => __( 'Spacing (Medium)',        'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ),
-		'btn_h'     => array( 'var' => '--adm-btn-h',     'label' => __( 'Button Height',           'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ),
-		'input_h'   => array( 'var' => '--adm-input-h',   'label' => __( 'Input Height',            'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ),
-		'radius_sm' => array( 'var' => '--adm-radius-sm', 'label' => __( 'Border Radius (Small)',   'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ),
-		'radius_md' => array( 'var' => '--adm-radius-md', 'label' => __( 'Border Radius (Medium)',  'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ),
-		'radius_lg' => array( 'var' => '--adm-radius-lg', 'label' => __( 'Border Radius (Large)',   'darkadmin-dark-mode-for-adminpanel' ), 'unit' => 'px' ),
-		'shadow_md' => array( 'var' => '--adm-shadow-md', 'label' => __( 'Shadow',                  'darkadmin-dark-mode-for-adminpanel' ), 'unit' => '' ),
+		'space_2'   => array(
+			'var'   => '--adm-space-2',
+			'label' => __( 'Spacing (Small)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => 'px',
+		),
+		'space_3'   => array(
+			'var'   => '--adm-space-3',
+			'label' => __( 'Spacing (Medium)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => 'px',
+		),
+		'btn_h'     => array(
+			'var'   => '--adm-btn-h',
+			'label' => __( 'Button Height', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => 'px',
+		),
+		'input_h'   => array(
+			'var'   => '--adm-input-h',
+			'label' => __( 'Input Height', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => 'px',
+		),
+		'radius_sm' => array(
+			'var'   => '--adm-radius-sm',
+			'label' => __( 'Border Radius (Small)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => 'px',
+		),
+		'radius_md' => array(
+			'var'   => '--adm-radius-md',
+			'label' => __( 'Border Radius (Medium)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => 'px',
+		),
+		'radius_lg' => array(
+			'var'   => '--adm-radius-lg',
+			'label' => __( 'Border Radius (Large)', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => 'px',
+		),
+		'shadow_md' => array(
+			'var'   => '--adm-shadow-md',
+			'label' => __( 'Shadow', 'darkadmin-dark-mode-for-adminpanel' ),
+			'unit'  => '',
+		),
 	);
 }
 
@@ -208,8 +419,8 @@ function darkadmin_layout_variable_map(): array {
  * Receives the submitted array from the Settings API (nonce already verified
  * by options.php via settings_fields()). No direct $_POST access is performed.
  *
- * @param mixed $input
- * @return array
+ * @param mixed $input Raw input from the Settings API.
+ * @return array Sanitized color values.
  */
 function darkadmin_sanitize_colors( $input ): array {
 	$input  = is_array( $input ) ? $input : array();
@@ -237,8 +448,8 @@ function darkadmin_sanitize_colors( $input ): array {
  * Receives the submitted array from the Settings API (nonce already verified
  * by options.php via settings_fields()). No direct $_POST access is performed.
  *
- * @param mixed $input
- * @return array
+ * @param mixed $input Raw input from the Settings API.
+ * @return array Sanitized layout values.
  */
 function darkadmin_sanitize_layout( $input ): array {
 	$input  = is_array( $input ) ? $input : array();
@@ -272,11 +483,23 @@ function darkadmin_sanitize_layout( $input ): array {
 	return $output;
 }
 
+/**
+ * Sanitizes the user access mode option value.
+ *
+ * @param string $value Raw value to sanitize.
+ * @return string One of 'all', 'include', or 'exclude'.
+ */
 function darkadmin_sanitize_user_access_mode( string $value ): string {
 	$allowed = array( 'all', 'include', 'exclude' );
 	return in_array( $value, $allowed, true ) ? $value : 'all';
 }
 
+/**
+ * Sanitizes the custom CSS option value.
+ *
+ * @param string $css Raw CSS string.
+ * @return string Sanitized CSS with all HTML tags stripped.
+ */
 function darkadmin_sanitize_custom_css( string $css ): string {
 	return wp_strip_all_tags( $css );
 }
