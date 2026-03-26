@@ -125,7 +125,7 @@ function darkadmin_preset_css_file( string $preset ): string {
 		'default' => 'darkadmin-dark.css',
 		'modern'  => 'darkadmin-wp-modern.css',
 	);
-	return $map[ $preset ] ?? 'darkadmin-dark.css';
+	return isset( $map[ $preset ] ) ? $map[ $preset ] : 'darkadmin-dark.css';
 }
 
 /**
@@ -437,7 +437,8 @@ function darkadmin_sanitize_colors( $input ): array {
 	$output   = array();
 	foreach ( $defaults as $key => $default ) {
 		$raw            = isset( $input[ $key ] ) ? (string) $input[ $key ] : $default;
-		$output[ $key ] = sanitize_hex_color( $raw ) ?: $default;
+		$sanitized      = sanitize_hex_color( $raw );
+		$output[ $key ] = ( false !== $sanitized && '' !== $sanitized ) ? $sanitized : $default;
 	}
 	return $output;
 }
