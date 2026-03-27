@@ -1,10 +1,10 @@
 === DarkAdmin - Dark Mode for Adminpanel ===
 Contributors: alexanderwagnerdev
 Tags: dark mode, admin, dashboard, ui, accessibility
-Requires at least: 6.7
+Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,12 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 4. Dashboard - Dark Mode aktiv
 
 == Changelog ==
+= 0.2.1 =
+* Mindestanforderung für WordPress-Version von 6.7 auf 6.3 gesenkt
+* Dark-Mode-Stile für Thickbox-Modal (Plugin-Details-Dialog): Hintergrund, Text, Links, Buttons und Schließen-Button vollständig über `--adm-*`-Variablen gestylt
+* Theme-Overlay-Header-Navigationsbuttons (`.theme-overlay .theme-header .left` / `.right` / `.close`) korrigiert: Hintergrund, Farbe und `border: none` mit `--adm-*`-Variablen in beiden Dateien `darkadmin-dark.css` und `darkadmin-wp-modern.css` angewendet
+* Styling des `#contextual-help-back`-Buttons korrigiert: Hintergrund, Rahmen und Farbe verwenden nun `--adm-*`-Tokens in beiden CSS-Presets
+
 = 0.2.0 =
 * Mindest-WordPress-Version auf 6.7 angehoben
 * Mindest-PHP-Version auf 8.0 angehoben (bereits erforderlich durch Verwendung von str_starts_with, str_contains und Named Arguments)
