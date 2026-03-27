@@ -1,8 +1,8 @@
 === DarkAdmin - Dark Mode for Adminpanel ===
 Contributors: alexanderwagnerdev
 Tags: dark mode, admin, dashboard, ui, accessibility
-Requires at least: 6.7
-Tested up to: 6.3
+Requires at least: 6.3
+Tested up to: 7.0
 Requires PHP: 7.4
 Stable tag: dev2026032701
 License: GPLv2 or later
