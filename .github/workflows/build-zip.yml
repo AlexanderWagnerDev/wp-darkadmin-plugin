@@ -3,10 +3,7 @@ name: Build Plugin ZIP
 on:
   push:
     branches:
-      - main
-  release:
-    types:
-      - published
+      - dev
   workflow_dispatch:
 
 permissions:
@@ -23,7 +20,7 @@ jobs:
 
       - name: Create plugin ZIP
         run: |
-          ZIP_NAME="darkadmin-dark-mode-for-adminpanel.zip"
+          ZIP_NAME="darkadmin-dark-mode-for-adminpanel-dev.zip"
           ZIP_PATH="/tmp/${ZIP_NAME}"
 
           find . \
