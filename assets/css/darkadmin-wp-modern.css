@@ -591,6 +591,41 @@ body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary:hover {
 }
 
 /* =============================================================================
+   THICKBOX / PLUGIN DETAILS MODAL
+   ============================================================================= */
+#TB_overlay {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+#TB_window {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+  color: var(--adm-text) !important;
+}
+#TB_title {
+  background: var(--adm-bg) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+#TB_ajaxWindowTitle {
+  color: var(--adm-text) !important;
+}
+#TB_ajaxContent {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+#TB_closeWindowButton,
+#TB_closeWindowButton .tb-close-icon {
+  color: var(--adm-text-muted) !important;
+}
+#TB_closeWindowButton:hover {
+  color: var(--adm-text) !important;
+}
+#TB_load {
+  background: var(--adm-surface-1) !important;
+}
+
+/* =============================================================================
    WP COLOR PICKER (Iris)
    ============================================================================= */
 .wp-picker-container {
