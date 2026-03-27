@@ -5,6 +5,17 @@ All notable changes to DarkAdmin - Dark Mode for Adminpanel are documented in th
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.2.1] - 2026-03-28
+
+### Changed
+- Raised minimum WordPress version requirement to 6.3
+
+### Added
+- Dark mode styles for Thickbox modal (plugin details dialog): background, text, links, buttons and close button fully themed via `--adm-*` variables
+
+### Fixed
+- Fixed theme overlay header navigation buttons (`.theme-overlay .theme-header .left` / `.right` / `.close`): applied background, color and `border: none` using `--adm-*` variables in both `darkadmin-dark.css` and `darkadmin-wp-modern.css`
+- Fixed `#contextual-help-back` button styling: background, border and color now use `--adm-*` tokens in both CSS presets
 
 ## [0.2.0] - 2026-03-26
 
