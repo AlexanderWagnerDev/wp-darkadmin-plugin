@@ -1,1 +1,1659 @@
-TODO_DARK
+/*
+ * DarkAdmin - Dark Mode for Adminpanel - Core Stylesheet
+ * Author: AlexanderWagnerDev
+ *
+ * All colors are driven by CSS custom properties.
+ * Override them via Settings > DarkAdmin.
+ */
+
+/* =============================================================================
+   BASE
+   ============================================================================= */
+html,
+body,
+body.wp-admin,
+#wpwrap,
+#wpcontent,
+#wpbody,
+#wpbody-content,
+#wpfooter,
+#dashboard-widgets-wrap {
+  background-color: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+.wrap {
+  color: var(--adm-text);
+}
+
+/* =============================================================================
+   ADMIN BAR
+   ============================================================================= */
+#wpadminbar {
+  background: var(--adm-bg-bar) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+#wpadminbar .ab-item,
+#wpadminbar a.ab-item,
+#wpadminbar > #wp-toolbar,
+#wpadminbar .ab-top-menu,
+#wpadminbar .ab-top-menu > li,
+#wpadminbar #wp-admin-bar-root-default,
+#wpadminbar #wp-admin-bar-top-secondary {
+  background: var(--adm-bg-bar) !important;
+}
+#wpadminbar .ab-top-menu > li > .ab-item,
+#wpadminbar > #wp-toolbar > #wp-admin-bar-root-default .ab-item {
+  color: var(--adm-text-muted) !important;
+}
+#wpadminbar .ab-top-menu > li:hover > .ab-item,
+#wpadminbar .ab-top-menu > li.hover > .ab-item {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+#wpadminbar .menupop .ab-sub-wrapper {
+  background: var(--adm-bg-bar) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: var(--adm-shadow-md) !important;
+}
+#wpadminbar .menupop .ab-sub-wrapper a {
+  color: var(--adm-text) !important;
+}
+#wpadminbar .menupop .ab-sub-wrapper a:hover {
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+#wpadminbar .update-plugins,
+#wpadminbar #wp-admin-bar-updates .update-plugins {
+  background: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+  border-radius: 999px !important;
+}
+
+/* =============================================================================
+   SIDEBAR
+   ============================================================================= */
+#adminmenu,
+#adminmenuback,
+#adminmenuwrap {
+  background: var(--adm-bg) !important;
+}
+#adminmenu a {
+  color: var(--adm-text-muted) !important;
+}
+#adminmenu .wp-has-current-submenu > a,
+#adminmenu .current > a,
+#adminmenu a:hover {
+  color: var(--adm-text-on-primary) !important;
+}
+#adminmenu .wp-has-current-submenu .wp-submenu,
+#adminmenu .wp-has-current-submenu .wp-submenu-wrap,
+#adminmenu li.opensub .wp-submenu,
+#adminmenu li:hover .wp-submenu {
+  background: var(--adm-bg-deep) !important;
+}
+#adminmenu .wp-submenu a {
+  color: var(--adm-text-muted) !important;
+}
+#adminmenu .wp-submenu a:hover,
+#adminmenu .wp-submenu .current a {
+  color: var(--adm-text-on-primary) !important;
+}
+#adminmenu li.menu-top:hover,
+#adminmenu li.opensub > a.menu-top {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+#adminmenu li.menu-top:hover > a > .wp-menu-image::before,
+#adminmenu li.opensub > a > .wp-menu-image::before,
+#adminmenu li.wp-has-current-submenu > a > .wp-menu-image::before,
+#adminmenu li.current > a > .wp-menu-image::before {
+  color: var(--adm-text-on-primary) !important;
+  opacity: 1;
+}
+#adminmenu li.wp-has-current-submenu > a::before,
+#adminmenu li.current > a::before,
+#adminmenu .wp-has-current-submenu a.wp-has-current-submenu::before {
+  display: none !important;
+}
+#adminmenu .wp-menu-arrow,
+#adminmenu .wp-menu-arrow div {
+  background: var(--adm-surface-1) !important;
+}
+#adminmenu li.menu-top.current,
+#adminmenu li.wp-has-current-submenu {
+  background: var(--adm-surface-1) !important;
+}
+#adminmenu li.current > a.menu-top,
+#adminmenu li.wp-has-current-submenu > a.wp-has-current-submenu {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+#adminmenu .wp-menu-separator {
+  border-color: var(--adm-border) !important;
+  background: transparent !important;
+}
+#adminmenu .wp-menu-image {
+  filter: brightness(.7);
+}
+#adminmenu li.current .wp-menu-image,
+#adminmenu li:hover .wp-menu-image {
+  filter: brightness(1);
+}
+.wp-submenu-head {
+  color: var(--adm-text-soft) !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+}
+#collapse-menu,
+#collapse-menu:hover,
+#collapse-button {
+  color: var(--adm-text-muted) !important;
+}
+#collapse-button:hover {
+  color: var(--adm-text) !important;
+  background: var(--adm-surface-1) !important;
+}
+.wp-menu-badge::before,
+.wp-menu-badge {
+  color: var(--adm-text-muted) !important;
+}
+.folded #adminmenu li.menu-top:hover > div.wp-menu-name {
+  background: var(--adm-bg-bar) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-md) !important;
+  color: var(--adm-text) !important;
+  box-shadow: var(--adm-shadow-md) !important;
+}
+
+/* =============================================================================
+   TYPOGRAPHY
+   ============================================================================= */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--adm-text) !important;
+}
+p, li, td, th, label, span, div {
+  color: inherit;
+}
+a {
+  color: var(--adm-link) !important;
+}
+a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.wp-heading-inline {
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   BUTTONS
+   ============================================================================= */
+.wp-core-ui .button:not(.wp-color-result),
+.wp-core-ui .button-secondary,
+a.page-title-action,
+.page-title-action {
+  height: var(--adm-btn-h) !important;
+  line-height: var(--adm-btn-h) !important;
+  padding: 0 var(--adm-space-3) !important;
+  border-radius: var(--adm-radius-sm) !important;
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-size: 13px !important;
+  cursor: pointer;
+}
+.wp-core-ui .button:hover,
+.wp-core-ui .button-secondary:hover,
+a.page-title-action:hover,
+.page-title-action:hover {
+  background: var(--adm-surface-3) !important;
+  border-color: var(--adm-border-hover) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.wp-core-ui .button-primary {
+  background: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.wp-core-ui .button-primary:hover {
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.wp-core-ui .button:disabled,
+.wp-core-ui .button[disabled] {
+  opacity: .55 !important;
+  cursor: not-allowed !important;
+}
+a.page-title-action {
+  margin-left: var(--adm-space-2) !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  text-decoration: none !important;
+}
+
+/* =============================================================================
+   FORMS & INPUTS
+   ============================================================================= */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+textarea,
+select {
+  min-height: var(--adm-input-h) !important;
+  padding: 0 var(--adm-space-2) !important;
+  border-radius: var(--adm-radius-sm) !important;
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+textarea {
+  min-height: unset !important;
+  padding: var(--adm-space-2) !important;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--adm-border-focus) !important;
+  box-shadow: 0 0 0 1px var(--adm-border-focus) !important;
+  outline: none !important;
+}
+select option {
+  background: var(--adm-surface-2);
+  color: var(--adm-text);
+}
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--adm-primary);
+}
+::placeholder {
+  color: var(--adm-text-soft) !important;
+  opacity: 1;
+}
+
+/* =============================================================================
+   TABLES
+   ============================================================================= */
+.wp-list-table,
+table.widefat {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+.wp-list-table th,
+.wp-list-table td,
+table.widefat th,
+table.widefat td {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.wp-list-table .alternate td,
+table.widefat .alternate td {
+  background: var(--adm-table-alt) !important;
+}
+.wp-list-table thead th,
+table.widefat thead th {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text-muted) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.column-primary strong a {
+  color: var(--adm-link) !important;
+}
+th.check-column {
+  background: var(--adm-bg) !important;
+}
+.widefat p,
+.widefat ul,
+.widefat ol {
+  color: var(--adm-text) !important;
+}
+.subsubsub {
+  margin: 8px 0 12px !important;
+  color: var(--adm-text-soft) !important;
+}
+.subsubsub a {
+  color: var(--adm-link) !important;
+}
+.subsubsub .current {
+  color: var(--adm-text) !important;
+  font-weight: 600;
+}
+.tablenav {
+  margin: 8px 0 !important;
+}
+.tablenav .displaying-num,
+.tablenav .tablenav-pages .current-page {
+  color: var(--adm-text-muted) !important;
+}
+.tablenav .tablenav-pages a {
+  color: var(--adm-link) !important;
+  border-color: var(--adm-border) !important;
+}
+.tablenav select,
+.tablenav .actions select {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.tablenav-pages input[type="number"] {
+  padding: 0 4px !important;
+}
+.wp-list-table .row-actions {
+  color: var(--adm-text-soft) !important;
+}
+.wp-list-table .row-actions a {
+  color: var(--adm-link) !important;
+}
+.wp-list-table .row-actions span.delete a,
+.wp-list-table .row-actions .submitdelete {
+  color: var(--adm-danger) !important;
+}
+
+/* =============================================================================
+   PLUGIN LIST
+   ============================================================================= */
+.plugins tr td {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.plugins tr.inactive td {
+  background: var(--adm-plugin-inactive) !important;
+}
+.plugins .plugin-title strong,
+.plugins .plugin-title strong a {
+  color: var(--adm-text) !important;
+}
+.plugins .plugin-description p,
+.plugins td.desc p,
+.plugins .second p {
+  color: var(--adm-text-muted) !important;
+  margin: 2px 0 !important;
+}
+.plugins .row-actions,
+.plugins .row-actions span a {
+  color: var(--adm-text-soft) !important;
+}
+.plugins .row-actions span a:hover {
+  color: var(--adm-text) !important;
+}
+.plugins .update-message p {
+  color: var(--adm-warning) !important;
+  background: transparent !important;
+}
+.plugin-update-tr .update-message {
+  background: rgba(34,113,177,.10) !important;
+  border-top-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   PLUGIN INSTALL PAGE
+   ============================================================================= */
+.wp-filter {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.wp-filter .filter-links li a {
+  color: var(--adm-text-muted) !important;
+  border-color: var(--adm-border) !important;
+}
+.wp-filter .filter-links li a:hover,
+.wp-filter .filter-links li a.current {
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+  border-bottom: 3px solid var(--adm-primary) !important;
+}
+.wp-filter .search-form .wp-filter-search {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.wp-filter .search-form .wp-filter-search::placeholder {
+  color: var(--adm-text-soft) !important;
+}
+#search-submit,
+.wp-filter .button {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+#search-submit:hover,
+.wp-filter .button:hover {
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+#plugin-filter,
+.plugin-install-tab {
+  background: transparent !important;
+}
+.plugin-card {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.plugin-card:hover {
+  border-color: var(--adm-primary) !important;
+  box-shadow: var(--adm-shadow-md) !important;
+}
+.plugin-card .plugin-card-top {
+  background: var(--adm-surface-1) !important;
+}
+.plugin-card .name,
+.plugin-card .name a {
+  color: var(--adm-text) !important;
+}
+.plugin-card .desc p,
+.plugin-card .desc {
+  color: var(--adm-text-muted) !important;
+}
+.plugin-card .authors,
+.plugin-card .authors a {
+  color: var(--adm-text-soft) !important;
+}
+.plugin-card .authors a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.plugin-card .plugin-action-buttons a.install-now,
+.plugin-card .plugin-action-buttons a.activate-now {
+  background: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.plugin-card .plugin-action-buttons a.install-now:hover,
+.plugin-card .plugin-action-buttons a.activate-now:hover {
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+}
+.plugin-card .plugin-action-buttons a {
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+.plugin-card .plugin-action-buttons a:hover {
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.plugin-card .plugin-card-bottom {
+  background: var(--adm-bg) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+.plugin-card .star-rating .star { color: var(--adm-warning) !important; }
+.plugin-card .num-ratings { color: var(--adm-text-soft) !important; }
+.plugin-card .compatibility-compatible strong { color: var(--adm-success) !important; }
+.plugin-card .compatibility-incompatible strong { color: var(--adm-danger) !important; }
+.plugin-card .compatibility-warning strong { color: var(--adm-warning) !important; }
+
+body.wp-admin .upload-plugin-wrap .upload-plugin .wp-upload-form,
+body.wp-admin div.upload-plugin > form.wp-upload-form {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-md) !important;
+  box-shadow: none !important;
+  padding: 20px !important;
+  color: var(--adm-text) !important;
+}
+body.wp-admin .upload-plugin-wrap,
+body.wp-admin .upload-plugin,
+body.wp-admin div.upload-plugin {
+  background: var(--adm-bg) !important;
+}
+body.wp-admin div.upload-plugin > form.wp-upload-form input[type="file"],
+body.wp-admin .upload-plugin .wp-upload-form input[type="file"] {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-sm) !important;
+}
+body.wp-admin div.upload-plugin > form.wp-upload-form label,
+body.wp-admin .upload-plugin .wp-upload-form label {
+  color: var(--adm-text) !important;
+}
+body.wp-admin div.upload-plugin > form.wp-upload-form input[type="submit"],
+body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary,
+body.wp-admin .upload-plugin .wp-upload-form input[type="submit"],
+body.wp-admin .upload-plugin .wp-upload-form .button-primary {
+  background: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+body.wp-admin div.upload-plugin > form.wp-upload-form input[type="submit"]:hover,
+body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary:hover,
+body.wp-admin .upload-plugin .wp-upload-form input[type="submit"]:hover,
+body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+}
+
+/* =============================================================================
+   PLUGIN INFORMATION
+   ============================================================================= */
+#plugin-information,
+#plugin-information .fyi,
+#plugin-information .plugin-information-sidebar,
+#plugin-information .plugin-information-content,
+#plugin-information .plugin-information-header {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+#plugin-information .fyi h3,
+#plugin-information .fyi ul li,
+#plugin-information .plugin-information-sidebar h3,
+#plugin-information .plugin-information-sidebar ul li {
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+#plugin-information .fyi a,
+#plugin-information .plugin-information-sidebar a {
+  color: var(--adm-link) !important;
+}
+#plugin-information h2.plugin-name,
+#plugin-information h3 {
+  color: var(--adm-text) !important;
+}
+#plugin-information p,
+#plugin-information li,
+#plugin-information .plugin-information-content p,
+#plugin-information .plugin-information-content li {
+  color: var(--adm-text) !important;
+}
+#plugin-information #section-description,
+#plugin-information #section-changelog,
+#plugin-information #section-reviews,
+#plugin-information #section-screenshots {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+#plugin-information .plugin-information-tabs,
+#plugin-information .plugin-information-tabs a {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text-muted) !important;
+  border-color: var(--adm-border) !important;
+}
+#plugin-information .plugin-information-tabs a:hover,
+#plugin-information .plugin-information-tabs a.current {
+  color: var(--adm-text) !important;
+  border-bottom-color: var(--adm-primary) !important;
+}
+
+/* =============================================================================
+   WP COLOR PICKER (Iris)
+   ============================================================================= */
+.wp-picker-container {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--adm-space-2);
+  flex-wrap: wrap;
+}
+.wp-picker-container .wp-color-result {
+  height: var(--adm-btn-h) !important;
+  padding: 0 0 0 30px !important;
+  border-radius: var(--adm-radius-sm) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+.wp-picker-container .wp-color-result .wp-color-result-text {
+  height: 100%;
+  line-height: var(--adm-btn-h) !important;
+  padding: 0 var(--adm-space-2) !important;
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border-left: 1px solid var(--adm-border) !important;
+}
+.wp-picker-container input[type="text"].wp-color-picker {
+  height: var(--adm-input-h) !important;
+  width: 90px !important;
+  padding: 0 var(--adm-space-2) !important;
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-sm) !important;
+}
+.wp-picker-holder {
+  margin-top: 4px;
+}
+.iris-picker {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: var(--adm-shadow-md) !important;
+  border-radius: var(--adm-radius-md) !important;
+}
+.iris-picker .iris-picker-inner input[type="text"] {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+}
+.iris-picker .iris-palette-container .iris-palette {
+  border: 1px solid var(--adm-border) !important;
+}
+.wp-picker-input-wrap .button,
+.wp-picker-clear {
+  height: var(--adm-btn-h) !important;
+  line-height: var(--adm-btn-h) !important;
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* =============================================================================
+   NOTICES
+   ============================================================================= */
+.notice,
+div.notice,
+div.updated,
+div.error,
+.update-nag {
+  background: var(--adm-surface-1) !important;
+  border-left-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+.notice p,
+.notice li,
+.update-nag p {
+  color: var(--adm-text) !important;
+}
+.notice .notice-dismiss::before {
+  color: var(--adm-text-muted) !important;
+}
+.notice .notice-dismiss:hover::before {
+  color: var(--adm-danger) !important;
+}
+div.notice-success, .notice.notice-success { border-left-color: var(--adm-success)  !important; }
+div.notice-error, .notice.notice-error { border-left-color: var(--adm-danger)   !important; }
+div.notice-warning, .notice.notice-warning { border-left-color: var(--adm-warning)  !important; }
+div.notice-info, .notice.notice-info { border-left-color: var(--adm-primary)  !important; }
+
+/* =============================================================================
+   POSTBOXES / METABOXES
+   ============================================================================= */
+.postbox,
+.postbox .inside,
+.stuffbox {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.postbox .hndle,
+.postbox .handlediv,
+.postbox-header {
+  background: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.postbox-header .handlediv {
+  color: var(--adm-text-muted) !important;
+}
+.meta-box-sortables .postbox:hover {
+  box-shadow: var(--adm-shadow-md) !important;
+}
+#poststuff h1,
+#poststuff h2 {
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   SCREEN OPTIONS / HELP
+   ============================================================================= */
+#screen-meta,
+#screen-meta-links,
+#screen-options-wrap,
+#contextual-help-wrap {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+#screen-meta-links .show-settings {
+  color: var(--adm-text-muted) !important;
+  border-color: var(--adm-border) !important;
+}
+#contextual-help-back {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+/* =============================================================================
+   TABS
+   ============================================================================= */
+.nav-tab-wrapper {
+  border-bottom-color: var(--adm-border) !important;
+}
+.nav-tab {
+  background: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+.nav-tab:hover {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+.nav-tab-active,
+.nav-tab-active:hover {
+  background: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   SETTINGS PAGES (form-table)
+   ============================================================================= */
+.form-table,
+.form-table td,
+.form-table th {
+  background: transparent !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.form-table td .description {
+  color: var(--adm-text-muted) !important;
+}
+
+/* =============================================================================
+   SEARCH & PAGINATION
+   ============================================================================= */
+.search-box input[type="search"] {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+}
+.search-box .button {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   MEDIA
+   ============================================================================= */
+.media-frame,
+.media-frame-content,
+.media-frame-menu,
+.media-sidebar,
+.uploader-inline,
+.upload-ui {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.media-frame .media-menu-item {
+  color: var(--adm-text-muted) !important;
+  border-bottom-color: var(--adm-border) !important;
+}
+.media-frame .media-menu-item.active,
+.media-frame .media-menu-item:hover {
+  color: var(--adm-text) !important;
+  background: var(--adm-surface-2) !important;
+}
+.media-modal,
+.media-modal-content {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+.media-modal-backdrop {
+  background: rgba(0,0,0,.75) !important;
+}
+.attachment-details,
+.attachment-details .settings {
+  background: var(--adm-surface-2) !important;
+  border-left-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.attachment-details label,
+.attachment-details .name {
+  color: var(--adm-text-muted) !important;
+}
+.edit-attachment-frame .media-frame-title {
+  background: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-border) !important;
+}
+.media-toolbar,
+.media-toolbar-primary,
+.media-toolbar-secondary {
+  background: var(--adm-bg) !important;
+  border-top-color: var(--adm-border) !important;
+}
+.media-search-input {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   GUTENBERG
+   ============================================================================= */
+.editor-styles-wrapper {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+.edit-post-sidebar,
+.interface-interface-skeleton__sidebar {
+  background: var(--adm-surface-1) !important;
+  border-left-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.edit-post-header,
+.interface-interface-skeleton__header {
+  background: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-border) !important;
+}
+
+/* =============================================================================
+   DROPDOWN MENUS
+   ============================================================================= */
+.dropdown-content,
+ul.wp-submenu {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  box-shadow: var(--adm-shadow-md) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - WELCOME PANEL
+   ============================================================================= */
+.welcome-panel {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+.welcome-panel-header {
+  background: var(--adm-bg) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.welcome-panel-header h2,
+.welcome-panel-header p {
+  color: var(--adm-text) !important;
+}
+.welcome-panel-header a {
+  color: var(--adm-link) !important;
+}
+.welcome-panel-content,
+.welcome-panel-column-container,
+.welcome-panel-column {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+.welcome-panel-content h3,
+.welcome-panel-content p,
+.welcome-panel-column h3,
+.welcome-panel-column p {
+  color: var(--adm-text) !important;
+}
+.welcome-panel-content a,
+.welcome-panel-column a {
+  color: var(--adm-link) !important;
+}
+.welcome-panel-content a:hover,
+.welcome-panel-column a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.welcome-panel .welcome-icon::before {
+  color: var(--adm-primary) !important;
+}
+.welcome-panel-close {
+  color: var(--adm-text-soft) !important;
+}
+.welcome-panel-close:hover {
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - ACTIVITY WIDGET
+   ============================================================================= */
+#dashboard_activity .subsubsub a {
+  color: var(--adm-link) !important;
+}
+#dashboard_activity .activity-block h3,
+#dashboard_activity .activity-block .published,
+#dashboard_activity .activity-block time {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_activity .activity-block ul li a {
+  color: var(--adm-link) !important;
+}
+#dashboard_activity .activity-block ul li span {
+  color: var(--adm-text-soft) !important;
+}
+#dashboard_activity .activity-block ul li,
+#dashboard_activity #the-comment-list tr,
+#dashboard_activity #the-comment-list td {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - COMMENT WIDGETS
+   ============================================================================= */
+.dashboard-comment-wrap,
+#latest-comments .comment-item,
+#the-comment-list .comment-item {
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+#latest-comments .comment-item .avatar-column,
+#latest-comments .comment-item .comment-body-column,
+.dashboard-comment-wrap .avatar,
+.dashboard-comment-wrap p {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+#latest-comments .comment-item blockquote,
+#latest-comments .comment-item blockquote p,
+.dashboard-comment-wrap blockquote,
+.dashboard-comment-wrap blockquote p {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text-muted) !important;
+  border-color: var(--adm-border) !important;
+}
+#latest-comments .comment-meta,
+#latest-comments .comment-meta a,
+.dashboard-comment-wrap .comment-meta,
+.dashboard-comment-wrap .comment-meta a {
+  color: var(--adm-text-muted) !important;
+}
+#latest-comments .row-actions,
+.dashboard-comment-wrap .row-actions span a {
+  color: var(--adm-text-soft) !important;
+}
+#latest-comments .row-actions span a:hover,
+.dashboard-comment-wrap .row-actions span a:hover {
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - WORDPRESS NEWS / EVENTS WIDGET
+   ============================================================================= */
+#dashboard_primary,
+#dashboard_secondary {
+  background: var(--adm-surface-1) !important;
+}
+#dashboard_primary .rss-widget ul li,
+#dashboard_secondary .rss-widget ul li {
+  border-top: 1px solid var(--adm-border) !important;
+}
+#dashboard_primary .rss-widget ul li a,
+#dashboard_secondary .rss-widget ul li a {
+  color: var(--adm-link) !important;
+}
+#dashboard_primary .rss-widget ul li a:hover,
+#dashboard_secondary .rss-widget ul li a:hover {
+  color: var(--adm-link-hover) !important;
+}
+#dashboard_primary .rss-widget .rss-date,
+#dashboard_primary .rss-widget cite,
+#dashboard_secondary .rss-widget .rss-date,
+#dashboard_secondary .rss-widget cite {
+  color: var(--adm-text-soft) !important;
+}
+.community-events-toggle-location,
+.community-events-toggle-location:hover {
+  color: var(--adm-link) !important;
+}
+.community-events-form {
+  background: var(--adm-surface-2) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+.community-events-form label {
+  color: var(--adm-text-muted) !important;
+}
+.community-events-form input[type="text"],
+#community-events-location {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.community-events-errors,
+.community-events-loading {
+  color: var(--adm-text-muted) !important;
+}
+.community-events-footer {
+  background: var(--adm-bg) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+.community-events-footer a {
+  color: var(--adm-link) !important;
+}
+.community-events-footer a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.community-events ul .event-title a {
+  color: var(--adm-link) !important;
+}
+.community-events ul .event-title a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.community-events ul .event-date-time,
+.community-events ul time {
+  color: var(--adm-text-muted) !important;
+}
+.community-events ul .event-location {
+  color: var(--adm-text-soft) !important;
+}
+.community-events ul .event-type-badge {
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - QUICK DRAFT WIDGET
+   ============================================================================= */
+#dashboard-widgets #dashboard_quick_press label {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_quick_press .drafts h2,
+#dashboard_quick_press .drafts h3 {
+  color: var(--adm-text) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+#dashboard_quick_press .drafts ul li a {
+  color: var(--adm-link) !important;
+}
+#dashboard_quick_press .drafts ul li .draft-title a:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - AT A GLANCE WIDGET
+   ============================================================================= */
+#dashboard_right_now .main,
+#dashboard_right_now .versions {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+#dashboard_right_now .main li a,
+#dashboard_right_now .main li span {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_right_now .main li a:hover {
+  color: var(--adm-link-hover) !important;
+}
+#dashboard_right_now .versions p,
+#dashboard_right_now .versions a {
+  color: var(--adm-text-muted) !important;
+}
+#dashboard_right_now .versions a:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+/* =============================================================================
+   DASHBOARD - GENERIC WIDGETS
+   ============================================================================= */
+#dashboard-widgets .postbox-container .postbox,
+#wp-dashboard-right .meta-box-sortables .postbox,
+#wp-dashboard-left .meta-box-sortables .postbox {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+.activity-block {
+  border-top-color: var(--adm-border) !important;
+}
+#dashboard_activity .no-activity p {
+  color: var(--adm-text-muted) !important;
+}
+.comment-ays,
+.feature-filter,
+.popular-tags,
+.widgets-holder-wrap {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.community-events,
+.community-events li {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   CARD
+   ============================================================================= */
+.card {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+.card h2,
+.card h3,
+.card p {
+  color: var(--adm-text) !important;
+}
+.card a {
+  color: var(--adm-link) !important;
+}
+.card a:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+/* =============================================================================
+   SITE HEALTH
+   ============================================================================= */
+.health-check-header,
+.privacy-settings-header {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.health-check-header h1,
+.health-check-header p,
+.privacy-settings-header h1,
+.privacy-settings-header p {
+  color: var(--adm-text) !important;
+}
+.health-check-accordion-trigger,
+.privacy-settings-accordion-trigger {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+.health-check-accordion-trigger:hover,
+.privacy-settings-accordion-trigger:hover {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.health-check-accordion-trigger .title,
+.privacy-settings-accordion-trigger .title {
+  color: var(--adm-text) !important;
+}
+.health-check-accordion-trigger .badge,
+.privacy-settings-accordion-trigger .badge {
+  color: var(--adm-text-muted) !important;
+}
+.health-check-accordion-panel,
+.privacy-settings-accordion-panel {
+  background: var(--adm-bg) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-top: none !important;
+  color: var(--adm-text) !important;
+}
+.health-check-accordion-panel p,
+.health-check-accordion-panel ul,
+.privacy-settings-accordion-panel p,
+.privacy-settings-accordion-panel ul {
+  color: var(--adm-text-muted) !important;
+}
+.site-health-issues-count-title {
+  color: var(--adm-text) !important;
+}
+.health-check-issues-wrapper .health-check-accordion-heading button.health-check-accordion-trigger {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+.health-check-table th { color: var(--adm-text-muted) !important; }
+.health-check-table td {
+  color: var(--adm-text) !important;
+  border-bottom-color: var(--adm-border) !important;
+}
+
+/* =============================================================================
+   NOTIFICATION DIALOG
+   ============================================================================= */
+.notification-dialog-background {
+  background: rgba(0,0,0,.6) !important;
+}
+.notification-dialog {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,.5) !important;
+  border-radius: var(--adm-radius-lg) !important;
+}
+.notification-dialog h1,
+.notification-dialog h2,
+.notification-dialog h3,
+.notification-dialog p {
+  color: var(--adm-text) !important;
+}
+.notification-dialog a {
+  color: var(--adm-link) !important;
+}
+.notification-dialog a:hover {
+  color: var(--adm-link-hover) !important;
+}
+.file-editor-warning-content,
+.file-editor-warning-message {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+.file-editor-warning-content h1,
+.file-editor-warning-message h1,
+.file-editor-warning-content p,
+.file-editor-warning-message p {
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   CODEMIRROR (Theme Editor)
+   ============================================================================= */
+.CodeMirror {
+  background: var(--adm-bg-bar) !important;
+  color: var(--adm-text) !important;
+  border: 1px solid var(--adm-border) !important;
+  font-family: Consolas, "Courier New", monospace !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+.CodeMirror-scroll {
+  background: var(--adm-bg-bar) !important;
+}
+.CodeMirror-gutters {
+  background: var(--adm-bg-darker) !important;
+  border-right: 1px solid var(--adm-border) !important;
+}
+.CodeMirror-linenumber {
+  color: var(--adm-text-soft) !important;
+}
+.CodeMirror-cursor {
+  border-left-color: var(--adm-text) !important;
+}
+.CodeMirror-selected,
+.CodeMirror-focused .CodeMirror-selected {
+  background: rgba(34,113,177,.3) !important;
+}
+.CodeMirror-activeline-background {
+  background: rgba(255,255,255,.04) !important;
+}
+.CodeMirror-matchingbracket {
+  color: var(--adm-text-on-primary) !important;
+  background: rgba(0,163,42,.25) !important;
+  border-bottom: 1px solid var(--adm-success) !important;
+}
+.CodeMirror-searching {
+  background: rgba(219,166,23,.3) !important;
+}
+.cm-keyword   { color: var(--adm-cm-keyword)   !important; }
+.cm-operator  { color: var(--adm-cm-operator)  !important; }
+.cm-variable  { color: var(--adm-text)          !important; }
+.cm-variable-2 { color: var(--adm-cm-variable2) !important; }
+.cm-def       { color: var(--adm-cm-variable2)  !important; }
+.cm-property  { color: var(--adm-cm-property)  !important; }
+.cm-number    { color: var(--adm-cm-number)     !important; }
+.cm-string    { color: var(--adm-cm-string)     !important; }
+.cm-string-2  { color: var(--adm-cm-string2)    !important; }
+.cm-comment   { color: var(--adm-cm-comment)   !important; font-style: italic !important; }
+.cm-atom      { color: var(--adm-cm-number)     !important; }
+.cm-meta      { color: var(--adm-text-muted)    !important; }
+.cm-tag       { color: var(--adm-cm-tag)        !important; }
+.cm-attribute { color: var(--adm-cm-attribute)  !important; }
+.cm-qualifier { color: var(--adm-cm-attribute)  !important; }
+.cm-builtin   { color: var(--adm-cm-attribute)  !important; }
+.cm-bracket   { color: var(--adm-cm-bracket)    !important; }
+.cm-error     { color: var(--adm-danger)        !important; background: rgba(214,54,56,.05) !important; }
+.CodeMirror-vscrollbar::-webkit-scrollbar,
+.CodeMirror-hscrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+.CodeMirror-vscrollbar::-webkit-scrollbar-track,
+.CodeMirror-hscrollbar::-webkit-scrollbar-track { background: var(--adm-bg-darker); }
+.CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
+.CodeMirror-hscrollbar::-webkit-scrollbar-thumb { background: var(--adm-surface-3); border-radius: 4px; }
+
+/* =============================================================================
+   POST EDITOR (Classic)
+   ============================================================================= */
+#post-status-info {
+  background: var(--adm-surface-2) !important;
+  border-top-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+#post-status-info #wp-word-count,
+#post-status-info .autosave-info { color: var(--adm-text-muted) !important; }
+.misc-pub-section {
+  border-bottom-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.misc-pub-section label,
+.misc-pub-curtime { color: var(--adm-text-muted) !important; }
+.submitbox {
+  background: var(--adm-surface-2) !important;
+  border: 1px solid var(--adm-border) !important;
+}
+.submitbox .submitdelete { color: var(--adm-danger) !important; }
+#post-body .postbox .inside { color: var(--adm-text) !important; }
+.mce-toolbar .mce-btn button:before { color: var(--adm-text-muted) !important; }
+.mce-toolbar .mce-btn:hover,
+.mce-toolbar .mce-btn:focus {
+  background: var(--adm-surface-3) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+.mce-container,
+.mce-container-body,
+.mce-toolbar-grp,
+.mce-edit-area {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+.wp-editor-container { border-color: var(--adm-border) !important; background: var(--adm-surface-3) !important; }
+.wp-editor-area {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* =============================================================================
+   TAXONOMY / TAGS
+   ============================================================================= */
+.tagcloud a,
+.tag-cloud a {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-link) !important;
+  border-radius: var(--adm-radius-md) !important;
+}
+.tagcloud a:hover,
+.tag-cloud a:hover {
+  background: var(--adm-surface-3) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+.tag-list { color: var(--adm-text) !important; }
+.the-tagcloud { border-color: var(--adm-border) !important; }
+input.tag-add,
+.tagadd {
+  background: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+  border-radius: var(--adm-radius-md) !important;
+}
+input.tag-add:hover,
+.tagadd:hover {
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+}
+
+/* =============================================================================
+   COMMENTS
+   ============================================================================= */
+#the-comment-list .comment-item,
+#the-comment-list tr { color: var(--adm-text) !important; }
+#the-comment-list tr.unapproved td { background: rgba(219,166,23,.08) !important; }
+#the-comment-list .comment-author { color: var(--adm-text) !important; }
+.comment-text blockquote {
+  border-left-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+/* =============================================================================
+   THEMES
+   ============================================================================= */
+.theme-browser .theme {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-lg) !important;
+}
+.theme-browser .theme:hover .theme-actions,
+.theme-browser .theme.active .theme-actions { background: rgba(0,0,0,.6) !important; }
+.theme-overlay .theme-backdrop { background: rgba(0,0,0,.75) !important; }
+.theme-overlay .theme-wrap {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.theme-overlay .theme-header {
+  border-bottom-color: var(--adm-border) !important;
+  background: var(--adm-surface-2) !important;
+}
+.theme-overlay .theme-header .left,
+.theme-overlay .theme-header .right {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border: none !important;
+}
+.theme-overlay .theme-header .close {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border: none !important;
+}
+.theme-overlay .theme-about .theme-description { color: var(--adm-text-muted) !important; }
+.theme-actions .button { border-radius: var(--adm-radius-md) !important; }
+
+.theme-browser .theme .theme-name {
+  background-color: var(--adm-bg-darker) !important;
+}
+.theme-overlay .theme-actions {
+  background-color: var(--adm-bg-darker) !important;
+  border-top: none !important;
+}
+.theme-overlay .theme-tags {
+  color: var(--adm-text-muted) !important;
+}
+.theme-overlay .theme-tags span {
+  color: var(--adm-text-soft) !important;
+}
+.theme-overlay .theme-header .theme-title {
+  color: var(--adm-text) !important;
+}
+.theme-overlay .theme-author {
+  color: var(--adm-text-muted) !important;
+}
+.theme-overlay .theme-version {
+  color: var(--adm-text-soft) !important;
+}
+.theme-overlay .theme-rating .star-rating .star {
+  color: var(--adm-warning) !important;
+}
+
+/* =============================================================================
+   CUSTOMIZER
+   ============================================================================= */
+#customize-controls,
+#customize-outer-pane,
+.wp-full-overlay-sidebar,
+.wp-full-overlay-sidebar-content,
+.wp-full-overlay .customize-info,
+#customize-header-actions,
+#customize-outer-pane .customize-pane-parent,
+.accordion-section-title,
+.customize-panel-back,
+.customize-section-back,
+.customize-controls-close {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+.accordion-section-title {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.accordion-section-title:hover,
+.accordion-section-title:focus {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.accordion-section-title .customize-action {
+  color: var(--adm-text-soft) !important;
+}
+.accordion-section-title::after {
+  color: var(--adm-text-muted) !important;
+}
+#customize-header-actions {
+  background: var(--adm-bg-bar) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.wp-full-overlay .customize-info,
+.customize-info .preview-notice {
+  background: var(--adm-surface-1) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+.customize-info .customize-help-toggle {
+  color: var(--adm-text-muted) !important;
+}
+#customize-footer-actions {
+  background: var(--adm-bg-bar) !important;
+  border-top: 1px solid var(--adm-border) !important;
+}
+#customize-footer-actions .devices button {
+  color: var(--adm-text-muted) !important;
+}
+#customize-footer-actions .devices button.active,
+#customize-footer-actions .devices button:hover {
+  color: var(--adm-text) !important;
+  border-bottom: 2px solid var(--adm-primary) !important;
+}
+.customize-controls-preview-toggle {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.customize-section-description-container {
+  background: var(--adm-surface-2) !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+.customize-section-description {
+  color: var(--adm-text-muted) !important;
+}
+#customize-theme-controls .customize-pane-child {
+  background: var(--adm-bg) !important;
+}
+.customize-control label,
+.customize-control .customize-control-title {
+  color: var(--adm-text) !important;
+}
+.customize-control .description {
+  color: var(--adm-text-muted) !important;
+}
+.wp-full-overlay .wp-full-overlay-sidebar {
+  background: var(--adm-bg) !important;
+}
+#accordion-panel-themes .accordion-section-title,
+#accordion-section-themes .accordion-section-title {
+  background: var(--adm-surface-1) !important;
+}
+
+/* =============================================================================
+   WIDGETS
+   ============================================================================= */
+.widget,
+.widget-inside {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+#widgets-right .widget-top,
+#widgets-left .widget-top {
+  background: var(--adm-surface-2) !important;
+  border-bottom-color: var(--adm-border) !important;
+}
+.sidebar-name {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.sidebar-name h2,
+.widget-title h3,
+.widget .widget-title { color: var(--adm-text) !important; }
+
+/* =============================================================================
+   NAV MENUS
+   ============================================================================= */
+.nav-menus-php #post-body-content { color: var(--adm-text) !important; }
+#nav-menu-header,
+#nav-menu-footer {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+#nav-menu-header h3,
+#nav-menu-footer h3 { color: var(--adm-text) !important; }
+.menu-item-bar .menu-item-handle {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.menu-item-bar .menu-item-handle:hover { background: var(--adm-surface-3) !important; }
+.menu-item-settings {
+  background: var(--adm-bg) !important;
+  border-top-color: var(--adm-border) !important;
+}
+.menu-item-settings label { color: var(--adm-text-muted) !important; }
+.menu-name-label .menu-name { color: var(--adm-text) !important; }
+#menu-name {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* =============================================================================
+   THEME EDITOR / TEMPLATE SIDE
+   ============================================================================= */
+#templateside > ul {
+  background-color: var(--adm-bg-darker) !important;
+}
+.importer-title {
+  color: var(--adm-text-muted) !important;
+}
+.color-option.selected,
+.color-option:hover {
+  background-color: var(--adm-bg-deep) !important;
+}
+
+/* =============================================================================
+   SCROLLBAR (Webkit)
+   ============================================================================= */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--adm-bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--adm-surface-3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--adm-border-hover); }
+
+/* =============================================================================
+   WOOCOMMERCE COMPATIBILITY
+   ============================================================================= */
+.woocommerce-layout__header,
+.woocommerce-navigation {
+  background: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.woocommerce-table,
+.woocommerce-table > table {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.woocommerce-table thead th {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text-muted) !important;
+  border-bottom-color: var(--adm-border) !important;
+}
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+  background: var(--adm-surface-1) !important;
+  border-top-color: var(--adm-primary) !important;
+  color: var(--adm-text) !important;
+}
+.woocommerce-error { border-top-color: var(--adm-danger) !important; }
+
+/* =============================================================================
+   FOOTER
+   ============================================================================= */
+#wpfooter {
+  border-top-color: var(--adm-border) !important;
+}
+#wpfooter p,
+#wpfooter a {
+  color: var(--adm-text-muted) !important;
+}
