@@ -103,7 +103,6 @@ body.wp-admin,
   background: var(--adm-surface-1) !important;
   color: var(--adm-text-on-primary) !important;
 }
-/* Fix icon color on active/hover items */
 #adminmenu li.menu-top:hover > a > .wp-menu-image::before,
 #adminmenu li.opensub > a > .wp-menu-image::before,
 #adminmenu li.wp-has-current-submenu > a > .wp-menu-image::before,
@@ -111,7 +110,6 @@ body.wp-admin,
   color: var(--adm-text-on-primary) !important;
   opacity: 1;
 }
-/* Remove WP white box pseudo-element on active menu items */
 #adminmenu li.wp-has-current-submenu > a::before,
 #adminmenu li.current > a::before,
 #adminmenu .wp-has-current-submenu a.wp-has-current-submenu::before {
@@ -546,7 +544,7 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 }
 
 /* =============================================================================
-   PLUGIN INFORMATION (#plugin-information)
+   PLUGIN INFORMATION
    ============================================================================= */
 #plugin-information,
 #plugin-information .fyi,
