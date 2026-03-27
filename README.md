@@ -47,6 +47,17 @@ A simple, lightweight Dark Mode plugin for the WordPress Admin Dashboard with fu
 ---
 
 ## Changelog
+## [0.2.1] - 2026-03-28
+
+### Changed
+- Lowered minimum WordPress version requirement from 6.7 to 6.3
+
+### Added
+- Dark mode styles for Thickbox modal (plugin details dialog): background, text, links, buttons and close button fully themed via `--adm-*` variables
+
+### Fixed
+- Fixed theme overlay header navigation buttons (`.theme-overlay .theme-header .left` / `.right` / `.close`): applied background, color and `border: none` using `--adm-*` variables in both `darkadmin-dark.css` and `darkadmin-wp-modern.css`
+- Fixed `#contextual-help-back` button styling: background, border and color now use `--adm-*` tokens in both CSS presets
 
 ### 0.2.0
 - Raised minimum WordPress version to 6.7
@@ -210,6 +221,18 @@ Ein einfaches, schlankes Dark-Mode-Plugin für das WordPress Admin-Dashboard mit
 ---
 
 ## Changelog
+
+## 0.2.1
+
+### Geändert
+- Mindestanforderung für WordPress-Version von 6.7 auf 6.3 gesenkt
+
+### Hinzugefügt
+- Dark-Mode-Stile für Thickbox-Modal (Plugin-Details-Dialog): Hintergrund, Text, Links, Buttons und Schließen-Button vollständig über `--adm-*`-Variablen gestylt
+
+### Behoben
+- Theme-Overlay-Header-Navigationsbuttons (`.theme-overlay .theme-header .left` / `.right` / `.close`) korrigiert: Hintergrund, Farbe und `border: none` mit `--adm-*`-Variablen in beiden Dateien `darkadmin-dark.css` und `darkadmin-wp-modern.css` angewendet
+- Styling des `#contextual-help-back`-Buttons korrigiert: Hintergrund, Rahmen und Farbe verwenden nun `--adm-*`-Tokens in beiden CSS-Presets
 
 ### 0.2.0
 - Mindest-WordPress-Version auf 6.7 angehoben
