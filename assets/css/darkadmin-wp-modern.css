@@ -723,6 +723,11 @@ div.notice-info, .notice.notice-info { border-left-color: var(--adm-primary)  !i
   color: var(--adm-text-muted) !important;
   border-color: var(--adm-border) !important;
 }
+#contextual-help-back {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
 
 /* =============================================================================
    TABS
@@ -1405,6 +1410,17 @@ input.tag-add:hover,
 .theme-overlay .theme-header {
   border-bottom-color: var(--adm-border) !important;
   background: var(--adm-surface-2) !important;
+}
+.theme-overlay .theme-header .left,
+.theme-overlay .theme-header .right {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border: none !important;
+}
+.theme-overlay .theme-header .close {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border: none !important;
 }
 .theme-overlay .theme-about .theme-description { color: var(--adm-text-muted) !important; }
 .theme-actions .button { border-radius: var(--adm-radius-md) !important; }
