@@ -411,6 +411,7 @@ th.check-column {
 }
 .wp-filter .filter-links li a {
   color: var(--adm-text-muted) !important;
+  border-color: var(--adm-border) !important;
 }
 .wp-filter .filter-links li a:hover,
 .wp-filter .filter-links li a.current {
