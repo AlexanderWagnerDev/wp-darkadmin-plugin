@@ -3,7 +3,7 @@
  * Plugin Name: DarkAdmin - Dark Mode for Adminpanel
  * Plugin URI: https://wordpress.org/plugins/darkadmin-dark-mode-for-adminpanel/
  * Description: Simple, lightweight Dark Mode Plugin for the WordPress Admin Dashboard.
- * Version: dev20260327
+ * Version: dev2026032701
  * Requires at least: 6.3
  * Tested up to: 7.0
  * Requires PHP: 7.4
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'DARKADMIN_VERSION', 'dev20260327' );
+define( 'DARKADMIN_VERSION', 'dev2026032701' );
 define( 'DARKADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DARKADMIN_PATH', plugin_dir_path( __FILE__ ) );
 
