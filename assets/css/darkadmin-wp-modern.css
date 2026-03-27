@@ -107,7 +107,6 @@ body.wp-core-ui,
   background: rgba(255,255,255,.12) !important;
   color: var(--adm-text-on-primary) !important;
 }
-/* Fix white icon overlay on active/hover items */
 #adminmenu li.menu-top:hover > a > .wp-menu-image::before,
 #adminmenu li.opensub > a > .wp-menu-image::before,
 #adminmenu li.wp-has-current-submenu > a > .wp-menu-image::before,
@@ -115,7 +114,6 @@ body.wp-core-ui,
   color: var(--adm-text-on-primary) !important;
   opacity: 1;
 }
-/* Remove WP's white box pseudo-element on active menu items */
 #adminmenu li.wp-has-current-submenu > a::before,
 #adminmenu li.current > a::before,
 #adminmenu .wp-has-current-submenu a.wp-has-current-submenu::before {
