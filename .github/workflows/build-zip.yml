@@ -62,9 +62,3 @@ jobs:
           name: darkadmin-dark-mode-for-adminpanel
           path: ${{ env.ZIP_PATH }}
           retention-days: 1
-
-      - name: Upload ZIP to GitHub Release
-        if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ${{ env.ZIP_PATH }}
