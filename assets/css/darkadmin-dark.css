@@ -103,7 +103,6 @@ body.wp-admin,
   background: var(--adm-surface-1) !important;
   color: var(--adm-text-on-primary) !important;
 }
-/* Fix icon color on active/hover items */
 #adminmenu li.menu-top:hover > a > .wp-menu-image::before,
 #adminmenu li.opensub > a > .wp-menu-image::before,
 #adminmenu li.wp-has-current-submenu > a > .wp-menu-image::before,
@@ -111,7 +110,6 @@ body.wp-admin,
   color: var(--adm-text-on-primary) !important;
   opacity: 1;
 }
-/* Remove WP white box pseudo-element on active menu items */
 #adminmenu li.wp-has-current-submenu > a::before,
 #adminmenu li.current > a::before,
 #adminmenu .wp-has-current-submenu a.wp-has-current-submenu::before {
@@ -546,6 +544,58 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 }
 
 /* =============================================================================
+   PLUGIN INFORMATION
+   ============================================================================= */
+#plugin-information,
+#plugin-information .fyi,
+#plugin-information .plugin-information-sidebar,
+#plugin-information .plugin-information-content,
+#plugin-information .plugin-information-header {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+#plugin-information .fyi h3,
+#plugin-information .fyi ul li,
+#plugin-information .plugin-information-sidebar h3,
+#plugin-information .plugin-information-sidebar ul li {
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+}
+#plugin-information .fyi a,
+#plugin-information .plugin-information-sidebar a {
+  color: var(--adm-link) !important;
+}
+#plugin-information h2.plugin-name,
+#plugin-information h3 {
+  color: var(--adm-text) !important;
+}
+#plugin-information p,
+#plugin-information li,
+#plugin-information .plugin-information-content p,
+#plugin-information .plugin-information-content li {
+  color: var(--adm-text) !important;
+}
+#plugin-information #section-description,
+#plugin-information #section-changelog,
+#plugin-information #section-reviews,
+#plugin-information #section-screenshots {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+#plugin-information .plugin-information-tabs,
+#plugin-information .plugin-information-tabs a {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text-muted) !important;
+  border-color: var(--adm-border) !important;
+}
+#plugin-information .plugin-information-tabs a:hover,
+#plugin-information .plugin-information-tabs a.current {
+  color: var(--adm-text) !important;
+  border-bottom-color: var(--adm-primary) !important;
+}
+
+/* =============================================================================
    WP COLOR PICKER (Iris)
    ============================================================================= */
 .wp-picker-container {
@@ -677,6 +727,11 @@ div.notice-info, .notice.notice-info { border-left-color: var(--adm-primary)  !i
 #screen-meta-links .show-settings {
   color: var(--adm-text-muted) !important;
   border-color: var(--adm-border) !important;
+}
+#contextual-help-back {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
 }
 
 /* =============================================================================
@@ -1359,6 +1414,17 @@ input.tag-add:hover,
 .theme-overlay .theme-header {
   border-bottom-color: var(--adm-border) !important;
   background: var(--adm-surface-2) !important;
+}
+.theme-overlay .theme-header .left,
+.theme-overlay .theme-header .right {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border: none !important;
+}
+.theme-overlay .theme-header .close {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  border: none !important;
 }
 .theme-overlay .theme-about .theme-description { color: var(--adm-text-muted) !important; }
 .theme-actions .button { border-radius: var(--adm-radius-md) !important; }
