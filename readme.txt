@@ -51,7 +51,7 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 
 == Changelog ==
 = 0.2.1 =
-* Raised minimum WordPress version requirement to 6.3
+* Lowered minimum WordPress version requirement from 6.7 to 6.3
 * Dark mode styles for Thickbox modal (plugin details dialog): background, text, links, buttons and close button fully themed via `--adm-*` variables
 * Fixed theme overlay header navigation buttons (`.theme-overlay .theme-header .left` / `.right` / `.close`): applied background, color and `border: none` using `--adm-*` variables in both `darkadmin-dark.css` and `darkadmin-wp-modern.css`
 * Fixed `#contextual-help-back` button styling: background, border and color now use `--adm-*` tokens in both CSS presets
