@@ -539,7 +539,7 @@ body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary:hover {
 }
 
 /* =============================================================================
-   PLUGIN INFORMATION (#plugin-information)
+   PLUGIN INFORMATION
    ============================================================================= */
 #plugin-information,
 #plugin-information .fyi,
@@ -589,40 +589,96 @@ body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary:hover {
   color: var(--adm-text) !important;
   border-bottom-color: var(--adm-primary) !important;
 }
-
-/* =============================================================================
-   THICKBOX / PLUGIN DETAILS MODAL
-   ============================================================================= */
-#TB_overlay {
-  background: rgba(0, 0, 0, 0.8) !important;
+#plugin-information-scrollable,
+#plugin-information-title {
+    all: unset !important;
+    display: block !important;
 }
-#TB_window {
-  background: var(--adm-surface-1) !important;
-  border: 1px solid var(--adm-border) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
-  color: var(--adm-text) !important;
+#plugin-information-tabs {
+    background: var(--adm-bg) !important;
+    border-bottom: 1px solid var(--adm-border) !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
-#TB_title {
-  background: var(--adm-bg) !important;
-  border-bottom: 1px solid var(--adm-border) !important;
-  color: var(--adm-text) !important;
+#plugin-information-tabs a {
+    background: var(--adm-bg) !important;
+    border: 1px solid var(--adm-border) !important;
+    border-bottom: none !important;
+    border-radius: var(--adm-radius-md) var(--adm-radius-md) 0 0 !important;
+    color: var(--adm-text-muted) !important;
+    margin-right: 4px !important;
+    padding: var(--adm-space-2) var(--adm-space-3) !important;
 }
-#TB_ajaxWindowTitle {
-  color: var(--adm-text) !important;
+#plugin-information-tabs a:hover,
+#plugin-information-tabs a.current {
+    background: var(--adm-surface-1) !important;
+    border-color: var(--adm-border) !important;
+    color: var(--adm-text) !important;
+    border-bottom-color: var(--adm-surface-1) !important;
 }
-#TB_ajaxContent {
-  background: var(--adm-surface-1) !important;
-  color: var(--adm-text) !important;
+#plugin-information-content {
+    background: var(--adm-surface-1) !important;
+    border: 1px solid var(--adm-border) !important;
+    border-top: none !important;
+    color: var(--adm-text) !important;
 }
-#TB_closeWindowButton,
-#TB_closeWindowButton .tb-close-icon {
-  color: var(--adm-text-muted) !important;
+#plugin-information-content.with-banner {
+    background: var(--adm-surface-1) !important;
+    border-color: var(--adm-border) !important;
 }
-#TB_closeWindowButton:hover {
-  color: var(--adm-text) !important;
+#section-holder {
+    background: var(--adm-surface-2) !important;
 }
-#TB_load {
-  background: var(--adm-surface-1) !important;
+#section-description,
+#section-installation,
+#section-faq,
+#section-changelog,
+#section-reviews,
+#section-screenshots,
+#section-other {
+    color: var(--adm-text) !important;
+}
+#section-description h3,
+#section-installation h3,
+#section-faq h3,
+#section-changelog h3,
+#section-reviews h3,
+#section-screenshots h3 {
+    color: var(--adm-text) !important;
+    margin: 0 !important;
+    padding: var(--adm-space-3) !important;
+}
+#section-description p,
+#section-installation p,
+#section-faq p,
+#section-changelog p,
+#section-reviews p,
+#section-screenshots p {
+    color: var(--adm-text) !important;
+    padding: var(--adm-space-3) !important;
+}
+#plugin-information .fyi,
+.plugin-information-sidebar {
+    border: 1px solid var(--adm-border) !important;
+    color: var(--adm-text) !important;
+}
+#plugin-information .fyi *,
+.plugin-information-sidebar * {
+    color: var(--adm-text) !important;
+}
+#plugin-information .fyi h3,
+.plugin-information-sidebar h3 {
+    color: var(--adm-text) !important;
+}
+#plugin-information .fyi ul li,
+.plugin-information-sidebar ul li {
+    color: var(--adm-text) !important;
+    margin: 0 !important;
+    padding: var(--adm-space-3) !important;
+}
+#plugin-information .fyi a,
+.plugin-information-sidebar a {
+    color: var(--adm-link) !important;
 }
 
 /* =============================================================================
