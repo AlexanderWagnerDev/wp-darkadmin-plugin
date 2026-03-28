@@ -132,28 +132,6 @@ function darkadmin_sanitize_preset( $v ): string {
 }
 
 /**
- * Returns the color fallbacks for a given preset slug.
- *
- * @param string $preset Preset slug.
- * @return array<string, string>
- */
-function darkadmin_preset_fallbacks( string $preset ): array {
-	$presets = darkadmin_preset_colors();
-	return isset( $presets[ $preset ] ) ? $presets[ $preset ] : $presets['default'];
-}
-
-/**
- * Returns the layout fallbacks for a given preset slug.
- *
- * @param string $preset Preset slug.
- * @return array<string, string>
- */
-function darkadmin_preset_layout_fallbacks( string $preset ): array {
-	$presets = darkadmin_preset_layout();
-	return isset( $presets[ $preset ] ) ? $presets[ $preset ] : $presets['default'];
-}
-
-/**
  * Parses the raw excluded-pages option into a clean list of entries.
  *
  * @param string $raw Raw textarea value.
@@ -253,6 +231,8 @@ add_action(
 		$preset   = get_option( 'darkadmin_preset', 'default' );
 		$css_file = darkadmin_preset_css_file( $preset );
 
+		// darkadmin_preset_fallbacks() and darkadmin_preset_layout_fallbacks() are
+		// defined in defaults.php and both delegate to darkadmin_get_preset_fallbacks().
 		$fallbacks = darkadmin_preset_fallbacks( $preset );
 		$c         = wp_parse_args(
 			(array) get_option( 'darkadmin_colors', array() ),
