@@ -430,7 +430,7 @@ function darkadmin_layout_variable_map(): array {
  * @return array<string, string> Sanitized color values.
  */
 function darkadmin_sanitize_colors( $input ): array {
-	$input  = is_array( $input ) ? $input : array();
+	$input = is_array( $input ) ? $input : array();
 
 	// '_preset' is an internal routing key, not a color token — excluded from output.
 	$preset = isset( $input['_preset'] )
@@ -473,7 +473,7 @@ function darkadmin_sanitize_colors( $input ): array {
  * @return array<string, string> Sanitized layout values.
  */
 function darkadmin_sanitize_layout( $input ): array {
-	$input  = is_array( $input ) ? $input : array();
+	$input = is_array( $input ) ? $input : array();
 
 	// '_preset' is an internal routing key, not a layout token — excluded from output.
 	$preset = isset( $input['_preset'] )
