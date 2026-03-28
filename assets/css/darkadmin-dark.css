@@ -633,9 +633,6 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 }
 #section-holder {
     background: var(--adm-surface-2) !important;
-    border: 1px solid var(--adm-border) !important;
-    border-radius: var(--adm-radius-md) !important;
-    margin-bottom: var(--adm-space-4) !important;
 }
 #section-description,
 #section-installation,
@@ -644,8 +641,6 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 #section-reviews,
 #section-screenshots,
 #section-other {
-    background: var(--adm-surface-1) !important;
-    border: 1px solid var(--adm-border) !important;
     color: var(--adm-text) !important;
 }
 #section-description h3,
@@ -654,8 +649,6 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 #section-changelog h3,
 #section-reviews h3,
 #section-screenshots h3 {
-    background: var(--adm-bg) !important;
-    border-bottom: 1px solid var(--adm-border) !important;
     color: var(--adm-text) !important;
     margin: 0 !important;
     padding: var(--adm-space-3) !important;
@@ -671,30 +664,19 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 }
 #plugin-information .fyi,
 .plugin-information-sidebar {
-    background: var(--adm-surface-1) !important;
     border: 1px solid var(--adm-border) !important;
     color: var(--adm-text) !important;
 }
 #plugin-information .fyi *,
 .plugin-information-sidebar * {
-    background: var(--adm-surface-1) !important;
     color: var(--adm-text) !important;
 }
 #plugin-information .fyi h3,
 .plugin-information-sidebar h3 {
-    background: var(--adm-bg) !important;
-    border-bottom: 1px solid var(--adm-border) !important;
     color: var(--adm-text) !important;
-}
-#plugin-information .fyi ul,
-.plugin-information-sidebar ul {
-    background: transparent !important;
-    border: none !important;
 }
 #plugin-information .fyi ul li,
 .plugin-information-sidebar ul li {
-    background: var(--adm-surface-2) !important;
-    border-bottom: 1px solid var(--adm-border) !important;
     color: var(--adm-text) !important;
     margin: 0 !important;
     padding: var(--adm-space-3) !important;
