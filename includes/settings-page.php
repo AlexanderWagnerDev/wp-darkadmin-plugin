@@ -190,7 +190,7 @@ function darkadmin_settings_page(): void {
 									</button>
 								</div>
 							<?php endforeach; ?>
-						</div>
+						</div><!-- .adm-preset-grid -->
 
 						<?php
 						$prev = $preset_meta[ $active_preset ];
@@ -225,7 +225,7 @@ function darkadmin_settings_page(): void {
 								</div>
 								<div class="adm-preview-name" id="adm-preview-name"><?php echo esc_html( $prev['label'] ); ?></div>
 							</div>
-						</div>
+						</div><!-- .adm-preview-panel -->
 
 					</div><!-- .adm-preset-layout -->
 
@@ -523,6 +523,7 @@ admin.php?page=my-plugin"
 						<?php
 						echo wp_kses(
 							sprintf(
+								/* translators: %s: comma-separated list of always-excluded admin page filenames */
 								__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
 								'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
 							),
