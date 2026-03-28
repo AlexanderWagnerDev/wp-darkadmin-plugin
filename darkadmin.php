@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'DARKADMIN_VERSION', 'dev2026032802' );
+define( 'DARKADMIN_VERSION', 'dev2026032803' );
 define( 'DARKADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DARKADMIN_PATH', plugin_dir_path( __FILE__ ) );
 
