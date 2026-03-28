@@ -5,6 +5,11 @@ All notable changes to DarkAdmin - Dark Mode for Adminpanel are documented in th
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
+## [0.2.2] - 2026-03-28
+
+### Fixed
+- Fixed Plugin Details dialog footer color
+
 ## [0.2.1] - 2026-03-28
 
 ### Changed
