@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,9 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 4. Dashboard - Dark Mode active
 
 == Changelog ==
+= 0.2.1 =
+* Fixed Plugin Details dialog footer color
+
 = 0.2.1 =
 * Lowered minimum WordPress version requirement from 6.7 to 6.3
 * Dark mode styles for Thickbox modal (plugin details dialog): background, text, links, buttons and close button fully themed via `--adm-*` variables
