@@ -50,7 +50,7 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 4. Dashboard - Dark Mode active
 
 == Changelog ==
-= 0.2.1 =
+= 0.2.2 =
 * Fixed Plugin Details dialog footer color
 
 = 0.2.1 =
