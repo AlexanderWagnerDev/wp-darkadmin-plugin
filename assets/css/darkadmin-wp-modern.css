@@ -575,7 +575,6 @@ body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary:hover {
 #plugin-information #section-changelog,
 #plugin-information #section-reviews,
 #plugin-information #section-screenshots {
-  background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
 }
 #plugin-information .plugin-information-tabs,
@@ -627,6 +626,7 @@ body.wp-admin div.upload-plugin > form.wp-upload-form .button-primary:hover {
 }
 #section-holder {
     background: var(--adm-surface-2) !important;
+    margin-top: 0;
 }
 #section-description,
 #section-installation,
