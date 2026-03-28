@@ -92,7 +92,7 @@ function darkadmin_settings_page(): void {
 					<h1 class="adm-page-title"><?php esc_html_e( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ); ?></h1>
 					<p class="adm-page-subtitle">
 						<?php esc_html_e( 'Dark theme for the WordPress backend', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-						&mdash; <?php echo esc_html( DARKADMIN_VERSION ); ?>
+						— v<?php echo esc_html( DARKADMIN_VERSION ); ?>
 					</p>
 				</div>
 			</div>
@@ -190,7 +190,7 @@ function darkadmin_settings_page(): void {
 									</button>
 								</div>
 							<?php endforeach; ?>
-						</div>
+						</div><!-- .adm-preset-grid -->
 
 						<?php
 						$prev = $preset_meta[ $active_preset ];
@@ -225,7 +225,7 @@ function darkadmin_settings_page(): void {
 								</div>
 								<div class="adm-preview-name" id="adm-preview-name"><?php echo esc_html( $prev['label'] ); ?></div>
 							</div>
-						</div>
+						</div><!-- .adm-preview-panel -->
 
 					</div><!-- .adm-preset-layout -->
 
@@ -521,10 +521,11 @@ admin.php?page=my-plugin"
 					<p class="adm-field-desc" style="margin-top:8px;">
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php
+						// translators: %s: comma-separated list of always-excluded admin page filenames.
+						$excluded_note = __( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' );
 						echo wp_kses(
 							sprintf(
-								/* translators: %s: comma-separated list of always-excluded admin page filenames */
-								__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
+								$excluded_note,
 								'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
 							),
 							array( 'code' => array() )
