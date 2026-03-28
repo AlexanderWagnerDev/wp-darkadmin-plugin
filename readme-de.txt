@@ -55,6 +55,10 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 * Dark-Mode-Stile für Thickbox-Modal (Plugin-Details-Dialog): Hintergrund, Text, Links, Buttons und Schließen-Button vollständig über `--adm-*`-Variablen gestylt
 * Theme-Overlay-Header-Navigationsbuttons (`.theme-overlay .theme-header .left` / `.right` / `.close`) korrigiert: Hintergrund, Farbe und `border: none` mit `--adm-*`-Variablen in beiden Dateien `darkadmin-dark.css` und `darkadmin-wp-modern.css` angewendet
 * Styling des `#contextual-help-back`-Buttons korrigiert: Hintergrund, Rahmen und Farbe verwenden nun `--adm-*`-Tokens in beiden CSS-Presets
+* Fix: Doppelte `darkadmin_get_preset_fallbacks()`-Definition und inline Fallback-Hilfsfunktionen in `defaults.php` und `enqueue.php` zu einzelnen kanonischen Hilfsfunktionen zusammengeführt
+* Fix: Ungenutzte `$presets`-Variable im `admin_enqueue_scripts`-Callback in `enqueue.php` entfernt
+* Fix: Falsch platzierten `<!-- .adm-preset-layout -->`-HTML-Kommentar in `settings-page.php` korrigiert (war am inneren Preview-Panel-`</div>` statt am äußeren `.adm-preset-layout`-`</div>`)
+* Fix: `translators:`-Kommentar aus `sprintf()` herausgelöst und direkt auf die Zeile vor `__()` verschoben, damit PHPCS `WordPress.WP.I18n.MissingTranslatorsComment` ihn korrekt erkennt (`settings-page.php`)
 
 = 0.2.0 =
 * Mindest-WordPress-Version auf 6.7 angehoben

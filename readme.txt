@@ -55,6 +55,10 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 * Dark mode styles for Thickbox modal (plugin details dialog): background, text, links, buttons and close button fully themed via `--adm-*` variables
 * Fixed theme overlay header navigation buttons (`.theme-overlay .theme-header .left` / `.right` / `.close`): applied background, color and `border: none` using `--adm-*` variables in both `darkadmin-dark.css` and `darkadmin-wp-modern.css`
 * Fixed `#contextual-help-back` button styling: background, border and color now use `--adm-*` tokens in both CSS presets
+* Fixed: consolidated duplicate `darkadmin_get_preset_fallbacks()` definition and inline fallback helper functions in `defaults.php` and `enqueue.php` into single canonical helpers
+* Fixed: removed unused `$presets` variable in `enqueue.php` `admin_enqueue_scripts` callback
+* Fixed: misplaced `<!-- .adm-preset-layout -->` HTML comment in `settings-page.php` (was on inner preview panel `</div>` instead of outer `.adm-preset-layout` `</div>`)
+* Fixed: moved `translators:` comment outside `sprintf()` onto the line directly above `__()` so PHPCS `WordPress.WP.I18n.MissingTranslatorsComment` detects it correctly (`settings-page.php`)
 
 = 0.2.0 =
 * Raised minimum WordPress version to 6.7
