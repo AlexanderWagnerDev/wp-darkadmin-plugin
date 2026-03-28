@@ -92,7 +92,7 @@ function darkadmin_settings_page(): void {
 					<h1 class="adm-page-title"><?php esc_html_e( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ); ?></h1>
 					<p class="adm-page-subtitle">
 						<?php esc_html_e( 'Dark theme for the WordPress backend', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-						 — v<?php echo esc_html( DARKADMIN_VERSION ); ?>
+						— v<?php echo esc_html( DARKADMIN_VERSION ); ?>
 					</p>
 				</div>
 			</div>
@@ -523,7 +523,6 @@ admin.php?page=my-plugin"
 						<?php
 						echo wp_kses(
 							sprintf(
-								/* translators: %s: comma-separated list of always-excluded admin page filenames */
 								__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
 								'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
 							),
