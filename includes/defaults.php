@@ -419,6 +419,10 @@ function darkadmin_layout_variable_map(): array {
  * Receives the submitted array from the Settings API (nonce already verified
  * by options.php via settings_fields()). No direct $_POST access is performed.
  *
+ * The optional '_preset' key selects which preset's defaults are used as
+ * fallbacks. It is an internal routing key and is intentionally not included
+ * in the returned $output array (it is not a color token).
+ *
  * sanitize_hex_color() returns null for invalid values (not false or ''),
  * so we check with is_string() and a non-empty guard instead.
  *
@@ -427,6 +431,8 @@ function darkadmin_layout_variable_map(): array {
  */
 function darkadmin_sanitize_colors( $input ): array {
 	$input  = is_array( $input ) ? $input : array();
+
+	// '_preset' is an internal routing key, not a color token — excluded from output.
 	$preset = isset( $input['_preset'] )
 		? sanitize_key( (string) $input['_preset'] )
 		: 'default';
@@ -452,7 +458,13 @@ function darkadmin_sanitize_colors( $input ): array {
  * Receives the submitted array from the Settings API (nonce already verified
  * by options.php via settings_fields()). No direct $_POST access is performed.
  *
- * For fields with a px unit the value is cast to a non-negative float.
+ * The optional '_preset' key selects which preset's layout defaults are used
+ * as fallbacks. It is an internal routing key and is intentionally not
+ * included in the returned $output array.
+ *
+ * For fields with a px unit the numeric part is extracted and clamped to >= 0,
+ * then re-appended as an integer to preserve the original input as-is (e.g.
+ * '8px' stays '8px', not '8.0px').
  * For the shadow_md field (empty unit) the value is validated against a safe
  * CSS box-shadow pattern to prevent CSS injection; invalid values fall back
  * to the preset default.
@@ -462,6 +474,8 @@ function darkadmin_sanitize_colors( $input ): array {
  */
 function darkadmin_sanitize_layout( $input ): array {
 	$input  = is_array( $input ) ? $input : array();
+
+	// '_preset' is an internal routing key, not a layout token — excluded from output.
 	$preset = isset( $input['_preset'] )
 		? sanitize_key( (string) $input['_preset'] )
 		: 'default';
@@ -481,7 +495,9 @@ function darkadmin_sanitize_layout( $input ): array {
 			$raw = $default;
 		}
 		if ( '' !== $var_map[ $key ]['unit'] ) {
-			$numeric = (float) $raw;
+			// Cast to int to preserve the original value (e.g. '8px' -> 8 -> '8px'),
+			// avoiding float artefacts like '8.1px' instead of '8.10px'.
+			$numeric = (int) $raw;
 			if ( $numeric < 0 ) {
 				$numeric = 0;
 			}
@@ -495,6 +511,42 @@ function darkadmin_sanitize_layout( $input ): array {
 		$output[ $key ] = $raw;
 	}
 	return $output;
+}
+
+/**
+ * Generic helper: returns the fallback values for a given preset type and slug.
+ *
+ * @param string $type   Either 'colors' or 'layout'.
+ * @param string $preset Preset slug (e.g. 'default', 'modern').
+ * @return array<string, string>
+ */
+function darkadmin_get_preset_fallbacks( string $type, string $preset ): array {
+	if ( 'layout' === $type ) {
+		$presets = darkadmin_preset_layout();
+		return isset( $presets[ $preset ] ) ? $presets[ $preset ] : $presets['default'];
+	}
+	$presets = darkadmin_preset_colors();
+	return isset( $presets[ $preset ] ) ? $presets[ $preset ] : $presets['default'];
+}
+
+/**
+ * Returns the color fallbacks for a given preset slug.
+ *
+ * @param string $preset Preset slug.
+ * @return array<string, string>
+ */
+function darkadmin_preset_fallbacks( string $preset ): array {
+	return darkadmin_get_preset_fallbacks( 'colors', $preset );
+}
+
+/**
+ * Returns the layout fallbacks for a given preset slug.
+ *
+ * @param string $preset Preset slug.
+ * @return array<string, string>
+ */
+function darkadmin_preset_layout_fallbacks( string $preset ): array {
+	return darkadmin_get_preset_fallbacks( 'layout', $preset );
 }
 
 /**
