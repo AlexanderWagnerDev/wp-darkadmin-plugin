@@ -596,7 +596,6 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 }
 #plugin-information-scrollable,
 #plugin-information-title {
-    all: unset !important;
     display: block !important;
 }
 #plugin-information-tabs {
