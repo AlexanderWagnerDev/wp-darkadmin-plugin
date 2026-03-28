@@ -521,10 +521,11 @@ admin.php?page=my-plugin"
 					<p class="adm-field-desc" style="margin-top:8px;">
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php
+						// translators: %s: comma-separated list of always-excluded admin page filenames.
+						$excluded_note = __( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' );
 						echo wp_kses(
 							sprintf(
-								/* translators: %s: comma-separated list of always-excluded admin page filenames */
-								__( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' ),
+								$excluded_note,
 								'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
 							),
 							array( 'code' => array() )
