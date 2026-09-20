@@ -302,6 +302,34 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     // -------------------------------------------------------------------------
+    // Editor screen coverage
+    // -------------------------------------------------------------------------
+
+    public function test_site_editor_is_always_excluded(): void {
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'site-editor.php' ) );
+    }
+
+    public function test_classic_post_editor_is_not_excluded(): void {
+        $screen = WP_Screen::get( 'post' );
+        $screen->is_block_editor( false );
+
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'post.php', $screen ) );
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'post-new.php', $screen ) );
+    }
+
+    public function test_block_post_editor_is_excluded(): void {
+        $screen = WP_Screen::get( 'post' );
+        $screen->is_block_editor( true );
+
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'post.php', $screen ) );
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'post-new.php', $screen ) );
+    }
+
+    public function test_regular_admin_screen_is_not_excluded(): void {
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'plugins.php', WP_Screen::get( 'plugins' ) ) );
+    }
+
+    // -------------------------------------------------------------------------
     // Plugin styles
     // -------------------------------------------------------------------------
 
