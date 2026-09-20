@@ -213,6 +213,33 @@ function darkadmin_current_page_slug(): string {
 	return '';
 }
 
+/**
+ * Determines whether DarkAdmin must leave an editor screen untouched.
+ *
+ * Block and site editors manage their own canvas color scheme. The classic
+ * editor is deliberately supported by the main stylesheet and must not be
+ * excluded merely because it also uses post.php or post-new.php.
+ *
+ * @param string         $pagenow Current admin filename.
+ * @param WP_Screen|null $screen  Current screen, when available.
+ * @return bool
+ */
+function darkadmin_is_editor_screen_excluded( string $pagenow, $screen = null ): bool {
+	if ( 'site-editor.php' === $pagenow ) {
+		return true;
+	}
+
+	if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
+		return false;
+	}
+
+	if ( ! $screen instanceof WP_Screen ) {
+		return false;
+	}
+
+	return method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor();
+}
+
 add_action(
 	'admin_enqueue_scripts',
 	function ( string $hook_suffix ) {
@@ -221,8 +248,8 @@ add_action(
 		}
 
 		global $pagenow;
-		$excluded = array( 'site-editor.php', 'post-new.php', 'post.php' );
-		if ( in_array( $pagenow, $excluded, true ) ) {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( darkadmin_is_editor_screen_excluded( (string) $pagenow, $screen ) ) {
 			return;
 		}
 

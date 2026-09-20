@@ -1779,3 +1779,80 @@ input.tag-add:hover,
 }
 #wpfooter p,
 #wpfooter a { color: var(--adm-text-muted) !important; }
+
+/* =============================================================================
+   WORDPRESS 7.1 COMPONENTS / NATIVE OVERLAYS
+   ============================================================================= */
+:root {
+  color-scheme: dark;
+}
+dialog,
+.components-modal__frame,
+.components-popover__content,
+.components-dropdown__content,
+.components-menu-group,
+.components-card,
+.components-panel,
+.components-snackbar,
+.components-tooltip {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+dialog::backdrop,
+.components-modal__screen-overlay {
+  background: rgba(0,0,0,.75) !important;
+}
+.components-modal__header,
+.components-modal__content,
+.components-card__header,
+.components-card__body,
+.components-card__footer,
+.components-panel__body,
+.components-panel__header {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.components-menu-item__button,
+.components-button.is-tertiary,
+.components-button.is-link {
+  color: var(--adm-link) !important;
+}
+.components-menu-item__button:hover,
+.components-menu-item__button:focus,
+.components-button.is-tertiary:hover,
+.components-button.is-tertiary:focus {
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-link-hover) !important;
+}
+.components-button.is-primary {
+  background: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+.components-button.is-primary:hover,
+.components-button.is-primary:focus {
+  background: var(--adm-primary-hover) !important;
+}
+.components-text-control__input,
+.components-textarea-control__input,
+.components-input-control__container,
+.components-combobox-control__input,
+.components-search-control__input {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.components-base-control__help,
+.components-input-control__help,
+.components-form-token-field__help {
+  color: var(--adm-text-muted) !important;
+}
+.components-notice {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+.components-notice.is-error { border-left-color: var(--adm-danger) !important; }
+.components-notice.is-warning { border-left-color: var(--adm-warning) !important; }
+.components-notice.is-success { border-left-color: var(--adm-success) !important; }
