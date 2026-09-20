@@ -213,6 +213,7 @@ function darkadmin_current_page_slug(): string {
 	return '';
 }
 
+// phpcs:disable WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 /**
  * Determines whether DarkAdmin must leave an editor screen untouched.
  *
@@ -224,7 +225,6 @@ function darkadmin_current_page_slug(): string {
  * @param WP_Screen|null $screen  Current screen, when available.
  * @return bool
  */
-// phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 function darkadminIsEditorScreenExcluded( string $pagenow, $screen = null ): bool {
 	if ( 'site-editor.php' === $pagenow ) {
 		return true;
@@ -236,6 +236,7 @@ function darkadminIsEditorScreenExcluded( string $pagenow, $screen = null ): boo
 
 	return method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor();
 }
+// phpcs:enable WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 
 add_action(
 	'admin_enqueue_scripts',
