@@ -311,8 +311,18 @@ class DarkAdminTest extends WP_UnitTestCase {
 
     public function test_classic_post_editor_is_not_excluded(): void {
         $screen = WP_Screen::get( 'post' );
+        $screen->is_block_editor( false );
+
         $this->assertFalse( darkadmin_is_editor_screen_excluded( 'post.php', $screen ) );
         $this->assertFalse( darkadmin_is_editor_screen_excluded( 'post-new.php', $screen ) );
+    }
+
+    public function test_block_post_editor_is_excluded(): void {
+        $screen = WP_Screen::get( 'post' );
+        $screen->is_block_editor( true );
+
+        $this->assertTrue( darkadmin_is_editor_screen_excluded( 'post.php', $screen ) );
+        $this->assertTrue( darkadmin_is_editor_screen_excluded( 'post-new.php', $screen ) );
     }
 
     public function test_regular_admin_screen_is_not_excluded(): void {
