@@ -306,27 +306,27 @@ class DarkAdminTest extends WP_UnitTestCase {
     // -------------------------------------------------------------------------
 
     public function test_site_editor_is_always_excluded(): void {
-        $this->assertTrue( darkadmin_is_editor_screen_excluded( 'site-editor.php' ) );
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'site-editor.php' ) );
     }
 
     public function test_classic_post_editor_is_not_excluded(): void {
         $screen = WP_Screen::get( 'post' );
         $screen->is_block_editor( false );
 
-        $this->assertFalse( darkadmin_is_editor_screen_excluded( 'post.php', $screen ) );
-        $this->assertFalse( darkadmin_is_editor_screen_excluded( 'post-new.php', $screen ) );
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'post.php', $screen ) );
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'post-new.php', $screen ) );
     }
 
     public function test_block_post_editor_is_excluded(): void {
         $screen = WP_Screen::get( 'post' );
         $screen->is_block_editor( true );
 
-        $this->assertTrue( darkadmin_is_editor_screen_excluded( 'post.php', $screen ) );
-        $this->assertTrue( darkadmin_is_editor_screen_excluded( 'post-new.php', $screen ) );
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'post.php', $screen ) );
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'post-new.php', $screen ) );
     }
 
     public function test_regular_admin_screen_is_not_excluded(): void {
-        $this->assertFalse( darkadmin_is_editor_screen_excluded( 'plugins.php', WP_Screen::get( 'plugins' ) ) );
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'plugins.php', WP_Screen::get( 'plugins' ) ) );
     }
 
     // -------------------------------------------------------------------------
