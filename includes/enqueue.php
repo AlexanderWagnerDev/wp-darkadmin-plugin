@@ -224,16 +224,13 @@ function darkadmin_current_page_slug(): string {
  * @param WP_Screen|null $screen  Current screen, when available.
  * @return bool
  */
-function darkadmin_is_editor_screen_excluded( string $pagenow, $screen = null ): bool {
+// phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function darkadminIsEditorScreenExcluded( string $pagenow, $screen = null ): bool {
 	if ( 'site-editor.php' === $pagenow ) {
 		return true;
 	}
 
-	if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
-		return false;
-	}
-
-	if ( ! $screen instanceof WP_Screen ) {
+	if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) || ! $screen instanceof WP_Screen ) {
 		return false;
 	}
 
@@ -249,7 +246,7 @@ add_action(
 
 		global $pagenow;
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( darkadmin_is_editor_screen_excluded( (string) $pagenow, $screen ) ) {
+		if ( darkadminIsEditorScreenExcluded( (string) $pagenow, $screen ) ) {
 			return;
 		}
 
