@@ -86,6 +86,14 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'DUPLICATOR_VERSION' );
 			},
 		),
+		'spectra'        => array(
+			'label'        => 'Spectra',
+			'description'  => __( 'Dashboard, blocks, popup builder and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'css'          => 'spectra.css',
+			'is_installed' => static function (): bool {
+				return defined( 'UAGB_VER' );
+			},
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),

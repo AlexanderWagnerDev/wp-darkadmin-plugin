@@ -23,7 +23,7 @@ customization and Auto Dark Mode support.
 - Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 - Preset Themes: Modern (WP 7.0, default) and Classic (WP 6.x) color palettes
 - **Plugins**: optional dedicated dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize,
-  Contact Form 7, Complianz, Newsletter, Duplicator, and WordPress AI & Connectors
+  Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, and WordPress AI & Connectors
 - Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users
   exist
 - Excluded Pages: specify admin pages where dark mode should not be applied

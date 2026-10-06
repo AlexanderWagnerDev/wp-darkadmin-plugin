@@ -12,10 +12,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Dark styles for Complianz (`.cmplz-*`, `#complianz`): dashboard, wizard, settings, modals, data
   tables, loading placeholders and date picker via `assets/css/plugins/complianz.css`.
-- Dark styles for Newsletter (jQuery UI tab panels and option tables) and Duplicator (notice bar,
-  staging rows, logo).
-- All three are listed in Settings > DarkAdmin > Plugins and enabled automatically when the plugin
-  is active.
+- Dark styles for Newsletter (jQuery UI tab panels and option tables), Duplicator (notice bar,
+  staging rows, logo) and Spectra (active settings navigation item).
+- All four are listed in Settings > DarkAdmin > Plugins and enabled automatically when the plugin is
+  active.
 - New screenshots (settings, presets, plugins, dashboard, posts, comments, users, Complianz,
   WooCommerce, Yoast SEO, Newsletter, Duplicator).
 
