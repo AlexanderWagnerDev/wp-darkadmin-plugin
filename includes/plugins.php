@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Builds a plugin style registry entry.
  *
- * @param string          $label        Human-readable plugin name.
- * @param string          $description  Short note shown on the settings page.
- * @param string          $css          Filename inside assets/css/plugins/.
+ * @param string           $label        Human-readable plugin name.
+ * @param string           $description  Short note shown on the settings page.
+ * @param string           $css          Filename inside assets/css/plugins/.
  * @param callable(): bool $is_installed Returns true when the plugin is installed and active.
  * @return array{label: string, description: string, css: string, is_installed: callable(): bool}
  */
