@@ -52,7 +52,7 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 
 == Changelog ==
 = 0.4.0 =
-* Compatibility: Updated for WordPress 7.1 with dark styling for current WordPress component modals, popovers, cards, notices, menus, inputs, and native dialogs
+* Compatibility: Updated for WordPress 7.1 with dark styling for current WordPress components, including modals, popovers, cards, notices, menus, inputs, and native dialogs
 * Compatibility: Dark mode now covers the Classic Editor on post.php and post-new.php; block-editor instances and the Site Editor remain intentionally excluded
 * Maintenance: Composer PHP requirement now matches the plugin's existing PHP 8.0 minimum
 
