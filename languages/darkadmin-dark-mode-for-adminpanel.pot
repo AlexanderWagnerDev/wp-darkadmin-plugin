@@ -172,6 +172,22 @@ msgid "Form editor, tag generator, integration and list table."
 msgstr ""
 
 #: includes/plugins.php
+msgid "Cookie consent wizard, dashboard, settings, banner editor and data tables."
+msgstr ""
+
+#: includes/plugins.php
+msgid "Subscription, forms, newsletters and settings tabs."
+msgstr ""
+
+#: includes/plugins.php
+msgid "Backups, schedules, storage and settings screens."
+msgstr ""
+
+#: includes/plugins.php
+msgid "Dashboard, blocks, popup builder and settings screens."
+msgstr ""
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr ""
 
