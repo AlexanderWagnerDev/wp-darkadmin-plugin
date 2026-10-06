@@ -1,0 +1,172 @@
+/*
+ * DarkAdmin plugin styles: Complianz (GDPR/CCPA Cookie Consent)
+ * Based on complianz-gdpr/trunk/assets/css/admin.css, variables.css and settings/build/*.css.
+ * Complianz is styled almost entirely through --rsp-* custom properties, so the
+ * palette is remapped here and a few hard-coded colors are overridden below.
+ */
+
+body[class*="complianz"],
+body.toplevel_page_complianz,
+body[class*="complianz_page_"],
+#complianz,
+.cmplz,
+[class^="cmplz-"],
+[class*=" cmplz-"] {
+  --rsp-black: var(--adm-text);
+  --rsp-white: var(--adm-surface-1);
+  --rsp-border-color: var(--adm-border);
+  --rsp-background-color: var(--adm-bg);
+  --rsp-background-block-color: var(--adm-surface-1);
+  --rsp-input-background-color: var(--adm-surface-2);
+  --rsp-input-text-color: var(--adm-text);
+  --rsp-input-border-color: var(--adm-border);
+  --rsp-text-color: var(--adm-text);
+  --rsp-text-color-invert: var(--adm-bg);
+  --rsp-text-color-light: var(--adm-text-muted);
+  --rsp-text-color-white: #fff;
+  --rsp-grey-100: var(--adm-surface-1);
+  --rsp-grey-200: var(--adm-surface-2);
+  --rsp-grey-300: var(--adm-surface-3);
+  --rsp-grey-400: var(--adm-border);
+  --rsp-grey-500: var(--adm-text-muted);
+  --rsp-grey-600: var(--adm-text-soft);
+  --rsp-color-disabled: var(--adm-surface-3);
+  --rsp-wp-blue: var(--adm-primary);
+  --rsp-dark-blue: var(--adm-link);
+  --rsp-blue-faded: color-mix(in srgb, var(--adm-primary) 20%, var(--adm-surface-1));
+  --rsp-dark-blue-faded: color-mix(in srgb, var(--adm-primary) 20%, var(--adm-surface-1));
+  --rsp-wp-blue-faded: color-mix(in srgb, var(--adm-primary) 28%, var(--adm-surface-1));
+  --rsp-green-faded: color-mix(in srgb, var(--rsp-green) 22%, var(--adm-surface-1));
+  --rsp-red-faded: color-mix(in srgb, var(--rsp-red) 22%, var(--adm-surface-1));
+  --rsp-yellow-faded: color-mix(in srgb, var(--rsp-yellow) 22%, var(--adm-surface-1));
+  --rsp-pink-faded: color-mix(in srgb, var(--rsp-pink) 22%, var(--adm-surface-1));
+  --rsp-box-shadow: rgba(0, 0, 0, 0.4) 0 4px 6px -1px, rgba(0, 0, 0, 0.3) 0 2px 4px -1px;
+}
+
+/* Page wrapper and cards */
+#complianz,
+#complianz .cmplz-grid-item,
+#complianz .cmplz-header,
+#complianz .cmplz-modal-content,
+#complianz .cmplz-modal-header,
+#complianz .cmplz-modal-footer {
+  color: var(--adm-text) !important;
+}
+
+#complianz .cmplz-grid-item,
+#complianz .cmplz-modal-content,
+#complianz .cmplz-panel__cookie_list .cmplz-panel__list__item,
+#complianz .cmplz-settings-overlay .cmplz-settings-overlay-message,
+.cmplz-settings-overlay .cmplz-settings-overlay-message {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.cmplz-suggested-plugin,
+.cmplz-wscscan-alert {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Inputs */
+#complianz input[type="text"],
+#complianz input[type="email"],
+#complianz input[type="url"],
+#complianz input[type="number"],
+#complianz input[type="password"],
+#complianz input[type="search"],
+#complianz select,
+#complianz textarea,
+.cmplz-modal-content input,
+.cmplz-modal-content select,
+.cmplz-modal-content textarea {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+#complianz input:focus,
+#complianz select:focus,
+#complianz textarea:focus {
+  border-color: var(--adm-border-focus) !important;
+  box-shadow: 0 0 0 1px var(--adm-border-focus) !important;
+}
+
+#complianz input::placeholder,
+#complianz textarea::placeholder {
+  color: var(--adm-text-muted) !important;
+}
+
+#complianz .cmplz-border-input-unit select {
+  background-color: var(--adm-surface-2) !important;
+  color-scheme: dark;
+}
+
+/* Tables */
+#complianz table,
+#complianz .cmplz-data-table,
+#complianz .rdt_Table,
+#complianz .rdt_TableHeadRow,
+#complianz .rdt_TableRow,
+#complianz .rdt_TableCell,
+#complianz .rdt_Pagination {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+#complianz .rdt_TableRow:hover {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* Loading placeholders */
+.cmplz-placeholder {
+  background-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+.cmplz-placeholder .cmplz-placeholder-line {
+  background-color: var(--adm-surface-3) !important;
+  background-image: linear-gradient(90deg, var(--adm-surface-3) 0, var(--adm-surface-2) 40px, var(--adm-surface-3) 80px) !important;
+}
+
+.cmplz-placeholder-count-1 .cmplz-placeholder-line {
+  background-color: var(--adm-surface-2) !important;
+  background-image: none !important;
+}
+
+.cmplz-integrations-placeholder div {
+  background-color: var(--adm-surface-2) !important;
+}
+
+/* Loader */
+#complianz .cmplz-loader > div {
+  background-color: var(--adm-text) !important;
+}
+
+/* Modals and backdrop */
+.cmplz-modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Date range picker */
+.rdrCalendarWrapper,
+.rdrDateDisplayWrapper,
+.rdrDefinedRangesWrapper,
+.rdrStaticRange {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.rdrStaticRange:hover .rdrStaticRangeLabel,
+.rdrStaticRange.rdrStaticRangeSelected {
+  background-color: var(--adm-surface-3) !important;
+}
+
+.rdrMonthAndYearPickers select,
+.rdrDayNumber span,
+.rdrWeekDay,
+.rdrMonthName {
+  color: var(--adm-text) !important;
+}

@@ -62,6 +62,14 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'WPCF7_VERSION' );
 			},
 		),
+		'complianz'     => array(
+			'label'        => 'Complianz',
+			'description'  => __( 'Cookie consent wizard, dashboard, settings, banner editor and data tables.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'css'          => 'complianz.css',
+			'is_installed' => static function (): bool {
+				return defined( 'cmplz_free' ) || defined( 'cmplz_premium' ) || defined( 'CMPLZ_PLUGIN' );
+			},
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),

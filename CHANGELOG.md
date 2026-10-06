@@ -8,6 +8,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Dark styles for Complianz (`.cmplz-*`, `#complianz`): dashboard, wizard, settings, modals, data tables,
+  loading placeholders and date picker via `assets/css/plugins/complianz.css`; listed in
+  Settings > DarkAdmin > Plugins and enabled automatically when Complianz is active.
+- New screenshots (settings, dashboard, posts, plugins, comments, users, Classic preset, Complianz).
+
 ## [0.4.0] - 2026-10-06
 
 ### Compatibility
