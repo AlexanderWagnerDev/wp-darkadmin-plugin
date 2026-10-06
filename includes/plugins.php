@@ -10,24 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Builds a plugin style registry entry.
- *
- * @param string           $label        Human-readable plugin name.
- * @param string           $description  Short note shown on the settings page.
- * @param string           $css          Filename inside assets/css/plugins/.
- * @param callable(): bool $is_installed Returns true when the plugin is installed and active.
- * @return array{label: string, description: string, css: string, is_installed: callable(): bool}
- */
-function darkadmin_plugin_definition( string $label, string $description, string $css, callable $is_installed ): array {
-	return array(
-		'label'        => $label,
-		'description'  => $description,
-		'css'          => $css,
-		'is_installed' => $is_installed,
-	);
-}
-
-/**
  * Returns all built-in plugin style definitions.
  *
  * Each entry:
@@ -39,6 +21,15 @@ function darkadmin_plugin_definition( string $label, string $description, string
  * @return array<string, array{label: string, description: string, css: string, is_installed: callable(): bool}>
  */
 function darkadmin_plugin_registry(): array {
+	$entry = static function ( string $label, string $description, string $css, callable $is_installed ): array {
+		return array(
+			'label'        => $label,
+			'description'  => $description,
+			'css'          => $css,
+			'is_installed' => $is_installed,
+		);
+	};
+
 	return array(
 		'yoast'          => array(
 			'label'        => 'Yoast SEO',
@@ -80,7 +71,7 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'WPCF7_VERSION' );
 			},
 		),
-		'complianz'      => darkadmin_plugin_definition(
+		'complianz'      => $entry(
 			'Complianz',
 			__( 'Cookie consent wizard, dashboard, settings, banner editor and data tables.', 'darkadmin-dark-mode-for-adminpanel' ),
 			'complianz.css',
@@ -88,7 +79,7 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'cmplz_free' ) || defined( 'cmplz_premium' ) || defined( 'CMPLZ_PLUGIN' );
 			}
 		),
-		'newsletter'     => darkadmin_plugin_definition(
+		'newsletter'     => $entry(
 			'Newsletter',
 			__( 'Subscription, forms, newsletters and settings tabs.', 'darkadmin-dark-mode-for-adminpanel' ),
 			'newsletter.css',
@@ -96,7 +87,7 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'NEWSLETTER_VERSION' );
 			}
 		),
-		'duplicator'     => darkadmin_plugin_definition(
+		'duplicator'     => $entry(
 			'Duplicator',
 			__( 'Backups, schedules, storage and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
 			'duplicator.css',
@@ -104,7 +95,7 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'DUPLICATOR_VERSION' );
 			}
 		),
-		'spectra'        => darkadmin_plugin_definition(
+		'spectra'        => $entry(
 			'Spectra',
 			__( 'Dashboard, blocks, popup builder and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
 			'spectra.css',
