@@ -149,6 +149,35 @@ body[class*="complianz_page_"],
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
+.cmplz-modal,
+.cmplz-modal .cmplz-modal-header,
+.cmplz-modal .cmplz-modal-header .modal-title {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+.cmplz-modal .cmplz-modal-footer {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Plugin tour tooltips (--rsp-white is remapped to a dark surface above) */
+body .cmplz-shepherd {
+  --rsp-black: var(--adm-surface-3);
+  --rsp-white: var(--adm-text);
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body .cmplz-shepherd .shepherd-arrow:before {
+  background: var(--adm-surface-3) !important;
+}
+
+body .cmplz-shepherd .shepherd-header .shepherd-title,
+body .cmplz-shepherd .shepherd-text p {
+  color: var(--adm-text) !important;
+}
+
 /* Date range picker */
 .rdrCalendarWrapper,
 .rdrDateDisplayWrapper,
@@ -169,4 +198,29 @@ body[class*="complianz_page_"],
 .rdrWeekDay,
 .rdrMonthName {
   color: var(--adm-text) !important;
+}
+
+.rdrDateDisplayItem {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.rdrDateDisplayItem input {
+  color: var(--adm-text) !important;
+}
+
+.rdrNextPrevButton {
+  background: var(--adm-surface-3) !important;
+}
+
+.rdrNextPrevButton:hover {
+  background: var(--adm-border) !important;
+}
+
+.rdrNextButton i {
+  border-color: transparent transparent transparent var(--adm-text) !important;
+}
+
+.rdrPprevButton i {
+  border-color: transparent var(--adm-text) transparent transparent !important;
 }

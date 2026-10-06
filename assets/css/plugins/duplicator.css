@@ -1,33 +1,37 @@
 /*
  * DarkAdmin plugin styles: Duplicator
- * Based on duplicator/assets/css/duplicator.css.
+ * Based on duplicator/assets/css/duplicator.css and
+ * duplicator/addons/litebase/assets/css/litebase.css.
  */
 
-body.duplicator-page,
-body[class*="_page_duplicator"],
-body.toplevel_page_duplicator {
+body[class*="duplicator"] {
   color: var(--adm-text);
 }
 
-#dup-notice-bar,
-.dupli-dismissable {
-  background: var(--adm-surface-2) !important;
+/* Upgrade banner: Duplicator sets a light background with !important and
+   an ".dup-styles" prefix, so the selector needs the same prefix. */
+body .dup-styles #dup-notice-bar,
+body #dup-notice-bar {
+  background-color: var(--adm-surface-2) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
 
-#dup-notice-bar a,
-.dupli-dismissable a {
+body #dup-notice-bar a {
   color: var(--adm-link) !important;
 }
 
-.duplicator-page .staging-row,
-.duplicator-page tr.staging-row {
+body #dup-notice-bar .dup-dismiss-button {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="duplicator"] .staging-row {
   background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
 }
 
-.duplicator-page .dup-logo img,
-.duplicator-page .dupli-header img {
-  filter: brightness(0) invert(1);
+/* The header logo is a dark-blue wordmark with an orange gear; invert the
+   lightness and rotate the hue back so the gear keeps its color. */
+body[class*="duplicator"] .dup-header img {
+  filter: invert(1) hue-rotate(180deg);
 }
