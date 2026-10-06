@@ -12,8 +12,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Compatibility
 
-- Updated plugin metadata for WordPress 7.1 and added dark styling for current WordPress component
-  modals, popovers, cards, notices, menus, inputs, and native dialogs.
+- Updated plugin metadata for WordPress 7.1 and added dark styling for current WordPress components,
+  including modals, popovers, cards, notices, menus, inputs, and native dialogs.
 - Dark mode now covers the Classic Editor on `post.php` and `post-new.php`; only block-editor
   instances and the Site Editor remain intentionally excluded.
 
