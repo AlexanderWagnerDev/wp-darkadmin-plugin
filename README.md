@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.3.2-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.4.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -51,6 +51,19 @@ customization and Auto Dark Mode support.
 ---
 
 ## Changelog
+
+## [0.4.0] - 2026-10-06
+
+### Compatibility
+
+- Updated for WordPress 7.1 with dark styling for current WordPress component modals, popovers,
+  cards, notices, menus, inputs, and native dialogs.
+- Dark mode now covers the Classic Editor on `post.php` and `post-new.php`; block-editor
+  instances and the Site Editor remain intentionally excluded.
+
+### Maintenance
+
+- Composer PHP requirement now matches the plugin's existing PHP 8.0 minimum.
 
 ## [0.3.2] - 2026-06-23
 
@@ -335,6 +348,19 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ---
 
 ## Changelog
+
+## 0.4.0
+
+### Kompatibilität
+
+- Für WordPress 7.1 aktualisiert; Dark-Mode-Stile für aktuelle WordPress-Komponenten wie Modals,
+  Popovers, Cards, Notices, Menüs, Eingabefelder und native Dialoge ergänzt.
+- Dark Mode deckt jetzt auch den Classic Editor auf `post.php` und `post-new.php` ab;
+  Block-Editor-Instanzen und der Site Editor bleiben bewusst ausgeschlossen.
+
+### Wartung
+
+- Composer-PHP-Anforderung an das bereits bestehende Plugin-Minimum PHP 8.0 angeglichen.
 
 ## 0.3.2
 
