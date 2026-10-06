@@ -6,6 +6,8 @@
 
 # Documentation (GitHub-only)
 README.md
+CHANGELOG.md
+AGENTS.md
 readme-de.txt
 
 # Screenshots and branding (not needed in plugin zip)
@@ -14,6 +16,19 @@ screenshot-2.png
 screenshot-3.png
 screenshot-4.png
 DarkAdmin-Logo.png
+DarkAdmin-Banner.png
+banner-772x250.png
+banner-1544x500.png
+icon-128x128.png
+icon-256x256.png
+
+# Repo tooling
+blueprint.json
+renovate.json
+
+# Translation sources (compiled .mo / .l10n.php files are shipped)
+*.po
+*.pot
 
 # Node / build tools
 node_modules

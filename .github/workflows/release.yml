@@ -1,0 +1,224 @@
+name: Release
+
+# Manual release workflow. The version is read from darkadmin.php, so bump the
+# version (plugin header, DARKADMIN_VERSION, readme.txt "Stable tag") and add a
+# "## [x.y.z] - date" section to CHANGELOG.md on main before running this.
+#
+# What it does:
+#   1. Validates that all version references agree and the tag does not exist yet
+#   2. Extracts the release notes for that version from CHANGELOG.md
+#   3. Builds the plugin ZIP (respecting .distignore)
+#   4. Creates the git tag + GitHub release with the changelog as notes and the ZIP attached
+#   5. Deploys trunk, assets and the new tag to the WordPress.org SVN repository
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   SVN_USERNAME  WordPress.org username
+#   SVN_PASSWORD  WordPress.org password (or SVN password)
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_svn:
+        description: 'Deploy to WordPress.org SVN'
+        type: boolean
+        default: true
+      dry_run:
+        description: 'Dry run (validate and build only, no tag, release or SVN commit)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  SLUG: darkadmin-dark-mode-for-adminpanel
+
+jobs:
+  prepare:
+    name: Validate & build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Ensure running on the default branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          if [ "${GITHUB_REF_NAME}" != "${DEFAULT_BRANCH}" ]; then
+            echo "::error::Releases must be started from '${DEFAULT_BRANCH}', not '${GITHUB_REF_NAME}'."
+            exit 1
+          fi
+
+      - name: Read and validate version
+        id: version
+        run: |
+          VERSION=$(sed -n 's/^ \* Version:[[:space:]]*//p' darkadmin.php | head -n1 | tr -d '[:space:]')
+          CONST=$(sed -n "s/^define( 'DARKADMIN_VERSION', '\(.*\)' );/\1/p" darkadmin.php | head -n1)
+          STABLE=$(sed -n 's/^Stable tag:[[:space:]]*//p' readme.txt | head -n1 | tr -d '[:space:]')
+
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
+            echo "::error::Invalid or missing version in darkadmin.php header: '$VERSION'"
+            exit 1
+          fi
+          if [ "$VERSION" != "$CONST" ]; then
+            echo "::error::Plugin header version ($VERSION) differs from DARKADMIN_VERSION ($CONST)."
+            exit 1
+          fi
+          if [ "$VERSION" != "$STABLE" ]; then
+            echo "::error::Plugin header version ($VERSION) differs from readme.txt Stable tag ($STABLE)."
+            exit 1
+          fi
+          if ! grep -qE "^= ${VERSION//./\\.} =" readme.txt; then
+            echo "::error::readme.txt has no '= $VERSION =' changelog entry."
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v${VERSION}" >/dev/null 2>&1; then
+            echo "::error::Tag v${VERSION} already exists."
+            exit 1
+          fi
+
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Releasing version ${VERSION}"
+
+      - name: Extract release notes from CHANGELOG.md
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          awk -v ver="$VERSION" '
+            /^## \[/ {
+              if (found) exit
+              if (index($0, "## [" ver "]") == 1) { found = 1; next }
+            }
+            found { print }
+          ' CHANGELOG.md \
+            | sed -e '/^---[[:space:]]*$/d' \
+            | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' \
+            | sed '/./,$!d' > release-notes.md
+
+          if [ ! -s release-notes.md ]; then
+            echo "::error::No notes found for [$VERSION] in CHANGELOG.md (expected a '## [$VERSION] - date' section)."
+            exit 1
+          fi
+
+          echo "----- release notes -----"
+          cat release-notes.md
+          {
+            echo '### Release notes'
+            echo
+            cat release-notes.md
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Build plugin ZIP
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          mkdir -p build/"$SLUG"
+          rsync -a --exclude-from=.distignore --exclude='vendor' ./ build/"$SLUG"/
+          (cd build && zip -rq "../${SLUG}.zip" "$SLUG")
+          echo "ZIP contents:"
+          unzip -l "${SLUG}.zip" | tail -n +4 | head -n -2 | awk '{print $4}'
+
+      - name: Upload build
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-files
+          path: |
+            ${{ env.SLUG }}.zip
+            release-notes.md
+            build/${{ env.SLUG }}
+          retention-days: 7
+
+  github-release:
+    name: GitHub tag & release
+    needs: prepare
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Download build
+        uses: actions/download-artifact@v7
+        with:
+          name: release-files
+
+      - name: Create tag and GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          PRERELEASE=""
+          if [[ "$VERSION" == *-* ]]; then PRERELEASE="--prerelease"; fi
+          gh release create "v${VERSION}" "${SLUG}.zip" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "v${VERSION}" \
+            --notes-file release-notes.md \
+            $PRERELEASE
+
+  svn-deploy:
+    name: WordPress.org SVN deploy
+    needs: [prepare, github-release]
+    if: ${{ !inputs.dry_run && inputs.deploy_svn }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Download build
+        uses: actions/download-artifact@v7
+        with:
+          name: release-files
+
+      - name: Deploy to WordPress.org
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          if [ -z "$SVN_USERNAME" ] || [ -z "$SVN_PASSWORD" ]; then
+            echo "::error::Secrets SVN_USERNAME and SVN_PASSWORD must be set."
+            exit 1
+          fi
+
+          SVN_URL="https://plugins.svn.wordpress.org/${SLUG}"
+          SVN_DIR="${RUNNER_TEMP}/svn"
+          svn_auth=(--non-interactive --no-auth-cache --username "$SVN_USERNAME")
+
+          svn checkout "$SVN_URL" "$SVN_DIR" --depth immediates "${svn_auth[@]}"
+          svn update "$SVN_DIR/trunk" --set-depth infinity "${svn_auth[@]}"
+          svn update "$SVN_DIR/assets" --set-depth infinity "${svn_auth[@]}"
+
+          if svn ls "$SVN_URL/tags/$VERSION" "${svn_auth[@]}" >/dev/null 2>&1; then
+            echo "::error::SVN tag $VERSION already exists."
+            exit 1
+          fi
+
+          # trunk <- built plugin files
+          rsync -a --delete --exclude='.svn' "build/${SLUG}/" "$SVN_DIR/trunk/"
+
+          # assets <- banners, icons, screenshots, blueprint (live in the repo root)
+          mkdir -p "$SVN_DIR/assets/blueprints"
+          cp banner-*.png icon-*.png screenshot-*.png "$SVN_DIR/assets/"
+          cp blueprint.json "$SVN_DIR/assets/blueprints/blueprint.json"
+
+          cd "$SVN_DIR"
+          svn add --force --parents trunk assets > /dev/null
+          svn status | grep '^!' | sed 's/^! *//' | xargs -r -d '\n' svn rm --force > /dev/null
+          find assets -maxdepth 1 -name '*.png' -exec svn propset svn:mime-type image/png {} + > /dev/null
+
+          # tag <- copy of trunk
+          svn copy trunk "tags/${VERSION}"
+
+          svn status
+          svn commit -m "Release ${VERSION}" "${svn_auth[@]}" --password-from-stdin <<< "$SVN_PASSWORD"
