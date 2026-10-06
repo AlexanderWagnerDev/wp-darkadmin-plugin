@@ -66,9 +66,13 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 
 == Changelog ==
 = 0.4.0 =
+* Added: Dark mode styles for Complianz, Newsletter, Duplicator and Spectra; listed in Settings > DarkAdmin > Plugins and enabled automatically when the plugin is active
+* Added: 14 new screenshots (presets, plugins, posts, comments, users, Complianz, WooCommerce, Yoast SEO, Newsletter, Duplicator)
+* Fixed: Yoast SEO light search button, active sidebar item and promo card in the modern admin UI
 * Compatibility: Updated for WordPress 7.1 with dark styling for current WordPress components, including modals, popovers, cards, notices, menus, inputs, and native dialogs
 * Compatibility: Dark mode now covers the Classic Editor on post.php and post-new.php; block-editor instances and the Site Editor remain intentionally excluded
 * Maintenance: Composer PHP requirement now matches the plugin's existing PHP 8.0 minimum
+* Updated translation files for the new plugin style descriptions
 
 = 0.3.2 =
 * Fixed: WordPress AI & Connectors page header (admin-ui Page) — title and subtitle are readable in dark mode; styles load after wp-components

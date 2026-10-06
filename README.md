@@ -82,6 +82,17 @@ customization and Auto Dark Mode support.
 
 ## [0.4.0] - 2026-10-06
 
+### Added
+
+- Dark styles for Complianz, Newsletter, Duplicator and Spectra, listed in Settings > DarkAdmin >
+  Plugins and enabled automatically when the plugin is active
+- 14 new screenshots (presets, plugins, posts, comments, users, Complianz, WooCommerce, Yoast SEO,
+  Newsletter, Duplicator)
+
+### Fixed
+
+- Yoast SEO: light search button, active sidebar item and promo card in the modern admin UI
+
 ### Compatibility
 
 - Updated for WordPress 7.1 with dark styling for current WordPress components, including modals,
@@ -92,6 +103,8 @@ customization and Auto Dark Mode support.
 ### Maintenance
 
 - Composer PHP requirement now matches the plugin's existing PHP 8.0 minimum.
+- PHPUnit CI matrix now runs on PHP 8.0 to 8.5 (PHP 7.4 removed).
+- Updated translation files for the new plugin style descriptions.
 
 ## [0.3.2] - 2026-06-23
 
@@ -379,6 +392,17 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 
 ## 0.4.0
 
+### Hinzugefügt
+
+- Dark-Mode-Stile für Complianz, Newsletter, Duplicator und Spectra unter Einstellungen >
+  DarkAdmin > Plugins; werden automatisch aktiv, wenn das Plugin läuft
+- 14 neue Screenshots (Presets, Plugins, Beiträge, Kommentare, Benutzer, Complianz, WooCommerce,
+  Yoast SEO, Newsletter, Duplicator)
+
+### Behoben
+
+- Yoast SEO: heller Suchbutton, aktiver Menüpunkt und Promo-Karte in der modernen Admin-Oberfläche
+
 ### Kompatibilität
 
 - Für WordPress 7.1 aktualisiert; Dark-Mode-Stile für aktuelle WordPress-Komponenten wie Modals,
@@ -389,6 +413,8 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ### Wartung
 
 - Composer-PHP-Anforderung an das bereits bestehende Plugin-Minimum PHP 8.0 angeglichen.
+- PHPUnit-CI-Matrix läuft jetzt auf PHP 8.0 bis 8.5 (PHP 7.4 entfernt).
+- Übersetzungsdateien für die neuen Plugin-Stil-Beschreibungen aktualisiert.
 
 ## 0.3.2
 

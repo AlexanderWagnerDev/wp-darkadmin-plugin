@@ -66,9 +66,13 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 
 == Changelog ==
 = 0.4.0 =
+* Neu: Dark-Mode-Stile für Complianz, Newsletter, Duplicator und Spectra unter Einstellungen > DarkAdmin > Plugins; werden automatisch aktiv, wenn das Plugin läuft
+* Neu: 14 neue Screenshots (Presets, Plugins, Beiträge, Kommentare, Benutzer, Complianz, WooCommerce, Yoast SEO, Newsletter, Duplicator)
+* Fix: Yoast SEO — heller Suchbutton, aktiver Menüpunkt und Promo-Karte in der modernen Admin-Oberfläche
 * Kompatibilität: Für WordPress 7.1 aktualisiert; Dark-Mode-Stile für aktuelle WordPress-Komponenten wie Modals, Popovers, Cards, Notices, Menüs, Eingabefelder und native Dialoge ergänzt
 * Kompatibilität: Dark Mode deckt jetzt auch den Classic Editor auf post.php und post-new.php ab; Block-Editor-Instanzen und der Site Editor bleiben bewusst ausgeschlossen
 * Wartung: Composer-PHP-Anforderung an das bereits bestehende Plugin-Minimum PHP 8.0 angeglichen
+* Übersetzungsdateien für die neuen Plugin-Stil-Beschreibungen aktualisiert
 
 = 0.3.2 =
 * Fix: WordPress AI & Connectors — Seitenkopf (admin-ui Page) mit lesbarem Kontrast im Dark Mode; Styles laden nach wp-components
