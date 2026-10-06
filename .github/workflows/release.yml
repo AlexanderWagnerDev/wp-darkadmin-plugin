@@ -79,8 +79,8 @@ jobs:
             echo "::error::readme.txt has no '= $VERSION =' changelog entry."
             exit 1
           fi
-          if git ls-remote --exit-code --tags origin "refs/tags/v${VERSION}" >/dev/null 2>&1; then
-            echo "::error::Tag v${VERSION} already exists."
+          if git ls-remote --exit-code --tags origin "refs/tags/${VERSION}" >/dev/null 2>&1; then
+            echo "::error::Tag ${VERSION} already exists."
             exit 1
           fi
 
@@ -223,9 +223,9 @@ jobs:
         run: |
           PRERELEASE=""
           if [[ "$VERSION" == *-* ]]; then PRERELEASE="--prerelease"; fi
-          gh release create "v${VERSION}" "${SLUG}.zip" \
+          gh release create "${VERSION}" "${SLUG}.zip" \
             --repo "$GITHUB_REPOSITORY" \
             --target "$GITHUB_SHA" \
-            --title "v${VERSION}" \
+            --title "${VERSION}" \
             --notes-file release-notes.md \
             $PRERELEASE
