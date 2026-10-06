@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.3.2
+Stable tag: 0.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,11 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 4. Dashboard - Dark Mode active
 
 == Changelog ==
+= 0.4.0 =
+* Compatibility: Updated for WordPress 7.1 with dark styling for current WordPress component modals, popovers, cards, notices, menus, inputs, and native dialogs
+* Compatibility: Dark mode now covers the Classic Editor on post.php and post-new.php; block-editor instances and the Site Editor remain intentionally excluded
+* Maintenance: Composer PHP requirement now matches the plugin's existing PHP 8.0 minimum
+
 = 0.3.2 =
 * Fixed: WordPress AI & Connectors page header (admin-ui Page) — title and subtitle are readable in dark mode; styles load after wp-components
 
