@@ -22,7 +22,7 @@ Features:
 * Token-based design system for backgrounds, text, borders, buttons and states
 * Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 * Preset Themes: Modern (WP 7.0, default) and Classic (WP 6.x) color palettes
-* Plugins: optional dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, and WordPress AI & Connectors
+* Plugins: optional dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, and WordPress AI & Connectors
 * Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
 * Excluded Pages: specify admin pages where dark mode should not be applied
 
@@ -49,12 +49,30 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 2. Settings Page - Dark Mode active
 3. Dashboard - Default (Dark Mode off)
 4. Dashboard - Dark Mode active
+5. Settings Page - Color Customization and layout options
+6. Settings Page - Plugins section with optional dark styles for installed plugins
+7. Settings Page - Classic preset
+8. Posts list - Dark Mode active
+9. Plugins list - Dark Mode active
+10. Comments - Dark Mode active
+11. Users - Dark Mode active
+12. Complianz - Dashboard
+13. Complianz - Wizard
+14. Complianz - Settings
+15. WooCommerce - Home
+16. Yoast SEO - Site features
+17. Newsletter - Subscription settings
+18. Duplicator - Backups
 
 == Changelog ==
 = 0.4.0 =
+* Added: Dark mode styles for Complianz, Newsletter, Duplicator and Spectra; listed in Settings > DarkAdmin > Plugins and enabled automatically when the plugin is active
+* Added: 14 new screenshots (presets, plugins, posts, comments, users, Complianz, WooCommerce, Yoast SEO, Newsletter, Duplicator)
+* Fixed: Yoast SEO light search button, active sidebar item and promo card in the modern admin UI
 * Compatibility: Updated for WordPress 7.1 with dark styling for current WordPress components, including modals, popovers, cards, notices, menus, inputs, and native dialogs
 * Compatibility: Dark mode now covers the Classic Editor on post.php and post-new.php; block-editor instances and the Site Editor remain intentionally excluded
 * Maintenance: Composer PHP requirement now matches the plugin's existing PHP 8.0 minimum
+* Updated translation files for the new plugin style descriptions
 
 = 0.3.2 =
 * Fixed: WordPress AI & Connectors page header (admin-ui Page) — title and subtitle are readable in dark mode; styles load after wp-components

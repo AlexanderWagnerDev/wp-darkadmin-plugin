@@ -1,0 +1,14 @@
+/*
+ * DarkAdmin plugin styles: Spectra (Ultimate Addons for Gutenberg)
+ * The Spectra admin app is built with Tailwind utility classes; the active
+ * settings navigation item hard-codes a light surface with light text.
+ */
+
+body[class*="_page_spectra"] li.bg-background-secondary {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_spectra"] li.bg-background-secondary > a {
+  color: var(--adm-text) !important;
+}

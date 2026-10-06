@@ -22,7 +22,7 @@ Funktionen:
 * Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
 * Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 * Preset-Themes: Modern (WP 7.0, Standard) und Classic (WP 6.x) Farbpaletten
-* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7 und WordPress AI & Connectors
+* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra und WordPress AI & Connectors
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 * Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
 
@@ -49,12 +49,30 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 2. Settings Page - Dark Mode aktiv
 3. Dashboard - Standard (Dark Mode deaktiviert)
 4. Dashboard - Dark Mode aktiv
+5. Settings Page - Farbanpassung und Layout-Optionen
+6. Settings Page - Plugins-Bereich mit optionalen Dark-Mode-Stilen für installierte Plugins
+7. Settings Page - Classic-Preset
+8. Beitragsliste - Dark Mode aktiv
+9. Plugin-Liste - Dark Mode aktiv
+10. Kommentare - Dark Mode aktiv
+11. Benutzer - Dark Mode aktiv
+12. Complianz - Dashboard
+13. Complianz - Wizard
+14. Complianz - Einstellungen
+15. WooCommerce - Startseite
+16. Yoast SEO - Site-Funktionen
+17. Newsletter - Abonnement-Einstellungen
+18. Duplicator - Backups
 
 == Changelog ==
 = 0.4.0 =
+* Neu: Dark-Mode-Stile für Complianz, Newsletter, Duplicator und Spectra unter Einstellungen > DarkAdmin > Plugins; werden automatisch aktiv, wenn das Plugin läuft
+* Neu: 14 neue Screenshots (Presets, Plugins, Beiträge, Kommentare, Benutzer, Complianz, WooCommerce, Yoast SEO, Newsletter, Duplicator)
+* Fix: Yoast SEO — heller Suchbutton, aktiver Menüpunkt und Promo-Karte in der modernen Admin-Oberfläche
 * Kompatibilität: Für WordPress 7.1 aktualisiert; Dark-Mode-Stile für aktuelle WordPress-Komponenten wie Modals, Popovers, Cards, Notices, Menüs, Eingabefelder und native Dialoge ergänzt
 * Kompatibilität: Dark Mode deckt jetzt auch den Classic Editor auf post.php und post-new.php ab; Block-Editor-Instanzen und der Site Editor bleiben bewusst ausgeschlossen
 * Wartung: Composer-PHP-Anforderung an das bereits bestehende Plugin-Minimum PHP 8.0 angeglichen
+* Übersetzungsdateien für die neuen Plugin-Stil-Beschreibungen aktualisiert
 
 = 0.3.2 =
 * Fix: WordPress AI & Connectors — Seitenkopf (admin-ui Page) mit lesbarem Kontrast im Dark Mode; Styles laden nach wp-components

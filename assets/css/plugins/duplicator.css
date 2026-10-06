@@ -1,0 +1,37 @@
+/*
+ * DarkAdmin plugin styles: Duplicator
+ * Based on duplicator/assets/css/duplicator.css and
+ * duplicator/addons/litebase/assets/css/litebase.css.
+ */
+
+body[class*="duplicator"] {
+  color: var(--adm-text);
+}
+
+/* Upgrade banner: Duplicator sets a light background with !important and
+   an ".dup-styles" prefix, so the selector needs the same prefix. */
+body .dup-styles #dup-notice-bar,
+body #dup-notice-bar {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body #dup-notice-bar a {
+  color: var(--adm-link) !important;
+}
+
+body #dup-notice-bar .dup-dismiss-button {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="duplicator"] .staging-row {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+/* The header logo is a dark-blue wordmark with an orange gear; invert the
+   lightness and rotate the hue back so the gear keeps its color. */
+body[class*="duplicator"] .dup-header img {
+  filter: invert(1) hue-rotate(180deg);
+}

@@ -10,6 +10,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.4.0] - 2026-10-06
 
+### Added
+
+- Dark styles for Complianz (`.cmplz-*`, `#complianz`): dashboard, wizard, settings, modals, data
+  tables, loading placeholders and date picker via `assets/css/plugins/complianz.css`.
+- Dark styles for Newsletter (jQuery UI tab panels and option tables), Duplicator (notice bar,
+  staging rows, logo) and Spectra (active settings navigation item).
+- All four are listed in Settings > DarkAdmin > Plugins and enabled automatically when the plugin is
+  active.
+- New screenshots (settings, presets, plugins, dashboard, posts, comments, users, Complianz,
+  WooCommerce, Yoast SEO, Newsletter, Duplicator).
+
+### Fixed
+
+- Yoast SEO: light search button, active sidebar item and promo card in the modern `yst-*` admin UI.
+
 ### Compatibility
 
 - Updated plugin metadata for WordPress 7.1 and added dark styling for current WordPress components,
@@ -20,6 +35,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Maintenance
 
 - Aligned the Composer PHP requirement with the plugin's existing PHP 8.0 minimum.
+- PHPUnit CI matrix now runs on PHP 8.0 to 8.5 (PHP 7.4 removed).
+- Updated translation files for the new plugin style descriptions.
 
 ## [0.3.2] - 2026-06-23
 

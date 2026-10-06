@@ -21,6 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array<string, array{label: string, description: string, css: string, is_installed: callable(): bool}>
  */
 function darkadmin_plugin_registry(): array {
+	$entry = static function ( string $label, string $description, string $css, callable $is_installed ): array {
+		return array(
+			'label'        => $label,
+			'description'  => $description,
+			'css'          => $css,
+			'is_installed' => $is_installed,
+		);
+	};
+
 	return array(
 		'yoast'          => array(
 			'label'        => 'Yoast SEO',
@@ -61,6 +70,38 @@ function darkadmin_plugin_registry(): array {
 			'is_installed' => static function (): bool {
 				return defined( 'WPCF7_VERSION' );
 			},
+		),
+		'complianz'      => $entry(
+			'Complianz',
+			__( 'Cookie consent wizard, dashboard, settings, banner editor and data tables.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'complianz.css',
+			static function (): bool {
+				return defined( 'cmplz_free' ) || defined( 'cmplz_premium' ) || defined( 'CMPLZ_PLUGIN' );
+			}
+		),
+		'newsletter'     => $entry(
+			'Newsletter',
+			__( 'Subscription, forms, newsletters and settings tabs.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'newsletter.css',
+			static function (): bool {
+				return defined( 'NEWSLETTER_VERSION' );
+			}
+		),
+		'duplicator'     => $entry(
+			'Duplicator',
+			__( 'Backups, schedules, storage and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'duplicator.css',
+			static function (): bool {
+				return defined( 'DUPLICATOR_VERSION' );
+			}
+		),
+		'spectra'        => $entry(
+			'Spectra',
+			__( 'Dashboard, blocks, popup builder and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'spectra.css',
+			static function (): bool {
+				return defined( 'UAGB_VER' );
+			}
 		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
