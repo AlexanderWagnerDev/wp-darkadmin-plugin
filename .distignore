@@ -11,16 +11,11 @@ AGENTS.md
 readme-de.txt
 
 # Screenshots and branding (not needed in plugin zip)
-screenshot-1.png
-screenshot-2.png
-screenshot-3.png
-screenshot-4.png
+screenshot-*.png
 DarkAdmin-Logo.png
 DarkAdmin-Banner.png
-banner-772x250.png
-banner-1544x500.png
-icon-128x128.png
-icon-256x256.png
+banner-*.png
+icon-*.png
 
 # Repo tooling
 blueprint.json
