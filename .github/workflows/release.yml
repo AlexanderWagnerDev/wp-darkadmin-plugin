@@ -8,8 +8,9 @@ name: Release
 #   1. Validates that all version references agree and the tag does not exist yet
 #   2. Extracts the release notes for that version from CHANGELOG.md
 #   3. Builds the plugin ZIP (respecting .distignore)
-#   4. Creates the git tag + GitHub release with the changelog as notes and the ZIP attached
-#   5. Deploys trunk, assets and the new tag to the WordPress.org SVN repository
+#   4. Deploys trunk, assets and the new tag to the WordPress.org SVN repository
+#   5. Only after that succeeds: creates the git tag + GitHub release with the
+#      changelog as notes and the ZIP attached
 #
 # Required repository secrets (Settings > Secrets and variables > Actions):
 #   SVN_USERNAME  WordPress.org username
@@ -134,39 +135,9 @@ jobs:
             build/${{ env.SLUG }}
           retention-days: 7
 
-  github-release:
-    name: GitHub tag & release
-    needs: prepare
-    if: ${{ !inputs.dry_run }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Download build
-        uses: actions/download-artifact@v7
-        with:
-          name: release-files
-
-      - name: Create tag and GitHub release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ needs.prepare.outputs.version }}
-        run: |
-          PRERELEASE=""
-          if [[ "$VERSION" == *-* ]]; then PRERELEASE="--prerelease"; fi
-          gh release create "v${VERSION}" "${SLUG}.zip" \
-            --repo "$GITHUB_REPOSITORY" \
-            --target "$GITHUB_SHA" \
-            --title "v${VERSION}" \
-            --notes-file release-notes.md \
-            $PRERELEASE
-
   svn-deploy:
     name: WordPress.org SVN deploy
-    needs: [prepare, github-release]
+    needs: prepare
     if: ${{ !inputs.dry_run && inputs.deploy_svn }}
     runs-on: ubuntu-latest
     permissions:
@@ -227,3 +198,34 @@ jobs:
 
           svn status
           svn commit -m "Release ${VERSION}" "${svn_auth[@]}" --password-from-stdin <<< "$SVN_PASSWORD"
+
+  github-release:
+    name: GitHub tag & release
+    needs: [prepare, svn-deploy]
+    # svn-deploy is skipped when deploy_svn is off; a failed deploy blocks the release.
+    if: ${{ !cancelled() && !inputs.dry_run && needs.svn-deploy.result != 'failure' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Download build
+        uses: actions/download-artifact@v7
+        with:
+          name: release-files
+
+      - name: Create tag and GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          PRERELEASE=""
+          if [[ "$VERSION" == *-* ]]; then PRERELEASE="--prerelease"; fi
+          gh release create "v${VERSION}" "${SLUG}.zip" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "v${VERSION}" \
+            --notes-file release-notes.md \
+            $PRERELEASE
