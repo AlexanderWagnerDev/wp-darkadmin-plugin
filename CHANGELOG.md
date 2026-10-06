@@ -8,12 +8,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-06
+
 ### Compatibility
 
 - Updated plugin metadata for WordPress 7.1 and added dark styling for current WordPress component
   modals, popovers, cards, notices, menus, inputs, and native dialogs.
 - Dark mode now covers the Classic Editor on `post.php` and `post-new.php`; only block-editor
   instances and the Site Editor remain intentionally excluded.
+
+### Maintenance
+
+- Aligned the Composer PHP requirement with the plugin's existing PHP 8.0 minimum.
 
 ## [0.3.2] - 2026-06-23
 
