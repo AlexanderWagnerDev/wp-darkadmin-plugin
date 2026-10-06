@@ -62,7 +62,7 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'WPCF7_VERSION' );
 			},
 		),
-		'complianz'     => array(
+		'complianz'      => array(
 			'label'        => 'Complianz',
 			'description'  => __( 'Cookie consent wizard, dashboard, settings, banner editor and data tables.', 'darkadmin-dark-mode-for-adminpanel' ),
 			'css'          => 'complianz.css',
