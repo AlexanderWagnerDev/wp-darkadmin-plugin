@@ -333,8 +333,8 @@ class DarkAdminTest extends WP_UnitTestCase {
     // Plugin styles
     // -------------------------------------------------------------------------
 
-    public function test_plugin_registry_has_seven_entries(): void {
-        $this->assertCount( 7, darkadmin_plugin_registry() );
+    public function test_plugin_registry_has_nine_entries(): void {
+        $this->assertCount( 9, darkadmin_plugin_registry() );
     }
 
     public function test_wordpress_ai_screen_ids_include_all_ai_admin_pages(): void {

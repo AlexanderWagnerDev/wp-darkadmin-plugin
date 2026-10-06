@@ -237,3 +237,27 @@ body.toplevel_page_wpseo_dashboard #wpcontent {
   background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
 }
+
+/* Yoast SEO: modern Tailwind-based admin (yst-*) */
+.yst-root .yst-bg-white,
+.yst-root button.yst-bg-white {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+.yst-root .yst-text-slate-600,
+.yst-root .yst-text-slate-500 {
+  color: var(--adm-text-muted) !important;
+}
+
+body .yst-root a.yst-sidebar-navigation__link.yst-sidebar-navigation__item--active,
+body .yst-root .yst-sidebar-navigation__item--active.yst-sidebar-navigation__collapsible-button {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+#wpseo-meta-section-content,
+.wpseo-meta-section.active {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}

@@ -1,0 +1,33 @@
+/*
+ * DarkAdmin plugin styles: Duplicator
+ * Based on duplicator/assets/css/duplicator.css.
+ */
+
+body.duplicator-page,
+body[class*="_page_duplicator"],
+body.toplevel_page_duplicator {
+  color: var(--adm-text);
+}
+
+#dup-notice-bar,
+.dupli-dismissable {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+#dup-notice-bar a,
+.dupli-dismissable a {
+  color: var(--adm-link) !important;
+}
+
+.duplicator-page .staging-row,
+.duplicator-page tr.staging-row {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+.duplicator-page .dup-logo img,
+.duplicator-page .dupli-header img {
+  filter: brightness(0) invert(1);
+}

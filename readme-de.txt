@@ -22,7 +22,7 @@ Funktionen:
 * Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
 * Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 * Preset-Themes: Modern (WP 7.0, Standard) und Classic (WP 6.x) Farbpaletten
-* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz und WordPress AI & Connectors
+* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator und WordPress AI & Connectors
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 * Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
 
@@ -49,6 +49,20 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 2. Settings Page - Dark Mode aktiv
 3. Dashboard - Standard (Dark Mode deaktiviert)
 4. Dashboard - Dark Mode aktiv
+5. Settings Page - Farbanpassung und Layout-Optionen
+6. Settings Page - Plugins-Bereich mit optionalen Dark-Mode-Stilen für installierte Plugins
+7. Settings Page - Classic-Preset
+8. Beitragsliste - Dark Mode aktiv
+9. Plugin-Liste - Dark Mode aktiv
+10. Kommentare - Dark Mode aktiv
+11. Benutzer - Dark Mode aktiv
+12. Complianz - Dashboard
+13. Complianz - Wizard
+14. Complianz - Einstellungen
+15. WooCommerce - Startseite
+16. Yoast SEO - Site-Funktionen
+17. Newsletter - Abonnement-Einstellungen
+18. Duplicator - Backups
 
 == Changelog ==
 = 0.4.0 =

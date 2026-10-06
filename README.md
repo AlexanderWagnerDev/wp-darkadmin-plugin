@@ -23,7 +23,7 @@ customization and Auto Dark Mode support.
 - Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 - Preset Themes: Modern (WP 7.0, default) and Classic (WP 6.x) color palettes
 - **Plugins**: optional dedicated dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize,
-  Contact Form 7, Complianz, and WordPress AI & Connectors
+  Contact Form 7, Complianz, Newsletter, Duplicator, and WordPress AI & Connectors
 - Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users
   exist
 - Excluded Pages: specify admin pages where dark mode should not be applied
@@ -48,6 +48,34 @@ customization and Auto Dark Mode support.
 | --------------------------------- | --------------------------------- |
 | ![Screenshot 3](screenshot-3.png) | ![Screenshot 4](screenshot-4.png) |
 
+| Color customization               | Plugins section                   |
+| --------------------------------- | --------------------------------- |
+| ![Screenshot 5](screenshot-5.png) | ![Screenshot 6](screenshot-6.png) |
+
+| Classic preset                    | Posts list                        |
+| --------------------------------- | --------------------------------- |
+| ![Screenshot 7](screenshot-7.png) | ![Screenshot 8](screenshot-8.png) |
+
+| Plugins list                      | Comments                            |
+| --------------------------------- | ----------------------------------- |
+| ![Screenshot 9](screenshot-9.png) | ![Screenshot 10](screenshot-10.png) |
+
+| Users                               | Complianz dashboard                 |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 11](screenshot-11.png) | ![Screenshot 12](screenshot-12.png) |
+
+| Complianz wizard                    | Complianz settings                  |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 13](screenshot-13.png) | ![Screenshot 14](screenshot-14.png) |
+
+| WooCommerce                         | Yoast SEO                           |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 15](screenshot-15.png) | ![Screenshot 16](screenshot-16.png) |
+
+| Newsletter                          | Duplicator                          |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 17](screenshot-17.png) | ![Screenshot 18](screenshot-18.png) |
+
 ---
 
 ## Changelog
@@ -58,8 +86,8 @@ customization and Auto Dark Mode support.
 
 - Updated for WordPress 7.1 with dark styling for current WordPress components, including modals,
   popovers, cards, notices, menus, inputs, and native dialogs.
-- Dark mode now covers the Classic Editor on `post.php` and `post-new.php`; block-editor
-  instances and the Site Editor remain intentionally excluded.
+- Dark mode now covers the Classic Editor on `post.php` and `post-new.php`; block-editor instances
+  and the Site Editor remain intentionally excluded.
 
 ### Maintenance
 

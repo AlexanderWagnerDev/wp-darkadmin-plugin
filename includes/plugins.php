@@ -70,6 +70,22 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'cmplz_free' ) || defined( 'cmplz_premium' ) || defined( 'CMPLZ_PLUGIN' );
 			},
 		),
+		'newsletter'     => array(
+			'label'        => 'Newsletter',
+			'description'  => __( 'Subscription, forms, newsletters and settings tabs.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'css'          => 'newsletter.css',
+			'is_installed' => static function (): bool {
+				return defined( 'NEWSLETTER_VERSION' );
+			},
+		),
+		'duplicator'     => array(
+			'label'        => 'Duplicator',
+			'description'  => __( 'Backups, schedules, storage and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'css'          => 'duplicator.css',
+			'is_installed' => static function (): bool {
+				return defined( 'DUPLICATOR_VERSION' );
+			},
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),

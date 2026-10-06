@@ -1,0 +1,68 @@
+/*
+ * DarkAdmin plugin styles: Newsletter
+ * Based on newsletter/admin/css (jQuery UI tab panels, option tables).
+ */
+
+body[class*="_page_newsletter_"],
+body[class*="toplevel_page_newsletter_"] {
+  color: var(--adm-text);
+}
+
+body[class*="_page_newsletter_"] .ui-tabs,
+body[class*="toplevel_page_newsletter_"] .ui-tabs {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+body[class*="_page_newsletter_"] .ui-tabs-nav,
+body[class*="toplevel_page_newsletter_"] .ui-tabs-nav {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--adm-border) !important;
+}
+
+body[class*="_page_newsletter_"] .ui-tabs-nav li,
+body[class*="toplevel_page_newsletter_"] .ui-tabs-nav li {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="_page_newsletter_"] .ui-tabs-nav li a,
+body[class*="toplevel_page_newsletter_"] .ui-tabs-nav li a {
+  background: transparent !important;
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="_page_newsletter_"] .ui-tabs-nav li.ui-tabs-active,
+body[class*="toplevel_page_newsletter_"] .ui-tabs-nav li.ui-tabs-active {
+  background: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-surface-1) !important;
+}
+
+body[class*="_page_newsletter_"] .ui-tabs-nav li.ui-tabs-active a,
+body[class*="toplevel_page_newsletter_"] .ui-tabs-nav li.ui-tabs-active a {
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] .ui-tabs-panel,
+body[class*="toplevel_page_newsletter_"] .ui-tabs-panel,
+body[class*="_page_newsletter_"] .ui-widget-content,
+body[class*="toplevel_page_newsletter_"] .ui-widget-content {
+  background: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] .form-table th,
+body[class*="_page_newsletter_"] .form-table td,
+body[class*="_page_newsletter_"] .form-table label,
+body[class*="toplevel_page_newsletter_"] .form-table th,
+body[class*="toplevel_page_newsletter_"] .form-table td,
+body[class*="toplevel_page_newsletter_"] .form-table label {
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] .description,
+body[class*="toplevel_page_newsletter_"] .description {
+  color: var(--adm-text-muted) !important;
+}
