@@ -43,7 +43,9 @@ add_action(
 		$db_version = (string) get_option( 'darkadmin_db_version', '0' );
 
 		if ( version_compare( $db_version, '0.3.0', '<' ) ) {
-			$preset = get_option( 'darkadmin_preset' );
+			// Explicit default keeps "no stored row" detectable; the registered
+			// default would otherwise be returned for single-argument calls.
+			$preset = get_option( 'darkadmin_preset', false );
 
 			if ( 'default' === $preset ) {
 				update_option( 'darkadmin_preset', 'classic' );
