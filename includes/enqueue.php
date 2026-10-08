@@ -210,11 +210,13 @@ function darkadmin_current_page_slug(): string {
 			return sanitize_key( substr( $id, strlen( $prefix ) ) );
 		}
 	}
-	// Generic fallback for other plugin pages (tools_page_*, {parent}_page_*).
-	if ( preg_match( '/(?:^|_)page_(.+)$/', $id, $matches ) ) {
-		return sanitize_key( $matches[1] );
+	// Generic fallback for other plugin pages (tools_page_*, {parent}_page_*),
+	// skipping post-type/taxonomy parent screens (edit-*) to avoid slug collisions.
+	$slug = '';
+	if ( ! str_starts_with( $id, 'edit-' ) && preg_match( '/(?:^|_)page_(.+)$/', $id, $matches ) ) {
+		$slug = sanitize_key( $matches[1] );
 	}
-	return '';
+	return $slug;
 }
 
 // phpcs:disable WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid

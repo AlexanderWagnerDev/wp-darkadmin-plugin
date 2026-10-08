@@ -249,7 +249,7 @@ function darkadmin_settings_page(): void {
 				</div>
 				<div class="adm-card-body">
 
-					<input type="hidden" name="darkadmin_user_access_mode" value="all" />
+					<input type="hidden" name="darkadmin_user_access_mode" value="<?php echo esc_attr( $user_access_mode ); ?>" />
 					<div class="adm-access-mode">
 						<label class="adm-access-mode-option <?php echo esc_attr( 'all' === $user_access_mode ? 'is-active' : '' ); ?>">
 							<input type="radio" name="darkadmin_user_access_mode" value="all"
