@@ -101,8 +101,10 @@ function darkadmin_queue_settings_saved_notice( string $option ): void {
 		return;
 	}
 
-	$option_page = isset( $_POST['option_page'] ) ? sanitize_key( wp_unslash( (string) $_POST['option_page'] ) ) : '';
-	$action      = isset( $_POST['action'] ) ? sanitize_key( wp_unslash( (string) $_POST['action'] ) ) : '';
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- Nonce is verified by options.php via settings_fields() before this hook runs.
+	$option_page = isset( $_POST['option_page'] ) && is_string( $_POST['option_page'] ) ? sanitize_key( wp_unslash( $_POST['option_page'] ) ) : '';
+	$action      = isset( $_POST['action'] ) && is_string( $_POST['action'] ) ? sanitize_key( wp_unslash( $_POST['action'] ) ) : '';
+	// phpcs:enable WordPress.Security.NonceVerification.Missing
 	if ( 'darkadmin_settings' !== $option_page || 'update' !== $action ) {
 		return;
 	}
