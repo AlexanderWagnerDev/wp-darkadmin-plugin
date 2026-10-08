@@ -573,10 +573,11 @@ function darkadmin_preset_layout_fallbacks( string $preset ): array {
 /**
  * Sanitizes the user access mode option value.
  *
- * @param string $value Raw value to sanitize.
+ * @param mixed $value Raw value to sanitize.
  * @return string One of 'all', 'include', or 'exclude'.
  */
-function darkadmin_sanitize_user_access_mode( string $value ): string {
+function darkadmin_sanitize_user_access_mode( $value ): string {
+	$value   = is_string( $value ) ? $value : '';
 	$allowed = array( 'all', 'include', 'exclude' );
 	return in_array( $value, $allowed, true ) ? $value : 'all';
 }
@@ -584,9 +585,10 @@ function darkadmin_sanitize_user_access_mode( string $value ): string {
 /**
  * Sanitizes the custom CSS option value.
  *
- * @param string $css Raw CSS string.
+ * @param mixed $css Raw CSS string.
  * @return string Sanitized CSS with all HTML tags stripped.
  */
-function darkadmin_sanitize_custom_css( string $css ): string {
+function darkadmin_sanitize_custom_css( $css ): string {
+	$css = is_string( $css ) ? $css : '';
 	return wp_strip_all_tags( $css );
 }
