@@ -89,7 +89,7 @@ function darkadmin_settings_saved_notice_key( int $user_id ): string {
 }
 
 /**
- * Queue a success notice after DarkAdmin options are persisted.
+ * Queue a success notice after DarkAdmin options are saved via the settings page.
  *
  * Nonce verification happens in options.php via settings_fields() before this runs.
  *
@@ -100,6 +100,13 @@ function darkadmin_queue_settings_saved_notice( string $option ): void {
 	if ( ! str_starts_with( $option, 'darkadmin_' ) || 'darkadmin_db_version' === $option ) {
 		return;
 	}
+
+	$option_page = isset( $_POST['option_page'] ) ? sanitize_key( wp_unslash( (string) $_POST['option_page'] ) ) : '';
+	$action      = isset( $_POST['action'] ) ? sanitize_key( wp_unslash( (string) $_POST['action'] ) ) : '';
+	if ( 'darkadmin_settings' !== $option_page || 'update' !== $action ) {
+		return;
+	}
+
 	set_transient( darkadmin_settings_saved_notice_key( get_current_user_id() ), 1, MINUTE_IN_SECONDS );
 }
 
