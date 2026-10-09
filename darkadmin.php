@@ -43,7 +43,9 @@ add_action(
 		$db_version = (string) get_option( 'darkadmin_db_version', '0' );
 
 		if ( version_compare( $db_version, '0.3.0', '<' ) ) {
-			$preset = get_option( 'darkadmin_preset' );
+			// Explicit default keeps "no stored row" detectable; the registered
+			// default would otherwise be returned for single-argument calls.
+			$preset = get_option( 'darkadmin_preset', false );
 
 			if ( 'default' === $preset ) {
 				update_option( 'darkadmin_preset', 'classic' );
@@ -87,7 +89,7 @@ function darkadmin_settings_saved_notice_key( int $user_id ): string {
 }
 
 /**
- * Queue a success notice after DarkAdmin options are persisted.
+ * Queue a success notice after DarkAdmin options are saved via the settings page.
  *
  * Nonce verification happens in options.php via settings_fields() before this runs.
  *
@@ -98,6 +100,15 @@ function darkadmin_queue_settings_saved_notice( string $option ): void {
 	if ( ! str_starts_with( $option, 'darkadmin_' ) || 'darkadmin_db_version' === $option ) {
 		return;
 	}
+
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- Nonce is verified by options.php via settings_fields() before this hook runs.
+	$option_page = isset( $_POST['option_page'] ) && is_string( $_POST['option_page'] ) ? sanitize_key( wp_unslash( $_POST['option_page'] ) ) : '';
+	$action      = isset( $_POST['action'] ) && is_string( $_POST['action'] ) ? sanitize_key( wp_unslash( $_POST['action'] ) ) : '';
+	// phpcs:enable WordPress.Security.NonceVerification.Missing
+	if ( 'darkadmin_settings' !== $option_page || 'update' !== $action ) {
+		return;
+	}
+
 	set_transient( darkadmin_settings_saved_notice_key( get_current_user_id() ), 1, MINUTE_IN_SECONDS );
 }
 

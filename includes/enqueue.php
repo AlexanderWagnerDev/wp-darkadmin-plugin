@@ -186,10 +186,10 @@ function darkadmin_is_page_excluded( array $entries, string $pagenow, string $ho
 /**
  * Resolves the current admin page slug using get_current_screen().
  *
- * Only extracts a slug for pages registered under a known parent prefix
- * (settings_page_, toplevel_page_, etc.). For all other screen IDs an empty
- * string is returned so that slug-based exclusion never fires unexpectedly on
- * built-in screens like edit.php (edit_posts -> 'posts').
+ * Extracts a slug for screens using WordPress' plugin page ID pattern
+ * (settings_page_, toplevel_page_, tools_page_, {parent}_page_, ...). For all
+ * other screen IDs an empty string is returned so that slug-based exclusion
+ * never fires unexpectedly on built-in screens like edit.php (edit_posts -> 'posts').
  *
  * @return string Sanitized page slug, or empty string.
  */
@@ -210,7 +210,13 @@ function darkadmin_current_page_slug(): string {
 			return sanitize_key( substr( $id, strlen( $prefix ) ) );
 		}
 	}
-	return '';
+	// Generic fallback for other plugin pages (tools_page_*, {parent}_page_*),
+	// skipping post-type/taxonomy parent screens (edit-*) to avoid slug collisions.
+	$slug = '';
+	if ( ! str_starts_with( $id, 'edit-' ) && preg_match( '/(?:^|_)page_(.+)$/', $id, $matches ) ) {
+		$slug = sanitize_key( $matches[1] );
+	}
+	return $slug;
 }
 
 // phpcs:disable WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
