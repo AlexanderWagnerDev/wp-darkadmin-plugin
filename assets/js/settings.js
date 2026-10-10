@@ -251,22 +251,57 @@
 	/* -----------------------------------------------------------------------
 	 * Copy CSS var to clipboard
 	 * --------------------------------------------------------------------- */
-	function initVarCopy() {
-		document.querySelectorAll( '.adm-var-copy' ).forEach( function ( btn ) {
-			btn.addEventListener( 'click', function () {
-				if ( ! navigator.clipboard || typeof navigator.clipboard.writeText !== 'function' ) {
-					return;
-				}
-				const code = btn.querySelector( 'code' );
-				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
-					if ( ! code ) return;
-					const orig  = code.textContent;
-					const label = i18n( 'copied' );
-					code.textContent = label;
-					setTimeout( function () { code.textContent = orig; }, 1400 );
-				} ).catch( function () {} );
-			} );
+	/**
+	 * Briefly replace a copy button's variable name with a "copied" label.
+	 *
+	 * The original label is captured once by the caller so that repeated
+	 * clicks always restore the variable name and never the temporary label.
+	 *
+	 * @param {HTMLElement} btn      Copy button.
+	 * @param {string}      original Original variable text to restore.
+	 */
+	function flashCopiedLabel( btn, original ) {
+		const code = btn.querySelector( 'code' );
+		if ( ! code ) return;
+
+		clearTimeout( btn.admCopyTimer );
+		code.textContent = i18n( 'copied' );
+		btn.admCopyTimer = setTimeout( function () {
+			code.textContent = original;
+		}, 1400 );
+	}
+
+	/**
+	 * Copy a button's CSS variable reference to the clipboard.
+	 *
+	 * @param {HTMLElement} btn      Copy button.
+	 * @param {string}      original Original variable text.
+	 */
+	function copyVarName( btn, original ) {
+		navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
+			flashCopiedLabel( btn, original );
+		} ).catch( function () {} );
+	}
+
+	/**
+	 * Wire up a single variable-name copy button.
+	 *
+	 * @param {HTMLElement} btn Copy button.
+	 */
+	function bindCopyButton( btn ) {
+		const code     = btn.querySelector( 'code' );
+		const original = code ? code.textContent : '';
+
+		btn.addEventListener( 'click', function () {
+			if ( ! navigator.clipboard || typeof navigator.clipboard.writeText !== 'function' ) {
+				return;
+			}
+			copyVarName( btn, original );
 		} );
+	}
+
+	function initVarCopy() {
+		document.querySelectorAll( '.adm-var-copy' ).forEach( bindCopyButton );
 	}
 
 	/* -----------------------------------------------------------------------
