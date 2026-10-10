@@ -64,7 +64,13 @@ add_action(
 			// would run the registered darkadmin_sanitize_plugins() callback and treat the
 			// empty value as "no plugin enabled", storing every installed plugin as disabled.
 			delete_option( 'darkadmin_plugins' );
-			update_option( 'darkadmin_db_version', '0.3.1' );
+
+			// Only record the migration once the legacy row is definitely gone, so a failed
+			// delete is retried on the next request instead of the stale opt-in list being
+			// read as an opt-out "disabled" list.
+			if ( false === get_option( 'darkadmin_plugins', false ) ) {
+				update_option( 'darkadmin_db_version', '0.3.1' );
+			}
 		}
 	}
 );
