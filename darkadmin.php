@@ -60,7 +60,10 @@ add_action(
 
 		if ( version_compare( $db_version, '0.3.1', '<' ) ) {
 			// Former opt-in list becomes opt-out; default is styles on for all installed plugins.
-			update_option( 'darkadmin_plugins', array() );
+			// Remove the legacy row instead of writing array() through update_option(), which
+			// would run the registered darkadmin_sanitize_plugins() callback and treat the
+			// empty value as "no plugin enabled", storing every installed plugin as disabled.
+			delete_option( 'darkadmin_plugins' );
 			update_option( 'darkadmin_db_version', '0.3.1' );
 		}
 	}

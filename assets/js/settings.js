@@ -254,11 +254,16 @@
 	function initVarCopy() {
 		document.querySelectorAll( '.adm-var-copy' ).forEach( function ( btn ) {
 			btn.addEventListener( 'click', function () {
+				if ( ! navigator.clipboard || typeof navigator.clipboard.writeText !== 'function' ) {
+					return;
+				}
+				const code = btn.querySelector( 'code' );
 				navigator.clipboard.writeText( 'var(' + btn.dataset.var + ')' ).then( function () {
-					const orig  = btn.textContent;
+					if ( ! code ) return;
+					const orig  = code.textContent;
 					const label = i18n( 'copied' );
-					btn.textContent = label;
-					setTimeout( function () { btn.textContent = orig; }, 1400 );
+					code.textContent = label;
+					setTimeout( function () { code.textContent = orig; }, 1400 );
 				} ).catch( function () {} );
 			} );
 		} );
