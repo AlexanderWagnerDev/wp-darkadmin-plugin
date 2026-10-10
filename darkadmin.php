@@ -60,8 +60,17 @@ add_action(
 
 		if ( version_compare( $db_version, '0.3.1', '<' ) ) {
 			// Former opt-in list becomes opt-out; default is styles on for all installed plugins.
-			update_option( 'darkadmin_plugins', array() );
-			update_option( 'darkadmin_db_version', '0.3.1' );
+			// Remove the legacy row instead of writing array() through update_option(), which
+			// would run the registered darkadmin_sanitize_plugins() callback and treat the
+			// empty value as "no plugin enabled", storing every installed plugin as disabled.
+			delete_option( 'darkadmin_plugins' );
+
+			// Only record the migration once the legacy row is definitely gone, so a failed
+			// delete is retried on the next request instead of the stale opt-in list being
+			// read as an opt-out "disabled" list.
+			if ( false === get_option( 'darkadmin_plugins', false ) ) {
+				update_option( 'darkadmin_db_version', '0.3.1' );
+			}
 		}
 	}
 );
