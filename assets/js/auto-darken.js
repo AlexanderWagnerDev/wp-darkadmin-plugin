@@ -49,10 +49,16 @@
 	 * @returns {string}
 	 */
 	function darkenRgb( rgb, factor ) {
-		return 'rgb(' +
-			Math.round( rgb.r * factor ) + ',' +
-			Math.round( rgb.g * factor ) + ',' +
-			Math.round( rgb.b * factor ) + ')';
+		var r = Math.round( rgb.r * factor );
+		var g = Math.round( rgb.g * factor );
+		var b = Math.round( rgb.b * factor );
+
+		// Preserve the source alpha so translucent scrims/overlays stay translucent.
+		if ( rgb.a < 1 ) {
+			return 'rgba(' + r + ',' + g + ',' + b + ',' + rgb.a + ')';
+		}
+
+		return 'rgb(' + r + ',' + g + ',' + b + ')';
 	}
 
 	/**
