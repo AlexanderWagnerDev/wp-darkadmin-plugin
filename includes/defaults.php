@@ -585,9 +585,10 @@ function darkadmin_sanitize_user_access_mode( $value ): string {
 /**
  * Sanitizes the custom CSS option value.
  *
- * @param string $css Raw CSS string.
+ * @param mixed $css Raw CSS string.
  * @return string Sanitized CSS with all HTML tags stripped.
  */
-function darkadmin_sanitize_custom_css( string $css ): string {
+function darkadmin_sanitize_custom_css( $css ): string {
+	$css = is_string( $css ) ? $css : '';
 	return wp_strip_all_tags( $css );
 }
