@@ -103,6 +103,10 @@
 
 		el.setAttribute( PROCESSED_ATTR, '1' );
 
+		if ( el.closest && el.closest( '.adm-var-swatch, .wp-color-result, .wp-picker-container, .wp-picker-input-wrap' ) ) {
+			return;
+		}
+
 		var style = window.getComputedStyle( el );
 
 		var bg = parseRgb( style.backgroundColor );
