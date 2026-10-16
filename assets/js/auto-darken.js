@@ -103,7 +103,7 @@
 
 		el.setAttribute( PROCESSED_ATTR, '1' );
 
-		if ( el.closest && el.closest( '.adm-var-swatch, .wp-color-result, .wp-picker-container, .wp-picker-input-wrap' ) ) {
+		if ( el.closest?.( '.adm-var-swatch, .wp-color-result, .wp-picker-container, .wp-picker-input-wrap' ) ) {
 			return;
 		}
 
@@ -123,7 +123,7 @@
 		}
 
 		var hasBorder = [ 'Top', 'Right', 'Bottom', 'Left' ].some( function ( side ) {
-			return 'none' !== style[ 'border' + side + 'Style' ] && parseFloat( style[ 'border' + side + 'Width' ] ) > 0;
+			return 'none' !== style[ 'border' + side + 'Style' ] && Number.parseFloat( style[ 'border' + side + 'Width' ] ) > 0;
 		} );
 
 		var bc = parseRgb( style.borderColor );
