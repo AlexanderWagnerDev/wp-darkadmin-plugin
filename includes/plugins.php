@@ -229,41 +229,6 @@ function darkadmin_plugin_styles_enabled( string $slug ): bool {
 }
 
 /**
- * Sanitizes a list of plugin slugs against the plugin style registry.
- *
- * @param mixed $value Raw slug list (array or scalar).
- * @return string[]
- */
-function darkadmin_sanitize_plugin_slugs( $value ): array {
-	$allowed = array_keys( darkadmin_plugin_registry() );
-	$slugs   = array_map( 'sanitize_key', (array) $value );
-	$slugs   = array_values( array_filter( $slugs ) );
-
-	return array_values( array_intersect( $slugs, $allowed ) );
-}
-
-/**
- * Keeps only registry slugs that are installed and not loaded automatically.
- *
- * @param string[] $slugs Candidate plugin slugs.
- * @return string[]
- */
-function darkadmin_filter_installed_plugin_slugs( array $slugs ): array {
-	$installed = array();
-	foreach ( $slugs as $slug ) {
-		if ( 'wordpress-ai' === $slug ) {
-			continue;
-		}
-		if ( ! darkadmin_plugin_is_installed( $slug ) ) {
-			continue;
-		}
-		$installed[] = $slug;
-	}
-
-	return $installed;
-}
-
-/**
  * Sanitize callback for darkadmin_plugins (stores disabled slugs).
  *
  * The settings form submits checked plugins as enabled; unchecked installed
@@ -276,14 +241,27 @@ function darkadmin_filter_installed_plugin_slugs( array $slugs ): array {
  * @return array{disabled: string[]}
  */
 function darkadmin_sanitize_plugins( $value ): array {
+	$sanitize = static function ( $value ): array {
+		$allowed = array_keys( darkadmin_plugin_registry() );
+		$slugs   = array_map( 'sanitize_key', (array) $value );
+		$slugs   = array_values( array_filter( $slugs ) );
+
+		return array_values( array_intersect( $slugs, $allowed ) );
+	};
+
+	$is_installed = static function ( $slug ): bool {
+		return 'wordpress-ai' !== $slug && darkadmin_plugin_is_installed( $slug );
+	};
+
+	$installed = array_values( array_filter( array_keys( darkadmin_plugin_registry() ), $is_installed ) );
+
 	if ( is_array( $value ) && isset( $value['disabled'] ) ) {
-		$candidates = (array) $value['disabled'];
+		$candidates = $sanitize( $value['disabled'] );
 	} else {
-		$enabled    = darkadmin_sanitize_plugin_slugs( $value );
-		$candidates = array_diff( darkadmin_filter_installed_plugin_slugs( array_keys( darkadmin_plugin_registry() ) ), $enabled );
+		$candidates = array_diff( $installed, $sanitize( $value ) );
 	}
 
-	return array( 'disabled' => darkadmin_filter_installed_plugin_slugs( darkadmin_sanitize_plugin_slugs( $candidates ) ) );
+	return array( 'disabled' => array_values( array_intersect( $sanitize( $candidates ), $installed ) ) );
 }
 
 /**
