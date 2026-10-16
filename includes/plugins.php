@@ -196,10 +196,19 @@ function darkadmin_plugin_is_installed( string $slug ): bool {
 /**
  * Returns plugin slugs whose dedicated dark styles are disabled in settings.
  *
+ * Reads the current array( 'disabled' => string[] ) shape and the legacy flat
+ * list of disabled slugs saved before the stored shape changed.
+ *
  * @return string[]
  */
 function darkadmin_plugins_disabled(): array {
-	return (array) get_option( 'darkadmin_plugins', array() );
+	$value = get_option( 'darkadmin_plugins', array() );
+
+	if ( is_array( $value ) && isset( $value['disabled'] ) ) {
+		return array_values( (array) $value['disabled'] );
+	}
+
+	return (array) $value;
 }
 
 /**
@@ -223,31 +232,36 @@ function darkadmin_plugin_styles_enabled( string $slug ): bool {
  * Sanitize callback for darkadmin_plugins (stores disabled slugs).
  *
  * The settings form submits checked plugins as enabled; unchecked installed
- * plugins are persisted as disabled.
+ * plugins are persisted as disabled. The callback must be a fixed point: it
+ * returns the stored array( 'disabled' => string[] ) shape unchanged when
+ * WordPress sanitizes it a second time (update_option() delegates to
+ * add_option() while the value still equals the registered default).
  *
- * @param mixed $value Raw input (enabled slugs from checkboxes).
- * @return string[]
+ * @param mixed $value Raw input (enabled slugs from checkboxes, or stored shape).
+ * @return array{disabled: string[]}
  */
 function darkadmin_sanitize_plugins( $value ): array {
-	$allowed = array_keys( darkadmin_plugin_registry() );
-	$enabled = array_map( 'sanitize_key', (array) $value );
-	$enabled = array_values( array_filter( $enabled ) );
-	$enabled = array_values( array_intersect( $enabled, $allowed ) );
+	$sanitize = static function ( $value ): array {
+		$allowed = array_keys( darkadmin_plugin_registry() );
+		$slugs   = array_map( 'sanitize_key', (array) $value );
+		$slugs   = array_values( array_filter( $slugs ) );
 
-	$disabled = array();
-	foreach ( darkadmin_plugin_registry() as $slug => $meta ) {
-		if ( 'wordpress-ai' === $slug ) {
-			continue;
-		}
-		if ( ! darkadmin_plugin_is_installed( $slug ) ) {
-			continue;
-		}
-		if ( ! in_array( $slug, $enabled, true ) ) {
-			$disabled[] = $slug;
-		}
+		return array_values( array_intersect( $slugs, $allowed ) );
+	};
+
+	$is_installed = static function ( $slug ): bool {
+		return 'wordpress-ai' !== $slug && darkadmin_plugin_is_installed( $slug );
+	};
+
+	$installed = array_values( array_filter( array_keys( darkadmin_plugin_registry() ), $is_installed ) );
+
+	if ( is_array( $value ) && isset( $value['disabled'] ) ) {
+		$candidates = $sanitize( $value['disabled'] );
+	} else {
+		$candidates = array_diff( $installed, $sanitize( $value ) );
 	}
 
-	return $disabled;
+	return array( 'disabled' => array_values( array_intersect( $sanitize( $candidates ), $installed ) ) );
 }
 
 /**

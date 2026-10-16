@@ -358,7 +358,7 @@ class DarkAdminTest extends WP_UnitTestCase {
         }
 
         $result = darkadmin_sanitize_plugins( [ 'yoast', 'invalid' ] );
-        $this->assertSame( [ 'wordfence' ], $result );
+        $this->assertSame( [ 'disabled' => [ 'wordfence' ] ], $result );
     }
 
     public function test_sanitize_plugins_returns_empty_when_all_installed_are_enabled(): void {
@@ -375,7 +375,7 @@ class DarkAdminTest extends WP_UnitTestCase {
             )
         );
 
-        $this->assertSame( [], darkadmin_sanitize_plugins( $enabled ) );
+        $this->assertSame( [ 'disabled' => [] ], darkadmin_sanitize_plugins( $enabled ) );
     }
 
     public function test_plugin_styles_enabled_when_installed_and_not_disabled(): void {

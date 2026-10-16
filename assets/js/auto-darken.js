@@ -62,16 +62,27 @@
 	}
 
 	/**
-	 * Lighten an rgb object towards white by a multiplier.
+	 * Lighten an rgb object towards white by a blend factor
+	 * (0 = unchanged, 1 = white).
 	 * @param {{ r: number, g: number, b: number }} rgb
-	 * @param {number} factor
+	 * @param {number} t
 	 * @returns {string}
 	 */
-	function lightenRgb( rgb, factor ) {
-		return 'rgb(' +
-			Math.min( 255, Math.round( rgb.r * factor ) ) + ',' +
-			Math.min( 255, Math.round( rgb.g * factor ) ) + ',' +
-			Math.min( 255, Math.round( rgb.b * factor ) ) + ')';
+	function lightenRgb( rgb, t ) {
+		function mix( v ) {
+			return Math.round( v + ( 255 - v ) * t );
+		}
+
+		var r = mix( rgb.r );
+		var g = mix( rgb.g );
+		var b = mix( rgb.b );
+
+		// Preserve the source alpha so translucent text stays translucent.
+		if ( rgb.a < 1 ) {
+			return 'rgba(' + r + ',' + g + ',' + b + ',' + rgb.a + ')';
+		}
+
+		return 'rgb(' + r + ',' + g + ',' + b + ')';
 	}
 
 	var SKIP_TAGS = new Set( [
@@ -92,6 +103,10 @@
 
 		el.setAttribute( PROCESSED_ATTR, '1' );
 
+		if ( el.closest?.( '.adm-var-swatch, .wp-color-result, .wp-picker-container, .wp-picker-input-wrap' ) ) {
+			return;
+		}
+
 		var style = window.getComputedStyle( el );
 
 		var bg = parseRgb( style.backgroundColor );
@@ -104,11 +119,15 @@
 
 		var fg = parseRgb( style.color );
 		if ( fg && luminance( fg ) < 0.20 ) {
-			el.style.color = lightenRgb( fg, 8 );
+			el.style.color = lightenRgb( fg, 0.85 );
 		}
 
+		var hasBorder = [ 'Top', 'Right', 'Bottom', 'Left' ].some( function ( side ) {
+			return 'none' !== style[ 'border' + side + 'Style' ] && Number.parseFloat( style[ 'border' + side + 'Width' ] ) > 0;
+		} );
+
 		var bc = parseRgb( style.borderColor );
-		if ( bc && luminance( bc ) > 0.40 ) {
+		if ( hasBorder && bc && luminance( bc ) > 0.40 ) {
 			el.style.borderColor = darkenRgb( bc, 0.25 );
 		}
 	}
