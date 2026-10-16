@@ -122,8 +122,12 @@
 			el.style.color = lightenRgb( fg, 0.85 );
 		}
 
+		var hasBorder = [ 'Top', 'Right', 'Bottom', 'Left' ].some( function ( side ) {
+			return 'none' !== style[ 'border' + side + 'Style' ] && parseFloat( style[ 'border' + side + 'Width' ] ) > 0;
+		} );
+
 		var bc = parseRgb( style.borderColor );
-		if ( bc && luminance( bc ) > 0.40 ) {
+		if ( hasBorder && bc && luminance( bc ) > 0.40 ) {
 			el.style.borderColor = darkenRgb( bc, 0.25 );
 		}
 	}
