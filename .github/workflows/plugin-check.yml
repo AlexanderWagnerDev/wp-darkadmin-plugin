@@ -12,7 +12,7 @@ jobs:
   plugin-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
     - name: Prepare clean plugin directory
       run: |
         mkdir ../plugin-clean
@@ -27,7 +27,7 @@ jobs:
                   --exclude='*.md' \
                   --exclude='readme-de.txt' \
                   ./ ../plugin-clean/
-    - uses: WordPress/plugin-check-action@v1
+    - uses: WordPress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e
       with:
         build-dir: '../plugin-clean'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
