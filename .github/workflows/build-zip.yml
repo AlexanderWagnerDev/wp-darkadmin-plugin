@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
       - name: Create plugin ZIP
         run: |
@@ -56,7 +56,7 @@ jobs:
           echo "ZIP_PATH=${ZIP_PATH}" >> $GITHUB_ENV
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           archive: false
           name: darkadmin-dark-mode-for-adminpanel
