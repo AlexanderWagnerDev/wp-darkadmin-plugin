@@ -258,7 +258,7 @@ add_action(
 		}
 
 		$raw_exclusions = get_option( 'darkadmin_excluded_pages', '' );
-		if ( '' !== $raw_exclusions ) {
+		if ( is_string( $raw_exclusions ) && '' !== $raw_exclusions ) {
 			$user_excluded = darkadmin_parse_excluded_pages( $raw_exclusions );
 			$page_slug     = darkadmin_current_page_slug();
 			if ( darkadmin_is_page_excluded( $user_excluded, $pagenow, $hook_suffix, $page_slug ) ) {
