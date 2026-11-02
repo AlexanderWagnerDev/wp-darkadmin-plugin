@@ -506,7 +506,7 @@ function darkadmin_settings_page(): void {
 										$info          = $entry['info'];
 										$raw_color     = isset( $colors[ $key ] ) ? $colors[ $key ] : '';
 										$sanitized     = sanitize_hex_color( $raw_color );
-										$current_color = ( '' !== $sanitized ) ? $sanitized : $defaults[ $key ];
+										$current_color = ( is_string( $sanitized ) && '' !== $sanitized ) ? $sanitized : $defaults[ $key ];
 										?>
 										<div class="adm-var-item">
 											<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>
