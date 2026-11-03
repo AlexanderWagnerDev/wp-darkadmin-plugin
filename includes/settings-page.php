@@ -584,7 +584,7 @@ function darkadmin_settings_page(): void {
 plugins.php
 tools.php
 admin.php?page=my-plugin"
-						><?php echo esc_textarea( $excluded_pages ); ?></textarea>
+						><?php echo esc_textarea( is_string( $excluded_pages ) ? $excluded_pages : '' ); ?></textarea>
 					</div>
 
 					<p class="adm-field-desc" style="margin-top:8px;">
