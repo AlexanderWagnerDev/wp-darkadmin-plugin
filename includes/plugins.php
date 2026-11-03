@@ -205,10 +205,10 @@ function darkadmin_plugins_disabled(): array {
 	$value = get_option( 'darkadmin_plugins', array() );
 
 	if ( is_array( $value ) && isset( $value['disabled'] ) ) {
-		return array_values( (array) $value['disabled'] );
+		return array_values( array_filter( (array) $value['disabled'], 'is_string' ) );
 	}
 
-	return (array) $value;
+	return array_values( array_filter( (array) $value, 'is_string' ) );
 }
 
 /**

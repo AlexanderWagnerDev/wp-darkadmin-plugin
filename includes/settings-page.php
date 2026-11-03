@@ -21,15 +21,15 @@ function darkadmin_settings_page(): void {
 
 	$enabled          = (bool) get_option( 'darkadmin_dark_mode_enabled', false );
 	$auto_darken      = (bool) get_option( 'darkadmin_auto_darken', false );
-	$active_preset    = darkadmin_normalize_preset_slug( (string) get_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
+	$active_preset    = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
 	$preset_colors    = darkadmin_preset_fallbacks( $active_preset );
 	$preset_layout    = darkadmin_preset_layout_fallbacks( $active_preset );
 	$colors           = wp_parse_args( (array) get_option( 'darkadmin_colors', array() ), $preset_colors );
 	$layout           = wp_parse_args( (array) get_option( 'darkadmin_layout', array() ), $preset_layout );
-	$custom           = get_option( 'darkadmin_custom_css', '' );
+	$custom           = darkadmin_read_string_option( 'darkadmin_custom_css' );
 	$allowed          = array_map( 'intval', (array) get_option( 'darkadmin_allowed_users', array() ) );
-	$user_access_mode = get_option( 'darkadmin_user_access_mode', 'all' );
-	$excluded_pages   = get_option( 'darkadmin_excluded_pages', '' );
+	$user_access_mode = darkadmin_sanitize_user_access_mode( get_option( 'darkadmin_user_access_mode', 'all' ) );
+	$excluded_pages   = darkadmin_read_string_option( 'darkadmin_excluded_pages' );
 	$plugins_disabled = darkadmin_plugins_disabled();
 	$plugin_registry  = darkadmin_plugin_registry();
 
@@ -405,7 +405,7 @@ function darkadmin_settings_page(): void {
 									type="text"
 									id="adm_layout_<?php echo esc_attr( $key ); ?>"
 									name="darkadmin_layout[<?php echo esc_attr( $key ); ?>]"
-									value="<?php echo esc_attr( $layout[ $key ] ?? $layout_defaults[ $key ] ); ?>"
+									value="<?php echo esc_attr( darkadmin_read_layout_value( $layout[ $key ] ?? null, $layout_defaults[ $key ] ) ); ?>"
 									class="adm-layout-input"
 									data-key="<?php echo esc_attr( $key ); ?>"
 									data-default="<?php echo esc_attr( $layout_defaults[ $key ] ); ?>"
@@ -460,7 +460,7 @@ function darkadmin_settings_page(): void {
 											type="text"
 											id="adm_color_<?php echo esc_attr( $key ); ?>"
 											name="darkadmin_colors[<?php echo esc_attr( $key ); ?>]"
-											value="<?php echo esc_attr( $colors[ $key ] ?? $defaults[ $key ] ); ?>"
+											value="<?php echo esc_attr( darkadmin_read_color_value( $colors[ $key ] ?? null, $defaults[ $key ] ) ); ?>"
 											class="adm-color-picker"
 											data-key="<?php echo esc_attr( $key ); ?>"
 											data-default-color="<?php echo esc_attr( $defaults[ $key ] ); ?>"
@@ -504,9 +504,7 @@ function darkadmin_settings_page(): void {
 									foreach ( $entries as $entry ) :
 										$key           = $entry['key'];
 										$info          = $entry['info'];
-										$raw_color     = isset( $colors[ $key ] ) ? $colors[ $key ] : '';
-										$sanitized     = sanitize_hex_color( $raw_color );
-										$current_color = ( '' !== $sanitized ) ? $sanitized : $defaults[ $key ];
+										$current_color = darkadmin_read_color_value( $colors[ $key ] ?? null, $defaults[ $key ] );
 										?>
 										<div class="adm-var-item">
 											<span class="adm-var-swatch" style="background:<?php echo esc_attr( $current_color ); ?>;"></span>
@@ -536,7 +534,7 @@ function darkadmin_settings_page(): void {
 											</button>
 											<span class="adm-var-label"><?php echo esc_html( $info['label'] ); ?></span>
 										</div>
-										<span class="adm-var-hex"><?php echo esc_html( $layout[ $key ] ?? $layout_defaults[ $key ] ); ?></span>
+										<span class="adm-var-hex"><?php echo esc_html( darkadmin_read_layout_value( $layout[ $key ] ?? null, $layout_defaults[ $key ] ) ); ?></span>
 									</div>
 								<?php endforeach; ?>
 							</div>

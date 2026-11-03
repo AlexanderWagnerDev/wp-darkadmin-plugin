@@ -310,10 +310,12 @@
 	function initUserAccessMode() {
 		const radios   = document.querySelectorAll( 'input[name="darkadmin_user_access_mode"]' );
 		const userGrid = document.getElementById( 'adm-user-grid' );
-		if ( ! radios.length || ! userGrid ) return;
+		if ( ! radios.length ) return;
 
 		function update( val ) {
-			userGrid.style.display = val === 'all' ? 'none' : '';
+			if ( userGrid ) {
+				userGrid.style.display = val === 'all' ? 'none' : '';
+			}
 			document.querySelectorAll( '.adm-access-mode-option' ).forEach( function ( label ) {
 				const radio = label.querySelector( 'input[type="radio"]' );
 				label.classList.toggle( 'is-active', radio && radio.value === val );

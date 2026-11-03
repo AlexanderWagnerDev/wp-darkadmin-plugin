@@ -37,8 +37,8 @@ function darkadmin_is_dark_mode_active(): bool {
 		return true;
 	}
 
-	$mode        = get_option( 'darkadmin_user_access_mode', 'all' );
-	$listed      = array_map( 'strval', (array) get_option( 'darkadmin_allowed_users', array() ) );
+	$mode        = darkadmin_sanitize_user_access_mode( get_option( 'darkadmin_user_access_mode', 'all' ) );
+	$listed      = array_map( 'strval', array_filter( (array) get_option( 'darkadmin_allowed_users', array() ), 'is_scalar' ) );
 	$user_id_str = (string) $user_id;
 
 	switch ( $mode ) {

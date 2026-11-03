@@ -449,9 +449,6 @@ function darkadmin_layout_variable_map(): array {
  * fallbacks. It is an internal routing key and is intentionally not included
  * in the returned $output array (it is not a color token).
  *
- * sanitize_hex_color() returns null for invalid values (not false or ''),
- * so we check with is_string() and a non-empty guard instead.
- *
  * @param mixed $input Raw input from the Settings API.
  * @return array<string, string> Sanitized color values.
  */
@@ -459,7 +456,7 @@ function darkadmin_sanitize_colors( $input ): array {
 	$input = is_array( $input ) ? $input : array();
 
 	// '_preset' is an internal routing key, not a color token — excluded from output.
-	$preset = isset( $input['_preset'] )
+	$preset = isset( $input['_preset'] ) && is_scalar( $input['_preset'] )
 		? sanitize_key( (string) $input['_preset'] )
 		: DARKADMIN_DEFAULT_PRESET;
 
@@ -468,9 +465,7 @@ function darkadmin_sanitize_colors( $input ): array {
 	$defaults = darkadmin_preset_colors()[ $preset ];
 	$output   = array();
 	foreach ( $defaults as $key => $default ) {
-		$raw            = isset( $input[ $key ] ) ? (string) $input[ $key ] : '';
-		$sanitized      = sanitize_hex_color( $raw );
-		$output[ $key ] = ( is_string( $sanitized ) && '' !== $sanitized ) ? $sanitized : $default;
+		$output[ $key ] = darkadmin_read_color_value( $input[ $key ] ?? null, $default );
 	}
 	return $output;
 }
@@ -499,7 +494,7 @@ function darkadmin_sanitize_layout( $input ): array {
 	$input = is_array( $input ) ? $input : array();
 
 	// '_preset' is an internal routing key, not a layout token — excluded from output.
-	$preset = isset( $input['_preset'] )
+	$preset = isset( $input['_preset'] ) && is_scalar( $input['_preset'] )
 		? sanitize_key( (string) $input['_preset'] )
 		: DARKADMIN_DEFAULT_PRESET;
 
@@ -510,7 +505,9 @@ function darkadmin_sanitize_layout( $input ): array {
 	$output   = array();
 
 	foreach ( $defaults as $key => $default ) {
-		$raw = isset( $input[ $key ] ) ? sanitize_text_field( wp_unslash( (string) $input[ $key ] ) ) : $default;
+		$raw = isset( $input[ $key ] ) && is_scalar( $input[ $key ] )
+			? sanitize_text_field( wp_unslash( (string) $input[ $key ] ) )
+			: $default;
 		if ( '' === trim( $raw ) ) {
 			$raw = $default;
 		}
@@ -585,10 +582,65 @@ function darkadmin_sanitize_user_access_mode( $value ): string {
 /**
  * Sanitizes the custom CSS option value.
  *
+ * The value is printed inside a <style> element by wp_add_inline_style(), so
+ * the only sequence that can leave that context is a case-insensitive
+ * "</style" end tag. Removing it keeps valid CSS intact — including inline
+ * SVG data URIs that contain a literal "<" — while still preventing a stored
+ * value from terminating the surrounding style element.
+ *
  * @param mixed $css Raw CSS string.
- * @return string Sanitized CSS with all HTML tags stripped.
+ * @return string Sanitized CSS.
  */
 function darkadmin_sanitize_custom_css( $css ): string {
 	$css = is_string( $css ) ? $css : '';
-	return wp_strip_all_tags( $css );
+	$css = preg_replace( '#</style#i', '', $css );
+
+	return is_string( $css ) ? $css : '';
+}
+
+/**
+ * Reads an option value only when it is a string.
+ *
+ * Options can be written outside the Settings API (WP-CLI, importers, plugin
+ * hooks that run before register_setting()), so read paths must not assume the
+ * stored type.
+ *
+ * @param string $option   Option name.
+ * @param string $fallback Fallback when the option is missing or not a string.
+ * @return string
+ */
+function darkadmin_read_string_option( string $option, string $fallback = '' ): string {
+	$value = get_option( $option, $fallback );
+
+	return is_string( $value ) ? $value : $fallback;
+}
+
+/**
+ * Returns a sanitized hex colour or the supplied fallback.
+ *
+ * @param mixed  $value    Raw colour value.
+ * @param string $fallback Fallback colour.
+ * @return string
+ */
+function darkadmin_read_color_value( $value, string $fallback ): string {
+	$sanitized = is_string( $value ) ? sanitize_hex_color( $value ) : null;
+
+	return ( is_string( $sanitized ) && '' !== $sanitized ) ? $sanitized : $fallback;
+}
+
+/**
+ * Returns a sanitized layout value or the supplied fallback.
+ *
+ * @param mixed  $value    Raw layout value.
+ * @param string $fallback Fallback layout value.
+ * @return string
+ */
+function darkadmin_read_layout_value( $value, string $fallback ): string {
+	if ( ! is_string( $value ) ) {
+		return $fallback;
+	}
+
+	$sanitized = sanitize_text_field( $value );
+
+	return '' !== trim( $sanitized ) ? $sanitized : $fallback;
 }
