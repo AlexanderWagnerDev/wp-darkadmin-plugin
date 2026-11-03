@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function darkadmin_sanitize_bool( $v ): bool {
-	return 1 === absint( $v );
+	return is_scalar( $v ) && 1 === absint( $v );
 }
 
 /**
@@ -29,7 +29,9 @@ function darkadmin_sanitize_bool( $v ): bool {
  * @return int[]
  */
 function darkadmin_sanitize_user_ids( $v ): array {
-	return array_values( array_filter( array_map( 'absint', (array) $v ) ) );
+	$values = array_filter( (array) $v, 'is_scalar' );
+
+	return array_values( array_filter( array_map( 'absint', $values ) ) );
 }
 
 add_action(
@@ -135,16 +137,19 @@ add_action(
  * @return string
  */
 function darkadmin_sanitize_preset( $v ): string {
-	return darkadmin_normalize_preset_slug( sanitize_key( (string) $v ) );
+	$value = is_scalar( $v ) ? (string) $v : '';
+
+	return darkadmin_normalize_preset_slug( sanitize_key( $value ) );
 }
 
 /**
  * Parses the raw excluded-pages option into a clean list of entries.
  *
- * @param string $raw Raw textarea value.
+ * @param mixed $raw Raw textarea value.
  * @return string[]
  */
-function darkadmin_parse_excluded_pages( string $raw ): array {
+function darkadmin_parse_excluded_pages( $raw ): array {
+	$raw   = is_string( $raw ) ? $raw : '';
 	$lines = explode( "\n", $raw );
 	$out   = array();
 	foreach ( $lines as $line ) {
@@ -257,8 +262,8 @@ add_action(
 			return;
 		}
 
-		$raw_exclusions = get_option( 'darkadmin_excluded_pages', '' );
-		if ( is_string( $raw_exclusions ) && '' !== $raw_exclusions ) {
+		$raw_exclusions = darkadmin_read_string_option( 'darkadmin_excluded_pages' );
+		if ( '' !== $raw_exclusions ) {
 			$user_excluded = darkadmin_parse_excluded_pages( $raw_exclusions );
 			$page_slug     = darkadmin_current_page_slug();
 			if ( darkadmin_is_page_excluded( $user_excluded, $pagenow, $hook_suffix, $page_slug ) ) {
@@ -266,7 +271,7 @@ add_action(
 			}
 		}
 
-		$preset   = darkadmin_normalize_preset_slug( (string) get_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
+		$preset   = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
 		$css_file = darkadmin_preset_css_file( $preset );
 
 		// darkadmin_preset_fallbacks() and darkadmin_preset_layout_fallbacks() are
@@ -287,11 +292,10 @@ add_action(
 		$ver        = DARKADMIN_VERSION . '-' . $color_hash;
 
 		$sc = static function ( string $k ) use ( $c, $fallbacks ) {
-			$val = sanitize_hex_color( isset( $c[ $k ] ) ? $c[ $k ] : '' );
-			return ( is_string( $val ) && '' !== $val ) ? $val : $fallbacks[ $k ];
+			return darkadmin_read_color_value( $c[ $k ] ?? null, $fallbacks[ $k ] );
 		};
 		$sl = static function ( string $k ) use ( $l, $layout_fallbacks ) {
-			return sanitize_text_field( isset( $l[ $k ] ) ? $l[ $k ] : $layout_fallbacks[ $k ] );
+			return darkadmin_read_layout_value( $l[ $k ] ?? null, $layout_fallbacks[ $k ] );
 		};
 
 		$vars = ':root{'
@@ -354,10 +358,10 @@ add_action(
 		// plus numeric cast / regex whitelist for shadow. No further wrapping needed.
 		wp_add_inline_style( 'darkadmin-darkmode', $vars );
 
-		$custom = get_option( 'darkadmin_custom_css', '' );
-		if ( ! empty( $custom ) ) {
-			// Sanitized on save via darkadmin_sanitize_custom_css() -> wp_strip_all_tags().
-			// Re-applying wp_strip_all_tags() here would corrupt valid CSS.
+		$custom = darkadmin_read_string_option( 'darkadmin_custom_css' );
+		if ( '' !== $custom ) {
+			// Sanitized on save via darkadmin_sanitize_custom_css(), which only
+			// removes sequences that could terminate the inline style element.
 			wp_add_inline_style( 'darkadmin-darkmode', $custom );
 		}
 

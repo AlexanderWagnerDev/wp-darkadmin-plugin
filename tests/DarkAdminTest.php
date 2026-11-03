@@ -15,6 +15,11 @@ class DarkAdminTest extends WP_UnitTestCase {
         delete_option( 'darkadmin_preset' );
         delete_option( 'darkadmin_db_version' );
         delete_option( 'darkadmin_plugins' );
+        delete_option( 'darkadmin_layout' );
+        delete_option( 'darkadmin_custom_css' );
+        delete_option( 'darkadmin_excluded_pages' );
+        delete_option( 'darkadmin_auto_darken' );
+        delete_option( 'darkadmin_test_non_string' );
     }
 
     // -------------------------------------------------------------------------
@@ -168,6 +173,53 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( darkadmin_default_colors()['bg'], $result['bg'] );
     }
 
+    public function test_sanitize_colors_falls_back_for_non_string_value(): void {
+        $input = [
+            '_preset' => 'classic',
+            'bg'      => [ '#000000' ],
+        ];
+
+        $result = darkadmin_sanitize_colors( $input );
+        $this->assertSame( darkadmin_default_colors()['bg'], $result['bg'] );
+    }
+
+    // -------------------------------------------------------------------------
+    // darkadmin_sanitize_layout
+    // -------------------------------------------------------------------------
+
+    public function test_sanitize_layout_keeps_valid_px_value(): void {
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset' => 'classic',
+                'space_2' => '14px',
+            ]
+        );
+
+        $this->assertSame( '14px', $result['space_2'] );
+    }
+
+    public function test_sanitize_layout_falls_back_for_non_string_value(): void {
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset' => 'classic',
+                'space_2' => [ '14px' ],
+            ]
+        );
+
+        $this->assertSame( darkadmin_default_layout()['space_2'], $result['space_2'] );
+    }
+
+    public function test_sanitize_layout_rejects_invalid_shadow(): void {
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset'    => 'classic',
+                'shadow_md' => 'red;}body{display:none',
+            ]
+        );
+
+        $this->assertSame( darkadmin_default_layout()['shadow_md'], $result['shadow_md'] );
+    }
+
     // -------------------------------------------------------------------------
     // darkadmin_sanitize_user_access_mode
     // -------------------------------------------------------------------------
@@ -202,13 +254,48 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( $css, $result );
     }
 
-    public function test_sanitize_custom_css_strips_html_tags(): void {
-        $result = darkadmin_sanitize_custom_css( '<script>alert(1)</script>body{}' );
-        $this->assertStringNotContainsString( '<script>', $result );
+    public function test_sanitize_custom_css_removes_style_end_tag(): void {
+        $result = darkadmin_sanitize_custom_css( 'body{color:red}</StYlE ><script>alert(1)</script>' );
+        $this->assertStringNotContainsStringIgnoringCase( '</style', $result );
+    }
+
+    public function test_sanitize_custom_css_preserves_inline_svg_data_uri(): void {
+        $css = 'body{background-image:url("data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\'><rect/></svg>");}';
+        $this->assertSame( $css, darkadmin_sanitize_custom_css( $css ) );
+    }
+
+    public function test_sanitize_custom_css_rejects_non_string(): void {
+        $this->assertSame( '', darkadmin_sanitize_custom_css( [ 'body{}' ] ) );
     }
 
     public function test_sanitize_custom_css_allows_empty_string(): void {
         $this->assertSame( '', darkadmin_sanitize_custom_css( '' ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Option read helpers
+    // -------------------------------------------------------------------------
+
+    public function test_read_string_option_returns_stored_string(): void {
+        update_option( 'darkadmin_custom_css', 'body{}' );
+        $this->assertSame( 'body{}', darkadmin_read_string_option( 'darkadmin_custom_css' ) );
+    }
+
+    public function test_read_string_option_returns_default_for_non_string(): void {
+        update_option( 'darkadmin_test_non_string', [ 'body{}' ] );
+        $this->assertSame( 'fallback', darkadmin_read_string_option( 'darkadmin_test_non_string', 'fallback' ) );
+    }
+
+    public function test_read_color_value_falls_back_for_invalid_or_non_string_values(): void {
+        $this->assertSame( '#123456', darkadmin_read_color_value( 'red', '#123456' ) );
+        $this->assertSame( '#123456', darkadmin_read_color_value( [ '#abcdef' ], '#123456' ) );
+        $this->assertSame( '#abcdef', darkadmin_read_color_value( '#abcdef', '#123456' ) );
+    }
+
+    public function test_read_layout_value_falls_back_for_invalid_or_non_string_values(): void {
+        $this->assertSame( '8px', darkadmin_read_layout_value( '', '8px' ) );
+        $this->assertSame( '8px', darkadmin_read_layout_value( [ '12px' ], '8px' ) );
+        $this->assertSame( '12px', darkadmin_read_layout_value( '12px', '8px' ) );
     }
 
     // -------------------------------------------------------------------------
@@ -217,6 +304,15 @@ class DarkAdminTest extends WP_UnitTestCase {
 
     public function test_sanitize_user_ids_filters_empty_values(): void {
         $this->assertSame( [ 1, 2 ], darkadmin_sanitize_user_ids( [ '1', '', '2', '0' ] ) );
+    }
+
+    public function test_sanitize_user_ids_ignores_non_scalar_values(): void {
+        $this->assertSame( [ 1, 2 ], darkadmin_sanitize_user_ids( [ '1', [ '3' ], '2' ] ) );
+    }
+
+    public function test_sanitize_bool_ignores_non_scalar_values(): void {
+        $this->assertFalse( darkadmin_sanitize_bool( [ '1' ] ) );
+        $this->assertTrue( darkadmin_sanitize_bool( '1' ) );
     }
 
     // -------------------------------------------------------------------------
@@ -402,5 +498,25 @@ class DarkAdminTest extends WP_UnitTestCase {
         }
 
         $this->assertFalse( darkadmin_plugin_styles_enabled( 'wordpress-ai' ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Uninstall cleanup
+    // -------------------------------------------------------------------------
+
+    public function test_uninstall_removes_options_and_notice_transients(): void {
+        update_option( 'darkadmin_dark_mode_enabled', true );
+        update_option( 'darkadmin_db_version', '0.4.0' );
+        set_transient( 'darkadmin_settings_saved_123', 1, MINUTE_IN_SECONDS );
+
+        if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+            define( 'WP_UNINSTALL_PLUGIN', 'darkadmin-dark-mode-for-adminpanel/darkadmin.php' );
+        }
+
+        include_once dirname( __DIR__ ) . '/uninstall.php';
+
+        $this->assertFalse( get_option( 'darkadmin_dark_mode_enabled' ) );
+        $this->assertFalse( get_option( 'darkadmin_db_version' ) );
+        $this->assertFalse( get_transient( 'darkadmin_settings_saved_123' ) );
     }
 }

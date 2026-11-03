@@ -40,7 +40,7 @@ require_once DARKADMIN_PATH . 'includes/settings-page.php';
 add_action(
 	'admin_init',
 	function () {
-		$db_version = (string) get_option( 'darkadmin_db_version', '0' );
+		$db_version = darkadmin_read_string_option( 'darkadmin_db_version', '0' );
 
 		if ( version_compare( $db_version, '0.3.0', '<' ) ) {
 			// Explicit default keeps "no stored row" detectable; the registered
