@@ -10,9 +10,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-- Hardened option reads so unexpected stored types can no longer break wp-admin or the settings screen.
-- Custom CSS keeps valid CSS such as inline SVG data URIs while still blocking style-element termination.
-- Uninstalling the plugin now also removes the per-user settings notice transients and per-site options on multisite.
+- Hardened option reads so unexpected stored types can no longer break wp-admin or the settings
+  screen.
+- Custom CSS keeps valid CSS such as inline SVG data URIs while still blocking style-element
+  termination.
+- Uninstalling the plugin now also removes the per-user settings notice transients and per-site
+  options on multisite.
 
 ## [0.4.0] - 2026-10-06
 
