@@ -265,7 +265,7 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     public function test_sanitize_custom_css_neutralizes_joined_style_end_tags(): void {
-        $payload = '</st</styleyle><script>alert(1)</script>';
+        $payload = '</st</styleyle>MARKER';
         $this->assertStringNotContainsStringIgnoringCase(
             '</style',
             darkadmin_sanitize_custom_css( $payload )
@@ -543,7 +543,7 @@ class DarkAdminTest extends WP_UnitTestCase {
 
         remove_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
         try {
-            update_option( 'darkadmin_custom_css', '</st</styleyle><script>alert(1)</script>' );
+            update_option( 'darkadmin_custom_css', '</st</styleyle>MARKER' );
         } finally {
             add_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
         }
