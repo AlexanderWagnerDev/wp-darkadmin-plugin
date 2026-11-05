@@ -519,4 +519,54 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertFalse( get_option( 'darkadmin_db_version' ) );
         $this->assertFalse( get_transient( 'darkadmin_settings_saved_123' ) );
     }
+
+    // -------------------------------------------------------------------------
+    // Read-path hardening
+    // -------------------------------------------------------------------------
+
+    public function test_enqueue_sanitizes_custom_css_written_outside_settings_api(): void {
+        update_option( 'darkadmin_dark_mode_enabled', true );
+        wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
+
+        remove_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
+        try {
+            update_option( 'darkadmin_custom_css', 'body{color:red}</style><script>alert(1)</script>' );
+        } finally {
+            add_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
+        }
+
+        $this->assertStringContainsString( '</style', (string) get_option( 'darkadmin_custom_css' ) );
+
+        $previous_pagenow   = $GLOBALS['pagenow'] ?? null;
+        $previous_screen    = get_current_screen();
+        $GLOBALS['pagenow'] = 'index.php';
+        set_current_screen( 'dashboard' );
+
+        do_action( 'admin_enqueue_scripts', 'index.php' );
+
+        $inline = wp_styles()->get_data( 'darkadmin-darkmode', 'after' );
+        $css    = is_array( $inline ) ? implode( "\n", $inline ) : (string) $inline;
+
+        $this->assertStringContainsString( ':root{', $css );
+
+        if ( null === $previous_pagenow ) {
+            unset( $GLOBALS['pagenow'] );
+        } else {
+            $GLOBALS['pagenow'] = $previous_pagenow;
+        }
+        $GLOBALS['current_screen'] = $previous_screen;
+
+        $this->assertStringNotContainsString( '</style', $css );
+    }
+
+    public function test_settings_page_ignores_non_scalar_allowed_users(): void {
+        update_option( 'darkadmin_allowed_users', [ new stdClass() ] );
+        wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
+
+        ob_start();
+        darkadmin_settings_page();
+        $html = ob_get_clean();
+
+        $this->assertStringContainsString( 'adm-settings-wrap', $html );
+    }
 }

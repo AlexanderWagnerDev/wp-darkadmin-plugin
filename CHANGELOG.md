@@ -16,6 +16,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   termination.
 - Uninstalling the plugin now also removes the per-user settings notice transients and per-site
   options on multisite.
+- Custom CSS is sanitized again when it is printed, so values written outside the Settings API
+  cannot terminate the inline style element.
+- The settings page ignores non-scalar entries in `darkadmin_allowed_users` instead of emitting a
+  PHP warning.
+- Color picker defaults follow the active preset after switching presets, so the picker's Default
+  button no longer restores the previous preset's palette.
+- The release build excludes `build/` and `release-notes.md` from the plugin ZIP.
 
 ## [0.4.0] - 2026-10-06
 

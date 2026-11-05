@@ -122,6 +122,12 @@ jobs:
           mkdir -p build/"$SLUG"
           rsync -a --exclude-from=.distignore --exclude='vendor' ./ build/"$SLUG"/
           (cd build && zip -rq "../${SLUG}.zip" "$SLUG")
+
+          if unzip -Z1 "${SLUG}.zip" | grep -Eq '(^|/)(build/|release-notes\.md$)'; then
+            echo "::error::Plugin ZIP contains release workflow artifacts."
+            exit 1
+          fi
+
           echo "ZIP contents:"
           unzip -l "${SLUG}.zip" | tail -n +4 | head -n -2 | awk '{print $4}'
 
