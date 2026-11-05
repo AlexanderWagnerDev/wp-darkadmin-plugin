@@ -264,6 +264,19 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( $css, darkadmin_sanitize_custom_css( $css ) );
     }
 
+    public function test_sanitize_custom_css_neutralizes_joined_style_end_tags(): void {
+        $payload = '</st</styleyle><script>alert(1)</script>';
+        $this->assertStringNotContainsStringIgnoringCase(
+            '</style',
+            darkadmin_sanitize_custom_css( $payload )
+        );
+
+        $this->assertStringNotContainsStringIgnoringCase(
+            '</style',
+            darkadmin_sanitize_custom_css( '</ST</StYlEyle>' )
+        );
+    }
+
     public function test_sanitize_custom_css_rejects_non_string(): void {
         $this->assertSame( '', darkadmin_sanitize_custom_css( [ 'body{}' ] ) );
     }
@@ -530,7 +543,7 @@ class DarkAdminTest extends WP_UnitTestCase {
 
         remove_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
         try {
-            update_option( 'darkadmin_custom_css', 'body{color:red}</style><script>alert(1)</script>' );
+            update_option( 'darkadmin_custom_css', '</st</styleyle><script>alert(1)</script>' );
         } finally {
             add_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
         }
