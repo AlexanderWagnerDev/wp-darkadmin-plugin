@@ -66,3 +66,46 @@ function darkadmin_get_selectable_users(): array {
 		)
 	);
 }
+
+/**
+ * Whether the current user may edit the site-wide custom CSS.
+ *
+ * WordPress maps edit_css to unfiltered_html. On multisite this is normally
+ * limited to super administrators; single-site administrators and editors may
+ * have unfiltered_html unless DISALLOW_UNFILTERED_HTML is set.
+ *
+ * @return bool
+ */
+function darkadmin_can_edit_custom_css(): bool {
+	return current_user_can( 'edit_css' );
+}
+
+/**
+ * Preserve the stored custom CSS when an unauthorized user saves the settings form.
+ *
+ * The Settings API updates every option in the settings group and passes null for
+ * fields that are not posted. Without this guard, hiding the field from a user
+ * without edit_css would erase the existing CSS when that user saves another
+ * setting.
+ *
+ * @param mixed $value     Sanitized new value.
+ * @param mixed $old_value Stored value.
+ * @return mixed
+ */
+function darkadmin_preserve_custom_css_on_unauthorized_save( $value, $old_value ) {
+	if ( darkadmin_can_edit_custom_css() ) {
+		return $value;
+	}
+
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- This filter only decides whether to keep the stored value; core options.php verifies the settings nonce before a save reaches this point.
+	$option_page = isset( $_POST['option_page'] ) && is_string( $_POST['option_page'] ) ? sanitize_key( wp_unslash( $_POST['option_page'] ) ) : '';
+	$action      = isset( $_POST['action'] ) && is_string( $_POST['action'] ) ? sanitize_key( wp_unslash( $_POST['action'] ) ) : '';
+	// phpcs:enable WordPress.Security.NonceVerification.Missing
+
+	if ( 'darkadmin_settings' !== $option_page || 'update' !== $action ) {
+		return $value;
+	}
+
+	return $old_value;
+}
+add_filter( 'pre_update_option_darkadmin_custom_css', 'darkadmin_preserve_custom_css_on_unauthorized_save', 10, 2 );

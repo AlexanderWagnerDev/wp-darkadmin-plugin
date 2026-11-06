@@ -481,6 +481,7 @@ function darkadmin_settings_page(): void {
 				</div>
 			</div>
 
+			<?php if ( darkadmin_can_edit_custom_css() ) : ?>
 			<!-- Custom CSS -->
 			<div class="adm-card">
 				<div class="adm-card-header">
@@ -553,6 +554,7 @@ function darkadmin_settings_page(): void {
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 
 			<!-- Advanced -->
 			<div class="adm-card">

@@ -8,6 +8,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Custom CSS is now editable only by users who can access Settings > DarkAdmin and have the core
+  `edit_css` capability. Other settings saves preserve the stored CSS instead of clearing it.
+
 ### Fixed
 
 - Hardened option reads so unexpected stored types can no longer break wp-admin or the settings
