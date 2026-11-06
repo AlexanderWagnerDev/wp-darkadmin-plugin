@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,17 @@ An optional second toggle that uses JavaScript to dynamically darken bright back
 18. Duplicator - Backups
 
 == Changelog ==
+= 0.4.1 =
+* Added: Dark mode for Appearance > Fonts (font-library.php, WordPress 7.0+): library, upload and Google Fonts install tabs, font cards, footer bar and readable font previews
+* Added: darkadmin-wpds.css with shared dark styles for WordPress Design System screens (Fonts, Connectors, AI plugin screens), loaded automatically
+* Changed: Custom CSS is editable only by users who can access Settings > DarkAdmin and have the edit_css capability; other settings saves keep the stored CSS
+* Fixed: Settings > Connectors and Settings > AI were light on WordPress 7.1
+* Fixed: About, Credits, Freedoms, Privacy and Get Involved screens, striped list rows and the classic Publish box footer
+* Fixed: Updated dark styles for Spectra, Newsletter, Yoast SEO, Wordfence, Duplicator, UpdraftPlus, WP-Optimize (incl. the new onboarding wizard) and Complianz
+* Fixed: Hardened option reads, Custom CSS sanitizing on output, non-scalar allowed-user entries and color picker defaults after switching presets
+* Fixed: Uninstall also removes settings notice transients and per-site options on multisite
+* Maintenance: "Tested up to" is declared only in readme.txt; release ZIP excludes build/ and release-notes.md
+
 = 0.4.0 =
 * Added: Dark mode styles for Complianz, Newsletter, Duplicator and Spectra; listed in Settings > DarkAdmin > Plugins and enabled automatically when the plugin is active
 * Added: 14 new screenshots (presets, plugins, posts, comments, users, Complianz, WooCommerce, Yoast SEO, Newsletter, Duplicator)

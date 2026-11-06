@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,17 @@ Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründ
 18. Duplicator - Backups
 
 == Changelog ==
+= 0.4.1 =
+* Neu: Dark Mode für Design > Schriftarten (font-library.php, WordPress 7.0+): Bibliothek, Hochladen, Google-Fonts-Installation, Schrift-Karten, Fußleiste und lesbare Schriftvorschauen
+* Neu: darkadmin-wpds.css mit gemeinsamen Dark-Stilen für WordPress-Design-System-Seiten (Schriftarten, Konnektoren, AI-Plugin-Seiten), lädt automatisch
+* Geändert: Eigenes CSS können nur noch Benutzer bearbeiten, die Einstellungen > DarkAdmin öffnen dürfen und die Berechtigung edit_css haben; andere Speichervorgänge behalten das gespeicherte CSS
+* Fix: Einstellungen > Konnektoren und Einstellungen > AI waren unter WordPress 7.1 hell
+* Fix: Seiten Über, Danksagungen, Freiheiten, Datenschutz und Mitmachen, gestreifte Listenzeilen und der Fußbereich der klassischen Veröffentlichen-Box
+* Fix: Aktualisierte Dark-Stile für Spectra, Newsletter, Yoast SEO, Wordfence, Duplicator, UpdraftPlus, WP-Optimize (inkl. neuem Einrichtungsassistenten) und Complianz
+* Fix: Robustere Options-Lesevorgänge, Bereinigung des eigenen CSS bei der Ausgabe, nicht-skalare Einträge in der Benutzerliste und Farbwähler-Standardwerte nach Preset-Wechsel
+* Fix: Deinstallation entfernt auch die Hinweis-Transients und auf Multisite die Optionen jeder Site
+* Wartung: „Tested up to“ steht nur noch in readme.txt; Release-ZIP schließt build/ und release-notes.md aus
+
 = 0.4.0 =
 * Neu: Dark-Mode-Stile für Complianz, Newsletter, Duplicator und Spectra unter Einstellungen > DarkAdmin > Plugins; werden automatisch aktiv, wenn das Plugin läuft
 * Neu: 14 neue Screenshots (Presets, Plugins, Beiträge, Kommentare, Benutzer, Complianz, WooCommerce, Yoast SEO, Newsletter, Duplicator)
