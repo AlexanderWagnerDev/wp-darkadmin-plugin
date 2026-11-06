@@ -11,7 +11,8 @@
  * writes the tokens as inline styles on <html> and on every nested provider
  * element (data-wpds-corner-radius), so remapping them only on the root is not
  * enough: the stage provider re-declares a light palette. This file is only
- * enqueued on those screens, so the selectors below are not body-scoped.
+ * enqueued on those screens, so the selectors below use the generic
+ * body.wp-admin prefix instead of a page-specific body class.
  */
 
 body.wp-admin,

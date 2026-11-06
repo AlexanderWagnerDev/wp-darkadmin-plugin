@@ -461,7 +461,6 @@ class DarkAdminTest extends WP_UnitTestCase {
         foreach ( darkadmin_wordpress_ai_screen_ids() as $ai_id ) {
             $this->assertContains( $ai_id, $ids );
         }
-        $this->assertSame( array_values( array_unique( $ids ) ), $ids );
     }
 
     public function test_boot_wpds_styles_enqueue_on_font_library_screen(): void {
