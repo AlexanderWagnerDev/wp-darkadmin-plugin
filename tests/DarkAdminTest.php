@@ -644,9 +644,10 @@ class DarkAdminTest extends WP_UnitTestCase {
         $limited       = $this->create_custom_css_user( false );
         $allowed       = $this->create_custom_css_user( true );
         $previous_post = $_POST;
+        $initial_css   = 'body{color:red}';
 
         try {
-            update_option( 'darkadmin_custom_css', 'body{color:red}' );
+            update_option( 'darkadmin_custom_css', $initial_css );
 
             wp_set_current_user( $limited );
             $_POST = [
@@ -654,11 +655,11 @@ class DarkAdminTest extends WP_UnitTestCase {
                 'action'      => 'update',
             ];
             update_option( 'darkadmin_custom_css', 'body{color:blue}' );
-            $this->assertSame( 'body{color:red}', get_option( 'darkadmin_custom_css' ) );
+            $this->assertSame( $initial_css, get_option( 'darkadmin_custom_css' ) );
 
             // options.php submits null for a field that is not rendered.
             update_option( 'darkadmin_custom_css', null );
-            $this->assertSame( 'body{color:red}', get_option( 'darkadmin_custom_css' ) );
+            $this->assertSame( $initial_css, get_option( 'darkadmin_custom_css' ) );
 
             wp_set_current_user( $allowed );
             update_option( 'darkadmin_custom_css', 'body{color:green}' );
