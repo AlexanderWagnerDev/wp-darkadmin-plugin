@@ -264,6 +264,19 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( $css, darkadmin_sanitize_custom_css( $css ) );
     }
 
+    public function test_sanitize_custom_css_neutralizes_joined_style_end_tags(): void {
+        $payload = '</st</styleyle>MARKER';
+        $this->assertStringNotContainsStringIgnoringCase(
+            '</style',
+            darkadmin_sanitize_custom_css( $payload )
+        );
+
+        $this->assertStringNotContainsStringIgnoringCase(
+            '</style',
+            darkadmin_sanitize_custom_css( '</ST</StYlEyle>' )
+        );
+    }
+
     public function test_sanitize_custom_css_rejects_non_string(): void {
         $this->assertSame( '', darkadmin_sanitize_custom_css( [ 'body{}' ] ) );
     }
@@ -518,5 +531,153 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertFalse( get_option( 'darkadmin_dark_mode_enabled' ) );
         $this->assertFalse( get_option( 'darkadmin_db_version' ) );
         $this->assertFalse( get_transient( 'darkadmin_settings_saved_123' ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Read-path hardening
+    // -------------------------------------------------------------------------
+
+    public function test_enqueue_sanitizes_custom_css_written_outside_settings_api(): void {
+        update_option( 'darkadmin_dark_mode_enabled', true );
+        wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
+
+        remove_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
+        try {
+            update_option( 'darkadmin_custom_css', '</st</styleyle>MARKER' );
+        } finally {
+            add_filter( 'sanitize_option_darkadmin_custom_css', 'darkadmin_sanitize_custom_css' );
+        }
+
+        $this->assertStringContainsString( '</style', (string) get_option( 'darkadmin_custom_css' ) );
+
+        $previous_pagenow   = $GLOBALS['pagenow'] ?? null;
+        $previous_screen    = get_current_screen();
+        $GLOBALS['pagenow'] = 'index.php';
+        set_current_screen( 'dashboard' );
+
+        do_action( 'admin_enqueue_scripts', 'index.php' );
+
+        $inline = wp_styles()->get_data( 'darkadmin-darkmode', 'after' );
+        $css    = is_array( $inline ) ? implode( "\n", $inline ) : (string) $inline;
+
+        $this->assertStringContainsString( ':root{', $css );
+
+        if ( null === $previous_pagenow ) {
+            unset( $GLOBALS['pagenow'] );
+        } else {
+            $GLOBALS['pagenow'] = $previous_pagenow;
+        }
+        $GLOBALS['current_screen'] = $previous_screen;
+
+        $this->assertStringNotContainsString( '</style', $css );
+    }
+
+    public function test_settings_page_ignores_non_scalar_allowed_users(): void {
+        update_option( 'darkadmin_allowed_users', [ new stdClass() ] );
+        wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
+
+        ob_start();
+        darkadmin_settings_page();
+        $html = ob_get_clean();
+
+        $this->assertStringContainsString( 'adm-settings-wrap', $html );
+    }
+
+    /**
+     * Creates a user with manage_options and optionally custom CSS editing capability.
+     *
+     * @param bool $can_edit_css Whether the user should pass current_user_can( 'edit_css' ).
+     * @return int User ID.
+     */
+    private function create_custom_css_user( bool $can_edit_css ): int {
+        if ( $can_edit_css ) {
+            $user_id = $this->factory->user->create( [ 'role' => 'administrator' ] );
+
+            if ( is_multisite() ) {
+                grant_super_admin( $user_id );
+            }
+
+            return $user_id;
+        }
+
+        if ( ! get_role( 'darkadmin_css_limited' ) ) {
+            add_role(
+                'darkadmin_css_limited',
+                'DarkAdmin CSS Limited',
+                [
+                    'read'           => true,
+                    'manage_options' => true,
+                ]
+            );
+        }
+
+        return $this->factory->user->create( [ 'role' => 'darkadmin_css_limited' ] );
+    }
+
+    public function test_custom_css_field_requires_edit_css_capability(): void {
+        $limited = $this->create_custom_css_user( false );
+        $allowed = $this->create_custom_css_user( true );
+
+        try {
+            $this->assertFalse( user_can( $limited, 'edit_css' ) );
+            $this->assertTrue( user_can( $allowed, 'edit_css' ) );
+
+            wp_set_current_user( $limited );
+            ob_start();
+            darkadmin_settings_page();
+            $limited_html = ob_get_clean();
+            $this->assertStringNotContainsString( 'id="darkadmin_custom_css"', $limited_html );
+
+            wp_set_current_user( $allowed );
+            ob_start();
+            darkadmin_settings_page();
+            $allowed_html = ob_get_clean();
+            $this->assertStringContainsString( 'id="darkadmin_custom_css"', $allowed_html );
+        } finally {
+            if ( is_multisite() ) {
+                revoke_super_admin( $allowed );
+            }
+        }
+    }
+
+    public function test_custom_css_save_guard_requires_edit_css_capability(): void {
+        $limited       = $this->create_custom_css_user( false );
+        $allowed       = $this->create_custom_css_user( true );
+        $previous_post = $_POST;
+        $initial_css   = 'body{color:red}';
+
+        try {
+            update_option( 'darkadmin_custom_css', $initial_css );
+
+            wp_set_current_user( $limited );
+            $_POST = [
+                'option_page' => 'darkadmin_settings',
+                'action'      => 'update',
+            ];
+            update_option( 'darkadmin_custom_css', 'body{color:blue}' );
+            $this->assertSame( $initial_css, get_option( 'darkadmin_custom_css' ) );
+
+            // options.php submits null for a field that is not rendered.
+            update_option( 'darkadmin_custom_css', null );
+            $this->assertSame( $initial_css, get_option( 'darkadmin_custom_css' ) );
+
+            wp_set_current_user( $allowed );
+            update_option( 'darkadmin_custom_css', 'body{color:green}' );
+            $this->assertSame( 'body{color:green}', get_option( 'darkadmin_custom_css' ) );
+
+            update_option( 'darkadmin_custom_css', '' );
+            $this->assertSame( '', get_option( 'darkadmin_custom_css' ) );
+
+            // Direct code/CLI writes are trusted and remain allowed.
+            wp_set_current_user( $limited );
+            $_POST = [];
+            update_option( 'darkadmin_custom_css', 'body{color:black}' );
+            $this->assertSame( 'body{color:black}', get_option( 'darkadmin_custom_css' ) );
+        } finally {
+            $_POST = $previous_post;
+            if ( is_multisite() ) {
+                revoke_super_admin( $allowed );
+            }
+        }
     }
 }

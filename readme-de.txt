@@ -41,6 +41,9 @@ Einstellungen -> DarkAdmin
 = Kann ich die Farben anpassen? =
 Ja. Das Plugin enthält mehrere Farbwähler für das komplette Admin-Theme und unterstützt zusätzlich eigenes Custom CSS.
 
+= Wer kann das eigene CSS bearbeiten? =
+Benutzer, die auf Einstellungen > DarkAdmin zugreifen können und die WordPress-Fähigkeit edit_css besitzen. Auf Multisite ist das normalerweise auf Super-Administratoren beschränkt. Andere Administratoren können die übrigen DarkAdmin-Einstellungen weiterhin ändern, ohne das gespeicherte CSS zu überschreiben.
+
 = Was ist der Auto Dark Mode? =
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 

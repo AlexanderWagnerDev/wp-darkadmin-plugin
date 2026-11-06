@@ -21,6 +21,10 @@ icon-*.png
 blueprint.json
 renovate.json
 
+# Release workflow artifacts (must not ship in the plugin ZIP)
+build
+release-notes.md
+
 # Translation sources (compiled .mo / .l10n.php files are shipped)
 *.po
 *.pot

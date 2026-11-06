@@ -358,10 +358,11 @@ add_action(
 		// plus numeric cast / regex whitelist for shadow. No further wrapping needed.
 		wp_add_inline_style( 'darkadmin-darkmode', $vars );
 
-		$custom = darkadmin_read_string_option( 'darkadmin_custom_css' );
+		// Sanitize again on read: options can be written outside the Settings API
+		// (WP-CLI, importers, hooks before register_setting()), so the output path
+		// must not rely on the save-time callback alone.
+		$custom = darkadmin_sanitize_custom_css( darkadmin_read_string_option( 'darkadmin_custom_css' ) );
 		if ( '' !== $custom ) {
-			// Sanitized on save via darkadmin_sanitize_custom_css(), which only
-			// removes sequences that could terminate the inline style element.
 			wp_add_inline_style( 'darkadmin-darkmode', $custom );
 		}
 

@@ -8,6 +8,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Custom CSS is now editable only by users who can access Settings > DarkAdmin and have the core
+  `edit_css` capability. Other settings saves preserve the stored CSS instead of clearing it.
+
 ### Fixed
 
 - Hardened option reads so unexpected stored types can no longer break wp-admin or the settings
@@ -16,6 +21,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   termination.
 - Uninstalling the plugin now also removes the per-user settings notice transients and per-site
   options on multisite.
+- Custom CSS is sanitized again when it is printed and end-tag removal is join-safe, so stored
+  values written outside the Settings API cannot terminate the inline style element.
+- The settings page ignores non-scalar entries in `darkadmin_allowed_users` instead of emitting a
+  PHP warning.
+- Color picker defaults follow the active preset after switching presets, so the picker's Default
+  button no longer restores the previous preset's palette.
+- The release build excludes `build/` and `release-notes.md` from the plugin ZIP.
+- Removed a duplicate `updates:` key from `.github/dependabot.yml` and dropped the stale `dev`
+  target so the `main` GitHub Actions update configuration is the only one parsed.
+- Kept the `Tested up to` declaration only in `readme.txt`; Plugin Check rejects a duplicate value
+  in the main plugin PHP header.
 
 ## [0.4.0] - 2026-10-06
 

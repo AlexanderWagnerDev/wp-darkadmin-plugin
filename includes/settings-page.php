@@ -19,6 +19,7 @@ function darkadmin_settings_page(): void {
 		wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'darkadmin-dark-mode-for-adminpanel' ) );
 	}
 
+	// Options can be written outside the Settings API; reads below tolerate unexpected types.
 	$enabled          = (bool) get_option( 'darkadmin_dark_mode_enabled', false );
 	$auto_darken      = (bool) get_option( 'darkadmin_auto_darken', false );
 	$active_preset    = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
@@ -27,7 +28,7 @@ function darkadmin_settings_page(): void {
 	$colors           = wp_parse_args( (array) get_option( 'darkadmin_colors', array() ), $preset_colors );
 	$layout           = wp_parse_args( (array) get_option( 'darkadmin_layout', array() ), $preset_layout );
 	$custom           = darkadmin_read_string_option( 'darkadmin_custom_css' );
-	$allowed          = array_map( 'intval', (array) get_option( 'darkadmin_allowed_users', array() ) );
+	$allowed          = array_map( 'intval', array_filter( (array) get_option( 'darkadmin_allowed_users', array() ), 'is_scalar' ) );
 	$user_access_mode = darkadmin_sanitize_user_access_mode( get_option( 'darkadmin_user_access_mode', 'all' ) );
 	$excluded_pages   = darkadmin_read_string_option( 'darkadmin_excluded_pages' );
 	$plugins_disabled = darkadmin_plugins_disabled();
@@ -480,6 +481,7 @@ function darkadmin_settings_page(): void {
 				</div>
 			</div>
 
+			<?php if ( darkadmin_can_edit_custom_css() ) : ?>
 			<!-- Custom CSS -->
 			<div class="adm-card">
 				<div class="adm-card-header">
@@ -552,6 +554,7 @@ function darkadmin_settings_page(): void {
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 
 			<!-- Advanced -->
 			<div class="adm-card">
