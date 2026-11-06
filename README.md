@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.4.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.4.1-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -79,6 +79,36 @@ customization and Auto Dark Mode support.
 ---
 
 ## Changelog
+
+## [0.4.1] - 2026-11-07
+
+### Added
+
+- Dark mode for Appearance > Fonts (`font-library.php`, WordPress 7.0+): library, upload and Google
+  Fonts install tabs, font cards, footer bar and readable font previews
+- `darkadmin-wpds.css` with shared dark styles for WordPress Design System screens (Fonts,
+  Connectors, AI plugin screens), loaded automatically
+
+### Changed
+
+- Custom CSS is editable only by users who can access Settings > DarkAdmin and have the `edit_css`
+  capability; other settings saves keep the stored CSS
+
+### Fixed
+
+- Settings > Connectors and Settings > AI were light on WordPress 7.1
+- About, Credits, Freedoms, Privacy and Get Involved screens, striped list rows and the classic
+  Publish box footer
+- Updated dark styles for Spectra, Newsletter, Yoast SEO, Wordfence, Duplicator, UpdraftPlus,
+  WP-Optimize (incl. the new onboarding wizard) and Complianz
+- Hardened option reads, Custom CSS sanitizing on output, non-scalar allowed-user entries and color
+  picker defaults after switching presets
+- Uninstall also removes settings notice transients and per-site options on multisite
+
+### Maintenance
+
+- `Tested up to` is declared only in `readme.txt`; the release ZIP excludes `build/` and
+  `release-notes.md`
 
 ## [0.4.0] - 2026-10-06
 
@@ -389,6 +419,36 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ---
 
 ## Changelog
+
+## 0.4.1
+
+### Hinzugefügt
+
+- Dark Mode für Design > Schriftarten (`font-library.php`, WordPress 7.0+): Bibliothek, Hochladen,
+  Google-Fonts-Installation, Schrift-Karten, Fußleiste und lesbare Schriftvorschauen
+- `darkadmin-wpds.css` mit gemeinsamen Dark-Stilen für WordPress-Design-System-Seiten (Schriftarten,
+  Konnektoren, AI-Plugin-Seiten), lädt automatisch
+
+### Geändert
+
+- Eigenes CSS können nur noch Benutzer bearbeiten, die Einstellungen > DarkAdmin öffnen dürfen und
+  die Berechtigung `edit_css` haben; andere Speichervorgänge behalten das gespeicherte CSS
+
+### Behoben
+
+- Einstellungen > Konnektoren und Einstellungen > AI waren unter WordPress 7.1 hell
+- Seiten Über, Danksagungen, Freiheiten, Datenschutz und Mitmachen, gestreifte Listenzeilen und der
+  Fußbereich der klassischen Veröffentlichen-Box
+- Aktualisierte Dark-Stile für Spectra, Newsletter, Yoast SEO, Wordfence, Duplicator, UpdraftPlus,
+  WP-Optimize (inkl. neuem Einrichtungsassistenten) und Complianz
+- Robustere Options-Lesevorgänge, Bereinigung des eigenen CSS bei der Ausgabe, nicht-skalare
+  Einträge in der Benutzerliste und Farbwähler-Standardwerte nach Preset-Wechsel
+- Deinstallation entfernt auch die Hinweis-Transients und auf Multisite die Optionen jeder Site
+
+### Wartung
+
+- `Tested up to` steht nur noch in `readme.txt`; das Release-ZIP schließt `build/` und
+  `release-notes.md` aus
 
 ## 0.4.0
 

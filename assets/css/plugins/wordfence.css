@@ -199,3 +199,85 @@ div.wf-radio-group div.wf-radio-option label,
   background: var(--adm-surface-1) !important;
   border-color: var(--adm-border) !important;
 }
+
+/* Wordfence 8.x: default buttons, dashboard items, tables, overlays and colorbox modals. */
+body .wf-btn.wf-btn-default,
+body .wf-btn.wf-btn-callout-subtle,
+body a.wf-btn.wf-btn-default.wf-btn-default,
+body a.wf-btn.wf-btn-callout-subtle.wf-btn-default,
+body a.wf-btn.wf-btn-default.wf-btn-default.wf-disabled,
+body a.wf-btn.wf-btn-default.wf-btn-default[disabled] {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body .wf-btn.wf-btn-default:hover,
+body .wf-btn.wf-btn-callout-subtle:hover {
+  background-color: var(--adm-surface-3) !important;
+}
+
+.wf-dashboard-item,
+.wf-dashboard-item.active,
+.wf-dashboard-show-more,
+.wf-dashboard-graph-attacks,
+.wf-dashboard-login-attempts,
+.wf-dashboard-item-list,
+.wf-options-controls,
+.wf-scan-step-premium,
+#wordfenceAuditLogPremiumOnly,
+#wf-cboxContent,
+#wf-cboxLoadedContent {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.wf-notifications-empty,
+#wordfenceAuditLogPremiumOnly table th,
+.wf-striped-table th,
+.wf-striped-table thead tr {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+#wordfenceAuditLogPremiumOnly table td,
+.wf-striped-table tbody tr,
+.wf-striped-table td {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+#wordfenceAuditLogPremiumOnly table tr:nth-child(even) td,
+.wf-striped-table tbody tr.even,
+.wf-striped-table tbody tr.even td,
+.wf-striped-table tbody tr:nth-child(even) td {
+  background-color: var(--adm-table-alt) !important;
+}
+
+#wf-install-incomplete-overlay {
+  background-color: color-mix(in srgb, var(--adm-bg) 70%, transparent) !important;
+}
+
+/* Plugins screen onboarding prompt below the Wordfence row. */
+#wf-onboarding-plugin-header-content {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Vueform multiselect used by Wordfence option fields. */
+body.toplevel_page_Wordfence,
+body[class*="wordfence_page_"] {
+  --ms-bg: var(--adm-surface-2);
+  --ms-border-color: var(--adm-border);
+  --ms-border-color-active: var(--adm-border-focus);
+  --ms-dropdown-bg: var(--adm-surface-1);
+  --ms-dropdown-border-color: var(--adm-border);
+  --ms-option-bg-pointed: var(--adm-surface-3);
+  --ms-option-color-pointed: var(--adm-text);
+  --ms-placeholder-color: var(--adm-text-soft);
+  --ms-caret-color: var(--adm-text-muted);
+  --ms-clear-color: var(--adm-text-muted);
+}

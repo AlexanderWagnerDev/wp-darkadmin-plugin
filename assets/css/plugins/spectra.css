@@ -12,3 +12,170 @@ body[class*="_page_spectra"] li.bg-background-secondary {
 body[class*="_page_spectra"] li.bg-background-secondary > a {
   color: var(--adm-text) !important;
 }
+
+/*
+ * Spectra dashboard (Force UI / Tailwind design tokens).
+ * Surfaces, fields, borders and text tokens are remapped to DarkAdmin variables.
+ */
+body[class*="_page_spectra"] .bg-background-primary,
+body[class*="_page_spectra"] .bg-white,
+body[class*="_page_spectra"] .bg-field-secondary-background,
+body[class*="_page_spectra"] nav.bg-white {
+  background-color: var(--adm-surface-1) !important;
+}
+
+body[class*="_page_spectra"] .bg-background-secondary,
+body[class*="_page_spectra"] .bg-field-primary-background,
+body[class*="_page_spectra"] .bg-field-background-disabled,
+body[class*="_page_spectra"] .bg-field-dropzone-background-hover,
+body[class*="_page_spectra"] .bg-gray-50,
+body[class*="_page_spectra"] .bg-gray-100 {
+  background-color: var(--adm-bg) !important;
+}
+
+body[class*="_page_spectra"] .bg-background-secondary .bg-background-secondary,
+body[class*="_page_spectra"] .bg-background-primary .bg-background-secondary {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="_page_spectra"] .bg-field-background-error {
+  background-color: color-mix(in srgb, var(--adm-danger) 12%, var(--adm-surface-1)) !important;
+}
+
+body[class*="_page_spectra"] [class*="bg-[#f3f0ff]"],
+body[class*="_page_spectra"] [class*="bg-[#e9e4ff]"],
+body[class*="_page_spectra"] [class*="bg-[#E9E4FF]"],
+body[class*="_page_spectra"] [class*="bg-[#F3F0FF]"] {
+  background-color: color-mix(in srgb, var(--adm-primary) 18%, var(--adm-surface-1)) !important;
+}
+
+body[class*="_page_spectra"] .border-border-subtle,
+body[class*="_page_spectra"] .border-border-disabled,
+body[class*="_page_spectra"] .border-field-border,
+body[class*="_page_spectra"] .border {
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="_page_spectra"] .text-text-primary,
+body[class*="_page_spectra"] .text-field-input,
+body[class*="_page_spectra"] .text-field-label,
+body[class*="_page_spectra"] .text-gray-900,
+body[class*="_page_spectra"] .text-gray-800 {
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_spectra"] .text-text-secondary,
+body[class*="_page_spectra"] .text-field-helper,
+body[class*="_page_spectra"] .text-gray-600,
+body[class*="_page_spectra"] .text-gray-500 {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="_page_spectra"] .text-text-tertiary,
+body[class*="_page_spectra"] .placeholder-text-tertiary::placeholder {
+  color: var(--adm-text-soft) !important;
+}
+
+body[class*="_page_spectra"] .shadow,
+body[class*="_page_spectra"] .shadow-sm,
+body[class*="_page_spectra"] .shadow-container-item {
+  box-shadow: 0 0 0 1px var(--adm-border) !important;
+}
+
+/* Force UI icons, tertiary/secondary buttons and switches. */
+body[class*="_page_spectra"] .text-icon-primary,
+body[class*="_page_spectra"] .text-button-tertiary-color,
+body[class*="_page_spectra"] .text-button-secondary {
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_spectra"] .text-icon-secondary {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="_page_spectra"] .bg-button-tertiary,
+body[class*="_page_spectra"] .bg-button-disabled {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="_page_spectra"] .bg-button-tertiary-hover,
+body[class*="_page_spectra"] .hover\:bg-button-tertiary-hover:hover {
+  background-color: var(--adm-surface-3) !important;
+}
+
+body[class*="_page_spectra"] .bg-button-secondary {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_spectra"] .bg-toggle-off:not(:checked),
+body[class*="_page_spectra"] .bg-toggle-off-disabled:not(:checked) {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* Block card icons hard-code a slate stroke; inline-styled light table header rows. */
+body[class*="_page_spectra"] svg [stroke="#1e293b"],
+body[class*="_page_spectra"] svg [stroke="#111827"] {
+  stroke: var(--adm-text) !important;
+}
+
+body[class*="_page_spectra"] svg [fill="#1e293b"],
+body[class*="_page_spectra"] svg [fill="#111827"] {
+  fill: var(--adm-text) !important;
+}
+
+body[class*="_page_spectra"] [style*="background-color: rgb(249, 250, 251)"] {
+  background-color: var(--adm-surface-2) !important;
+}
+
+/* Badges and alerts: tinted dark surfaces instead of pastel fills. */
+body[class*="_page_spectra"] .bg-badge-background-gray,
+body[class*="_page_spectra"] .bg-badge-background-disabled,
+body[class*="_page_spectra"] .bg-alert-background-neutral,
+body[class*="_page_spectra"] .bg-tab-background {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="_page_spectra"] .bg-badge-background-green,
+body[class*="_page_spectra"] .bg-alert-background-green {
+  background-color: color-mix(in srgb, var(--adm-success) 18%, var(--adm-surface-1)) !important;
+}
+
+body[class*="_page_spectra"] .bg-badge-background-yellow,
+body[class*="_page_spectra"] .bg-alert-background-warning {
+  background-color: color-mix(in srgb, var(--adm-warning) 18%, var(--adm-surface-1)) !important;
+}
+
+body[class*="_page_spectra"] .bg-badge-background-red,
+body[class*="_page_spectra"] .bg-alert-background-danger {
+  background-color: color-mix(in srgb, var(--adm-danger) 18%, var(--adm-surface-1)) !important;
+}
+
+body[class*="_page_spectra"] .bg-badge-background-sky,
+body[class*="_page_spectra"] .bg-alert-background-info {
+  background-color: color-mix(in srgb, var(--adm-primary) 18%, var(--adm-surface-1)) !important;
+}
+
+body[class*="_page_spectra"] .text-badge-color-gray {
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_spectra"] .text-badge-color-green {
+  color: var(--adm-success) !important;
+}
+
+body[class*="_page_spectra"] .text-badge-color-yellow {
+  color: var(--adm-warning) !important;
+}
+
+body[class*="_page_spectra"] .text-badge-color-red {
+  color: var(--adm-danger) !important;
+}
+
+body[class*="_page_spectra"] .text-badge-color-sky {
+  color: var(--adm-link) !important;
+}
+
+body[class*="_page_spectra"] [class*="border-badge-border-"] {
+  border-color: var(--adm-border) !important;
+}

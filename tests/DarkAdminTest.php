@@ -454,8 +454,28 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertContains( 'tools_page_ai-request-logs', $ids );
     }
 
-    public function test_boot_wpds_screen_ids_alias_matches_wordpress_ai_screen_ids(): void {
-        $this->assertSame( darkadmin_wordpress_ai_screen_ids(), darkadmin_boot_wpds_screen_ids() );
+    public function test_boot_wpds_screen_ids_cover_core_boot_screens_and_ai_pages(): void {
+        $ids = darkadmin_boot_wpds_screen_ids();
+        $this->assertContains( 'font-library', $ids );
+        $this->assertContains( 'options-connectors', $ids );
+        foreach ( darkadmin_wordpress_ai_screen_ids() as $ai_id ) {
+            $this->assertContains( $ai_id, $ids );
+        }
+    }
+
+    public function test_boot_wpds_styles_enqueue_on_font_library_screen(): void {
+        set_current_screen( 'font-library' );
+        darkadmin_enqueue_boot_wpds_styles();
+        $this->assertTrue( wp_style_is( 'darkadmin-wpds', 'enqueued' ) );
+        wp_dequeue_style( 'darkadmin-wpds' );
+        set_current_screen( 'front' );
+    }
+
+    public function test_boot_wpds_styles_skip_regular_screens(): void {
+        set_current_screen( 'edit-post' );
+        darkadmin_enqueue_boot_wpds_styles();
+        $this->assertFalse( wp_style_is( 'darkadmin-wpds', 'enqueued' ) );
+        set_current_screen( 'front' );
     }
 
     public function test_sanitize_plugins_stores_disabled_slugs_for_unchecked_installed_plugins(): void {

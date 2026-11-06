@@ -35,3 +35,87 @@ body[class*="duplicator"] .staging-row {
 body[class*="duplicator"] .dup-header img {
   filter: invert(1) hue-rotate(180deg);
 }
+
+/* Duplicator 1.6+/litebase: page chrome, list tables, import, incremental backups and popups. */
+body[class*="duplicator"] .dup-styles,
+body[class*="duplicator"] .dup-header.dup-styles,
+body[class*="duplicator"] .dup-styles.dup-plugin-footer {
+  background-color: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="duplicator"] .dup-body-header,
+body[class*="duplicator"] .dupli-import-upload-box,
+body[class*="duplicator"] .dupli-inc-card,
+body[class*="duplicator"] .dupli-inc-stat,
+body[class*="duplicator"] .dupli-litebase-static-popup-content,
+body[class*="duplicator"] #dup-litebase-settings-feature-box,
+body[class*="duplicator"] .dupli-dismissable {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="duplicator"] .dupli-inc-stats,
+body[class*="duplicator"] .dupli-litebase-static-popup-cta,
+body[class*="duplicator"] table th.name,
+body[class*="duplicator"] table th.size,
+body[class*="duplicator"] table th.created,
+body[class*="duplicator"] table th.funcs {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="duplicator"] .dupli-litebase-static-popup-notice,
+body[class*="duplicator"] .dup-log-severity.dup-log-warning {
+  background-color: color-mix(in srgb, var(--adm-warning) 16%, var(--adm-surface-1)) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="duplicator"] .dupli-inc-status-pill-active {
+  background-color: color-mix(in srgb, var(--adm-success) 20%, var(--adm-surface-1)) !important;
+  color: var(--adm-success) !important;
+}
+
+body[class*="duplicator"] tr.dupli-nopackages,
+body[class*="duplicator"] tr.dup-row,
+body[class*="duplicator"] tr.schedule-row,
+body[class*="duplicator"] tr.storage-row,
+body[class*="duplicator"] tr.main-event {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="duplicator"] tr.dup-row:nth-child(even),
+body[class*="duplicator"] tr.alternate {
+  background-color: var(--adm-table-alt) !important;
+}
+
+body[class*="duplicator"] .select2-selection,
+body[class*="duplicator"] .select2-dropdown,
+body[class*="duplicator"] #filter_date_from,
+body[class*="duplicator"] #filter_date_to {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="duplicator"] .select2-selection__choice {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* About Us page: info sections and addon cards. */
+body[class*="duplicator"] .dup-styles .dupli-litebase-about-section,
+body[class*="duplicator"] .dup-styles .addons-container .addon-item {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="duplicator"] .dup-styles .addons-container .addon-item .actions {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
