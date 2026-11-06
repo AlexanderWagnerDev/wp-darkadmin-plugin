@@ -1,0 +1,297 @@
+/*
+ * DarkAdmin core styles: WordPress Design System (WPDS) "Boot" admin screens
+ *
+ * WordPress 7.0+ renders some admin screens as React apps built on the
+ * @wordpress/boot layout and @wordpress/admin-ui Page component:
+ *  - wp-admin/font-library.php          (Appearance > Fonts)
+ *  - wp-admin/options-connectors.php    (Settings > Connectors)
+ *  - AI plugin screens (Settings > AI, Tools > Connector Approvals / Request Logs)
+ *
+ * Their colors come from WPDS design tokens (--wpds-color-*). The ThemeProvider
+ * writes the tokens as inline styles on <html> and on every nested provider
+ * element (data-wpds-corner-radius), so remapping them only on the root is not
+ * enough: the stage provider re-declares a light palette. This file is only
+ * enqueued on those screens, so the selectors below are not body-scoped.
+ */
+
+body.wp-admin,
+body.wp-admin #wpwrap,
+body.wp-admin #wpcontent,
+body.wp-admin #wpbody,
+body.wp-admin #wpbody-content,
+body.wp-admin .boot-layout-container {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+
+body.wp-admin ul#adminmenu a.wp-has-current-submenu::after,
+body.wp-admin ul#adminmenu > li.current > a.current::after {
+  border-inline-end-color: var(--adm-bg) !important;
+}
+
+/* WPDS token remap: root and every nested ThemeProvider (inline-style tokens). */
+:root,
+body.wp-admin,
+body.wp-admin [data-wpds-root-provider],
+body.wp-admin [data-wpds-corner-radius],
+body.wp-admin [style*="--wpds-color-"],
+body.wp-admin .admin-ui-page,
+body.wp-admin .boot-layout-container {
+  --wp-dataviews-color-background: var(--adm-surface-2) !important;
+  /* Surfaces */
+  --wpds-color-background-surface-neutral: var(--adm-surface-1) !important;
+  --wpds-color-background-surface-neutral-strong: var(--adm-surface-2) !important;
+  --wpds-color-background-surface-neutral-weak: var(--adm-bg) !important;
+  --wpds-color-bg-surface-neutral: var(--adm-surface-1) !important;
+  --wpds-color-bg-surface-neutral-strong: var(--adm-surface-2) !important;
+  --wpds-color-bg-surface-neutral-weak: var(--adm-bg) !important;
+
+  --wpds-color-background-surface-brand: color-mix(in srgb, var(--adm-primary) 14%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-brand: color-mix(in srgb, var(--adm-primary) 14%, var(--adm-surface-1)) !important;
+
+  --wpds-color-background-surface-success: color-mix(in srgb, var(--adm-success) 22%, var(--adm-surface-1)) !important;
+  --wpds-color-background-surface-success-weak: color-mix(in srgb, var(--adm-success) 12%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-success: color-mix(in srgb, var(--adm-success) 22%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-success-weak: color-mix(in srgb, var(--adm-success) 12%, var(--adm-surface-1)) !important;
+
+  --wpds-color-background-surface-info: color-mix(in srgb, var(--adm-primary) 20%, var(--adm-surface-1)) !important;
+  --wpds-color-background-surface-info-weak: color-mix(in srgb, var(--adm-primary) 10%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-info: color-mix(in srgb, var(--adm-primary) 20%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-info-weak: color-mix(in srgb, var(--adm-primary) 10%, var(--adm-surface-1)) !important;
+
+  --wpds-color-background-surface-warning: color-mix(in srgb, var(--adm-warning) 22%, var(--adm-surface-1)) !important;
+  --wpds-color-background-surface-warning-weak: color-mix(in srgb, var(--adm-warning) 12%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-warning: color-mix(in srgb, var(--adm-warning) 22%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-warning-weak: color-mix(in srgb, var(--adm-warning) 12%, var(--adm-surface-1)) !important;
+
+  --wpds-color-background-surface-caution: color-mix(in srgb, var(--adm-warning) 28%, var(--adm-surface-1)) !important;
+  --wpds-color-background-surface-caution-weak: color-mix(in srgb, var(--adm-warning) 14%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-caution: color-mix(in srgb, var(--adm-warning) 28%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-caution-weak: color-mix(in srgb, var(--adm-warning) 14%, var(--adm-surface-1)) !important;
+
+  --wpds-color-background-surface-error: color-mix(in srgb, var(--adm-danger) 20%, var(--adm-surface-1)) !important;
+  --wpds-color-background-surface-error-weak: color-mix(in srgb, var(--adm-danger) 10%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-error: color-mix(in srgb, var(--adm-danger) 20%, var(--adm-surface-1)) !important;
+  --wpds-color-bg-surface-error-weak: color-mix(in srgb, var(--adm-danger) 10%, var(--adm-surface-1)) !important;
+
+  /* Content text */
+  --wpds-color-foreground-content-neutral: var(--adm-text) !important;
+  --wpds-color-foreground-content-neutral-weak: var(--adm-text-muted) !important;
+  --wpds-color-fg-content-neutral: var(--adm-text) !important;
+  --wpds-color-fg-content-neutral-weak: var(--adm-text-muted) !important;
+
+  --wpds-color-foreground-content-success: var(--adm-success) !important;
+  --wpds-color-foreground-content-success-weak: color-mix(in srgb, var(--adm-success) 75%, var(--adm-text)) !important;
+  --wpds-color-fg-content-success: var(--adm-success) !important;
+  --wpds-color-fg-content-success-weak: color-mix(in srgb, var(--adm-success) 75%, var(--adm-text)) !important;
+
+  --wpds-color-foreground-content-info: var(--adm-link) !important;
+  --wpds-color-foreground-content-info-weak: color-mix(in srgb, var(--adm-link) 75%, var(--adm-text-muted)) !important;
+  --wpds-color-fg-content-info: var(--adm-link) !important;
+  --wpds-color-fg-content-info-weak: color-mix(in srgb, var(--adm-link) 75%, var(--adm-text-muted)) !important;
+
+  --wpds-color-foreground-content-warning: var(--adm-warning) !important;
+  --wpds-color-foreground-content-warning-weak: color-mix(in srgb, var(--adm-warning) 75%, var(--adm-text)) !important;
+  --wpds-color-fg-content-warning: var(--adm-warning) !important;
+  --wpds-color-fg-content-warning-weak: color-mix(in srgb, var(--adm-warning) 75%, var(--adm-text)) !important;
+
+  --wpds-color-foreground-content-caution: var(--adm-warning) !important;
+  --wpds-color-foreground-content-caution-weak: color-mix(in srgb, var(--adm-warning) 75%, var(--adm-text)) !important;
+  --wpds-color-fg-content-caution: var(--adm-warning) !important;
+  --wpds-color-fg-content-caution-weak: color-mix(in srgb, var(--adm-warning) 75%, var(--adm-text)) !important;
+
+  --wpds-color-foreground-content-error: var(--adm-danger) !important;
+  --wpds-color-foreground-content-error-weak: color-mix(in srgb, var(--adm-danger) 80%, var(--adm-text)) !important;
+  --wpds-color-fg-content-error: var(--adm-danger) !important;
+  --wpds-color-fg-content-error-weak: color-mix(in srgb, var(--adm-danger) 80%, var(--adm-text)) !important;
+
+  /* Interactive */
+  --wpds-color-background-interactive-neutral-strong: var(--adm-surface-3) !important;
+  --wpds-color-background-interactive-neutral-strong-active: var(--adm-border-hover) !important;
+  --wpds-color-background-interactive-neutral-strong-disabled: var(--adm-surface-2) !important;
+  --wpds-color-background-interactive-neutral-weak-active: var(--adm-surface-2) !important;
+
+  --wpds-color-background-interactive-brand-strong: var(--adm-primary) !important;
+  --wpds-color-background-interactive-brand-strong-active: var(--adm-primary-hover) !important;
+  --wpds-color-background-interactive-brand-weak-active: color-mix(in srgb, var(--adm-primary) 16%, var(--adm-surface-1)) !important;
+
+  --wpds-color-background-interactive-error-active: color-mix(in srgb, var(--adm-danger) 12%, var(--adm-surface-1)) !important;
+  --wpds-color-background-interactive-error-strong: var(--adm-danger) !important;
+  --wpds-color-background-interactive-error-strong-active: color-mix(in srgb, var(--adm-danger) 85%, black) !important;
+  --wpds-color-background-interactive-error-weak-active: color-mix(in srgb, var(--adm-danger) 12%, var(--adm-surface-1)) !important;
+
+  --wpds-color-foreground-interactive-neutral: var(--adm-text) !important;
+  --wpds-color-foreground-interactive-neutral-active: var(--adm-text) !important;
+  --wpds-color-foreground-interactive-neutral-disabled: var(--adm-text-soft) !important;
+  --wpds-color-foreground-interactive-neutral-strong: var(--adm-text-on-primary) !important;
+  --wpds-color-foreground-interactive-neutral-strong-active: var(--adm-text-on-primary) !important;
+  --wpds-color-foreground-interactive-neutral-weak: var(--adm-text-muted) !important;
+
+  --wpds-color-foreground-interactive-brand: var(--adm-link) !important;
+  --wpds-color-foreground-interactive-brand-active: var(--adm-link-hover) !important;
+  --wpds-color-foreground-interactive-brand-strong: var(--adm-text-on-primary) !important;
+  --wpds-color-foreground-interactive-brand-strong-active: var(--adm-text-on-primary) !important;
+
+  --wpds-color-foreground-interactive-error: var(--adm-danger) !important;
+  --wpds-color-foreground-interactive-error-active: color-mix(in srgb, var(--adm-danger) 85%, white) !important;
+  --wpds-color-foreground-interactive-error-strong: var(--adm-text-on-primary) !important;
+
+  /* Strokes */
+  --wpds-color-stroke-surface-neutral: var(--adm-border) !important;
+  --wpds-color-stroke-surface-neutral-weak: var(--adm-border) !important;
+  --wpds-color-stroke-surface-neutral-strong: var(--adm-border-hover) !important;
+  --wpds-color-stroke-surface-brand: color-mix(in srgb, var(--adm-primary) 55%, var(--adm-border)) !important;
+  --wpds-color-stroke-surface-brand-strong: var(--adm-primary) !important;
+  --wpds-color-stroke-surface-success: color-mix(in srgb, var(--adm-success) 55%, var(--adm-border)) !important;
+  --wpds-color-stroke-surface-info: color-mix(in srgb, var(--adm-link) 55%, var(--adm-border)) !important;
+  --wpds-color-stroke-surface-warning: color-mix(in srgb, var(--adm-warning) 55%, var(--adm-border)) !important;
+  --wpds-color-stroke-surface-error: color-mix(in srgb, var(--adm-danger) 55%, var(--adm-border)) !important;
+  --wpds-color-stroke-surface-error-strong: var(--adm-danger) !important;
+
+  --wpds-color-stroke-interactive-neutral: var(--adm-border) !important;
+  --wpds-color-stroke-interactive-neutral-active: var(--adm-border-hover) !important;
+  --wpds-color-stroke-interactive-neutral-disabled: var(--adm-border) !important;
+  --wpds-color-stroke-interactive-neutral-strong: var(--adm-border-hover) !important;
+  --wpds-color-stroke-interactive-brand: var(--adm-primary) !important;
+  --wpds-color-stroke-interactive-brand-active: var(--adm-primary-hover) !important;
+  --wpds-color-stroke-interactive-brand-disabled: var(--adm-border) !important;
+  --wpds-color-stroke-interactive-error: var(--adm-danger) !important;
+  --wpds-color-stroke-interactive-error-active: color-mix(in srgb, var(--adm-danger) 85%, white) !important;
+  --wpds-color-stroke-interactive-error-disabled: var(--adm-border) !important;
+  --wpds-color-stroke-interactive-error-strong: var(--adm-danger) !important;
+  --wpds-color-stroke-focus: var(--adm-border-focus) !important;
+
+  /* Tracks / thumbs (toggles, scrollbars) */
+  --wpds-color-background-track-neutral-weak: var(--adm-surface-2) !important;
+  --wpds-color-background-track-neutral: var(--adm-surface-3) !important;
+  --wpds-color-background-thumb-neutral-weak: var(--adm-text-soft) !important;
+  --wpds-color-background-thumb-neutral-weak-active: var(--adm-text-muted) !important;
+  --wpds-color-background-thumb-brand: var(--adm-primary) !important;
+  --wpds-color-background-thumb-brand-active: var(--adm-primary-hover) !important;
+  --wpds-color-background-thumb-neutral-disabled: var(--adm-border) !important;
+
+  /* Elevation */
+  --wpds-elevation-xs: var(--adm-shadow-md) !important;
+  --wpds-elevation-sm: var(--adm-shadow-md) !important;
+  --wpds-elevation-md: var(--adm-shadow-md) !important;
+  --wpds-elevation-lg: var(--adm-shadow-md) !important;
+  /* Tokens added in WordPress 7.1. */
+  --wpds-color-background-interactive-neutral-weak: transparent !important;
+  --wpds-color-background-interactive-neutral-weak-disabled: transparent !important;
+  --wpds-color-background-interactive-brand-weak: transparent !important;
+  --wpds-color-background-interactive-brand-weak-disabled: transparent !important;
+  --wpds-color-background-interactive-brand-strong-disabled: var(--adm-surface-3) !important;
+  --wpds-color-background-interactive-error: transparent !important;
+  --wpds-color-background-interactive-error-disabled: transparent !important;
+  --wpds-color-background-interactive-error-weak: transparent !important;
+  --wpds-color-background-interactive-error-weak-disabled: transparent !important;
+  --wpds-color-background-interactive-error-strong-disabled: var(--adm-surface-3) !important;
+  --wpds-color-background-thumb-brand-disabled: var(--adm-border) !important;
+  --wpds-color-background-thumb-neutral-weak-disabled: var(--adm-border) !important;
+
+  --wpds-color-foreground-interactive-brand-disabled: var(--adm-text-soft) !important;
+  --wpds-color-foreground-interactive-brand-strong-disabled: var(--adm-text-soft) !important;
+  --wpds-color-foreground-interactive-error-disabled: var(--adm-text-soft) !important;
+  --wpds-color-foreground-interactive-error-strong-active: var(--adm-text-on-primary) !important;
+  --wpds-color-foreground-interactive-error-strong-disabled: var(--adm-text-soft) !important;
+  --wpds-color-foreground-interactive-neutral-strong-disabled: var(--adm-text-soft) !important;
+  --wpds-color-foreground-interactive-neutral-weak-active: var(--adm-text) !important;
+  --wpds-color-foreground-interactive-neutral-weak-disabled: var(--adm-text-soft) !important;
+
+  --wpds-color-stroke-surface-caution: color-mix(in srgb, var(--adm-warning) 55%, var(--adm-border)) !important;
+  --wpds-color-stroke-surface-caution-strong: var(--adm-warning) !important;
+  --wpds-color-stroke-surface-info-strong: var(--adm-link) !important;
+  --wpds-color-stroke-surface-success-strong: var(--adm-success) !important;
+  --wpds-color-stroke-surface-warning-strong: var(--adm-warning) !important;
+}
+
+/* Boot layout: the stage is the rounded content panel next to the admin menu. */
+body.wp-admin .boot-layout,
+body.wp-admin .boot-layout__surfaces {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+
+body.wp-admin .boot-layout__stage,
+body.wp-admin .admin-ui-page,
+body.wp-admin .admin-ui-page__content {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+body.wp-admin .admin-ui-page__header {
+  background: var(--adm-surface-1) !important;
+  border-block-end-color: var(--adm-border) !important;
+  border-bottom-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.wp-admin .admin-ui-page__header-title {
+  color: var(--adm-text) !important;
+}
+
+body.wp-admin .admin-ui-page__header-subtitle {
+  color: var(--adm-text-muted) !important;
+}
+
+/* @wordpress/components that keep hardcoded light colors inside Boot screens. */
+body.wp-admin .components-form-toggle .components-form-toggle__track {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+body.wp-admin .components-form-toggle .components-form-toggle__thumb {
+  background-color: var(--adm-text-muted) !important;
+}
+
+body.wp-admin .components-form-toggle.is-checked .components-form-toggle__track {
+  background-color: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+}
+
+body.wp-admin .components-form-toggle.is-checked .components-form-toggle__thumb {
+  background-color: var(--adm-text-on-primary) !important;
+}
+
+/* Appearance > Fonts (font-library.php). */
+body.wp-admin .font-library__footer,
+body.wp-admin .font-library-modal__tablist-container {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body.wp-admin .font-library__font-card {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.wp-admin .font-library__font-card:hover {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body.wp-admin .font-library__font-card .font-library__font-card__count,
+body.wp-admin .font-library__local-fonts .font-library__upload-area__text {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Google Fonts previews are dark-on-transparent images; invert them for contrast. */
+body.wp-admin img.font-library__font-variant_demo-image {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+body.wp-admin button.font-library__upload-area {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Settings > Connectors (options-connectors.php). */
+body.wp-admin .connectors-page .components-item {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body.wp-admin .connectors-page .ai-plugin-callout {
+  background-color: color-mix(in srgb, var(--adm-primary) 16%, var(--adm-surface-1)) !important;
+  color: var(--adm-text) !important;
+}

@@ -261,3 +261,112 @@ body .yst-root .yst-sidebar-navigation__item--active.yst-sidebar-navigation__col
   background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
 }
+
+/* Yoast SEO 26+: paper/card layout, form controls and dashboard widgets. */
+.yst-root .yst-paper,
+.yst-root .yst-card,
+.yst-root .yst-paper__content,
+.yst-root main.yst-paper,
+.yst-root .yst-table tbody,
+.yst-root table tbody,
+.yoast_premium_upsell,
+.yoast-sidebar__product,
+#webinar-promo-notification.notice-yoast,
+.notice-yoast.yoast {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.yst-root .yst-card__header,
+.yst-root header.yst-bg-slate-100,
+.yst-root .yst-bg-slate-100,
+.yst-root .yst-bg-slate-50,
+.yst-root .yst-bg-gray-100,
+.yst-root .yst-bg-gray-50 {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.yst-root .yst-validation-input__input,
+.yst-root .yst-select__button,
+.yst-root .yst-autocomplete__button,
+.yst-root .yst-autocomplete__input,
+.yst-root .yst-select__options,
+.yst-root .yst-autocomplete__options {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.yst-root .yst-step__circle {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+.yst-root .yst-toggle:not([aria-checked="true"]) {
+  background-color: var(--adm-surface-3) !important;
+}
+
+.yst-root .yst-toggle[aria-checked="true"] {
+  background-color: var(--adm-primary) !important;
+}
+
+.yst-root .yst-badge--plain {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+.yst-root .yst-text-slate-900,
+.yst-root .yst-text-slate-800,
+.yst-root .yst-text-slate-700,
+.yst-root .yst-text-gray-900,
+.yst-root .yst-text-gray-800,
+.yst-root .yst-text-gray-700 {
+  color: var(--adm-text) !important;
+}
+
+.yst-root .yst-text-slate-400,
+.yst-root .yst-text-gray-500,
+.yst-root .yst-text-gray-600 {
+  color: var(--adm-text-muted) !important;
+}
+
+.yst-root .yst-border-slate-200,
+.yst-root .yst-border-slate-300,
+.yst-root .yst-border-gray-200,
+.yst-root .yst-border-gray-300,
+.yst-root .yst-divide-slate-200 > * {
+  border-color: var(--adm-border) !important;
+}
+
+.yst-root .yst-toast,
+.yst-root .yst-modal__panel,
+.yst-root [id^="headlessui-dialog-panel"] {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Wincher widget on the WordPress dashboard. */
+.wincher-performance-report-alert {
+  background-color: color-mix(in srgb, var(--adm-warning) 14%, var(--adm-surface-1)) !important;
+  border-color: color-mix(in srgb, var(--adm-warning) 55%, var(--adm-border)) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Settings sidebar group headings (General, Content types, ...). */
+body .yst-root .yst-sidebar-navigation__collapsible-button {
+  color: var(--adm-text) !important;
+}
+
+body .yst-root .yst-sidebar-navigation__collapsible-button svg {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Keep the dark text on Yoast's yellow upsell buttons readable. */
+.yst-root a.yst-button--upsell,
+.yst-root .yst-button--upsell,
+a.yoast-button-upsell {
+  color: #78350f !important;
+}

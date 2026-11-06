@@ -164,18 +164,64 @@ function darkadmin_enqueue_wordpress_ai_styles(): void {
 	wp_enqueue_style(
 		'darkadmin-wordpress-ai',
 		DARKADMIN_URL . 'assets/css/plugins/wordpress-ai.css',
-		array( 'darkadmin-darkmode', 'wp-components' ),
+		array( 'darkadmin-darkmode', 'darkadmin-wpds', 'wp-components' ),
 		DARKADMIN_VERSION
 	);
 }
 
 /**
- * Back-compat alias for darkadmin_wordpress_ai_screen_ids().
+ * Screen IDs for admin screens rendered with the WordPress Design System
+ * (@wordpress/boot layout and admin-ui Page), covered by darkadmin-wpds.css.
+ *
+ * Includes the core Font Library (WordPress 7.0+) and Connectors screens plus
+ * all WordPress AI plugin screens.
  *
  * @return string[]
  */
 function darkadmin_boot_wpds_screen_ids(): array {
-	return darkadmin_wordpress_ai_screen_ids();
+	return array_values(
+		array_unique(
+			array_merge(
+				array(
+					'font-library',
+					'options-connectors',
+				),
+				darkadmin_wordpress_ai_screen_ids()
+			)
+		)
+	);
+}
+
+/**
+ * Whether the current admin screen is a Boot/WPDS screen covered by darkadmin-wpds.css.
+ *
+ * @return bool
+ */
+function darkadmin_is_boot_wpds_admin_screen(): bool {
+	$screen = get_current_screen();
+	if ( ! $screen instanceof WP_Screen ) {
+		return false;
+	}
+
+	return in_array( $screen->id, darkadmin_boot_wpds_screen_ids(), true );
+}
+
+/**
+ * Enqueues the core WPDS dark styles (token remap and Boot layout) on Boot screens.
+ *
+ * @return void
+ */
+function darkadmin_enqueue_boot_wpds_styles(): void {
+	if ( ! darkadmin_is_boot_wpds_admin_screen() ) {
+		return;
+	}
+
+	wp_enqueue_style(
+		'darkadmin-wpds',
+		DARKADMIN_URL . 'assets/css/darkadmin-wpds.css',
+		array( 'darkadmin-darkmode', 'wp-components' ),
+		DARKADMIN_VERSION
+	);
 }
 
 /**

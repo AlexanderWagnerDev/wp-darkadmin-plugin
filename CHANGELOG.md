@@ -8,8 +8,34 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Dark mode for **Appearance > Fonts** (`wp-admin/font-library.php`, WordPress 7.0+): library,
+  upload and Google Fonts install tabs, font cards, footer bar and inverted font previews.
+- `assets/css/darkadmin-wpds.css`: shared dark styles for all WordPress Design System "Boot" screens
+  (Fonts, Connectors and the AI plugin screens), loaded automatically on those screens.
+
 ### Fixed
 
+- Settings > Connectors and Settings > AI were rendered light on WordPress 7.1: WPDS color tokens
+  are now also remapped on nested ThemeProvider elements, which re-declare a light palette inline.
+- Spectra: dark styles for the Force UI dashboard (cards, block grid, icons, toggles, badges, Free
+  vs Pro table).
+- Newsletter: dark top menu, heading bar, dashboard cards, setup steps, widgets, flow view and
+  modals.
+- Yoast SEO: dark paper/card layout, form controls, toggles, toasts, settings sidebar group headings
+  and the Wincher dashboard widget.
+- Wordfence: dark default buttons, dashboard items, Audit Log table, option controls, colorbox modal
+  and install overlay.
+- Duplicator: dark page chrome, list tables, import box, incremental backup cards, popups and
+  select2 fields.
+- UpdraftPlus and WP-Optimize: dark navigation tabs, schedule box, dashboard cards, notices and the
+  new TeamUpdraft onboarding wizard.
+- Complianz: dark locked/overlay states and progress bar track.
+- About, Credits, Freedoms, Privacy and Get Involved screens: dark navigation bar and sections
+  (previously white gaps and light-on-light text).
+- Striped list rows and the classic Publish box footer (also used by Contact Form 7) no longer use a
+  light background.
 - Hardened option reads so unexpected stored types can no longer break wp-admin or the settings
   screen.
 - Custom CSS keeps valid CSS such as inline SVG data URIs while still blocking style-element

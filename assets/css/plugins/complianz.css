@@ -224,3 +224,16 @@ body .cmplz-shepherd .shepherd-text p {
 .rdrPprevButton i {
   border-color: transparent var(--adm-text) transparent transparent !important;
 }
+
+/* Locked/overlay states and the dashboard progress bar track. */
+#complianz .cmplz-settings-overlay,
+#complianz .cmplz-locked,
+.cmplz-settings-overlay,
+.cmplz-locked {
+  background-color: color-mix(in srgb, var(--adm-bg) 80%, transparent) !important;
+}
+
+#complianz .cmplz-progress,
+.cmplz-progress {
+  background-color: var(--adm-surface-2) !important;
+}

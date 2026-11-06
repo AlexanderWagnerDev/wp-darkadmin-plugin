@@ -66,3 +66,161 @@ body[class*="_page_newsletter_"] .description,
 body[class*="toplevel_page_newsletter_"] .description {
   color: var(--adm-text-muted) !important;
 }
+
+/*
+ * Newsletter 9.x admin shell: top menu, heading bar, dashboard cards, setup
+ * steps, widgets, flow view, notices and modals (newsletter/admin/css/all.css,
+ * main/css/dashboard.css, main/css/setup.css).
+ */
+body[class*="_page_newsletter_"] #tnp-wrap,
+body[class*="toplevel_page_newsletter_"] #tnp-wrap {
+  --tnp-text: var(--adm-text-muted);
+  --tnp-title: var(--adm-link);
+  --tnp-gray-lighter: var(--adm-surface-2);
+  --tnp-blue-lighter: var(--adm-surface-2);
+  --tnp-status-gray-bg: var(--adm-surface-3);
+}
+
+body[class*="_page_newsletter_"] #tnp-menu,
+body[class*="toplevel_page_newsletter_"] #tnp-menu {
+  --tnp-menu-bg: var(--adm-surface-1);
+  background-color: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-border) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-menu a,
+body[class*="toplevel_page_newsletter_"] #tnp-menu a {
+  color: var(--adm-link) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-menu ul ul li:hover,
+body[class*="toplevel_page_newsletter_"] #tnp-menu ul ul li:hover {
+  background: var(--adm-surface-3) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-menu ul ul li a small,
+body[class*="toplevel_page_newsletter_"] #tnp-menu ul ul li a small {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-menu .tnp-licence-button a,
+body[class*="toplevel_page_newsletter_"] #tnp-menu .tnp-licence-button a {
+  color: #fff !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-heading,
+body[class*="toplevel_page_newsletter_"] #tnp-heading {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-heading h2,
+body[class*="toplevel_page_newsletter_"] #tnp-heading h2 {
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] .tnp-title-help,
+body[class*="toplevel_page_newsletter_"] .tnp-title-help {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-link) !important;
+}
+
+body[class*="_page_newsletter_"] .tnp-card,
+body[class*="toplevel_page_newsletter_"] .tnp-card,
+body[class*="_page_newsletter_"] #tnp-body .tnp-step,
+body[class*="toplevel_page_newsletter_"] #tnp-body .tnp-step,
+body[class*="_page_newsletter_"] .tnp-widget,
+body[class*="toplevel_page_newsletter_"] .tnp-widget,
+body[class*="_page_newsletter_"] #tnp-promo,
+body[class*="toplevel_page_newsletter_"] #tnp-promo,
+body[class*="_page_newsletter_"] table.tnp-promo,
+body[class*="toplevel_page_newsletter_"] table.tnp-promo,
+body[class*="_page_newsletter_"] #tnp-license-control,
+body[class*="toplevel_page_newsletter_"] #tnp-license-control,
+body[class*="_page_newsletter_"] .tnp-flow-item,
+body[class*="toplevel_page_newsletter_"] .tnp-flow-item,
+body[class*="_page_newsletter_"] .tnp-flow-fieldset > div,
+body[class*="toplevel_page_newsletter_"] .tnp-flow-fieldset > div,
+body[class*="_page_newsletter_"] .tnp-tab-success,
+body[class*="toplevel_page_newsletter_"] .tnp-tab-success,
+body[class*="_page_newsletter_"] #tnp-body .widefat,
+body[class*="toplevel_page_newsletter_"] #tnp-body .widefat,
+body[class*="_page_newsletter_"] #tnp-body .form-table,
+body[class*="toplevel_page_newsletter_"] #tnp-body .form-table,
+body[class*="_page_newsletter_"] #tnp-body .tnp-widget.tnp-table table.widefat thead,
+body[class*="toplevel_page_newsletter_"] #tnp-body .tnp-widget.tnp-table table.widefat thead,
+body[class*="_page_newsletter_"] #tnp-body .tnp-widget.tnp-table table.widefat thead th,
+body[class*="toplevel_page_newsletter_"] #tnp-body .tnp-widget.tnp-table table.widefat thead th,
+body[class*="_page_newsletter_"] .tnp-modal-container,
+body[class*="toplevel_page_newsletter_"] .tnp-modal-container,
+body[class*="_page_newsletter_"] .tnp-modal2__content,
+body[class*="toplevel_page_newsletter_"] .tnp-modal2__content {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] .tnp-flow-item.inactive,
+body[class*="toplevel_page_newsletter_"] .tnp-flow-item.inactive,
+body[class*="_page_newsletter_"] .tnp-flow-item.notusable,
+body[class*="toplevel_page_newsletter_"] .tnp-flow-item.notusable,
+body[class*="_page_newsletter_"] #tnp-body .form-table .tnpc-default-text,
+body[class*="toplevel_page_newsletter_"] #tnp-body .form-table .tnpc-default-text,
+body[class*="_page_newsletter_"] #tnp-body .tnpc-media,
+body[class*="toplevel_page_newsletter_"] #tnp-body .tnpc-media,
+body[class*="_page_newsletter_"] .tnpc-checkboxes label,
+body[class*="toplevel_page_newsletter_"] .tnpc-checkboxes label,
+body[class*="_page_newsletter_"] .tnpc-lists label span,
+body[class*="toplevel_page_newsletter_"] .tnpc-lists label span,
+body[class*="_page_newsletter_"] .tnpf-field-box,
+body[class*="toplevel_page_newsletter_"] .tnpf-field-box,
+body[class*="_page_newsletter_"] #tnp-body .tnpf-field-block-style label.tnpf-style,
+body[class*="toplevel_page_newsletter_"] #tnp-body .tnpf-field-block-style label.tnpf-style {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-body .tnp-step h3,
+body[class*="toplevel_page_newsletter_"] #tnp-body .tnp-step h3,
+body[class*="_page_newsletter_"] .tnp-card h3,
+body[class*="toplevel_page_newsletter_"] .tnp-card h3,
+body[class*="_page_newsletter_"] .tnp-card-title,
+body[class*="toplevel_page_newsletter_"] .tnp-card-title {
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-wrap .tnp-notice,
+body[class*="toplevel_page_newsletter_"] #tnp-wrap .tnp-notice,
+body[class*="_page_newsletter_"] .tnp-error,
+body[class*="toplevel_page_newsletter_"] .tnp-error,
+body[class*="_page_newsletter_"] .tnp-warning,
+body[class*="toplevel_page_newsletter_"] .tnp-warning,
+body[class*="_page_newsletter_"] .tnp-message,
+body[class*="toplevel_page_newsletter_"] .tnp-message {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-wrap .tnp-notice.tnp-notice-warning,
+body[class*="toplevel_page_newsletter_"] #tnp-wrap .tnp-notice.tnp-notice-warning {
+  background-color: color-mix(in srgb, var(--adm-warning) 14%, var(--adm-surface-1)) !important;
+  border-color: color-mix(in srgb, var(--adm-warning) 55%, var(--adm-border)) !important;
+}
+
+body[class*="_page_newsletter_"] #tnp-body .button-secondary.tnpc-button,
+body[class*="toplevel_page_newsletter_"] #tnp-body .button-secondary.tnpc-button,
+body[class*="_page_newsletter_"] #tnp-body .button-primary.tnp-button-white,
+body[class*="toplevel_page_newsletter_"] #tnp-body .button-primary.tnp-button-white,
+body[class*="_page_newsletter_"] #tnp-body .tnp-button.tnp-button-white,
+body[class*="toplevel_page_newsletter_"] #tnp-body .tnp-button.tnp-button-white {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="_page_newsletter_"] .tnp-card-documentation-index,
+body[class*="toplevel_page_newsletter_"] .tnp-card-documentation-index {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}

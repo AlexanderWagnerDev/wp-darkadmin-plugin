@@ -182,14 +182,18 @@ span#updraft_lastlogcontainer,
 }
 
 #updraft-wrap .nav-tab-wrapper .nav-tab,
-.updraft-nav-tab {
+.updraft-nav-tab,
+.updraftplus-nav-tab {
   background: var(--adm-surface-2) !important;
   border-color: var(--adm-border) !important;
   color: var(--adm-text-muted) !important;
 }
 
 #updraft-wrap .nav-tab-wrapper .nav-tab.nav-tab-active,
-.updraft-nav-tab.nav-tab-active {
+.updraft-nav-tab.nav-tab-active,
+body .updraftplus-nav-tab.nav-tab-active,
+body .updraftplus-nav-tab.nav-tab-active:hover,
+body .updraftplus-nav-tab.nav-tab-active:focus {
   background: var(--adm-surface-1) !important;
   color: var(--adm-text) !important;
   border-bottom-color: var(--adm-surface-1) !important;
@@ -197,6 +201,8 @@ span#updraft_lastlogcontainer,
 
 .updraft_next_scheduled_backups_wrapper,
 .updraft_next_scheduled_entity,
+.updraft_next_scheduled_backups_wrapper .schedule,
+.updraft_time_now,
 .updraft_backup_btn_wrapper,
 .updraft_exclude_container,
 .updraft_include_container,
@@ -221,4 +227,55 @@ span#updraft_lastlogcontainer,
 .updraftplus_clone_status,
 .updraftplus_migration_status {
   color: var(--adm-warning) !important;
+}
+
+/* TeamUpdraft onboarding wizard shared with WP-Optimize (Tailwind, #teamupdraft-onboarding). */
+#teamupdraft-onboarding {
+  --teamupdraft-grey-900: var(--adm-text);
+  --teamupdraft-grey-800: var(--adm-text);
+  --teamupdraft-grey-700: var(--adm-text-muted);
+  --teamupdraft-grey-600: var(--adm-text-muted);
+  --teamupdraft-grey-500: var(--adm-text-soft);
+  --teamupdraft-grey-200: var(--adm-border);
+  --teamupdraft-grey-100: var(--adm-surface-2);
+  --teamupdraft-grey-50: var(--adm-surface-2);
+}
+
+#teamupdraft-onboarding .bg-blue-lightest {
+  background-color: var(--adm-bg) !important;
+}
+
+#teamupdraft-onboarding .bg-white {
+  background-color: var(--adm-surface-1) !important;
+}
+
+#teamupdraft-onboarding .bg-gray-50,
+#teamupdraft-onboarding .bg-gray-100 {
+  background-color: var(--adm-surface-2) !important;
+}
+
+#teamupdraft-onboarding .text-black,
+#teamupdraft-onboarding .text-gray-900,
+#teamupdraft-onboarding .text-gray-800 {
+  color: var(--adm-text) !important;
+}
+
+#teamupdraft-onboarding .text-gray-700,
+#teamupdraft-onboarding .text-gray-600,
+#teamupdraft-onboarding .text-gray-500 {
+  color: var(--adm-text-muted) !important;
+}
+
+#teamupdraft-onboarding .border-gray-200,
+#teamupdraft-onboarding .border-gray-300 {
+  border-color: var(--adm-border) !important;
+}
+
+#teamupdraft-onboarding input[type="text"],
+#teamupdraft-onboarding input[type="email"],
+#teamupdraft-onboarding input[type="password"],
+#teamupdraft-onboarding select {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
 }

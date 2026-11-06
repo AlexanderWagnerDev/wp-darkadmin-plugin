@@ -1856,3 +1856,58 @@ dialog::backdrop,
 .components-notice.is-error { border-left-color: var(--adm-danger) !important; }
 .components-notice.is-warning { border-left-color: var(--adm-warning) !important; }
 .components-notice.is-success { border-left-color: var(--adm-success) !important; }
+
+/* Striped list rows and the classic Publish box footer (also used by Contact Form 7). */
+.alternate,
+.striped > tbody > :nth-child(odd),
+ul.striped > :nth-child(odd) {
+  background-color: var(--adm-table-alt) !important;
+}
+
+#major-publishing-actions {
+  background: var(--adm-surface-2) !important;
+  border-top-color: var(--adm-border) !important;
+}
+
+/* About, Credits, Freedoms, Privacy and Get Involved screens (wp-admin/css/about.css). */
+.about__container {
+  --subtle-background: var(--adm-surface-1);
+  --text: var(--adm-text);
+  --accent-1: var(--adm-link);
+  --accent-3: var(--adm-border);
+  --nav-background: var(--adm-surface-1);
+  --nav-border: var(--adm-border);
+  --nav-color: var(--adm-text);
+  --nav-current: var(--adm-primary);
+  color: var(--adm-text);
+}
+
+.about__container .about__header-navigation .nav-tab {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+.about__container .about__header-navigation .nav-tab-active {
+  border-color: var(--adm-primary) !important;
+  color: var(--adm-link) !important;
+}
+
+.about__container .about__header-navigation .nav-tab:hover,
+.about__container .about__header-navigation .nav-tab:active {
+  background: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+
+.about__container .has-subtle-background-color,
+.about__container .about__section.has-subtle-background-color {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+.about__container .about__section p,
+.about__container .about__section li,
+.about__container .about__section h2,
+.about__container .about__section h3 {
+  color: var(--adm-text);
+}
