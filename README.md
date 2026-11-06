@@ -80,7 +80,7 @@ customization and Auto Dark Mode support.
 
 ## Changelog
 
-## [0.4.1] - 2026-11-06
+## [0.4.1] - 2026-11-07
 
 ### Added
 
