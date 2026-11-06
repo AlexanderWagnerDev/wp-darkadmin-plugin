@@ -23,6 +23,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Color picker defaults follow the active preset after switching presets, so the picker's Default
   button no longer restores the previous preset's palette.
 - The release build excludes `build/` and `release-notes.md` from the plugin ZIP.
+- Removed a duplicate `updates:` key from `.github/dependabot.yml` and dropped the stale `dev`
+  target so the `main` GitHub Actions update configuration is the only one parsed.
 
 ## [0.4.0] - 2026-10-06
 
