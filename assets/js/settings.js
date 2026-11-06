@@ -146,6 +146,10 @@
 			const input = document.getElementById( 'adm_color_' + key );
 			if ( ! input ) return;
 			const val = colors[ key ];
+			// Keep the picker's Default button and the clear callback in sync
+			// with the newly selected preset.
+			input.dataset.defaultColor = val;
+			jQuery( input ).wpColorPicker( 'defaultColor', val );
 			jQuery( input ).wpColorPicker( 'color', val );
 			setCssVar( key, val );
 		} );

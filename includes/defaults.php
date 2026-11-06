@@ -584,16 +584,16 @@ function darkadmin_sanitize_user_access_mode( $value ): string {
  *
  * The value is printed inside a <style> element by wp_add_inline_style(), so
  * the only sequence that can leave that context is a case-insensitive
- * "</style" end tag. Removing it keeps valid CSS intact — including inline
- * SVG data URIs that contain a literal "<" — while still preventing a stored
- * value from terminating the surrounding style element.
+ * "</style" end tag. It is replaced with a space rather than removed: deleting
+ * it can join the surrounding text into a new "</style" sequence, while a space
+ * breaks the boundary and cannot form a new end tag in a single pass.
  *
  * @param mixed $css Raw CSS string.
  * @return string Sanitized CSS.
  */
 function darkadmin_sanitize_custom_css( $css ): string {
 	$css = is_string( $css ) ? $css : '';
-	$css = preg_replace( '#</style#i', '', $css );
+	$css = preg_replace( '#</style#i', ' ', $css );
 
 	return is_string( $css ) ? $css : '';
 }
