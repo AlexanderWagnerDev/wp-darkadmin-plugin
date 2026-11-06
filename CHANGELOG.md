@@ -25,6 +25,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The release build excludes `build/` and `release-notes.md` from the plugin ZIP.
 - Removed a duplicate `updates:` key from `.github/dependabot.yml` and dropped the stale `dev`
   target so the `main` GitHub Actions update configuration is the only one parsed.
+- Kept the `Tested up to` declaration only in `readme.txt`; Plugin Check rejects a duplicate value
+  in the main plugin PHP header.
 
 ## [0.4.0] - 2026-10-06
 
