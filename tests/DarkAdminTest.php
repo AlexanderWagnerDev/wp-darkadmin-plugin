@@ -762,16 +762,22 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     public function test_custom_css_save_guard_blocks_legacy_all_settings_route(): void {
-        $limited       = $this->create_custom_css_user( false );
-        $previous_post = $_POST;
-        $initial_css   = 'body{color:red}';
+        $limited          = $this->create_custom_css_user( false );
+        $previous_post    = $_POST;
+        $previous_get     = $_GET;
+        $previous_request = $_REQUEST;
+        $initial_css      = 'body{color:red}';
 
         try {
             wp_set_current_user( $limited );
             update_option( 'darkadmin_custom_css', $initial_css );
 
-            $_POST = [
-                'option_page'          => 'options',
+            // The back-compat All Settings route omits option_page entirely and
+            // identifies the update list through page_options only.
+            $_GET     = [];
+            $_REQUEST = [];
+            $_POST    = [
+                'action'               => 'update',
                 'page_options'         => 'darkadmin_custom_css',
                 'darkadmin_custom_css' => 'body{color:blue}',
             ];
@@ -780,7 +786,9 @@ class DarkAdminTest extends WP_UnitTestCase {
 
             $this->assertSame( $initial_css, get_option( 'darkadmin_custom_css' ) );
         } finally {
-            $_POST = $previous_post;
+            $_POST    = $previous_post;
+            $_GET     = $previous_get;
+            $_REQUEST = $previous_request;
         }
     }
 
