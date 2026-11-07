@@ -66,6 +66,15 @@ add_action(
 		);
 		register_setting(
 			'darkadmin_settings',
+			'darkadmin_block_editor_theme',
+			array(
+				'type'              => 'boolean',
+				'sanitize_callback' => 'darkadmin_sanitize_bool',
+				'default'           => false,
+			)
+		);
+		register_setting(
+			'darkadmin_settings',
 			'darkadmin_colors',
 			array(
 				'type'              => 'array',
@@ -275,12 +284,42 @@ function darkadminIsBlockPostEditor( string $pagenow, $screen = null ): bool {
 }
 
 /**
- * Whether the "Dark Block Editor" option is enabled.
+ * Whether this WordPress version always renders the post editor canvas in an iframe.
+ *
+ * Before WordPress 7.1 the post editor drops the iframe as soon as a block with
+ * apiVersion < 3 is present. The canvas then shares the admin document, and the
+ * admin dark stylesheets would recolor post content. The dark block editor is
+ * therefore only offered from 7.1 on.
+ *
+ * @return bool
+ */
+function darkadminIsBlockEditorSupported(): bool {
+	$supported = version_compare( (string) get_bloginfo( 'version' ), '7.1-alpha', '>=' );
+
+	/**
+	 * Filters whether the dark block editor is available on this site.
+	 *
+	 * @param bool $supported True on WordPress 7.1 or later.
+	 */
+	return (bool) apply_filters( 'darkadmin_block_editor_supported', $supported );
+}
+
+/**
+ * Whether the "Dark Block Editor" option is enabled and supported.
  *
  * @return bool
  */
 function darkadminIsBlockEditorStylingEnabled(): bool {
-	return darkadmin_sanitize_bool( get_option( 'darkadmin_block_editor', false ) );
+	return darkadmin_sanitize_bool( get_option( 'darkadmin_block_editor', false ) ) && darkadminIsBlockEditorSupported();
+}
+
+/**
+ * Whether the "Darken theme design in the editor" option is enabled.
+ *
+ * @return bool
+ */
+function darkadminIsBlockEditorThemeDarkened(): bool {
+	return darkadmin_sanitize_bool( get_option( 'darkadmin_block_editor_theme', false ) );
 }
 // phpcs:enable WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 
@@ -498,11 +537,16 @@ function darkadmin_block_editor_canvas_css(): string {
 }
 
 /**
- * Adds the dark canvas stylesheet to the block editor's default editor styles.
+ * Adds the dark canvas stylesheet to the block editor settings.
  *
- * The block editor uses "defaultEditorStyles" when "Use theme styles" is turned
- * off or when the theme has no editor styles of its own. Themes that style the
- * editor keep their WYSIWYG preview until the user turns their styles off.
+ * By default it goes into "defaultEditorStyles", which the editor uses when
+ * "Use theme styles" is turned off or the theme has no editor styles of its own,
+ * so the theme's WYSIWYG preview stays until the user turns its styles off.
+ *
+ * With "Darken theme design in the editor" enabled it goes into "styles" as a
+ * presets entry instead. The editor keeps presets entries in both modes, so the
+ * canvas is dark whether or not theme styles are used, and the entry does not
+ * change the editor's own "does the theme have styles" check.
  *
  * @param array<string, mixed>    $settings Block editor settings.
  * @param WP_Block_Editor_Context $context  Block editor context.
@@ -523,11 +567,16 @@ function darkadmin_block_editor_canvas_settings( $settings, $context ) {
 		return $settings;
 	}
 
-	$styles = isset( $settings['defaultEditorStyles'] ) && is_array( $settings['defaultEditorStyles'] ) ? $settings['defaultEditorStyles'] : array();
+	$key    = darkadminIsBlockEditorThemeDarkened() ? 'styles' : 'defaultEditorStyles';
+	$styles = isset( $settings[ $key ] ) && is_array( $settings[ $key ] ) ? $settings[ $key ] : array();
+	$entry  = array( 'css' => darkadmin_block_editor_canvas_css() );
 
-	$styles[] = array( 'css' => darkadmin_block_editor_canvas_css() );
+	if ( 'styles' === $key ) {
+		$entry['__unstableType'] = 'presets';
+	}
 
-	$settings['defaultEditorStyles'] = $styles;
+	$styles[]         = $entry;
+	$settings[ $key ] = $styles;
 
 	return $settings;
 }
