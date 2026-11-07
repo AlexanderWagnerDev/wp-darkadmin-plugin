@@ -78,8 +78,13 @@ body.block-editor-page .block-editor-block-breadcrumb {
   color: var(--adm-text) !important;
 }
 
-body.block-editor-page .block-editor-block-breadcrumb__current {
+body.block-editor-page .block-editor-block-breadcrumb__current,
+body.block-editor-page .block-editor-block-breadcrumb__button.block-editor-block-breadcrumb__button {
   color: var(--adm-text) !important;
+}
+
+body.block-editor-page .block-editor-block-breadcrumb__separator {
+  color: var(--adm-text-muted) !important;
 }
 
 /* -----------------------------------------------------------------------------
