@@ -81,6 +81,8 @@ Ja, ab WordPress 7.1, wenn „Dunkler Block-Editor“ unter Einstellungen -> Dar
 * Fix: Die Dark-Klasse der Einstellungsseite wird nur gesetzt, wenn das Dark-Stylesheet geladen ist
 * Fix: Die Schalter auf der Einstellungsseite haben einen zugänglichen Text für Screenreader
 * Fix: Der Breadcrumb-Link im Block-Editor ist im Dark Mode lesbar
+* Entwickler: Neuer Filter darkadmin_block_editor_supported, um die WordPress-Versionsprüfung zu überschreiben
+* Wartung: Der Workflow „Plugin Check Trunk“ übergibt wp-version: trunk und doppelt den stabilen Plugin-Check nicht mehr
 
 = 0.4.1 =
 * Neu: Dark Mode für Design > Schriftarten (font-library.php, WordPress 7.0+): Bibliothek, Hochladen, Google-Fonts-Installation, Schrift-Karten, Fußleiste und lesbare Schriftvorschauen

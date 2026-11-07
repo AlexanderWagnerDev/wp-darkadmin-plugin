@@ -81,6 +81,8 @@ Yes, on WordPress 7.1 or later, when "Dark Block Editor" is enabled under Settin
 * Fixed: The dark settings body class is only added when the dark stylesheet is loaded
 * Fixed: Settings toggle switches have accessible text for screen readers
 * Fixed: Block editor breadcrumb root link is readable in dark mode
+* Developers: New darkadmin_block_editor_supported filter to override the WordPress version check
+* Maintenance: The Plugin Check Trunk workflow passes wp-version: trunk and no longer duplicates the stable Plugin Check run
 
 = 0.4.1 =
 * Added: Dark mode for Appearance > Fonts (font-library.php, WordPress 7.0+): library, upload and Google Fonts install tabs, font cards, footer bar and readable font previews

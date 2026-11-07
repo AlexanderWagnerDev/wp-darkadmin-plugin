@@ -93,6 +93,7 @@ customization and Auto Dark Mode support.
   excluded. Requires WordPress 7.1 or later
 - **Darken Theme Design in the Editor** setting (off by default): the editing area also turns dark
   while "Use theme styles" is on
+- `darkadmin_block_editor_supported` filter to override the WordPress version check
 
 ### Changed
 
@@ -106,6 +107,11 @@ customization and Auto Dark Mode support.
 - The dark settings body class is only added when the dark stylesheet is loaded
 - Settings toggle switches have accessible text for screen readers
 - Block editor breadcrumb root link is readable in dark mode
+
+### Maintenance
+
+- The Plugin Check Trunk workflow passes `wp-version: trunk` and no longer duplicates the stable
+  Plugin Check run
 
 ## [0.4.1] - 2026-11-07
 
@@ -458,6 +464,7 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
   Erfordert WordPress 7.1 oder neuer
 - Einstellung **Theme-Design im Editor abdunkeln** (standardmäßig aus): der Bearbeitungsbereich wird
   auch bei aktivierten „Theme-Stilen verwenden“ dunkel
+- Filter `darkadmin_block_editor_supported`, um die WordPress-Versionsprüfung zu überschreiben
 
 ### Geändert
 
@@ -471,6 +478,11 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 - Die Dark-Klasse der Einstellungsseite wird nur gesetzt, wenn das Dark-Stylesheet geladen ist
 - Die Schalter auf der Einstellungsseite haben einen zugänglichen Text für Screenreader
 - Der Breadcrumb-Link im Block-Editor ist im Dark Mode lesbar
+
+### Wartung
+
+- Der Workflow „Plugin Check Trunk“ übergibt `wp-version: trunk` und doppelt den stabilen Plugin-Check
+  nicht mehr
 
 ## 0.4.1
 
