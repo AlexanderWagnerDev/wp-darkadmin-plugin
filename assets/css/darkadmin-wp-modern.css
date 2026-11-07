@@ -964,25 +964,6 @@ div.notice-info, .notice.notice-info { border-left-color: var(--adm-primary)  !i
 }
 
 /* =============================================================================
-   GUTENBERG
-   ============================================================================= */
-.editor-styles-wrapper {
-  background: var(--adm-bg) !important;
-  color: var(--adm-text) !important;
-}
-.edit-post-sidebar,
-.interface-interface-skeleton__sidebar {
-  background: var(--adm-surface-1) !important;
-  border-left-color: var(--adm-border) !important;
-  color: var(--adm-text) !important;
-}
-.edit-post-header,
-.interface-interface-skeleton__header {
-  background: var(--adm-surface-1) !important;
-  border-bottom-color: var(--adm-border) !important;
-}
-
-/* =============================================================================
    DROPDOWN MENUS
    ============================================================================= */
 .dropdown-content,

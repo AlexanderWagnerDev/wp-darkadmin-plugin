@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.4.1-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.5.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -27,6 +27,9 @@ customization and Auto Dark Mode support.
 - Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users
   exist
 - Excluded Pages: specify admin pages where dark mode should not be applied
+- Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing
+  canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in the
+  Editor"
 
 ---
 
@@ -79,6 +82,36 @@ customization and Auto Dark Mode support.
 ---
 
 ## Changelog
+
+## [0.5.0] - 2026-11-07
+
+### Added
+
+- **Dark Block Editor** setting (off by default): dark post/page block editor interface (header,
+  sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns
+  dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays
+  excluded. Requires WordPress 7.1 or later
+- **Darken Theme Design in the Editor** setting (off by default): the editing area also turns dark
+  while "Use theme styles" is on
+- `darkadmin_block_editor_supported` filter to override the WordPress version check
+
+### Changed
+
+- Removed unused Gutenberg rules from the main stylesheets, which made the block editor copy the whole
+  admin stylesheet into the editor canvas
+
+### Fixed
+
+- Custom CSS capability is enforced on every `options.php` save route
+- Plugin-style settings keep their current format when an old migration is retried
+- The dark settings body class is only added when the dark stylesheet is loaded
+- Settings toggle switches have accessible text for screen readers
+- Block editor breadcrumb root link is readable in dark mode
+
+### Maintenance
+
+- The Plugin Check Trunk workflow passes `wp-version: trunk` and no longer duplicates the stable
+  Plugin Check run
 
 ## [0.4.1] - 2026-11-07
 
@@ -419,6 +452,37 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ---
 
 ## Changelog
+
+## 0.5.0
+
+### Hinzugefügt
+
+- Einstellung **Dunkler Block-Editor** (standardmäßig aus): dunkle Oberfläche im Block-Editor für
+  Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs,
+  Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“
+  deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen.
+  Erfordert WordPress 7.1 oder neuer
+- Einstellung **Theme-Design im Editor abdunkeln** (standardmäßig aus): der Bearbeitungsbereich wird
+  auch bei aktivierten „Theme-Stilen verwenden“ dunkel
+- Filter `darkadmin_block_editor_supported`, um die WordPress-Versionsprüfung zu überschreiben
+
+### Geändert
+
+- Ungenutzte Gutenberg-Regeln aus den Haupt-Stylesheets entfernt, durch die der Block-Editor das
+  komplette Admin-Stylesheet in den Bearbeitungsbereich kopiert hat
+
+### Behoben
+
+- Die Berechtigung für eigenes CSS wird bei jedem Speichern über `options.php` geprüft
+- Plugin-Stil-Einstellungen behalten ihr aktuelles Format, wenn eine alte Migration erneut läuft
+- Die Dark-Klasse der Einstellungsseite wird nur gesetzt, wenn das Dark-Stylesheet geladen ist
+- Die Schalter auf der Einstellungsseite haben einen zugänglichen Text für Screenreader
+- Der Breadcrumb-Link im Block-Editor ist im Dark Mode lesbar
+
+### Wartung
+
+- Der Workflow „Plugin Check Trunk“ übergibt `wp-version: trunk` und doppelt den stabilen Plugin-Check
+  nicht mehr
 
 ## 0.4.1
 
