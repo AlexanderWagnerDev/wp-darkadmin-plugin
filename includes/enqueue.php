@@ -433,8 +433,11 @@ add_action(
 			)
 		);
 
-		// Inject dark-mode body class via inline script instead of raw echo.
-		if ( (bool) get_option( 'darkadmin_dark_mode_enabled', false ) ) {
+		// Only mark the body as dark when the dark stylesheet and its :root
+		// variables were actually enqueued for this page. Check the direct queue
+		// rather than wp_style_is(), because a dependent stylesheet can keep a
+		// manually dequeued handle "enqueued" through dependency traversal.
+		if ( in_array( 'darkadmin-darkmode', wp_styles()->queue, true ) ) {
 			wp_add_inline_script( 'darkadmin-settings-js', 'document.body.classList.add("adm-dark-active");', 'before' );
 		}
 	}

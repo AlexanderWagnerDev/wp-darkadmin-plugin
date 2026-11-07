@@ -8,6 +8,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Enforce the `edit_css` capability for Custom CSS on every core `options.php` save route, including a
+  query-string `action` and the legacy All Settings screen.
+- Preserve the current `disabled` plugin-style option shape when a stale 0.3.1 migration marker
+  triggers a retry, instead of deleting the newer value.
+- Do not add the dark settings body class when the dark stylesheet was not enqueued for the current
+  page or user.
+- Make the Plugin Check Trunk workflow pass `wp-version: trunk` so it no longer duplicates the stable
+  Plugin Check run.
+
 ## [0.4.1] - 2026-11-07
 
 ### Added

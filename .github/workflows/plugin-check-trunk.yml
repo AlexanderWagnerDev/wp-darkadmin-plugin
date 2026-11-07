@@ -32,3 +32,4 @@ jobs:
         build-dir: '../plugin-clean'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         slug: "darkadmin-dark-mode-for-adminpanel"
+        wp-version: "trunk"
