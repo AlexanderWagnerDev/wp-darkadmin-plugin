@@ -1,0 +1,139 @@
+name: Update WordPress.org assets
+
+# Manual workflow to update the WordPress.org plugin page without a new release.
+# Use it when only screenshots, banners, icons, the blueprint or readme.txt
+# changed on main after a version was already released.
+#
+# What it does:
+#   1. Reads the "Stable tag" from readme.txt and checks that it matches the
+#      plugin version in darkadmin.php and that tags/<version> exists in SVN
+#   2. Syncs banner-*.png, icon-*.png, screenshot-*.png and blueprint.json into
+#      the SVN assets/ folder (assets removed from the repo are removed there too)
+#   3. Copies readme.txt into trunk/ and into tags/<stable tag>/, because
+#      WordPress.org reads the plugin page (description, FAQ, screenshot
+#      captions, changelog) from the readme.txt of the stable tag
+#
+# It never changes plugin code, never creates an SVN tag and never creates a
+# git tag or GitHub release. Use release.yml for that.
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   SVN_USERNAME  WordPress.org username
+#   SVN_PASSWORD  WordPress.org password (or SVN password)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (show the SVN changes, do not commit)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  SLUG: darkadmin-dark-mode-for-adminpanel
+
+jobs:
+  update-assets:
+    name: Update assets and readme
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Ensure running on the default branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          if [ "${GITHUB_REF_NAME}" != "${DEFAULT_BRANCH}" ]; then
+            echo "::error::Asset updates must be started from '${DEFAULT_BRANCH}', not '${GITHUB_REF_NAME}'."
+            exit 1
+          fi
+
+      - name: Read and validate stable tag
+        id: version
+        run: |
+          VERSION=$(sed -n 's/^ \* Version:[[:space:]]*//p' darkadmin.php | head -n1 | tr -d '[:space:]')
+          STABLE=$(sed -n 's/^Stable tag:[[:space:]]*//p' readme.txt | head -n1 | tr -d '[:space:]')
+
+          if ! [[ "$STABLE" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
+            echo "::error::Invalid or missing Stable tag in readme.txt: '$STABLE'"
+            exit 1
+          fi
+          if [ "$VERSION" != "$STABLE" ]; then
+            echo "::error::readme.txt Stable tag ($STABLE) differs from the plugin version ($VERSION). Unreleased changes are on main; run release.yml instead."
+            exit 1
+          fi
+
+          echo "stable=${STABLE}" >> "$GITHUB_OUTPUT"
+          echo "Updating assets and readme for stable tag ${STABLE}"
+
+      - name: Install Subversion
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y subversion
+
+      - name: Update WordPress.org SVN
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          STABLE: ${{ steps.version.outputs.stable }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ -z "$SVN_USERNAME" ] || [ -z "$SVN_PASSWORD" ]; then
+            echo "::error::Secrets SVN_USERNAME and SVN_PASSWORD must be set."
+            exit 1
+          fi
+
+          SVN_URL="https://plugins.svn.wordpress.org/${SLUG}"
+          SVN_DIR="${RUNNER_TEMP}/svn"
+          svn_auth=(--non-interactive --no-auth-cache --username "$SVN_USERNAME")
+
+          if ! svn ls "$SVN_URL/tags/$STABLE" "${svn_auth[@]}" >/dev/null 2>&1; then
+            echo "::error::SVN tag $STABLE does not exist. Release it with release.yml first."
+            exit 1
+          fi
+
+          # Only fetch what this workflow touches: assets/, trunk/readme.txt and
+          # tags/<stable>/readme.txt.
+          svn checkout "$SVN_URL" "$SVN_DIR" --depth immediates "${svn_auth[@]}"
+          svn update "$SVN_DIR/assets" --set-depth infinity "${svn_auth[@]}"
+          svn update "$SVN_DIR/trunk" --set-depth empty "${svn_auth[@]}"
+          svn update "$SVN_DIR/trunk/readme.txt" "${svn_auth[@]}"
+          svn update "$SVN_DIR/tags/$STABLE" --set-depth empty --parents "${svn_auth[@]}"
+          svn update "$SVN_DIR/tags/$STABLE/readme.txt" "${svn_auth[@]}"
+
+          # assets <- banners, icons, screenshots, blueprint (live in the repo root)
+          find "$SVN_DIR/assets" -maxdepth 1 -type f \
+            \( -name 'banner-*.png' -o -name 'icon-*.png' -o -name 'screenshot-*.png' \) -delete
+          mkdir -p "$SVN_DIR/assets/blueprints"
+          cp banner-*.png icon-*.png screenshot-*.png "$SVN_DIR/assets/"
+          cp blueprint.json "$SVN_DIR/assets/blueprints/blueprint.json"
+
+          # readme.txt <- trunk and the stable tag
+          cp readme.txt "$SVN_DIR/trunk/readme.txt"
+          cp readme.txt "$SVN_DIR/tags/$STABLE/readme.txt"
+
+          cd "$SVN_DIR"
+          svn add --force --parents assets > /dev/null
+          svn status assets | grep '^!' | sed 's/^! *//' | xargs -r -d '\n' svn rm --force > /dev/null
+          find assets -maxdepth 1 -name '*.png' -exec svn propset svn:mime-type image/png {} + > /dev/null
+
+          echo "----- SVN changes -----"
+          svn status
+          if [ -z "$(svn status)" ]; then
+            echo "Nothing to update; WordPress.org already matches main."
+            exit 0
+          fi
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "Dry run: not committing."
+            svn diff trunk/readme.txt "tags/$STABLE/readme.txt"
+            exit 0
+          fi
+
+          svn commit -m "Update assets and readme for ${STABLE}" "${svn_auth[@]}" --password-from-stdin <<< "$SVN_PASSWORD"
