@@ -35,30 +35,41 @@ require_once DARKADMIN_PATH . 'includes/settings-page.php';
 
 /**
  * One-time migrations for existing installations (preset rename, defaults).
+ *
+ * Also records schema migrations only after their data change is definitely
+ * complete, so a failed write is retried on the next request.
+ *
+ * @return void
  */
-add_action(
-	'admin_init',
-	function () {
-		$db_version = darkadmin_read_string_option( 'darkadmin_db_version', '0' );
+function darkadmin_maybe_migrate_options(): void {
+	$db_version = darkadmin_read_string_option( 'darkadmin_db_version', '0' );
 
-		if ( version_compare( $db_version, '0.3.0', '<' ) ) {
-			// Explicit default keeps "no stored row" detectable; the registered
-			// default would otherwise be returned for single-argument calls.
-			$preset = get_option( 'darkadmin_preset', false );
+	if ( version_compare( $db_version, '0.3.0', '<' ) ) {
+		// Explicit default keeps "no stored row" detectable; the registered
+		// default would otherwise be returned for single-argument calls.
+		$preset = get_option( 'darkadmin_preset', false );
 
-			if ( 'default' === $preset ) {
-				update_option( 'darkadmin_preset', 'classic' );
-			} elseif ( false === $preset && darkadmin_is_existing_install() ) {
-				// Pre-0.3.0 installs without a saved preset were using the classic palette.
-				update_option( 'darkadmin_preset', 'classic' );
-			}
-
-			$db_version = '0.3.0';
-			update_option( 'darkadmin_db_version', $db_version );
+		if ( 'default' === $preset ) {
+			update_option( 'darkadmin_preset', 'classic' );
+		} elseif ( false === $preset && darkadmin_is_existing_install() ) {
+			// Pre-0.3.0 installs without a saved preset were using the classic palette.
+			update_option( 'darkadmin_preset', 'classic' );
 		}
 
-		if ( version_compare( $db_version, '0.3.1', '<' ) ) {
-			// Former opt-in list becomes opt-out; default is styles on for all installed plugins.
+		$db_version = '0.3.0';
+		update_option( 'darkadmin_db_version', $db_version );
+	}
+
+	if ( version_compare( $db_version, '0.3.1', '<' ) ) {
+		// Former opt-in list becomes opt-out; default is styles on for all installed plugins.
+		// Only the legacy flat list is removed. A stale version marker must not delete the
+		// current array( 'disabled' => string[] ) shape, which is already the new format.
+		$plugins          = get_option( 'darkadmin_plugins', false );
+		$is_current_shape = is_array( $plugins ) && array_key_exists( 'disabled', $plugins );
+
+		if ( $is_current_shape ) {
+			update_option( 'darkadmin_db_version', '0.3.1' );
+		} else {
 			// Remove the legacy row instead of writing array() through update_option(), which
 			// would run the registered darkadmin_sanitize_plugins() callback and treat the
 			// empty value as "no plugin enabled", storing every installed plugin as disabled.
@@ -72,7 +83,8 @@ add_action(
 			}
 		}
 	}
-);
+}
+add_action( 'admin_init', 'darkadmin_maybe_migrate_options' );
 
 /**
  * Add a settings link in the Plugins list.
