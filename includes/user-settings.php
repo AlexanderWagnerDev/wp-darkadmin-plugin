@@ -81,12 +81,34 @@ function darkadmin_can_edit_custom_css(): bool {
 }
 
 /**
- * Preserve the stored custom CSS when an unauthorized user saves the settings form.
+ * Whether the current request is an options.php save request.
+ *
+ * Core routes Settings API saves through options.php and reads the routing
+ * fields from $_REQUEST (WordPress 7.1+) or POST/GET fallbacks (WordPress 6.3).
+ * The legacy "All Settings" screen uses page_options instead of option_page.
+ * Checking only the POST settings-page shape leaves the custom-CSS guard
+ * bypassable by moving action to the query string or by using that legacy
+ * screen, so detect every core options.php save route.
+ *
+ * @return bool
+ */
+function darkadmin_is_options_save_request(): bool {
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing -- Core options.php verifies the settings nonce before update_option() reaches this filter. This helper only detects the core save route.
+	return isset( $_REQUEST['option_page'] )
+		|| isset( $_POST['option_page'] )
+		|| isset( $_GET['option_page'] )
+		|| isset( $_POST['page_options'] );
+	// phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
+}
+
+/**
+ * Preserve the stored custom CSS when an unauthorized user saves options.
  *
  * The Settings API updates every option in the settings group and passes null for
  * fields that are not posted. Without this guard, hiding the field from a user
  * without edit_css would erase the existing CSS when that user saves another
- * setting.
+ * setting, and the hidden field could still be submitted directly through
+ * options.php.
  *
  * @param mixed $value     Sanitized new value.
  * @param mixed $old_value Stored value.
@@ -97,12 +119,7 @@ function darkadmin_preserve_custom_css_on_unauthorized_save( $value, $old_value 
 		return $value;
 	}
 
-	// phpcs:disable WordPress.Security.NonceVerification.Missing -- This filter only decides whether to keep the stored value; core options.php verifies the settings nonce before a save reaches this point.
-	$option_page = isset( $_POST['option_page'] ) && is_string( $_POST['option_page'] ) ? sanitize_key( wp_unslash( $_POST['option_page'] ) ) : '';
-	$action      = isset( $_POST['action'] ) && is_string( $_POST['action'] ) ? sanitize_key( wp_unslash( $_POST['action'] ) ) : '';
-	// phpcs:enable WordPress.Security.NonceVerification.Missing
-
-	if ( 'darkadmin_settings' !== $option_page || 'update' !== $action ) {
+	if ( ! darkadmin_is_options_save_request() ) {
 		return $value;
 	}
 

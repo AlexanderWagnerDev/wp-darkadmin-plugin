@@ -411,6 +411,30 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     // -------------------------------------------------------------------------
+    // Migrations
+    // -------------------------------------------------------------------------
+
+    public function test_migration_removes_legacy_plugin_option(): void {
+        update_option( 'darkadmin_db_version', '0.3.0' );
+        update_option( 'darkadmin_plugins', [ 'yoast' ] );
+
+        darkadmin_maybe_migrate_options();
+
+        $this->assertFalse( get_option( 'darkadmin_plugins', false ) );
+        $this->assertSame( '0.3.1', get_option( 'darkadmin_db_version' ) );
+    }
+
+    public function test_migration_preserves_current_plugin_shape(): void {
+        update_option( 'darkadmin_db_version', '0.3.0' );
+        update_option( 'darkadmin_plugins', [ 'disabled' => [ 'yoast' ] ] );
+
+        darkadmin_maybe_migrate_options();
+
+        $this->assertSame( [ 'disabled' => [ 'yoast' ] ], get_option( 'darkadmin_plugins' ) );
+        $this->assertSame( '0.3.1', get_option( 'darkadmin_db_version' ) );
+    }
+
+    // -------------------------------------------------------------------------
     // Editor screen coverage
     // -------------------------------------------------------------------------
 
@@ -592,6 +616,58 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertStringNotContainsString( '</style', $css );
     }
 
+    public function test_settings_body_class_is_not_added_when_page_is_excluded(): void {
+        $previous_pagenow = $GLOBALS['pagenow'] ?? null;
+        $previous_screen  = get_current_screen();
+        $admin            = $this->factory->user->create( [ 'role' => 'administrator' ] );
+
+        try {
+            wp_set_current_user( $admin );
+            update_option( 'darkadmin_dark_mode_enabled', true );
+            update_option( 'darkadmin_excluded_pages', 'options-general.php' );
+
+            $GLOBALS['pagenow'] = 'options-general.php';
+            set_current_screen( 'settings_page_darkadmin' );
+
+            wp_dequeue_style( 'darkadmin-darkmode' );
+            wp_dequeue_script( 'darkadmin-settings-js' );
+            wp_styles()->remove( 'darkadmin-darkmode' );
+            wp_scripts()->remove( 'darkadmin-settings-js' );
+
+            do_action( 'admin_enqueue_scripts', 'settings_page_darkadmin' );
+
+            $inline = wp_scripts()->get_data( 'darkadmin-settings-js', 'before' );
+            $script = is_array( $inline ) ? implode( "\n", $inline ) : (string) $inline;
+
+            $this->assertStringNotContainsString( 'adm-dark-active', $script );
+
+            update_option( 'darkadmin_excluded_pages', '' );
+            wp_dequeue_style( 'darkadmin-darkmode' );
+            wp_dequeue_script( 'darkadmin-settings-js' );
+            wp_styles()->remove( 'darkadmin-darkmode' );
+            wp_scripts()->remove( 'darkadmin-settings-js' );
+
+            do_action( 'admin_enqueue_scripts', 'settings_page_darkadmin' );
+
+            $inline = wp_scripts()->get_data( 'darkadmin-settings-js', 'before' );
+            $script = is_array( $inline ) ? implode( "\n", $inline ) : (string) $inline;
+
+            $this->assertStringContainsString( 'adm-dark-active', $script );
+        } finally {
+            wp_dequeue_style( 'darkadmin-darkmode' );
+            wp_dequeue_script( 'darkadmin-settings-js' );
+            delete_option( 'darkadmin_dark_mode_enabled' );
+            delete_option( 'darkadmin_excluded_pages' );
+
+            if ( null === $previous_pagenow ) {
+                unset( $GLOBALS['pagenow'] );
+            } else {
+                $GLOBALS['pagenow'] = $previous_pagenow;
+            }
+            $GLOBALS['current_screen'] = $previous_screen;
+        }
+    }
+
     public function test_settings_page_ignores_non_scalar_allowed_users(): void {
         update_option( 'darkadmin_allowed_users', [ new stdClass() ] );
         wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
@@ -657,6 +733,54 @@ class DarkAdminTest extends WP_UnitTestCase {
             if ( is_multisite() ) {
                 revoke_super_admin( $allowed );
             }
+        }
+    }
+
+    public function test_custom_css_save_guard_blocks_action_in_query_string(): void {
+        $limited       = $this->create_custom_css_user( false );
+        $previous_post = $_POST;
+        $previous_get  = $_GET;
+        $initial_css   = 'body{color:red}';
+
+        try {
+            wp_set_current_user( $limited );
+            update_option( 'darkadmin_custom_css', $initial_css );
+
+            $_GET  = [ 'action' => 'update' ];
+            $_POST = [
+                'option_page'         => 'darkadmin_settings',
+                'darkadmin_custom_css' => 'body{color:blue}',
+            ];
+
+            update_option( 'darkadmin_custom_css', 'body{color:blue}' );
+
+            $this->assertSame( $initial_css, get_option( 'darkadmin_custom_css' ) );
+        } finally {
+            $_POST = $previous_post;
+            $_GET  = $previous_get;
+        }
+    }
+
+    public function test_custom_css_save_guard_blocks_legacy_all_settings_route(): void {
+        $limited       = $this->create_custom_css_user( false );
+        $previous_post = $_POST;
+        $initial_css   = 'body{color:red}';
+
+        try {
+            wp_set_current_user( $limited );
+            update_option( 'darkadmin_custom_css', $initial_css );
+
+            $_POST = [
+                'option_page'          => 'options',
+                'page_options'         => 'darkadmin_custom_css',
+                'darkadmin_custom_css' => 'body{color:blue}',
+            ];
+
+            update_option( 'darkadmin_custom_css', 'body{color:blue}' );
+
+            $this->assertSame( $initial_css, get_option( 'darkadmin_custom_css' ) );
+        } finally {
+            $_POST = $previous_post;
         }
     }
 
