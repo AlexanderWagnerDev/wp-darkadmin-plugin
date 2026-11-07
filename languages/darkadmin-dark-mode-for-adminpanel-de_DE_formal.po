@@ -65,6 +65,18 @@ msgid "Applies dark mode to the block editor for posts and pages. The editing ar
 msgstr "Wendet den Dark Mode auf den Block-Editor für Beiträge und Seiten an. Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ in den Editor-Einstellungen deaktiviert ist oder das Theme keine eigenen Editor-Stile hat."
 
 #: includes/settings-page.php
+msgid "Requires WordPress 7.1 or later."
+msgstr "Erfordert WordPress 7.1 oder neuer."
+
+#: includes/settings-page.php
+msgid "Darken Theme Design in the Editor"
+msgstr "Theme-Design im Editor abdunkeln"
+
+#: includes/settings-page.php
+msgid "Also darkens the editing area while \"Use theme styles\" is on. The editor then no longer shows your theme's real colors. Requires \"Dark Block Editor\"."
+msgstr "Dunkelt den Bearbeitungsbereich auch ab, wenn „Theme-Stile verwenden“ aktiv ist. Der Editor zeigt dann nicht mehr die echten Farben Ihres Themes. Erfordert „Dunkler Block-Editor“."
+
+#: includes/settings-page.php
 msgid "Preset Themes"
 msgstr "Preset-Themes"
 

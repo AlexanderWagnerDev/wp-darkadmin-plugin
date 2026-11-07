@@ -17,7 +17,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   toolbar, popovers, menus, modals, preferences and the publish panel
   (`assets/css/darkadmin-block-editor.css`). The editing canvas turns dark when "Use theme styles"
   is turned off in the editor preferences or the theme has no editor styles; otherwise the theme's
-  own design stays visible as a WYSIWYG preview. The site editor stays excluded.
+  own design stays visible as a WYSIWYG preview. The site editor stays excluded. Requires WordPress
+  7.1 or later, where the post editor canvas is always an iframe; on older versions the block editor
+  stays excluded, because a canvas without iframe would let the admin styles recolor post content.
+- **Darken Theme Design in the Editor** setting (off by default): also darkens the editing canvas while
+  "Use theme styles" is on, for users who prefer a dark canvas over the theme's real colors.
+- `darkadmin_block_editor_supported` filter to override the WordPress version check.
 
 ### Changed
 
@@ -32,6 +37,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   triggers a retry, instead of deleting the newer value.
 - Do not add the dark settings body class when the dark stylesheet was not enqueued for the current
   page or user.
+- Make the block editor breadcrumb root link readable in dark mode.
 - Give the settings toggle switches accessible text, so each wrapping toggle label has a name for
   screen readers.
 

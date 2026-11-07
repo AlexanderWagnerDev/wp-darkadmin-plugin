@@ -25,7 +25,7 @@ Features:
 * Plugins: optional dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, and WordPress AI & Connectors
 * Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
 * Excluded Pages: specify admin pages where dark mode should not be applied
-* Dark Block Editor (optional): dark post/page block editor interface; the editing canvas turns dark when "Use theme styles" is turned off
+* Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in the Editor"
 
 == Installation ==
 1. Upload the plugin folder to `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` (or install via the Plugins screen).
@@ -49,7 +49,7 @@ Users who can access Settings > DarkAdmin and have the WordPress edit_css capabi
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 = Does it work in the block editor? =
-Yes, when "Dark Block Editor" is enabled under Settings > DarkAdmin. The editor interface turns dark right away. The editing area keeps your theme's design as a preview until you turn off "Use theme styles" in the editor (Options > Preferences > Appearance); then it turns dark too. The site editor is not changed, because it previews your site design.
+Yes, on WordPress 7.1 or later, when "Dark Block Editor" is enabled under Settings > DarkAdmin. The editor interface turns dark right away. The editing area keeps your theme's design as a preview until you turn off "Use theme styles" in the editor (Options > Preferences > Appearance); then it turns dark too. To get a dark editing area while keeping theme styles on, also enable "Darken Theme Design in the Editor". The site editor is not changed, because it previews your site design.
 
 == Screenshots ==
 1. Settings Page - Default (Dark Mode off)
@@ -73,12 +73,14 @@ Yes, when "Dark Block Editor" is enabled under Settings > DarkAdmin. The editor 
 
 == Changelog ==
 = 0.5.0 =
-* Added: "Dark Block Editor" setting (off by default): dark post/page block editor interface (header, sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays excluded.
+* Added: "Dark Block Editor" setting (off by default): dark post/page block editor interface (header, sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays excluded. Requires WordPress 7.1 or later.
+* Added: "Darken Theme Design in the Editor" setting (off by default): the editing area also turns dark while "Use theme styles" is on
 * Changed: Removed unused Gutenberg rules from the main stylesheets, which made the block editor copy the whole admin stylesheet into the editor canvas
 * Fixed: Custom CSS capability is enforced on every options.php save route
 * Fixed: Plugin-style settings keep their current format when an old migration is retried
 * Fixed: The dark settings body class is only added when the dark stylesheet is loaded
 * Fixed: Settings toggle switches have accessible text for screen readers
+* Fixed: Block editor breadcrumb root link is readable in dark mode
 
 = 0.4.1 =
 * Added: Dark mode for Appearance > Fonts (font-library.php, WordPress 7.0+): library, upload and Google Fonts install tabs, font cards, footer bar and readable font previews

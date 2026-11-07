@@ -22,7 +22,9 @@ function darkadmin_settings_page(): void {
 	// Options can be written outside the Settings API; reads below tolerate unexpected types.
 	$enabled          = (bool) get_option( 'darkadmin_dark_mode_enabled', false );
 	$auto_darken      = (bool) get_option( 'darkadmin_auto_darken', false );
-	$block_editor     = darkadminIsBlockEditorStylingEnabled();
+	$block_editor     = darkadmin_sanitize_bool( get_option( 'darkadmin_block_editor', false ) );
+	$block_editor_ok  = darkadminIsBlockEditorSupported();
+	$block_editor_th  = darkadminIsBlockEditorThemeDarkened();
 	$active_preset    = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
 	$preset_colors    = darkadmin_preset_fallbacks( $active_preset );
 	$preset_layout    = darkadmin_preset_layout_fallbacks( $active_preset );
@@ -170,6 +172,9 @@ function darkadmin_settings_page(): void {
 							</label>
 							<span class="adm-field-desc">
 								<?php esc_html_e( 'Applies dark mode to the block editor for posts and pages. The editing area turns dark when "Use theme styles" is turned off in the editor preferences, or when the theme has no editor styles.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+								<?php if ( ! $block_editor_ok ) : ?>
+									<strong><?php esc_html_e( 'Requires WordPress 7.1 or later.', 'darkadmin-dark-mode-for-adminpanel' ); ?></strong>
+								<?php endif; ?>
 							</span>
 						</div>
 						<label class="adm-toggle">
@@ -177,6 +182,26 @@ function darkadmin_settings_page(): void {
 							<input type="hidden" name="darkadmin_block_editor" value="0" />
 							<input type="checkbox" id="darkadmin_block_editor" name="darkadmin_block_editor" value="1"
 								<?php checked( true, $block_editor ); ?> />
+							<span class="adm-slider" aria-hidden="true"></span>
+						</label>
+					</div>
+
+					<hr class="adm-field-divider" />
+
+					<div class="adm-field-row">
+						<div class="adm-field-info">
+							<label for="darkadmin_block_editor_theme" class="adm-field-title">
+								<?php esc_html_e( 'Darken Theme Design in the Editor', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</label>
+							<span class="adm-field-desc">
+								<?php esc_html_e( 'Also darkens the editing area while "Use theme styles" is on. The editor then no longer shows your theme\'s real colors. Requires "Dark Block Editor".', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</span>
+						</div>
+						<label class="adm-toggle">
+							<span class="screen-reader-text"><?php esc_html_e( 'Darken Theme Design in the Editor', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
+							<input type="hidden" name="darkadmin_block_editor_theme" value="0" />
+							<input type="checkbox" id="darkadmin_block_editor_theme" name="darkadmin_block_editor_theme" value="1"
+								<?php checked( true, $block_editor_th ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
 						</label>
 					</div>

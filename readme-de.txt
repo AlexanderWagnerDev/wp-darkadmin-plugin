@@ -25,7 +25,7 @@ Funktionen:
 * Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra und WordPress AI & Connectors
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 * Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
-* Dunkler Block-Editor (optional): dunkle Oberfläche im Block-Editor für Beiträge und Seiten; der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist
+* Dunkler Block-Editor (optional, WordPress 7.1+): dunkle Oberfläche im Block-Editor für Beiträge und Seiten; der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist, oder immer mit „Theme-Design im Editor abdunkeln“
 
 == Installation ==
 1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` hoch (oder installiere über "Plugins").
@@ -49,7 +49,7 @@ Benutzer, die auf Einstellungen > DarkAdmin zugreifen können und die WordPress-
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 = Funktioniert es im Block-Editor? =
-Ja, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert ist. Die Editor-Oberfläche wird sofort dunkel. Der Bearbeitungsbereich zeigt weiterhin das Design deines Themes als Vorschau, bis du im Editor „Theme-Stile verwenden“ deaktivierst (Optionen > Einstellungen > Erscheinungsbild); dann wird er ebenfalls dunkel. Der Website-Editor wird nicht verändert, da er das Design der Website als Vorschau zeigt.
+Ja, ab WordPress 7.1, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert ist. Die Editor-Oberfläche wird sofort dunkel. Der Bearbeitungsbereich zeigt weiterhin das Design deines Themes als Vorschau, bis du im Editor „Theme-Stile verwenden“ deaktivierst (Optionen > Einstellungen > Erscheinungsbild); dann wird er ebenfalls dunkel. Wer einen dunklen Bearbeitungsbereich bei aktivierten Theme-Stilen möchte, schaltet zusätzlich „Theme-Design im Editor abdunkeln“ ein. Der Website-Editor wird nicht verändert, da er das Design der Website als Vorschau zeigt.
 
 == Screenshots ==
 1. Settings Page - Standard (Dark Mode deaktiviert)
@@ -73,12 +73,14 @@ Ja, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert i
 
 == Changelog ==
 = 0.5.0 =
-* Neu: Einstellung „Dunkler Block-Editor“ (standardmäßig aus): dunkle Oberfläche im Block-Editor für Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs, Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen.
+* Neu: Einstellung „Dunkler Block-Editor“ (standardmäßig aus): dunkle Oberfläche im Block-Editor für Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs, Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen. Erfordert WordPress 7.1 oder neuer.
+* Neu: Einstellung „Theme-Design im Editor abdunkeln“ (standardmäßig aus): der Bearbeitungsbereich wird auch bei aktivierten „Theme-Stilen verwenden“ dunkel
 * Geändert: Ungenutzte Gutenberg-Regeln aus den Haupt-Stylesheets entfernt, durch die der Block-Editor das komplette Admin-Stylesheet in den Bearbeitungsbereich kopiert hat
 * Fix: Die Berechtigung für eigenes CSS wird bei jedem Speichern über options.php geprüft
 * Fix: Plugin-Stil-Einstellungen behalten ihr aktuelles Format, wenn eine alte Migration erneut läuft
 * Fix: Die Dark-Klasse der Einstellungsseite wird nur gesetzt, wenn das Dark-Stylesheet geladen ist
 * Fix: Die Schalter auf der Einstellungsseite haben einen zugänglichen Text für Screenreader
+* Fix: Der Breadcrumb-Link im Block-Editor ist im Dark Mode lesbar
 
 = 0.4.1 =
 * Neu: Dark Mode für Design > Schriftarten (font-library.php, WordPress 7.0+): Bibliothek, Hochladen, Google-Fonts-Installation, Schrift-Karten, Fußleiste und lesbare Schriftvorschauen

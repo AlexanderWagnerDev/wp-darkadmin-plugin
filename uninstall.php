@@ -23,6 +23,7 @@ function darkadmin_uninstall_site_data(): void {
 		'darkadmin_dark_mode_enabled',
 		'darkadmin_auto_darken',
 		'darkadmin_block_editor',
+		'darkadmin_block_editor_theme',
 		'darkadmin_colors',
 		'darkadmin_layout',
 		'darkadmin_custom_css',

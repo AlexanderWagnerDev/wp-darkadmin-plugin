@@ -27,8 +27,9 @@ customization and Auto Dark Mode support.
 - Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users
   exist
 - Excluded Pages: specify admin pages where dark mode should not be applied
-- Dark Block Editor (optional): dark post/page block editor interface; the editing canvas turns
-  dark when "Use theme styles" is turned off
+- Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing
+  canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in the
+  Editor"
 
 ---
 
@@ -89,7 +90,9 @@ customization and Auto Dark Mode support.
 - **Dark Block Editor** setting (off by default): dark post/page block editor interface (header,
   sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns
   dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays
-  excluded.
+  excluded. Requires WordPress 7.1 or later
+- **Darken Theme Design in the Editor** setting (off by default): the editing area also turns dark
+  while "Use theme styles" is on
 
 ### Changed
 
@@ -102,6 +105,7 @@ customization and Auto Dark Mode support.
 - Plugin-style settings keep their current format when an old migration is retried
 - The dark settings body class is only added when the dark stylesheet is loaded
 - Settings toggle switches have accessible text for screen readers
+- Block editor breadcrumb root link is readable in dark mode
 
 ## [0.4.1] - 2026-11-07
 
@@ -451,6 +455,9 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
   Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs,
   Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“
   deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen.
+  Erfordert WordPress 7.1 oder neuer
+- Einstellung **Theme-Design im Editor abdunkeln** (standardmäßig aus): der Bearbeitungsbereich wird
+  auch bei aktivierten „Theme-Stilen verwenden“ dunkel
 
 ### Geändert
 
@@ -463,6 +470,7 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 - Plugin-Stil-Einstellungen behalten ihr aktuelles Format, wenn eine alte Migration erneut läuft
 - Die Dark-Klasse der Einstellungsseite wird nur gesetzt, wenn das Dark-Stylesheet geladen ist
 - Die Schalter auf der Einstellungsseite haben einen zugänglichen Text für Screenreader
+- Der Breadcrumb-Link im Block-Editor ist im Dark Mode lesbar
 
 ## 0.4.1
 

@@ -65,6 +65,18 @@ msgid "Applies dark mode to the block editor for posts and pages. The editing ar
 msgstr "Applies dark mode to the block editor for posts and pages. The editing area turns dark when \"Use theme styles\" is turned off in the editor preferences, or when the theme has no editor styles."
 
 #: includes/settings-page.php
+msgid "Requires WordPress 7.1 or later."
+msgstr "Requires WordPress 7.1 or later."
+
+#: includes/settings-page.php
+msgid "Darken Theme Design in the Editor"
+msgstr "Darken Theme Design in the Editor"
+
+#: includes/settings-page.php
+msgid "Also darkens the editing area while \"Use theme styles\" is on. The editor then no longer shows your theme's real colors. Requires \"Dark Block Editor\"."
+msgstr "Also darkens the editing area while \"Use theme styles\" is on. The editor then no longer shows your theme's real colors. Requires \"Dark Block Editor\"."
+
+#: includes/settings-page.php
 msgid "Preset Themes"
 msgstr "Preset Themes"
 
