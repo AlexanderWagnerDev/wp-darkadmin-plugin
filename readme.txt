@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.4.1
+Stable tag: 0.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,14 @@ Yes, when "Dark Block Editor" is enabled under Settings > DarkAdmin. The editor 
 18. Duplicator - Backups
 
 == Changelog ==
+= 0.5.0 =
+* Added: "Dark Block Editor" setting (off by default): dark post/page block editor interface (header, sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays excluded.
+* Changed: Removed unused Gutenberg rules from the main stylesheets, which made the block editor copy the whole admin stylesheet into the editor canvas
+* Fixed: Custom CSS capability is enforced on every options.php save route
+* Fixed: Plugin-style settings keep their current format when an old migration is retried
+* Fixed: The dark settings body class is only added when the dark stylesheet is loaded
+* Fixed: Settings toggle switches have accessible text for screen readers
+
 = 0.4.1 =
 * Added: Dark mode for Appearance > Fonts (font-library.php, WordPress 7.0+): library, upload and Google Fonts install tabs, font cards, footer bar and readable font previews
 * Added: darkadmin-wpds.css with shared dark styles for WordPress Design System screens (Fonts, Connectors, AI plugin screens), loaded automatically

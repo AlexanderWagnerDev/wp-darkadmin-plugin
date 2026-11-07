@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-07
+
 ### Added
 
 - **Dark Block Editor** setting (Settings > DarkAdmin > General, off by default): dark styles for the
@@ -30,6 +32,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   triggers a retry, instead of deleting the newer value.
 - Do not add the dark settings body class when the dark stylesheet was not enqueued for the current
   page or user.
+- Give the settings toggle switches accessible text, so each wrapping toggle label has a name for
+  screen readers.
+
+### Maintenance
+
 - Make the Plugin Check Trunk workflow pass `wp-version: trunk` so it no longer duplicates the stable
   Plugin Check run.
 

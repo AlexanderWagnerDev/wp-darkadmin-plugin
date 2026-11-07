@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.4.1
+Stable tag: 0.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,14 @@ Ja, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert i
 18. Duplicator - Backups
 
 == Changelog ==
+= 0.5.0 =
+* Neu: Einstellung „Dunkler Block-Editor“ (standardmäßig aus): dunkle Oberfläche im Block-Editor für Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs, Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen.
+* Geändert: Ungenutzte Gutenberg-Regeln aus den Haupt-Stylesheets entfernt, durch die der Block-Editor das komplette Admin-Stylesheet in den Bearbeitungsbereich kopiert hat
+* Fix: Die Berechtigung für eigenes CSS wird bei jedem Speichern über options.php geprüft
+* Fix: Plugin-Stil-Einstellungen behalten ihr aktuelles Format, wenn eine alte Migration erneut läuft
+* Fix: Die Dark-Klasse der Einstellungsseite wird nur gesetzt, wenn das Dark-Stylesheet geladen ist
+* Fix: Die Schalter auf der Einstellungsseite haben einen zugänglichen Text für Screenreader
+
 = 0.4.1 =
 * Neu: Dark Mode für Design > Schriftarten (font-library.php, WordPress 7.0+): Bibliothek, Hochladen, Google-Fonts-Installation, Schrift-Karten, Fußleiste und lesbare Schriftvorschauen
 * Neu: darkadmin-wpds.css mit gemeinsamen Dark-Stilen für WordPress-Design-System-Seiten (Schriftarten, Konnektoren, AI-Plugin-Seiten), lädt automatisch
