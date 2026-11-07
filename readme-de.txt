@@ -70,6 +70,10 @@ Ja, ab WordPress 7.1, wenn „Dunkler Block-Editor“ unter Einstellungen -> Dar
 16. Yoast SEO - Site-Funktionen
 17. Newsletter - Abonnement-Einstellungen
 18. Duplicator - Backups
+19. Block-Editor - Dark Mode aktiv („Theme-Stile verwenden“ aus)
+20. Block-Editor - Ausgewählter Block mit Block-Toolbar und Einstellungs-Seitenleiste
+21. Block-Editor - Block-Auswahl
+22. Einstellungsseite - Dunkler Block-Editor und Theme-Design im Editor abdunkeln
 
 == Changelog ==
 = 0.5.0 =
