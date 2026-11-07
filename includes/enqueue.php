@@ -57,6 +57,15 @@ add_action(
 		);
 		register_setting(
 			'darkadmin_settings',
+			'darkadmin_block_editor',
+			array(
+				'type'              => 'boolean',
+				'sanitize_callback' => 'darkadmin_sanitize_bool',
+				'default'           => false,
+			)
+		);
+		register_setting(
+			'darkadmin_settings',
 			'darkadmin_colors',
 			array(
 				'type'              => 'array',
@@ -228,9 +237,11 @@ function darkadmin_current_page_slug(): string {
 /**
  * Determines whether DarkAdmin must leave an editor screen untouched.
  *
- * Block and site editors manage their own canvas color scheme. The classic
- * editor is deliberately supported by the main stylesheet and must not be
- * excluded merely because it also uses post.php or post-new.php.
+ * The site editor always keeps its own color scheme, because its canvas is a
+ * preview of the theme design. The block post editor (post.php, post-new.php)
+ * is only styled when the "Dark Block Editor" option is enabled. The classic
+ * editor is always supported by the main stylesheet and must not be excluded
+ * merely because it also uses post.php or post-new.php.
  *
  * @param string         $pagenow Current admin filename.
  * @param WP_Screen|null $screen  Current screen, when available.
@@ -241,11 +252,35 @@ function darkadminIsEditorScreenExcluded( string $pagenow, $screen = null ): boo
 		return true;
 	}
 
+	if ( ! darkadminIsBlockPostEditor( $pagenow, $screen ) ) {
+		return false;
+	}
+
+	return ! darkadminIsBlockEditorStylingEnabled();
+}
+
+/**
+ * Whether the current screen is the block editor for a post (post.php, post-new.php).
+ *
+ * @param string         $pagenow Current admin filename.
+ * @param WP_Screen|null $screen  Current screen, when available.
+ * @return bool
+ */
+function darkadminIsBlockPostEditor( string $pagenow, $screen = null ): bool {
 	if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) || ! $screen instanceof WP_Screen ) {
 		return false;
 	}
 
 	return method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor();
+}
+
+/**
+ * Whether the "Dark Block Editor" option is enabled.
+ *
+ * @return bool
+ */
+function darkadminIsBlockEditorStylingEnabled(): bool {
+	return darkadmin_sanitize_bool( get_option( 'darkadmin_block_editor', false ) );
 }
 // phpcs:enable WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 
@@ -262,13 +297,8 @@ add_action(
 			return;
 		}
 
-		$raw_exclusions = darkadmin_read_string_option( 'darkadmin_excluded_pages' );
-		if ( '' !== $raw_exclusions ) {
-			$user_excluded = darkadmin_parse_excluded_pages( $raw_exclusions );
-			$page_slug     = darkadmin_current_page_slug();
-			if ( darkadmin_is_page_excluded( $user_excluded, $pagenow, $hook_suffix, $page_slug ) ) {
-				return;
-			}
+		if ( darkadmin_is_current_page_user_excluded( (string) $pagenow, $hook_suffix ) ) {
+			return;
 		}
 
 		$preset   = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
@@ -382,8 +412,126 @@ add_action(
 		darkadmin_enqueue_plugin_styles();
 		darkadmin_enqueue_boot_wpds_styles();
 		darkadmin_enqueue_wordpress_ai_styles();
+
+		if ( darkadminIsBlockPostEditor( (string) $pagenow, $screen ) ) {
+			darkadmin_enqueue_block_editor_styles();
+		}
 	}
 );
+
+/**
+ * Whether the user's "Excluded Pages" list matches the current admin page.
+ *
+ * @param string $pagenow     Current $pagenow value (e.g. 'admin.php').
+ * @param string $hook_suffix Current admin page hook suffix.
+ * @return bool
+ */
+function darkadmin_is_current_page_user_excluded( string $pagenow, string $hook_suffix ): bool {
+	$raw_exclusions = darkadmin_read_string_option( 'darkadmin_excluded_pages' );
+	if ( '' === $raw_exclusions ) {
+		return false;
+	}
+
+	return darkadmin_is_page_excluded(
+		darkadmin_parse_excluded_pages( $raw_exclusions ),
+		$pagenow,
+		$hook_suffix,
+		darkadmin_current_page_slug()
+	);
+}
+
+/**
+ * Enqueues the dark styles for the block editor interface (header, sidebars,
+ * inserter, popovers, modals). The editor canvas is styled separately through
+ * darkadmin_block_editor_canvas_settings(), because it renders in an iframe.
+ *
+ * @return void
+ */
+function darkadmin_enqueue_block_editor_styles(): void {
+	darkadmin_enqueue_boot_wpds_styles( true );
+
+	wp_enqueue_style(
+		'darkadmin-block-editor',
+		DARKADMIN_URL . 'assets/css/darkadmin-block-editor.css',
+		array( 'darkadmin-darkmode', 'darkadmin-wpds', 'wp-components', 'wp-block-editor', 'wp-editor', 'wp-edit-post' ),
+		DARKADMIN_VERSION
+	);
+}
+
+/**
+ * Builds the dark stylesheet for the block editor canvas.
+ *
+ * The canvas is an iframe that does not inherit the admin :root variables, so
+ * the resolved color values are written directly into the CSS. Selectors are
+ * relative to the canvas body; the editor scopes them to .editor-styles-wrapper.
+ *
+ * @return string
+ */
+function darkadmin_block_editor_canvas_css(): string {
+	$preset    = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
+	$fallbacks = darkadmin_preset_fallbacks( $preset );
+	$c         = wp_parse_args( (array) get_option( 'darkadmin_colors', array() ), $fallbacks );
+
+	$sc = static function ( string $k ) use ( $c, $fallbacks ) {
+		return darkadmin_read_color_value( $c[ $k ] ?? null, $fallbacks[ $k ] );
+	};
+
+	// All values come from darkadmin_read_color_value(), which runs sanitize_hex_color().
+	// Block themes keep their global styles in the canvas even with "Use theme
+	// styles" off, so body colors use !important and element rules are prefixed
+	// with :root to outrank the theme's :root :where() rules. Colors chosen per
+	// block (preset classes with !important, inline styles) still take priority.
+	return 'body{'
+		. "background-color:{$sc('bg')} !important;"
+		. "color:{$sc('text')} !important;"
+		. '}'
+		. ':root :is(h1,h2,h3,h4,h5,h6){color:inherit;}'
+		. ":root a:where(:not(.wp-element-button)){color:{$sc('link')};}"
+		. ":root a:where(:not(.wp-element-button)):hover{color:{$sc('link_hover')};}"
+		. ":root :is(code,kbd,pre,.wp-block-code){background-color:{$sc('surface1')};color:inherit;}"
+		. ":root :is(figcaption,.wp-element-caption){color:{$sc('text_muted')};}"
+		. ":root :is(hr,.wp-block-separator){border-color:{$sc('border')};}"
+		. ":root ::selection{background-color:{$sc('primary')};color:{$sc('text_on_primary')};}"
+		. ":root [data-rich-text-placeholder]::after{color:{$sc('text_muted')};opacity:1;}"
+		. ":root :is(.components-placeholder,.block-editor-media-placeholder){background-color:{$sc('surface1')};color:{$sc('text')};box-shadow:inset 0 0 0 1px {$sc('border')};}"
+		. ":root .components-placeholder :is(.components-placeholder__label,.components-placeholder__instructions){color:{$sc('text')};}";
+}
+
+/**
+ * Adds the dark canvas stylesheet to the block editor's default editor styles.
+ *
+ * The block editor uses "defaultEditorStyles" when "Use theme styles" is turned
+ * off or when the theme has no editor styles of its own. Themes that style the
+ * editor keep their WYSIWYG preview until the user turns their styles off.
+ *
+ * @param array<string, mixed>    $settings Block editor settings.
+ * @param WP_Block_Editor_Context $context  Block editor context.
+ * @return array<string, mixed>
+ */
+function darkadmin_block_editor_canvas_settings( $settings, $context ) {
+	if ( ! is_array( $settings ) || ! $context instanceof WP_Block_Editor_Context || 'core/edit-post' !== $context->name ) {
+		return $settings;
+	}
+
+	if ( ! is_admin() || ! darkadmin_is_dark_mode_active() || ! darkadminIsBlockEditorStylingEnabled() ) {
+		return $settings;
+	}
+
+	global $pagenow, $hook_suffix;
+	$page = is_string( $pagenow ) ? $pagenow : '';
+	if ( darkadmin_is_current_page_user_excluded( $page, is_string( $hook_suffix ) ? $hook_suffix : $page ) ) {
+		return $settings;
+	}
+
+	$styles = isset( $settings['defaultEditorStyles'] ) && is_array( $settings['defaultEditorStyles'] ) ? $settings['defaultEditorStyles'] : array();
+
+	$styles[] = array( 'css' => darkadmin_block_editor_canvas_css() );
+
+	$settings['defaultEditorStyles'] = $styles;
+
+	return $settings;
+}
+add_filter( 'block_editor_settings_all', 'darkadmin_block_editor_canvas_settings', 10, 2 );
 
 add_action(
 	'admin_enqueue_scripts',

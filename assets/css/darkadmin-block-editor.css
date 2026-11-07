@@ -1,0 +1,566 @@
+/*
+ * DarkAdmin: block editor interface (post.php / post-new.php).
+ *
+ * Loaded only when "Dark Block Editor" is enabled. Covers the editor chrome
+ * (header, sidebars, inserter, list view, popovers, modals, publish panel).
+ * The editor canvas renders in an iframe and is styled separately through the
+ * block editor settings (see darkadmin_block_editor_canvas_css()).
+ *
+ * Do not add selectors containing ".editor-styles-wrapper" or ".wp-block" to
+ * this file: the editor copies any admin stylesheet that matches them into the
+ * canvas iframe, where these interface rules would leak into post content.
+ */
+
+/* -----------------------------------------------------------------------------
+   Component color variables (@wordpress/components)
+   -------------------------------------------------------------------------- */
+body.block-editor-page,
+body.block-editor-page .components-popover,
+body.block-editor-page .components-modal__frame {
+  --wp-components-color-foreground: var(--adm-text);
+  --wp-components-color-foreground-inverted: var(--adm-bg);
+  --wp-components-color-background: var(--adm-surface-1);
+  --wp-components-color-gray-100: var(--adm-surface-2);
+  --wp-components-color-gray-200: var(--adm-surface-3);
+  --wp-components-color-gray-300: var(--adm-border);
+  --wp-components-color-gray-400: var(--adm-border-hover);
+  --wp-components-color-gray-600: var(--adm-text-soft);
+  --wp-components-color-gray-700: var(--adm-text-muted);
+  --wp-components-color-gray-800: var(--adm-text);
+}
+
+/* -----------------------------------------------------------------------------
+   Layout skeleton
+   -------------------------------------------------------------------------- */
+body.block-editor-page,
+body.block-editor-page #wpwrap,
+body.block-editor-page #wpcontent,
+body.block-editor-page #wpbody,
+body.block-editor-page #wpbody-content,
+body.block-editor-page .interface-interface-skeleton__body,
+body.block-editor-page .interface-interface-skeleton__content,
+body.block-editor-page .editor-visual-editor,
+body.block-editor-page .edit-post-visual-editor {
+  background-color: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .interface-interface-skeleton__header,
+body.block-editor-page .editor-header,
+body.block-editor-page .edit-post-header {
+  background-color: var(--adm-surface-1) !important;
+  border-bottom-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .interface-interface-skeleton__sidebar,
+body.block-editor-page .interface-interface-skeleton__secondary-sidebar,
+body.block-editor-page .interface-complementary-area,
+body.block-editor-page .interface-complementary-area-header,
+body.block-editor-page .editor-sidebar,
+body.block-editor-page .editor-sidebar__panel-tabs,
+body.block-editor-page .block-editor-block-inspector {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .interface-interface-skeleton__sidebar,
+body.block-editor-page .interface-interface-skeleton__secondary-sidebar {
+  border-left-color: var(--adm-border) !important;
+  border-right-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .interface-interface-skeleton__footer,
+body.block-editor-page .block-editor-block-breadcrumb {
+  background-color: var(--adm-surface-1) !important;
+  border-top-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .block-editor-block-breadcrumb__current {
+  color: var(--adm-text) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Header: document bar, buttons
+   -------------------------------------------------------------------------- */
+body.block-editor-page .editor-document-bar {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .editor-document-bar:hover {
+  background-color: var(--adm-surface-3) !important;
+}
+
+body.block-editor-page .editor-document-bar__post-title,
+body.block-editor-page .editor-document-bar__title,
+body.block-editor-page .editor-document-bar__post-type-label {
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .editor-header .components-button:not(.is-primary):not(:disabled):not([aria-disabled="true"]),
+body.block-editor-page .editor-header .components-button:not(.is-primary) svg {
+  color: var(--adm-text) !important;
+  fill: currentColor;
+}
+
+body.block-editor-page .editor-header .components-button:disabled,
+body.block-editor-page .editor-header .components-button[aria-disabled="true"] {
+  color: var(--adm-text-soft) !important;
+}
+
+body.block-editor-page .editor-header .components-button.is-pressed:not(.is-primary),
+body.block-editor-page .editor-header .components-button.is-pressed:not(.is-primary) svg {
+  background-color: var(--adm-text) !important;
+  color: var(--adm-bg) !important;
+}
+
+body.block-editor-page .editor-post-saved-state,
+body.block-editor-page .editor-post-save-draft {
+  color: var(--adm-text-muted) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Generic components: text, buttons
+   -------------------------------------------------------------------------- */
+body.block-editor-page .components-base-control__label,
+body.block-editor-page .components-base-control label,
+body.block-editor-page .components-input-control__label,
+body.block-editor-page .components-truncate,
+body.block-editor-page .components-heading,
+body.block-editor-page .components-text,
+body.block-editor-page .components-panel__body-title,
+body.block-editor-page .components-panel__body-toggle.components-button,
+body.block-editor-page .components-panel__header,
+body.block-editor-page .editor-post-panel__row-label,
+body.block-editor-page .editor-post-card-panel__title,
+body.block-editor-page .block-editor-block-card__title,
+body.block-editor-page .block-editor-block-card__name {
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-base-control__help,
+body.block-editor-page .components-form-token-field__help,
+body.block-editor-page .editor-post-card-panel__description,
+body.block-editor-page .editor-post-content-information,
+body.block-editor-page .editor-post-last-edited-panel,
+body.block-editor-page .block-editor-block-card__description {
+  color: var(--adm-text-muted) !important;
+}
+
+body.block-editor-page .components-panel,
+body.block-editor-page .components-panel__body,
+body.block-editor-page .components-panel__header,
+body.block-editor-page .components-panel__row,
+body.block-editor-page .block-editor-block-card,
+body.block-editor-page .editor-post-card-panel,
+body.block-editor-page .components-tools-panel {
+  background-color: transparent !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-panel__body-toggle.components-button:hover,
+body.block-editor-page .components-panel__body-toggle.components-button:focus {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body.block-editor-page .components-panel__arrow,
+body.block-editor-page .components-panel__body-toggle svg {
+  color: var(--adm-text) !important;
+  fill: currentColor !important;
+}
+
+body.block-editor-page .components-button.is-secondary,
+body.block-editor-page .components-button.is-tertiary,
+body.block-editor-page .editor-post-featured-image__toggle {
+  background-color: transparent !important;
+  box-shadow: inset 0 0 0 1px var(--adm-border-hover) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-button.is-tertiary {
+  box-shadow: none !important;
+}
+
+body.block-editor-page .components-button.is-secondary:hover:not(:disabled),
+body.block-editor-page .components-button.is-tertiary:hover:not(:disabled),
+body.block-editor-page .editor-post-featured-image__toggle:hover {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-button.is-secondary.is-destructive,
+body.block-editor-page .components-button.is-tertiary.is-destructive {
+  box-shadow: inset 0 0 0 1px var(--adm-danger) !important;
+  color: var(--adm-danger) !important;
+}
+
+body.block-editor-page .components-button.is-link {
+  color: var(--adm-link) !important;
+}
+
+body.block-editor-page .components-button.is-link:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+body.block-editor-page .components-button.is-primary:disabled,
+body.block-editor-page .components-button.is-primary[aria-disabled="true"] {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text-soft) !important;
+}
+
+body.block-editor-page .block-editor-tabbed-sidebar__close-button {
+  background-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .block-editor-block-styles__item {
+  border-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .block-editor-block-styles__item.is-active {
+  background-color: var(--adm-primary) !important;
+  box-shadow: none !important;
+  color: var(--adm-text-on-primary) !important;
+}
+
+/* Icon-only buttons in sidebars and popovers. */
+body.block-editor-page .components-button.has-icon:not(.is-primary):not(.is-pressed) {
+  color: var(--adm-text);
+}
+
+/* -----------------------------------------------------------------------------
+   Tabs
+   -------------------------------------------------------------------------- */
+body.block-editor-page [role="tablist"] [role="tab"],
+body.block-editor-page .components-tab-panel__tabs-item {
+  color: var(--adm-text-muted) !important;
+}
+
+body.block-editor-page [role="tablist"] [role="tab"][aria-selected="true"],
+body.block-editor-page [role="tablist"] [role="tab"]:hover,
+body.block-editor-page .components-tab-panel__tabs-item.is-active,
+body.block-editor-page .components-tab-panel__tabs-item:hover {
+  color: var(--adm-text) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Form controls
+   -------------------------------------------------------------------------- */
+body.block-editor-page .components-text-control__input,
+body.block-editor-page .components-textarea-control__input,
+body.block-editor-page .components-select-control__input,
+body.block-editor-page .components-input-control__input,
+body.block-editor-page .components-form-token-field__input,
+body.block-editor-page .components-combobox-control__input,
+body.block-editor-page .components-search-control__input,
+body.block-editor-page .block-editor-inserter__search input,
+body.block-editor-page .editor-post-excerpt textarea,
+body.block-editor-page input[type="text"],
+body.block-editor-page input[type="search"],
+body.block-editor-page input[type="url"],
+body.block-editor-page input[type="number"],
+body.block-editor-page textarea,
+body.block-editor-page select {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-input-control__container,
+body.block-editor-page .components-form-token-field__input-container,
+body.block-editor-page .components-search-control,
+body.block-editor-page .components-custom-select-control__button,
+body.block-editor-page .components-unit-control-wrapper {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-input-control__backdrop {
+  border-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .components-form-token-field__input-container {
+  border-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .components-form-token-field__token-text,
+body.block-editor-page .components-form-token-field__remove-token {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page ::placeholder {
+  color: var(--adm-text-soft) !important;
+}
+
+body.block-editor-page .components-checkbox-control__input[type="checkbox"],
+body.block-editor-page .components-radio-control__input[type="radio"] {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+body.block-editor-page .components-checkbox-control__input[type="checkbox"]:checked,
+body.block-editor-page .components-radio-control__input[type="radio"]:checked {
+  background-color: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+}
+
+body.block-editor-page .components-toggle-group-control {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .components-toggle-group-control-option-base {
+  color: var(--adm-text-muted) !important;
+}
+
+body.block-editor-page .components-toggle-group-control-option-base[aria-checked="true"],
+body.block-editor-page .components-toggle-group-control-option-base[aria-pressed="true"] {
+  color: var(--adm-text-on-primary) !important;
+}
+
+body.block-editor-page .components-toggle-group-control__backdrop-view {
+  background-color: var(--adm-primary) !important;
+}
+
+body.block-editor-page .editor-post-taxonomies__hierarchical-terms-list,
+body.block-editor-page .editor-post-taxonomies__hierarchical-terms-choice label {
+  color: var(--adm-text) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Popovers, dropdown menus, block toolbar
+   -------------------------------------------------------------------------- */
+body.block-editor-page .components-popover__content,
+body.block-editor-page .components-dropdown__content .components-popover__content,
+body.block-editor-page .components-dropdown-menu__menu,
+body.block-editor-page .block-editor-block-toolbar,
+body.block-editor-page .block-editor-block-contextual-toolbar,
+body.block-editor-page .block-editor-block-contextual-toolbar.is-fixed,
+body.block-editor-page .components-accessible-toolbar,
+body.block-editor-page .block-editor-block-switcher__popover-preview,
+body.block-editor-page .block-editor-link-control,
+body.block-editor-page .block-editor-format-toolbar,
+body.block-editor-page .components-autocomplete__results,
+body.block-editor-page .block-editor-inserter__quick-inserter {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-popover:not(.is-unstyled) .components-popover__content {
+  box-shadow: 0 0 0 1px var(--adm-border), var(--adm-shadow-md) !important;
+  outline-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .block-editor-block-contextual-toolbar,
+body.block-editor-page .components-toolbar-group,
+body.block-editor-page .components-toolbar,
+body.block-editor-page .block-editor-block-toolbar .components-toolbar-group,
+body.block-editor-page .block-editor-block-toolbar .components-toolbar {
+  border-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .components-menu-group + .components-menu-group,
+body.block-editor-page .components-dropdown-menu__menu .components-menu-group + .components-menu-group {
+  border-top-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .components-menu-item__button,
+body.block-editor-page .components-menu-item__button.components-button,
+body.block-editor-page .components-menu-items-choice,
+body.block-editor-page .components-dropdown-menu__menu-item,
+body.block-editor-page .block-editor-block-toolbar .components-button,
+body.block-editor-page .block-editor-block-contextual-toolbar .components-button,
+body.block-editor-page .components-autocomplete__result.components-button {
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-menu-item__button:hover:not(:disabled),
+body.block-editor-page .components-menu-item__button:focus:not(:disabled),
+body.block-editor-page .components-autocomplete__result.components-button.is-selected,
+body.block-editor-page .components-autocomplete__result.components-button:hover {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-menu-item__shortcut,
+body.block-editor-page .components-menu-item__info,
+body.block-editor-page .components-menu-group__label {
+  color: var(--adm-text-muted) !important;
+}
+
+body.block-editor-page .components-menu-item__button.is-destructive {
+  color: var(--adm-danger) !important;
+}
+
+/* Popover arrows. */
+body.block-editor-page .components-popover__triangle-bg {
+  fill: var(--adm-surface-1) !important;
+}
+
+body.block-editor-page .components-popover__triangle-border {
+  stroke: var(--adm-border) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Inserter and list view
+   -------------------------------------------------------------------------- */
+body.block-editor-page .editor-inserter-sidebar,
+body.block-editor-page .editor-list-view-sidebar,
+body.block-editor-page .block-editor-inserter__menu,
+body.block-editor-page .block-editor-inserter__main-area,
+body.block-editor-page .block-editor-inserter__panel-content,
+body.block-editor-page .block-editor-inserter__panel-header,
+body.block-editor-page .block-editor-inserter__search,
+body.block-editor-page .block-editor-tabbed-sidebar,
+body.block-editor-page .block-editor-tabbed-sidebar__tablist-and-close-button,
+body.block-editor-page .block-editor-inserter__category-panel,
+body.block-editor-page .block-editor-inserter__media-panel,
+body.block-editor-page .block-editor-inserter__patterns-category-panel {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .block-editor-inserter__panel-title,
+body.block-editor-page .block-editor-inserter__panel-title button,
+body.block-editor-page .block-editor-block-types-list__item,
+body.block-editor-page .block-editor-block-types-list__item-title,
+body.block-editor-page .block-editor-block-types-list__item-icon,
+body.block-editor-page .block-editor-inserter__category-tab,
+body.block-editor-page .block-editor-list-view-block-select-button,
+body.block-editor-page .block-editor-list-view-leaf,
+body.block-editor-page .block-editor-list-view-leaf .block-editor-list-view-block__title {
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .block-editor-block-types-list__item:hover:not(:disabled),
+body.block-editor-page .block-editor-inserter__category-tab:hover,
+body.block-editor-page .block-editor-inserter__category-tab[aria-selected="true"],
+body.block-editor-page .block-editor-list-view-leaf:not(.is-selected):hover td {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body.block-editor-page .block-editor-list-view-leaf.is-selected td,
+body.block-editor-page .block-editor-list-view-leaf.is-selected .block-editor-list-view-block-select-button {
+  background-color: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+
+body.block-editor-page .block-editor-inserter__no-results,
+body.block-editor-page .block-editor-inserter__tips,
+body.block-editor-page .block-editor-inserter__preview-container,
+body.block-editor-page .block-editor-inserter__preview-content-missing {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Modals (preferences, keyboard shortcuts, welcome guide, publish panel)
+   -------------------------------------------------------------------------- */
+body.block-editor-page .components-modal__screen-overlay {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+body.block-editor-page .components-modal__frame,
+body.block-editor-page .components-modal__header,
+body.block-editor-page .components-modal__content,
+body.block-editor-page .components-guide,
+body.block-editor-page .components-guide__footer,
+body.block-editor-page .preferences-modal,
+body.block-editor-page .preferences-modal .components-navigator-screen,
+body.block-editor-page .commands-command-menu,
+body.block-editor-page .commands-command-menu__header,
+body.block-editor-page .editor-post-publish-panel,
+body.block-editor-page .editor-post-publish-panel__header,
+body.block-editor-page .editor-post-publish-panel__content,
+body.block-editor-page .editor-post-publish-panel__footer,
+body.block-editor-page .editor-post-publish-panel__prepublish,
+body.block-editor-page .editor-entities-saved-states__panel,
+body.block-editor-page .entities-saved-states__panel-header {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-modal__header-heading,
+body.block-editor-page .components-guide__page-heading,
+body.block-editor-page .components-guide__page-text,
+body.block-editor-page .edit-post-welcome-guide__heading,
+body.block-editor-page .edit-post-welcome-guide__text,
+body.block-editor-page .preferences-modal__section-title,
+body.block-editor-page .preferences-modal__option-label,
+body.block-editor-page .editor-keyboard-shortcut-help-modal__section-title,
+body.block-editor-page .editor-keyboard-shortcut-help-modal__shortcut-description,
+body.block-editor-page .commands-command-menu__container [cmdk-item] {
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .preferences-modal__section-description,
+body.block-editor-page .preferences-modal__option .components-base-control__help {
+  color: var(--adm-text-muted) !important;
+}
+
+body.block-editor-page .components-guide .components-guide__page-control li[aria-current="step"] button {
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .preferences-modal__tabs,
+body.block-editor-page .preferences-modal .components-navigator-screen .components-item,
+body.block-editor-page .editor-keyboard-shortcut-help-modal__shortcut {
+  border-color: var(--adm-border) !important;
+}
+
+body.block-editor-page .editor-keyboard-shortcut-help-modal__shortcut-key-combination kbd,
+body.block-editor-page .editor-keyboard-shortcut-help-modal__shortcut-key {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .commands-command-menu__container [cmdk-input] {
+  background-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .commands-command-menu__container [cmdk-item][aria-selected="true"] {
+  background-color: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Notices and meta boxes
+   -------------------------------------------------------------------------- */
+body.block-editor-page .components-notice {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body.block-editor-page .components-notice.is-success {
+  background-color: color-mix(in srgb, var(--adm-success) 18%, var(--adm-surface-1)) !important;
+}
+
+body.block-editor-page .components-notice.is-warning {
+  background-color: color-mix(in srgb, var(--adm-warning) 18%, var(--adm-surface-1)) !important;
+}
+
+body.block-editor-page .components-notice.is-error {
+  background-color: color-mix(in srgb, var(--adm-danger) 18%, var(--adm-surface-1)) !important;
+}
+
+body.block-editor-page .edit-post-layout__metaboxes,
+body.block-editor-page .edit-post-meta-boxes-main,
+body.block-editor-page .edit-post-meta-boxes-main__presenter,
+body.block-editor-page .edit-post-meta-boxes-main__liner,
+body.block-editor-page .edit-post-meta-boxes-area,
+body.block-editor-page .edit-post-meta-boxes-area .postbox,
+body.block-editor-page .edit-post-meta-boxes-area .postbox-header {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}

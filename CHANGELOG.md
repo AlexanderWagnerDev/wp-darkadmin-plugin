@@ -8,6 +8,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **Dark Block Editor** setting (Settings > DarkAdmin > General, off by default): dark styles for the
+  block editor on `post.php` / `post-new.php`, including header, sidebars, inserter, list view, block
+  toolbar, popovers, menus, modals, preferences and the publish panel
+  (`assets/css/darkadmin-block-editor.css`). The editing canvas turns dark when "Use theme styles"
+  is turned off in the editor preferences or the theme has no editor styles; otherwise the theme's
+  own design stays visible as a WYSIWYG preview. The site editor stays excluded.
+
+### Changed
+
+- Removed the unused Gutenberg rules from the main stylesheets. Their `.editor-styles-wrapper`
+  selector made the block editor copy the whole admin stylesheet into the editor canvas iframe.
+
 ### Fixed
 
 - Enforce the `edit_css` capability for Custom CSS on every core `options.php` save route, including a

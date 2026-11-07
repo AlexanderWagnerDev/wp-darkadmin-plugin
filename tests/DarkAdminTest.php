@@ -19,6 +19,7 @@ class DarkAdminTest extends WP_UnitTestCase {
         delete_option( 'darkadmin_custom_css' );
         delete_option( 'darkadmin_excluded_pages' );
         delete_option( 'darkadmin_auto_darken' );
+        delete_option( 'darkadmin_block_editor' );
         delete_option( 'darkadmin_test_non_string' );
     }
 
@@ -460,6 +461,102 @@ class DarkAdminTest extends WP_UnitTestCase {
 
     public function test_regular_admin_screen_is_not_excluded(): void {
         $this->assertFalse( darkadminIsEditorScreenExcluded( 'plugins.php', WP_Screen::get( 'plugins' ) ) );
+    }
+
+    public function test_block_post_editor_is_not_excluded_when_block_editor_option_enabled(): void {
+        update_option( 'darkadmin_block_editor', true );
+        $screen = WP_Screen::get( 'post' );
+        $screen->is_block_editor( true );
+
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'post.php', $screen ) );
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'post-new.php', $screen ) );
+    }
+
+    public function test_site_editor_stays_excluded_when_block_editor_option_enabled(): void {
+        update_option( 'darkadmin_block_editor', true );
+
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'site-editor.php' ) );
+    }
+
+    public function test_block_editor_option_ignores_non_boolean_values(): void {
+        update_option( 'darkadmin_block_editor', [ 'yes' ] );
+
+        $this->assertFalse( darkadminIsBlockEditorStylingEnabled() );
+    }
+
+    // -------------------------------------------------------------------------
+    // Block editor canvas
+    // -------------------------------------------------------------------------
+
+    /**
+     * Runs the canvas settings filter on the dashboard screen as an administrator.
+     *
+     * @param string $context_name Block editor context name.
+     * @return array<string, mixed>
+     */
+    private function run_canvas_settings_filter( string $context_name = 'core/edit-post' ): array {
+        $previous_screen = get_current_screen();
+        wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
+        set_current_screen( 'dashboard' );
+
+        try {
+            $settings = array( 'defaultEditorStyles' => array( array( 'css' => 'body{font-size:18px}' ) ) );
+
+            return darkadmin_block_editor_canvas_settings( $settings, new WP_Block_Editor_Context( array( 'name' => $context_name ) ) );
+        } finally {
+            $GLOBALS['current_screen'] = $previous_screen;
+        }
+    }
+
+    public function test_canvas_styles_are_added_when_block_editor_option_enabled(): void {
+        update_option( 'darkadmin_dark_mode_enabled', true );
+        update_option( 'darkadmin_block_editor', true );
+
+        $styles = $this->run_canvas_settings_filter()['defaultEditorStyles'];
+
+        $this->assertCount( 2, $styles );
+        $this->assertSame( 'body{font-size:18px}', $styles[0]['css'] );
+        $this->assertStringContainsString( 'background-color:', $styles[1]['css'] );
+    }
+
+    public function test_canvas_styles_are_not_added_when_block_editor_option_disabled(): void {
+        update_option( 'darkadmin_dark_mode_enabled', true );
+
+        $this->assertCount( 1, $this->run_canvas_settings_filter()['defaultEditorStyles'] );
+    }
+
+    public function test_canvas_styles_are_not_added_when_dark_mode_disabled(): void {
+        update_option( 'darkadmin_block_editor', true );
+
+        $this->assertCount( 1, $this->run_canvas_settings_filter()['defaultEditorStyles'] );
+    }
+
+    public function test_canvas_styles_are_not_added_to_other_editors(): void {
+        update_option( 'darkadmin_dark_mode_enabled', true );
+        update_option( 'darkadmin_block_editor', true );
+
+        $this->assertCount( 1, $this->run_canvas_settings_filter( 'core/edit-site' )['defaultEditorStyles'] );
+        $this->assertCount( 1, $this->run_canvas_settings_filter( 'core/edit-widgets' )['defaultEditorStyles'] );
+    }
+
+    public function test_canvas_css_uses_saved_colors_and_rejects_invalid_values(): void {
+        update_option( 'darkadmin_colors', [ 'bg' => '#123456', 'text' => 'red;}body{x:y' ] );
+
+        $css = darkadmin_block_editor_canvas_css();
+
+        $this->assertStringContainsString( 'background-color:#123456 !important', $css );
+        $this->assertStringNotContainsString( 'red;}', $css );
+        $this->assertStringContainsString( 'color:' . darkadmin_preset_fallbacks( 'modern' )['text'] . ' !important', $css );
+    }
+
+    public function test_block_editor_stylesheet_is_not_copied_into_canvas_iframe(): void {
+        // The editor copies admin stylesheets whose selectors contain these
+        // strings into the canvas iframe, where interface rules would leak.
+        $css = (string) file_get_contents( dirname( __DIR__ ) . '/assets/css/darkadmin-block-editor.css' );
+        $css = (string) preg_replace( '#/\*.*?\*/#s', '', $css );
+
+        $this->assertStringNotContainsString( '.editor-styles-wrapper', $css );
+        $this->assertStringNotContainsString( '.wp-block', $css );
     }
 
     // -------------------------------------------------------------------------

@@ -27,6 +27,8 @@ customization and Auto Dark Mode support.
 - Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users
   exist
 - Excluded Pages: specify admin pages where dark mode should not be applied
+- Dark Block Editor (optional): dark post/page block editor interface; the editing canvas turns
+  dark when "Use theme styles" is turned off
 
 ---
 

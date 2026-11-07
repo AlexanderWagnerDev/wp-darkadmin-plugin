@@ -22,6 +22,7 @@ function darkadmin_settings_page(): void {
 	// Options can be written outside the Settings API; reads below tolerate unexpected types.
 	$enabled          = (bool) get_option( 'darkadmin_dark_mode_enabled', false );
 	$auto_darken      = (bool) get_option( 'darkadmin_auto_darken', false );
+	$block_editor     = darkadminIsBlockEditorStylingEnabled();
 	$active_preset    = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
 	$preset_colors    = darkadmin_preset_fallbacks( $active_preset );
 	$preset_layout    = darkadmin_preset_layout_fallbacks( $active_preset );
@@ -154,6 +155,25 @@ function darkadmin_settings_page(): void {
 							<input type="hidden" name="darkadmin_auto_darken" value="0" />
 							<input type="checkbox" id="darkadmin_auto_darken" name="darkadmin_auto_darken" value="1"
 								<?php checked( true, $auto_darken ); ?> />
+							<span class="adm-slider" aria-hidden="true"></span>
+						</label>
+					</div>
+
+					<hr class="adm-field-divider" />
+
+					<div class="adm-field-row">
+						<div class="adm-field-info">
+							<label for="darkadmin_block_editor" class="adm-field-title">
+								<?php esc_html_e( 'Dark Block Editor', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</label>
+							<span class="adm-field-desc">
+								<?php esc_html_e( 'Applies dark mode to the block editor for posts and pages. The editing area turns dark when "Use theme styles" is turned off in the editor preferences, or when the theme has no editor styles.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</span>
+						</div>
+						<label class="adm-toggle">
+							<input type="hidden" name="darkadmin_block_editor" value="0" />
+							<input type="checkbox" id="darkadmin_block_editor" name="darkadmin_block_editor" value="1"
+								<?php checked( true, $block_editor ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
 						</label>
 					</div>
@@ -591,12 +611,13 @@ admin.php?page=my-plugin"
 					<p class="adm-field-desc" style="margin-top:8px;">
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php
-						// translators: %s: comma-separated list of always-excluded admin page filenames.
-						$excluded_note = __( 'The following pages are always excluded: %s', 'darkadmin-dark-mode-for-adminpanel' );
+						// translators: 1: site editor filename, 2: comma-separated list of block editor filenames.
+						$excluded_note = __( 'The site editor (%1$s) is always excluded. The block editor (%2$s) is excluded unless "Dark Block Editor" is enabled.', 'darkadmin-dark-mode-for-adminpanel' );
 						echo wp_kses(
 							sprintf(
 								$excluded_note,
-								'<code>site-editor.php</code>, <code>post-new.php</code>, <code>post.php</code>'
+								'<code>site-editor.php</code>',
+								'<code>post.php</code>, <code>post-new.php</code>'
 							),
 							array( 'code' => array() )
 						);

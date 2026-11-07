@@ -57,6 +57,14 @@ msgid "Automatically darkens bright backgrounds and lightens dark text from unkn
 msgstr "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
 
 #: includes/settings-page.php
+msgid "Dark Block Editor"
+msgstr "Dark Block Editor"
+
+#: includes/settings-page.php
+msgid "Applies dark mode to the block editor for posts and pages. The editing area turns dark when \"Use theme styles\" is turned off in the editor preferences, or when the theme has no editor styles."
+msgstr "Applies dark mode to the block editor for posts and pages. The editing area turns dark when \"Use theme styles\" is turned off in the editor preferences, or when the theme has no editor styles."
+
+#: includes/settings-page.php
 msgid "Preset Themes"
 msgstr "Preset Themes"
 
@@ -276,9 +284,10 @@ msgstr "One entry per line. Dark mode styles will not be loaded on matching admi
 msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
 msgstr "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
 
+#. translators: 1: site editor filename, 2: comma-separated list of block editor filenames.
 #: includes/settings-page.php
-msgid "The following pages are always excluded: %s"
-msgstr "The following pages are always excluded: %s"
+msgid "The site editor (%1$s) is always excluded. The block editor (%2$s) is excluded unless \"Dark Block Editor\" is enabled."
+msgstr "The site editor (%1$s) is always excluded. The block editor (%2$s) is excluded unless \"Dark Block Editor\" is enabled."
 
 #: includes/settings-page.php
 msgid "You do not have sufficient permissions to access this page."

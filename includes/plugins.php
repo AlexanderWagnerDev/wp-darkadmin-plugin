@@ -209,10 +209,12 @@ function darkadmin_is_boot_wpds_admin_screen(): bool {
 /**
  * Enqueues the core WPDS dark styles (token remap and Boot layout) on Boot screens.
  *
+ * @param bool $force Enqueue on any screen (used by the block editor, which also
+ *                    reads WPDS tokens).
  * @return void
  */
-function darkadmin_enqueue_boot_wpds_styles(): void {
-	if ( ! darkadmin_is_boot_wpds_admin_screen() ) {
+function darkadmin_enqueue_boot_wpds_styles( bool $force = false ): void {
+	if ( ! $force && ! darkadmin_is_boot_wpds_admin_screen() ) {
 		return;
 	}
 

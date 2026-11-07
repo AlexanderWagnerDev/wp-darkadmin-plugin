@@ -25,6 +25,7 @@ Funktionen:
 * Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra und WordPress AI & Connectors
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 * Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
+* Dunkler Block-Editor (optional): dunkle Oberfläche im Block-Editor für Beiträge und Seiten; der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist
 
 == Installation ==
 1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` hoch (oder installiere über "Plugins").
@@ -46,6 +47,9 @@ Benutzer, die auf Einstellungen > DarkAdmin zugreifen können und die WordPress-
 
 = Was ist der Auto Dark Mode? =
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
+
+= Funktioniert es im Block-Editor? =
+Ja, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert ist. Die Editor-Oberfläche wird sofort dunkel. Der Bearbeitungsbereich zeigt weiterhin das Design deines Themes als Vorschau, bis du im Editor „Theme-Stile verwenden“ deaktivierst (Optionen > Einstellungen > Erscheinungsbild); dann wird er ebenfalls dunkel. Der Website-Editor wird nicht verändert, da er das Design der Website als Vorschau zeigt.
 
 == Screenshots ==
 1. Settings Page - Standard (Dark Mode deaktiviert)
