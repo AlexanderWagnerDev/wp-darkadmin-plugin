@@ -49,7 +49,7 @@ Users who can access Settings > DarkAdmin and have the WordPress edit_css capabi
 An optional second toggle that uses JavaScript to dynamically darken bright backgrounds and lighten dark text from third-party plugins not covered by the built-in stylesheet. Requires Dark Mode to be active.
 
 = Does it work in the block editor? =
-Yes, on WordPress 7.1 or later, when "Dark Block Editor" is enabled under Settings > DarkAdmin. The editor interface turns dark right away. The editing area keeps your theme's design as a preview until you turn off "Use theme styles" in the editor (Options > Preferences > Appearance); then it turns dark too. To get a dark editing area while keeping theme styles on, also enable "Darken Theme Design in the Editor". The site editor is not changed, because it previews your site design.
+Yes, on WordPress 7.1 or later, when "Dark Block Editor" is enabled under Settings > DarkAdmin. The editor interface turns dark right away. If your theme has its own editor styles, the editing area keeps your theme's design as a preview until you turn off "Use theme styles" in the editor (Options > Preferences > Appearance); then it turns dark too. If your theme has no editor styles, the editing area is dark even with "Use theme styles" on. To get a dark editing area while keeping theme styles on, also enable "Darken Theme Design in the Editor". The site editor is not changed, because it previews your site design.
 
 == Screenshots ==
 1. Settings Page - Default (Dark Mode off)

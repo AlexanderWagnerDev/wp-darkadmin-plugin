@@ -49,7 +49,7 @@ Benutzer, die auf Einstellungen > DarkAdmin zugreifen können und die WordPress-
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 = Funktioniert es im Block-Editor? =
-Ja, ab WordPress 7.1, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert ist. Die Editor-Oberfläche wird sofort dunkel. Der Bearbeitungsbereich zeigt weiterhin das Design deines Themes als Vorschau, bis du im Editor „Theme-Stile verwenden“ deaktivierst (Optionen > Einstellungen > Erscheinungsbild); dann wird er ebenfalls dunkel. Wer einen dunklen Bearbeitungsbereich bei aktivierten Theme-Stilen möchte, schaltet zusätzlich „Theme-Design im Editor abdunkeln“ ein. Der Website-Editor wird nicht verändert, da er das Design der Website als Vorschau zeigt.
+Ja, ab WordPress 7.1, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert ist. Die Editor-Oberfläche wird sofort dunkel. Hat dein Theme eigene Editor-Stile, zeigt der Bearbeitungsbereich weiterhin das Design deines Themes als Vorschau, bis du im Editor „Theme-Stile verwenden“ deaktivierst (Optionen > Einstellungen > Erscheinungsbild); dann wird er ebenfalls dunkel. Hat dein Theme keine Editor-Stile, ist der Bearbeitungsbereich auch bei aktiviertem „Theme-Stile verwenden“ dunkel. Wer einen dunklen Bearbeitungsbereich bei aktivierten Theme-Stilen möchte, schaltet zusätzlich „Theme-Design im Editor abdunkeln“ ein. Der Website-Editor wird nicht verändert, da er das Design der Website als Vorschau zeigt.
 
 == Screenshots ==
 1. Settings Page - Standard (Dark Mode deaktiviert)
