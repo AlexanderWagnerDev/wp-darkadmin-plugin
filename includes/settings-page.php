@@ -133,6 +133,7 @@ function darkadmin_settings_page(): void {
 							</span>
 						</div>
 						<label class="adm-toggle">
+							<span class="screen-reader-text"><?php esc_html_e( 'Enable Dark Mode', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
 							<input type="hidden" name="darkadmin_dark_mode_enabled" value="0" />
 							<input type="checkbox" id="darkadmin_dark_mode_enabled" name="darkadmin_dark_mode_enabled" value="1"
 								<?php checked( true, $enabled ); ?> />
@@ -152,6 +153,7 @@ function darkadmin_settings_page(): void {
 							</span>
 						</div>
 						<label class="adm-toggle">
+							<span class="screen-reader-text"><?php esc_html_e( 'Auto Dark Mode', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
 							<input type="hidden" name="darkadmin_auto_darken" value="0" />
 							<input type="checkbox" id="darkadmin_auto_darken" name="darkadmin_auto_darken" value="1"
 								<?php checked( true, $auto_darken ); ?> />
@@ -171,6 +173,7 @@ function darkadmin_settings_page(): void {
 							</span>
 						</div>
 						<label class="adm-toggle">
+							<span class="screen-reader-text"><?php esc_html_e( 'Dark Block Editor', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
 							<input type="hidden" name="darkadmin_block_editor" value="0" />
 							<input type="checkbox" id="darkadmin_block_editor" name="darkadmin_block_editor" value="1"
 								<?php checked( true, $block_editor ); ?> />
