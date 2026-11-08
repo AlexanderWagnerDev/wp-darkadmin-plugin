@@ -224,7 +224,42 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     public function test_sanitize_layout_preserves_calc_shadow(): void {
-        $shadow = '0 0 0 1px calc(1px + 1px)';
+        $shadow = '0 0 calc(1px + 1px) rgba(0,0,0,.35)';
+
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset'    => 'modern',
+                'shadow_md' => $shadow,
+            ]
+        );
+
+        $this->assertSame( $shadow, $result['shadow_md'] );
+    }
+
+    public function test_sanitize_layout_rejects_unterminated_comment(): void {
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset'    => 'modern',
+                'shadow_md' => '0 0 0 1px /*',
+            ]
+        );
+
+        $this->assertSame( darkadmin_default_layout()['shadow_md'], $result['shadow_md'] );
+    }
+
+    public function test_sanitize_layout_rejects_unbalanced_parentheses(): void {
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset'    => 'modern',
+                'shadow_md' => '0 0 calc(1px + 1px',
+            ]
+        );
+
+        $this->assertSame( darkadmin_default_layout()['shadow_md'], $result['shadow_md'] );
+    }
+
+    public function test_sanitize_layout_preserves_closed_comment(): void {
+        $shadow = '0 0 0 1px /* note */';
 
         $result = darkadmin_sanitize_layout(
             [
@@ -347,8 +382,20 @@ class DarkAdminTest extends WP_UnitTestCase {
         );
     }
 
+    public function test_read_layout_value_rejects_disallowed_original_before_sanitizing(): void {
+        $this->assertSame( '8px', darkadmin_read_layout_value( 'none<b></b>', '8px' ) );
+    }
+
+    public function test_read_layout_value_rejects_unterminated_comment(): void {
+        $this->assertSame( '8px', darkadmin_read_layout_value( '0 0 0 1px /*', '8px' ) );
+    }
+
+    public function test_read_layout_value_rejects_unbalanced_parentheses(): void {
+        $this->assertSame( '8px', darkadmin_read_layout_value( '0 0 calc(1px + 1px', '8px' ) );
+    }
+
     public function test_read_layout_value_preserves_calc_and_custom_property(): void {
-        $calc  = '0 0 0 1px calc(1px + 1px)';
+        $calc   = '0 0 calc(1px + 1px) rgba(0,0,0,.35)';
         $custom = '0 0 0 1px var(--my_shadow)';
 
         $this->assertSame( $calc, darkadmin_read_layout_value( $calc, '8px' ) );

@@ -11,8 +11,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - The layout shadow field now accepts valid CSS values such as `calc()` expressions and custom
-  property names with underscores, while still rejecting values that could break out of the inline
-  stylesheet.
+  property names with underscores, while rejecting values that could break out of the inline
+  stylesheet, including unterminated comments and unbalanced functions.
 - Users with the `manage_options` capability, including custom roles and multisite super admins, are
   no longer listed in the User Access picker because dark mode always applies to them.
 

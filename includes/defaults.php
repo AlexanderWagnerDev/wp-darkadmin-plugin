@@ -477,12 +477,50 @@ function darkadmin_sanitize_colors( $input ): array {
  * quotes, so a stored value cannot escape its declaration or the inline
  * style element. It still permits the characters needed by common valid
  * values such as calc() expressions, custom properties and color functions.
+ * Comments and parentheses must also be balanced so an unterminated comment
+ * or function cannot consume the rest of the generated stylesheet.
  *
  * @param string $value Layout value.
  * @return bool
  */
 function darkadmin_is_valid_layout_value( string $value ): bool {
-	return (bool) preg_match( '/^[a-zA-Z0-9\s\-_.,%#()\/:+*]+$/', $value );
+	if ( ! preg_match( '/^[a-zA-Z0-9\s\-_.,%#()\/:+*]+$/', $value ) ) {
+		return false;
+	}
+
+	$depth      = 0;
+	$in_comment = false;
+	$length     = strlen( $value );
+
+	for ( $i = 0; $i < $length; $i++ ) {
+		$char = $value[ $i ];
+		$next = $i + 1 < $length ? $value[ $i + 1 ] : '';
+
+		if ( $in_comment ) {
+			if ( '*' === $char && '/' === $next ) {
+				$in_comment = false;
+				++$i;
+			}
+			continue;
+		}
+
+		if ( '/' === $char && '*' === $next ) {
+			$in_comment = true;
+			++$i;
+			continue;
+		}
+
+		if ( '(' === $char ) {
+			++$depth;
+		} elseif ( ')' === $char ) {
+			--$depth;
+			if ( $depth < 0 ) {
+				return false;
+			}
+		}
+	}
+
+	return ! $in_comment && 0 === $depth;
 }
 
 /**
@@ -656,9 +694,16 @@ function darkadmin_read_layout_value( $value, string $fallback ): string {
 		return $fallback;
 	}
 
+	// Validate the original value before sanitizing it. sanitize_text_field()
+	// strips tags, so a disallowed stored value such as "none<b></b>" would
+	// otherwise become "none" and pass the whitelist instead of falling back.
+	if ( ! darkadmin_is_valid_layout_value( $value ) ) {
+		return $fallback;
+	}
+
 	$sanitized = sanitize_text_field( $value );
 
-	if ( '' === trim( $sanitized ) || ! darkadmin_is_valid_layout_value( $sanitized ) ) {
+	if ( '' === trim( $sanitized ) ) {
 		return $fallback;
 	}
 
