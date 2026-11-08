@@ -471,6 +471,21 @@ function darkadmin_sanitize_colors( $input ): array {
 }
 
 /**
+ * Whether a layout value contains only characters used by valid CSS values.
+ *
+ * The pattern deliberately excludes semicolons, braces, angle brackets and
+ * quotes, so a stored value cannot escape its declaration or the inline
+ * style element. It still permits the characters needed by common valid
+ * values such as calc() expressions, custom properties and color functions.
+ *
+ * @param string $value Layout value.
+ * @return bool
+ */
+function darkadmin_is_valid_layout_value( string $value ): bool {
+	return (bool) preg_match( '/^[a-zA-Z0-9\s\-_.,%#()\/:+*]+$/', $value );
+}
+
+/**
  * Sanitize callback for the darkadmin_layout setting.
  *
  * Receives the submitted array from the Settings API (nonce already verified
@@ -519,10 +534,11 @@ function darkadmin_sanitize_layout( $input ): array {
 				$numeric = 0;
 			}
 			$raw = $numeric . $var_map[ $key ]['unit'];
-		} elseif ( ! preg_match( '/^[a-zA-Z0-9\s\-.,%#()\/:]+$/', $raw ) ) {
+		} elseif ( ! darkadmin_is_valid_layout_value( $raw ) ) {
 			// shadow_md: allow only safe CSS box-shadow values.
-			// Pattern permits: lengths (px/em/rem/%), colors (hex, rgb, rgba, hsl, hsla),
-			// keywords (inset, none), digits, spaces, commas, dots, slashes and parentheses.
+			// The shared pattern permits lengths (px/em/rem/%), colors (hex, rgb,
+			// rgba, hsl, hsla), keywords (inset, none), calc() operators, custom
+			// property names, spaces, commas, dots, slashes and parentheses.
 			$raw = $default;
 		}
 		$output[ $key ] = $raw;
@@ -642,5 +658,9 @@ function darkadmin_read_layout_value( $value, string $fallback ): string {
 
 	$sanitized = sanitize_text_field( $value );
 
-	return '' !== trim( $sanitized ) ? $sanitized : $fallback;
+	if ( '' === trim( $sanitized ) || ! darkadmin_is_valid_layout_value( $sanitized ) ) {
+		return $fallback;
+	}
+
+	return $sanitized;
 }

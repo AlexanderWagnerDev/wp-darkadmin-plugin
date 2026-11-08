@@ -223,6 +223,32 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( darkadmin_default_layout()['shadow_md'], $result['shadow_md'] );
     }
 
+    public function test_sanitize_layout_preserves_calc_shadow(): void {
+        $shadow = '0 0 0 1px calc(1px + 1px)';
+
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset'    => 'modern',
+                'shadow_md' => $shadow,
+            ]
+        );
+
+        $this->assertSame( $shadow, $result['shadow_md'] );
+    }
+
+    public function test_sanitize_layout_preserves_custom_property_with_underscore(): void {
+        $shadow = '0 0 0 1px var(--my_shadow)';
+
+        $result = darkadmin_sanitize_layout(
+            [
+                '_preset'    => 'modern',
+                'shadow_md' => $shadow,
+            ]
+        );
+
+        $this->assertSame( $shadow, $result['shadow_md'] );
+    }
+
     // -------------------------------------------------------------------------
     // darkadmin_sanitize_user_access_mode
     // -------------------------------------------------------------------------
@@ -314,6 +340,21 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( '12px', darkadmin_read_layout_value( '12px', '8px' ) );
     }
 
+    public function test_read_layout_value_rejects_css_breakout(): void {
+        $this->assertSame(
+            '8px',
+            darkadmin_read_layout_value( '8px;}body{display:none', '8px' )
+        );
+    }
+
+    public function test_read_layout_value_preserves_calc_and_custom_property(): void {
+        $calc  = '0 0 0 1px calc(1px + 1px)';
+        $custom = '0 0 0 1px var(--my_shadow)';
+
+        $this->assertSame( $calc, darkadmin_read_layout_value( $calc, '8px' ) );
+        $this->assertSame( $custom, darkadmin_read_layout_value( $custom, '8px' ) );
+    }
+
     // -------------------------------------------------------------------------
     // darkadmin_sanitize_user_ids
     // -------------------------------------------------------------------------
@@ -395,6 +436,29 @@ class DarkAdminTest extends WP_UnitTestCase {
         $user = $this->factory->user->create( [ 'role' => 'subscriber' ] );
         wp_set_current_user( $user );
         $this->assertTrue( darkadmin_is_dark_mode_active() );
+    }
+
+    public function test_selectable_users_exclude_users_with_manage_options(): void {
+        if ( ! get_role( 'darkadmin_manage_options_probe' ) ) {
+            add_role(
+                'darkadmin_manage_options_probe',
+                'DarkAdmin Manage Options Probe',
+                [
+                    'read'           => true,
+                    'manage_options' => true,
+                ]
+            );
+        }
+
+        $manager = $this->factory->user->create( [ 'role' => 'darkadmin_manage_options_probe' ] );
+        $editor  = $this->factory->user->create( [ 'role' => 'editor' ] );
+        $admin   = $this->factory->user->create( [ 'role' => 'administrator' ] );
+
+        $ids = wp_list_pluck( darkadmin_get_selectable_users(), 'ID' );
+
+        $this->assertNotContains( $manager, $ids );
+        $this->assertNotContains( $admin, $ids );
+        $this->assertContains( $editor, $ids );
     }
 
     // -------------------------------------------------------------------------
