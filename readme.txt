@@ -70,6 +70,10 @@ Yes, on WordPress 7.1 or later, when "Dark Block Editor" is enabled under Settin
 16. Yoast SEO - Site features
 17. Newsletter - Subscription settings
 18. Duplicator - Backups
+19. Block Editor - Dark Mode active ("Use theme styles" off)
+20. Block Editor - Selected block with block toolbar and settings sidebar
+21. Block Editor - Block inserter
+22. Settings Page - Dark Block Editor and Darken Theme Design in the Editor
 
 == Changelog ==
 = 0.5.0 =

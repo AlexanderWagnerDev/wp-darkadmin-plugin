@@ -79,6 +79,14 @@ customization and Auto Dark Mode support.
 | ----------------------------------- | ----------------------------------- |
 | ![Screenshot 17](screenshot-17.png) | ![Screenshot 18](screenshot-18.png) |
 
+| Block Editor                        | Block Editor - selected block       |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 19](screenshot-19.png) | ![Screenshot 20](screenshot-20.png) |
+
+| Block Editor - inserter             | Settings - block editor options     |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 21](screenshot-21.png) | ![Screenshot 22](screenshot-22.png) |
+
 ---
 
 ## Changelog
