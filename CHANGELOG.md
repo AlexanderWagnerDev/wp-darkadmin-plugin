@@ -12,16 +12,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- **Dark Block Editor** setting (Settings > DarkAdmin > General, off by default): dark styles for the
-  block editor on `post.php` / `post-new.php`, including header, sidebars, inserter, list view, block
-  toolbar, popovers, menus, modals, preferences and the publish panel
+- **Dark Block Editor** setting (Settings > DarkAdmin > General, off by default): dark styles for
+  the block editor on `post.php` / `post-new.php`, including header, sidebars, inserter, list view,
+  block toolbar, popovers, menus, modals, preferences and the publish panel
   (`assets/css/darkadmin-block-editor.css`). The editing canvas turns dark when "Use theme styles"
   is turned off in the editor preferences or the theme has no editor styles; otherwise the theme's
   own design stays visible as a WYSIWYG preview. The site editor stays excluded. Requires WordPress
   7.1 or later, where the post editor canvas is always an iframe; on older versions the block editor
   stays excluded, because a canvas without iframe would let the admin styles recolor post content.
-- **Darken Theme Design in the Editor** setting (off by default): also darkens the editing canvas while
-  "Use theme styles" is on, for users who prefer a dark canvas over the theme's real colors.
+- **Darken Theme Design in the Editor** setting (off by default): also darkens the editing canvas
+  while "Use theme styles" is on, for users who prefer a dark canvas over the theme's real colors.
 - `darkadmin_block_editor_supported` filter to override the WordPress version check.
 
 ### Changed
@@ -31,8 +31,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-- Enforce the `edit_css` capability for Custom CSS on every core `options.php` save route, including a
-  query-string `action` and the legacy All Settings screen.
+- Enforce the `edit_css` capability for Custom CSS on every core `options.php` save route, including
+  a query-string `action` and the legacy All Settings screen.
 - Preserve the current `disabled` plugin-style option shape when a stale 0.3.1 migration marker
   triggers a retry, instead of deleting the newer value.
 - Do not add the dark settings body class when the dark stylesheet was not enqueued for the current
@@ -43,8 +43,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Maintenance
 
-- Make the Plugin Check Trunk workflow pass `wp-version: trunk` so it no longer duplicates the stable
-  Plugin Check run.
+- Make the Plugin Check Trunk workflow pass `wp-version: trunk` so it no longer duplicates the
+  stable Plugin Check run.
 
 ## [0.4.1] - 2026-11-07
 

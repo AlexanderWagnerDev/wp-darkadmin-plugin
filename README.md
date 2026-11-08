@@ -28,8 +28,8 @@ customization and Auto Dark Mode support.
   exist
 - Excluded Pages: specify admin pages where dark mode should not be applied
 - Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing
-  canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in the
-  Editor"
+  canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in
+  the Editor"
 
 ---
 
@@ -96,17 +96,17 @@ customization and Auto Dark Mode support.
 ### Added
 
 - **Dark Block Editor** setting (off by default): dark post/page block editor interface (header,
-  sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns
-  dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays
-  excluded. Requires WordPress 7.1 or later
+  sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area
+  turns dark when "Use theme styles" is turned off or the theme has no editor styles. The site
+  editor stays excluded. Requires WordPress 7.1 or later
 - **Darken Theme Design in the Editor** setting (off by default): the editing area also turns dark
   while "Use theme styles" is on
 - `darkadmin_block_editor_supported` filter to override the WordPress version check
 
 ### Changed
 
-- Removed unused Gutenberg rules from the main stylesheets, which made the block editor copy the whole
-  admin stylesheet into the editor canvas
+- Removed unused Gutenberg rules from the main stylesheets, which made the block editor copy the
+  whole admin stylesheet into the editor canvas
 
 ### Fixed
 
@@ -466,10 +466,10 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ### Hinzugefügt
 
 - Einstellung **Dunkler Block-Editor** (standardmäßig aus): dunkle Oberfläche im Block-Editor für
-  Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs,
-  Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“
-  deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen.
-  Erfordert WordPress 7.1 oder neuer
+  Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar,
+  Menüs, Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile
+  verwenden“ deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt
+  ausgeschlossen. Erfordert WordPress 7.1 oder neuer
 - Einstellung **Theme-Design im Editor abdunkeln** (standardmäßig aus): der Bearbeitungsbereich wird
   auch bei aktivierten „Theme-Stilen verwenden“ dunkel
 - Filter `darkadmin_block_editor_supported`, um die WordPress-Versionsprüfung zu überschreiben
@@ -489,8 +489,8 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 
 ### Wartung
 
-- Der Workflow „Plugin Check Trunk“ übergibt `wp-version: trunk` und doppelt den stabilen Plugin-Check
-  nicht mehr
+- Der Workflow „Plugin Check Trunk“ übergibt `wp-version: trunk` und doppelt den stabilen
+  Plugin-Check nicht mehr
 
 ## 0.4.1
 
