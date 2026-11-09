@@ -53,16 +53,32 @@ function darkadmin_is_dark_mode_active(): bool {
 }
 
 /**
- * Returns all non-admin users for the user selection UI.
+ * Returns selectable users for the user selection UI.
+ *
+ * Users who can manage options always receive dark mode and are therefore
+ * excluded; the include/exclude setting cannot affect them.
  *
  * @return WP_User[]
  */
 function darkadmin_get_selectable_users(): array {
-	return get_users(
+	$users = get_users(
 		array(
 			'orderby'      => 'display_name',
 			'order'        => 'ASC',
 			'role__not_in' => array( 'administrator' ),
+		)
+	);
+
+	// Anyone with manage_options always receives dark mode (see
+	// darkadmin_is_dark_mode_active()), so listing them as selectable would
+	// offer an include/exclude control that cannot take effect. This also
+	// covers custom roles, individual capabilities and multisite super admins.
+	return array_values(
+		array_filter(
+			$users,
+			static function ( $user ): bool {
+				return $user instanceof WP_User && ! user_can( $user, 'manage_options' );
+			}
 		)
 	);
 }
