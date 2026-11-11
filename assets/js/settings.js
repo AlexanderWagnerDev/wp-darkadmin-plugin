@@ -224,12 +224,23 @@
 				reader.onload = function ( e ) {
 					try {
 						const data = JSON.parse( e.target.result );
+						if ( ! data || 'object' !== typeof data || Array.isArray( data ) ) {
+							throw new Error( 'Invalid palette' );
+						}
+						// Only import keys that match a rendered color input; an
+						// array or an object with no known color token is not a palette.
+						const colorKeys = Object.keys( data ).filter( function ( key ) {
+							return null !== document.getElementById( 'adm_color_' + key );
+						} );
+						if ( ! colorKeys.length ) {
+							throw new Error( 'Palette has no known color keys' );
+						}
 						for ( const key in data ) {
 							if ( ! /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test( data[ key ] ) ) {
 								throw new Error( 'Invalid hex color value for key: ' + key );
 							}
 						}
-						Object.keys( data ).forEach( function ( key ) {
+						colorKeys.forEach( function ( key ) {
 							const input = document.getElementById( 'adm_color_' + key );
 							if ( ! input ) return;
 							jQuery( input ).wpColorPicker( 'color', data[ key ] );
