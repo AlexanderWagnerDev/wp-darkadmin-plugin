@@ -591,6 +591,9 @@ function darkadmin_settings_page(): void {
 						</div>
 					</details>
 					<div class="adm-css-editor-wrap">
+						<label for="darkadmin_custom_css" class="screen-reader-text">
+							<?php esc_html_e( 'Custom CSS', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+						</label>
 						<textarea
 							id="darkadmin_custom_css"
 							name="darkadmin_custom_css"

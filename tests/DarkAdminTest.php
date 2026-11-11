@@ -984,6 +984,21 @@ class DarkAdminTest extends WP_UnitTestCase {
         }
     }
 
+    public function test_custom_css_textarea_has_accessible_label(): void {
+        $allowed = $this->create_custom_css_user( true );
+        wp_set_current_user( $allowed );
+
+        ob_start();
+        darkadmin_settings_page();
+        $html = ob_get_clean();
+
+        $this->assertMatchesRegularExpression(
+            '/<label[^>]*for="darkadmin_custom_css"[^>]*>\s*Custom CSS\s*<\/label>/',
+            $html
+        );
+        $this->assertStringContainsString( 'id="darkadmin_custom_css"', $html );
+    }
+
     public function test_custom_css_save_guard_blocks_action_in_query_string(): void {
         $limited       = $this->create_custom_css_user( false );
         $previous_post = $_POST;
