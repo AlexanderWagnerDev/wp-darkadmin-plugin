@@ -27,6 +27,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - The picked color of the WordPress color picker (`.wp-color-result`) no longer shows through
   around the "Select Color" label, for example at its rounded corners or on wider buttons.
+- The WordPress color picker keeps the picked color in its swatch while hovered or focused instead
+  of painting it gray.
+- The opened color picker appears below its button again. Before, it sat next to the button and was
+  cut off, and the button row moved down to the middle of the picker.
 
 - The layout shadow field now accepts valid CSS values such as `calc()` expressions and custom
   property names with underscores, while rejecting values that could break out of the inline
