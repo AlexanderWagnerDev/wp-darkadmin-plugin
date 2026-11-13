@@ -87,9 +87,17 @@ customization and Auto Dark Mode support.
 | ----------------------------------- | ----------------------------------- |
 | ![Screenshot 19](screenshot-19.png) | ![Screenshot 20](screenshot-20.png) |
 
-| Block Editor - inserter             | Settings - block editor options     |
+| Block Editor - inserter             | Settings - editor and login options |
 | ----------------------------------- | ----------------------------------- |
 | ![Screenshot 21](screenshot-21.png) | ![Screenshot 22](screenshot-22.png) |
+
+| Site Editor                         | Login page                          |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 23](screenshot-23.png) | ![Screenshot 24](screenshot-24.png) |
+
+| Settings - Excluded Plugins         |
+| ----------------------------------- |
+| ![Screenshot 25](screenshot-25.png) |
 
 ---
 
@@ -125,6 +133,8 @@ customization and Auto Dark Mode support.
 
 - GitHub Actions pinned to commit SHAs
 - New workflow to update WordPress.org assets without a release
+- All screenshots retaken on WordPress 7.1, plus new screenshots of the site editor, the login page
+  and the Excluded Plugins setting
 
 ## [0.5.0] - 2026-11-07
 
@@ -534,6 +544,8 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 
 - GitHub Actions auf Commit-SHAs festgelegt
 - Neuer Workflow, um WordPress.org-Assets ohne Release zu aktualisieren
+- Alle Screenshots unter WordPress 7.1 neu aufgenommen, dazu neue Screenshots von Website-Editor,
+  Login-Seite und den ausgeschlossenen Plugins
 
 ## 0.5.0
 

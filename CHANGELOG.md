@@ -52,6 +52,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - GitHub Actions are pinned to commit SHAs.
 - New manual `update-assets.yml` workflow (with dry run) syncs screenshots, banners, icons and
   `readme.txt` to WordPress.org without a new release.
+- All screenshots retaken on WordPress 7.1, plus new screenshots of the site editor
+  (`screenshot-23.png`), the dark login page (`screenshot-24.png`) and the Excluded Plugins setting
+  (`screenshot-25.png`).
 
 ## [0.5.0] - 2026-11-07
 

@@ -82,7 +82,10 @@ Ja, mit „Dunkle Login-Seite“ unter Einstellungen -> DarkAdmin. Das gilt für
 19. Block-Editor - Dark Mode aktiv („Theme-Stile verwenden“ aus)
 20. Block-Editor - Ausgewählter Block mit Block-Toolbar und Einstellungs-Seitenleiste
 21. Block-Editor - Block-Auswahl
-22. Einstellungsseite - Dunkler Block-Editor und Theme-Design im Editor abdunkeln
+22. Einstellungsseite - Dunkler Block-Editor, Dunkler Website-Editor und Dunkle Login-Seite
+23. Website-Editor - Dark Mode aktiv
+24. Login-Seite - Dunkle Login-Seite aktiv
+25. Einstellungsseite - Ausgeschlossene Plugins
 
 == Changelog ==
 = 0.6.0 =
@@ -98,6 +101,7 @@ Ja, mit „Dunkle Login-Seite“ unter Einstellungen -> DarkAdmin. Das gilt für
 * Fix: Die dunkle Login-Seite ersetzt nur das Standard-WordPress-Logo, nie eigene Logos
 * Fix: Das Textfeld für eigenes CSS und die Liste der ausgeschlossenen Plugins sind für Screenreader beschriftet
 * Wartung: GitHub Actions auf Commit-SHAs festgelegt; neuer Workflow, um WordPress.org-Assets ohne Release zu aktualisieren
+* Wartung: Alle Screenshots unter WordPress 7.1 neu aufgenommen, dazu neue Screenshots von Website-Editor, Login-Seite und den ausgeschlossenen Plugins
 
 = 0.5.0 =
 * Neu: Einstellung „Dunkler Block-Editor“ (standardmäßig aus): dunkle Oberfläche im Block-Editor für Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs, Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen. Erfordert WordPress 7.1 oder neuer.

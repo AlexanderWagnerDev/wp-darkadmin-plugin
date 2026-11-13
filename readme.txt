@@ -82,7 +82,10 @@ Yes, enable "Dark Login Page" under Settings > DarkAdmin. It applies to everyone
 19. Block Editor - Dark Mode active ("Use theme styles" off)
 20. Block Editor - Selected block with block toolbar and settings sidebar
 21. Block Editor - Block inserter
-22. Settings Page - Dark Block Editor and Darken Theme Design in the Editor
+22. Settings Page - Dark Block Editor, Dark Site Editor and Dark Login Page
+23. Site Editor - Dark Mode active
+24. Login Page - Dark Login Page active
+25. Settings Page - Excluded Plugins
 
 == Changelog ==
 = 0.6.0 =
@@ -98,6 +101,7 @@ Yes, enable "Dark Login Page" under Settings > DarkAdmin. It applies to everyone
 * Fixed: The dark login page only replaces the default WordPress logo, never custom logos
 * Fixed: Custom CSS textarea and Excluded Plugins list are labeled for screen readers
 * Maintenance: GitHub Actions pinned to commit SHAs; new workflow to update WordPress.org assets without a release
+* Maintenance: All screenshots retaken on WordPress 7.1, plus new screenshots of the site editor, the login page and the Excluded Plugins setting
 
 = 0.5.0 =
 * Added: "Dark Block Editor" setting (off by default): dark post/page block editor interface (header, sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays excluded. Requires WordPress 7.1 or later.
