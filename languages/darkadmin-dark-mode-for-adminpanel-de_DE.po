@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: DarkAdmin - Dark Mode for Adminpanel\n"
 "Report-Msgid-Bugs-To: https://alexanderwagnerdev.com\n"
 "POT-Creation-Date: 2026-06-23 12:00+0200\n"
-"PO-Revision-Date: 2026-06-23 12:00+0200\n"
+"PO-Revision-Date: 2026-11-13 12:00+0100\n"
 "Last-Translator: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language-Team: AlexanderWagnerDev <info@alexanderwagnerdev.com>\n"
 "Language: de_DE\n"
@@ -46,7 +46,7 @@ msgstr "Dark Mode aktivieren"
 
 #: includes/settings-page.php
 msgid "Enables the dark theme for all admin pages. Administrators always see dark mode when this is active."
-msgstr "Aktiviert das dunkle Design für alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn er aktiviert ist."
+msgstr "Aktiviert das dunkle Theme für alle Admin-Seiten. Administratoren sehen den Dark Mode immer, wenn diese Option aktiviert ist."
 
 #: includes/settings-page.php
 msgid "Auto Dark Mode"
@@ -54,7 +54,7 @@ msgstr "Auto Dark Mode"
 
 #: includes/settings-page.php
 msgid "Automatically darkens bright backgrounds and lightens dark text from unknown plugins. Requires Dark Mode to be active."
-msgstr "Verdunkelt automatisch helle Hintergründe und erhellt dunklen Text unbekannter Plugins. Setzt aktiven Dark Mode voraus."
+msgstr "Dunkelt helle Hintergründe unbekannter Plugins automatisch ab und hellt deren dunklen Text auf. Erfordert einen aktiven Dark Mode."
 
 #: includes/settings-page.php
 msgid "Dark Block Editor"
@@ -74,7 +74,7 @@ msgstr "Theme-Design im Editor abdunkeln"
 
 #: includes/settings-page.php
 msgid "Also darkens the editing area while \"Use theme styles\" is on. The editor then no longer shows your theme's real colors. Requires \"Dark Block Editor\"."
-msgstr "Dunkelt den Bearbeitungsbereich auch ab, wenn „Theme-Stile verwenden“ aktiv ist. Der Editor zeigt dann nicht mehr die echten Farben deines Themes. Erfordert „Dunkler Block-Editor“."
+msgstr "Dunkelt den Bearbeitungsbereich auch ab, wenn „Theme-Stile verwenden“ aktiv ist. Der Editor zeigt dann nicht mehr die tatsächlichen Farben deines Themes. Erfordert „Dunkler Block-Editor“."
 
 #: includes/settings-page.php
 msgid "Preset Themes"
@@ -82,7 +82,7 @@ msgstr "Preset-Themes"
 
 #: includes/settings-page.php
 msgid "Choose a preset to load its color palette. You can further customize colors below after loading."
-msgstr "Wähle ein Preset aus, um dessen Farbpalette zu laden. Farben können anschließend weiter angepasst werden."
+msgstr "Wähle ein Preset aus, um dessen Farbpalette zu laden. Die Farben kannst du anschließend weiter unten anpassen."
 
 #: includes/settings-page.php
 msgid "Modern"
@@ -90,7 +90,7 @@ msgstr "Modern"
 
 #: includes/settings-page.php
 msgid "WP 7.0 design language — default"
-msgstr "WP 7.0 Design Language — Standard"
+msgstr "Designsprache von WP 7.0 — Standard"
 
 #: includes/settings-page.php
 msgid "Classic"
@@ -98,7 +98,7 @@ msgstr "Klassisch"
 
 #: includes/settings-page.php
 msgid "WP 6.x dark theme"
-msgstr "WP 6.x Dark-Theme"
+msgstr "Dark-Theme von WP 6.x"
 
 #: includes/settings-page.php
 msgid "✓ Active"
@@ -146,7 +146,7 @@ msgstr "Administratoren werden hier nicht angezeigt — sie haben den Dark Mode 
 
 #: includes/settings-page.php
 msgid "No non-administrator users found. Create additional users to manage their dark mode access here."
-msgstr "Keine Nicht-Administrator-Benutzer gefunden. Erstelle weitere Benutzer, um deren Dark-Mode-Zugriff hier zu verwalten."
+msgstr "Keine Benutzer ohne Administratorrechte gefunden. Erstelle weitere Benutzer, um deren Dark-Mode-Zugriff hier zu verwalten."
 
 #: includes/settings-page.php
 msgid "Plugins"
@@ -154,7 +154,7 @@ msgstr "Plugins"
 
 #: includes/settings-page.php
 msgid "Dark styles load automatically for installed plugins. Uncheck a plugin to disable its styles."
-msgstr "Dark-Mode-Stile werden für installierte Plugins automatisch geladen. Deaktiviere ein Plugin per Checkbox, um dessen Stile zu deaktivieren."
+msgstr "Dunkle Stile werden automatisch für installierte Plugins geladen. Entferne den Haken bei einem Plugin, um dessen Stile zu deaktivieren."
 
 #: includes/settings-page.php
 msgid "Automatic"
@@ -170,7 +170,7 @@ msgstr "Nicht installiert"
 
 #: includes/settings-page.php
 msgid "Plugin styles load after the main dark theme and use your color variables."
-msgstr "Plugin-Stile werden nach dem Haupt-Dark-Theme geladen und nutzen deine Farbvariablen."
+msgstr "Plugin-Stile werden nach dem Haupt-Dark-Theme geladen und verwenden deine Farbvariablen."
 
 #: includes/plugins.php
 msgid "SEO settings, metaboxes and dashboard widgets."
@@ -178,43 +178,43 @@ msgstr "SEO-Einstellungen, Metaboxen und Dashboard-Widgets."
 
 #: includes/plugins.php
 msgid "Firewall, scan and security options pages."
-msgstr "Firewall-, Scan- und Sicherheitsoptionen."
+msgstr "Seiten für Firewall, Scans und Sicherheitsoptionen."
 
 #: includes/plugins.php
 msgid "Backup, restore and migration screens."
-msgstr "Backup-, Wiederherstellungs- und Migrationsseiten."
+msgstr "Sicherungs-, Wiederherstellungs- und Migrationsseiten."
 
 #: includes/plugins.php
 msgid "Database, cache and image optimization UI."
-msgstr "Datenbank-, Cache- und Bildoptimierungs-Oberfläche."
+msgstr "Oberfläche für Datenbank-, Cache- und Bildoptimierung."
 
 #: includes/plugins.php
 msgid "Form editor, tag generator, integration and list table."
-msgstr "Formular-Editor, Tag-Generator, Integration und Formularliste."
+msgstr "Formular-Editor, Tag-Generator, Integration und Listentabelle."
 
 #: includes/plugins.php
 msgid "Cookie consent wizard, dashboard, settings, banner editor and data tables."
-msgstr "Cookie-Consent-Assistent, Dashboard, Einstellungen, Banner-Editor und Datentabellen."
+msgstr "Assistent für die Cookie-Einwilligung, Dashboard, Einstellungen, Banner-Editor und Datentabellen."
 
 #: includes/plugins.php
 msgid "Subscription, forms, newsletters and settings tabs."
-msgstr "Abonnement, Formulare, Newsletter und Einstellungs-Tabs."
+msgstr "Abonnements, Formulare, Newsletter und Einstellungs-Tabs."
 
 #: includes/plugins.php
 msgid "Backups, schedules, storage and settings screens."
-msgstr "Backups, Zeitpläne, Speicher und Einstellungsseiten."
+msgstr "Sicherungen, Zeitpläne, Speicherorte und Einstellungsseiten."
 
 #: includes/plugins.php
 msgid "Dashboard, blocks, popup builder and settings screens."
-msgstr "Dashboard, Blöcke, Popup-Builder und Einstellungsseiten."
+msgstr "Dashboard, Blöcke, Pop-up-Builder und Einstellungsseiten."
 
 #: includes/plugins.php
 msgid "WordPress AI & Connectors"
-msgstr "WordPress AI & Konnektoren"
+msgstr "WordPress KI & Konnektoren"
 
 #: includes/plugins.php
 msgid "Connectors, AI settings, connector approvals and request logs."
-msgstr "Konnektoren, AI-Einstellungen, Connector-Freigaben und Request-Logs."
+msgstr "Konnektoren, KI-Einstellungen, Konnektor-Genehmigungen und Anfrage-Protokolle."
 
 #: includes/settings-page.php
 msgid "Layout & Spacing"
@@ -222,11 +222,11 @@ msgstr "Layout & Abstände"
 
 #: includes/settings-page.php
 msgid "Adjust spacing, button sizes, border radii and shadow. px values only for size fields; shadow accepts any valid CSS box-shadow value."
-msgstr "Passe Abstände, Button-Größen, Rahmenradien und Schatten an. Größenfelder nur in px; Schatten akzeptiert jeden gültigen CSS-box-shadow-Wert."
+msgstr "Passe Abstände, Button-Größen, Eckenradien und Schatten an. Größenfelder nur in px; Schatten akzeptiert jeden gültigen CSS-box-shadow-Wert."
 
 #: includes/settings-page.php
 msgid "Restore Preset Layout"
-msgstr "Preset-Layout wiederherstellen"
+msgstr "Voreingestelltes Layout wiederherstellen"
 
 #: includes/settings-page.php
 msgid "Color Customization"
@@ -246,7 +246,7 @@ msgstr "Palette importieren"
 
 #: includes/settings-page.php
 msgid "Restore Preset Colors"
-msgstr "Preset-Farben wiederherstellen"
+msgstr "Voreingestellte Farben wiederherstellen"
 
 #: includes/settings-page.php
 msgid "Available CSS Variables"
@@ -254,7 +254,7 @@ msgstr "Verfügbare CSS-Variablen"
 
 #: includes/settings-page.php
 msgid "Click to copy"
-msgstr "Klicken zum Kopieren"
+msgstr "Zum Kopieren klicken"
 
 #: includes/enqueue.php
 msgid "Copied!"
@@ -266,11 +266,11 @@ msgstr "Palette erfolgreich importiert."
 
 #: includes/enqueue.php
 msgid "Invalid JSON or color value."
-msgstr "Ungültige JSON-Datei oder Farbwert."
+msgstr "Ungültiges JSON oder ungültiger Farbwert."
 
 #: includes/settings-page.php
 msgid "Custom CSS"
-msgstr "Eigenes CSS"
+msgstr "Individuelles CSS"
 
 #: includes/settings-page.php
 msgid "Add your own CSS here, loaded after the dark mode stylesheet. All CSS variables are available."
@@ -294,7 +294,7 @@ msgstr "Ein Eintrag pro Zeile. Dark-Mode-Stile werden auf den entsprechenden Adm
 
 #: includes/settings-page.php
 msgid "Supports plain filenames (plugins.php) and custom page slugs (admin.php?page=my-plugin). Lines starting with # are treated as comments."
-msgstr "Unterstützt einfache Dateinamen (plugins.php) und benutzerdefinierte Seiten-Slugs (admin.php?page=my-plugin). Zeilen, die mit # beginnen, werden als Kommentare behandelt."
+msgstr "Unterstützt einfache Dateinamen (plugins.php) und individuelle Seiten-Slugs (admin.php?page=my-plugin). Zeilen, die mit # beginnen, werden als Kommentare behandelt."
 
 #. translators: 1: site editor filename, 2: comma-separated list of block editor filenames.
 #: includes/settings-page.php
@@ -323,7 +323,7 @@ msgstr "Flächen"
 
 #: includes/defaults.php
 msgid "Borders"
-msgstr "Rand"
+msgstr "Ränder"
 
 #: includes/defaults.php
 msgid "Text"
@@ -355,11 +355,11 @@ msgstr "Hintergrund (Adminleiste)"
 
 #: includes/defaults.php
 msgid "Background (Deep / Submenu)"
-msgstr "Hintergrund (Tief / Untermenüs)"
+msgstr "Hintergrund (tief / Untermenüs)"
 
 #: includes/defaults.php
 msgid "Background (Darker / Editor Gutter)"
-msgstr "Hintergrund (Dunkler / Editor-Gutter)"
+msgstr "Hintergrund (dunkler / Editor-Gutter)"
 
 #: includes/defaults.php
 msgid "Surface 1 (Cards / Tables)"
@@ -471,11 +471,11 @@ msgstr "Code: Zahl / Atom"
 
 #: includes/defaults.php
 msgid "Code: String"
-msgstr "Code: Zeichenfolge"
+msgstr "Code: Zeichenkette"
 
 #: includes/defaults.php
 msgid "Code: String (alt)"
-msgstr "Code: Zeichenfolge (alt)"
+msgstr "Code: Zeichenkette (alt)"
 
 #: includes/defaults.php
 msgid "Code: Comment"
@@ -495,11 +495,11 @@ msgstr "Code: Klammer"
 
 #: includes/defaults.php
 msgid "Spacing (Small)"
-msgstr "Abstand (Klein)"
+msgstr "Abstand (klein)"
 
 #: includes/defaults.php
 msgid "Spacing (Medium)"
-msgstr "Abstand (Mittel)"
+msgstr "Abstand (mittel)"
 
 #: includes/defaults.php
 msgid "Button Height"
@@ -511,15 +511,15 @@ msgstr "Eingabefeld-Höhe"
 
 #: includes/defaults.php
 msgid "Border Radius (Small)"
-msgstr "Eckenradius (Klein)"
+msgstr "Eckenradius (klein)"
 
 #: includes/defaults.php
 msgid "Border Radius (Medium)"
-msgstr "Eckenradius (Mittel)"
+msgstr "Eckenradius (mittel)"
 
 #: includes/defaults.php
 msgid "Border Radius (Large)"
-msgstr "Eckenradius (Groß)"
+msgstr "Eckenradius (groß)"
 
 #: includes/defaults.php
 msgid "Shadow"
@@ -531,15 +531,15 @@ msgstr "Dunkler Website-Editor"
 
 #: includes/settings-page.php
 msgid "Applies dark mode to the site editor (Appearance > Editor): navigation, Pages, Templates, Patterns, Styles and the editor interface. The preview of your theme design stays unchanged."
-msgstr "Aktiviert den Dark Mode im Website-Editor (Design > Editor): Navigation, Seiten, Templates, Vorlagen, Stile und die Editor-Oberfläche. Die Vorschau deines Theme-Designs bleibt unverändert."
+msgstr "Aktiviert den Dark Mode für den Website-Editor (Design > Editor), einschließlich Navigation, Seiten, Templates, Vorlagen, Stile und Editor-Oberfläche. Die Vorschau des Theme-Designs bleibt unverändert."
 
 #: includes/settings-page.php
 msgid "Dark Login Page"
-msgstr "Dunkle Login-Seite"
+msgstr "Dunkle Anmeldeseite"
 
 #: includes/settings-page.php
 msgid "Applies dark mode to the login screen (wp-login.php), including lost password and registration. Applies to all visitors of the login screen, independent of the user access settings."
-msgstr "Aktiviert den Dark Mode auf der Login-Seite (wp-login.php), inklusive Passwort vergessen und Registrierung. Gilt für alle Besucher der Login-Seite, unabhängig von den Einstellungen zum Benutzerzugriff."
+msgstr "Aktiviert den Dark Mode für die Anmeldeseite (wp-login.php), einschließlich der Seiten zum Zurücksetzen des Passworts und zur Registrierung. Dies gilt für alle Besucher der Anmeldeseite, unabhängig von den Einstellungen für den Benutzerzugriff."
 
 #: includes/settings-page.php
 msgid "Excluded Plugins"
@@ -547,7 +547,7 @@ msgstr "Ausgeschlossene Plugins"
 
 #: includes/settings-page.php
 msgid "Dark mode is not loaded on any admin page of the selected plugins. DarkAdmin finds the pages on its own, including subpages that add-ons place in the plugin's menu, so you do not have to list every URL."
-msgstr "Auf keiner Admin-Seite der ausgewählten Plugins wird der Dark Mode geladen. DarkAdmin findet die Seiten selbst, auch Unterseiten, die Erweiterungen im Menü des Plugins ablegen, sodass du nicht jede URL einzeln eintragen musst."
+msgstr "Auf den Admin-Seiten der ausgewählten Plugins wird der Dark Mode nicht geladen. DarkAdmin erkennt diese Seiten automatisch, einschließlich Unterseiten, die Add-ons zum Menü des jeweiligen Plugins hinzufügen. Du musst daher nicht jede URL einzeln angeben."
 
 #: includes/settings-page.php
 msgid "No other active plugins found."
