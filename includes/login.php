@@ -45,13 +45,35 @@ function darkadmin_enqueue_login_styles(): void {
 	// Values in $vars are sanitized at the source, see darkadmin_css_variables_block().
 	wp_add_inline_style( 'darkadmin-login', $vars );
 
-	// The default logo is a dark gray SVG. Swap it for the white variant, but
-	// only while the logo still links to WordPress.org: sites with a custom logo
-	// almost always change the link as well, and their logo stays untouched.
+	// The default logo is a dark gray SVG. darkadmin_mark_default_login_logo()
+	// adds the class below only when the rendered logo is that default image,
+	// so custom logos stay untouched, whatever their link points to.
 	$logo = esc_url_raw( admin_url( 'images/wordpress-logo-white.svg' ) );
 	wp_add_inline_style(
 		'darkadmin-login',
-		'body.login h1 a[href*="wordpress.org"]{background-image:none,url("' . $logo . '");opacity:.9;}'
+		'body.login h1 a.darkadmin-default-logo{background-image:none,url("' . $logo . '");opacity:.9;}'
 	);
 }
+
 add_action( 'login_enqueue_scripts', 'darkadmin_enqueue_login_styles' );
+
+/**
+ * Marks the login logo when it shows the default WordPress logo.
+ *
+ * Custom logos are usually set in CSS on the same element and cannot be told
+ * apart from the default one in a stylesheet, so the rendered background
+ * image decides. Without JavaScript the default logo simply keeps its gray color.
+ *
+ * @return void
+ */
+function darkadmin_mark_default_login_logo(): void {
+	if ( ! darkadmin_is_login_dark_mode_enabled() ) {
+		return;
+	}
+
+	wp_print_inline_script_tag(
+		'(function(){var a=document.querySelector(".login h1 a");'
+		. 'if(a&&/wordpress-logo(-gray)?\\.svg|w-logo-gray\\.png/.test(getComputedStyle(a).backgroundImage)){a.classList.add("darkadmin-default-logo");}})();'
+	);
+}
+add_action( 'login_footer', 'darkadmin_mark_default_login_logo' );
