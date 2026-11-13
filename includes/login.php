@@ -71,9 +71,19 @@ function darkadmin_mark_default_login_logo(): void {
 		return;
 	}
 
+	// Exact URLs of the core logo files, compared without their query string.
+	$core_logos = array(
+		admin_url( 'images/wordpress-logo-gray.svg' ),
+		admin_url( 'images/wordpress-logo.svg' ),
+		admin_url( 'images/w-logo-gray.png' ),
+	);
+
 	wp_print_inline_script_tag(
-		'(function(){var a=document.querySelector(".login h1 a");'
-		. 'if(a&&/wordpress-logo(-gray)?\\.svg|w-logo-gray\\.png/.test(getComputedStyle(a).backgroundImage)){a.classList.add("darkadmin-default-logo");}})();'
+		'(function(){var a=document.querySelector(".login h1 a");if(!a){return;}'
+		. 'var core=' . wp_json_encode( array_map( 'esc_url_raw', $core_logos ) ) . ';'
+		. 'var re=/url\\(["\']?([^"\')]+)["\']?\\)/g,m,urls=[];'
+		. 'while((m=re.exec(getComputedStyle(a).backgroundImage))){urls.push(m[1].split("?")[0]);}'
+		. 'if(urls.length&&urls.every(function(u){return core.indexOf(u)!==-1;})){a.classList.add("darkadmin-default-logo");}})();'
 	);
 }
 add_action( 'login_footer', 'darkadmin_mark_default_login_logo' );
