@@ -738,8 +738,13 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
   border: 1px solid var(--adm-border) !important;
   box-shadow: none !important;
   overflow: hidden;
+  /* WordPress paints the picked color as the button's inline background-color.
+     Cover everything right of the 30px swatch so the color cannot show through
+     next to or around the label (rounded corners, wider buttons). */
+  background-image: linear-gradient(to right, transparent 30px, var(--adm-surface-2) 30px) !important;
 }
 .wp-picker-container .wp-color-result .wp-color-result-text {
+  border-radius: 0 !important;
   height: 100%;
   line-height: var(--adm-btn-h) !important;
   padding: 0 var(--adm-space-2) !important;

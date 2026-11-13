@@ -21,6 +21,9 @@ class DarkAdminTest extends WP_UnitTestCase {
         delete_option( 'darkadmin_auto_darken' );
         delete_option( 'darkadmin_block_editor' );
         delete_option( 'darkadmin_block_editor_theme' );
+        delete_option( 'darkadmin_site_editor' );
+        delete_option( 'darkadmin_login_page' );
+        delete_option( 'darkadmin_plugin_exclusions' );
         remove_all_filters( 'darkadmin_block_editor_supported' );
         delete_option( 'darkadmin_test_non_string' );
     }
@@ -552,8 +555,23 @@ class DarkAdminTest extends WP_UnitTestCase {
     // Editor screen coverage
     // -------------------------------------------------------------------------
 
-    public function test_site_editor_is_always_excluded(): void {
+    public function test_site_editor_is_excluded_by_default(): void {
         $this->assertTrue( darkadminIsEditorScreenExcluded( 'site-editor.php' ) );
+    }
+
+    public function test_site_editor_is_not_excluded_when_site_editor_option_enabled(): void {
+        update_option( 'darkadmin_site_editor', '1' );
+
+        $this->assertFalse( darkadminIsEditorScreenExcluded( 'site-editor.php' ) );
+    }
+
+    public function test_site_editor_option_does_not_affect_block_post_editor(): void {
+        update_option( 'darkadmin_site_editor', '1' );
+        add_filter( 'darkadmin_block_editor_supported', '__return_true' );
+        $screen = WP_Screen::get( 'post' );
+        $screen->is_block_editor( true );
+
+        $this->assertTrue( darkadminIsEditorScreenExcluded( 'post.php', $screen ) );
     }
 
     public function test_classic_post_editor_is_not_excluded(): void {
@@ -1094,5 +1112,121 @@ class DarkAdminTest extends WP_UnitTestCase {
                 revoke_super_admin( $allowed );
             }
         }
+    }
+
+    // -------------------------------------------------------------------------
+    // Login screen
+    // -------------------------------------------------------------------------
+
+    public function test_login_dark_mode_requires_both_options(): void {
+        $this->assertFalse( darkadmin_is_login_dark_mode_enabled() );
+
+        update_option( 'darkadmin_login_page', '1' );
+        $this->assertFalse( darkadmin_is_login_dark_mode_enabled() );
+
+        update_option( 'darkadmin_dark_mode_enabled', '1' );
+        $this->assertTrue( darkadmin_is_login_dark_mode_enabled() );
+    }
+
+    public function test_login_styles_enqueued_with_palette_variables(): void {
+        update_option( 'darkadmin_dark_mode_enabled', '1' );
+        update_option( 'darkadmin_login_page', '1' );
+
+        darkadmin_enqueue_login_styles();
+
+        $this->assertTrue( wp_style_is( 'darkadmin-login', 'enqueued' ) );
+        $inline = implode( '', (array) wp_styles()->get_data( 'darkadmin-login', 'after' ) );
+        $this->assertStringContainsString( '--adm-bg:', $inline );
+        wp_dequeue_style( 'darkadmin-login' );
+    }
+
+    public function test_login_styles_not_enqueued_when_option_disabled(): void {
+        update_option( 'darkadmin_dark_mode_enabled', '1' );
+
+        darkadmin_enqueue_login_styles();
+
+        $this->assertFalse( wp_style_is( 'darkadmin-login', 'enqueued' ) );
+    }
+
+    // -------------------------------------------------------------------------
+    // Plugin exclusions
+    // -------------------------------------------------------------------------
+
+    /**
+     * Writes a fixture plugin into WP_PLUGIN_DIR and loads it.
+     *
+     * @param string $dir  Plugin folder.
+     * @param string $code PHP code without the opening tag.
+     * @return string Plugin basename.
+     */
+    private function load_fixture_plugin( string $dir, string $code ): string {
+        $path = WP_PLUGIN_DIR . '/' . $dir;
+        if ( ! is_dir( $path ) ) {
+            mkdir( $path, 0777, true );
+        }
+        file_put_contents( $path . '/' . $dir . '.php', "<?php\n/* Plugin Name: {$dir} */\n" . $code );
+        require_once $path . '/' . $dir . '.php';
+
+        return $dir . '/' . $dir . '.php';
+    }
+
+    public function test_plugin_for_file_maps_files_to_active_plugins(): void {
+        $active = [ 'mainwp/mainwp.php', 'single.php' ];
+
+        $this->assertSame( 'mainwp/mainwp.php', darkadmin_plugin_for_file( WP_PLUGIN_DIR . '/mainwp/class/class-ui.php', $active ) );
+        $this->assertSame( 'single.php', darkadmin_plugin_for_file( WP_PLUGIN_DIR . '/single.php', $active ) );
+        $this->assertSame( '', darkadmin_plugin_for_file( WP_PLUGIN_DIR . '/other/other.php', $active ) );
+        $this->assertSame( '', darkadmin_plugin_for_file( ABSPATH . 'wp-admin/admin.php', $active ) );
+    }
+
+    public function test_admin_page_owners_include_callback_and_parent_plugins(): void {
+        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', 'function darkadmin_fixture_main_render() {}' );
+        $ext  = $this->load_fixture_plugin( 'darkadmin-fixture-ext', 'function darkadmin_fixture_ext_render() {}' );
+        $active = [ $main, $ext ];
+
+        add_action( get_plugin_page_hookname( 'fixture_tab', '' ), 'darkadmin_fixture_main_render' );
+        add_action( get_plugin_page_hookname( 'FixtureSettings', 'fixture_tab' ), 'darkadmin_fixture_main_render' );
+        add_action( get_plugin_page_hookname( 'FixtureExtension', 'fixture_tab' ), 'darkadmin_fixture_ext_render' );
+        add_action( get_plugin_page_hookname( 'FixtureHidden', '' ), 'darkadmin_fixture_main_render' );
+
+        $this->assertSame( [ $main ], darkadmin_admin_page_owners( 'fixture_tab', '', $active ) );
+        $this->assertSame( [ $main ], darkadmin_admin_page_owners( 'FixtureSettings', 'fixture_tab', $active ) );
+        $this->assertSame( [ $main ], darkadmin_admin_page_owners( 'FixtureHidden', '', $active ) );
+        $this->assertEqualsCanonicalizing( [ $main, $ext ], darkadmin_admin_page_owners( 'FixtureExtension', 'fixture_tab', $active ) );
+        $this->assertSame( [], darkadmin_admin_page_owners( 'unknown', 'options-general.php', $active ) );
+    }
+
+    public function test_current_page_plugin_exclusion(): void {
+        global $plugin_page, $_parent_pages;
+
+        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', 'function darkadmin_fixture_main_render() {}' );
+        update_option( 'active_plugins', [ $main ] );
+        add_action( get_plugin_page_hookname( 'FixtureSettings', 'fixture_tab' ), 'darkadmin_fixture_main_render' );
+
+        $saved_page    = $plugin_page;
+        $saved_parents = $_parent_pages;
+        $plugin_page   = 'FixtureSettings';
+        $_parent_pages = [ 'FixtureSettings' => 'fixture_tab' ];
+
+        try {
+            $this->assertFalse( darkadmin_is_current_page_plugin_excluded() );
+
+            update_option( 'darkadmin_plugin_exclusions', [ $main ] );
+            $this->assertTrue( darkadmin_is_current_page_plugin_excluded() );
+
+            $plugin_page = '';
+            $this->assertFalse( darkadmin_is_current_page_plugin_excluded() );
+        } finally {
+            $plugin_page   = $saved_page;
+            $_parent_pages = $saved_parents;
+        }
+    }
+
+    public function test_sanitize_plugin_exclusions_keeps_installed_plugins_only(): void {
+        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', 'function darkadmin_fixture_main_render() {}' );
+        wp_clean_plugins_cache( false );
+
+        $this->assertSame( [ $main ], darkadmin_sanitize_plugin_exclusions( [ $main, 'missing/missing.php', '', [ 'x' ], $main ] ) );
+        $this->assertSame( [], darkadmin_sanitize_plugin_exclusions( 'not-an-array' ) );
     }
 }

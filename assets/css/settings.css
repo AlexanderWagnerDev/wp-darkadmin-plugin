@@ -359,6 +359,44 @@
   color: #646970;
 }
 
+.adm-exclusion-grid {
+  margin-bottom: 16px;
+}
+.adm-exclusion-item {
+  flex-direction: column;
+  gap: 6px;
+  cursor: default;
+}
+.adm-exclusion-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+.adm-exclusion-pages {
+  width: 100%;
+  padding-left: 25px;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+.adm-exclusion-pages summary {
+  cursor: pointer;
+  color: #2271b1;
+}
+.adm-exclusion-pages ul {
+  max-height: 180px;
+  overflow-y: auto;
+  margin: 6px 0 0;
+}
+.adm-exclusion-pages li {
+  margin: 0 0 2px;
+  overflow-wrap: anywhere;
+}
+.adm-exclusion-pages code {
+  font-size: 11px;
+}
+
 /* =============================================================================
    USER ACCESS GRID
    ============================================================================= */
@@ -1133,3 +1171,5 @@ body.adm-dark-active .adm-preset-info strong { color: var(--adm-text) !important
 body.adm-dark-active .adm-preset-info span   { color: var(--adm-text-muted) !important; }
 body.adm-dark-active .adm-preview-label      { color: var(--adm-text-muted) !important; }
 body.adm-dark-active .adm-preset-preview     { border-color: var(--adm-border) !important; }
+body.adm-dark-active .adm-exclusion-pages summary { color: var(--adm-link) !important; }
+body.adm-dark-active .adm-exclusion-pages code { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; }

@@ -1,0 +1,39 @@
+/*
+ * DarkAdmin: site editor (site-editor.php).
+ *
+ * Loaded only when "Dark Site Editor" is enabled, on top of
+ * darkadmin-block-editor.css. Covers the site editor frame, the Pages,
+ * Templates and Patterns lists (DataViews) and the Styles panel. The canvas
+ * is a preview of the theme design and is never recolored.
+ *
+ * Do not add selectors containing ".editor-styles-wrapper" or ".wp-block" to
+ * this file: the editor copies any admin stylesheet that matches them into the
+ * canvas iframe.
+ */
+
+/* -----------------------------------------------------------------------------
+   Save panel toggle (shown on keyboard focus at the bottom right)
+   -------------------------------------------------------------------------- */
+body.site-editor-php .editor-layout__toggle-entities-saved-states-panel {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Pages, Templates and Patterns lists (DataViews)
+   -------------------------------------------------------------------------- */
+body.site-editor-php .fields-controls__featured-image-placeholder {
+  background-color: var(--adm-surface-3) !important;
+}
+
+body.site-editor-php .components-badge.is-default {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body.site-editor-php .dataviews-view-table tr,
+body.site-editor-php .dataviews-view-table th,
+body.site-editor-php .dataviews-view-table td {
+  border-color: var(--adm-border) !important;
+}

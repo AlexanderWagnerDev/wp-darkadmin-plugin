@@ -1,0 +1,182 @@
+/*
+ * DarkAdmin: login screen (wp-login.php).
+ *
+ * Loaded only when Dark Mode and "Dark Login Page" are enabled. Covers the
+ * login, lost password, reset password, register, confirm admin email and
+ * interim (session expired) login forms. Colors come from the same --adm-*
+ * variables as the admin, printed inline by darkadmin_enqueue_login_styles().
+ */
+
+body.login {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+  color-scheme: dark;
+}
+
+body.login a {
+  color: var(--adm-link);
+}
+
+body.login a:hover,
+body.login a:active,
+body.login a:focus {
+  color: var(--adm-link-hover);
+}
+
+body.login form,
+body.login .admin-email-confirm-form {
+  background: var(--adm-surface-1) !important;
+  border: 1px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-md);
+  box-shadow: var(--adm-shadow-md) !important;
+  color: var(--adm-text) !important;
+}
+
+body.login label,
+body.login form p,
+body.login .admin-email__heading,
+body.login .admin-email__details,
+body.login #reg_passmail,
+body.login .description,
+body.login .indicator-hint {
+  color: var(--adm-text) !important;
+}
+
+body.login .description,
+body.login .indicator-hint,
+body.login #reg_passmail {
+  color: var(--adm-text-muted) !important;
+}
+
+body.login input[type="text"],
+body.login input[type="email"],
+body.login input[type="password"],
+body.login input[type="number"],
+body.login input.input,
+body.login select {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+
+body.login input[type="text"]:focus,
+body.login input[type="email"]:focus,
+body.login input[type="password"]:focus,
+body.login input.input:focus,
+body.login select:focus {
+  border-color: var(--adm-border-focus) !important;
+  box-shadow: 0 0 0 1px var(--adm-border-focus) !important;
+}
+
+/* Keep browser autofill from painting a light yellow background. */
+body.login input:-webkit-autofill,
+body.login input:-webkit-autofill:hover,
+body.login input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--adm-text);
+  box-shadow: 0 0 0 1000px var(--adm-surface-2) inset !important;
+  caret-color: var(--adm-text);
+}
+
+body.login input[type="checkbox"] {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+body.login .button-primary {
+  background: var(--adm-primary) !important;
+  border-color: var(--adm-primary) !important;
+  color: var(--adm-text-on-primary) !important;
+}
+
+body.login .button-primary:hover,
+body.login .button-primary:focus {
+  background: var(--adm-primary-hover) !important;
+  border-color: var(--adm-primary-hover) !important;
+}
+
+body.login .button:not(.button-primary):not(.wp-hide-pw) {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.login .button.wp-hide-pw,
+body.login .button.wp-hide-pw .dashicons {
+  color: var(--adm-text-muted) !important;
+}
+
+body.login .button.wp-hide-pw:hover .dashicons,
+body.login .button.wp-hide-pw:focus .dashicons {
+  color: var(--adm-text) !important;
+}
+
+/* Messages and errors */
+body.login .message,
+body.login .notice,
+body.login .success,
+body.login #login_error {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+  box-shadow: none !important;
+}
+
+body.login .notice-info,
+body.login .message {
+  border-left-color: var(--adm-primary) !important;
+}
+
+body.login .notice-error,
+body.login #login_error {
+  border-left-color: var(--adm-danger) !important;
+  background: color-mix(in srgb, var(--adm-danger) 12%, var(--adm-surface-1)) !important;
+}
+
+body.login .success {
+  border-left-color: var(--adm-success) !important;
+  background: color-mix(in srgb, var(--adm-success) 12%, var(--adm-surface-1)) !important;
+}
+
+/* Password strength meter (reset password, register) */
+body.login #pass-strength-result {
+  background-color: var(--adm-surface-2);
+  border-color: var(--adm-border);
+  color: var(--adm-text);
+}
+
+body.login #pass-strength-result.short {
+  background-color: color-mix(in srgb, var(--adm-danger) 30%, var(--adm-surface-2));
+  border-color: var(--adm-danger);
+}
+
+body.login #pass-strength-result.bad {
+  background-color: color-mix(in srgb, var(--adm-warning) 30%, var(--adm-surface-2));
+  border-color: var(--adm-warning);
+}
+
+body.login #pass-strength-result.good {
+  background-color: color-mix(in srgb, var(--adm-warning) 18%, var(--adm-surface-2));
+  border-color: var(--adm-warning);
+}
+
+body.login #pass-strength-result.strong {
+  background-color: color-mix(in srgb, var(--adm-success) 30%, var(--adm-surface-2));
+  border-color: var(--adm-success);
+}
+
+/* Links below the form, language switcher */
+body.login #nav a,
+body.login #backtoblog a,
+body.login .privacy-policy-page-link a {
+  color: var(--adm-text-muted) !important;
+}
+
+body.login #nav a:hover,
+body.login #backtoblog a:hover,
+body.login .privacy-policy-page-link a:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+body.login .language-switcher label .dashicons {
+  color: var(--adm-text-muted) !important;
+}
