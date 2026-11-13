@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.5.0
+Stable tag: 0.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,9 @@ Funktionen:
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 * Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
 * Dunkler Block-Editor (optional, WordPress 7.1+): dunkle Oberfläche im Block-Editor für Beiträge und Seiten; der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist, oder immer mit „Theme-Design im Editor abdunkeln“
+* Dunkler Website-Editor (optional): dunkle Oberfläche im Website-Editor, die Vorschau behält das Theme-Design
+* Dunkle Login-Seite (optional): dunkle wp-login.php in der aktiven Farbpalette
+* Ausgeschlossene Plugins: Dark Mode für alle Admin-Seiten ausgewählter Plugins abschalten
 
 == Installation ==
 1. Lade den Plugin-Ordner nach `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` hoch (oder installiere über "Plugins").
@@ -82,6 +85,20 @@ Ja, mit „Dunkle Login-Seite“ unter Einstellungen -> DarkAdmin. Das gilt für
 22. Einstellungsseite - Dunkler Block-Editor und Theme-Design im Editor abdunkeln
 
 == Changelog ==
+= 0.6.0 =
+* Neu: Einstellung „Dunkler Website-Editor“ (standardmäßig aus): dunkle Oberfläche im Website-Editor (Navigation, Listen für Seiten, Templates und Vorlagen, Stile-Panel, Editor-Oberfläche). Die Vorschau des Website-Designs behält die Farben des Themes.
+* Neu: Einstellung „Dunkle Login-Seite“ (standardmäßig aus): dunkle wp-login.php in der aktiven Farbpalette, mit weißem WordPress-Logo statt des Standard-Logos
+* Neu: „Ausgeschlossene Plugins“ (Einstellungen > DarkAdmin > Erweitert): Dark Mode für alle Admin-Seiten ausgewählter Plugins abschalten, auch für versteckte Seiten und Unterseiten von Add-ons im Menü des Plugins
+* Fix: Die gewählte Farbe des WordPress-Farbwählers scheint nicht mehr um die Beschriftung „Farbe auswählen“ durch und bleibt beim Hover im Farbfeld
+* Fix: Der geöffnete Farbwähler erscheint wieder unter seinem Button statt abgeschnitten daneben
+* Fix: Das Farbfeld des Farbwählers auf der Einstellungsseite zeigt die gewählte Farbe vollständig
+* Fix: Das Layout-Feld für Schatten akzeptiert gültiges CSS wie calc() und lehnt Werte ab, die das Inline-Stylesheet beschädigen könnten
+* Fix: Benutzer, die immer Dark Mode bekommen (manage_options, Super-Admins), werden nicht mehr in der Benutzerauswahl aufgelistet
+* Fix: Paletten-Importe lehnen JSON ohne bekannte Farbe ab, statt einen erfolgreichen Import zu melden
+* Fix: Die dunkle Login-Seite ersetzt nur das Standard-WordPress-Logo, nie eigene Logos
+* Fix: Das Textfeld für eigenes CSS und die Liste der ausgeschlossenen Plugins sind für Screenreader beschriftet
+* Wartung: GitHub Actions auf Commit-SHAs festgelegt; neuer Workflow, um WordPress.org-Assets ohne Release zu aktualisieren
+
 = 0.5.0 =
 * Neu: Einstellung „Dunkler Block-Editor“ (standardmäßig aus): dunkle Oberfläche im Block-Editor für Beiträge und Seiten (Kopfleiste, Seitenleisten, Block-Auswahl, Listenansicht, Block-Toolbar, Menüs, Dialoge, Veröffentlichen-Panel). Der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist oder das Theme keine Editor-Stile hat. Der Website-Editor bleibt ausgeschlossen. Erfordert WordPress 7.1 oder neuer.
 * Neu: Einstellung „Theme-Design im Editor abdunkeln“ (standardmäßig aus): der Bearbeitungsbereich wird auch bei aktivierten „Theme-Stilen verwenden“ dunkel

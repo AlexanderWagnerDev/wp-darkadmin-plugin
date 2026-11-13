@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-13
+
 ### Added
 
 - **Dark Site Editor** setting (Settings > DarkAdmin > General, off by default): dark styles for
@@ -31,12 +33,25 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   of painting it gray.
 - The opened color picker appears below its button again. Before, it sat next to the button and was
   cut off, and the button row moved down to the middle of the picker.
-
+- The color picker swatch on the settings page shows the full picked color again instead of a gray
+  strip.
 - The layout shadow field now accepts valid CSS values such as `calc()` expressions and custom
   property names with underscores, while rejecting values that could break out of the inline
   stylesheet, including unterminated comments and unbalanced functions.
 - Users with the `manage_options` capability, including custom roles and multisite super admins, are
   no longer listed in the User Access picker because dark mode always applies to them.
+- Palette imports reject JSON arrays and objects without a known color token instead of reporting a
+  successful import that changed nothing.
+- The dark login page swaps only the default WordPress logo for its white variant. Custom logos,
+  including custom files named like the core logo, stay untouched.
+- The Custom CSS textarea has a label for screen readers, and the Excluded Plugins list is a
+  `fieldset` with a legend.
+
+### Maintenance
+
+- GitHub Actions are pinned to commit SHAs.
+- New manual `update-assets.yml` workflow (with dry run) syncs screenshots, banners, icons and
+  `readme.txt` to WordPress.org without a new release.
 
 ## [0.5.0] - 2026-11-07
 

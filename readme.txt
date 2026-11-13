@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.5.0
+Stable tag: 0.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,9 @@ Features:
 * Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
 * Excluded Pages: specify admin pages where dark mode should not be applied
 * Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in the Editor"
+* Dark Site Editor (optional): dark site editor interface, while the site preview keeps the theme design
+* Dark Login Page (optional): dark wp-login.php in the active palette
+* Excluded Plugins: turn dark mode off for every admin page of selected plugins
 
 == Installation ==
 1. Upload the plugin folder to `/wp-content/plugins/darkadmin-dark-mode-for-adminpanel/` (or install via the Plugins screen).
@@ -82,6 +85,20 @@ Yes, enable "Dark Login Page" under Settings > DarkAdmin. It applies to everyone
 22. Settings Page - Dark Block Editor and Darken Theme Design in the Editor
 
 == Changelog ==
+= 0.6.0 =
+* Added: "Dark Site Editor" setting (off by default): dark site editor interface (navigation, Pages, Templates and Patterns lists, Styles panel, editor interface). The preview of your site design keeps the theme colors.
+* Added: "Dark Login Page" setting (off by default): dark wp-login.php using the active palette, with the white WordPress logo instead of the default logo
+* Added: "Excluded Plugins" (Settings > DarkAdmin > Advanced): turn dark mode off for all admin pages of selected plugins, including hidden pages and add-on subpages in the plugin's menu
+* Fixed: The picked color of the WordPress color picker no longer shows through around the "Select Color" label and stays in the swatch on hover
+* Fixed: The opened color picker appears below its button again instead of being cut off next to it
+* Fixed: The color picker swatch on the settings page shows the full picked color
+* Fixed: The layout shadow field accepts valid CSS such as calc() and rejects values that could break the inline stylesheet
+* Fixed: Users who always get dark mode (manage_options, super admins) are no longer listed in the User Access picker
+* Fixed: Palette imports reject JSON without a known color instead of reporting a successful import
+* Fixed: The dark login page only replaces the default WordPress logo, never custom logos
+* Fixed: Custom CSS textarea and Excluded Plugins list are labeled for screen readers
+* Maintenance: GitHub Actions pinned to commit SHAs; new workflow to update WordPress.org assets without a release
+
 = 0.5.0 =
 * Added: "Dark Block Editor" setting (off by default): dark post/page block editor interface (header, sidebars, inserter, list view, block toolbar, menus, modals, publish panel). The editing area turns dark when "Use theme styles" is turned off or the theme has no editor styles. The site editor stays excluded. Requires WordPress 7.1 or later.
 * Added: "Darken Theme Design in the Editor" setting (off by default): the editing area also turns dark while "Use theme styles" is on
