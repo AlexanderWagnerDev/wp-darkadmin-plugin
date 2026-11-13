@@ -838,6 +838,12 @@ body.adm-dark-active .adm-layout-input:focus {
   border-right: 2px solid rgba(0,0,0,.15) !important;
   flex-shrink: 0 !important;
 }
+/* The swatch inherits the button background, which also carries the overlay
+   that keeps the picked color from showing around the label. Only the color
+   itself belongs in the swatch. */
+.adm-color-item .wp-picker-container .wp-color-result::before {
+  background-image: none !important;
+}
 .adm-color-item .wp-picker-container .wp-color-result-text {
   display: block !important;
   flex: 1 !important;
