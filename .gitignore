@@ -1,2 +1,5 @@
 node_modules
 .bug-hunter/
+vendor/
+composer.lock
+.phpunit.result.cache
