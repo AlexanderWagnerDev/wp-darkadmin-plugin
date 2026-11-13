@@ -5,6 +5,9 @@
 
 class DarkAdminTest extends WP_UnitTestCase {
 
+    /** Code of the main fixture plugin used by the plugin exclusion tests. */
+    private const FIXTURE_MAIN_CODE = 'function darkadmin_fixture_main_render() {}';
+
     public function set_up(): void {
         parent::set_up();
         // Reset all plugin options before each test.
@@ -1180,7 +1183,7 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     public function test_admin_page_owners_include_callback_and_parent_plugins(): void {
-        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', 'function darkadmin_fixture_main_render() {}' );
+        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', self::FIXTURE_MAIN_CODE );
         $ext  = $this->load_fixture_plugin( 'darkadmin-fixture-ext', 'function darkadmin_fixture_ext_render() {}' );
         $active = [ $main, $ext ];
 
@@ -1199,7 +1202,7 @@ class DarkAdminTest extends WP_UnitTestCase {
     public function test_current_page_plugin_exclusion(): void {
         global $plugin_page, $_parent_pages;
 
-        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', 'function darkadmin_fixture_main_render() {}' );
+        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', self::FIXTURE_MAIN_CODE );
         update_option( 'active_plugins', [ $main ] );
         add_action( get_plugin_page_hookname( 'FixtureSettings', 'fixture_tab' ), 'darkadmin_fixture_main_render' );
 
@@ -1223,7 +1226,7 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     public function test_sanitize_plugin_exclusions_keeps_installed_plugins_only(): void {
-        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', 'function darkadmin_fixture_main_render() {}' );
+        $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', self::FIXTURE_MAIN_CODE );
         wp_clean_plugins_cache( false );
 
         $this->assertSame( [ $main ], darkadmin_sanitize_plugin_exclusions( [ $main, 'missing/missing.php', '', [ 'x' ], $main ] ) );

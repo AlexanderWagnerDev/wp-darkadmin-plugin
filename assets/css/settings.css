@@ -360,7 +360,10 @@
 }
 
 .adm-exclusion-grid {
-  margin-bottom: 16px;
+  min-width: 0;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
 }
 .adm-exclusion-item {
   flex-direction: column;

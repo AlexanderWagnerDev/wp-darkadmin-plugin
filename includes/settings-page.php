@@ -675,7 +675,7 @@ function darkadmin_settings_page(): void {
 				<div class="adm-card-body">
 
 					<div class="adm-field-info" style="margin-bottom:8px;">
-						<span class="adm-field-title" id="darkadmin_plugin_exclusions_label">
+						<span class="adm-field-title" id="darkadmin_plugin_exclusions_label" aria-hidden="true">
 							<?php esc_html_e( 'Excluded Plugins', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 						</span>
 						<span class="adm-field-desc">
@@ -686,7 +686,8 @@ function darkadmin_settings_page(): void {
 					<?php if ( empty( $active_plugins ) ) : ?>
 						<p class="adm-field-desc"><?php esc_html_e( 'No other active plugins found.', 'darkadmin-dark-mode-for-adminpanel' ); ?></p>
 					<?php else : ?>
-						<div class="adm-plugin-grid adm-exclusion-grid" role="group" aria-labelledby="darkadmin_plugin_exclusions_label">
+						<fieldset class="adm-plugin-grid adm-exclusion-grid">
+							<legend class="screen-reader-text"><?php esc_html_e( 'Excluded Plugins', 'darkadmin-dark-mode-for-adminpanel' ); ?></legend>
 							<input type="hidden" name="darkadmin_plugin_exclusions[]" value="" />
 							<?php foreach ( $active_plugins as $basename ) : ?>
 								<?php
@@ -727,7 +728,7 @@ function darkadmin_settings_page(): void {
 									<?php endif; ?>
 								</div>
 							<?php endforeach; ?>
-						</div>
+						</fieldset>
 					<?php endif; ?>
 
 					<hr class="adm-field-divider" />
