@@ -359,6 +359,47 @@
   color: #646970;
 }
 
+.adm-exclusion-grid {
+  min-width: 0;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+.adm-exclusion-item {
+  flex-direction: column;
+  gap: 6px;
+  cursor: default;
+}
+.adm-exclusion-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+.adm-exclusion-pages {
+  width: 100%;
+  padding-left: 25px;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+.adm-exclusion-pages summary {
+  cursor: pointer;
+  color: #2271b1;
+}
+.adm-exclusion-pages ul {
+  max-height: 180px;
+  overflow-y: auto;
+  margin: 6px 0 0;
+}
+.adm-exclusion-pages li {
+  margin: 0 0 2px;
+  overflow-wrap: anywhere;
+}
+.adm-exclusion-pages code {
+  font-size: 11px;
+}
+
 /* =============================================================================
    USER ACCESS GRID
    ============================================================================= */
@@ -797,6 +838,12 @@ body.adm-dark-active .adm-layout-input:focus {
   border-right: 2px solid rgba(0,0,0,.15) !important;
   flex-shrink: 0 !important;
 }
+/* The swatch inherits the button background, which also carries the overlay
+   that keeps the picked color from showing around the label. Only the color
+   itself belongs in the swatch. */
+.adm-color-item .wp-picker-container .wp-color-result::before {
+  background-image: none !important;
+}
 .adm-color-item .wp-picker-container .wp-color-result-text {
   display: block !important;
   flex: 1 !important;
@@ -1133,3 +1180,5 @@ body.adm-dark-active .adm-preset-info strong { color: var(--adm-text) !important
 body.adm-dark-active .adm-preset-info span   { color: var(--adm-text-muted) !important; }
 body.adm-dark-active .adm-preview-label      { color: var(--adm-text-muted) !important; }
 body.adm-dark-active .adm-preset-preview     { border-color: var(--adm-border) !important; }
+body.adm-dark-active .adm-exclusion-pages summary { color: var(--adm-link) !important; }
+body.adm-dark-active .adm-exclusion-pages code { background: var(--adm-surface-2) !important; color: var(--adm-text) !important; }

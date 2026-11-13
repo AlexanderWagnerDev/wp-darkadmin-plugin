@@ -25,6 +25,8 @@ function darkadmin_settings_page(): void {
 	$block_editor     = darkadmin_sanitize_bool( get_option( 'darkadmin_block_editor', false ) );
 	$block_editor_ok  = darkadminIsBlockEditorSupported();
 	$block_editor_th  = darkadminIsBlockEditorThemeDarkened();
+	$site_editor      = darkadminIsSiteEditorStylingEnabled();
+	$login_page       = darkadmin_sanitize_bool( get_option( 'darkadmin_login_page', false ) );
 	$active_preset    = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
 	$preset_colors    = darkadmin_preset_fallbacks( $active_preset );
 	$preset_layout    = darkadmin_preset_layout_fallbacks( $active_preset );
@@ -36,6 +38,23 @@ function darkadmin_settings_page(): void {
 	$excluded_pages   = darkadmin_read_string_option( 'darkadmin_excluded_pages' );
 	$plugins_disabled = darkadmin_plugins_disabled();
 	$plugin_registry  = darkadmin_plugin_registry();
+	$excluded_plugins = darkadmin_excluded_plugins();
+	$detected_pages   = darkadmin_detect_plugin_admin_pages();
+	$all_plugins      = get_plugins();
+	$active_plugins   = array_values(
+		array_filter(
+			darkadmin_active_plugin_basenames(),
+			static function ( string $basename ) use ( $all_plugins ): bool {
+				return isset( $all_plugins[ $basename ] ) && plugin_basename( DARKADMIN_PATH . 'darkadmin.php' ) !== $basename;
+			}
+		)
+	);
+	usort(
+		$active_plugins,
+		static function ( string $a, string $b ) use ( $all_plugins ): int {
+			return strcasecmp( (string) $all_plugins[ $a ]['Name'], (string) $all_plugins[ $b ]['Name'] );
+		}
+	);
 
 	$var_map         = darkadmin_css_variable_map();
 	$defaults        = $preset_colors;
@@ -202,6 +221,46 @@ function darkadmin_settings_page(): void {
 							<input type="hidden" name="darkadmin_block_editor_theme" value="0" />
 							<input type="checkbox" id="darkadmin_block_editor_theme" name="darkadmin_block_editor_theme" value="1"
 								<?php checked( true, $block_editor_th ); ?> />
+							<span class="adm-slider" aria-hidden="true"></span>
+						</label>
+					</div>
+
+					<hr class="adm-field-divider" />
+
+					<div class="adm-field-row">
+						<div class="adm-field-info">
+							<label for="darkadmin_site_editor" class="adm-field-title">
+								<?php esc_html_e( 'Dark Site Editor', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</label>
+							<span class="adm-field-desc">
+								<?php esc_html_e( 'Applies dark mode to the site editor (Appearance > Editor): navigation, Pages, Templates, Patterns, Styles and the editor interface. The preview of your theme design stays unchanged.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</span>
+						</div>
+						<label class="adm-toggle">
+							<span class="screen-reader-text"><?php esc_html_e( 'Dark Site Editor', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
+							<input type="hidden" name="darkadmin_site_editor" value="0" />
+							<input type="checkbox" id="darkadmin_site_editor" name="darkadmin_site_editor" value="1"
+								<?php checked( true, $site_editor ); ?> />
+							<span class="adm-slider" aria-hidden="true"></span>
+						</label>
+					</div>
+
+					<hr class="adm-field-divider" />
+
+					<div class="adm-field-row">
+						<div class="adm-field-info">
+							<label for="darkadmin_login_page" class="adm-field-title">
+								<?php esc_html_e( 'Dark Login Page', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</label>
+							<span class="adm-field-desc">
+								<?php esc_html_e( 'Applies dark mode to the login screen (wp-login.php), including lost password and registration. Applies to all visitors of the login screen, independent of the user access settings.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+							</span>
+						</div>
+						<label class="adm-toggle">
+							<span class="screen-reader-text"><?php esc_html_e( 'Dark Login Page', 'darkadmin-dark-mode-for-adminpanel' ); ?></span>
+							<input type="hidden" name="darkadmin_login_page" value="0" />
+							<input type="checkbox" id="darkadmin_login_page" name="darkadmin_login_page" value="1"
+								<?php checked( true, $login_page ); ?> />
 							<span class="adm-slider" aria-hidden="true"></span>
 						</label>
 					</div>
@@ -616,6 +675,65 @@ function darkadmin_settings_page(): void {
 				<div class="adm-card-body">
 
 					<div class="adm-field-info" style="margin-bottom:8px;">
+						<span class="adm-field-title" id="darkadmin_plugin_exclusions_label" aria-hidden="true">
+							<?php esc_html_e( 'Excluded Plugins', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+						</span>
+						<span class="adm-field-desc">
+							<?php esc_html_e( 'Dark mode is not loaded on any admin page of the selected plugins. DarkAdmin finds the pages on its own, including subpages that add-ons place in the plugin\'s menu, so you do not have to list every URL.', 'darkadmin-dark-mode-for-adminpanel' ); ?>
+						</span>
+					</div>
+
+					<?php if ( empty( $active_plugins ) ) : ?>
+						<p class="adm-field-desc"><?php esc_html_e( 'No other active plugins found.', 'darkadmin-dark-mode-for-adminpanel' ); ?></p>
+					<?php else : ?>
+						<fieldset class="adm-plugin-grid adm-exclusion-grid">
+							<legend class="screen-reader-text"><?php esc_html_e( 'Excluded Plugins', 'darkadmin-dark-mode-for-adminpanel' ); ?></legend>
+							<input type="hidden" name="darkadmin_plugin_exclusions[]" value="" />
+							<?php foreach ( $active_plugins as $basename ) : ?>
+								<?php
+								$plugin_pages = $detected_pages[ $basename ] ?? array();
+								$page_count   = count( $plugin_pages );
+								?>
+								<div class="adm-plugin-item adm-exclusion-item">
+									<label class="adm-exclusion-label">
+										<input
+											type="checkbox"
+											name="darkadmin_plugin_exclusions[]"
+											value="<?php echo esc_attr( $basename ); ?>"
+											<?php checked( in_array( $basename, $excluded_plugins, true ) ); ?>
+										/>
+										<span class="adm-plugin-info">
+											<strong><?php echo esc_html( wp_strip_all_tags( (string) $all_plugins[ $basename ]['Name'] ) ); ?></strong>
+											<span>
+												<?php
+												echo esc_html(
+													0 === $page_count
+														? __( 'No admin pages found', 'darkadmin-dark-mode-for-adminpanel' )
+														/* translators: %d: number of admin pages. */
+														: sprintf( _n( '%d admin page', '%d admin pages', $page_count, 'darkadmin-dark-mode-for-adminpanel' ), $page_count )
+												);
+												?>
+											</span>
+										</span>
+									</label>
+									<?php if ( $page_count > 0 ) : ?>
+										<details class="adm-exclusion-pages">
+											<summary><?php esc_html_e( 'Show pages', 'darkadmin-dark-mode-for-adminpanel' ); ?></summary>
+											<ul>
+												<?php foreach ( $plugin_pages as $page_slug ) : ?>
+													<li><code><?php echo esc_html( 'admin.php?page=' . $page_slug ); ?></code></li>
+												<?php endforeach; ?>
+											</ul>
+										</details>
+									<?php endif; ?>
+								</div>
+							<?php endforeach; ?>
+						</fieldset>
+					<?php endif; ?>
+
+					<hr class="adm-field-divider" />
+
+					<div class="adm-field-info" style="margin-bottom:8px;">
 						<label for="darkadmin_excluded_pages" class="adm-field-title">
 							<?php esc_html_e( 'Excluded Pages', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 						</label>
@@ -643,7 +761,7 @@ admin.php?page=my-plugin"
 						<span class="dashicons dashicons-info" style="font-size:14px;width:14px;height:14px;vertical-align:middle;"></span>
 						<?php
 						// translators: 1: site editor filename, 2: comma-separated list of block editor filenames.
-						$excluded_note = __( 'The site editor (%1$s) is always excluded. The block editor (%2$s) is excluded unless "Dark Block Editor" is enabled.', 'darkadmin-dark-mode-for-adminpanel' );
+						$excluded_note = __( 'The site editor (%1$s) is excluded unless "Dark Site Editor" is enabled. The block editor (%2$s) is excluded unless "Dark Block Editor" is enabled.', 'darkadmin-dark-mode-for-adminpanel' );
 						echo wp_kses(
 							sprintf(
 								$excluded_note,

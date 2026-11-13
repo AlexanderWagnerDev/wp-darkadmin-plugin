@@ -49,7 +49,13 @@ Benutzer, die auf Einstellungen > DarkAdmin zugreifen können und die WordPress-
 Ein optionaler zweiter Schalter, der JavaScript verwendet, um helle Hintergründe und dunklen Text von Drittanbieter-Plugins, die vom eingebauten Stylesheet nicht abgedeckt werden, dynamisch anzupassen. Erfordert, dass Dark Mode aktiv ist.
 
 = Funktioniert es im Block-Editor? =
-Ja, ab WordPress 7.1, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert ist. Die Editor-Oberfläche wird sofort dunkel. Hat dein Theme eigene Editor-Stile, zeigt der Bearbeitungsbereich weiterhin das Design deines Themes als Vorschau, bis du im Editor „Theme-Stile verwenden“ deaktivierst (Optionen > Einstellungen > Erscheinungsbild); dann wird er ebenfalls dunkel. Hat dein Theme keine Editor-Stile, ist der Bearbeitungsbereich auch bei aktiviertem „Theme-Stile verwenden“ dunkel. Wer einen dunklen Bearbeitungsbereich bei aktivierten Theme-Stilen möchte, schaltet zusätzlich „Theme-Design im Editor abdunkeln“ ein. Der Website-Editor wird nicht verändert, da er das Design der Website als Vorschau zeigt.
+Ja, ab WordPress 7.1, wenn „Dunkler Block-Editor“ unter Einstellungen -> DarkAdmin aktiviert ist. Die Editor-Oberfläche wird sofort dunkel. Hat dein Theme eigene Editor-Stile, zeigt der Bearbeitungsbereich weiterhin das Design deines Themes als Vorschau, bis du im Editor „Theme-Stile verwenden“ deaktivierst (Optionen > Einstellungen > Erscheinungsbild); dann wird er ebenfalls dunkel. Hat dein Theme keine Editor-Stile, ist der Bearbeitungsbereich auch bei aktiviertem „Theme-Stile verwenden“ dunkel. Wer einen dunklen Bearbeitungsbereich bei aktivierten Theme-Stilen möchte, schaltet zusätzlich „Theme-Design im Editor abdunkeln“ ein. Für den Website-Editor (Design > Editor) gibt es die eigene Einstellung „Dunkler Website-Editor“; die Vorschau deines Website-Designs wird dabei nie umgefärbt.
+
+= Kann ich den Dark Mode für ein bestimmtes Plugin abschalten? =
+Ja. Unter Einstellungen -> DarkAdmin -> Erweitert -> „Ausgeschlossene Plugins“ das Plugin anhaken. DarkAdmin findet alle Admin-Seiten dieses Plugins selbst, auch Unterseiten, die Erweiterungen in dessen Menü ablegen (z. B. MainWP und seine Extensions), sodass du nicht jede admin.php?page=...-URL einzeln eintragen musst.
+
+= Kann auch die Login-Seite dunkel sein? =
+Ja, mit „Dunkle Login-Seite“ unter Einstellungen -> DarkAdmin. Das gilt für alle, die wp-login.php aufrufen.
 
 == Screenshots ==
 1. Settings Page - Standard (Dark Mode deaktiviert)

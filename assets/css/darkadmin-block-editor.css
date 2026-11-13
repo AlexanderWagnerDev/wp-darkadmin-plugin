@@ -569,3 +569,11 @@ body.block-editor-page .edit-post-meta-boxes-area .postbox-header {
   border-color: var(--adm-border) !important;
   color: var(--adm-text) !important;
 }
+
+/* -----------------------------------------------------------------------------
+   Welcome guide: the sticky header overlaps the illustration, so it must stay
+   transparent instead of drawing a dark bar over the image.
+   -------------------------------------------------------------------------- */
+body.block-editor-page .components-guide .components-modal__header {
+  background-color: transparent !important;
+}

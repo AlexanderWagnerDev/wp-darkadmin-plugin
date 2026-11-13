@@ -297,7 +297,7 @@ msgstr ""
 
 #. translators: 1: site editor filename, 2: comma-separated list of block editor filenames.
 #: includes/settings-page.php
-msgid "The site editor (%1$s) is always excluded. The block editor (%2$s) is excluded unless \"Dark Block Editor\" is enabled."
+msgid "The site editor (%1$s) is excluded unless \"Dark Site Editor\" is enabled. The block editor (%2$s) is excluded unless \"Dark Block Editor\" is enabled."
 msgstr ""
 
 #: includes/settings-page.php
@@ -523,3 +523,46 @@ msgstr ""
 #: includes/defaults.php
 msgid "Shadow"
 msgstr ""
+
+#: includes/settings-page.php
+msgid "Dark Site Editor"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Applies dark mode to the site editor (Appearance > Editor): navigation, Pages, Templates, Patterns, Styles and the editor interface. The preview of your theme design stays unchanged."
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Dark Login Page"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Applies dark mode to the login screen (wp-login.php), including lost password and registration. Applies to all visitors of the login screen, independent of the user access settings."
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Excluded Plugins"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Dark mode is not loaded on any admin page of the selected plugins. DarkAdmin finds the pages on its own, including subpages that add-ons place in the plugin's menu, so you do not have to list every URL."
+msgstr ""
+
+#: includes/settings-page.php
+msgid "No other active plugins found."
+msgstr ""
+
+#: includes/settings-page.php
+msgid "No admin pages found"
+msgstr ""
+
+#: includes/settings-page.php
+msgid "Show pages"
+msgstr ""
+
+#. translators: %d: number of admin pages.
+#: includes/settings-page.php
+msgid "%d admin page"
+msgid_plural "%d admin pages"
+msgstr[0] ""
+msgstr[1] ""

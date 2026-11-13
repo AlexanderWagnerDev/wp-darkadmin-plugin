@@ -75,6 +75,33 @@ add_action(
 		);
 		register_setting(
 			'darkadmin_settings',
+			'darkadmin_site_editor',
+			array(
+				'type'              => 'boolean',
+				'sanitize_callback' => 'darkadmin_sanitize_bool',
+				'default'           => false,
+			)
+		);
+		register_setting(
+			'darkadmin_settings',
+			'darkadmin_login_page',
+			array(
+				'type'              => 'boolean',
+				'sanitize_callback' => 'darkadmin_sanitize_bool',
+				'default'           => false,
+			)
+		);
+		register_setting(
+			'darkadmin_settings',
+			'darkadmin_plugin_exclusions',
+			array(
+				'type'              => 'array',
+				'sanitize_callback' => 'darkadmin_sanitize_plugin_exclusions',
+				'default'           => array(),
+			)
+		);
+		register_setting(
+			'darkadmin_settings',
 			'darkadmin_colors',
 			array(
 				'type'              => 'array',
@@ -246,7 +273,8 @@ function darkadmin_current_page_slug(): string {
 /**
  * Determines whether DarkAdmin must leave an editor screen untouched.
  *
- * The site editor always keeps its own color scheme, because its canvas is a
+ * The site editor (site-editor.php) is only styled when the "Dark Site Editor"
+ * option is enabled. Its canvas stays untouched either way, because it is a
  * preview of the theme design. The block post editor (post.php, post-new.php)
  * is only styled when the "Dark Block Editor" option is enabled. The classic
  * editor is always supported by the main stylesheet and must not be excluded
@@ -258,7 +286,7 @@ function darkadmin_current_page_slug(): string {
  */
 function darkadminIsEditorScreenExcluded( string $pagenow, $screen = null ): bool {
 	if ( 'site-editor.php' === $pagenow ) {
-		return true;
+		return ! darkadminIsSiteEditorStylingEnabled();
 	}
 
 	if ( ! darkadminIsBlockPostEditor( $pagenow, $screen ) ) {
@@ -314,6 +342,18 @@ function darkadminIsBlockEditorStylingEnabled(): bool {
 }
 
 /**
+ * Whether the "Dark Site Editor" option is enabled.
+ *
+ * The site editor always renders its canvas in an iframe, so unlike the post
+ * editor no WordPress version check is needed.
+ *
+ * @return bool
+ */
+function darkadminIsSiteEditorStylingEnabled(): bool {
+	return darkadmin_sanitize_bool( get_option( 'darkadmin_site_editor', false ) );
+}
+
+/**
  * Whether the "Darken theme design in the editor" option is enabled.
  *
  * @return bool
@@ -336,84 +376,14 @@ add_action(
 			return;
 		}
 
-		if ( darkadmin_is_current_page_user_excluded( (string) $pagenow, $hook_suffix ) ) {
+		if ( darkadmin_is_current_page_user_excluded( (string) $pagenow, $hook_suffix ) || darkadmin_is_current_page_plugin_excluded() ) {
 			return;
 		}
 
 		$preset   = darkadmin_normalize_preset_slug( darkadmin_read_string_option( 'darkadmin_preset', DARKADMIN_DEFAULT_PRESET ) );
 		$css_file = darkadmin_preset_css_file( $preset );
-
-		// darkadmin_preset_fallbacks() and darkadmin_preset_layout_fallbacks() are
-		// defined in defaults.php and both delegate to darkadmin_get_preset_fallbacks().
-		$fallbacks = darkadmin_preset_fallbacks( $preset );
-		$c         = wp_parse_args(
-			(array) get_option( 'darkadmin_colors', array() ),
-			$fallbacks
-		);
-
-		$layout_fallbacks = darkadmin_preset_layout_fallbacks( $preset );
-		$l                = wp_parse_args(
-			(array) get_option( 'darkadmin_layout', array() ),
-			$layout_fallbacks
-		);
-
-		$color_hash = substr( md5( wp_json_encode( $c ) . wp_json_encode( $l ) ), 0, 8 );
-		$ver        = DARKADMIN_VERSION . '-' . $color_hash;
-
-		$sc = static function ( string $k ) use ( $c, $fallbacks ) {
-			return darkadmin_read_color_value( $c[ $k ] ?? null, $fallbacks[ $k ] );
-		};
-		$sl = static function ( string $k ) use ( $l, $layout_fallbacks ) {
-			return darkadmin_read_layout_value( $l[ $k ] ?? null, $layout_fallbacks[ $k ] );
-		};
-
-		$vars = ':root{'
-			. "--adm-bg:{$sc('bg')};"
-			. "--adm-bg-bar:{$sc('bg_bar')};"
-			. "--adm-bg-deep:{$sc('bg_deep')};"
-			. "--adm-bg-darker:{$sc('bg_darker')};"
-			. "--adm-surface-1:{$sc('surface1')};"
-			. "--adm-surface-2:{$sc('surface2')};"
-			. "--adm-surface-3:{$sc('surface3')};"
-			. "--adm-table-alt:{$sc('table_alt')};"
-			. "--adm-plugin-inactive:{$sc('plugin_inactive')};"
-			. "--adm-border:{$sc('border')};"
-			. "--adm-border-focus:{$sc('border_focus')};"
-			. "--adm-border-hover:{$sc('border_hover')};"
-			. "--adm-text:{$sc('text')};"
-			. "--adm-text-muted:{$sc('text_muted')};"
-			. "--adm-text-soft:{$sc('text_soft')};"
-			. "--adm-text-on-primary:{$sc('text_on_primary')};"
-			. "--adm-link:{$sc('link')};"
-			. "--adm-link-hover:{$sc('link_hover')};"
-			. "--adm-primary:{$sc('primary')};"
-			. "--adm-primary-hover:{$sc('primary_hover')};"
-			. "--adm-success:{$sc('success')};"
-			. "--adm-warning:{$sc('warning')};"
-			. "--adm-danger:{$sc('danger')};"
-			. "--adm-sidebar-bg:{$sc('sidebar_bg')};"
-			. "--adm-sidebar-active:{$sc('sidebar_active')};"
-			. "--adm-sidebar-text:{$sc('sidebar_text')};"
-			. "--adm-cm-keyword:{$sc('cm_keyword')};"
-			. "--adm-cm-operator:{$sc('cm_operator')};"
-			. "--adm-cm-variable2:{$sc('cm_variable2')};"
-			. "--adm-cm-property:{$sc('cm_property')};"
-			. "--adm-cm-number:{$sc('cm_number')};"
-			. "--adm-cm-string:{$sc('cm_string')};"
-			. "--adm-cm-string2:{$sc('cm_string2')};"
-			. "--adm-cm-comment:{$sc('cm_comment')};"
-			. "--adm-cm-tag:{$sc('cm_tag')};"
-			. "--adm-cm-attribute:{$sc('cm_attribute')};"
-			. "--adm-cm-bracket:{$sc('cm_bracket')};"
-			. "--adm-space-2:{$sl('space_2')};"
-			. "--adm-space-3:{$sl('space_3')};"
-			. "--adm-btn-h:{$sl('btn_h')};"
-			. "--adm-input-h:{$sl('input_h')};"
-			. "--adm-radius-sm:{$sl('radius_sm')};"
-			. "--adm-radius-md:{$sl('radius_md')};"
-			. "--adm-radius-lg:{$sl('radius_lg')};"
-			. "--adm-shadow-md:{$sl('shadow_md')};"
-			. '}';
+		$vars     = darkadmin_css_variables_block( $preset );
+		$ver      = DARKADMIN_VERSION . '-' . substr( md5( $vars ), 0, 8 );
 
 		wp_enqueue_style(
 			'darkadmin-darkmode',
@@ -422,9 +392,7 @@ add_action(
 			$ver
 		);
 
-		// All values in $vars are already sanitized at the source:
-		// $sc() runs sanitize_hex_color(), $sl() runs sanitize_text_field()
-		// plus numeric cast / regex whitelist for shadow. No further wrapping needed.
+		// All values in $vars are sanitized at the source, see darkadmin_css_variables_block().
 		wp_add_inline_style( 'darkadmin-darkmode', $vars );
 
 		// Sanitize again on read: options can be written outside the Settings API
@@ -454,9 +422,92 @@ add_action(
 
 		if ( darkadminIsBlockPostEditor( (string) $pagenow, $screen ) ) {
 			darkadmin_enqueue_block_editor_styles();
+		} elseif ( 'site-editor.php' === $pagenow ) {
+			darkadmin_enqueue_site_editor_styles();
 		}
 	}
 );
+
+/**
+ * Builds the :root block with all DarkAdmin color and layout variables.
+ *
+ * All values are sanitized at the source: $sc() runs sanitize_hex_color(),
+ * $sl() runs sanitize_text_field() plus a numeric cast / regex whitelist for
+ * the shadow value.
+ *
+ * @param string $preset Normalized preset slug.
+ * @return string
+ */
+function darkadmin_css_variables_block( string $preset ): string {
+	// darkadmin_preset_fallbacks() and darkadmin_preset_layout_fallbacks() are
+	// defined in defaults.php and both delegate to darkadmin_get_preset_fallbacks().
+	$fallbacks = darkadmin_preset_fallbacks( $preset );
+	$c         = wp_parse_args(
+		(array) get_option( 'darkadmin_colors', array() ),
+		$fallbacks
+	);
+
+	$layout_fallbacks = darkadmin_preset_layout_fallbacks( $preset );
+	$l                = wp_parse_args(
+		(array) get_option( 'darkadmin_layout', array() ),
+		$layout_fallbacks
+	);
+
+	$sc = static function ( string $k ) use ( $c, $fallbacks ) {
+		return darkadmin_read_color_value( $c[ $k ] ?? null, $fallbacks[ $k ] );
+	};
+	$sl = static function ( string $k ) use ( $l, $layout_fallbacks ) {
+		return darkadmin_read_layout_value( $l[ $k ] ?? null, $layout_fallbacks[ $k ] );
+	};
+
+	return ':root{'
+		. "--adm-bg:{$sc('bg')};"
+		. "--adm-bg-bar:{$sc('bg_bar')};"
+		. "--adm-bg-deep:{$sc('bg_deep')};"
+		. "--adm-bg-darker:{$sc('bg_darker')};"
+		. "--adm-surface-1:{$sc('surface1')};"
+		. "--adm-surface-2:{$sc('surface2')};"
+		. "--adm-surface-3:{$sc('surface3')};"
+		. "--adm-table-alt:{$sc('table_alt')};"
+		. "--adm-plugin-inactive:{$sc('plugin_inactive')};"
+		. "--adm-border:{$sc('border')};"
+		. "--adm-border-focus:{$sc('border_focus')};"
+		. "--adm-border-hover:{$sc('border_hover')};"
+		. "--adm-text:{$sc('text')};"
+		. "--adm-text-muted:{$sc('text_muted')};"
+		. "--adm-text-soft:{$sc('text_soft')};"
+		. "--adm-text-on-primary:{$sc('text_on_primary')};"
+		. "--adm-link:{$sc('link')};"
+		. "--adm-link-hover:{$sc('link_hover')};"
+		. "--adm-primary:{$sc('primary')};"
+		. "--adm-primary-hover:{$sc('primary_hover')};"
+		. "--adm-success:{$sc('success')};"
+		. "--adm-warning:{$sc('warning')};"
+		. "--adm-danger:{$sc('danger')};"
+		. "--adm-sidebar-bg:{$sc('sidebar_bg')};"
+		. "--adm-sidebar-active:{$sc('sidebar_active')};"
+		. "--adm-sidebar-text:{$sc('sidebar_text')};"
+		. "--adm-cm-keyword:{$sc('cm_keyword')};"
+		. "--adm-cm-operator:{$sc('cm_operator')};"
+		. "--adm-cm-variable2:{$sc('cm_variable2')};"
+		. "--adm-cm-property:{$sc('cm_property')};"
+		. "--adm-cm-number:{$sc('cm_number')};"
+		. "--adm-cm-string:{$sc('cm_string')};"
+		. "--adm-cm-string2:{$sc('cm_string2')};"
+		. "--adm-cm-comment:{$sc('cm_comment')};"
+		. "--adm-cm-tag:{$sc('cm_tag')};"
+		. "--adm-cm-attribute:{$sc('cm_attribute')};"
+		. "--adm-cm-bracket:{$sc('cm_bracket')};"
+		. "--adm-space-2:{$sl('space_2')};"
+		. "--adm-space-3:{$sl('space_3')};"
+		. "--adm-btn-h:{$sl('btn_h')};"
+		. "--adm-input-h:{$sl('input_h')};"
+		. "--adm-radius-sm:{$sl('radius_sm')};"
+		. "--adm-radius-md:{$sl('radius_md')};"
+		. "--adm-radius-lg:{$sl('radius_lg')};"
+		. "--adm-shadow-md:{$sl('shadow_md')};"
+		. '}';
+}
 
 /**
  * Whether the user's "Excluded Pages" list matches the current admin page.
@@ -484,15 +535,38 @@ function darkadmin_is_current_page_user_excluded( string $pagenow, string $hook_
  * inserter, popovers, modals). The editor canvas is styled separately through
  * darkadmin_block_editor_canvas_settings(), because it renders in an iframe.
  *
+ * @param string $editor_handle Stylesheet handle of the editor package that
+ *                              must load first (wp-edit-post or wp-edit-site).
  * @return void
  */
-function darkadmin_enqueue_block_editor_styles(): void {
+function darkadmin_enqueue_block_editor_styles( string $editor_handle = 'wp-edit-post' ): void {
 	darkadmin_enqueue_boot_wpds_styles( true );
 
 	wp_enqueue_style(
 		'darkadmin-block-editor',
 		DARKADMIN_URL . 'assets/css/darkadmin-block-editor.css',
-		array( 'darkadmin-darkmode', 'darkadmin-wpds', 'wp-components', 'wp-block-editor', 'wp-editor', 'wp-edit-post' ),
+		array( 'darkadmin-darkmode', 'darkadmin-wpds', 'wp-components', 'wp-block-editor', 'wp-editor', $editor_handle ),
+		DARKADMIN_VERSION
+	);
+}
+
+/**
+ * Enqueues the dark styles for the site editor (site-editor.php).
+ *
+ * The site editor shares the editor interface with the post editor (its body
+ * also has the block-editor-page class), so the block editor stylesheet is
+ * loaded first and darkadmin-site-editor.css adds the site editor frame, the
+ * Pages/Templates/Patterns lists and the Styles panel on top.
+ *
+ * @return void
+ */
+function darkadmin_enqueue_site_editor_styles(): void {
+	darkadmin_enqueue_block_editor_styles( 'wp-edit-site' );
+
+	wp_enqueue_style(
+		'darkadmin-site-editor',
+		DARKADMIN_URL . 'assets/css/darkadmin-site-editor.css',
+		array( 'darkadmin-block-editor', 'wp-edit-site' ),
 		DARKADMIN_VERSION
 	);
 }

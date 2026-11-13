@@ -204,7 +204,7 @@ a.page-title-action,
   font-size: 13px !important;
   cursor: pointer;
 }
-.wp-core-ui .button:hover,
+.wp-core-ui .button:not(.wp-color-result):hover,
 .wp-core-ui .button-secondary:hover,
 a.page-title-action:hover,
 .page-title-action:hover {
@@ -727,9 +727,22 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
 .wp-picker-container {
   display: inline-flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--adm-space-2);
   flex-wrap: wrap;
+}
+/* The open picker must start a new row below the button, as in core. Without
+   this it sits next to the button and pushes the button row down. */
+.wp-picker-container .wp-picker-holder {
+  flex-basis: 100%;
+}
+.wp-picker-container .wp-picker-input-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--adm-space-2);
+}
+.wp-picker-container .wp-picker-input-wrap.hidden {
+  display: none;
 }
 .wp-picker-container .wp-color-result {
   height: var(--adm-btn-h) !important;
@@ -738,8 +751,17 @@ body.wp-admin .upload-plugin .wp-upload-form .button-primary:hover {
   border: 1px solid var(--adm-border) !important;
   box-shadow: none !important;
   overflow: hidden;
+  /* WordPress paints the picked color as the button's inline background-color.
+     Cover everything right of the 30px swatch so the color cannot show through
+     next to or around the label (rounded corners, wider buttons). */
+  background-image: linear-gradient(to right, transparent 30px, var(--adm-surface-2) 30px) !important;
+}
+.wp-picker-container .wp-color-result:hover,
+.wp-picker-container .wp-color-result:focus {
+  border-color: var(--adm-border-focus) !important;
 }
 .wp-picker-container .wp-color-result .wp-color-result-text {
+  border-radius: 0 !important;
   height: 100%;
   line-height: var(--adm-btn-h) !important;
   padding: 0 var(--adm-space-2) !important;

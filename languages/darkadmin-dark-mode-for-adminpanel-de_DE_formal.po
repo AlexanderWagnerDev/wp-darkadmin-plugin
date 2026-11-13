@@ -298,8 +298,8 @@ msgstr "Unterstützt einfache Dateinamen (plugins.php) und benutzerdefinierte Se
 
 #. translators: 1: site editor filename, 2: comma-separated list of block editor filenames.
 #: includes/settings-page.php
-msgid "The site editor (%1$s) is always excluded. The block editor (%2$s) is excluded unless \"Dark Block Editor\" is enabled."
-msgstr "Der Website-Editor (%1$s) ist immer ausgeschlossen. Der Block-Editor (%2$s) ist ausgeschlossen, solange „Dunkler Block-Editor“ nicht aktiviert ist."
+msgid "The site editor (%1$s) is excluded unless \"Dark Site Editor\" is enabled. The block editor (%2$s) is excluded unless \"Dark Block Editor\" is enabled."
+msgstr "Der Website-Editor (%1$s) ist ausgeschlossen, solange „Dunkler Website-Editor“ nicht aktiviert ist. Der Block-Editor (%2$s) ist ausgeschlossen, solange „Dunkler Block-Editor“ nicht aktiviert ist."
 
 #: includes/settings-page.php
 msgid "You do not have sufficient permissions to access this page."
@@ -524,3 +524,46 @@ msgstr "Eckenradius (Groß)"
 #: includes/defaults.php
 msgid "Shadow"
 msgstr "Schatten"
+
+#: includes/settings-page.php
+msgid "Dark Site Editor"
+msgstr "Dunkler Website-Editor"
+
+#: includes/settings-page.php
+msgid "Applies dark mode to the site editor (Appearance > Editor): navigation, Pages, Templates, Patterns, Styles and the editor interface. The preview of your theme design stays unchanged."
+msgstr "Aktiviert den Dark Mode im Website-Editor (Design > Editor): Navigation, Seiten, Templates, Vorlagen, Stile und die Editor-Oberfläche. Die Vorschau Ihres Theme-Designs bleibt unverändert."
+
+#: includes/settings-page.php
+msgid "Dark Login Page"
+msgstr "Dunkle Login-Seite"
+
+#: includes/settings-page.php
+msgid "Applies dark mode to the login screen (wp-login.php), including lost password and registration. Applies to all visitors of the login screen, independent of the user access settings."
+msgstr "Aktiviert den Dark Mode auf der Login-Seite (wp-login.php), inklusive Passwort vergessen und Registrierung. Gilt für alle Besucher der Login-Seite, unabhängig von den Einstellungen zum Benutzerzugriff."
+
+#: includes/settings-page.php
+msgid "Excluded Plugins"
+msgstr "Ausgeschlossene Plugins"
+
+#: includes/settings-page.php
+msgid "Dark mode is not loaded on any admin page of the selected plugins. DarkAdmin finds the pages on its own, including subpages that add-ons place in the plugin's menu, so you do not have to list every URL."
+msgstr "Auf keiner Admin-Seite der ausgewählten Plugins wird der Dark Mode geladen. DarkAdmin findet die Seiten selbst, auch Unterseiten, die Erweiterungen im Menü des Plugins ablegen, sodass Sie nicht jede URL einzeln eintragen müssen."
+
+#: includes/settings-page.php
+msgid "No other active plugins found."
+msgstr "Keine weiteren aktiven Plugins gefunden."
+
+#: includes/settings-page.php
+msgid "No admin pages found"
+msgstr "Keine Admin-Seiten gefunden"
+
+#: includes/settings-page.php
+msgid "Show pages"
+msgstr "Seiten anzeigen"
+
+#. translators: %d: number of admin pages.
+#: includes/settings-page.php
+msgid "%d admin page"
+msgid_plural "%d admin pages"
+msgstr[0] "%d Admin-Seite"
+msgstr[1] "%d Admin-Seiten"
