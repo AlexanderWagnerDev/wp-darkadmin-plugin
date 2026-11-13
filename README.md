@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.5.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.6.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -30,6 +30,10 @@ customization and Auto Dark Mode support.
 - Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing
   canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in
   the Editor"
+- Dark Site Editor (optional): dark site editor interface, while the site preview keeps the theme
+  design
+- Dark Login Page (optional): dark `wp-login.php` in the active palette
+- Excluded Plugins: turn dark mode off for every admin page of selected plugins
 
 ---
 
@@ -83,13 +87,54 @@ customization and Auto Dark Mode support.
 | ----------------------------------- | ----------------------------------- |
 | ![Screenshot 19](screenshot-19.png) | ![Screenshot 20](screenshot-20.png) |
 
-| Block Editor - inserter             | Settings - block editor options     |
+| Block Editor - inserter             | Settings - editor and login options |
 | ----------------------------------- | ----------------------------------- |
 | ![Screenshot 21](screenshot-21.png) | ![Screenshot 22](screenshot-22.png) |
+
+| Site Editor                         | Login page                          |
+| ----------------------------------- | ----------------------------------- |
+| ![Screenshot 23](screenshot-23.png) | ![Screenshot 24](screenshot-24.png) |
+
+| Settings - Excluded Plugins         |
+| ----------------------------------- |
+| ![Screenshot 25](screenshot-25.png) |
 
 ---
 
 ## Changelog
+
+## [0.6.0] - 2026-11-13
+
+### Added
+
+- **Dark Site Editor** setting (off by default): dark site editor interface (navigation, Pages,
+  Templates and Patterns lists, Styles panel, editor interface). The preview of your site design
+  keeps the theme colors
+- **Dark Login Page** setting (off by default): dark `wp-login.php` using the active palette, with
+  the white WordPress logo instead of the default logo
+- **Excluded Plugins** (Settings > DarkAdmin > Advanced): turn dark mode off for all admin pages of
+  selected plugins, including hidden pages and add-on subpages in the plugin's menu
+
+### Fixed
+
+- The picked color of the WordPress color picker no longer shows through around the "Select Color"
+  label and stays in the swatch on hover
+- The opened color picker appears below its button again instead of being cut off next to it
+- The color picker swatch on the settings page shows the full picked color
+- The layout shadow field accepts valid CSS such as `calc()` and rejects values that could break the
+  inline stylesheet
+- Users who always get dark mode (`manage_options`, super admins) are no longer listed in the User
+  Access picker
+- Palette imports reject JSON without a known color instead of reporting a successful import
+- The dark login page only replaces the default WordPress logo, never custom logos
+- Custom CSS textarea and Excluded Plugins list are labeled for screen readers
+
+### Maintenance
+
+- GitHub Actions pinned to commit SHAs
+- New workflow to update WordPress.org assets without a release
+- All screenshots retaken on WordPress 7.1, plus new screenshots of the site editor, the login page
+  and the Excluded Plugins setting
 
 ## [0.5.0] - 2026-11-07
 
@@ -448,6 +493,12 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 - Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI
   wenn keine Nicht-Admin-Benutzer vorhanden sind
 - Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
+- Dunkler Block-Editor (optional, WordPress 7.1+): dunkle Oberfläche im Block-Editor für Beiträge
+  und Seiten
+- Dunkler Website-Editor (optional): dunkle Oberfläche im Website-Editor, die Vorschau behält das
+  Theme-Design
+- Dunkle Login-Seite (optional): dunkle `wp-login.php` in der aktiven Farbpalette
+- Ausgeschlossene Plugins: Dark Mode für alle Admin-Seiten ausgewählter Plugins abschalten
 
 ---
 
@@ -460,6 +511,41 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ---
 
 ## Changelog
+
+## 0.6.0
+
+### Hinzugefügt
+
+- Einstellung **Dunkler Website-Editor** (standardmäßig aus): dunkle Oberfläche im Website-Editor
+  (Navigation, Listen für Seiten, Templates und Vorlagen, Stile-Panel, Editor-Oberfläche). Die
+  Vorschau des Website-Designs behält die Farben des Themes
+- Einstellung **Dunkle Login-Seite** (standardmäßig aus): dunkle `wp-login.php` in der aktiven
+  Farbpalette, mit weißem WordPress-Logo statt des Standard-Logos
+- **Ausgeschlossene Plugins** (Einstellungen > DarkAdmin > Erweitert): Dark Mode für alle
+  Admin-Seiten ausgewählter Plugins abschalten, auch für versteckte Seiten und Unterseiten von
+  Add-ons im Menü des Plugins
+
+### Behoben
+
+- Die gewählte Farbe des WordPress-Farbwählers scheint nicht mehr um die Beschriftung „Farbe
+  auswählen“ durch und bleibt beim Hover im Farbfeld
+- Der geöffnete Farbwähler erscheint wieder unter seinem Button statt abgeschnitten daneben
+- Das Farbfeld des Farbwählers auf der Einstellungsseite zeigt die gewählte Farbe vollständig
+- Das Layout-Feld für Schatten akzeptiert gültiges CSS wie `calc()` und lehnt Werte ab, die das
+  Inline-Stylesheet beschädigen könnten
+- Benutzer, die immer Dark Mode bekommen (`manage_options`, Super-Admins), werden nicht mehr in der
+  Benutzerauswahl aufgelistet
+- Paletten-Importe lehnen JSON ohne bekannte Farbe ab, statt einen erfolgreichen Import zu melden
+- Die dunkle Login-Seite ersetzt nur das Standard-WordPress-Logo, nie eigene Logos
+- Das Textfeld für eigenes CSS und die Liste der ausgeschlossenen Plugins sind für Screenreader
+  beschriftet
+
+### Wartung
+
+- GitHub Actions auf Commit-SHAs festgelegt
+- Neuer Workflow, um WordPress.org-Assets ohne Release zu aktualisieren
+- Alle Screenshots unter WordPress 7.1 neu aufgenommen, dazu neue Screenshots von Website-Editor,
+  Login-Seite und den ausgeschlossenen Plugins
 
 ## 0.5.0
 
