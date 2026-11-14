@@ -22,6 +22,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Field labels on the Add Category / Add Tag forms (`.form-wrap label`) were dark text on the dark
+  background, and unchecked checkboxes and radio buttons kept the white WordPress 7.1 background.
 - Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive or when no
   other plugin is active. The settings form only submits active plugins, so the exclusion was
   silently dropped on the next settings save. Deleted plugins are still removed, and unchecking an

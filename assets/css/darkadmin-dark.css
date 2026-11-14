@@ -277,6 +277,18 @@ input[type="checkbox"],
 input[type="radio"] {
   accent-color: var(--adm-primary);
 }
+input[type="checkbox"]:not(:checked),
+input[type="radio"]:not(:checked),
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background-color: var(--adm-surface-2);
+  border-color: var(--adm-border-hover);
+}
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {
+  background-color: var(--adm-bg);
+  border-color: var(--adm-border);
+}
 ::placeholder {
   color: var(--adm-text-soft) !important;
   opacity: 1;
@@ -907,6 +919,7 @@ div.notice-info, .notice.notice-info { border-left-color: var(--adm-primary)  !i
 /* =============================================================================
    SETTINGS PAGES (form-table)
    ============================================================================= */
+.form-wrap label,
 .form-table,
 .form-table td,
 .form-table th {
