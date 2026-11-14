@@ -8,6 +8,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive or when no
+  other plugin is active. The settings form only submits active plugins, so the exclusion was
+  silently dropped on the next settings save. Deleted plugins are still removed, and unchecking an
+  active plugin still removes its exclusion.
+- Plugin page detection maps a file to the plugin that owns the exact file before falling back to
+  the folder, and prefers the deepest folder. Two active plugins in one folder, or a plugin nested
+  in another plugin's folder, are no longer attributed to the wrong plugin.
+
 ## [0.6.0] - 2026-11-13
 
 ### Added
