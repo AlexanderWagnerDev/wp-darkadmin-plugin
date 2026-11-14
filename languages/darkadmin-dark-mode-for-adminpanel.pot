@@ -224,6 +224,10 @@ msgid "Forms list, form editor, entries, reports and settings screens."
 msgstr ""
 
 #: includes/plugins.php
+msgid "Post types, meta boxes, relations, query builder and Crocoblock dashboard."
+msgstr ""
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr ""
 

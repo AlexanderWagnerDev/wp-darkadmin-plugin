@@ -735,8 +735,8 @@ class DarkAdminTest extends WP_UnitTestCase {
     // Plugin styles
     // -------------------------------------------------------------------------
 
-    public function test_plugin_registry_has_fourteen_entries(): void {
-        $this->assertCount( 14, darkadmin_plugin_registry() );
+    public function test_plugin_registry_has_fifteen_entries(): void {
+        $this->assertCount( 15, darkadmin_plugin_registry() );
     }
 
     public function test_every_plugin_registry_stylesheet_exists(): void {
@@ -764,6 +764,11 @@ class DarkAdminTest extends WP_UnitTestCase {
     public function test_fluent_forms_styles_follow_fluentform_version_constant(): void {
         $this->assertSame( defined( 'FLUENTFORM_VERSION' ), darkadmin_plugin_is_installed( 'fluent-forms' ) );
         $this->assertSame( 'fluent-forms.css', darkadmin_plugin_registry()['fluent-forms']['css'] );
+    }
+
+    public function test_jetengine_styles_follow_jet_engine_class(): void {
+        $this->assertSame( class_exists( 'Jet_Engine', false ), darkadmin_plugin_is_installed( 'jetengine' ) );
+        $this->assertSame( 'jetengine.css', darkadmin_plugin_registry()['jetengine']['css'] );
     }
 
     public function test_wordpress_ai_screen_ids_include_all_ai_admin_pages(): void {

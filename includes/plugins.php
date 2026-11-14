@@ -135,6 +135,14 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'FLUENTFORM_VERSION' );
 			}
 		),
+		'jetengine'      => $entry(
+			'JetEngine',
+			__( 'Post types, meta boxes, relations, query builder and Crocoblock dashboard.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'jetengine.css',
+			static function (): bool {
+				return class_exists( 'Jet_Engine', false );
+			}
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),
