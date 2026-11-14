@@ -301,7 +301,7 @@
 }
 
 .wpb_toggle-switch .wpb_toggle-input:checked + .wpb_toggle-track {
-  background: #0772ce !important;
+  background: var(--adm-primary) !important;
 }
 
 .wpb_button_group-container .wpb_button_group-buttons {
