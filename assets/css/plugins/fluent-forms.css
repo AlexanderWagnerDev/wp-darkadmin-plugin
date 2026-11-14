@@ -335,8 +335,8 @@ body[class*="page_fluent_forms"] .el-radio-button__inner {
 }
 
 body[class*="page_fluent_forms"] .el-radio-button__orig-radio:checked + .el-radio-button__inner {
-  background-color: #1a7efb !important;
-  border-color: #1a7efb !important;
+  background-color: #1565c9 !important;
+  border-color: #1565c9 !important;
   color: #fff !important;
 }
 
@@ -416,7 +416,7 @@ body[class*="page_fluent_forms"] .el-pagination :is(button, .btn-prev, .btn-next
 
 body[class*="page_fluent_forms"] .el-pagination .el-pager li.active,
 body[class*="page_fluent_forms"] .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: #1a7efb !important;
+  background-color: #1565c9 !important;
   color: #fff !important;
 }
 
