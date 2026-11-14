@@ -22,7 +22,7 @@ Features:
 * Token-based design system for backgrounds, text, borders, buttons and states
 * Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 * Preset Themes: Modern (WP 7.0, default) and Classic (WP 6.x) color palettes
-* Plugins: optional dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor, and WordPress AI & Connectors
+* Plugins: optional dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor, Polylang, and WordPress AI & Connectors
 * Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
 * Excluded Pages: specify admin pages where dark mode should not be applied
 * Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in the Editor"

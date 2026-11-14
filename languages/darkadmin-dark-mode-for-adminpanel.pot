@@ -216,6 +216,10 @@ msgid "Home, settings, templates, submissions, tools and system screens."
 msgstr ""
 
 #: includes/plugins.php
+msgid "Languages, string translations, settings and language pickers."
+msgstr ""
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr ""
 

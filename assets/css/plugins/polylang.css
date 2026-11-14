@@ -1,0 +1,144 @@
+/*
+ * DarkAdmin plugin styles: Polylang
+ * Languages, Translations (strings) and Settings screens, the language and
+ * flag pickers (jQuery UI selectmenu), the confirmation dialog, the term
+ * translation fields and the translations dashboard.
+ *
+ * The setup wizard is a standalone page without the admin stylesheet and is
+ * left untouched.
+ */
+
+/* --- Language and flag pickers (jQuery UI selectmenu) --------------------- */
+.pll-selectmenu-button,
+.pll-selectmenu-button:hover,
+.pll-selectmenu-button:active,
+.pll-selectmenu-button:focus {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.pll-selectmenu-button:hover {
+  border-color: var(--adm-border-hover) !important;
+}
+
+.pll-selectmenu-button:focus {
+  border-color: var(--adm-border-focus) !important;
+  box-shadow: 0 0 0 1px var(--adm-border-focus) !important;
+}
+
+.pll-selectmenu-button span.ui-selectmenu-text {
+  color: var(--adm-text) !important;
+}
+
+/* Dropdown arrow: the original icon is a dark SVG on a white background. */
+.pll-selectmenu-button .ui-icon-triangle-1-s::before {
+  background-color: transparent !important;
+  filter: invert(1);
+}
+
+.pll-selectmenu-menu .ui-menu {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.pll-selectmenu-menu .ui-menu-item-wrapper {
+  color: var(--adm-text) !important;
+}
+
+.pll-selectmenu-menu .ui-menu-item .ui-state-active {
+  background-color: var(--adm-surface-3) !important;
+  border-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+/* --- Languages screen ------------------------------------------------------ */
+#add-lang label,
+.pll-legend,
+#term-translations p {
+  color: var(--adm-text) !important;
+}
+
+.languages_page_mlang #the-list .inactive,
+.languages_page_mlang #the-list .inactive td {
+  background-color: color-mix(in srgb, #d54e21 12%, var(--adm-surface-1)) !important;
+}
+
+/* "No language" and other Polylang error notices. */
+.languages_page_mlang .notice p,
+.languages_page_mlang .error p,
+body[class*="languages_page_mlang"] .error p {
+  color: var(--adm-text) !important;
+}
+
+/* --- Settings screen (module list) ----------------------------------------- */
+.pll-settings.plugins .row-actions span a {
+  color: var(--adm-link) !important;
+}
+
+.pll-settings.plugins .row-actions span.deactivated {
+  color: var(--adm-text-muted) !important;
+}
+
+.pll-settings code {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+.pll-settings tr.pll-configure td,
+.pll-settings tr.pll-configure fieldset,
+.pll-settings .pll-configure legend {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Machine translation (DeepL) settings box. */
+.pll-settings-machine-translation,
+.pll-machine-translation-settings,
+#pll-machine-translation-settings {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* --- Translations (strings) screen ----------------------------------------- */
+.languages_page_mlang_strings .metabox-holder > div > div.closed .postbox-header,
+.languages_page_mlang_strings .postbox,
+.languages_page_mlang_strings .postbox .postbox-header {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+#pll-machine-strings-translations label,
+.languages_page_mlang_strings .translation label {
+  color: var(--adm-text) !important;
+}
+
+/* --- Confirmation dialog ---------------------------------------------------- */
+.pll-confirmation-modal.ui-dialog,
+.ui-dialog.pll-confirmation-modal .ui-dialog-content {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+.ui-dialog.pll-confirmation-modal .ui-dialog-titlebar,
+.ui-dialog.pll-confirmation-modal .ui-dialog-buttonpane {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.ui-dialog.pll-confirmation-modal .ui-dialog-buttonpane .ui-button,
+.ui-dialog.pll-confirmation-modal .ui-button:focus {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* --- Bulk translate and post list columns ---------------------------------- */
+#pll-translate .pll-translation-flag,
+.pll-bulk-translate-fieldset legend,
+.inline-edit-row .pll-bulk-translate-fieldset label {
+  color: var(--adm-text) !important;
+}

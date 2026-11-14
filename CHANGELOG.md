@@ -19,6 +19,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   Tools, System Info, Role Manager, Templates, Submissions, MCP, Agent Ready and License). The
   Elementor color tokens are remapped to the DarkAdmin palette, so the styles follow the active
   preset. The Elementor editor keeps its own UI theme setting.
+- Polylang: dark styles for the Languages, Translations and Settings screens (including the inline
+  module settings), the language and flag pickers, the confirmation dialog and the term translation
+  fields. The setup wizard is a standalone page and keeps its own design.
 
 ### Fixed
 

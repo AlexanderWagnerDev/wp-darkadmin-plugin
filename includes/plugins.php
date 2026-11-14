@@ -119,6 +119,14 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'ELEMENTOR_VERSION' );
 			}
 		),
+		'polylang'       => $entry(
+			'Polylang',
+			__( 'Languages, string translations, settings and language pickers.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'polylang.css',
+			static function (): bool {
+				return defined( 'POLYLANG_VERSION' );
+			}
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),
