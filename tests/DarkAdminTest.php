@@ -775,11 +775,37 @@ class DarkAdminTest extends WP_UnitTestCase {
         set_current_screen( 'front' );
     }
 
-    public function test_tinymce_dark_script_skips_screens_without_fluent_forms(): void {
+    /**
+     * Runs in its own process: FLUENTFORM_VERSION cannot be undefined again and would
+     * change the installed-plugin results of the other plugin-style tests.
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function test_tinymce_dark_script_loads_only_on_fluent_forms_screens(): void {
+        define( 'FLUENTFORM_VERSION', '6.0.0' );
+        update_option( 'darkadmin_plugins', [] );
+
         set_current_screen( 'dashboard' );
         darkadmin_enqueue_tinymce_dark_script();
         $this->assertFalse( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
-        set_current_screen( 'front' );
+
+        set_current_screen( 'toplevel_page_fluent_forms' );
+        darkadmin_enqueue_tinymce_dark_script();
+        $this->assertTrue( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
+    }
+
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function test_tinymce_dark_script_skips_fluent_forms_screens_when_styles_disabled(): void {
+        define( 'FLUENTFORM_VERSION', '6.0.0' );
+        update_option( 'darkadmin_plugins', [ 'disabled' => [ 'fluent-forms' ] ] );
+
+        set_current_screen( 'toplevel_page_fluent_forms' );
+        darkadmin_enqueue_tinymce_dark_script();
+        $this->assertFalse( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
     }
 
     public function test_jetengine_styles_follow_jet_engine_class(): void {
