@@ -1,0 +1,576 @@
+/*
+ * DarkAdmin plugin styles: WPBakery Page Builder
+ * Backend editor (rows, columns, element cards, controls), editor panels
+ * (Add Element, Edit Element, Templates, Page Settings, Custom Code) and the
+ * WPBakery settings screens. WPBakery hard-codes light surfaces (#fff, #e6e6e7)
+ * and #5e5e5e text, so they are remapped to DarkAdmin variables.
+ *
+ * The frontend editor canvas and the TinyMCE content area show the page
+ * design and are left untouched.
+ */
+
+/* --- Editor mode switch (Backend / Frontend / Gutenberg) ------------------ */
+.composer-switch a,
+.composer-switch a:visited,
+.composer-switch a:hover,
+.composer-switch a:focus {
+  color: #fff !important;
+}
+
+.composer-switch a.wpb_switch-to-gutenberg,
+.composer-switch a:visited.wpb_switch-to-gutenberg {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+.composer-switch a.wpb_switch-to-gutenberg:hover,
+.composer-switch a.wpb_switch-to-gutenberg:focus {
+  background-color: var(--adm-border-hover) !important;
+}
+
+/* --- Backend editor canvas ------------------------------------------------ */
+#wpb_wpbakery .metabox-composer-content,
+.metabox-composer-content {
+  background-color: var(--adm-bg) !important;
+}
+
+/* Row, column and section containers. */
+.wpb_row_container > .wpb_vc_column > .wpb_element_wrapper,
+.wpb_row_container > .wpb_vc_column_inner > .wpb_element_wrapper,
+.metabox-composer-content .vc_control-container,
+.metabox-composer-content .vc_controls-row .vc_control,
+.metabox-composer-content .vc_controls-row .column_move,
+.metabox-composer-content .vc_control-column,
+.wpb_vc_tta_section.vc_shortcodes_container > .wpb_element_wrapper > .vc_tta-panel-body .wpb_vc_column_inner > .vc_controls,
+.wpb_vc_tta_section.vc_shortcodes_container > .wpb_element_wrapper > .vc_tta-panel-body .wpb_vc_column_inner > .wpb_element_wrapper,
+.wpb_vc_tta_section.vc_shortcodes_container > .wpb_element_wrapper > .vc_tta-panel-body .wpb_vc_row_inner > .vc_controls > .column_move,
+.wpb_vc_tta_toggle_section.vc_shortcodes_container > .wpb_element_wrapper > .vc_tta-panel-body .wpb_vc_column_inner > .vc_controls,
+.wpb_vc_tta_toggle_section.vc_shortcodes_container > .wpb_element_wrapper > .vc_tta-panel-body .wpb_vc_column_inner > .wpb_element_wrapper,
+.wpb_vc_tta_toggle_section.vc_shortcodes_container > .wpb_element_wrapper > .vc_tta-panel-body .wpb_vc_row_inner > .vc_controls > .column_move,
+.wpb_content_element .ui-tabs .ui-tabs-panel.wpb_vc_tab > .wpb_element_wrapper > .wpb_column_container .wpb_vc_column_inner > .vc_controls,
+.wpb_content_element .ui-tabs .ui-tabs-panel.wpb_vc_tab > .wpb_element_wrapper > .wpb_column_container .wpb_vc_column_inner > .wpb_element_wrapper,
+:is(.wpb_vc_tta_pageable, .wpb_vc_tta_tabs, .wpb_vc_tta_toggle, .wpb_vc_tta_tour) .vc_tta-tabs .vc_tta-panels .vc_shortcodes_container,
+:is(.wpb_vc_tta_pageable, .wpb_vc_tta_tabs, .wpb_vc_tta_toggle, .wpb_vc_tta_tour) .vc_tta.vc_general .vc_tta-tab > a,
+.wpb_vc_tta_accordion .vc_tta.vc_general .vc_tta-panel-body,
+.vc_tta-color-backend-tabs-white .vc_tta-panels,
+.vc_tta-color-backend-tabs-white .vc_tta-panel .vc_tta-panel-heading,
+.vc_tta-panels > .wpb_vc_tta_section > .wpb_element_wrapper,
+.vc_tta-panels > .wpb_vc_tta_toggle_section > .wpb_element_wrapper,
+.vc_controls-row .vc_copypaste-select + .select2-container .select2-selection,
+.wpb_vc_tabs > .wpb_element_wrapper .ui-tabs .ui-tabs-nav li {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-surface-1) !important;
+}
+
+/* Element cards and inner rows. */
+.wpb_content_element > .wpb_element_wrapper,
+.wpb_content_element.wpb-compact-view .wpb_element_wrapper.vc_message_box,
+.wpb_vc_row_inner,
+#wpb_wpbakery .vc_tta-container.wpb_content_holder,
+.wpb_content_element .ui-tabs .ui-tabs-panel.wpb_vc_tab,
+#poststuff .wpb_vc_accordion .ui-accordion-header,
+#poststuff .wpb_vc_accordion .ui-accordion-header.ui-state-active,
+.vc_text_separator div {
+  background-color: var(--adm-surface-2) !important;
+}
+
+:is(.wpb_vc_tta_pageable, .wpb_vc_tta_tabs, .wpb_vc_tta_toggle, .wpb_vc_tta_tour) .vc_tta.vc_general .vc_tta-tab {
+  border-bottom-color: var(--adm-surface-2) !important;
+}
+
+:is(.wpb_vc_tta_pageable, .wpb_vc_tta_tabs, .wpb_vc_tta_toggle, .wpb_vc_tta_tour) .vc_tta.vc_general .vc_tta-tab.vc_active {
+  border-bottom-color: var(--adm-surface-1) !important;
+}
+
+.wpb_vc_tta_tour .vc_tta.vc_general .vc_tta-tab.vc_active {
+  border-right-color: var(--adm-surface-1) !important;
+}
+
+.vc_text_separator,
+.wpb_separator {
+  border-bottom-color: var(--adm-border) !important;
+}
+
+/* Element titles and parameter previews. */
+.wpb_element_title,
+.wpb_element_title *,
+.wpb_content_element .wpb_element_title,
+.wpb_vc_param_value.content,
+.wpb_vc_param_value.content *,
+.wpb_vc_param_value.title,
+.wpb_vc_param_value.title *,
+:is(.wpb_vc_tta_pageable, .wpb_vc_tta_tabs, .wpb_vc_tta_toggle, .wpb_vc_tta_tour) .vc_tta.vc_general .vc_tta-tab > a,
+:is(.wpb_vc_tta_pageable, .wpb_vc_tta_tabs, .wpb_vc_tta_toggle, .wpb_vc_tta_tour) .vc_tta.vc_general .vc_tta-tab > a .vc_tta-title-text {
+  color: var(--adm-text) !important;
+}
+
+/* Element control bars (move, add, edit, clone, delete). */
+.metabox-composer-content .vc_controls-content-widget .vc_control-btn .vc_btn-content,
+.metabox-composer-content .vc_controls-parent > div > .vc_element .vc_copypaste-select + .select2-container .select2-selection,
+.metabox-composer-content .vc_control-container .vc_copypaste-select + .select2-container .select2-selection,
+.metabox-composer-content .vc_controls-content-widget .vc_copypaste-select + .select2-container .select2-selection {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+.metabox-composer-content .vc_control-container .vc_copypaste-select + .select2-container .select2-selection,
+.metabox-composer-content .vc_controls-parent > div > .vc_element .vc_copypaste-select + .select2-container .select2-selection {
+  background-color: var(--adm-surface-1) !important;
+}
+
+.metabox-composer-content .vc_controls-content-widget .vc_control-btn .vc_btn-content:hover,
+.metabox-composer-content .vc_controls-content-widget .vc_control-btn:focus .vc_btn-content,
+.metabox-composer-content .vc_control-container .vc_control-btn .vc_btn-content:hover,
+.metabox-composer-content .vc_control-container .vc_control-btn:focus .vc_btn-content,
+.metabox-composer-content .vc_controls-row .vc_control:hover,
+.wpb_vc_row_inner .wpb-inner-row-controls-menu .wpb-inner-row-controls-select + .select2-container .select2-selection:hover {
+  background-color: var(--adm-border-hover) !important;
+}
+
+.metabox-composer-content .vc_controls-content-widget .vc_control-btn .vc-composer-icon,
+.metabox-composer-content .vc_copypaste-select + .select2-container .select2-selection__rendered::before,
+.wpb_vc_row_inner .wpb-inner-row-controls-menu .wpb-inner-row-controls-select + .select2-container .select2-selection:hover .select2-selection__rendered::before {
+  color: var(--adm-text) !important;
+}
+
+.vc_control-align:hover .vc_control-wrap,
+.vc_layout-switcher .vc_layout-btn {
+  background-color: var(--adm-surface-2) !important;
+}
+
+/* Built-in element previews inside the cards. */
+.metabox-composer-content .vc_btn3:is(.vc_btn3-color-grey, .vc_btn3-color-white, .vc_btn3-color-default, [class$="vc_btn3-color-"]),
+#wpb_wpbakery .vc_btn3:is(.vc_btn3-color-grey, .vc_btn3-color-white, .vc_btn3-color-default, [class$="vc_btn3-color-"]) {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.wpb_vc_single_image .wpb_element_wrapper .vc_element-icon,
+.wpb_vc_single_image .attachment-thumbnail {
+  filter: invert(0.85) hue-rotate(180deg);
+}
+
+/* Empty-row placeholder. */
+.vc_empty-container,
+.metabox-composer-content .vc_container_for_children.vc_empty-container {
+  border-color: var(--adm-border) !important;
+}
+
+.vc_add-element-not-empty-button {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* "Add element" hint shown on an empty page. */
+#vc_no-content-helper,
+#vc_no-content-helper .vc_ui-help-block,
+#vc_no-content-helper .vc_ui-help-block a {
+  color: var(--adm-text-muted) !important;
+}
+
+/* --- Panels (Add Element, Edit Element, Templates, Settings) -------------- */
+.vc_ui-panel-window-inner,
+.vc_ui-panel-content-container,
+.vc_ui-panel-download,
+.vc_ui-panel-loading,
+#vc_ui-helper-promo-popup .vc_ui-panel-footer-container {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-panel-footer-container {
+  background: var(--adm-surface-2) !important;
+  border-top: 1px solid var(--adm-border);
+}
+
+.vc_ui-panel-title,
+.vc_ui-panel-download .vc_description,
+.vc_add-element-container .wpb-content-layouts-title,
+.vc_add-element-container .wpb-content-layouts .wpb-element-title,
+.vc_ui-list-bar-item-trigger,
+.vc_ui-panel .wpb_element_label,
+.vc_ui-panel .wpb_el_type_checkbox label,
+.vc_ui-panel .edit_form_line label,
+.vc_ui-panel .vc_ui-panel-content h3,
+.vc_ui-panel .vc_ui-panel-content h4 {
+  color: var(--adm-text) !important;
+}
+
+.vc_description,
+.vc_ui-panel .vc_panel-tabs .wpb_form-description,
+.vc_add-element-container .wpb-content-layouts .vc_element-description {
+  color: var(--adm-text-muted) !important;
+}
+
+.vc_ui-panel .vc_panel-tabs a.wpb_form-link {
+  color: var(--adm-link) !important;
+}
+
+.vc_ui-panel .vc_panel-tabs a.wpb_form-link:hover {
+  color: var(--adm-link-hover) !important;
+}
+
+/* Tab bar inside a panel: the active tab is a light "card" on the blue header. */
+.vc_ui-panel-window .vc_ui-tabs-line > li.vc_active > .vc_ui-tabs-line-trigger,
+.vc_ui-panel-window .vc_ui-tabs-line > .vc_active > .vc_ui-tabs-line-trigger {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Add Element grid. */
+.vc_add-element-container .wpb-content-layouts li,
+.vc_add-element-container .wpb-content-layouts li.wpb-layout-element-button {
+  background-color: var(--adm-surface-2) !important;
+}
+
+.vc_add-element-container .wpb-content-layouts .vc_element-icon {
+  filter: brightness(1.6);
+}
+
+.vc_add-element-container .wpb-content-layouts li:hover {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* Lists, messages and template cards. */
+.vc_ui-list-bar,
+.vc_ui-panel-message,
+.vc_ui-prompt,
+.vc_ui-prompt.vc_ui-prompt-presets.vc_visible,
+.vc_ui-prompt.vc_ui-prompt-templates.vc_visible,
+.vc_ui-prompt.vc_ui-prompt-view-presets.vc_visible {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-list-bar-item:hover,
+.vc_ui-template-list .vc_ui-list-bar-item:hover,
+.vc_ui-template-list :is(.vc_active, .vc_loading) .vc_ui-list-bar-item {
+  background-color: var(--adm-surface-3) !important;
+}
+
+.vc_ui-panel-message--error {
+  background: color-mix(in srgb, var(--adm-danger) 18%, var(--adm-surface-1)) !important;
+}
+
+.vc_ui-template-card::before {
+  background: var(--adm-surface-2) !important;
+}
+
+.vc_ui-template-card-action:hover,
+.vc_ui-template-card-action:focus,
+.vc_ui-template-card-action:active,
+.vc_ui-template-card-action:focus-visible {
+  background: var(--adm-surface-3) !important;
+  color: var(--adm-link-hover) !important;
+}
+
+/* Form fields inside panels. */
+.vc_ui-panel input[type="text"].wpb-form-input,
+.vc_ui-panel input[type="number"].wpb-form-input,
+.vc_ui-panel input[type="text"].wpb-textinput,
+.vc_ui-panel textarea.wpb-form-textarea,
+.vc_ui-panel .wpb-textarea.textarea_html,
+.wpb_link-popup-select,
+.wpb_link-popup-text,
+.vc_suggest-field .vc_suggester,
+.vc_css-editor .vc_layout-onion input,
+:is(.wpb-form-select, .wpb-form-select-search) + .select2-container.select2-container--default .select2-selection--single,
+.wpb-form-select-dropdown.select2-dropdown .select2-search--dropdown .select2-search__field,
+.vc-iconpicker-wrapper .fip-vc-theme-grey.vc-icons-selector .selector-popup .selector-search input[type="text"] {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+:is(.wpb-form-select, .wpb-form-select-search) + .select2-container .select2-selection__rendered {
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-panel input:disabled[type="text"].wpb-form-input,
+.vc_ui-panel input:disabled[type="number"].wpb-form-input,
+.vc_css-editor.vc_simplified .vc_layout-onion :is(input.vc_bottom, input.vc_left, input.vc_right),
+.vc_css-editor.vc_simplified .vc_layout-onion .vc_border-radius-corners input:not(.vc_corner_top_right) {
+  background-color: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-soft) !important;
+}
+
+.wpb_toggle-switch .wpb_toggle-track {
+  background: var(--adm-surface-3) !important;
+}
+
+.wpb_toggle-switch .wpb_toggle-input:checked + .wpb_toggle-track {
+  background: #0772ce !important;
+}
+
+.wpb_button_group-container .wpb_button_group-buttons {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* Design Options box model. */
+.vc_css-editor .vc_layout-onion .vc_margin .vc_border .vc_padding .vc_content {
+  background-color: var(--adm-surface-2) !important;
+}
+
+.vc_css-editor .vc_layout-onion,
+.vc_css-editor .vc_layout-onion > div,
+.vc_css-editor .vc_layout-onion label {
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+.vc_css-editor .vc_layout-onion::after,
+.wpb-modal-section::after {
+  border-bottom-color: var(--adm-border) !important;
+}
+
+/* Param groups and loop builder. */
+.vc_options-fields,
+.loop_params_holder {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.vc_wrapper-param-type-param_group .vc_param_group-list > li,
+.vc_wrapper-param-type-param_group .vc_param_group-list .vc_param {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.vc_sorted-list-checkbox label span,
+#vc_teaser .vc_teaser-constructor .vc_toolbar .vc_teaser-checkbox label span {
+  background: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.vc_sorted-list-checkbox label input:checked + span,
+#vc_teaser .vc_teaser-constructor .vc_toolbar .vc_teaser-checkbox label input:checked + span {
+  background: var(--adm-surface-3) !important;
+  box-shadow: inset 1px 1px 1px 1px var(--adm-bg) !important;
+  color: var(--adm-text) !important;
+}
+
+/* TinyMCE toolbar and Visual/Code tabs inside the Edit Element panel. */
+.vc_ui-panel .wp-editor-tools,
+.vc_ui-panel .wp-editor-container,
+.vc_ui-panel .quicktags-toolbar {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.vc_ui-panel .wp-switch-editor {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+.vc_ui-panel .html-active .switch-html,
+.vc_ui-panel .tmce-active .switch-tmce {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-panel .wp-editor-area {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Custom CSS/JS (Ace) editor gutter. */
+.custom_code.ace_editor .ace_gutter {
+  background: var(--adm-surface-2) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+/* Legacy modal and panel markup. */
+.vc_modal-content,
+.vc_panel {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.vc_panel-footer,
+.vc_panel-tabs > .vc_edit-form-tabs-menu,
+.vc_panel-tabs > .vc_panel-tabs-menu {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.vc_panel-tabs > .vc_edit-form-tabs-menu .vc_edit-form-tab-control.vc_active,
+.vc_panel-tabs > .vc_panel-tabs-menu .vc_panel-tabs-control.vc_active {
+  background: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+#vc_overlay_spinner,
+.vc_helper,
+.wpb-gutenberg-modal-inner,
+.wpb-gutenberg-modal .wpb-loading-overlay {
+  background-color: var(--adm-surface-1) !important;
+}
+
+/* --- WPBakery settings screens ------------------------------------------- */
+/* Settings navigation keeps the WPBakery blue; the global link color is unreadable on it. */
+.wpb-nav-item,
+.wpb-nav-item:visited,
+.wpb-nav-item .wpb-nav-item__title,
+.wpb-nav-item:hover .wpb-nav-item__title,
+.wpb-nav-item--active .wpb-nav-item__title {
+  color: #fff !important;
+}
+
+.vc_checkbox-label,
+.wpb_radio-label-text,
+.vc_settings .wpb_element_label,
+.vc_settings .wpb_toggle-switch .wpb_element_label,
+body[class*="page_vc-"] .wpb_toggle-switch .wpb_element_label {
+  color: var(--adm-text) !important;
+}
+
+.vc_checkbox-label input[type="checkbox"]:not(:checked),
+.wpb_radio-visual {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+.vc-page-welcome .about-text {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Role Manager: collapsible role boxes. */
+body[class*="page_vc-roles"] .widget-top,
+body[class*="page_vc-roles"] .widget-inside {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_vc-roles"] .widget-title h4,
+body[class*="page_vc-roles"] .widget-title h3 {
+  color: var(--adm-text) !important;
+}
+
+.vc_settings .vc_modal-content,
+.vc_settings .vc_ui-helper-popup-promo,
+.vc_settings #vc_ui-helper-promo-popup .vc_ui-panel-footer-container {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* --- Grid Builder (vc_grid_item editor) ---------------------------------- */
+.vc_gitem-shortcode.wpb_content_holder,
+.wpb_vc_gitem_row {
+  background-color: var(--adm-surface-2) !important;
+}
+
+.vc_gitem-tabs > li,
+.vc_gitem-tabs > li.vc_active,
+[class*="wpb_vc_gitem_zone"] > .wpb_element_wrapper,
+.wpb_vc_gitem_row > .vc_controls.vc_controls-row,
+.wpb_vc_gitem_row .wpb_element_wrapper {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.vc_gitem-tabs > li a,
+.wpb_item-label .vc_label {
+  color: var(--adm-text) !important;
+}
+
+#wpb_wpbakery .vc_navbar .vc_btn-white,
+#wpb_wpbakery .vc_navbar-btn.vc_btn-white {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Generic select2 fields, TinyMCE format menu and empty states in panels. */
+.vc_ui-panel .select2-container--default .select2-selection--single,
+.vc_ui-panel .select2-container--default .select2-selection--multiple {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.vc_ui-panel .select2-container--default .select2-selection__rendered,
+.vc_ui-panel .vc_ui-template-grid-empty,
+.vc_post-custom-layout .vc_layout-label {
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-panel .mce-menubtn,
+.vc_ui-panel .mce-menubtn button {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Page Settings: layout picker. */
+.vc_post-custom-layout,
+.vc_post-custom-layout.vc-active-post-custom-layout {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.vc_post-custom-layout:hover,
+.vc_post-custom-layout.vc-active-post-custom-layout {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* Custom CSS/JS (Ace) editor. */
+.vc_ui-panel .ace_editor,
+.vc_ui-panel .ace_editor .ace_scroller,
+.vc_ui-panel .ace_editor .ace_content {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_gutter-active-line,
+.vc_ui-panel .ace_editor .ace_marker-layer .ace_active-line {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_cursor {
+  color: var(--adm-text) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_marker-layer .ace_selection {
+  background-color: color-mix(in srgb, var(--adm-primary) 35%, transparent) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_keyword,
+.vc_ui-panel .ace_editor .ace_storage {
+  color: var(--adm-cm-keyword) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_string {
+  color: var(--adm-cm-string) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_constant,
+.vc_ui-panel .ace_editor .ace_numeric {
+  color: var(--adm-cm-number) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_comment {
+  color: var(--adm-cm-comment) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_variable,
+.vc_ui-panel .ace_editor .ace_support {
+  color: var(--adm-cm-property) !important;
+}
+
+.vc_ui-panel .ace_editor .ace_tag,
+.vc_ui-panel .ace_editor .ace_meta.ace_tag {
+  color: var(--adm-cm-tag) !important;
+}
+
+/* Frontend editor toolbar: the white Save/Update button keeps its blue label. */
+.vc_navbar .vc_btn-save,
+.vc_navbar .vc_btn-save p,
+.vc_navbar .vc_btn-save:hover p {
+  color: #0772ce !important;
+}

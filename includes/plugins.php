@@ -103,6 +103,14 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'UAGB_VER' );
 			}
 		),
+		'wpbakery'       => $entry(
+			'WPBakery Page Builder',
+			__( 'Backend editor, element panels, templates and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'wpbakery.css',
+			static function (): bool {
+				return defined( 'WPB_VC_VERSION' );
+			}
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),

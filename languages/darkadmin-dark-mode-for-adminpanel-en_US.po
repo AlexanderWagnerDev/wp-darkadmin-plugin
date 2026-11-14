@@ -209,6 +209,10 @@ msgid "Dashboard, blocks, popup builder and settings screens."
 msgstr "Dashboard, blocks, popup builder and settings screens."
 
 #: includes/plugins.php
+msgid "Backend editor, element panels, templates and settings screens."
+msgstr "Backend editor, element panels, templates and settings screens."
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr "WordPress AI & Connectors"
 

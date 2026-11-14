@@ -8,6 +8,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- WPBakery Page Builder: dark styles for the backend editor (rows, columns, element cards, tabs and
+  control bars), the Add Element, Edit Element, Templates, Page Settings and Custom CSS & JS panels,
+  the frontend editor toolbar, the Grid Builder and the WPBakery settings screens. The page content
+  in the frontend editor and the TinyMCE content area keep the theme design. Listed in Settings >
+  DarkAdmin > Plugins and enabled automatically when WPBakery is active.
+
 ### Fixed
 
 - Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive or when no

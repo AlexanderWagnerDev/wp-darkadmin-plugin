@@ -735,8 +735,20 @@ class DarkAdminTest extends WP_UnitTestCase {
     // Plugin styles
     // -------------------------------------------------------------------------
 
-    public function test_plugin_registry_has_ten_entries(): void {
-        $this->assertCount( 10, darkadmin_plugin_registry() );
+    public function test_plugin_registry_has_eleven_entries(): void {
+        $this->assertCount( 11, darkadmin_plugin_registry() );
+    }
+
+    public function test_every_plugin_registry_stylesheet_exists(): void {
+        foreach ( darkadmin_plugin_registry() as $slug => $meta ) {
+            $this->assertFileIsReadable( DARKADMIN_PATH . 'assets/css/plugins/' . $meta['css'], $slug );
+        }
+    }
+
+    public function test_wpbakery_styles_follow_wpbakery_version_constant(): void {
+        // Defining the constant here would leak into the other plugin-style tests.
+        $this->assertSame( defined( 'WPB_VC_VERSION' ), darkadmin_plugin_is_installed( 'wpbakery' ) );
+        $this->assertSame( 'wpbakery.css', darkadmin_plugin_registry()['wpbakery']['css'] );
     }
 
     public function test_wordpress_ai_screen_ids_include_all_ai_admin_pages(): void {
