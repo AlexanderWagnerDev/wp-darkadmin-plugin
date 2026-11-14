@@ -766,6 +766,22 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( 'fluent-forms.css', darkadmin_plugin_registry()['fluent-forms']['css'] );
     }
 
+    public function test_fluent_forms_screen_detection(): void {
+        set_current_screen( 'toplevel_page_fluent_forms' );
+        $this->assertTrue( darkadmin_is_fluent_forms_admin_screen() );
+
+        set_current_screen( 'dashboard' );
+        $this->assertFalse( darkadmin_is_fluent_forms_admin_screen() );
+        set_current_screen( 'front' );
+    }
+
+    public function test_tinymce_dark_script_skips_screens_without_fluent_forms(): void {
+        set_current_screen( 'dashboard' );
+        darkadmin_enqueue_tinymce_dark_script();
+        $this->assertFalse( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
+        set_current_screen( 'front' );
+    }
+
     public function test_jetengine_styles_follow_jet_engine_class(): void {
         $this->assertSame( class_exists( 'Jet_Engine', false ), darkadmin_plugin_is_installed( 'jetengine' ) );
         $this->assertSame( 'jetengine.css', darkadmin_plugin_registry()['jetengine']['css'] );

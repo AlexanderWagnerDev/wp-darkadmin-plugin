@@ -381,3 +381,52 @@ function darkadmin_enqueue_plugin_styles(): void {
 		);
 	}
 }
+
+/**
+ * Whether the current admin screen belongs to Fluent Forms.
+ *
+ * @return bool
+ */
+function darkadmin_is_fluent_forms_admin_screen(): bool {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen instanceof WP_Screen ) {
+		return false;
+	}
+
+	return false !== strpos( $screen->id, 'fluent_forms' );
+}
+
+/**
+ * Darkens the TinyMCE content area on Fluent Forms screens.
+ *
+ * Fluent Forms uses TinyMCE for confirmation messages and email bodies. The
+ * editing area is an iframe that admin stylesheets cannot reach, so a small
+ * script adds the DarkAdmin colors to each TinyMCE document.
+ *
+ * @return void
+ */
+function darkadmin_enqueue_tinymce_dark_script(): void {
+	if ( ! darkadmin_plugin_styles_enabled( 'fluent-forms' ) || ! darkadmin_is_fluent_forms_admin_screen() ) {
+		return;
+	}
+
+	$src = DARKADMIN_URL . 'assets/js/tinymce-dark.js';
+
+	// Fluent Forms dequeues scripts from other plugins on its screens ("no conflict" mode).
+	add_filter(
+		'fluentform/exclude_js_slugs_from_dequeue',
+		static function ( $slugs ) use ( $src ) {
+			$slugs   = is_array( $slugs ) ? $slugs : array();
+			$slugs[] = $src;
+			return $slugs;
+		}
+	);
+
+	wp_enqueue_script(
+		'darkadmin-tinymce-dark',
+		$src,
+		array(),
+		DARKADMIN_VERSION,
+		array( 'in_footer' => true )
+	);
+}

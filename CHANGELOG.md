@@ -25,7 +25,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fluent Forms: dark styles for the forms list, form editor (canvas, field palette, field settings),
   form settings, entries and entry details, reports, global settings, tools, integrations and
   support screens, including the Element UI dialogs, dropdowns, tables and date pickers. The
-  signature field placeholder stays readable. The TinyMCE content area keeps the theme design.
+  signature field placeholder stays readable. The rich text editors for confirmation messages and
+  email bodies get a dark editing area with light text (`assets/js/tinymce-dark.js`, loaded only on
+  Fluent Forms screens).
 - JetEngine: dark styles for the post type, meta box, taxonomy, relation, options page and query
   builder screens, the listings list and the Crocoblock dashboard (license, settings, workflows),
   covering the shared Crocoblock UI components (panels, tabs, switchers, selects, repeaters, popups).

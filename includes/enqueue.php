@@ -417,6 +417,7 @@ add_action(
 		}
 
 		darkadmin_enqueue_plugin_styles();
+		darkadmin_enqueue_tinymce_dark_script();
 		darkadmin_enqueue_boot_wpds_styles();
 		darkadmin_enqueue_wordpress_ai_styles();
 
