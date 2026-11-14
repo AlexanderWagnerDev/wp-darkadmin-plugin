@@ -37,6 +37,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   delivery, cache, file optimization, media, preload, database, heartbeat, tools, add-ons, help and
   account sections, add-on cards and popins).
 
+### Developers
+
+- New `darkadmin_plugin_is_installed` filter to override the detection of a plugin from the plugin
+  style registry (arguments: detected state, plugin style slug).
+
 ### Fixed
 
 - Field labels on the Add Category / Add Tag forms (`.form-wrap label`) were dark text on the dark

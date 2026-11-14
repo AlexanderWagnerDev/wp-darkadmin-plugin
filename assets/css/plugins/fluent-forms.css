@@ -310,8 +310,8 @@ body[class*="page_fluent_forms"] :is(.el-radio__inner, .el-checkbox__inner) {
 }
 
 body[class*="page_fluent_forms"] :is(.el-radio__input.is-checked .el-radio__inner, .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner) {
-  background-color: #1a7efb !important;
-  border-color: #1a7efb !important;
+  background-color: #1565c9 !important;
+  border-color: #1565c9 !important;
 }
 
 body[class*="page_fluent_forms"] :is(.el-radio__label, .el-checkbox__label, .el-switch__label:not(.is-active)) {

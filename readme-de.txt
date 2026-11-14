@@ -98,6 +98,7 @@ Ja, mit „Dunkle Login-Seite“ unter Einstellungen -> DarkAdmin. Das gilt für
 * Fix: Die Feldbeschriftungen beim Hinzufügen von Kategorien und Schlagwörtern waren unlesbar, und nicht angehakte Checkboxen und Radiobuttons blieben weiß
 * Fix: „Ausgeschlossene Plugins“ behält einen gespeicherten Ausschluss, wenn das Plugin vorübergehend inaktiv ist
 * Fix: Die Erkennung von Plugin-Seiten ordnet Seiten nicht mehr dem falschen Plugin zu, wenn Plugins Ordner teilen oder verschachteln
+* Entwickler: Neuer Filter darkadmin_plugin_is_installed, um die Plugin-Erkennung für die Plugin-Stile zu überschreiben
 
 = 0.6.0 =
 * Neu: Einstellung „Dunkler Website-Editor“ (standardmäßig aus): dunkle Oberfläche im Website-Editor (Navigation, Listen für Seiten, Templates und Vorlagen, Stile-Panel, Editor-Oberfläche). Die Vorschau des Website-Designs behält die Farben des Themes.

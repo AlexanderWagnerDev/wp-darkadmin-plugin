@@ -129,6 +129,10 @@ customization and Auto Dark Mode support.
 - Plugin page detection no longer attributes pages to the wrong plugin when plugins share or nest
   folders
 
+### Developers
+
+- New `darkadmin_plugin_is_installed` filter to override the plugin detection for the plugin styles
+
 ## [0.6.0] - 2026-11-13
 
 ### Added
@@ -565,6 +569,11 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
   inaktiv ist
 - Die Erkennung von Plugin-Seiten ordnet Seiten nicht mehr dem falschen Plugin zu, wenn Plugins
   Ordner teilen oder verschachteln
+
+### Entwickler
+
+- Neuer Filter `darkadmin_plugin_is_installed`, um die Plugin-Erkennung für die Plugin-Stile zu
+  überschreiben
 
 ## 0.6.0
 

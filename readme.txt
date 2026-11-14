@@ -98,6 +98,7 @@ Yes, enable "Dark Login Page" under Settings > DarkAdmin. It applies to everyone
 * Fixed: Field labels on the Add Category / Add Tag forms were unreadable, and unchecked checkboxes and radio buttons stayed white
 * Fixed: Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive
 * Fixed: Plugin page detection no longer attributes pages to the wrong plugin when plugins share or nest folders
+* Developers: New darkadmin_plugin_is_installed filter to override the plugin detection for the plugin styles
 
 = 0.6.0 =
 * Added: "Dark Site Editor" setting (off by default): dark site editor interface (navigation, Pages, Templates and Patterns lists, Styles panel, editor interface). The preview of your site design keeps the theme colors.

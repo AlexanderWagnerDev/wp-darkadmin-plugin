@@ -776,14 +776,22 @@ class DarkAdminTest extends WP_UnitTestCase {
     }
 
     /**
-     * Runs in its own process: FLUENTFORM_VERSION cannot be undefined again and would
-     * change the installed-plugin results of the other plugin-style tests.
-     *
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
+     * Marks Fluent Forms as installed through the detection filter. WP_UnitTestCase
+     * restores all hooks after each test, so nothing leaks into other tests.
      */
+    private function fake_fluent_forms_installed(): void {
+        add_filter(
+            'darkadmin_plugin_is_installed',
+            static function ( $installed, $slug ) {
+                return 'fluent-forms' === $slug ? true : $installed;
+            },
+            10,
+            2
+        );
+    }
+
     public function test_tinymce_dark_script_loads_only_on_fluent_forms_screens(): void {
-        define( 'FLUENTFORM_VERSION', '6.0.0' );
+        $this->fake_fluent_forms_installed();
         update_option( 'darkadmin_plugins', [] );
 
         set_current_screen( 'dashboard' );
@@ -793,19 +801,25 @@ class DarkAdminTest extends WP_UnitTestCase {
         set_current_screen( 'toplevel_page_fluent_forms' );
         darkadmin_enqueue_tinymce_dark_script();
         $this->assertTrue( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
+
+        wp_dequeue_script( 'darkadmin-tinymce-dark' );
+        set_current_screen( 'front' );
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
     public function test_tinymce_dark_script_skips_fluent_forms_screens_when_styles_disabled(): void {
-        define( 'FLUENTFORM_VERSION', '6.0.0' );
+        $this->fake_fluent_forms_installed();
         update_option( 'darkadmin_plugins', [ 'disabled' => [ 'fluent-forms' ] ] );
 
         set_current_screen( 'toplevel_page_fluent_forms' );
         darkadmin_enqueue_tinymce_dark_script();
         $this->assertFalse( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
+        set_current_screen( 'front' );
+    }
+
+    public function test_plugin_is_installed_filter_overrides_detection(): void {
+        $this->assertFalse( darkadmin_plugin_is_installed( 'not-a-registry-slug' ) );
+        $this->fake_fluent_forms_installed();
+        $this->assertTrue( darkadmin_plugin_is_installed( 'fluent-forms' ) );
     }
 
     public function test_jetengine_styles_follow_jet_engine_class(): void {

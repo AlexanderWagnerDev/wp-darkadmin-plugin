@@ -285,8 +285,16 @@ function darkadmin_plugin_is_installed( string $slug ): bool {
 	if ( ! isset( $registry[ $slug ] ) ) {
 		return false;
 	}
-	$callback = $registry[ $slug ]['is_installed'];
-	return is_callable( $callback ) && (bool) call_user_func( $callback );
+	$callback  = $registry[ $slug ]['is_installed'];
+	$installed = is_callable( $callback ) && (bool) call_user_func( $callback );
+
+	/**
+	 * Filters whether a plugin from the DarkAdmin plugin style registry counts as installed.
+	 *
+	 * @param bool   $installed Whether the plugin was detected.
+	 * @param string $slug      Plugin style slug.
+	 */
+	return (bool) apply_filters( 'darkadmin_plugin_is_installed', $installed, $slug );
 }
 
 /**
