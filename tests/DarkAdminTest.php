@@ -735,8 +735,8 @@ class DarkAdminTest extends WP_UnitTestCase {
     // Plugin styles
     // -------------------------------------------------------------------------
 
-    public function test_plugin_registry_has_eleven_entries(): void {
-        $this->assertCount( 11, darkadmin_plugin_registry() );
+    public function test_plugin_registry_has_twelve_entries(): void {
+        $this->assertCount( 12, darkadmin_plugin_registry() );
     }
 
     public function test_every_plugin_registry_stylesheet_exists(): void {
@@ -749,6 +749,11 @@ class DarkAdminTest extends WP_UnitTestCase {
         // Defining the constant here would leak into the other plugin-style tests.
         $this->assertSame( defined( 'WPB_VC_VERSION' ), darkadmin_plugin_is_installed( 'wpbakery' ) );
         $this->assertSame( 'wpbakery.css', darkadmin_plugin_registry()['wpbakery']['css'] );
+    }
+
+    public function test_elementor_styles_follow_elementor_version_constant(): void {
+        $this->assertSame( defined( 'ELEMENTOR_VERSION' ), darkadmin_plugin_is_installed( 'elementor' ) );
+        $this->assertSame( 'elementor.css', darkadmin_plugin_registry()['elementor']['css'] );
     }
 
     public function test_wordpress_ai_screen_ids_include_all_ai_admin_pages(): void {

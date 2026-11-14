@@ -1,0 +1,220 @@
+/*
+ * DarkAdmin plugin styles: Elementor
+ * Elementor admin screens use two token sets: --e-one-palette-* (the "Editor
+ * One" admin shell: settings, tools, templates, submissions) and --e-a-* (legacy
+ * admin UI, dialogs and notices). Both are remapped to DarkAdmin variables on
+ * body, which overrides Elementor's :root values for every descendant.
+ * React screens built with Elementor UI (MUI) hard-code a light theme and are
+ * covered by the scoped rules further down.
+ *
+ * The Elementor editor itself has its own dark UI theme (Editor > User
+ * Preferences > UI Theme) and is not styled here.
+ */
+
+body.wp-admin {
+  /* Editor One admin shell. */
+  --e-one-palette-text-primary: var(--adm-text);
+  --e-one-palette-text-secondary: var(--adm-text-muted);
+  --e-one-palette-text-tertiary: var(--adm-text-muted);
+  --e-one-palette-text-disabled: var(--adm-text-soft);
+  --e-one-palette-text-tab: var(--adm-text);
+  --e-one-palette-background-default: var(--adm-bg);
+  --e-one-palette-background-paper: var(--adm-surface-1);
+  --e-one-palette-divider: var(--adm-border);
+  --e-one-palette-border: var(--adm-border-hover);
+  --e-one-palette-checkbox-primary: var(--adm-text-muted);
+  --e-one-palette-action-active: var(--adm-text);
+  --e-one-palette-action-hover: rgba(255, 255, 255, 0.06);
+  --e-one-palette-action-selected: rgba(255, 255, 255, 0.12);
+  --e-one-palette-action-focus: var(--adm-border-focus);
+  --e-one-palette-action-disabled: rgba(255, 255, 255, 0.3);
+  --e-one-palette-action-disabled-background: rgba(255, 255, 255, 0.12);
+  --e-one-palette-secondary-light: #babfc5;
+  --e-one-palette-secondary-main: #9da5ae;
+  --e-one-palette-secondary-dark: #818a96;
+  --e-one-palette-secondary-contrast-text: #0c0d0e;
+  --e-one-palette-info-main: var(--adm-link);
+
+  /* Legacy admin tokens. */
+  --e-a-bg-default: var(--adm-surface-1);
+  --e-a-bg-hover: var(--adm-surface-2);
+  --e-a-bg-active: var(--adm-surface-3);
+  --e-a-bg-active-bold: var(--adm-border-hover);
+  --e-a-bg-loading: var(--adm-surface-2);
+  --e-a-bg-primary: #310132;
+  --e-a-bg-success: #032317;
+  --e-a-bg-info: #0a1a3d;
+  --e-a-bg-danger: #390a0a;
+  --e-a-bg-warning: #311808;
+  --e-a-bg-chip: var(--adm-surface-3);
+  --e-a-color-txt: var(--adm-text);
+  --e-a-color-txt-muted: var(--adm-text-muted);
+  --e-a-color-txt-disabled: var(--adm-text-soft);
+  --e-a-color-txt-hover: var(--adm-text-muted);
+  --e-a-color-txt-active: var(--adm-text);
+  --e-a-color-txt-accent: var(--adm-text);
+  --e-a-border-color: var(--adm-border);
+  --e-a-border-color-bold: var(--adm-border-hover);
+  --e-a-border-color-focus: var(--adm-border-focus);
+  --e-a-btn-bg-disabled: var(--adm-surface-3);
+  --e-a-popover-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
+  --e-notice-border-color: var(--adm-border);
+  --e-notice-dismiss-color: var(--adm-text-muted);
+}
+
+/* --- Elementor UI (MUI) screens: Home, sidebar navigation, MCP, Agent Ready,
+ * License, Submissions. Scoped to Elementor admin pages through their body
+ * classes; menus and popovers are portaled into body and inherit the scope. */
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(#elementor-home-app, #editor-one-sidebar-navigation, #editor-one-sidebar-navigation > nav, .MuiBox-root > main) {
+  background-color: var(--adm-bg) !important;
+  color: var(--adm-text);
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) #editor-one-sidebar-navigation {
+  border-inline-end: 1px solid var(--adm-border);
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) #editor-one-sidebar-navigation :is(.MuiBox-root, .MuiList-root, .MuiIconButton-root) {
+  background-color: transparent !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiPaper-root, .MuiCard-root, .MuiPopover-paper, .MuiMenu-paper, .MuiDialog-paper) {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiPaper-outlined, .MuiCard-root) {
+  border-color: var(--adm-border) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiDivider-root {
+  border-color: var(--adm-border) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiTypography-root:not(a), .MuiListItemText-primary, .MuiListItemText-secondary, .MuiListItemIcon-root, .MuiIconButton-root, .MuiFormLabel-root, .MuiFormControlLabel-label, .MuiTableCell-root, .MuiTab-root) {
+  color: var(--adm-text) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiTypography-body2, .MuiTypography-caption, .MuiListItemText-secondary, .MuiFormHelperText-root) {
+  color: var(--adm-text-muted) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiListItemButton-root:hover, .MuiMenuItem-root:hover, .MuiButtonBase-root.Mui-focusVisible) {
+  background-color: var(--adm-surface-2) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiListItemButton-root.Mui-selected, .MuiMenuItem-root.Mui-selected) {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* Chips and outlined/text buttons. */
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiChip-root:not([class*="MuiChip-color"]):not(.MuiChip-colorDefault),
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiChip-colorDefault {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiChip-root.MuiChip-filled[aria-pressed="true"],
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiChip-root.MuiChip-colorSecondary {
+  background-color: var(--adm-text-muted) !important;
+  color: var(--adm-bg) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiChip-colorInfo {
+  background-color: color-mix(in srgb, #2563eb 25%, var(--adm-surface-1)) !important;
+  color: var(--adm-text) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiButton-outlined, .MuiButton-outlinedSecondary, .MuiButton-text:not(.MuiButton-textPrimary)) {
+  border-color: var(--adm-border-hover) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Info banners and tinted papers. */
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiAlert-standardInfo, .MuiAlert-standardInfo .MuiAlert-message) {
+  background-color: color-mix(in srgb, #2563eb 18%, var(--adm-surface-1)) !important;
+  color: var(--adm-text) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiAlert-standardWarning, .MuiAlert-standardWarning .MuiAlert-message) {
+  background-color: color-mix(in srgb, #f59e0b 18%, var(--adm-surface-1)) !important;
+  color: var(--adm-text) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiLink-root {
+  color: var(--adm-link) !important;
+}
+
+/* Inputs. */
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) :is(.MuiInputBase-root, .MuiOutlinedInput-root) {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiOutlinedInput-notchedOutline {
+  border-color: var(--adm-border) !important;
+}
+
+:is(body.toplevel_page_elementor-home, body.e-has-sidebar-navigation) .MuiInputBase-input {
+  color: var(--adm-text) !important;
+  background-color: transparent !important;
+}
+
+/* The info button inside the license notice: the global link color is unreadable on blue. */
+.e-button.e-button--info,
+.e-button.e-button--info span {
+  color: #fff !important;
+}
+
+/* MCP, Agent Ready and License: React roots and cards with hard-coded white
+ * surfaces. Boxes and stacks have no semantic class, so their surface is
+ * cleared and the page background shows through; borders stay visible. */
+#elementor-mcp-root,
+.elementor-license-box.e-one-section-outlined {
+  background-color: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.elementor-license-box.e-one-section-outlined :is(h3, p, label) {
+  color: var(--adm-text) !important;
+}
+
+:is(body.elementor_page_elementor-mcp, body.elementor_page_elementor-agents-ready) .wrap :is(.MuiBox-root, .MuiStack-root) {
+  background-color: transparent !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* Agent Ready: floating "Check my site" bar. */
+body.elementor_page_elementor-agents-ready .wrap .MuiStack-root:has(> .MuiInputBase-root, > input) {
+  background-color: var(--adm-surface-2) !important;
+}
+
+/* Submissions upsell list on the free version. */
+.e-feature-promotion,
+.e-feature-promotion :is(li, p, h1, h2, h3) {
+  color: var(--adm-text) !important;
+}
+
+/* Role Manager role names. */
+#elementor-role-manager .elementor-role-name {
+  color: var(--adm-text) !important;
+}
+
+/* Template edit screen (classic metaboxes styled by Elementor). */
+body.post-type-elementor_library .category-tabs li.tabs,
+body.post-type-elementor_library .categorydiv .tabs-panel {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body.post-type-elementor_library .category-tabs li.tabs a {
+  color: var(--adm-text) !important;
+}
+
+body.post-type-elementor_library #postcustomstuff table,
+body.post-type-elementor_library #postcustomstuff thead th,
+body.post-type-elementor_library #postcustomstuff table th {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}

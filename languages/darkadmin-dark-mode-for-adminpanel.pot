@@ -212,6 +212,10 @@ msgid "Backend editor, element panels, templates and settings screens."
 msgstr ""
 
 #: includes/plugins.php
+msgid "Home, settings, templates, submissions, tools and system screens."
+msgstr ""
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr ""
 

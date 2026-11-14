@@ -15,6 +15,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   the frontend editor toolbar, the Grid Builder and the WPBakery settings screens. The page content
   in the frontend editor and the TinyMCE content area keep the theme design. Listed in Settings >
   DarkAdmin > Plugins and enabled automatically when WPBakery is active.
+- Elementor: dark styles for the Elementor admin screens (Home, sidebar navigation, Settings,
+  Tools, System Info, Role Manager, Templates, Submissions, MCP, Agent Ready and License). The
+  Elementor color tokens are remapped to the DarkAdmin palette, so the styles follow the active
+  preset. The Elementor editor keeps its own UI theme setting.
 
 ### Fixed
 

@@ -111,6 +111,14 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'WPB_VC_VERSION' );
 			}
 		),
+		'elementor'      => $entry(
+			'Elementor',
+			__( 'Home, settings, templates, submissions, tools and system screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'elementor.css',
+			static function (): bool {
+				return defined( 'ELEMENTOR_VERSION' );
+			}
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),
