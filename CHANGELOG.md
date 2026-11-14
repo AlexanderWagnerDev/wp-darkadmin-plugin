@@ -22,6 +22,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Polylang: dark styles for the Languages, Translations and Settings screens (including the inline
   module settings), the language and flag pickers, the confirmation dialog and the term translation
   fields. The setup wizard is a standalone page and keeps its own design.
+- Fluent Forms: dark styles for the forms list, form editor (canvas, field palette, field settings),
+  form settings, entries and entry details, reports, global settings, tools, integrations and
+  support screens, including the Element UI dialogs, dropdowns, tables and date pickers. The
+  signature field placeholder stays readable. The TinyMCE content area keeps the theme design.
 
 ### Fixed
 

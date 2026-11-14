@@ -221,6 +221,10 @@ msgid "Languages, string translations, settings and language pickers."
 msgstr "Languages, string translations, settings and language pickers."
 
 #: includes/plugins.php
+msgid "Forms list, form editor, entries, reports and settings screens."
+msgstr "Forms list, form editor, entries, reports and settings screens."
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr "WordPress AI & Connectors"
 

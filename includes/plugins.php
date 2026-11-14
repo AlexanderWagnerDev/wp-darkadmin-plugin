@@ -127,6 +127,14 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'POLYLANG_VERSION' );
 			}
 		),
+		'fluent-forms'   => $entry(
+			'Fluent Forms',
+			__( 'Forms list, form editor, entries, reports and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'fluent-forms.css',
+			static function (): bool {
+				return defined( 'FLUENTFORM_VERSION' );
+			}
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),
