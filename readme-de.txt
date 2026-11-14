@@ -22,7 +22,7 @@ Funktionen:
 * Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
 * Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 * Preset-Themes: Modern (WP 7.0, Standard) und Classic (WP 6.x) Farbpaletten
-* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor, Polylang, Fluent Forms, JetEngine und WordPress AI & Connectors
+* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor, Polylang, Fluent Forms, JetEngine, WP Rocket und WordPress AI & Connectors
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 * Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
 * Dunkler Block-Editor (optional, WordPress 7.1+): dunkle Oberfläche im Block-Editor für Beiträge und Seiten; der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist, oder immer mit „Theme-Design im Editor abdunkeln“

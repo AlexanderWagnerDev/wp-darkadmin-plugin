@@ -31,6 +31,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - JetEngine: dark styles for the post type, meta box, taxonomy, relation, options page and query
   builder screens, the listings list and the Crocoblock dashboard (license, settings, workflows),
   covering the shared Crocoblock UI components (panels, tabs, switchers, selects, repeaters, popups).
+- WP Rocket: dark styles for Settings > WP Rocket (navigation, dashboard, Rocket Insights, content
+  delivery, cache, file optimization, media, preload, database, heartbeat, tools, add-ons, help and
+  account sections, add-on cards and popins).
 
 ### Fixed
 

@@ -229,6 +229,10 @@ msgid "Post types, meta boxes, relations, query builder and Crocoblock dashboard
 msgstr "Post types, meta boxes, relations, query builder and Crocoblock dashboard."
 
 #: includes/plugins.php
+msgid "Dashboard, cache, file optimization, media, preload, CDN and tools tabs."
+msgstr "Dashboard, cache, file optimization, media, preload, CDN and tools tabs."
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr "WordPress AI & Connectors"
 

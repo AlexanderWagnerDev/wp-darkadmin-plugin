@@ -143,6 +143,14 @@ function darkadmin_plugin_registry(): array {
 				return class_exists( 'Jet_Engine', false );
 			}
 		),
+		'wp-rocket'      => $entry(
+			'WP Rocket',
+			__( 'Dashboard, cache, file optimization, media, preload, CDN and tools tabs.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'wp-rocket.css',
+			static function (): bool {
+				return defined( 'WP_ROCKET_VERSION' );
+			}
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),

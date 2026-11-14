@@ -735,8 +735,8 @@ class DarkAdminTest extends WP_UnitTestCase {
     // Plugin styles
     // -------------------------------------------------------------------------
 
-    public function test_plugin_registry_has_fifteen_entries(): void {
-        $this->assertCount( 15, darkadmin_plugin_registry() );
+    public function test_plugin_registry_has_sixteen_entries(): void {
+        $this->assertCount( 16, darkadmin_plugin_registry() );
     }
 
     public function test_every_plugin_registry_stylesheet_exists(): void {
@@ -785,6 +785,11 @@ class DarkAdminTest extends WP_UnitTestCase {
     public function test_jetengine_styles_follow_jet_engine_class(): void {
         $this->assertSame( class_exists( 'Jet_Engine', false ), darkadmin_plugin_is_installed( 'jetengine' ) );
         $this->assertSame( 'jetengine.css', darkadmin_plugin_registry()['jetengine']['css'] );
+    }
+
+    public function test_wp_rocket_styles_follow_wp_rocket_version_constant(): void {
+        $this->assertSame( defined( 'WP_ROCKET_VERSION' ), darkadmin_plugin_is_installed( 'wp-rocket' ) );
+        $this->assertSame( 'wp-rocket.css', darkadmin_plugin_registry()['wp-rocket']['css'] );
     }
 
     public function test_wordpress_ai_screen_ids_include_all_ai_admin_pages(): void {
