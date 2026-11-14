@@ -15,8 +15,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Dark Site Editor** setting (Settings > DarkAdmin > General, off by default): dark styles for
   `site-editor.php`, including the navigation, the Pages, Templates and Patterns lists, the Styles
   panel and the editor interface (`assets/css/darkadmin-site-editor.css` on top of the block editor
-  stylesheet). The canvas keeps the theme design. No WordPress version requirement, because the
-  site editor canvas is always an iframe.
+  stylesheet). The canvas keeps the theme design. No WordPress version requirement, because the site
+  editor canvas is always an iframe.
 - **Dark Login Page** setting (off by default): dark styles for `wp-login.php` (login, lost and
   reset password, registration, admin email confirmation, interim login) using the active palette
   (`assets/css/darkadmin-login.css`). The default WordPress logo switches to its white variant.
@@ -27,8 +27,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-- The picked color of the WordPress color picker (`.wp-color-result`) no longer shows through
-  around the "Select Color" label, for example at its rounded corners or on wider buttons.
+- The picked color of the WordPress color picker (`.wp-color-result`) no longer shows through around
+  the "Select Color" label, for example at its rounded corners or on wider buttons.
 - The WordPress color picker keeps the picked color in its swatch while hovered or focused instead
   of painting it gray.
 - The opened color picker appears below its button again. Before, it sat next to the button and was
