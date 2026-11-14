@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.6.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.7.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -103,6 +103,31 @@ customization and Auto Dark Mode support.
 ---
 
 ## Changelog
+
+## [0.7.0] - 2026-11-14
+
+### Added
+
+- Dark styles for **WPBakery Page Builder**: backend editor, Add Element, Edit Element, Templates,
+  Page Settings and Custom CSS & JS panels, frontend editor toolbar, Grid Builder and settings
+  screens
+- Dark styles for **Elementor** admin screens (Home, Settings, Tools, System Info, Role Manager,
+  Templates, Submissions and more). The Elementor editor keeps its own UI theme setting
+- Dark styles for **Polylang**: Languages, Translations and Settings screens, language and flag
+  pickers, term translation fields
+- Dark styles for **Fluent Forms**: forms list, form editor, form settings, entries, reports, global
+  settings, tools and integrations, including a dark editing area for confirmation messages and
+  email bodies
+- Dark styles for **JetEngine** screens and the Crocoblock dashboard
+- Dark styles for **Settings > WP Rocket**
+
+### Fixed
+
+- Field labels on the Add Category / Add Tag forms were unreadable, and unchecked checkboxes and
+  radio buttons stayed white
+- Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive
+- Plugin page detection no longer attributes pages to the wrong plugin when plugins share or nest
+  folders
 
 ## [0.6.0] - 2026-11-13
 
@@ -513,6 +538,33 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ---
 
 ## Changelog
+
+## 0.7.0
+
+### Hinzugefügt
+
+- Dark-Mode-Stile für **WPBakery Page Builder**: Backend-Editor, Panels „Element hinzufügen“,
+  „Element bearbeiten“, Vorlagen, Seiteneinstellungen und eigenes CSS & JS, Toolbar des
+  Frontend-Editors, Grid Builder und Einstellungsseiten
+- Dark-Mode-Stile für die **Elementor**-Adminseiten (Startseite, Einstellungen, Werkzeuge,
+  Systeminfo, Rollenverwaltung, Vorlagen, Formulareinsendungen und mehr). Der Elementor-Editor
+  behält seine eigene UI-Theme-Einstellung
+- Dark-Mode-Stile für **Polylang**: Sprachen, Übersetzungen und Einstellungen, Sprach- und
+  Flaggenauswahl, Übersetzungsfelder für Begriffe
+- Dark-Mode-Stile für **Fluent Forms**: Formularliste, Formular-Editor, Formulareinstellungen,
+  Einträge, Berichte, globale Einstellungen, Werkzeuge und Integrationen, inklusive dunklem
+  Textfeld für Bestätigungen und E-Mails
+- Dark-Mode-Stile für die **JetEngine**-Seiten und das Crocoblock-Dashboard
+- Dark-Mode-Stile für **Einstellungen > WP Rocket**
+
+### Behoben
+
+- Die Feldbeschriftungen beim Hinzufügen von Kategorien und Schlagwörtern waren unlesbar, und nicht
+  angehakte Checkboxen und Radiobuttons blieben weiß
+- „Ausgeschlossene Plugins“ behält einen gespeicherten Ausschluss, wenn das Plugin vorübergehend
+  inaktiv ist
+- Die Erkennung von Plugin-Seiten ordnet Seiten nicht mehr dem falschen Plugin zu, wenn Plugins
+  Ordner teilen oder verschachteln
 
 ## 0.6.0
 
