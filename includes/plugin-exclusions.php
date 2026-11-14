@@ -22,6 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Keeps only plugin basenames (folder/file.php or file.php) of installed plugins.
  *
+ * The settings form only renders a checkbox for each active plugin, so exclusions
+ * stored for installed but inactive plugins are never posted. They are merged
+ * back in here instead of being dropped by an ordinary settings save; a deleted
+ * plugin is still removed by the intersection with the installed list. Active
+ * plugins are always taken from the submitted value, so unchecking still works.
+ *
  * @param mixed $value Raw input value.
  * @return string[]
  */
@@ -39,7 +45,15 @@ function darkadmin_sanitize_plugin_exclusions( $value ): array {
 		}
 	}
 
-	return array_values( array_unique( $out ) );
+	$inactive  = array_diff( darkadmin_excluded_plugins(), darkadmin_active_plugin_basenames() );
+	$preserved = array_intersect( $inactive, $installed );
+	$out       = array_values( array_unique( array_merge( $out, $preserved ) ) );
+
+	// Deterministic order keeps the sanitizer a fixed point when WordPress
+	// sanitizes the value a second time inside update_option().
+	sort( $out, SORT_STRING );
+
+	return $out;
 }
 
 /**
@@ -102,14 +116,31 @@ function darkadmin_plugin_for_file( string $file, array $active ): string {
 		return '';
 	}
 
+	// An active plugin whose main file is this file owns it. Without this check
+	// a second active plugin in the same folder would win by directory prefix
+	// and report the wrong plugin for the file.
+	if ( in_array( $relative, $active, true ) ) {
+		return $relative;
+	}
+
+	$owner    = '';
+	$best_len = 0;
+
 	foreach ( $active as $basename ) {
 		$dir = dirname( $basename );
-		if ( '.' === $dir ? $relative === $basename : str_starts_with( $relative, $dir . '/' ) ) {
-			return $basename;
+		if ( '.' === $dir || ! str_starts_with( $relative, $dir . '/' ) ) {
+			continue;
+		}
+
+		// Prefer the deepest plugin folder, so a plugin nested inside another
+		// plugin's folder wins over its parent instead of the first match.
+		if ( strlen( $dir ) > $best_len ) {
+			$owner    = $basename;
+			$best_len = strlen( $dir );
 		}
 	}
 
-	return '';
+	return $owner;
 }
 
 /**

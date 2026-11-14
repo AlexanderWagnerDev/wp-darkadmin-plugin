@@ -1182,6 +1182,25 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( '', darkadmin_plugin_for_file( ABSPATH . 'wp-admin/admin.php', $active ) );
     }
 
+    public function test_plugin_for_file_prefers_the_exact_plugin_file(): void {
+        // Two plugins that share one folder: the main file must map to itself,
+        // not to the first active plugin whose folder prefixes it.
+        $active = [ 'bundle/first.php', 'bundle/second.php' ];
+
+        $this->assertSame( 'bundle/first.php', darkadmin_plugin_for_file( WP_PLUGIN_DIR . '/bundle/first.php', $active ) );
+        $this->assertSame( 'bundle/second.php', darkadmin_plugin_for_file( WP_PLUGIN_DIR . '/bundle/second.php', $active ) );
+    }
+
+    public function test_plugin_for_file_prefers_the_deepest_plugin_folder(): void {
+        // A plugin nested inside another plugin's folder owns its own files.
+        $active = [ 'bundle/first.php', 'bundle/nested/plugin.php' ];
+
+        $this->assertSame(
+            'bundle/nested/plugin.php',
+            darkadmin_plugin_for_file( WP_PLUGIN_DIR . '/bundle/nested/includes/file.php', $active )
+        );
+    }
+
     public function test_admin_page_owners_include_callback_and_parent_plugins(): void {
         $main = $this->load_fixture_plugin( 'darkadmin-fixture-main', self::FIXTURE_MAIN_CODE );
         $ext  = $this->load_fixture_plugin( 'darkadmin-fixture-ext', 'function darkadmin_fixture_ext_render() {}' );
@@ -1231,5 +1250,21 @@ class DarkAdminTest extends WP_UnitTestCase {
 
         $this->assertSame( [ $main ], darkadmin_sanitize_plugin_exclusions( [ $main, 'missing/missing.php', '', [ 'x' ], $main ] ) );
         $this->assertSame( [], darkadmin_sanitize_plugin_exclusions( 'not-an-array' ) );
+    }
+
+    public function test_sanitize_plugin_exclusions_keeps_exclusions_for_inactive_plugins(): void {
+        $active   = $this->load_fixture_plugin( 'darkadmin-fixture-excl-active', 'function darkadmin_fixture_excl_active_render() {}' );
+        $inactive = $this->load_fixture_plugin( 'darkadmin-fixture-excl-inactive', 'function darkadmin_fixture_excl_inactive_render() {}' );
+        wp_clean_plugins_cache( false );
+
+        update_option( 'active_plugins', [ $active ] );
+        update_option( 'darkadmin_plugin_exclusions', [ $inactive, $active ] );
+
+        // The settings form only renders a checkbox for active plugins, so an
+        // exclusion stored for an inactive plugin is never posted. It must
+        // survive the save instead of being silently dropped.
+        $result = darkadmin_sanitize_plugin_exclusions( [ $active ] );
+
+        $this->assertEqualsCanonicalizing( [ $active, $inactive ], $result );
     }
 }
