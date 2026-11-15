@@ -233,6 +233,11 @@
   height: 0;
   pointer-events: none;
 }
+/* The radio itself is invisible, so the card has to show keyboard focus. */
+.adm-access-mode-option:focus-within {
+  outline: 2px solid #2271b1;
+  outline-offset: 2px;
+}
 .adm-access-mode-option .dashicons {
   font-size: 20px !important;
   width: 20px !important;
@@ -767,6 +772,11 @@ body.adm-dark-active .adm-layout-input:focus {
 .adm-import-label {
   cursor: pointer;
 }
+/* The file input is visually hidden, so the button has to show keyboard focus. */
+.adm-import-label:focus-within {
+  outline: 2px solid #2271b1;
+  outline-offset: 2px;
+}
 .adm-import-status {
   font-size: 12px;
   font-weight: 600;
@@ -1095,6 +1105,9 @@ body.adm-dark-active .adm-access-mode-option.is-active {
 body.adm-dark-active .adm-access-mode-option.is-disabled {
   opacity: .3 !important;
 }
+body.adm-dark-active .adm-access-mode-option:focus-within {
+  outline-color: var(--adm-link);
+}
 body.adm-dark-active .adm-access-mode-option .dashicons      { color: var(--adm-text-muted) !important; }
 body.adm-dark-active .adm-access-mode-option.is-active .dashicons,
 body.adm-dark-active .adm-access-mode-option:hover .dashicons { color: var(--adm-link) !important; }
@@ -1140,6 +1153,7 @@ body.adm-dark-active .adm-user-info span   { color: var(--adm-text-muted) !impor
 
 body.adm-dark-active .adm-import-ok  { color: #6ee7a0; background: #12532e50; }
 body.adm-dark-active .adm-import-err { color: #fca5a5; background: #7f1d1d50; }
+body.adm-dark-active .adm-import-label:focus-within { outline-color: var(--adm-link); }
 
 body.adm-dark-active .adm-var-reference          { border-color: var(--adm-border) !important; }
 body.adm-dark-active .adm-var-reference-summary  { background: var(--adm-bg) !important; color: var(--adm-text) !important; }

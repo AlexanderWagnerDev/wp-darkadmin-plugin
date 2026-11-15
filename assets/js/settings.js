@@ -243,6 +243,10 @@
 						colorKeys.forEach( function ( key ) {
 							const input = document.getElementById( 'adm_color_' + key );
 							if ( ! input ) return;
+							// Treat the imported palette as the new default, like
+							// loadPresetColors() does for a preset.
+							input.dataset.defaultColor = data[ key ];
+							jQuery( input ).wpColorPicker( 'defaultColor', data[ key ] );
 							jQuery( input ).wpColorPicker( 'color', data[ key ] );
 							setCssVar( key, data[ key ] );
 						} );
