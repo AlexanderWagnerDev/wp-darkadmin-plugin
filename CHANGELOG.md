@@ -17,10 +17,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   the frontend editor toolbar, the Grid Builder and the WPBakery settings screens. The page content
   in the frontend editor and the TinyMCE content area keep the theme design. Listed in Settings >
   DarkAdmin > Plugins and enabled automatically when WPBakery is active.
-- Elementor: dark styles for the Elementor admin screens (Home, sidebar navigation, Settings,
-  Tools, System Info, Role Manager, Templates, Submissions, MCP, Agent Ready and License). The
-  Elementor color tokens are remapped to the DarkAdmin palette, so the styles follow the active
-  preset. The Elementor editor keeps its own UI theme setting.
+- Elementor: dark styles for the Elementor admin screens (Home, sidebar navigation, Settings, Tools,
+  System Info, Role Manager, Templates, Submissions, MCP, Agent Ready and License). The Elementor
+  color tokens are remapped to the DarkAdmin palette, so the styles follow the active preset. The
+  Elementor editor keeps its own UI theme setting.
 - Polylang: dark styles for the Languages, Translations and Settings screens (including the inline
   module settings), the language and flag pickers, the confirmation dialog and the term translation
   fields. The setup wizard is a standalone page and keeps its own design.
@@ -32,7 +32,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   Fluent Forms screens).
 - JetEngine: dark styles for the post type, meta box, taxonomy, relation, options page and query
   builder screens, the listings list and the Crocoblock dashboard (license, settings, workflows),
-  covering the shared Crocoblock UI components (panels, tabs, switchers, selects, repeaters, popups).
+  covering the shared Crocoblock UI components (panels, tabs, switchers, selects, repeaters,
+  popups).
 - WP Rocket: dark styles for Settings > WP Rocket (navigation, dashboard, Rocket Insights, content
   delivery, cache, file optimization, media, preload, database, heartbeat, tools, add-ons, help and
   account sections, add-on cards and popins).
@@ -46,10 +47,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Field labels on the Add Category / Add Tag forms (`.form-wrap label`) were dark text on the dark
   background, and unchecked checkboxes and radio buttons kept the white WordPress 7.1 background.
-- Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive or when no
-  other plugin is active. The settings form only submits active plugins, so the exclusion was
-  silently dropped on the next settings save. Deleted plugins are still removed, and unchecking an
-  active plugin still removes its exclusion.
+- Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive or when no other
+  plugin is active. The settings form only submits active plugins, so the exclusion was silently
+  dropped on the next settings save. Deleted plugins are still removed, and unchecking an active
+  plugin still removes its exclusion.
 - Plugin page detection maps a file to the plugin that owns the exact file before falling back to
   the folder, and prefers the deepest folder. Two active plugins in one folder, or a plugin nested
   in another plugin's folder, are no longer attributed to the wrong plugin.

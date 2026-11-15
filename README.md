@@ -519,8 +519,8 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
   abgedeckt werden
 - Preset-Themes: Modern (WP 7.0, Standard) und Classic (WP 6.x) Farbpaletten
 - **Plugins**: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact
-  Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor,
-  Polylang, Fluent Forms, JetEngine, WP Rocket und WordPress AI & Connectors
+  Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor, Polylang,
+  Fluent Forms, JetEngine, WP Rocket und WordPress AI & Connectors
 - Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI
   wenn keine Nicht-Admin-Benutzer vorhanden sind
 - Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
@@ -556,8 +556,8 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 - Dark-Mode-Stile für **Polylang**: Sprachen, Übersetzungen und Einstellungen, Sprach- und
   Flaggenauswahl, Übersetzungsfelder für Begriffe
 - Dark-Mode-Stile für **Fluent Forms**: Formularliste, Formular-Editor, Formulareinstellungen,
-  Einträge, Berichte, globale Einstellungen, Werkzeuge und Integrationen, inklusive dunklem
-  Textfeld für Bestätigungen und E-Mails
+  Einträge, Berichte, globale Einstellungen, Werkzeuge und Integrationen, inklusive dunklem Textfeld
+  für Bestätigungen und E-Mails
 - Dark-Mode-Stile für die **JetEngine**-Seiten und das Crocoblock-Dashboard
 - Dark-Mode-Stile für **Einstellungen > WP Rocket**
 
