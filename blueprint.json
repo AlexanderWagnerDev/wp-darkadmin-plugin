@@ -1,4 +1,5 @@
 {
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
     "landingPage": "/wp-admin/options-general.php?page=darkadmin",
     "preferredVersions": {
         "php": "8.5",
@@ -21,9 +22,19 @@
             }
         },
         {
+            "step": "setSiteLanguage",
+            "language": "browser"
+        },
+        {
             "step": "setSiteOptions",
             "options": {
                 "darkadmin_dark_mode_enabled": "1",
+                "darkadmin_auto_darken": "0",
+                "darkadmin_block_editor": "1",
+                "darkadmin_block_editor_theme": "1",
+                "darkadmin_site_editor": "1",
+                "darkadmin_login_page": "1",
+                "darkadmin_user_access_mode": "all",
                 "darkadmin_preset": "modern"
             }
         }
