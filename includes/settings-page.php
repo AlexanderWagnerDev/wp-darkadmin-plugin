@@ -549,9 +549,9 @@ function darkadmin_settings_page(): void {
 						<label class="button adm-import-label">
 							<span class="dashicons dashicons-upload"></span>
 							<?php esc_html_e( 'Import Palette', 'darkadmin-dark-mode-for-adminpanel' ); ?>
-							<input type="file" id="adm-import-file" accept=".json" style="display:none;" />
+							<input type="file" id="adm-import-file" class="screen-reader-text" accept=".json" />
 						</label>
-						<span id="adm-import-status" class="adm-import-status"></span>
+						<span id="adm-import-status" class="adm-import-status" role="status" aria-live="polite"></span>
 					</div>
 
 					<?php foreach ( $color_groups as $group_name => $group_keys ) : ?>

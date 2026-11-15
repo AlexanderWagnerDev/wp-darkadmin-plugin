@@ -103,7 +103,7 @@
 
 		el.setAttribute( PROCESSED_ATTR, '1' );
 
-		if ( el.closest?.( '.adm-var-swatch, .wp-color-result, .wp-picker-container, .wp-picker-input-wrap' ) ) {
+		if ( el.closest?.( '.adm-var-swatch, .wp-color-result, .wp-picker-container, .wp-picker-input-wrap, .adm-toggle, .adm-preset-preview' ) ) {
 			return;
 		}
 

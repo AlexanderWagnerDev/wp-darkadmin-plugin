@@ -1113,6 +1113,48 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertStringContainsString( 'id="darkadmin_custom_css"', $html );
     }
 
+    public function test_user_access_mode_cards_show_keyboard_focus(): void {
+        // The radio inputs are visually hidden (0x0, transparent), so the
+        // surrounding card is the only element that can show keyboard focus.
+        $css = (string) file_get_contents( dirname( __DIR__ ) . '/assets/css/settings.css' );
+        $css = (string) preg_replace( '#/\*.*?\*/#s', '', $css );
+
+        $this->assertSame(
+            1,
+            preg_match( '/\.adm-access-mode-option:focus-within\s*\{[^}]*outline\s*:\s*2px solid\s*#2271b1/i', $css ),
+            'The access mode card must show a keyboard focus outline.'
+        );
+        $this->assertSame(
+            1,
+            preg_match( '/body\.adm-dark-active \.adm-access-mode-option:focus-within\s*\{[^}]*outline-color\s*:\s*var\(--adm-link\)/i', $css ),
+            'The focus outline must stay visible in dark mode.'
+        );
+    }
+
+    public function test_palette_import_is_keyboard_reachable_and_announced(): void {
+        wp_set_current_user( $this->factory->user->create( array( 'role' => 'administrator' ) ) );
+
+        ob_start();
+        darkadmin_settings_page();
+        $html = ob_get_clean();
+
+        // The file input must stay focusable: display:none removes it from the
+        // tab order and the accessibility tree, leaving the import mouse-only.
+        $this->assertSame(
+            1,
+            preg_match( '/<input[^>]*id="adm-import-file"[^>]*class="[^"]*screen-reader-text/', $html ),
+            'The palette file input must use the screen-reader-text pattern instead of display:none.'
+        );
+        $this->assertStringNotContainsString( 'id="adm-import-file" accept=".json" style="display:none;"', $html );
+
+        // The result is written by script only, so it needs a live region.
+        $this->assertSame(
+            1,
+            preg_match( '/<span id="adm-import-status"[^>]*role="status"[^>]*aria-live="polite"/', $html ),
+            'The import result must be announced through a live region.'
+        );
+    }
+
     public function test_custom_css_save_guard_blocks_action_in_query_string(): void {
         $limited       = $this->create_custom_css_user( false );
         $previous_post = $_POST;
