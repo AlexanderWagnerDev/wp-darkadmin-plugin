@@ -336,36 +336,51 @@ function darkadmin_plugin_styles_enabled( string $slug ): bool {
  * Sanitize callback for darkadmin_plugins (stores disabled slugs).
  *
  * The settings form submits checked plugins as enabled; unchecked installed
- * plugins are persisted as disabled. The callback must be a fixed point: it
- * returns the stored array( 'disabled' => string[] ) shape unchanged when
- * WordPress sanitizes it a second time (update_option() delegates to
- * add_option() while the value still equals the registered default).
+ * plugins are persisted as disabled. A plugin that is not active cannot be
+ * posted at all, so its stored preference is kept instead of being read as
+ * "enabled" — the same rule the excluded-plugins setting follows. The callback
+ * must be a fixed point: it returns the stored array( 'disabled' => string[] )
+ * shape unchanged when WordPress sanitizes it a second time (update_option()
+ * delegates to add_option() while the value still equals the registered
+ * default), so the stored shape is only filtered against the registry.
  *
  * @param mixed $value Raw input (enabled slugs from checkboxes, or stored shape).
  * @return array{disabled: string[]}
  */
 function darkadmin_sanitize_plugins( $value ): array {
-	$sanitize = static function ( $value ): array {
-		$allowed = array_keys( darkadmin_plugin_registry() );
-		$slugs   = array_map( 'sanitize_key', (array) $value );
-		$slugs   = array_values( array_filter( $slugs ) );
+	$allowed = array_values( array_diff( array_keys( darkadmin_plugin_registry() ), array( 'wordpress-ai' ) ) );
+
+	$sanitize = static function ( $value ) use ( $allowed ): array {
+		$slugs = array_map( 'sanitize_key', (array) $value );
+		$slugs = array_values( array_filter( $slugs ) );
 
 		return array_values( array_intersect( $slugs, $allowed ) );
 	};
 
-	$is_installed = static function ( $slug ): bool {
-		return 'wordpress-ai' !== $slug && darkadmin_plugin_is_installed( $slug );
-	};
-
-	$installed = array_values( array_filter( array_keys( darkadmin_plugin_registry() ), $is_installed ) );
-
 	if ( is_array( $value ) && isset( $value['disabled'] ) ) {
-		$candidates = $sanitize( $value['disabled'] );
+		// Second sanitize pass or a direct write of the stored shape.
+		$disabled = $sanitize( $value['disabled'] );
 	} else {
-		$candidates = array_diff( $installed, $sanitize( $value ) );
+		$active = array_values(
+			array_filter(
+				$allowed,
+				static function ( string $slug ): bool {
+					return darkadmin_plugin_is_installed( $slug );
+				}
+			)
+		);
+
+		// Active plugins are authoritative: a checked one is enabled, an
+		// unchecked one is disabled. Inactive plugins are never posted, so
+		// keep the preference they had before this save.
+		$disabled = array_diff( $active, $sanitize( $value ) );
+		$disabled = array_merge( $disabled, array_intersect( darkadmin_plugins_disabled(), array_diff( $allowed, $active ) ) );
 	}
 
-	return array( 'disabled' => array_values( array_intersect( $sanitize( $candidates ), $installed ) ) );
+	$disabled = array_values( array_unique( $disabled ) );
+	sort( $disabled, SORT_STRING );
+
+	return array( 'disabled' => $disabled );
 }
 
 /**

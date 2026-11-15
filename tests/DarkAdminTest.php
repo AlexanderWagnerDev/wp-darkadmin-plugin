@@ -893,6 +893,45 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( [ 'disabled' => [] ], darkadmin_sanitize_plugins( $enabled ) );
     }
 
+    public function test_sanitize_plugins_keeps_disabled_state_for_inactive_plugins(): void {
+        if ( ! defined( 'WPSEO_VERSION' ) ) {
+            define( 'WPSEO_VERSION', '1.0.0' );
+        }
+
+        // The settings form submits only plugins that are detected as active.
+        add_filter( 'sanitize_option_darkadmin_plugins', 'darkadmin_sanitize_plugins' );
+        update_option( 'darkadmin_plugins', [] );
+        $stored = get_option( 'darkadmin_plugins' );
+        $this->assertContains( 'yoast', $stored['disabled'] );
+        $this->assertSame( $stored, darkadmin_sanitize_plugins( $stored ) );
+
+        // The plugin is deactivated, so its checkbox is no longer rendered and
+        // cannot be posted by the next settings save.
+        add_filter(
+            'darkadmin_plugin_is_installed',
+            static function ( $installed, $slug ) {
+                return 'yoast' === $slug ? false : $installed;
+            },
+            10,
+            2
+        );
+
+        $posted = [];
+        foreach ( array_keys( darkadmin_plugin_registry() ) as $slug ) {
+            if ( 'wordpress-ai' !== $slug && darkadmin_plugin_is_installed( $slug ) ) {
+                $posted[] = $slug;
+            }
+        }
+        update_option( 'darkadmin_plugins', $posted );
+
+        $after = get_option( 'darkadmin_plugins' );
+        $this->assertContains( 'yoast', $after['disabled'], 'A stored opt-out must survive the plugin being inactive.' );
+
+        // After reactivation the style stays disabled.
+        remove_all_filters( 'darkadmin_plugin_is_installed' );
+        $this->assertFalse( darkadmin_plugin_styles_enabled( 'yoast' ) );
+    }
+
     public function test_plugin_styles_enabled_when_installed_and_not_disabled(): void {
         if ( ! defined( 'WPSEO_VERSION' ) ) {
             define( 'WPSEO_VERSION', '1.0.0' );
