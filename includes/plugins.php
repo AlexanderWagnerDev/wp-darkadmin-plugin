@@ -103,6 +103,54 @@ function darkadmin_plugin_registry(): array {
 				return defined( 'UAGB_VER' );
 			}
 		),
+		'wpbakery'       => $entry(
+			'WPBakery Page Builder',
+			__( 'Backend editor, element panels, templates and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'wpbakery.css',
+			static function (): bool {
+				return defined( 'WPB_VC_VERSION' );
+			}
+		),
+		'elementor'      => $entry(
+			'Elementor',
+			__( 'Home, settings, templates, submissions, tools and system screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'elementor.css',
+			static function (): bool {
+				return defined( 'ELEMENTOR_VERSION' );
+			}
+		),
+		'polylang'       => $entry(
+			'Polylang',
+			__( 'Languages, string translations, settings and language pickers.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'polylang.css',
+			static function (): bool {
+				return defined( 'POLYLANG_VERSION' );
+			}
+		),
+		'fluent-forms'   => $entry(
+			'Fluent Forms',
+			__( 'Forms list, form editor, entries, reports and settings screens.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'fluent-forms.css',
+			static function (): bool {
+				return defined( 'FLUENTFORM_VERSION' );
+			}
+		),
+		'jetengine'      => $entry(
+			'JetEngine',
+			__( 'Post types, meta boxes, relations, query builder and Crocoblock dashboard.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'jetengine.css',
+			static function (): bool {
+				return class_exists( 'Jet_Engine', false );
+			}
+		),
+		'wp-rocket'      => $entry(
+			'WP Rocket',
+			__( 'Dashboard, cache, file optimization, media, preload, CDN and tools tabs.', 'darkadmin-dark-mode-for-adminpanel' ),
+			'wp-rocket.css',
+			static function (): bool {
+				return defined( 'WP_ROCKET_VERSION' );
+			}
+		),
 		'wordpress-ai'   => array(
 			'label'        => __( 'WordPress AI & Connectors', 'darkadmin-dark-mode-for-adminpanel' ),
 			'description'  => __( 'Connectors, AI settings, connector approvals and request logs.', 'darkadmin-dark-mode-for-adminpanel' ),
@@ -237,8 +285,16 @@ function darkadmin_plugin_is_installed( string $slug ): bool {
 	if ( ! isset( $registry[ $slug ] ) ) {
 		return false;
 	}
-	$callback = $registry[ $slug ]['is_installed'];
-	return is_callable( $callback ) && (bool) call_user_func( $callback );
+	$callback  = $registry[ $slug ]['is_installed'];
+	$installed = is_callable( $callback ) && (bool) call_user_func( $callback );
+
+	/**
+	 * Filters whether a plugin from the DarkAdmin plugin style registry counts as installed.
+	 *
+	 * @param bool   $installed Whether the plugin was detected.
+	 * @param string $slug      Plugin style slug.
+	 */
+	return (bool) apply_filters( 'darkadmin_plugin_is_installed', $installed, $slug );
 }
 
 /**
@@ -340,4 +396,53 @@ function darkadmin_enqueue_plugin_styles(): void {
 			DARKADMIN_VERSION
 		);
 	}
+}
+
+/**
+ * Whether the current admin screen belongs to Fluent Forms.
+ *
+ * @return bool
+ */
+function darkadmin_is_fluent_forms_admin_screen(): bool {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen instanceof WP_Screen ) {
+		return false;
+	}
+
+	return false !== strpos( $screen->id, 'fluent_forms' );
+}
+
+/**
+ * Darkens the TinyMCE content area on Fluent Forms screens.
+ *
+ * Fluent Forms uses TinyMCE for confirmation messages and email bodies. The
+ * editing area is an iframe that admin stylesheets cannot reach, so a small
+ * script adds the DarkAdmin colors to each TinyMCE document.
+ *
+ * @return void
+ */
+function darkadmin_enqueue_tinymce_dark_script(): void {
+	if ( ! darkadmin_plugin_styles_enabled( 'fluent-forms' ) || ! darkadmin_is_fluent_forms_admin_screen() ) {
+		return;
+	}
+
+	$src = DARKADMIN_URL . 'assets/js/tinymce-dark.js';
+
+	// Fluent Forms dequeues scripts from other plugins on its screens ("no conflict" mode).
+	add_filter(
+		'fluentform/exclude_js_slugs_from_dequeue',
+		static function ( $slugs ) use ( $src ) {
+			$slugs   = is_array( $slugs ) ? $slugs : array();
+			$slugs[] = $src;
+			return $slugs;
+		}
+	);
+
+	wp_enqueue_script(
+		'darkadmin-tinymce-dark',
+		$src,
+		array(),
+		DARKADMIN_VERSION,
+		array( 'in_footer' => true )
+	);
 }

@@ -209,6 +209,30 @@ msgid "Dashboard, blocks, popup builder and settings screens."
 msgstr "Dashboard, Blöcke, Pop-up-Builder und Einstellungsseiten."
 
 #: includes/plugins.php
+msgid "Backend editor, element panels, templates and settings screens."
+msgstr "Backend-Editor, Element-Panels, Vorlagen und Einstellungsseiten."
+
+#: includes/plugins.php
+msgid "Home, settings, templates, submissions, tools and system screens."
+msgstr "Startseite, Einstellungen, Vorlagen, Formulareinsendungen, Werkzeuge und Systemseiten."
+
+#: includes/plugins.php
+msgid "Languages, string translations, settings and language pickers."
+msgstr "Sprachen, String-Übersetzungen, Einstellungen und Sprachauswahl."
+
+#: includes/plugins.php
+msgid "Forms list, form editor, entries, reports and settings screens."
+msgstr "Formularliste, Formular-Editor, Einträge, Berichte und Einstellungsseiten."
+
+#: includes/plugins.php
+msgid "Post types, meta boxes, relations, query builder and Crocoblock dashboard."
+msgstr "Beitragstypen, Metaboxen, Beziehungen, Query Builder und Crocoblock-Dashboard."
+
+#: includes/plugins.php
+msgid "Dashboard, cache, file optimization, media, preload, CDN and tools tabs."
+msgstr "Dashboard, Cache, Dateioptimierung, Medien, Preload, CDN und Werkzeuge."
+
+#: includes/plugins.php
 msgid "WordPress AI & Connectors"
 msgstr "WordPress KI & Konnektoren"
 

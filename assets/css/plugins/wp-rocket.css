@@ -1,0 +1,215 @@
+/*
+ * DarkAdmin plugin styles: WP Rocket
+ * Settings > WP Rocket: header, navigation, dashboard, Rocket Insights,
+ * content delivery (RocketCDN), cache, file optimization, media, preload,
+ * database, heartbeat, tools, add-ons, tutorials, plugins and account
+ * sections, plus the popins and the add-on/upsell cards. WP Rocket hard-codes
+ * light surfaces (#fff, #f9fafb, #f2f3f6) and dark text (#121116, #0c0f1f),
+ * so they are remapped to DarkAdmin variables on the WP Rocket screen only.
+ */
+
+/* --- Surfaces -------------------------------------------------------------- */
+body.settings_page_wprocket :is(
+  .wpr-Header,
+  .wpr-Content,
+  .wpr-Content.isNotFull,
+  .wpr-Sidebar,
+  .wpr-Dashboard-main,
+  .wpr-Dashboard-sidebar,
+  .wpr-menuGroup,
+  .wpr-menuGroup.is-open,
+  .wpr-menuGroup-items,
+  .wpr-Popin,
+  .wpr-Popin-Upgrade,
+  .wpr-account-card,
+  .wpr-tools,
+  .wpr-ri-urls-table,
+  .wpr-rocketcdn-cta,
+  .wpr-cdn-add-page__input-wrap,
+  .wpr-imagifyBanner-cta
+) {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text);
+}
+
+body.settings_page_wprocket :is(
+  .wpr-fieldsContainer-fieldset,
+  .wpr-Sidebar-notice,
+  .wpr-imagifyBanner,
+  .wpr-plugins--box,
+  .wpr-cdn-built-in,
+  .wpr-cdn-purge,
+  .wpr-cdn-exclusions,
+  .wpr-dash-banner,
+  .wpr-warningContainer,
+  .wpr-ri-license-banner,
+  .wpr-speed-radar-table,
+  .wpr-recommendations__list,
+  .wpr-account-row,
+  .wpr-rocketcdn-cta-footer,
+  .wpr-rocketcdn-cta-promo-footer,
+  .add-on-container--user-cache,
+  .wpr-cdn-add-page__homepage,
+  .wpr-cdn-tabs,
+  .wpr-multiple-select
+) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text);
+}
+
+body.settings_page_wprocket .wpr-Header {
+  border-right: 1px solid var(--adm-border) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-sectionHeader, .wpr-optionHeader, .wpr-cdn-tabs__divider, .wpr-cdn-title-divider, .wpr-cdn-built-in__separator, .wpr-rocketcdn-cta-separator, .wpr-table-list__cell, .wpr-field, .wpr-field--cache) {
+  border-color: var(--adm-border) !important;
+}
+
+/* --- Navigation ------------------------------------------------------------ */
+body.settings_page_wprocket :is(.wpr-menuItem, .wpr-menuGroup-trigger) {
+  background-color: transparent !important;
+  border-color: var(--adm-border) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-menuItem-title, .wpr-menuItem--sub, .wpr-menuItem--sub:visited) {
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket .wpr-menuItem-description {
+  color: var(--adm-text-muted) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-menuItem.isActive, .wpr-menuGroup-trigger.isActive, .wpr-menuItem--sub:hover, .wpr-menuItem--sub:focus-visible) {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-menuItem.isActive .wpr-menuItem-title, .wpr-menuItem--sub.isActive) {
+  color: #f56640 !important;
+}
+
+/* The WP Rocket wordmark is dark text: lighten it, keep the orange. */
+body.settings_page_wprocket .wpr-Header-logo img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* --- Typography ------------------------------------------------------------ */
+body.settings_page_wprocket :is(
+  .wpr-title1,
+  .wpr-title2,
+  .wpr-title3,
+  .wpr-sectionHeader-title,
+  .wpr-fieldsContainer-description,
+  .wpr-dash-section-header__title,
+  .wpr-Dashboard-sidebar-title,
+  .wpr-notice-title,
+  .wpr-addonCard-title,
+  .wpr-dash-banner__title,
+  .wpr-recommendation-item__title,
+  .wpr-account-planValue,
+  .wpr-account-license,
+  .wpr-field .wpr-title3,
+  .wpr-field label,
+  .wpr-checkbox label,
+  .wpr-radio label,
+  .wpr-text,
+  .rocketcdn-driver-js
+) {
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket :is(
+  .wpr-sectionHeader-description,
+  .wpr-field-description,
+  .wpr-fieldsContainer-description + p,
+  .wpr-dash-banner__text,
+  .wpr-imagifyBanner-description,
+  .wpr-account-label,
+  .wpr-account-planLabel,
+  .wpr-cdn-upsell__text,
+  .wpr-dash-score__legend-item,
+  .wpr-dash-score__metric-value--na,
+  .wpr-rocketcdn-cta-toggle__text,
+  span.price-tax__info,
+  span.renewal-tax__info
+) {
+  color: var(--adm-text-muted) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-infoAction, .wpr-imagifyBanner-learnMore, .wpr-cdn-purge__learn-more, .wpr-recommendation-item__more-info, .wpr-recommendations__success-link, .wpr-dash-recs__more, .wpr-upgrade-link) {
+  color: var(--adm-link) !important;
+}
+
+/* --- Fields ---------------------------------------------------------------- */
+body.settings_page_wprocket :is(.wpr-field textarea, .wpr-field input[type="text"], .wpr-field input[type="number"], .wpr-field input[type="url"], .wpr-field select, input#upload, .wpr-cdn-add-page__input-wrap input) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket .wpr-cdn-tabs__tab {
+  background-color: transparent !important;
+  color: var(--adm-text-muted) !important;
+}
+
+body.settings_page_wprocket .wpr-cdn-tabs__tab--active {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-button--gray, .wpr-account-button--neutral, .wpr-cdn-purge__button, .wpr-recommendations__load-more) {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* --- Tinted cards and notices ---------------------------------------------- */
+body.settings_page_wprocket :is(.wpr-addonCard--imagify, .wpr-addonCard) {
+  background-color: color-mix(in srgb, #f56640 14%, var(--adm-surface-1)) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body.settings_page_wprocket .wpr-Dashboard-main-notice .wpr-notice {
+  background-color: color-mix(in srgb, #1eadbf 14%, var(--adm-surface-1)) !important;
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket .wpr-Dashboard-main-notice .wpr-notice :is(h2, p, .wpr-notice-description) {
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-cdn-expired__notice, .wpr-rocketcdn-notice__warning, .wpr-ri-notice.wpr-error-notice) {
+  background-color: color-mix(in srgb, #f56640 16%, var(--adm-surface-1)) !important;
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket .wpr-badge--grey {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Tables (Rocket Insights URL list, speed radar). */
+body.settings_page_wprocket :is(.wpr-ri-urls-table, .wpr-speed-radar-table) :is(th, td) {
+  background-color: transparent !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Remaining hard-coded text colors. */
+body.settings_page_wprocket :is(.wpr-addonCard-lead, .wpr-addonCard-text, .wpr-addonCard-toggle, .wpr-cdn-purge__title, .wpr-field-description-label, .wpr-fieldsContainer-fieldset strong) {
+  color: var(--adm-text) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-Header-footer, .wpr-cdn-purge__description, .wpr-cdn-indicator__details) {
+  color: var(--adm-text-muted) !important;
+}
+
+body.settings_page_wprocket :is(.wpr-cdn-purge__button-icon, .wpr-cdn-add-page__icon) {
+  background-color: transparent !important;
+}
+
+body.settings_page_wprocket .wpr-account-badge.wpr-isValid {
+  background-color: color-mix(in srgb, #31a670 22%, var(--adm-surface-1)) !important;
+  color: #7fdcb0 !important;
+}

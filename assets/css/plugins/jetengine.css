@@ -1,0 +1,213 @@
+/*
+ * DarkAdmin plugin styles: JetEngine
+ * JetEngine screens (post types, meta boxes, taxonomies, relations, options
+ * pages, query builder, listings) and the Crocoblock dashboard, built with the
+ * Crocoblock Vue UI framework (cx-vui-*) and hard-coded light colors.
+ * The cx-vui-* and jet-dashboard-* class names are unique to Crocoblock
+ * plugins, so they are styled without an extra screen scope.
+ */
+
+/* --- Panels and components ------------------------------------------------- */
+.cx-vui-panel,
+.cx-vui-popup__body,
+.cx-vue-list-table,
+.cx-vui-tabs--invert > .cx-vui-tabs__content,
+.jet-engine-edit-page__actions-extra-settings,
+.jet-dashboard-page__panel,
+.jet-dashboard-page__guide-content,
+.jet-dashboard-page__guide-video,
+.jet-dashboard-page__help-center,
+.jet-dashboard-page__alert,
+.crocoblock-workflow-item {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  box-shadow: none !important;
+  color: var(--adm-text);
+}
+
+.cx-vui-inner-panel,
+.cx-vui-tabs__nav,
+.cx-vui-tabs--invert > .cx-vui-tabs__nav,
+.cx-vue-list-table .list-table-item:nth-child(odd),
+.jet-engine-cb-list__item,
+.jet-engine-cb-args__item,
+.jet-engine-help-list__item {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+.jet-engine-cb-list__item-alt,
+.jet-engine-cb-args__item-alt {
+  background-color: var(--adm-surface-1) !important;
+}
+
+.cx-vui-tabs__nav-item--active,
+.cx-vui-tabs--invert > .cx-vui-tabs__nav .cx-vui-tabs__nav-item--active {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+.cx-vui-tabs__nav-item {
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-muted);
+}
+
+.cx-vui-component + .cx-vui-component,
+.cx-vui-component--vertical-fullwidth .cx-vui-component__meta,
+.cx-vui-collapse,
+.cx-vue-list-table .list-table-item,
+.cx-vue-list-table .list-table-heading {
+  border-color: var(--adm-border) !important;
+}
+
+/* Typography. */
+.cx-vui-component__label,
+.cx-vui-subtitle,
+.cx-vui-title,
+.cx-vui-collapse__heading,
+.cx-vui-popup__header,
+.crocoblock-workflow-item__title,
+.jet-dashboard-page__panel :is(h1, h2, h3, h4, .title, .jet-dashboard-page__panel-title) {
+  color: var(--adm-text) !important;
+}
+
+.cx-vui-component__desc,
+.cx-vui-notice,
+.cx-vui-popup__content,
+.cx-vui-popup__content p,
+.cx-vui-repeater__tip,
+.cx-vui-f-select__result,
+.cx-vui-f-select__results-message,
+.crocoblock-workflow-item__desc,
+.cx-vue-list-table .list-table-heading__cell {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Inputs and selects. */
+input.cx-vui-input,
+textarea.cx-vui-textarea,
+select.cx-vui-select,
+.cx-vui-f-select__input,
+.cx-vui-f-select__input.cx-vui-input--in-focus,
+.cx-vui-f-select__results,
+.vue__time-picker input.display-time,
+.vue__time-picker-dropdown,
+.vue__time-picker .dropdown {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.cx-vui-f-select__result.is-selected,
+.cx-vui-f-select__selected-option {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+.cx-vui-f-select__selected-option-icon {
+  background-color: var(--adm-surface-2) !important;
+}
+
+/* Switchers. */
+.cx-vui-switcher__panel {
+  background-color: var(--adm-surface-3) !important;
+}
+
+.cx-vui-switcher--on .cx-vui-switcher__panel {
+  background-color: color-mix(in srgb, #007cba 45%, var(--adm-surface-3)) !important;
+}
+
+.cx-vui-switcher__trigger {
+  background-color: var(--adm-text-muted) !important;
+}
+
+.cx-vui-switcher--on .cx-vui-switcher__trigger {
+  background-color: #007cba !important;
+}
+
+/* Buttons. */
+.cx-vui-button--style-default,
+.cx-vui-button--style-default-border {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-link) !important;
+}
+
+.cx-vui-button--style-default:hover,
+.cx-vui-button--style-default-border:hover {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* Notices. */
+.cx-vui-notice--error,
+.jet-engine-edit-page__notice-error-content,
+.jet-dashboard-page__alert.danger-type {
+  background-color: color-mix(in srgb, #c92c2c 16%, var(--adm-surface-1)) !important;
+}
+
+.cx-vui-notice--success {
+  background-color: color-mix(in srgb, #46b450 16%, var(--adm-surface-1)) !important;
+}
+
+.jet-engine-field-warning__tip {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Media and icon pickers. */
+.cx-vui-media__add-button,
+.cx-vui-media__attachment,
+.cx-vui-iconpicker__preview,
+.cx-vui-iconpicker__canvas {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+.cx-vui-iconpicker__canvas-icon--selected {
+  background-color: var(--adm-surface-3) !important;
+}
+
+/* Repeater handles and popup close icons. */
+.cx-vui-repeater-item__handle svg line {
+  stroke: var(--adm-text-soft) !important;
+}
+
+.cx-vui-popup__close path {
+  fill: var(--adm-text-muted) !important;
+}
+
+/* --- Crocoblock dashboard --------------------------------------------------- */
+.jet-dashboard-page__panel a,
+.help-center-link-label,
+.crocoblock-workflow-item__link {
+  color: var(--adm-link) !important;
+}
+
+.jet-engine-navigation__per-page {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* "Got stuck?" help button. */
+.jet-kbs-trigger {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-link) !important;
+}
+
+/* Crocoblock dashboard headings and labels. */
+.jet-dashboard-page :is(.panel-header-title, .plugin-label, .alert-title, .jet-dashboard-upsale-page__title),
+.jet-dashboard-upsale-page__title,
+.cx-vui-tabs__nav-item {
+  color: var(--adm-text) !important;
+}
+
+.cx-vui-tabs__nav-item:not(.cx-vui-tabs__nav-item--active) {
+  color: var(--adm-text-muted) !important;
+}
+
+/* "Get More Plugins": dark navy wordmarks. */
+.jet-dashboard-page .plugin-tumbnail img[src*="jetlogo"] {
+  filter: invert(1) hue-rotate(180deg) brightness(1.1);
+}

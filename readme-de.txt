@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.6.0
+Stable tag: 0.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Funktionen:
 * Token-basiertes Design-System für Hintergründe, Texte, Rahmen, Buttons und Statusfarben
 * Auto Dark Mode: Verdunkelt automatisch helle Plugin-Hintergründe, die vom Stylesheet nicht abgedeckt werden
 * Preset-Themes: Modern (WP 7.0, Standard) und Classic (WP 6.x) Farbpaletten
-* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra und WordPress AI & Connectors
+* Plugins: optionale Dark-Mode-Stile für Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor, Polylang, Fluent Forms, JetEngine, WP Rocket und WordPress AI & Connectors
 * Benutzerspezifische Dark-Mode-Zugriffskontrolle (Einschließen / Ausschließen) mit Empty-State-UI wenn keine Nicht-Admin-Benutzer vorhanden sind
 * Ausgeschlossene Seiten: Admin-Seiten angeben, auf denen Dark Mode nicht angewendet werden soll
 * Dunkler Block-Editor (optional, WordPress 7.1+): dunkle Oberfläche im Block-Editor für Beiträge und Seiten; der Bearbeitungsbereich wird dunkel, wenn „Theme-Stile verwenden“ deaktiviert ist, oder immer mit „Theme-Design im Editor abdunkeln“
@@ -88,6 +88,18 @@ Ja, mit „Dunkle Login-Seite“ unter Einstellungen -> DarkAdmin. Das gilt für
 25. Einstellungsseite - Ausgeschlossene Plugins
 
 == Changelog ==
+= 0.7.0 =
+* Neu: Dark-Mode-Stile für WPBakery Page Builder: Backend-Editor, Panels „Element hinzufügen“, „Element bearbeiten“, Vorlagen, Seiteneinstellungen und eigenes CSS & JS, Toolbar des Frontend-Editors, Grid Builder und Einstellungsseiten
+* Neu: Dark-Mode-Stile für die Elementor-Adminseiten (Startseite, Einstellungen, Werkzeuge, Systeminfo, Rollenverwaltung, Vorlagen, Formulareinsendungen und mehr). Der Elementor-Editor behält seine eigene UI-Theme-Einstellung.
+* Neu: Dark-Mode-Stile für Polylang: Sprachen, Übersetzungen und Einstellungen, Sprach- und Flaggenauswahl, Übersetzungsfelder für Begriffe
+* Neu: Dark-Mode-Stile für Fluent Forms: Formularliste, Formular-Editor, Formulareinstellungen, Einträge, Berichte, globale Einstellungen, Werkzeuge und Integrationen, inklusive dunklem Textfeld für Bestätigungen und E-Mails
+* Neu: Dark-Mode-Stile für die JetEngine-Seiten und das Crocoblock-Dashboard
+* Neu: Dark-Mode-Stile für Einstellungen > WP Rocket
+* Fix: Die Feldbeschriftungen beim Hinzufügen von Kategorien und Schlagwörtern waren unlesbar, und nicht angehakte Checkboxen und Radiobuttons blieben weiß
+* Fix: „Ausgeschlossene Plugins“ behält einen gespeicherten Ausschluss, wenn das Plugin vorübergehend inaktiv ist
+* Fix: Die Erkennung von Plugin-Seiten ordnet Seiten nicht mehr dem falschen Plugin zu, wenn Plugins Ordner teilen oder verschachteln
+* Entwickler: Neuer Filter darkadmin_plugin_is_installed, um die Plugin-Erkennung für die Plugin-Stile zu überschreiben
+
 = 0.6.0 =
 * Neu: Einstellung „Dunkler Website-Editor“ (standardmäßig aus): dunkle Oberfläche im Website-Editor (Navigation, Listen für Seiten, Templates und Vorlagen, Stile-Panel, Editor-Oberfläche). Die Vorschau des Website-Designs behält die Farben des Themes.
 * Neu: Einstellung „Dunkle Login-Seite“ (standardmäßig aus): dunkle wp-login.php in der aktiven Farbpalette, mit weißem WordPress-Logo statt des Standard-Logos

@@ -735,8 +735,101 @@ class DarkAdminTest extends WP_UnitTestCase {
     // Plugin styles
     // -------------------------------------------------------------------------
 
-    public function test_plugin_registry_has_ten_entries(): void {
-        $this->assertCount( 10, darkadmin_plugin_registry() );
+    public function test_plugin_registry_has_sixteen_entries(): void {
+        $this->assertCount( 16, darkadmin_plugin_registry() );
+    }
+
+    public function test_every_plugin_registry_stylesheet_exists(): void {
+        foreach ( darkadmin_plugin_registry() as $slug => $meta ) {
+            $this->assertFileIsReadable( DARKADMIN_PATH . 'assets/css/plugins/' . $meta['css'], $slug );
+        }
+    }
+
+    public function test_wpbakery_styles_follow_wpbakery_version_constant(): void {
+        // Defining the constant here would leak into the other plugin-style tests.
+        $this->assertSame( defined( 'WPB_VC_VERSION' ), darkadmin_plugin_is_installed( 'wpbakery' ) );
+        $this->assertSame( 'wpbakery.css', darkadmin_plugin_registry()['wpbakery']['css'] );
+    }
+
+    public function test_elementor_styles_follow_elementor_version_constant(): void {
+        $this->assertSame( defined( 'ELEMENTOR_VERSION' ), darkadmin_plugin_is_installed( 'elementor' ) );
+        $this->assertSame( 'elementor.css', darkadmin_plugin_registry()['elementor']['css'] );
+    }
+
+    public function test_polylang_styles_follow_polylang_version_constant(): void {
+        $this->assertSame( defined( 'POLYLANG_VERSION' ), darkadmin_plugin_is_installed( 'polylang' ) );
+        $this->assertSame( 'polylang.css', darkadmin_plugin_registry()['polylang']['css'] );
+    }
+
+    public function test_fluent_forms_styles_follow_fluentform_version_constant(): void {
+        $this->assertSame( defined( 'FLUENTFORM_VERSION' ), darkadmin_plugin_is_installed( 'fluent-forms' ) );
+        $this->assertSame( 'fluent-forms.css', darkadmin_plugin_registry()['fluent-forms']['css'] );
+    }
+
+    public function test_fluent_forms_screen_detection(): void {
+        set_current_screen( 'toplevel_page_fluent_forms' );
+        $this->assertTrue( darkadmin_is_fluent_forms_admin_screen() );
+
+        set_current_screen( 'dashboard' );
+        $this->assertFalse( darkadmin_is_fluent_forms_admin_screen() );
+        set_current_screen( 'front' );
+    }
+
+    /**
+     * Marks Fluent Forms as installed through the detection filter. WP_UnitTestCase
+     * restores all hooks after each test, so nothing leaks into other tests.
+     */
+    private function fake_fluent_forms_installed(): void {
+        add_filter(
+            'darkadmin_plugin_is_installed',
+            static function ( $installed, $slug ) {
+                return 'fluent-forms' === $slug ? true : $installed;
+            },
+            10,
+            2
+        );
+    }
+
+    public function test_tinymce_dark_script_loads_only_on_fluent_forms_screens(): void {
+        $this->fake_fluent_forms_installed();
+        update_option( 'darkadmin_plugins', [] );
+
+        set_current_screen( 'dashboard' );
+        darkadmin_enqueue_tinymce_dark_script();
+        $this->assertFalse( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
+
+        set_current_screen( 'toplevel_page_fluent_forms' );
+        darkadmin_enqueue_tinymce_dark_script();
+        $this->assertTrue( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
+
+        wp_dequeue_script( 'darkadmin-tinymce-dark' );
+        set_current_screen( 'front' );
+    }
+
+    public function test_tinymce_dark_script_skips_fluent_forms_screens_when_styles_disabled(): void {
+        $this->fake_fluent_forms_installed();
+        update_option( 'darkadmin_plugins', [ 'disabled' => [ 'fluent-forms' ] ] );
+
+        set_current_screen( 'toplevel_page_fluent_forms' );
+        darkadmin_enqueue_tinymce_dark_script();
+        $this->assertFalse( wp_script_is( 'darkadmin-tinymce-dark', 'enqueued' ) );
+        set_current_screen( 'front' );
+    }
+
+    public function test_plugin_is_installed_filter_overrides_detection(): void {
+        $this->assertFalse( darkadmin_plugin_is_installed( 'not-a-registry-slug' ) );
+        $this->fake_fluent_forms_installed();
+        $this->assertTrue( darkadmin_plugin_is_installed( 'fluent-forms' ) );
+    }
+
+    public function test_jetengine_styles_follow_jet_engine_class(): void {
+        $this->assertSame( class_exists( 'Jet_Engine', false ), darkadmin_plugin_is_installed( 'jetengine' ) );
+        $this->assertSame( 'jetengine.css', darkadmin_plugin_registry()['jetengine']['css'] );
+    }
+
+    public function test_wp_rocket_styles_follow_wp_rocket_version_constant(): void {
+        $this->assertSame( defined( 'WP_ROCKET_VERSION' ), darkadmin_plugin_is_installed( 'wp-rocket' ) );
+        $this->assertSame( 'wp-rocket.css', darkadmin_plugin_registry()['wp-rocket']['css'] );
     }
 
     public function test_wordpress_ai_screen_ids_include_all_ai_admin_pages(): void {

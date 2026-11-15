@@ -1,0 +1,579 @@
+/*
+ * DarkAdmin plugin styles: Fluent Forms
+ * All Forms, form editor, form settings, entries, reports, global settings,
+ * tools, integrations and support screens, including add-on fields such as
+ * the signature pad. The admin app is built with Element UI and Fluent Forms
+ * utility classes, both with hard-coded light colors, so every rule is scoped
+ * to Fluent Forms screens via the body class (dialogs, dropdowns and popovers
+ * are appended to body and share the scope).
+ *
+ * The form preview canvas in the editor keeps a dark field style that matches
+ * the rest of the admin; the public form design is not changed.
+ */
+
+/* --- Layout: header, sidebars, cards, menus ------------------------------- */
+body[class*="page_fluent_forms"] :is(
+  .ff_header,
+  .form_internal_menu,
+  .form_internal_menu_inner,
+  .ff_layout_section_sidebar,
+  .ff_admin_menu_sidebar,
+  .ff_settings_sidebar,
+  .ff_settings_wrapper,
+  .ff_card,
+  .ff_card_block,
+  .ff_table,
+  .ff-table,
+  .ff_update_card,
+  .ff_license_setting,
+  .ff_as_container,
+  .ff_conditions_warp,
+  .fluentform-wrapper,
+  .fluentform-reports,
+  .stats-card,
+  .entry_submission_log,
+  .country-heatmap-section,
+  .submission-heatmap-section,
+  .global-search-wrapper,
+  .ff_global_notices,
+  .ff-quiz-settings-wrapper,
+  .ff_conversion_editor
+) {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text);
+}
+
+body[class*="page_fluent_forms"] :is(.ff_card .ff_card, .ff_card_s2, .ff_card .ff_card_block, .ff_table .ff_card) {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.ff_header, .form_internal_menu) {
+  border-bottom: 1px solid var(--adm-border) !important;
+  box-shadow: none !important;
+}
+
+/* Header and sidebar navigation links. */
+body[class*="page_fluent_forms"] :is(.ff_menu_link, .ff-page-scroll, .ff_tab_link, .ff_settings_menu_label) {
+  background-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(
+  .ff_menu_link:hover,
+  .ff_menu_link:focus,
+  .ff_menu .active > .ff_menu_link,
+  .ff_menu_item.active > .ff_menu_link,
+  .ff-page-scroll:hover,
+  .ff_list_button_item.active > a,
+  .ff_list_button_s1 .active > a,
+  .ff_tab_link:hover
+) {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_list_submenu {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_sidebar_toggle {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Headings and body text. */
+body[class*="page_fluent_forms"] .wrap :is(h1, h2, h3, h4, h5, h6),
+body[class*="page_fluent_forms"] :is(.ff_card, .ff_header, .ff_settings_wrapper, .el-dialog) :is(h1, h2, h3, h4, h5, h6, .title, .ff_card_title, .lead-title),
+body[class*="page_fluent_forms"] :is(.ff_card, .ff_settings_wrapper) :is(label, .label-block, .el-form-item__label) {
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.ff_card, .ff_settings_wrapper, .ff_header) :is(p, .text, .ff_card_desc, .reports-description, .el-form-item__content > .text-note, .help-text) {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="page_fluent_forms"] hr,
+body[class*="page_fluent_forms"] .ff_card_head {
+  border-color: var(--adm-border) !important;
+}
+
+/* Shortcode chips. */
+body[class*="page_fluent_forms"] :is(.ff_shortcode_btn, .ff_shortcode_btn_thin, .copy_btn) {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Soft icon tiles and badges: keep the hue, darken the tint. */
+body[class*="page_fluent_forms"] .ff_icon_btn:is(.primary-soft, .blue-soft, .info-soft) {
+  background-color: color-mix(in srgb, #1a7efb 22%, var(--adm-surface-1)) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_icon_btn.success-soft {
+  background-color: color-mix(in srgb, #00b27f 22%, var(--adm-surface-1)) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_icon_btn.warning-soft {
+  background-color: color-mix(in srgb, #fcbe2d 22%, var(--adm-surface-1)) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_icon_btn.danger-soft {
+  background-color: color-mix(in srgb, #ff6154 22%, var(--adm-surface-1)) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_icon_btn.cyan-soft {
+  background-color: color-mix(in srgb, #0dcaf0 22%, var(--adm-surface-1)) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_icon_btn.dark-soft {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_alert {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_alert.success-soft {
+  background-color: color-mix(in srgb, #00b27f 18%, var(--adm-surface-1)) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_alert:is(.danger-soft, .danger) {
+  background-color: color-mix(in srgb, #ff6154 18%, var(--adm-surface-1)) !important;
+}
+
+/* Reports. */
+body[class*="page_fluent_forms"] :is(.stats-icon, .stat-icon, .stats-bar-horizontal, .stats-bar-vertical) {
+  background-color: var(--adm-surface-3) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.stat-icon.complete) {
+  background-color: color-mix(in srgb, #00b27f 22%, var(--adm-surface-1)) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.stat-icon.incomplete) {
+  background-color: color-mix(in srgb, #ff6154 22%, var(--adm-surface-1)) !important;
+}
+
+/* --- Form editor ----------------------------------------------------------- */
+body[class*="page_fluent_forms"] :is(
+  .form-editor--body,
+  .form-editor__body-content,
+  .form-editor--sidebar,
+  .form-editor--sidebar-content,
+  .form-editor--sidebar .nav-tab-list,
+  .option-fields-section,
+  .option-fields-section--content,
+  .panel__body,
+  .wp_vue_editor_wrapper
+) {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text);
+}
+
+body[class*="page_fluent_forms"] .form-editor--body {
+  background-color: var(--adm-bg) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.option-fields-section--title, .nav-tab-list a, .nav-tab-list li) {
+  background-color: transparent !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .option-fields-section--title.active,
+body[class*="page_fluent_forms"] .option-fields-section_active > .option-fields-section--title {
+  background-color: var(--adm-surface-2) !important;
+}
+
+/* Field palette buttons. */
+body[class*="page_fluent_forms"] :is(.vddl-draggable.btn-element, .btn-element) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .vddl-draggable.btn-element:hover {
+  border-color: var(--adm-border-hover) !important;
+}
+
+/* Fields on the editor canvas. */
+body[class*="page_fluent_forms"] :is(.panel__body--item, .js-editor-item) {
+  background-color: transparent !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.panel__body--item, .js-editor-item):hover,
+body[class*="page_fluent_forms"] .panel__body--item.selected {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="page_fluent_forms"] .form-editor :is(label, .ff-el-input--label label, .ff-el-form-check-label) {
+  color: var(--adm-text) !important;
+}
+
+/* Signature add-on: the editor placeholder is a dark script image. */
+body[class*="page_fluent_forms"] .panel__body--item img[src*="signature"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Signature images in entries are dark ink on a transparent background. */
+body[class*="page_fluent_forms"] :is(.ff_entry_detail, .entry_info_box, .el-table) img[src*="signature"],
+body[class*="page_fluent_forms"] :is(.ff_entry_detail, .entry_info_box, .el-table) img[src*="fluentform"][src$=".png"] {
+  background-color: #fff;
+  border-radius: var(--adm-radius-sm);
+}
+
+/* --- Element UI ------------------------------------------------------------ */
+body[class*="page_fluent_forms"] :is(
+  .el-input__inner,
+  .el-textarea__inner,
+  .el-input-group__append,
+  .el-input-group__prepend,
+  .el-range-editor.el-input__inner,
+  .el-input-number__decrease,
+  .el-input-number__increase,
+  .ff-select,
+  .input-with-select
+) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-range-editor .el-range-input {
+  background-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-input__inner, .el-textarea__inner):focus {
+  border-color: var(--adm-border-focus) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-input.is-disabled .el-input__inner, .el-textarea.is-disabled .el-textarea__inner) {
+  background-color: var(--adm-bg) !important;
+  color: var(--adm-text-soft) !important;
+}
+
+/* Default and plain buttons. */
+body[class*="page_fluent_forms"] :is(.el-button--default, .el-button.is-plain:not([class*="el-button--primary"]):not([class*="el-button--danger"])) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-button--default:hover {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+body[class*="page_fluent_forms"] .el-button.is-disabled:not([class*="--primary"]) {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text-soft) !important;
+}
+
+/* Soft colored buttons. */
+body[class*="page_fluent_forms"] .el-button:is(.el-button--soft, .el-button--soft-2):is(.el-button--primary, .el-button--blue, .el-button--info) {
+  background-color: color-mix(in srgb, #1a7efb 22%, var(--adm-surface-1)) !important;
+  border-color: transparent !important;
+  color: #8fc0ff !important;
+}
+
+body[class*="page_fluent_forms"] .el-button.el-button--soft.el-button--success {
+  background-color: color-mix(in srgb, #00b27f 22%, var(--adm-surface-1)) !important;
+  border-color: transparent !important;
+  color: #6be0bd !important;
+}
+
+body[class*="page_fluent_forms"] .el-button.el-button--soft.el-button--warning {
+  background-color: color-mix(in srgb, #fcbe2d 22%, var(--adm-surface-1)) !important;
+  border-color: transparent !important;
+  color: #ffd877 !important;
+}
+
+body[class*="page_fluent_forms"] .el-button.el-button--soft.el-button--danger {
+  background-color: color-mix(in srgb, #ff6154 22%, var(--adm-surface-1)) !important;
+  border-color: transparent !important;
+  color: #ffa49c !important;
+}
+
+/* Radio, checkbox and switch controls. */
+body[class*="page_fluent_forms"] :is(.el-radio__inner, .el-checkbox__inner) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-radio__input.is-checked .el-radio__inner, .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner) {
+  background-color: #1565c9 !important;
+  border-color: #1565c9 !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-radio__label, .el-checkbox__label, .el-switch__label:not(.is-active)) {
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-switch:not(.is-checked) .el-switch__core {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border-hover) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.ff_radio_group, .ff_radio_group_s2) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] .el-radio-button__inner {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+  background-color: #1565c9 !important;
+  border-color: #1565c9 !important;
+  color: #fff !important;
+}
+
+/* Tabs. */
+body[class*="page_fluent_forms"] :is(.el-tabs__header, .el-tabs__nav-wrap) {
+  background-color: transparent !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] .el-tabs__nav-wrap::after {
+  background-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] .el-tabs__item:not(.is-active) {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="page_fluent_forms"] .el-tabs--border-card {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] .el-tabs--border-card > .el-tabs__header {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="page_fluent_forms"] .el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* Tables. */
+body[class*="page_fluent_forms"] :is(.el-table, .el-table__expanded-cell, .el-table th, .el-table tr, .el-table__fixed, .el-table__fixed-right, .el-table__fixed-right-patch, .el-table__body-wrapper, .el-table__header-wrapper, .el-table__footer-wrapper, .el-table__empty-block) {
+  background-color: var(--adm-surface-1) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-table th.el-table__cell,
+body[class*="page_fluent_forms"] .el-table thead th {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-table--striped .el-table__body tr.el-table__row--striped td {
+  background-color: var(--adm-table-alt) !important;
+}
+
+body[class*="page_fluent_forms"] .el-table--enable-row-hover .el-table__body tr:hover > td,
+body[class*="page_fluent_forms"] .el-table__body tr.hover-row > td {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-table td, .el-table th.is-leaf, .el-table--border, .el-table--group) {
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-table::before, .el-table--border::after, .el-table__fixed::before, .el-table__fixed-right::before) {
+  background-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] .el-table .cell,
+body[class*="page_fluent_forms"] .el-table__empty-text {
+  color: var(--adm-text);
+}
+
+/* Pagination. */
+body[class*="page_fluent_forms"] .ff_pagination,
+body[class*="page_fluent_forms"] .el-pagination {
+  background-color: transparent !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-pagination :is(button, .btn-prev, .btn-next, .el-pager li, .el-pagination__total, .el-pagination__jump) {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-pagination .el-pager li.active,
+body[class*="page_fluent_forms"] .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #1565c9 !important;
+  color: #fff !important;
+}
+
+/* Dialogs, message boxes, popovers, dropdowns, pickers and tooltips. */
+body[class*="page_fluent_forms"] :is(
+  .el-dialog,
+  .el-message-box,
+  .el-popover,
+  .el-dropdown-menu,
+  .el-select-dropdown,
+  .el-picker-panel,
+  .el-date-range-picker,
+  .el-time-panel,
+  .el-cascader__dropdown,
+  .el-autocomplete-suggestion,
+  .el-drawer,
+  .el-collapse-item__header,
+  .el-collapse-item__wrap,
+  .el-card
+) {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-dialog__header, .el-dialog__footer, .el-message-box__header, .el-drawer__header) {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-dialog__title, .el-message-box__title, .el-message-box__message, .el-dialog__body, .el-drawer__header, .el-collapse-item__header) {
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-select-dropdown__item, .el-dropdown-menu__item, .el-cascader-node, .el-autocomplete-suggestion li) {
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-select-dropdown__item.hover, .el-select-dropdown__item:hover, .el-dropdown-menu__item:hover, .el-dropdown-menu__item:focus, .el-cascader-node:hover, .el-autocomplete-suggestion li:hover) {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
+  background-color: var(--adm-surface-2) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-picker-panel__sidebar, .el-picker-panel__footer, .el-date-picker__header, .el-date-range-picker__header, .el-time-panel__footer) {
+  background-color: var(--adm-surface-1) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-date-table td.in-range div, .el-date-table td.in-range div:hover) {
+  background-color: var(--adm-surface-3) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-date-table th, .el-date-table td, .el-picker-panel__icon-btn, .el-date-picker__header-label, .el-picker-panel__shortcut, .el-time-spinner__item) {
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-popper[x-placement^="bottom"] .popper__arrow, .el-popper[x-placement^="bottom"] .popper__arrow::after) {
+  border-bottom-color: var(--adm-surface-1) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.el-popper[x-placement^="top"] .popper__arrow, .el-popper[x-placement^="top"] .popper__arrow::after) {
+  border-top-color: var(--adm-surface-1) !important;
+}
+
+body[class*="page_fluent_forms"] .el-tag:not([class*="el-tag--"]),
+body[class*="page_fluent_forms"] .el-tag.el-tag--info {
+  background-color: var(--adm-surface-3) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .el-select .el-tag {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+/* Rich text editor inside settings (TinyMCE toolbar and tabs). */
+body[class*="page_fluent_forms"] .wp_vue_editor_wrapper :is(.wp-editor-tools, .wp-editor-container, .quicktags-toolbar, .mce-menubtn) {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .wp_vue_editor_wrapper .wp-switch-editor {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="page_fluent_forms"] .wp_vue_editor_wrapper :is(.tmce-active .switch-tmce, .html-active .switch-html) {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .wp_vue_editor_wrapper .wp-editor-area {
+  background-color: var(--adm-surface-2) !important;
+  color: var(--adm-text) !important;
+}
+
+/* --- Remaining hard-coded text colors -------------------------------------- */
+body[class*="page_fluent_forms"] :is(
+  .ff_form_name_inner,
+  .el-table .cell strong,
+  .lead-title,
+  .stats-value,
+  .stats-value span,
+  .stat-value,
+  .gauge-percentage,
+  .el-tabs__item.is-active,
+  .el-range-separator,
+  .wp_vue_editor_wrapper .mce-txt
+) {
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.stats-title, .stat-label, .gauge-label, .reports-description, .global-search-menu-button .shortcut) {
+  color: var(--adm-text-muted) !important;
+}
+
+/* Reports: chart and heatmap containers. */
+body[class*="page_fluent_forms"] :is(.chart-container, .ff_card_body.chart-container) {
+  background-color: var(--adm-surface-1) !important;
+}
+
+/* Field settings: segmented radio buttons and section labels. */
+body[class*="page_fluent_forms"] .el-radio-button-group {
+  background-color: var(--adm-surface-2) !important;
+  border-color: var(--adm-border) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.form-editor--sidebar .el-form-item__label, .form-editor--sidebar p, .form-editor--sidebar p strong, .form-editor--sidebar .ff_field_section_label) {
+  color: var(--adm-text) !important;
+}
+
+/* Entry detail view. */
+body[class*="page_fluent_forms"] :is(.entry_info_box_title, .wpf_entry_label, .entry_info_box_header) {
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .lead-text {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.entry_info_box_title .json_action, .ff_smtp_suggest) {
+  background-color: var(--adm-surface-3) !important;
+  color: var(--adm-text) !important;
+}
+
+body[class*="page_fluent_forms"] .ff_smtp_suggest p {
+  color: var(--adm-text-muted) !important;
+}
+
+body[class*="page_fluent_forms"] :is(.wpf_each_entry, .entry_info_body li, .entry_info_box li, .entry-footer, .ff_form_name, .el-radio.is-bordered, .entry_info_box_header, .ff_card_head_group, .ff_card_head, .ff_card_border, .ff_card_footer) {
+  border-color: var(--adm-border) !important;
+}

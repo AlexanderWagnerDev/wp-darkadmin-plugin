@@ -8,8 +8,44 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-14
+
+### Added
+
+- WPBakery Page Builder: dark styles for the backend editor (rows, columns, element cards, tabs and
+  control bars), the Add Element, Edit Element, Templates, Page Settings and Custom CSS & JS panels,
+  the frontend editor toolbar, the Grid Builder and the WPBakery settings screens. The page content
+  in the frontend editor and the TinyMCE content area keep the theme design. Listed in Settings >
+  DarkAdmin > Plugins and enabled automatically when WPBakery is active.
+- Elementor: dark styles for the Elementor admin screens (Home, sidebar navigation, Settings,
+  Tools, System Info, Role Manager, Templates, Submissions, MCP, Agent Ready and License). The
+  Elementor color tokens are remapped to the DarkAdmin palette, so the styles follow the active
+  preset. The Elementor editor keeps its own UI theme setting.
+- Polylang: dark styles for the Languages, Translations and Settings screens (including the inline
+  module settings), the language and flag pickers, the confirmation dialog and the term translation
+  fields. The setup wizard is a standalone page and keeps its own design.
+- Fluent Forms: dark styles for the forms list, form editor (canvas, field palette, field settings),
+  form settings, entries and entry details, reports, global settings, tools, integrations and
+  support screens, including the Element UI dialogs, dropdowns, tables and date pickers. The
+  signature field placeholder stays readable. The rich text editors for confirmation messages and
+  email bodies get a dark editing area with light text (`assets/js/tinymce-dark.js`, loaded only on
+  Fluent Forms screens).
+- JetEngine: dark styles for the post type, meta box, taxonomy, relation, options page and query
+  builder screens, the listings list and the Crocoblock dashboard (license, settings, workflows),
+  covering the shared Crocoblock UI components (panels, tabs, switchers, selects, repeaters, popups).
+- WP Rocket: dark styles for Settings > WP Rocket (navigation, dashboard, Rocket Insights, content
+  delivery, cache, file optimization, media, preload, database, heartbeat, tools, add-ons, help and
+  account sections, add-on cards and popins).
+
+### Developers
+
+- New `darkadmin_plugin_is_installed` filter to override the detection of a plugin from the plugin
+  style registry (arguments: detected state, plugin style slug).
+
 ### Fixed
 
+- Field labels on the Add Category / Add Tag forms (`.form-wrap label`) were dark text on the dark
+  background, and unchecked checkboxes and radio buttons kept the white WordPress 7.1 background.
 - Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive or when no
   other plugin is active. The settings form only submits active plugins, so the exclusion was
   silently dropped on the next settings save. Deleted plugins are still removed, and unchecking an

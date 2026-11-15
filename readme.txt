@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.6.0
+Stable tag: 0.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Features:
 * Token-based design system for backgrounds, text, borders, buttons and states
 * Auto Dark Mode: automatically darkens bright plugin backgrounds not covered by the stylesheet
 * Preset Themes: Modern (WP 7.0, default) and Classic (WP 6.x) color palettes
-* Plugins: optional dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, and WordPress AI & Connectors
+* Plugins: optional dark styles for Yoast SEO, Wordfence, UpdraftPlus, WP-Optimize, Contact Form 7, Complianz, Newsletter, Duplicator, Spectra, WPBakery Page Builder, Elementor, Polylang, Fluent Forms, JetEngine, WP Rocket, and WordPress AI & Connectors
 * Per-user Dark Mode access control (Include / Exclude) with empty-state UI when no non-admin users exist
 * Excluded Pages: specify admin pages where dark mode should not be applied
 * Dark Block Editor (optional, WordPress 7.1+): dark post/page block editor interface; the editing canvas turns dark when "Use theme styles" is turned off, or always with "Darken Theme Design in the Editor"
@@ -88,6 +88,18 @@ Yes, enable "Dark Login Page" under Settings > DarkAdmin. It applies to everyone
 25. Settings Page - Excluded Plugins
 
 == Changelog ==
+= 0.7.0 =
+* Added: Dark styles for WPBakery Page Builder: backend editor, Add Element, Edit Element, Templates, Page Settings and Custom CSS & JS panels, frontend editor toolbar, Grid Builder and settings screens
+* Added: Dark styles for Elementor admin screens (Home, Settings, Tools, System Info, Role Manager, Templates, Submissions and more). The Elementor editor keeps its own UI theme setting.
+* Added: Dark styles for Polylang: Languages, Translations and Settings screens, language and flag pickers, term translation fields
+* Added: Dark styles for Fluent Forms: forms list, form editor, form settings, entries, reports, global settings, tools and integrations, including a dark editing area for confirmation messages and email bodies
+* Added: Dark styles for JetEngine screens and the Crocoblock dashboard
+* Added: Dark styles for Settings > WP Rocket
+* Fixed: Field labels on the Add Category / Add Tag forms were unreadable, and unchecked checkboxes and radio buttons stayed white
+* Fixed: Excluded Plugins keeps a stored exclusion when the plugin is temporarily inactive
+* Fixed: Plugin page detection no longer attributes pages to the wrong plugin when plugins share or nest folders
+* Developers: New darkadmin_plugin_is_installed filter to override the plugin detection for the plugin styles
+
 = 0.6.0 =
 * Added: "Dark Site Editor" setting (off by default): dark site editor interface (navigation, Pages, Templates and Patterns lists, Styles panel, editor interface). The preview of your site design keeps the theme colors.
 * Added: "Dark Login Page" setting (off by default): dark wp-login.php using the active palette, with the white WordPress logo instead of the default logo
