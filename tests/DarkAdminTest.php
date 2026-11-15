@@ -1186,11 +1186,13 @@ class DarkAdminTest extends WP_UnitTestCase {
         );
         $this->assertStringNotContainsString( 'id="adm-import-file" accept=".json" style="display:none;"', $html );
 
-        // The result is written by script only, so it needs a live region.
+        // <output> is the native live region for a form result: implicit
+        // role=status + aria-live=polite, and announced more reliably across
+        // devices than an explicit ARIA status role on a span.
         $this->assertSame(
             1,
-            preg_match( '/<span id="adm-import-status"[^>]*role="status"[^>]*aria-live="polite"/', $html ),
-            'The import result must be announced through a live region.'
+            preg_match( '/<output id="adm-import-status"[^>]*class="[^"]*adm-import-status/', $html ),
+            'The import result must use the native live-region element.'
         );
     }
 

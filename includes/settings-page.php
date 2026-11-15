@@ -551,7 +551,7 @@ function darkadmin_settings_page(): void {
 							<?php esc_html_e( 'Import Palette', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 							<input type="file" id="adm-import-file" class="screen-reader-text" accept=".json" />
 						</label>
-						<span id="adm-import-status" class="adm-import-status" role="status" aria-live="polite"></span>
+						<output id="adm-import-status" class="adm-import-status"></output>
 					</div>
 
 					<?php foreach ( $color_groups as $group_name => $group_keys ) : ?>
