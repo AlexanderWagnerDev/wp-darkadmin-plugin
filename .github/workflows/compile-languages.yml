@@ -46,7 +46,16 @@ jobs:
       - name: Add direct file access protection
         run: |
           for f in languages/*.l10n.php; do
-            sed -i 's/<?php/<?php\nif ( ! defined( '"'"'ABSPATH'"'"' ) ) {\n\texit;\n}/' "$f"
+            # Only the opening tag on line 1 is the real PHP tag. An unscoped
+            # substitution also rewrites a "<?php" inside a translated string
+            # and corrupts the single-line return array.
+            sed -i '1s/<?php/<?php\nif ( ! defined( '"'"'ABSPATH'"'"' ) ) {\n\texit;\n}/' "$f"
+          done
+
+      - name: Validate generated language files
+        run: |
+          for f in languages/*.l10n.php; do
+            php -l "$f"
           done
 
       - name: Commit compiled files
