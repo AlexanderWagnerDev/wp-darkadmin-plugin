@@ -27,9 +27,9 @@ jobs:
 
       - name: Install Prettier & Markdown plugins
         run: |
-          npm install --no-save \
-            prettier@3 \
-            @prettier/plugin-xml
+          npm install --no-save --ignore-scripts --no-audit --no-fund \
+            prettier@3.10.1 \
+            @prettier/plugin-xml@3.4.2
 
       - name: Run Prettier on all Markdown files
         run: |
@@ -45,7 +45,7 @@ jobs:
             "!vendor/**"
 
       - name: Install markdownlint-cli2
-        run: npm install --no-save markdownlint-cli2
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund markdownlint-cli2@0.24.1
 
       - name: Create markdownlint config
         run: |

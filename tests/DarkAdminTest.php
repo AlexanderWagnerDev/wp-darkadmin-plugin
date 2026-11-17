@@ -1443,4 +1443,100 @@ class DarkAdminTest extends WP_UnitTestCase {
 
         $this->assertEqualsCanonicalizing( [ $active, $inactive ], $result );
     }
+
+    // -------------------------------------------------------------------------
+    // Excluded Pages slug normalization
+    // -------------------------------------------------------------------------
+
+    public function test_excluded_page_entry_matches_a_file_style_plugin_slug(): void {
+        // Core removes ".php" from a plugin page slug when it builds the page
+        // hook, so the screen id of add_menu_page(..., 'my-plugin/admin.php')
+        // is "toplevel_page_my-plugin/admin" and the resolved slug is
+        // "my-pluginadmin".
+        $this->assertTrue(
+            darkadmin_is_page_excluded(
+                [ 'admin.php?page=my-plugin/admin.php' ],
+                'admin.php',
+                'toplevel_page_my-plugin/admin',
+                'my-pluginadmin'
+            )
+        );
+
+        // A plain slug keeps working unchanged.
+        $this->assertTrue(
+            darkadmin_is_page_excluded(
+                [ 'admin.php?page=my-plugin' ],
+                'admin.php',
+                'toplevel_page_my-plugin',
+                'my-plugin'
+            )
+        );
+    }
+
+    public function test_excluded_page_entry_with_array_page_parameter_is_ignored(): void {
+        $this->assertFalse(
+            darkadmin_is_page_excluded(
+                [ 'admin.php?page[]=my-plugin' ],
+                'admin.php',
+                'toplevel_page_my-plugin',
+                'my-plugin'
+            )
+        );
+    }
+
+    // -------------------------------------------------------------------------
+    // Settings page preset tiles and palette export
+    // -------------------------------------------------------------------------
+
+    public function test_active_preset_tile_cannot_reapply_itself(): void {
+        wp_set_current_user( self::factory()->user->create( [ 'role' => 'administrator' ] ) );
+        update_option( 'darkadmin_preset', 'modern' );
+
+        ob_start();
+        darkadmin_settings_page();
+        $html = ob_get_clean();
+
+        // The active tile is a status indicator. Re-applying it would reset all
+        // custom colors and layout values without a confirmation.
+        $this->assertMatchesRegularExpression(
+            '/<button[^>]*class="button adm-preset-load-btn"[^>]*data-preset="modern"[^>]*\bdisabled\b/',
+            $html
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/<button[^>]*class="button adm-preset-load-btn"[^>]*data-preset="classic"[^>]*\bdisabled\b/',
+            $html
+        );
+    }
+
+    public function test_preset_switch_updates_the_disabled_tile_state(): void {
+        $js = (string) file_get_contents( dirname( __DIR__ ) . '/assets/js/settings.js' );
+
+        // The tile state is only useful if a preset click actually reaches
+        // setActive() and setActive() then disables the new active tile. Assert
+        // the whole chain, not just the assignment.
+        $this->assertMatchesRegularExpression(
+            '/btn\.addEventListener\( \'click\', function \(\) \{[\s\S]*?setActive\( slug \);/',
+            $js,
+            'The preset button handler must call setActive().'
+        );
+        $this->assertMatchesRegularExpression(
+            '/function setActive\( slug \) \{[\s\S]*?btn\.disabled\s*=\s*isThis;/',
+            $js,
+            'setActive() must disable the tile it marks as active.'
+        );
+    }
+
+    public function test_palette_export_skips_cleared_color_values(): void {
+        $js = (string) file_get_contents( dirname( __DIR__ ) . '/assets/js/settings.js' );
+
+        // A cleared picker saves as its preset default. The export must write
+        // that effective value, because an empty entry would make the file
+        // unimportable for the strict importer. The expression must sit inside
+        // the export click handler so an unwired exporter cannot pass.
+        $this->assertMatchesRegularExpression(
+            '/exportBtn\.addEventListener\( \'click\', function \(\) \{[\s\S]*?palette\[ p\.dataset\.key \] = p\.value \|\| p\.dataset\.defaultColor;/',
+            $js,
+            'The export handler must write the effective color for a cleared picker.'
+        );
+    }
 }

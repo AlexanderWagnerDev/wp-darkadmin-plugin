@@ -208,6 +208,23 @@ function darkadmin_parse_excluded_pages( $raw ): array {
 }
 
 /**
+ * Resolves the page slug from an Excluded Pages entry that contains a query string.
+ *
+ * Core strips ".php" from a plugin page slug when it builds the page hook
+ * (get_plugin_page_hookname), so the screen id no longer contains it. The entry
+ * is normalized the same way before it is compared with the current slug.
+ *
+ * @param string $entry Excluded Pages entry with a query string.
+ * @return string Sanitized page slug, or an empty string.
+ */
+function darkadmin_excluded_page_slug( string $entry ): string {
+	parse_str( (string) wp_parse_url( $entry, PHP_URL_QUERY ), $params );
+	$page_param = isset( $params['page'] ) && is_scalar( $params['page'] ) ? (string) $params['page'] : '';
+
+	return '' !== $page_param ? sanitize_key( str_replace( '.php', '', $page_param ) ) : '';
+}
+
+/**
  * Checks whether the current admin page matches any of the excluded entries.
  *
  * @param string[] $entries     Parsed exclusion list.
@@ -219,8 +236,7 @@ function darkadmin_parse_excluded_pages( $raw ): array {
 function darkadmin_is_page_excluded( array $entries, string $pagenow, string $hook_suffix, string $page_slug = '' ): bool {
 	foreach ( $entries as $entry ) {
 		if ( str_contains( $entry, '?' ) ) {
-			parse_str( (string) wp_parse_url( $entry, PHP_URL_QUERY ), $params );
-			$entry_slug = isset( $params['page'] ) ? sanitize_key( $params['page'] ) : '';
+			$entry_slug = darkadmin_excluded_page_slug( $entry );
 			if ( '' !== $entry_slug && $entry_slug === $page_slug ) {
 				return true;
 			}
