@@ -1511,17 +1511,31 @@ class DarkAdminTest extends WP_UnitTestCase {
     public function test_preset_switch_updates_the_disabled_tile_state(): void {
         $js = (string) file_get_contents( dirname( __DIR__ ) . '/assets/js/settings.js' );
 
-        $this->assertMatchesRegularExpression( '/btn\.disabled\s*=\s*isThis/', $js );
+        // The tile state is only useful if a preset click actually reaches
+        // setActive() and setActive() then disables the new active tile. Assert
+        // the whole chain, not just the assignment.
+        $this->assertMatchesRegularExpression(
+            '/btn\.addEventListener\( \'click\', function \(\) \{[\s\S]*?setActive\( slug \);/',
+            $js,
+            'The preset button handler must call setActive().'
+        );
+        $this->assertMatchesRegularExpression(
+            '/function setActive\( slug \) \{[\s\S]*?btn\.disabled\s*=\s*isThis;/',
+            $js,
+            'setActive() must disable the tile it marks as active.'
+        );
     }
 
     public function test_palette_export_skips_cleared_color_values(): void {
         $js = (string) file_get_contents( dirname( __DIR__ ) . '/assets/js/settings.js' );
 
         // A cleared picker has an empty value; exporting it would produce a file
-        // that the strict importer rejects as a whole.
+        // that the strict importer rejects as a whole. The guard must sit inside
+        // the export click handler so an unwired exporter cannot pass this test.
         $this->assertMatchesRegularExpression(
-            '/pickers\.forEach\( function \( p \) \{[\s\S]*?if \( p\.value \)[\s\S]*?palette\[ p\.dataset\.key \] = p\.value/',
-            $js
+            '/exportBtn\.addEventListener\( \'click\', function \(\) \{[\s\S]*?if \( p\.value \) palette\[ p\.dataset\.key \] = p\.value;/',
+            $js,
+            'The export handler must skip cleared pickers.'
         );
     }
 }
