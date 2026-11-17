@@ -1443,4 +1443,85 @@ class DarkAdminTest extends WP_UnitTestCase {
 
         $this->assertEqualsCanonicalizing( [ $active, $inactive ], $result );
     }
+
+    // -------------------------------------------------------------------------
+    // Excluded Pages slug normalization
+    // -------------------------------------------------------------------------
+
+    public function test_excluded_page_entry_matches_a_file_style_plugin_slug(): void {
+        // Core removes ".php" from a plugin page slug when it builds the page
+        // hook, so the screen id of add_menu_page(..., 'my-plugin/admin.php')
+        // is "toplevel_page_my-plugin/admin" and the resolved slug is
+        // "my-pluginadmin".
+        $this->assertTrue(
+            darkadmin_is_page_excluded(
+                [ 'admin.php?page=my-plugin/admin.php' ],
+                'admin.php',
+                'toplevel_page_my-plugin/admin',
+                'my-pluginadmin'
+            )
+        );
+
+        // A plain slug keeps working unchanged.
+        $this->assertTrue(
+            darkadmin_is_page_excluded(
+                [ 'admin.php?page=my-plugin' ],
+                'admin.php',
+                'toplevel_page_my-plugin',
+                'my-plugin'
+            )
+        );
+    }
+
+    public function test_excluded_page_entry_with_array_page_parameter_is_ignored(): void {
+        $this->assertFalse(
+            darkadmin_is_page_excluded(
+                [ 'admin.php?page[]=my-plugin' ],
+                'admin.php',
+                'toplevel_page_my-plugin',
+                'my-plugin'
+            )
+        );
+    }
+
+    // -------------------------------------------------------------------------
+    // Settings page preset tiles and palette export
+    // -------------------------------------------------------------------------
+
+    public function test_active_preset_tile_cannot_reapply_itself(): void {
+        wp_set_current_user( self::factory()->user->create( [ 'role' => 'administrator' ] ) );
+        update_option( 'darkadmin_preset', 'modern' );
+
+        ob_start();
+        darkadmin_settings_page();
+        $html = ob_get_clean();
+
+        // The active tile is a status indicator. Re-applying it would reset all
+        // custom colors and layout values without a confirmation.
+        $this->assertMatchesRegularExpression(
+            '/<button[^>]*class="button adm-preset-load-btn"[^>]*data-preset="modern"[^>]*\bdisabled\b/',
+            $html
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/<button[^>]*class="button adm-preset-load-btn"[^>]*data-preset="classic"[^>]*\bdisabled\b/',
+            $html
+        );
+    }
+
+    public function test_preset_switch_updates_the_disabled_tile_state(): void {
+        $js = (string) file_get_contents( dirname( __DIR__ ) . '/assets/js/settings.js' );
+
+        $this->assertMatchesRegularExpression( '/btn\.disabled\s*=\s*isThis/', $js );
+    }
+
+    public function test_palette_export_skips_cleared_color_values(): void {
+        $js = (string) file_get_contents( dirname( __DIR__ ) . '/assets/js/settings.js' );
+
+        // A cleared picker has an empty value; exporting it would produce a file
+        // that the strict importer rejects as a whole.
+        $this->assertMatchesRegularExpression(
+            '/pickers\.forEach\( function \( p \) \{[\s\S]*?if \( p\.value \)[\s\S]*?palette\[ p\.dataset\.key \] = p\.value/',
+            $js
+        );
+    }
 }

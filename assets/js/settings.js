@@ -108,6 +108,9 @@
 			loadBtns.forEach( function ( btn ) {
 				const isThis = btn.dataset.preset === slug;
 				btn.textContent = isThis ? i18n( 'active' ) : i18n( 'loadPreset' );
+				// The active tile is a status indicator: re-applying it would reset
+				// every custom color and layout value without a confirmation.
+				btn.disabled = isThis;
 			} );
 			syncPresetHiddenFields( slug );
 		}
@@ -205,7 +208,12 @@
 			exportBtn.addEventListener( 'click', function () {
 				const pickers = document.querySelectorAll( '.adm-color-picker' );
 				const palette = {};
-				pickers.forEach( function ( p ) { palette[ p.dataset.key ] = p.value; } );
+				pickers.forEach( function ( p ) {
+					// A cleared picker has no value. Exporting '' would make the
+					// file unreadable for the strict importer, which only accepts
+					// hex colors.
+					if ( p.value ) palette[ p.dataset.key ] = p.value;
+				} );
 				const blob = new Blob( [ JSON.stringify( palette, null, 2 ) ], { type: 'application/json' } );
 				const url  = URL.createObjectURL( blob );
 				const a    = document.createElement( 'a' );

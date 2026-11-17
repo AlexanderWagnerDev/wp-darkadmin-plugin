@@ -295,7 +295,7 @@ function darkadmin_settings_page(): void {
 										<strong><?php echo esc_html( $meta['label'] ); ?></strong>
 										<span><?php echo esc_html( $meta['desc'] ); ?></span>
 									</div>
-									<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>">
+									<button type="button" class="button adm-preset-load-btn" data-preset="<?php echo esc_attr( $slug ); ?>" <?php disabled( $active_preset === $slug ); ?>>
 										<?php if ( $active_preset === $slug ) : ?>
 											<?php esc_html_e( '✓ Active', 'darkadmin-dark-mode-for-adminpanel' ); ?>
 										<?php else : ?>

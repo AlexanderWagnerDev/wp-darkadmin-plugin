@@ -220,7 +220,12 @@ function darkadmin_is_page_excluded( array $entries, string $pagenow, string $ho
 	foreach ( $entries as $entry ) {
 		if ( str_contains( $entry, '?' ) ) {
 			parse_str( (string) wp_parse_url( $entry, PHP_URL_QUERY ), $params );
-			$entry_slug = isset( $params['page'] ) ? sanitize_key( $params['page'] ) : '';
+			$page_param = isset( $params['page'] ) && is_scalar( $params['page'] ) ? (string) $params['page'] : '';
+			// Core strips ".php" from a plugin page slug when it builds the page
+			// hook (get_plugin_page_hookname), so the screen id no longer contains
+			// it. Normalize the entry the same way or a file-style slug such as
+			// admin.php?page=my-plugin/admin.php could never match.
+			$entry_slug = '' !== $page_param ? sanitize_key( (string) preg_replace( '!\.php!', '', $page_param ) ) : '';
 			if ( '' !== $entry_slug && $entry_slug === $page_slug ) {
 				return true;
 			}
