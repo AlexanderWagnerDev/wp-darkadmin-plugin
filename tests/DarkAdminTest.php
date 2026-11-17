@@ -1529,13 +1529,14 @@ class DarkAdminTest extends WP_UnitTestCase {
     public function test_palette_export_skips_cleared_color_values(): void {
         $js = (string) file_get_contents( dirname( __DIR__ ) . '/assets/js/settings.js' );
 
-        // A cleared picker has an empty value; exporting it would produce a file
-        // that the strict importer rejects as a whole. The guard must sit inside
-        // the export click handler so an unwired exporter cannot pass this test.
+        // A cleared picker saves as its preset default. The export must write
+        // that effective value, because an empty entry would make the file
+        // unimportable for the strict importer. The expression must sit inside
+        // the export click handler so an unwired exporter cannot pass.
         $this->assertMatchesRegularExpression(
-            '/exportBtn\.addEventListener\( \'click\', function \(\) \{[\s\S]*?if \( p\.value \) palette\[ p\.dataset\.key \] = p\.value;/',
+            '/exportBtn\.addEventListener\( \'click\', function \(\) \{[\s\S]*?palette\[ p\.dataset\.key \] = p\.value \|\| p\.dataset\.defaultColor;/',
             $js,
-            'The export handler must skip cleared pickers.'
+            'The export handler must write the effective color for a cleared picker.'
         );
     }
 }

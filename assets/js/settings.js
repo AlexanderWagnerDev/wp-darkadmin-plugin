@@ -209,10 +209,10 @@
 				const pickers = document.querySelectorAll( '.adm-color-picker' );
 				const palette = {};
 				pickers.forEach( function ( p ) {
-					// A cleared picker has no value. Exporting '' would make the
-					// file unreadable for the strict importer, which only accepts
-					// hex colors.
-					if ( p.value ) palette[ p.dataset.key ] = p.value;
+					// A cleared picker is saved as its preset default again, so
+					// export the effective color. An empty entry would make the
+					// file unimportable for the strict importer.
+					palette[ p.dataset.key ] = p.value || p.dataset.defaultColor;
 				} );
 				const blob = new Blob( [ JSON.stringify( palette, null, 2 ) ], { type: 'application/json' } );
 				const url  = URL.createObjectURL( blob );
