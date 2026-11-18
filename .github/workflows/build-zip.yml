@@ -28,6 +28,12 @@ jobs:
             -not -path './.git' \
             -not -path './.github/*' \
             -not -path './.github' \
+            -not -path './.bug-hunter/*' \
+            -not -path './.bug-hunter' \
+            -not -path './.cloudflare-security-audit/*' \
+            -not -path './.cloudflare-security-audit' \
+            -not -path './.commandcode/*' \
+            -not -path './.commandcode' \
             -not -path './tests/*' \
             -not -path './tests' \
             -not -path './vendor/*' \

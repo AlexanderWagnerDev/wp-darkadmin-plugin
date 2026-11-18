@@ -25,6 +25,11 @@ renovate.json
 build
 release-notes.md
 
+# Agent and audit workspaces (must not ship in the plugin ZIP)
+.bug-hunter
+.cloudflare-security-audit
+.commandcode
+
 # Translation sources (compiled .mo / .l10n.php files are shipped)
 *.po
 *.pot

@@ -53,4 +53,23 @@ class DarkAdminWorkflowTest extends WP_UnitTestCase {
         $this->assertDoesNotMatchRegularExpression( '/prettier@3\s/', $yaml );
         $this->assertDoesNotMatchRegularExpression( '/npm install[^\n]*markdownlint-cli2(\s|$)/', $yaml );
     }
+
+    public function test_release_packages_exclude_audit_and_agent_workspaces(): void {
+        // The release workflow runs in a clean checkout, but a maintainer can
+        // run the same packaging commands locally, where the audit workspaces
+        // exist. Neither the distribution manifest nor the ZIP build may copy
+        // findings or agent configuration into the shipped plugin.
+        $distignore = (string) file_get_contents( dirname( __DIR__ ) . '/.distignore' );
+        $lines      = preg_split( '/\R/', $distignore ) ?: array();
+        $zip        = $this->workflow( 'build-zip.yml' );
+
+        foreach ( array( '.bug-hunter', '.cloudflare-security-audit', '.commandcode' ) as $directory ) {
+            $this->assertContains( $directory, $lines, $directory . ' must be excluded from the release ZIP.' );
+            $this->assertStringContainsString(
+                "-not -path './" . $directory . "/*'",
+                $zip,
+                $directory . ' must be excluded from the build-zip workflow.'
+            );
+        }
+    }
 }
