@@ -1539,4 +1539,30 @@ class DarkAdminTest extends WP_UnitTestCase {
             'The export handler must write the effective color for a cleared picker.'
         );
     }
+
+    public function test_plugin_action_link_escapes_translated_label(): void {
+        // Core prints plugin action links as HTML. Translations and language
+        // packs are a lower-trust data source, so the label must be escaped at
+        // the sink like every other translated string in this plugin.
+        $link_filter = 'plugin_action_links_' . plugin_basename( DARKADMIN_PATH . 'darkadmin.php' );
+
+        add_filter(
+            'gettext',
+            static function ( $translation, $text, $domain ) {
+                if ( 'Settings' === $text && 'darkadmin-dark-mode-for-adminpanel' === $domain ) {
+                    return '<script>alert(1)</script>';
+                }
+
+                return $translation;
+            },
+            10,
+            3
+        );
+
+        $links = apply_filters( $link_filter, array() );
+
+        $this->assertArrayHasKey( 'settings', $links );
+        $this->assertStringNotContainsString( '<script>', $links['settings'] );
+        $this->assertStringContainsString( '&lt;script&gt;', $links['settings'] );
+    }
 }

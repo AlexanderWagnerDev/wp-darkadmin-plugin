@@ -95,7 +95,7 @@ add_filter(
 	'plugin_action_links_' . plugin_basename( __FILE__ ),
 	function ( $actions ) {
 		$url                 = admin_url( 'options-general.php?page=darkadmin' );
-		$actions['settings'] = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'darkadmin-dark-mode-for-adminpanel' ) . '</a>';
+		$actions['settings'] = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'darkadmin-dark-mode-for-adminpanel' ) . '</a>';
 		return $actions;
 	}
 );
