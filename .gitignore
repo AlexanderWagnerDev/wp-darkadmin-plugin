@@ -1,5 +1,6 @@
 node_modules
 .bug-hunter/
+.cloudflare-security-audit/
 vendor/
 composer.lock
 .phpunit.result.cache
