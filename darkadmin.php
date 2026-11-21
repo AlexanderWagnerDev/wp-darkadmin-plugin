@@ -65,7 +65,7 @@ function darkadmin_maybe_migrate_options(): void {
 			// Only advance once the preset row is definitely stored, so a failed
 			// write is retried on the next request instead of silently keeping the
 			// modern fallback for a pre-0.3.0 install.
-			if ( $target !== get_option( 'darkadmin_preset', false ) ) {
+			if ( get_option( 'darkadmin_preset', false ) !== $target ) {
 				return;
 			}
 		}
