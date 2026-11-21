@@ -1569,7 +1569,12 @@ class DarkAdminTest extends WP_UnitTestCase {
     public function test_admin_menu_title_escapes_translated_label(): void {
         // Core stores the submenu title raw and prints it after wptexturize(),
         // which does not escape HTML. Translations are lower-trust input, so the
-        // title must be escaped before it reaches add_options_page().
+        // menu title must be escaped before it reaches add_options_page(). The
+        // page title is not the raw sink: core strips tags and escapes it.
+        if ( ! function_exists( 'add_options_page' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
         add_filter(
             'gettext',
             static function ( $translation, $text, $domain ) {
