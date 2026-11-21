@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.7.0
+Stable tag: 0.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,18 @@ Ja, mit „Dunkle Login-Seite“ unter Einstellungen -> DarkAdmin. Das gilt für
 25. Einstellungsseite - Ausgeschlossene Plugins
 
 == Changelog ==
+= 0.7.1 =
+* Fix: Die aktive Preset-Kachel ist eine deaktivierte Statusanzeige und lädt die Preset-Standardwerte nicht mehr neu, wodurch alle eigenen Farb- und Layoutwerte ohne Nachfrage zurückgesetzt wurden
+* Fix: Der Paletten-Export schreibt für einen geleerten Farbwähler die wirksame Farbe, sodass eine exportierte Palette wieder importiert werden kann; eine importierte Palette wird außerdem zum Standard des Farbwählers für den „Standard“-Button
+* Fix: Einträge in „Ausgeschlossene Seiten“ mit dateiähnlichem Slug (admin.php?page=my-plugin/admin.php) treffen ihre Admin-Seite jetzt
+* Fix: Ein abgeschalteter Plugin-Stil bleibt abgeschaltet, solange das Plugin inaktiv ist, sodass die Dark-Mode-Stile beim Reaktivieren nicht zurückkehren
+* Fix: Die Karten der Benutzer-Zugriffskontrolle und der Button „Palette importieren“ zeigen Tastaturfokus, das Dateifeld ist in der Tab-Reihenfolge, und das Import-Ergebnis wird von Screenreadern angesagt
+* Fix: Auto Dark Mode übermalt nicht mehr die Einstellungs-Schalter und die Preset-Vorschau
+* Fix: Die 0.3.0-Migration setzt ihre Markierung erst, wenn die Preset-Zeile gespeichert ist, sodass ein fehlgeschlagenes Schreiben erneut versucht wird, statt still die moderne Palette zu behalten
+* Fix: Der Menü- und Seitentitel von DarkAdmin wird maskiert, sodass eine Übersetzung mit Markup kein HTML ins Admin-Menü einschleusen kann
+* Wartung: Der Einstellungen-Link auf der Plugin-Seite maskiert seine übersetzte Beschriftung
+* Wartung: Der Markdown-Workflow legt seine npm-Werkzeuge auf exakte Versionen fest und installiert sie mit --ignore-scripts; der Sprach-Workflow prüft jede erzeugte Katalogdatei
+
 = 0.7.0 =
 * Neu: Dark-Mode-Stile für WPBakery Page Builder: Backend-Editor, Panels „Element hinzufügen“, „Element bearbeiten“, Vorlagen, Seiteneinstellungen und eigenes CSS & JS, Toolbar des Frontend-Editors, Grid Builder und Einstellungsseiten
 * Neu: Dark-Mode-Stile für die Elementor-Adminseiten (Startseite, Einstellungen, Werkzeuge, Systeminfo, Rollenverwaltung, Vorlagen, Formulareinsendungen und mehr). Der Elementor-Editor behält seine eigene UI-Theme-Einstellung.

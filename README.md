@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.3%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-0.7.0-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
+[![Version](https://img.shields.io/badge/Version-0.7.1-orange)](https://github.com/AlexanderWagnerDev/wp-darkadmin-plugin)
 
 <img src="DarkAdmin-Logo.png" alt="DarkAdmin-Logo" width="250px"/>
 
@@ -103,6 +103,32 @@ customization and Auto Dark Mode support.
 ---
 
 ## Changelog
+
+## [0.7.1] - 2026-11-21
+
+### Fixed
+
+- The active preset tile is a disabled status indicator and no longer reloads the preset defaults,
+  which reset every custom color and layout value without a confirmation
+- The palette export writes the effective color for a cleared picker, so an exported palette can be
+  imported again; an imported palette also becomes the picker default for the Default button
+- Excluded Pages entries with a file-style slug (`admin.php?page=my-plugin/admin.php`) now match
+  their admin page
+- A plugin style that was switched off stays off while the plugin is inactive, so reactivating the
+  plugin no longer brings its dark styles back
+- The User Access cards and the Import Palette button show keyboard focus, the file input is in the
+  tab order, and the import result is announced by screen readers
+- Auto Dark Mode no longer repaints the settings toggles and the preset preview
+- The 0.3.0 migration only records its marker after the preset row is stored, so a failed write is
+  retried instead of silently keeping the modern palette
+- The DarkAdmin menu and page titles are escaped, so a translated label containing markup cannot
+  inject HTML into the admin menu
+
+### Maintenance
+
+- The Settings link on the Plugins screen escapes its translated label
+- The Markdown workflow pins its npm tools to exact versions and installs them with
+  `--ignore-scripts`; the language workflow validates every generated catalog file
 
 ## [0.7.0] - 2026-11-14
 
@@ -542,6 +568,34 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 ---
 
 ## Changelog
+
+## 0.7.1
+
+### Behoben
+
+- Die aktive Preset-Kachel ist eine deaktivierte Statusanzeige und lädt die Preset-Standardwerte
+  nicht mehr neu, wodurch alle eigenen Farb- und Layoutwerte ohne Nachfrage zurückgesetzt wurden
+- Der Paletten-Export schreibt für einen geleerten Farbwähler die wirksame Farbe, sodass eine
+  exportierte Palette wieder importiert werden kann; eine importierte Palette wird außerdem zum
+  Standard des Farbwählers für den „Standard“-Button
+- Einträge in „Ausgeschlossene Seiten“ mit dateiähnlichem Slug (`admin.php?page=my-plugin/admin.php`)
+  treffen ihre Admin-Seite jetzt
+- Ein abgeschalteter Plugin-Stil bleibt abgeschaltet, solange das Plugin inaktiv ist, sodass die
+  Dark-Mode-Stile beim Reaktivieren nicht zurückkehren
+- Die Karten der Benutzer-Zugriffskontrolle und der Button „Palette importieren“ zeigen
+  Tastaturfokus, das Dateifeld ist in der Tab-Reihenfolge, und das Import-Ergebnis wird von
+  Screenreadern angesagt
+- Auto Dark Mode übermalt nicht mehr die Einstellungs-Schalter und die Preset-Vorschau
+- Die 0.3.0-Migration setzt ihre Markierung erst, wenn die Preset-Zeile gespeichert ist, sodass ein
+  fehlgeschlagenes Schreiben erneut versucht wird, statt still die moderne Palette zu behalten
+- Der Menü- und Seitentitel von DarkAdmin wird maskiert, sodass eine Übersetzung mit Markup kein
+  HTML ins Admin-Menü einschleusen kann
+
+### Wartung
+
+- Der Einstellungen-Link auf der Plugin-Seite maskiert seine übersetzte Beschriftung
+- Der Markdown-Workflow legt seine npm-Werkzeuge auf exakte Versionen fest und installiert sie mit
+  `--ignore-scripts`; der Sprach-Workflow prüft jede erzeugte Katalogdatei
 
 ## 0.7.0
 

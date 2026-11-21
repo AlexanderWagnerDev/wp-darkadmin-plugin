@@ -4,7 +4,7 @@ Tags: dark mode, admin, dashboard, ui, accessibility
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.7.0
+Stable tag: 0.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,18 @@ Yes, enable "Dark Login Page" under Settings > DarkAdmin. It applies to everyone
 25. Settings Page - Excluded Plugins
 
 == Changelog ==
+= 0.7.1 =
+* Fixed: The active preset tile is a disabled status indicator and no longer reloads the preset defaults, which reset every custom color and layout value without a confirmation
+* Fixed: The palette export writes the effective color for a cleared picker, so an exported palette can be imported again; an imported palette also becomes the picker default for the "Default" button
+* Fixed: Excluded Pages entries with a file-style slug (admin.php?page=my-plugin/admin.php) now match their admin page
+* Fixed: A plugin style that was switched off stays off while the plugin is inactive, so reactivating the plugin no longer brings its dark styles back
+* Fixed: The User Access cards and the Import Palette button show keyboard focus, the file input is in the tab order, and the import result is announced by screen readers
+* Fixed: Auto Dark Mode no longer repaints the settings toggles and the preset preview
+* Fixed: The 0.3.0 migration only records its marker after the preset row is stored, so a failed write is retried instead of silently keeping the modern palette
+* Fixed: The DarkAdmin menu and page titles are escaped, so a translated label containing markup cannot inject HTML into the admin menu
+* Maintenance: The Settings link on the Plugins screen escapes its translated label
+* Maintenance: The Markdown workflow pins its npm tools to exact versions and installs them with --ignore-scripts; the language workflow validates every generated catalog file
+
 = 0.7.0 =
 * Added: Dark styles for WPBakery Page Builder: backend editor, Add Element, Edit Element, Templates, Page Settings and Custom CSS & JS panels, frontend editor toolbar, Grid Builder and settings screens
 * Added: Dark styles for Elementor admin screens (Home, Settings, Tools, System Info, Role Manager, Templates, Submissions and more). The Elementor editor keeps its own UI theme setting.

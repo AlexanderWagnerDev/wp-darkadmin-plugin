@@ -8,6 +8,45 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-11-21
+
+### Fixed
+
+- The active preset tile is a disabled status indicator. Clicking it reloaded the preset defaults
+  and overwrote every custom color and layout value without a confirmation.
+- The palette export writes the effective color for a cleared color picker, so an exported palette
+  can be imported again; the strict importer rejects empty values. An imported palette also becomes
+  the picker default, so the Default button restores the imported color instead of the previous
+  preset value.
+- Excluded Pages entries with a file-style slug (`admin.php?page=my-plugin/admin.php`) now match
+  their admin page. WordPress strips `.php` from the page slug when it builds the page hook, so the
+  entry never matched before.
+- A plugin style that was switched off stays off while the plugin is inactive. Saving any DarkAdmin
+  setting dropped the stored opt-out, so the dark styles returned when the plugin was reactivated.
+  Active plugins stay authoritative: checked enables, unchecked disables.
+- The User Access cards and the Import Palette button show keyboard focus, and the palette file
+  input is part of the tab order. The import result is a native `<output>` element and is announced
+  by screen readers.
+- Auto Dark Mode no longer repaints the settings toggles and the preset preview, so the checked
+  toggle color stays intact.
+- The 0.3.0 migration only records its marker after the preset row is stored. A failed write is
+  retried on the next request instead of silently keeping the modern palette for a pre-0.3.0
+  install.
+- The DarkAdmin menu and page titles are escaped before they are registered, so a translated label
+  containing markup cannot inject HTML into the admin menu.
+
+### Maintenance
+
+- The Settings link on the Plugins screen escapes its translated label with `esc_html__()`.
+- Pinned the npm tools in the Markdown workflow to exact versions and installed them with
+  `--ignore-scripts`; a job with write access and a persisted token no longer runs registry install
+  scripts.
+- The language compilation workflow only adds the ABSPATH guard to the opening PHP tag, so a
+  translation containing `<?php` no longer corrupts the catalog, and validates every generated
+  `.l10n.php` file with `php -l`.
+- New regression tests for the preset state, the palette export and import, the excluded-page slug,
+  the plugin opt-out, keyboard focus and the live region.
+
 ## [0.7.0] - 2026-11-14
 
 ### Added
