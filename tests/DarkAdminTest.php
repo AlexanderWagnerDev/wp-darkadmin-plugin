@@ -1565,4 +1565,50 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertStringNotContainsString( '<script>', $links['settings'] );
         $this->assertStringContainsString( '&lt;script&gt;', $links['settings'] );
     }
+
+    public function test_admin_menu_title_escapes_translated_label(): void {
+        // Core stores the submenu title raw and prints it after wptexturize(),
+        // which does not escape HTML. Translations are lower-trust input, so the
+        // title must be escaped before it reaches add_options_page().
+        add_filter(
+            'gettext',
+            static function ( $translation, $text, $domain ) {
+                if ( 'DarkAdmin' === $text && 'darkadmin-dark-mode-for-adminpanel' === $domain ) {
+                    return '<img src=x onerror=alert(1)>';
+                }
+
+                return $translation;
+            },
+            10,
+            3
+        );
+
+        $previous_user    = get_current_user_id();
+        $previous_submenu = $GLOBALS['submenu'] ?? null;
+
+        try {
+            wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+            $GLOBALS['submenu']['options-general.php'] = array();
+
+            do_action( 'admin_menu' );
+
+            $entry = null;
+            foreach ( (array) ( $GLOBALS['submenu']['options-general.php'] ?? array() ) as $item ) {
+                if ( isset( $item[2] ) && 'darkadmin' === $item[2] ) {
+                    $entry = $item;
+                }
+            }
+        } finally {
+            if ( null === $previous_submenu ) {
+                unset( $GLOBALS['submenu'] );
+            } else {
+                $GLOBALS['submenu'] = $previous_submenu;
+            }
+            wp_set_current_user( $previous_user );
+        }
+
+        $this->assertIsArray( $entry, 'The DarkAdmin options page must be registered.' );
+        $this->assertStringNotContainsString( '<img', $entry[0] );
+        $this->assertStringContainsString( '&lt;img', $entry[0] );
+    }
 }
