@@ -554,6 +554,31 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( '0.3.1', get_option( 'darkadmin_db_version' ) );
     }
 
+    public function test_migration_retries_when_preset_write_fails(): void {
+        // A pre-0.3.0 install with no preset row. A no-op update is equivalent to
+        // a failed write: the value is not stored and update_option() returns false.
+        update_option( 'darkadmin_dark_mode_enabled', '1' );
+
+        $fail = static function ( $value, $old_value ) {
+            return $old_value;
+        };
+        add_filter( 'pre_update_option_darkadmin_preset', $fail, 10, 2 );
+
+        darkadmin_maybe_migrate_options();
+
+        $this->assertFalse( get_option( 'darkadmin_preset', false ) );
+        $this->assertFalse(
+            get_option( 'darkadmin_db_version', false ),
+            'The migration marker must not advance after a failed preset write.'
+        );
+
+        remove_filter( 'pre_update_option_darkadmin_preset', $fail, 10 );
+        darkadmin_maybe_migrate_options();
+
+        $this->assertSame( 'classic', get_option( 'darkadmin_preset' ) );
+        $this->assertSame( '0.3.1', get_option( 'darkadmin_db_version' ) );
+    }
+
     // -------------------------------------------------------------------------
     // Editor screen coverage
     // -------------------------------------------------------------------------
@@ -1564,5 +1589,56 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertArrayHasKey( 'settings', $links );
         $this->assertStringNotContainsString( '<script>', $links['settings'] );
         $this->assertStringContainsString( '&lt;script&gt;', $links['settings'] );
+    }
+
+    public function test_admin_menu_title_escapes_translated_label(): void {
+        // Core stores the submenu title raw and prints it after wptexturize(),
+        // which does not escape HTML. Translations are lower-trust input, so the
+        // menu title must be escaped before it reaches add_options_page(). The
+        // page title is not the raw sink: core strips tags and escapes it.
+        if ( ! function_exists( 'add_options_page' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        add_filter(
+            'gettext',
+            static function ( $translation, $text, $domain ) {
+                if ( 'DarkAdmin' === $text && 'darkadmin-dark-mode-for-adminpanel' === $domain ) {
+                    return '<img src=x onerror=alert(1)>';
+                }
+
+                return $translation;
+            },
+            10,
+            3
+        );
+
+        $previous_user    = get_current_user_id();
+        $previous_submenu = $GLOBALS['submenu'] ?? null;
+
+        try {
+            wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+            $GLOBALS['submenu']['options-general.php'] = array();
+
+            do_action( 'admin_menu' );
+
+            $entry = null;
+            foreach ( (array) ( $GLOBALS['submenu']['options-general.php'] ?? array() ) as $item ) {
+                if ( isset( $item[2] ) && 'darkadmin' === $item[2] ) {
+                    $entry = $item;
+                }
+            }
+        } finally {
+            if ( null === $previous_submenu ) {
+                unset( $GLOBALS['submenu'] );
+            } else {
+                $GLOBALS['submenu'] = $previous_submenu;
+            }
+            wp_set_current_user( $previous_user );
+        }
+
+        $this->assertIsArray( $entry, 'The DarkAdmin options page must be registered.' );
+        $this->assertStringNotContainsString( '<img', $entry[0] );
+        $this->assertStringContainsString( '&lt;img', $entry[0] );
     }
 }

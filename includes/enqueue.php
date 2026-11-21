@@ -736,7 +736,7 @@ add_action(
 	function () {
 		add_options_page(
 			__( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ),
-			__( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ),
+			esc_html__( 'DarkAdmin', 'darkadmin-dark-mode-for-adminpanel' ),
 			'manage_options',
 			'darkadmin',
 			'darkadmin_settings_page'
