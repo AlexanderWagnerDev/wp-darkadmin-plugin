@@ -554,6 +554,31 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( '0.3.1', get_option( 'darkadmin_db_version' ) );
     }
 
+    public function test_migration_retries_when_preset_write_fails(): void {
+        // A pre-0.3.0 install with no preset row. A no-op update is equivalent to
+        // a failed write: the value is not stored and update_option() returns false.
+        update_option( 'darkadmin_dark_mode_enabled', '1' );
+
+        $fail = static function ( $value, $old_value ) {
+            return $old_value;
+        };
+        add_filter( 'pre_update_option_darkadmin_preset', $fail, 10, 2 );
+
+        darkadmin_maybe_migrate_options();
+
+        $this->assertFalse( get_option( 'darkadmin_preset', false ) );
+        $this->assertFalse(
+            get_option( 'darkadmin_db_version', false ),
+            'The migration marker must not advance after a failed preset write.'
+        );
+
+        remove_filter( 'pre_update_option_darkadmin_preset', $fail, 10 );
+        darkadmin_maybe_migrate_options();
+
+        $this->assertSame( 'classic', get_option( 'darkadmin_preset' ) );
+        $this->assertSame( '0.3.1', get_option( 'darkadmin_db_version' ) );
+    }
+
     // -------------------------------------------------------------------------
     // Editor screen coverage
     // -------------------------------------------------------------------------

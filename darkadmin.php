@@ -50,12 +50,24 @@ function darkadmin_maybe_migrate_options(): void {
 		// Explicit default keeps "no stored row" detectable; the registered
 		// default would otherwise be returned for single-argument calls.
 		$preset = get_option( 'darkadmin_preset', false );
+		$target = '';
 
 		if ( 'default' === $preset ) {
-			update_option( 'darkadmin_preset', 'classic' );
+			$target = 'classic';
 		} elseif ( false === $preset && darkadmin_is_existing_install() ) {
 			// Pre-0.3.0 installs without a saved preset were using the classic palette.
-			update_option( 'darkadmin_preset', 'classic' );
+			$target = 'classic';
+		}
+
+		if ( '' !== $target ) {
+			update_option( 'darkadmin_preset', $target );
+
+			// Only advance once the preset row is definitely stored, so a failed
+			// write is retried on the next request instead of silently keeping the
+			// modern fallback for a pre-0.3.0 install.
+			if ( $target !== get_option( 'darkadmin_preset', false ) ) {
+				return;
+			}
 		}
 
 		$db_version = '0.3.0';
