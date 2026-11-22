@@ -578,8 +578,8 @@ Farbanpassung und Auto-Dark-Mode-Unterstützung.
 - Der Paletten-Export schreibt für einen geleerten Farbwähler die wirksame Farbe, sodass eine
   exportierte Palette wieder importiert werden kann; eine importierte Palette wird außerdem zum
   Standard des Farbwählers für den „Standard“-Button
-- Einträge in „Ausgeschlossene Seiten“ mit dateiähnlichem Slug (`admin.php?page=my-plugin/admin.php`)
-  treffen ihre Admin-Seite jetzt
+- Einträge in „Ausgeschlossene Seiten“ mit dateiähnlichem Slug
+  (`admin.php?page=my-plugin/admin.php`) treffen ihre Admin-Seite jetzt
 - Ein abgeschalteter Plugin-Stil bleibt abgeschaltet, solange das Plugin inaktiv ist, sodass die
   Dark-Mode-Stile beim Reaktivieren nicht zurückkehren
 - Die Karten der Benutzer-Zugriffskontrolle und der Button „Palette importieren“ zeigen
