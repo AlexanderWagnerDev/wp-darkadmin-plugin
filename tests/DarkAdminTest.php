@@ -441,6 +441,27 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( [], darkadmin_sanitize_user_ids( [ '' ] ) );
     }
 
+    /**
+     * The sanitizer contract above depends on the form: clearing the list only
+     * works because the grid always posts the hidden empty value.
+     */
+    public function test_user_grid_posts_the_hidden_value_that_clears_the_allow_list(): void {
+        $this->factory->user->create( [ 'role' => 'subscriber' ] );
+        wp_set_current_user( $this->factory->user->create( [ 'role' => 'administrator' ] ) );
+        update_option( 'darkadmin_user_access_mode', 'include' );
+
+        ob_start();
+        darkadmin_settings_page();
+        $html = ob_get_clean();
+
+        $this->assertStringContainsString( 'id="adm-user-grid"', $html );
+        $this->assertStringContainsString(
+            '<input type="hidden" name="darkadmin_allowed_users[]" value="" />',
+            $html,
+            'Without the hidden field an unchecked list could never be cleared again.'
+        );
+    }
+
     public function test_sanitize_bool_ignores_non_scalar_values(): void {
         $this->assertFalse( darkadmin_sanitize_bool( [ '1' ] ) );
         $this->assertTrue( darkadmin_sanitize_bool( '1' ) );
