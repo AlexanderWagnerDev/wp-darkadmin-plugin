@@ -25,10 +25,19 @@ function darkadmin_sanitize_bool( $v ): bool {
 /**
  * Sanitize callback for the allowed-users array setting.
  *
- * @param mixed $v Raw input value.
+ * A save that does not contain the field must not erase the stored list:
+ * options.php passes null for every option that is absent from the request,
+ * and the user grid is not rendered while no selectable user exists. This is
+ * the same rule the custom CSS guard and the plugin-exclusion sanitizer follow.
+ *
+ * @param mixed $v Raw input value, or null when the setting was not submitted.
  * @return int[]
  */
 function darkadmin_sanitize_user_ids( $v ): array {
+	if ( null === $v ) {
+		$v = get_option( 'darkadmin_allowed_users', array() );
+	}
+
 	$values = array_filter( (array) $v, 'is_scalar' );
 
 	return array_values( array_filter( array_map( 'absint', $values ) ) );
