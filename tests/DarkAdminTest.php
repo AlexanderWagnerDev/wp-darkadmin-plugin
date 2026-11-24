@@ -420,6 +420,27 @@ class DarkAdminTest extends WP_UnitTestCase {
         $this->assertSame( [ 1, 2 ], darkadmin_sanitize_user_ids( [ '1', [ '3' ], '2' ] ) );
     }
 
+    /**
+     * options.php passes null for a setting that is absent from the request.
+     *
+     * The user grid is not rendered while no selectable user exists, so saving
+     * any other DarkAdmin setting from that state would otherwise erase the
+     * stored allow-list.
+     */
+    public function test_sanitize_user_ids_keeps_the_stored_list_when_the_setting_is_absent(): void {
+        update_option( 'darkadmin_allowed_users', [ 3, 9 ] );
+
+        $this->assertSame( [ 3, 9 ], darkadmin_sanitize_user_ids( null ) );
+    }
+
+    public function test_sanitize_user_ids_still_clears_the_list_when_the_rendered_field_is_empty(): void {
+        update_option( 'darkadmin_allowed_users', [ 3, 9 ] );
+
+        // The rendered grid always posts the hidden empty value, so unchecking
+        // every user must still clear the list.
+        $this->assertSame( [], darkadmin_sanitize_user_ids( [ '' ] ) );
+    }
+
     public function test_sanitize_bool_ignores_non_scalar_values(): void {
         $this->assertFalse( darkadmin_sanitize_bool( [ '1' ] ) );
         $this->assertTrue( darkadmin_sanitize_bool( '1' ) );
