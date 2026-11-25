@@ -142,6 +142,7 @@ body.wp-admin,
   filter: brightness(.7);
 }
 #adminmenu li.current .wp-menu-image,
+#adminmenu li.wp-has-current-submenu .wp-menu-image,
 #adminmenu li:hover .wp-menu-image {
   filter: brightness(1);
 }

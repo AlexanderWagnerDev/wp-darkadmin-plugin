@@ -13,11 +13,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - WordPress 7.2 draws the core admin menu icons as inline SVG instead of a Dashicons `::before`
   glyph. The hovered, open and current menu icons now follow the "Text on Primary" color again;
   before, they stayed white when that color was customized.
+- The icon of a selected menu parent (for example Posts on the Posts list) is no longer dimmed
+  next to its full-brightness label.
 
 ### Changed
 
 - Tested up to WordPress 7.2.
-- The PHPUnit and PHP compatibility CI matrices also run on PHP 8.6.
+- The PHPUnit and PHP compatibility CI matrices also run on PHP 8.6. PHPUnit also runs on
+  WordPress 7.1 and 7.2-RC3.
 
 ## [0.7.1] - 2026-11-21
 
