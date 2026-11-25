@@ -103,6 +103,12 @@ body.wp-admin,
   background: var(--adm-sidebar-active) !important;
   color: var(--adm-text-on-primary) !important;
 }
+/* WP 7.2+ draws core menu icons as inline SVG (currentColor) inside
+   .wp-menu-image, so color the element as well as the legacy ::before glyph. */
+#adminmenu li.menu-top:hover > a > .wp-menu-image,
+#adminmenu li.opensub > a > .wp-menu-image,
+#adminmenu li.wp-has-current-submenu > a > .wp-menu-image,
+#adminmenu li.current > a > .wp-menu-image,
 #adminmenu li.menu-top:hover > a > .wp-menu-image::before,
 #adminmenu li.opensub > a > .wp-menu-image::before,
 #adminmenu li.wp-has-current-submenu > a > .wp-menu-image::before,
@@ -136,6 +142,7 @@ body.wp-admin,
   filter: brightness(.7);
 }
 #adminmenu li.current .wp-menu-image,
+#adminmenu li.wp-has-current-submenu .wp-menu-image,
 #adminmenu li:hover .wp-menu-image {
   filter: brightness(1);
 }
