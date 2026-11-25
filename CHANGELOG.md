@@ -17,6 +17,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Tested up to WordPress 7.2.
+- The PHPUnit and PHP compatibility CI matrices also run on PHP 8.6.
 
 ## [0.7.1] - 2026-11-21
 
